@@ -10,6 +10,6 @@ package projecto_exp;
  * @author cartas
  */
 public class exp {
-
+int i;
     public exp(){}
 }
