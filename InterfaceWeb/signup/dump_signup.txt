@@ -1,0 +1,3 @@
+CREATE TABLE plus_signup ( userid varchar(10) NOT NULL default '', password varchar(10) NOT NULL default '', email varchar(50) NOT NULL default '', name varchar(50) NOT NULL default '', sex varchar(6) NOT NULL default '', PRIMARY KEY (userid) ) TYPE=MyISAM; 
+
+CREATE TABLE plus_login ( id varchar(50) NOT NULL default '', userid varchar(10) NOT NULL default '', ip varchar(20) NOT NULL default '', tm datetime NOT NULL default '0000-00-00 00:00:00', status char(3) NOT NULL default 'ON' ) TYPE=MyISAM; 
