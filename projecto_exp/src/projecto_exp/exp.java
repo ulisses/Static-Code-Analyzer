@@ -11,5 +11,6 @@ package projecto_exp;
  */
 public class exp {
 int i;
+String s;
     public exp(){}
 }
