@@ -1,0 +1,87 @@
+Formalização funcional do sistema.(...)
+
+\begin{lstlisting}[frame=single, numbers=left, basicstyle=\small, caption={Part of grammar's definition code}, label={lst medicalgrammar}]
+// {pre condição} 
+//assinatura :: assinatura 
+//{pós condição}
+//=~ (instancia de)
+
+{ existsInDatabase(u) }
+login :: (u =~ Username, Hash) -> SessionID -> Either Error SessionID
+{ }
+
+-----funçoes da pagina homePageProf ---
+:: assinatura
+data Dict a b = [(a,b)]
+data Exercicio = Exercicio Enunciado (Dict Input Output)
+data Contest =  Contest Nome Tipo [Exercicio] 
+
+{ existeSession(s)  and isProf(s) and (notEmpty . getExercice) c}
+createContest :: s =~ SessionID -> c =~ Contest -> ()
+{ (notEmpty . getDict) c }
+
+{ existeSession(s)  and isProf(s) and (not . exist) (Exercicio e d)}
+createExercice :: s=~ SessionID -> e =~ Enunciado -> d =~ (Dict a b) -> ()
+{ exerciceCreated(Exercicio e d) }
+
+{}
+addTeste :: 
+{}
+
+{ existeSession(s) and isProf(s) and contestIsClosed(c) }
+consultarLogsContest :: s =~ SessionID -> c =~ Contest -> LogsContest
+{ }
+
+------funcoes da pagina homePageAluno -----
+
+{ existeSession(s) and contestNotFull(c)}
+efectuaRegistonoConcurso :: s =~ SessionID -> c=~ ContestName -> Credenciais
+{ }
+
+{ existeSession(s) and exerciceExist(e) }
+submitExercicio :: s =~ SessionID -> e =~ Exercicio -> res =~ Resolucao -> rep =~ Report
+{ rep = geraReport s e res }
+
+{ existeSession(s) and exerciceExist(e) }
+escolheExercicio :: s =~ SessionID -> e =~ Exercicio -> ()
+{ }
+
+{ existSession(s) and existContest(c) and userRegistadoNoContest(s,c) }
+escolheConcursoJaRegistado :: s =~ SessionID -> c =~ ContestName -> ()
+{ }
+
+{ }
+geraReport :: e =~ Exercicio -> res =~ Resolucao -> rep =~ Report
+--{ rep = compile res >>= \p -> compare(e (execute p e)) >>= pageCerto) }
+{ rep = do
+             case compile(res) of
+                 (Left error) -> geraReportBugCompile error res
+                 (Right p) -> let resProps = execute p e
+                                  in case (compare e resProps) of
+                                      (Left certo) -> geraReportNoBug e res
+                                      (Right errado) -> geraReportBugCompare errado res
+}
+
+geraReportBugCompile :: Exercicio -> Error -> Report
+geraReportBugCompare :: Exercicio -> Errado -> Report
+geraReportNoBug :: Exercicio -> Resolucao -> Report
+
+{ }
+compile :: Resolucao -> Either Error Program
+{ }
+
+-- Output do programa proposto
+data ResolucaoProposta = Dict Input Output
+
+{ }
+execute :: Program -> Exercicio -> ResolucaoProposta
+{ }
+
+{ length(Exercicio)==length(ResolucaoProposta)}
+compare :: Exercicio -> ResolucaoProposta -> Either Certo Errado
+{ }
+
+{ existSession(s) and existContest(c) and }
+geraFinalReport :: s =~ SessionID -> c =~ Contest -> Dict Exercicio Resolucao -> Report
+{ }
+\end{lstlisting}

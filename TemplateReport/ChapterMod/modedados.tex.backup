@@ -1,0 +1,26 @@
+Definimos que existirão três tipos de utilizadores: o administrador, o docente e o aluno/concorrente.\\
+
+O administrador é a entidade com mais poder no sistema. É o único que pode criar contas do tipo docente. 
+É caracterizado por um nome de utilizador, nome completo, password e e-mail.\\
+
+O docente, que tem permissões para criar concursos, exercícios, aceder aos resultados das submissões, etc. 
+Possui as mesmas características que um administrador.\\
+
+Decidimos que o sistema terá a noção de grupo. 
+O grupo é que possui as credencias para entrar no sistema (nome de utilizador e password). 
+Além disso também tem um nome pelo qual é identificado, um e-mail que será usado no caso de haver necessidade de se entrar em contacto com o grupo, e um conjunto de concorrentes.\\
+
+Achamos importante incluir a informação de cada concorrente no grupo para, se possível, automatizar várias tarefas tais como lançamento de notas.
+Cada concorrente é caracterizado pelo seu nome completo, número de aluno (se for o caso), e e-mail.\\
+
+Para finalizar vamos explicar em que consistem os concursos, exercícios e tentativas.
+
+Um concurso, resumidamente, é um agregado de enunciados. 
+Tem outras propriedades tais como um título, data de inicio e data de fim (período em que o concurso está disponível para que os grupos se registem), 
+chave de acesso (necessária para o registo dos grupos), duração do concurso (tempo que o grupo tem para resolver os exercícios do concurso, 
+a partir do momento que dá inicio à prova), e por fim, regras de classificação.\\
+
+Um enunciado é um exercício que o concorrente tenta solucionar. Como seria de esperar, cada exercício pode ter uma cotação diferente, 
+logo o peso do enunciado é guardado no mesmo. 
+Para cada enunciado existe também um conjunto de inputs e outputs, que servirão para verificar se o programa submetido está correcto. 
+Contém ainda uma descrição do problema que o concorrente deve resolver, assim como uma função de avaliação, função esta que define como se verifica se o output obtido está de acordo com o esperado.\\

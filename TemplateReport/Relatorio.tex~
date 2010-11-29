@@ -1,0 +1,132 @@
+\documentclass[english,a4paper]{report}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{babel}
+\usepackage{hyperref}
+\usepackage{t1enc}
+%\usepackage{aeguill}
+\usepackage{varioref}
+\usepackage{fancyvrb}
+\usepackage{color}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{harvard}
+\usepackage{geometry}
+\usepackage{graphics}
+\usepackage{setspace}
+\usepackage{thumbpdf}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{alltt}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{color}
+\usepackage{url}
+\usepackage{epsf}
+\usepackage{listings}
+\usepackage[refpages]{gloss}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{slashbox}
+\usepackage{rotating}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\geometry{verbose,a4paper,tmargin=30mm,bmargin=30mm,lmargin=30mm,rmargin=30mm}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{\markboth{ \thesection.\ \emph{#1}}{}}
+\renewcommand{\chaptermark}[1]{\markboth{ \thechapter.\ \emph{#1}}{}}
+
+\fancyhead[RO]{\leftmark}
+
+\fancyhead[LE]{\small{\it Visual Languages}}
+
+\fancyfoot[CE,CO]{\thepage}
+\lstset{basicstyle=\small,
+numbers=left, numberstyle=\tiny, numbersep=5pt,
+breaklines=true, mathescape=true, frame=tB}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.3\textwidth]{Images/DI-UM}
+\end{center}
+\end{figure}
+{\centering \large
+{\large\bf \textbf{Universidade do Minho} \\ Departamento de Informática}\\
+\vspace{1cm}
+\bf{Engenharia de Linguagens}\\
+\vspace{2cm}
+{\Large \bf {Projecto Integrado}}\\
+\vspace{1cm}
+{\LARGE \bf {Mooshak}}\\
+\vspace{1cm}
+%{\large \bf {}}
+\vspace{8.5cm}
+}
+\flushleft{ \emph{Grupo 2:\\}
+\vspace{0.4cm}
+José Pedro Silva\\
+Mário Ulisses Costa\\
+Pedro Faria\\
+}
+\vspace {1.5cm}
+\textbf{Braga, \today}\\
+\pagebreak
+\end{titlepage}
+
+\include{Abstract}
+
+\tableofcontents
+\listoffigures
+\listoftables
+\newpage
+
+
+\pagenumbering{arabic}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Introdução} \label{chap int}
+\input{ChapterInt/Contextualization}
+\section{Motivação}
+\input{ChapterInt/Motivation}
+\section{Objectivos}
+\input{ChapterInt/Objectives}
+\section{Estrutura do Relatório}
+\input{ChapterInt/ReportsStructure}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Chapter2} \label{chap xxx}
+\input{Chapter2/Contextualization}
+\section{Sec2}
+\input{Chapter2/sec2}\label{sec yyy}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Modelação do Problema} \label{chap modprob}
+\input{ChapterMod/Contextualization}
+\section{Modelação Informal}
+\input{ChapterMod/informal}\label{sec modinf}
+\section{Modelação Formal}
+\input{ChapterMod/formal}\label{sec modfor}
+\section{Modelação à lá cenas}
+\input{ChapterMod/cenas}\label{sec modcenas}
+\section{Modelo de Dados}
+\input{ChapterMod/modedados}\label{sec modedados}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Conclusão e Trabalho Futuro}\label{chap con} 
+\input{ChapterCon/Conclusion}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{harvard}
+%\bibliographystyle{plain}
+\bibliography{bib}
+\end{document} 
