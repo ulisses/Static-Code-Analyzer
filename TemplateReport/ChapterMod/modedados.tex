@@ -1,21 +1,21 @@
-Definiu-se que existir„o trÍs tipos de utilizadores: o administrador, o docente e o aluno/concorrente.\\
+Definiu-se que existir√£o tr√™s tipos de utilizadores: o administrador, o docente e o aluno/concorrente.\\
 
 \begin{itemize}
-  \item Administrador - È a entidade com mais poder no sistema. … o ˙nico que pode criar contas do tipo docente. … caracterizado por:
+  \item Administrador - √© a entidade com mais poder no sistema. √â o √∫nico que pode criar contas do tipo docente. √â caracterizado por:
     \begin{itemize}
       \item Nome de utilizador;
       \item Nome completo;
       \item Password
       \item e-Mail
     \end{itemize}
-  \item Docente - entidade que tem permissıes para criar concursos, exercÌcios, aceder aos resultados das submissıes, (...). Os seus atributos coincidem com os do Administrador.
+  \item Docente - entidade que tem permiss√µes para criar concursos, exerc√≠cios, aceder aos resultados das submiss√µes, (...). Os seus atributos coincidem com os do Administrador.
   \item Aluno/Concorrente - (...)
 \end{itemize}
 
-Decidiu-se que o sistema ter· a noÁ„o de grupo. 
+Decidiu-se que o sistema ter√° a no√ß√£o de grupo. 
 (...)
-O grupo È que possui as credenciais para entrar no sistema (nome de utilizador e password). 
-AlÈm disso tambÈm tem um nome pelo qual È identificado, um e-mail que ser· usado no caso de haver necessidade de se entrar em contacto com o grupo, e um conjunto de concorrentes.\\
+O grupo √© que possui as credenciais para entrar no sistema (nome de utilizador e password). 
+Al√©m disso tamb√©m tem um nome pelo qual √© identificado, um e-mail que ser√° usado no caso de haver necessidade de se entrar em contacto com o grupo, e um conjunto de concorrentes.\\
 
 \begin{figure}[htbp]
 \begin{center}
@@ -24,17 +24,17 @@ AlÈm disso tambÈm tem um nome pelo qual È identificado, um e-mail que ser· usado
 \end{center}
 \end{figure}
 
-Achamos importante incluir a informaÁ„o de cada concorrente no grupo para, se possÌvel, automatizar v·rias tarefas tais como lanÁamento de notas.
-Cada concorrente È caracterizado pelo seu nome completo, n˙mero de aluno (se for o caso), e e-mail.\\
+Achamos importante incluir a informa√ß√£o de cada concorrente no grupo para, se poss√≠vel, automatizar v√°rias tarefas tais como lan√ßamento de notas.
+Cada concorrente √© caracterizado pelo seu nome completo, n√∫mero de aluno (se for o caso), e e-mail.\\
 
-Para finalizar vamos explicar em que consistem os concursos, exercÌcios e tentativas.
+Para finalizar vamos explicar em que consistem os concursos, exerc√≠cios e tentativas.
 
-Um concurso, resumidamente, È um agregado de enunciados. 
-Tem outras propriedades tais como um tÌtulo, data de inicio e data de fim (perÌodo em que o concurso est· disponÌvel para que os grupos se registem), 
-chave de acesso (necess·ria para o registo dos grupos), duraÁ„o do concurso (tempo que o grupo tem para resolver os exercÌcios do concurso, 
-a partir do momento que d· inicio ‡ prova), e por fim, regras de classificaÁ„o.\\
+Um concurso, resumidamente, √© um agregado de enunciados. 
+Tem outras propriedades tais como um t√≠tulo, data de inicio e data de fim (per√≠odo em que o concurso est√° dispon√≠vel para que os grupos se registem), 
+chave de acesso (necess√°ria para o registo dos grupos), dura√ß√£o do concurso (tempo que o grupo tem para resolver os exerc√≠cios do concurso, 
+a partir do momento que d√° inicio √† prova), e por fim, regras de classifica√ß√£o.\\
 
-Um enunciado È um exercÌcio que o concorrente tenta solucionar. Como seria de esperar, cada exercÌcio pode ter uma cotaÁ„o diferente, 
-logo o peso do enunciado È guardado no mesmo. 
-Para cada enunciado existe tambÈm um conjunto de inputs e outputs, que servir„o para verificar se o programa submetido est· correcto. 
-ContÈm ainda uma descriÁ„o do problema que o concorrente deve resolver, assim como uma funÁ„o de avaliaÁ„o, funÁ„o esta que define como se verifica se o output obtido est· de acordo com o esperado.\\
+Um enunciado √© um exerc√≠cio que o concorrente tenta solucionar. Como seria de esperar, cada exerc√≠cio pode ter uma cota√ß√£o diferente, 
+logo o peso do enunciado √© guardado no mesmo. 
+Para cada enunciado existe tamb√©m um conjunto de inputs e outputs, que servir√£o para verificar se o programa submetido est√° correcto. 
+Cont√©m ainda uma descri√ß√£o do problema que o concorrente deve resolver, assim como uma fun√ß√£o de avalia√ß√£o, fun√ß√£o esta que define como se verifica se o output obtido est√° de acordo com o esperado.\\

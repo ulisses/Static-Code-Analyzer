@@ -1,7 +1,7 @@
-Com o diagrama da arquitectura do sistema, figura~\ref{fig diaact},pretende-se mostrar as v·rias entidades que podem aceder ao sistema, assim como as v·rias
+Com o diagrama da arquitectura do sistema, figura~\ref{fig diaact},pretende-se mostrar as v√°rias entidades que podem aceder ao sistema, assim como as v√°rias
 actividades que cada uma pode realizar e tarefas para o sistema processar.
-TambÈm È realÁada a ideia de que alguns dos recursos do sistema sÛ est„o dispÛniveis ao utilizador depois 
-de passar por outros passos, ou seja, o diagrama d· a entender a ordem pelas quais o utilizador e o sistema podem/devem executar as tarefas.\\
+Tamb√©m √© real√ßada a ideia de que alguns dos recursos do sistema s√≥ est√£o disp√≥niveis ao utilizador depois 
+de passar por outros passos, ou seja, o diagrama d√° a entender a ordem pelas quais o utilizador e o sistema podem/devem executar as tarefas.\\
 
 \begin{figure}[htbp]
 \begin{center}
@@ -10,23 +10,23 @@ de passar por outros passos, ou seja, o diagrama d· a entender a ordem pelas qua
 \end{center}
 \end{figure}
 
-Para comeÁar, como temos duas entidades diferentes que podem aceder ao sistema (o docente e o aluno/concorrente), 
+Para come√ßar, como temos duas entidades diferentes que podem aceder ao sistema (o docente e o aluno/concorrente), 
 dividiu-se o diagrama em duas partes distintas (uma para cada entidade referida), de modo a facilitar a leitura.\\
 
-Em ambos os casos, o login È a primeira actividade que pode ser realizada.
-Se o login n„o foi efectuado com sucesso, È adicionado no log file uma entrada com a descriÁ„o do erro.
-No caso de o login ser efectuado com sucesso, consoante as permissıes do utilizador em quest„o, tem diferentes opÁıes ao seu dispÙr.\\
+Em ambos os casos, o login √© a primeira actividade que pode ser realizada.
+Se o login n√£o foi efectuado com sucesso, √© adicionado no log file uma entrada com a descri√ß√£o do erro.
+No caso de o login ser efectuado com sucesso, consoante as permiss√µes do utilizador em quest√£o, tem diferentes op√ß√µes ao seu disp√¥r.\\
 
-No caso do login pertencer a um docente, este ter· acesso aos dados de cada um dos grupos, podendo verificar os resultados que estes 
-obtiveram na resoluÁ„o das questıes do(s) concurso(s), assim como ao ficheiro que contÈm a an·lise das mÈtricas dos v·rios programas submetidos 
+No caso do login pertencer a um docente, este ter√° acesso aos dados de cada um dos grupos, podendo verificar os resultados que estes 
+obtiveram na resolu√ß√£o das quest√µes do(s) concurso(s), assim como ao ficheiro que cont√©m a an√°lise das m√©tricas dos v√°rios programas submetidos 
 pelos mesmos.
-Poder· tambÈm criar novos concursos e os seus respectivos exercÌcios, assim como adicionar baterias de testes para os novos exercÌcios, 
-ou para exercÌcios j· existentes.\\
+Poder√° tamb√©m criar novos concursos e os seus respectivos exerc√≠cios, assim como adicionar baterias de testes para os novos exerc√≠cios, 
+ou para exerc√≠cios j√° existentes.\\
 
-No caso do login pertencer a um aluno/concorrente, o utilizador ter· a opÁ„o de se registar num concurso ou de seleccionar um no qual j· 
+No caso do login pertencer a um aluno/concorrente, o utilizador ter√° a op√ß√£o de se registar num concurso ou de seleccionar um no qual j√° 
 esteja registado.
-J· depois de seleccionar o concurso, pode ainda escolher o exercÌcio que pretende submeter.
-Depois de submeter o cÛdigo fonte do programa correspondente ao exercÌcio escolhido, e j· sem a interacÁ„o do utilizador, 
-o sistema compilar· e tentar· executar os diferentes inputs da bateria de testes do exercÌcio, e compararar os resultados obtidos com os esperados.
-No fim de cada um destes procedimentos, ser„o guardados os resultados / erros.
-Para terminar, ser· feito um estudo das mÈtricas do ficheiro submetido, tendo como resultado a criaÁ„o um ficheiro com os dados relativos a essa avaliaÁ„o.\\
+J√° depois de seleccionar o concurso, pode ainda escolher o exerc√≠cio que pretende submeter.
+Depois de submeter o c√≥digo fonte do programa correspondente ao exerc√≠cio escolhido, e j√° sem a interac√ß√£o do utilizador, 
+o sistema compilar√° e tentar√° executar os diferentes inputs da bateria de testes do exerc√≠cio, e compararar os resultados obtidos com os esperados.
+No fim de cada um destes procedimentos, ser√£o guardados os resultados / erros.
+Para terminar, ser√° feito um estudo das m√©tricas do ficheiro submetido, tendo como resultado a cria√ß√£o um ficheiro com os dados relativos a essa avalia√ß√£o.\\

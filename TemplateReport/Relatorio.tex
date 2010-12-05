@@ -1,8 +1,13 @@
+%%!TEX encoding = UTF-8 Unicode 
 \documentclass[english,a4paper]{report}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{babel}
-\usepackage{hyperref}
-\usepackage{t1enc}
+\usepackage[portuges]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[pdftex]{color,graphicx}
+% pretty collors.. :)
+\usepackage[a4paper, pdftex, bookmarks, colorlinks,citecolor=darkblue,linkcolor=darkblue,urlcolor=darkblue,filecolor=darkblue]{hyperref}
+%\usepackage{t1enc}
 %\usepackage{aeguill}
 \usepackage{varioref}
 \usepackage{fancyvrb}
@@ -34,6 +39,8 @@
 \usepackage{rotating}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\definecolor{darkblue}{rgb}{0,0.1,0.5}
+
 \geometry{verbose,a4paper,tmargin=30mm,bmargin=30mm,lmargin=30mm,rmargin=30mm}
 
 \pagestyle{fancy}
@@ -61,21 +68,21 @@ breaklines=true, mathescape=true, frame=tB}
 \end{center}
 \end{figure}
 {\centering \large
-{\large\bf \textbf{Universidade do Minho} \\ Departamento de Inform·tica}\\
+{\large\bf \textbf{Universidade do Minho} \\ Departamento de Inform√°tica}\\
 \vspace{1cm}
 \bf{Engenharia de Linguagens}\\
 \vspace{2cm}
 {\Large \bf {Projecto Integrado}}\\
 \vspace{1cm}
-{\LARGE \bf {\emph{Software} para An·lise e AvaliaÁ„o de Programas}}\\
+{\LARGE \bf {\emph{Software} para An√°lise e Avalia√ß√£o de Programas}}\\
 \vspace{1cm}
 %{\large \bf {}}
 \vspace{8.5cm}
 }
 \flushleft{ \emph{Grupo 2:\\}
 \vspace{0.4cm}
-JosÈ Pedro Silva\\
-M·rio Ulisses Costa\\
+Jos√© Pedro Silva\\
+M√°rio Ulisses Costa\\
 Pedro Faria\\
 }
 \vspace {1.5cm}
@@ -94,13 +101,13 @@ Pedro Faria\\
 \pagenumbering{arabic}
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{IntroduÁ„o} \label{chap int}
+\chapter{Introdu√ß√£o} \label{chap int}
 \input{ChapterInt/Contextualization}
-\section{MotivaÁ„o}
+\section{Motiva√ß√£o}
 \input{ChapterInt/Motivation}
 \section{Objectivos}
 \input{ChapterInt/Objectives}
-\section{Estrutura do RelatÛrio}
+\section{Estrutura do Relat√≥rio}
 \input{ChapterInt/ReportsStructure}
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -110,19 +117,19 @@ Pedro Faria\\
 \input{Chapter2/sec2}\label{sec yyy}
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{ModelaÁ„o do Problema} \label{chap modprob}
+\chapter{Modela√ß√£o do Problema} \label{chap modprob}
 \input{ChapterMod/Contextualization}
-\section{ModelaÁ„o Informal}
+\section{Modela√ß√£o Informal}
 \input{ChapterMod/informal}\label{sec modinf}
-\section{ModelaÁ„o Formal}
+\section{Modela√ß√£o Formal}
 \input{ChapterMod/formal}\label{sec modfor}
-\section{ModelaÁ„o ‡ l· cenas}
+\section{Modela√ß√£o √† l√° cenas}
 \input{ChapterMod/cenas}\label{sec modcenas}
 \section{Modelo de Dados}
 \input{ChapterMod/modedados}\label{sec modedados}
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Conclus„o e Trabalho Futuro}\label{chap con} 
+\chapter{Conclus√£o e Trabalho Futuro}\label{chap con} 
 \input{ChapterCon/Conclusion}
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

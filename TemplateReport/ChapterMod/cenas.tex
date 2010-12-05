@@ -1,87 +1,121 @@
-Formaliza��o funcional do sistema.(...)
+\newcommand{\rarrow}{\rightarrow}
+\newcommand{\larrow}{\leftarrow}
+\newcommand{\unif}{\sim}
+\def\prop#1#2#3{\noindent$\begin{array}{l} \{#1\} \\ #2 \\ \{#3\} \\ \end{array}$}
 
-\begin{lstlisting}[frame=single, numbers=left, basicstyle=\small, caption={Part of grammar's definition code}, label={lst medicalgrammar}]
-// {pre condi��o} 
-//assinatura :: assinatura 
-//{p�s condi��o}
-//=~ (instancia de)
+Afim de haver algum rigor na definição do sistema decidiu-se fazer um modelo mais formal do ponto de vista dos dados e das funcionalidades que o sistema apresenta.
+A ideia desta modelação é ainda ser um modelo formal da especificação atrás descrita. Para isso utilizou-se uma notação orientada aos contratos (design by contract),
+com a riqueza que as pré e pós condições de funções nos oferecem.\\
 
-{ existsInDatabase(u) }
-login :: (u =~ Username, Hash) -> SessionID -> Either Error SessionID
+Assim sendo, temos descritos os contratos da seguinte forma: \prop{P}{C}{R} em que $P$ define uma pré condição, $C$ uma assinatura de uma função e $R$ uma pós condição.
+De notar que tanto a pré como a pós condição teem de ser elementos booleanos e devem-se referir à assinatura da função. Assim sendo estamos a definir que apenas o contrato $C$
+é válido se a sua pré e pós condições devolverem $true$. A pré e pós condição podem ser vazias.\\
+
+Neste sistema que difinimos a assinatura $C$ da função pode ter uma particularidade, que é a instânciação de um elemento que pertença a um determinado tipo.
+Ou seja, pode-se dizer $$soma :: a \unif Int \rarrow b \unif Int \rarrow Int$$ para expressar que a função $soma$ recebe dois parametros $a$ e $b$ que são inteiros e devolve
+um elemento do tipo inteiro.\\
+
+Começamos então por definir o contrato da função $login$ que permite a um determinado utilizador entrar no sistema. Este contrato estipula que recebendo um par
+$Username \times Hash$ e um $SessionID$ devolve ou um $Error$ ou um novo $SessionID$ que associa o utilizador à sua sessão no sistema. Afim de haver provacidade
+sobre os dados criticos do utilizador, como a password, decidimos apenas receber do lado do servidor a $Hash$ respectiva da sua palavra-passe, sendo esta hash
+gerada do lado do cliente. Esta técnica não tem nada de novo, mas por incrível que pareça ainda há sistemas online que não usam este tipo de mecanismos.\\
+
+\prop
+{existsInDatabase(u)}
+{login :: u \unif Username \times Hash \rarrow SessionID \rarrow Error + SessionID}
 { }
 
------fun�oes da pagina homePageProf ---
-:: assinatura
-data Dict a b = [(a,b)]
-data Exercicio = Exercicio Enunciado (Dict Input Output)
-data Contest =  Contest Nome Tipo [Exercicio] 
+Aprenta-se de seguida o modelo de dados que o sistema usa. Consideramos que um $Exercicio$ tem um $Enunciado$ e um dicionário a relacionar $Input's$ com $Output's$,
+um concurso tem um nome, um tipo e um conjunto de exercicios.\\
 
-{ existeSession(s)  and isProf(s) and (notEmpty . getExercice) c}
-createContest :: s =~ SessionID -> c =~ Contest -> ()
-{ (notEmpty . getDict) c }
+$\begin{array}{l}
+data~Dict~a~b = (a \times b)^{*} \\
+data~Exercicio = Exercicio~Enunciado~(Dict~Input~Output) \\
+data~Contest =  Contest~Nome~Tipo~Exercicio^{*}
+\end{array}$
 
-{ existeSession(s)  and isProf(s) and (not . exist) (Exercicio e d)}
-createExercice :: s=~ SessionID -> e =~ Enunciado -> d =~ (Dict a b) -> ()
+Para criar um novo concurso, temos de assegurar que o utilizador que requisita este serviço é um professor, visto não nos interessar que alunos criem concursos.
+Temos ainda de assegurar que o concurso que se vai criar tem no minimo um exercicio.\\
+
+\prop
+{ existeSession(s)  \wedge isProf(s) \wedge (notEmpty \circ getExercice)~c}
+{createContest :: s \unif SessionID \rarrow c \unif Contest \rarrow 1}
+{ (notEmpty \circ getDict)~c }
+
+Para criar um novo exercicio, o utilizador tem de ser um professor e o exercicio em questão não pode ser repetido no sistema. Decidiu-se assim para evitar redundância
+na informação que se tem armazenada.
+
+\prop
+{ existeSession(s)  \wedge isProf(s) \wedge (not \circ exist) (Exercicio e d)}
+{createExercice :: s\unif SessionID \rarrow e \unif Enunciado \rarrow d \unif (Dict a b) \rarrow 1}
 { exerciceCreated(Exercicio e d) }
 
-{}
-addTeste :: 
+\prop 
+{ existeSession(s) \wedge isProf(s) \wedge contestIsClosed(c) }
+{consultarLogsContest :: s \unif SessionID \rarrow c \unif Contest \rarrow LogsContest}
 {}
 
-{ existeSession(s) and isProf(s) and contestIsClosed(c) }
-consultarLogsContest :: s =~ SessionID -> c =~ Contest -> LogsContest
+\prop
+{}
+{addTeste :: }
+{}
+
+\prop
+{ existeSession(s) \wedge contestNotFull(c)}
+{efectuaRegistonoConcurso :: s \unif SessionID \rarrow c\unif ContestName \rarrow Credenciais}
 { }
 
-------funcoes da pagina homePageAluno -----
-
-{ existeSession(s) and contestNotFull(c)}
-efectuaRegistonoConcurso :: s =~ SessionID -> c=~ ContestName -> Credenciais
-{ }
-
-{ existeSession(s) and exerciceExist(e) }
-submitExercicio :: s =~ SessionID -> e =~ Exercicio -> res =~ Resolucao -> rep =~ Report
+\prop
+{ existeSession(s) \wedge exerciceExist(e) }
+{submitExercicio :: s \unif SessionID \rarrow e \unif Exercicio \rarrow res \unif Resolucao \rarrow rep \unif Report}
 { rep = geraReport s e res }
 
-{ existeSession(s) and exerciceExist(e) }
-escolheExercicio :: s =~ SessionID -> e =~ Exercicio -> ()
+\prop
+{ existeSession(s) \wedge exerciceExist(e) }
+{escolheExercicio :: s \unif SessionID \rarrow e \unif Exercicio \rarrow 1}
 { }
 
-{ existSession(s) and existContest(c) and userRegistadoNoContest(s,c) }
-escolheConcursoJaRegistado :: s =~ SessionID -> c =~ ContestName -> ()
+\prop
+{ existSession(s) \wedge existContest(c) \wedge userRegistadoNoContest(s,c) }
+{escolheConcursoJaRegistado :: s \unif SessionID \rarrow c \unif ContestName \rarrow 1}
 { }
 
+\prop
 { }
-geraReport :: e =~ Exercicio -> res =~ Resolucao -> rep =~ Report
---{ rep = compile res >>= \p -> compare(e (execute p e)) >>= pageCerto) }
+{geraReport :: e \unif Exercicio \rarrow res \unif Resolucao \rarrow rep \unif Report}
+%{ rep = compile res >>= \p \rarrow compare(e (execute p e)) >>= pageCerto) }
 { rep = do
              case compile(res) of
-                 (Left error) -> geraReportBugCompile error res
-                 (Right p) -> let resProps = execute p e
+                 (Left error) \rarrow geraReportBugCompile error res
+                 (Right p) \rarrow let resProps = execute p e
                                   in case (compare e resProps) of
-                                      (Left certo) -> geraReportNoBug e res
-                                      (Right errado) -> geraReportBugCompare errado res
+                                      (Left certo) \rarrow geraReportNoBug e res
+                                      (Right errado) \rarrow geraReportBugCompare errado res
 }
 
-geraReportBugCompile :: Exercicio -> Error -> Report
-geraReportBugCompare :: Exercicio -> Errado -> Report
-geraReportNoBug :: Exercicio -> Resolucao -> Report
+%geraReportBugCompile :: Exercicio \rarrow Error \rarrow Report
+%geraReportBugCompare :: Exercicio \rarrow Errado \rarrow Report
+%geraReportNoBug :: Exercicio \rarrow Resolucao \rarrow Report
 
+\prop
 { }
-compile :: Resolucao -> Either Error Program
-{ }
-
--- Output do programa proposto
-data ResolucaoProposta = Dict Input Output
-
-{ }
-execute :: Program -> Exercicio -> ResolucaoProposta
+{compile :: Resolucao \rarrow Either Error Program}
 { }
 
+%-- Output do programa proposto
+%data ResolucaoProposta = Dict Input Output
+
+\prop
+{ }
+{execute :: Program \rarrow Exercicio \rarrow ResolucaoProposta}
+{ }
+
+\prop
 { length(Exercicio)==length(ResolucaoProposta)}
-compare :: Exercicio -> ResolucaoProposta -> Either Certo Errado
+{compare :: Exercicio \rarrow ResolucaoProposta \rarrow Certo + Errado}
 { }
 
-{ existSession(s) and existContest(c) and }
-geraFinalReport :: s =~ SessionID -> c =~ Contest -> Dict Exercicio Resolucao -> Report
+\prop
+{ existSession(s) \wedge existContest(c) \wedge }
+{geraFinalReport :: s \unif SessionID \rarrow c \unif Contest \rarrow Dict Exercicio Resolucao \rarrow Report}
 { }
-\end{lstlisting}
