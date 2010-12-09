@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tt:schema xmlns:tt="http://www.w3.org/2001/XMLSchema">
+    <tt:element name="Enunciado">
+        <tt:complexType>
+            <tt:sequence>
+                
+                
+                <tt:element name="idConcurso" type="tt:string"/>
+                <tt:element name="idEnunciado" type="tt:string"/>
+                <tt:element name="idGrupo"/>
+                
+                <tt:element name="data" type="tt:date"/>
+                <tt:element name="hora" type="tt:time"/>
+                
+                <tt:element name="compilou" type="tt:integer"/>
+                
+                <tt:element name="Dict">
+                    <tt:complexType>
+                        <tt:sequence>
+                            <tt:element name="Teste" maxOccurs="unbounded">
+                                <tt:complexType>
+                                    <tt:sequence>
+                                        <tt:element name="Nome" type="tt:string"/>
+                                        <tt:element name="Input" type="tt:string"/>
+                                        <tt:element name="Output" type="tt:string"/>
+                                    </tt:sequence>
+                                </tt:complexType>
+                            </tt:element>
+                        </tt:sequence>
+                    </tt:complexType>
+                </tt:element>
+
+                <tt:element name="pathMetricas" type="tt:string"/>
+                
+                <tt:element name="codigoFonte">
+                    <tt:complexType>
+                        <tt:sequence>
+                            <tt:element name="nome" type="tt:string"/>
+                            <tt:element name="codigo" type="tt:string"/>
+                        </tt:sequence>
+                    </tt:complexType>
+                </tt:element>
+
+            </tt:sequence>
+        </tt:complexType>
+    </tt:element>
+</tt:schema>
