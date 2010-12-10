@@ -32,7 +32,7 @@
     <pathMetricas>sasas</pathMetricas>
     
     <codigoFonte>
-        <nome>sopa</nome>
+        <nome>prog.c</nome>
         <codigo>
             <![CDATA[
             #include <stdio.h>
