@@ -1,0 +1,59 @@
+\subsection{Descrição do Sistema}
+O SAAP - Software para Análise e Avaliação de Programas é um sistema disponível através de uma interface web, que terá como principal função 
+submeter, analisar e avaliar automaticamente programas.\\
+O sistema estará disponível em parte para utilizadores não registados, mas a suas principais funcionalidades estarão apenas disponíveis para docentes 
+e grupos já registados no sistema.\\
+O sistema poderá ser utilizado para várias finalidades, no entanto estará direccionado para ser utilizado em concursos de programação e em elementos 
+de avaliação universitários.
+
+\subsection{Utilizadores}
+Existem três entidades que podem aceder ao sistema.\\ \\
+O administrador, que além de poder aceder às mesmas funcionalidades do docente, funcionalidades essas que já iremos descrever, é quem tem o poder de
+criar contas para os docentes.\\
+\\
+O docente tem acesso a todo o tipo de funcionalidades relacionadas com a criação, edição e eliminação de concursos e enunciados, assim como consulta
+de resultados dos concursos e geração/consulta de métricas para os ficheiros submetidos no sistema.\\
+\\
+O grupo, que pode ser constituído por um ou mais concorrentes, terá acesso aos concursos disponíveis, poderá tentar registar-se nos mesmos, e submeter
+tentativas de resposta para cada um dos seus enunciados.\\
+\\
+Além do que já foi referido, todos os utilizadores podem editar os dados da sua conta.\\ 
+Falta referir que um utilizador não registado (guest), pode criar uma conta para o seu grupo, de modo a poder entrar no sistema.
+
+\subsection{Funcionalidades do sistema}
+As várias funcionalidades do sistema já foram praticamente todas mencionadas, vamos no entanto tentar explicar a sua maioria, com um maior nível de
+detalhe.
+
+\subsubsection{Criação de contas de grupo e de docente}
+\begin{itemize}
+ \item Criação de conta de grupo : Qualquer utilizador não registado poderá criar uma conta no sistema para o seu grupo, através da página principal do sistema.
+Terá de preencher dados referentes ao grupo e aos respectivos concorrentes.
+ \item Criação de conta de docente : Como já foi referido, o administrador terá acesso a uma página onde poderá criar contas para docentes.
+\end{itemize}
+
+\subsubsection{Criação de concursos e enunciados}
+Tanto o administrador como o docente podem criar concursos. Depois de preencher todos os dados do concurso podem passar à criação de enunciados.
+Nesta altura caso prefiram, podem importar enunciados previamente criados em xml.
+O concurso só ficará disponível na data definida aquando da criação do concurso.
+
+\subsubsection{Registo e participação nos concursos}
+Um grupo que esteja autenticado no sistema pode tentar registar-se num dos concursos disponíveis, e será bem sucedido se a chave que utilizar for a correcta.\\
+Depois de se registar no concurso, o tempo para a participação no mesmo inicia a contagem decrescente e o grupo poderá começar a submeter tentativas para
+cada um dos enunciados. O sistema informará, pouco depois da submissão, se a resposta estaria correcta ou não.
+Depois do tempo esgotar o grupo não pode submeter mais tentativas.
+
+\subsubsection{Geração das métricas para os ficheiros submetidos}
+O docente ou o administrador a qualquer altura podem pedir ao sistema que gere as métricas para as tentativas submetidas.
+
+\subsubsection{Consulta dos ficheiros com as métricas e dos resultados do concurso}
+O docente pode aceder aos logs que contêm a informação sobre as tentativas submetidas, ou se desejar, apenas aceder a informações mais específicas, tal como 
+qual exercício tentou submeter determinado grupo, e se teve sucesso ou não.\\
+Pode também visualizar os ficheiros com as informações das métricas.
+
+\subsubsection{Ferramentas}
+base de dados - DB2?\\
+scripts perl\\
+aplicaçao web - ruby on rails\\
+
+
+
