@@ -1,0 +1,475 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{graphicx}
+\usepackage{alltt}
+\usepackage[portuges]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{color}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{multicol}
+
+\setlength{\textwidth}{16.5cm}
+\setlength{\textheight}{24cm}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{0pt plus 1pt}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{-1.1cm}
+\setlength{\headsep}{20pt}
+\setlength{\columnsep}{1.5pc}
+\setlength\columnseprule{.4pt}
+\setlength\premulticols{6\baselineskip}
+\pagestyle{fancy}
+
+\definecolor{castanho_ulisses}{rgb}{0.71,0.33,0.14}
+\definecolor{gray_ulisses}{gray}{0.55}
+\definecolor{green_ulises}{rgb}{0.2,0.75,0}
+
+\lstdefinelanguage{C_ulisses}
+{
+basicstyle=\ttfamily\scriptsize,
+%backgroundcolor=\color{yellow},
+% frameshape={RYRYNYYYY}{yny}{yny}{RYRYNYYYY}, %contornos... muito nice...
+sensitive=true,
+morecomment=[l][\color{gray_ulisses}\scriptsize]{//},
+morecomment=[s][\color{gray_ulisses}\scriptsize]{/*}{*/},
+morestring=[b]",
+morestring=[b]',
+stringstyle=\color{red},
+showstringspaces=false,
+% firstnumber=\thelstnumber,
+numbers=left,
+numberstyle=\tiny,
+numberblanklines=true,
+showspaces=false,
+breaklines=true,
+showtabs=false,
+xleftmargin=-10pt,
+xrightmargin=-20pt,
+%% funcoes predefinidas...
+emph=
+{[1]
+return,printf,fprintf,if,else,scanf,sscanf,sprintf,malloc,
+calloc,realloc,fgets,fputs,puts,system,strcmp,strstr,
+strchr,exit,for,while,fclose,fopen,atoi,sizeof,sin,cos
+%% e muitos mais que a medida que sejam necessrios irei adicionar...
+},
+emphstyle={[1]\color{blue}\textbf},
+%% tipos de dados e nao so... >mais enph's<;
+emph={[2]char,float,double,void,NULL,int,bool},
+emphstyle={[2]\color{green_ulises}\textbf},
+emph={[3]typedef, struct},
+emphstyle={[3]\color{castanho_ulisses}\textbf}
+}
+
+\lstdefinelanguage{txt}
+{
+       basicstyle=\ttfamily\scriptsize,
+       showstringspaces=false,
+		breaklines=true,
+       numbers=left,
+       numberstyle=\tiny,
+       numberblanklines=true,
+       showspaces=false,
+       showtabs=false
+}
+\lstnewenvironment{code_txt}{\lstset{language=txt}}{}
+\lstnewenvironment{code_c}{\lstset{language=C_ulisses}}{}
+
+\lstnewenvironment{code_lex}
+{\textbf{Código Lex} \hspace{1cm} \hrulefill \lstset{language=txt}}
+{\hrule\smallskip}
+
+\title{\sf Engenharia de Linguagens \\
+\begin{tabular}{c}
+    %\includegraphics[width=.1\textwidth]{stuff/uminho.jpg}
+    %\includegraphics[width=.07\textwidth]{stuff/informatica.jpg}\\
+    {\small Universidade do Minho}, {\small LEI}\\
+    {\small Ano lectivo 2010/2011}\\
+    {\small Engenharia Gramatical - Exercício 3}\\
+\end{tabular}
+}
+\author{
+    {\small José Pedro Silva - pg17628} \and
+    {\small Mário Ulisses Costa - pg15817} \and
+    {\small Pedro Faria - pg17684}}
+\date{{\small \today}}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+Descrição da solução à proposta para os problemas do dia 06-12-2010
+\end{abstract}
+
+\tableofcontents
+
+\section{Problema}
+Considere a linguagem para descrever uma Factura. Sabe-se que uma Factura é composta por um cabeçalho e um corpo, e este é composto por um ou mais movimentos.
+
+A GIC abaixo define formalmente uma primeira versão da linguagem Factura, de acordo com a descrição acima:
+
+\begin{code_txt}
+      T = { id, str, num}
+      N = { Lisp, SExp, SExplist }
+      S = Lisp
+      P = {
+            p1:  Factura  --> Cabec Corpo
+            p2:  Cabec    --> IdFact IdE IdR
+            p3:  IdFact   --> NumFact
+            p4:  NumFact  --> id
+            p5:  IdE      --> Nome NIF Morada NIB
+            p6:  IdR      --> Nome NIF Morada
+            p7:  Nome     --> str
+            p8:  NIF      --> str
+            p9:  Morada   --> str
+            p10: NIB      --> str
+            p11: Corpo    --> ...
+          }
+\end{code_txt}
+
+Pede-se então que escreva uma Gramática de Atributos, GA, para
+\begin{itemize}
+    \item a) calcular o total por linha e total geral. 
+
+    \item b) estender a linguagem original para permitir mais do que uma factura (calculando os mesmos totais). 
+
+    \item c) modificar a linguagem de modo a suportar inicialmente a descrição do stock (referência, descrição, preço unitário e quantidade em stock); neste caso, cada linha só terá a referência e a quantidade vendida. 
+
+    \item d) estender a semântica da nova linguagem de modo a também actualizar o stock. 
+\end{itemize}
+
+\section{Solução}
+As subsecções que se seguem referem-se à resolução de cada alínea do capítulo anterior.
+\subsection{Alínea a)}
+A solução para a primeira alínea passa por calcular o total por linha na produção linha, multiplicando a quantidade pelo preço unitário.
+
+\begin{code_txt} 
+Linha -> Ref Desc Qtd PU {Linha.totalLinha = Qtd.quantidade * PU.pu;}
+\end{code_txt}
+
+Para calcular o montante total da factura, temos que somar na produção Linhas, o preço de cada linha com o preço já calculado das restantes linhas.
+No caso de só haver uma linha, o montante total é igual ao montante da linha.
+
+\begin{code_txt} 
+Linhas -> Linha {Linhas.total = Linhas.totalLinha;}
+Linhas -> Linha Linhas {Linhas0.total = Linha1.totalLinha + Linhas2.total;}
+\end{code_txt}
+
+\subsection{Alínea b)}
+Para a linguagem passar a permitir multiplas facturas, temos de acrescentar as seguintes produções à gramática:
+
+\begin{code_txt} 
+LivroF -> Facturas
+
+Facturas -> Factura
+
+Facturas -> Factura Facturas
+\end{code_txt}
+ 
+E agora \textit{LivroF} toma o lugar de símbolo inícial, que pertencia a \textit{Factura}.
+ 
+\subsection{Alínea c)}
+Nesta alínea a descrição e preço unitário desaparecem de cada linha da factura, porque passa a existir um stock, que contém as informações de todos os produtos.
+
+\begin{code_txt} 
+Inicial -> Stock LivroF { LivroF.stock = Stock.stock; }
+
+Stock -> Produtos
+
+Produtos -> Produto
+
+Produtos -> Produto Produtos
+
+Produto -> Ref Desc Qtd PU
+\end{code_txt}
+
+As informações lidas no stock são depois herdadas pelo livro de facturas (\textit{LivroF}), depois pelas Facturas, e assim sucessivamente atée chegar à Linha.
+Na linha é calculado o preço total da linha através da quantidade e do preço unitário, tal como anteriormente. A diferença é que agora o preço unitário é acessido através do stock.
+
+\begin{code_txt} 
+Linha -> Ref Qtd {  
+	int pu = Linha.stock.getPU(Ref.num);
+	Linha.totalLinha = Qtd.quantidade * pu;
+	imprime Linha.totalLinha;
+}
+\end{code_txt} 
+
+
+\subsection{Alínea d)}
+De modo a actualizar o stock, na produção \textit{Linha} retiramos ao produto referenciado por \textit{Ref}, a quantidade vendida.
+
+\begin{code_txt} 
+Linha -> Ref Qtd {  
+		int pu = stock.getPU(Ref.num);
+ 		Linha.totalLinha = Qtd.quantidade * pu;
+		imprime Linha.totalLinha;
+		
+		int qt = Linha.stock.getQuantidade(Ref.num);
+		Linha.stock.setQuantidade(qt-Qtd.quantidade);	
+		}
+\end{code_txt} 
+
+\newpage
+
+\section{Anexo}
+\subsection{Código da alínea a)}
+\begin{code_txt} 
+synthesided attribute quantidade occurs on Qtd;
+synthesided attribute pu occurs on PU;
+synthesided attribute totalLinha occurs on Linha;
+synthesided attribute total occurs on Linhas,CorpoF,Factura,Facturas;
+
+
+Factura -> CabecaF CorpoF {imprime(CorpoF.total);}
+
+CabecaF -> IdFact IdE IdR
+
+IdFact -> NumFact
+
+NumFact -> id
+
+IdE -> Nome NIF Mor NIB
+
+IdR -> Nome NIF Mor
+
+Nome -> string
+
+NIF -> num
+
+Mor -> string
+
+NIB -> num
+
+CorpoF -> Linhas {CorpoF.total = Linhas.total;}
+
+Linhas -> Linha {Linhas.total = Linhas.totalLinha;}
+
+Linhas -> Linha Linhas {Linhas0.total = Linha1.totalLinha + Linhas2.total;}
+
+Linha -> Ref Desc Qtd PU {Linha.totalLinha = Qtd.quantidade * PU.pu;}
+
+Ref -> NumProd
+
+NumPro -> id
+
+Desc -> string
+
+Qtd -> num  { Qtd.quantidade = num.lexeme;}
+
+PU -> num	{ PU.quantidade = num.lexeme;}
+
+
+
+
+\end{code_txt} 
+\newpage
+\subsection{Código da alínea b)}
+\begin{code_txt} 
+synthesided attribute quantidade occurs on Qtd;
+synthesided attribute pu occurs on PU;
+
+synthesided attribute totalLinha occurs on Linha;
+
+synthesided attribute total occurs on Linhas,CorpoF,Factura;
+
+
+
+LivroF -> Facturas
+
+Facturas -> Factura
+
+Facturas -> Factura Facturas
+
+Factura -> CabecaF CorpoF {imprime(CorpoF.total);}
+
+CabecaF -> IdFact IdE IdR
+
+IdFact -> NumFact
+
+NumFact -> id
+
+IdE -> Nome NIF Mor NIB
+
+IdR -> Nome NIF Mor
+
+Nome -> string
+
+NIF -> num
+
+Mor -> string
+
+NIB -> num
+
+CorpoF -> Linhas {CorpoF.total = Linhas.total;}
+
+Linhas -> Linha {Linhas.total = Linhas.totalLinha;}
+
+Linhas -> Linha Linhas {Linhas0.total = Linha1.totalLinhas + Linhas2.total;}
+
+Linha -> Ref Desc Qtd PU {Linha.totalLinha = Qtd.quantidade * PU.pu;}
+
+Ref -> NumProd
+
+NumPro -> id
+
+Desc -> string
+
+Qtd -> num  { Qtd.quantidade = num.lexeme;}
+
+PU -> num	{ PU.quantidade = num.lexeme;}
+
+
+
+
+\end{code_txt} 
+\newpage
+\subsection{Código da alínea c)}
+\begin{code_txt} 
+synthesided attribute quantidade occurs on Qtd;
+synthesided attribute pu occurs on PU;
+
+synthesided attribute totalLinha occurs on Linha;
+
+synthesided attribute total occurs on Linhas,CorpoF,Factura,Facturas;
+
+inherited attribute stock occurs on LivroF,Facturas,Factura,CorpoF,Linhas,Linha;
+
+
+
+Inicial -> Stock LivroF { LivroF.stock = Stock.stock; }
+
+Stock -> Produtos
+
+Produtos -> Produto
+
+Produtos -> Produto Produtos
+
+Produto -> Ref Desc Qtd PU
+
+LivroF -> Facturas { Facturas.stock = LivroF.stock;}
+
+Facturas -> Factura {Factura.stock = Facturas.stock;}
+
+Facturas -> Factura Facturas {Factura1.stock = Facturas0.stock; Facturas2.stock = Facturas0.stock;} 
+
+Factura -> CabecaF CorpoF { imprime(CorpoF.total); CorpoF.stock = Factura.stock;}
+
+CabecaF -> IdFact IdE IdR
+
+IdFact -> NumFact
+
+NumFact -> id
+
+IdE -> Nome NIF Mor NIB
+
+IdR -> Nome NIF Mor
+
+Nome -> string
+
+NIF -> num
+
+Mor -> string
+
+NIB -> num
+
+CorpoF -> Linhas {CorpoF.total = Linhas.total; Linhas.stock = CorpoF.stock;} 
+
+Linhas -> Linha {Linhas.total = Linhas.totalLinha; Linha.stock = Linhas.stock;}
+
+Linhas -> Linha Linhas {Linhas0.total = Linha1.totalLinhas + Linhas2.total; Linha1.stock = Linhas0.stock; Linhas2.stock = Linhas0.stock; } 
+
+Linha -> Ref Qtd {  int pu = Linha.stock.getPU(Ref.num);
+ 					Linha.totalLinha = Qtd.quantidade * pu;
+					imprime Linha.totalLinha;
+						}
+
+Ref -> NumProd { Ref.num = Numprod.num}
+
+NumPro -> id {NumPro.num = id.lexeme}
+
+Desc -> string
+
+Qtd -> num  { Qtd.quantidade = num.lexeme;}
+
+PU -> num	{ PU.quantidade = num.lexeme;}
+
+
+
+
+\end{code_txt} 
+\newpage
+\subsection{Código da alínea d)}
+\begin{code_txt} 
+synthesided attribute quantidade occurs on Qtd;
+synthesided attribute pu occurs on PU;
+
+synthesided attribute totalLinha occurs on Linha;
+
+synthesided attribute total occurs on Linhas,CorpoF,Factura;
+
+inherited attribute stock occurs on LivroF,Facturas,Factura,CorpoF,Linhas,Linha;
+
+
+
+
+Inicial -> Stock LivroF { LivroF.stock = Stock.stock; }
+
+LivroF -> Facturas { Facturas.stock = LivroF.stock;}
+
+Facturas -> Factura {Factura.stock = Facturas.stock;}
+
+Facturas -> Factura Facturas {Factura1.stock = Facturas0.stock; Facturas2.stock = Facturas0.stock;} 
+
+Factura -> CabecaF CorpoF { imprime(CorpoF.total); CorpoF.stock = Factura.stock;}
+
+CabecaF -> IdFact IdE IdR
+
+IdFact -> NumFact
+
+NumFact -> id
+
+IdE -> Nome NIF Mor NIB
+
+IdR -> Nome NIF Mor
+
+Nome -> string
+
+NIF -> num
+
+Mor -> string
+
+NIB -> num
+
+CorpoF -> Linhas {CorpoF.total = Linhas.total; Linhas.stock = CorpoF.stock;} 
+
+Linhas -> Linha {Linhas.total = Linhas.totalLinha; Linha.stock = Linhas.stock;}
+
+Linhas -> Linha Linhas {Linhas0.total = Linha1.totalLinhas + Linhas2.total; Linha1.stock = Linhas0.stock; Linhas2.stock = Linhas0.stock; } 
+
+Linha -> Ref Qtd {  int pu = stock.getPU(Ref.num);
+ 					Linha.totalLinha = Qtd.quantidade * pu;
+					imprime Linha.totalLinha;
+					
+					int qt = Linha.stock.getQuantidade(Ref.num);
+					Linha.stock.setQuantidade(qt-Qtd.quantidade);	
+						}
+
+Ref -> NumProd { Ref.num = Numprod.num}
+
+NumPro -> id {NumPro.num = id.lexeme}
+
+Desc -> string
+
+Qtd -> num  { Qtd.quantidade = num.lexeme;}
+
+PU -> num	{ PU.quantidade = num.lexeme;}
+
+
+
+\end{code_txt} 
+
+\end{document}
+

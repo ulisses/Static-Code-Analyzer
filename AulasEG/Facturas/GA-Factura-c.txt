@@ -1,0 +1,70 @@
+synthesided attribute quantidade occurs on Qtd;
+synthesided attribute pu occurs on PU;
+
+synthesided attribute totalLinha occurs on Linha;
+
+synthesided attribute total occurs on Linhas,CorpoF,Factura,Facturas;
+
+inherited attribute stock occurs on LivroF,Facturas,Factura,CorpoF,Linhas,Linha;
+
+
+
+Inicial -> Stock LivroF { LivroF.stock = Stock.stock; }
+
+Stock -> Produtos
+
+Produtos -> Produto
+
+Produtos -> Produto Produtos
+
+Produto -> Ref Desc Qtd PU
+
+LivroF -> Facturas { Facturas.stock = LivroF.stock;}
+
+Facturas -> Factura {Factura.stock = Facturas.stock;}
+
+Facturas -> Factura Facturas {Factura1.stock = Facturas0.stock; Facturas2.stock = Facturas0.stock;} 
+
+Factura -> CabecaF CorpoF { imprime(CorpoF.total); CorpoF.stock = Factura.stock;}
+
+CabecaF -> IdFact IdE IdR
+
+IdFact -> NumFact
+
+NumFact -> id
+
+IdE -> Nome NIF Mor NIB
+
+IdR -> Nome NIF Mor
+
+Nome -> string
+
+NIF -> num
+
+Mor -> string
+
+NIB -> num
+
+CorpoF -> Linhas {CorpoF.total = Linhas.total; Linhas.stock = CorpoF.stock;} 
+
+Linhas -> Linha {Linhas.total = Linhas.totalLinha; Linha.stock = Linhas.stock;}
+
+Linhas -> Linha Linhas {Linhas0.total = Linha1.totalLinhas + Linhas2.total; Linha1.stock = Linhas0.stock; Linhas2.stock = Linhas0.stock; } 
+
+Linha -> Ref Qtd {  int pu = Linha.stock.getPU(Ref.num);
+ 					Linha.totalLinha = Qtd.quantidade * pu;
+					imprime Linha.totalLinha;
+						}
+
+Ref -> NumProd { Ref.num = Numprod.num}
+
+NumPro -> id {NumPro.num = id.lexeme}
+
+Desc -> string
+
+Qtd -> num  { Qtd.quantidade = num.lexeme;}
+
+PU -> num	{ PU.quantidade = num.lexeme;}
+
+
+

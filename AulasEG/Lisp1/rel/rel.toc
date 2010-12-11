@@ -1,0 +1,6 @@
+\select@language {portuges}
+\contentsline {section}{\numberline {1}Problema}{2}{section*.1}
+\contentsline {section}{\numberline {2}Solu\IeC {\c c}\IeC {\~a}o}{3}{section*.1}
+\contentsline {subsection}{\numberline {2.1}Al\IeC {\'\i }nea a)}{3}{section*.2}
+\contentsline {subsection}{\numberline {2.2}Al\IeC {\'\i }nea b)}{3}{section*.2}
+\contentsline {subsection}{\numberline {2.3}Al\IeC {\'\i }nea c) e d)}{3}{figure.1}

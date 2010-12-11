@@ -1,0 +1,12 @@
+\select@language {portuges}
+\contentsline {section}{\numberline {1}Problema}{1}
+\contentsline {section}{\numberline {2}Solu\IeC {\c c}\IeC {\~a}o}{2}
+\contentsline {subsection}{\numberline {2.1}Al\IeC {\'\i }nea a)}{2}
+\contentsline {subsection}{\numberline {2.2}Al\IeC {\'\i }nea b)}{2}
+\contentsline {subsection}{\numberline {2.3}Al\IeC {\'\i }nea c)}{2}
+\contentsline {subsection}{\numberline {2.4}Al\IeC {\'\i }nea d)}{3}
+\contentsline {section}{\numberline {3}Anexo}{4}
+\contentsline {subsection}{\numberline {3.1}C\IeC {\'o}digo da al\IeC {\'\i }nea a)}{4}
+\contentsline {subsection}{\numberline {3.2}C\IeC {\'o}digo da al\IeC {\'\i }nea b)}{5}
+\contentsline {subsection}{\numberline {3.3}C\IeC {\'o}digo da al\IeC {\'\i }nea c)}{6}
+\contentsline {subsection}{\numberline {3.4}C\IeC {\'o}digo da al\IeC {\'\i }nea d)}{7}

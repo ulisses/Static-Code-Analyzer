@@ -1,0 +1,49 @@
+synthesided attribute quantidade occurs on Qtd;
+synthesided attribute pu occurs on PU;
+
+synthesided attribute totalLinha occurs on Linha;
+
+synthesided attribute total occurs on Linhas,CorpoF,Factura,Facturas;
+
+
+
+Factura -> CabecaF CorpoF {imprime(CorpoF.total);}
+
+CabecaF -> IdFact IdE IdR
+
+IdFact -> NumFact
+
+NumFact -> id
+
+IdE -> Nome NIF Mor NIB
+
+IdR -> Nome NIF Mor
+
+Nome -> string
+
+NIF -> num
+
+Mor -> string
+
+NIB -> num
+
+CorpoF -> Linhas {CorpoF.total = Linhas.total;}
+
+Linhas -> Linha {Linhas.total = Linhas.totalLinha;}
+
+Linhas -> Linha Linhas {Linhas0.total = Linha1.totalLinha + Linhas2.total;}
+
+Linha -> Ref Desc Qtd PU {Linha.totalLinha = Qtd.quantidade * PU.pu;}
+
+Ref -> NumProd
+
+NumPro -> id
+
+Desc -> string
+
+Qtd -> num  { Qtd.quantidade = num.lexeme;}
+
+PU -> num	{ PU.quantidade = num.lexeme;}
+
+
+
