@@ -1,8 +1,0 @@
-name:           asd
-version:        0.1
-cabal-version:  >= 1.2
-
-executable asd
-  hs-source-dirs:  src
-  main-is:         Main.hs
-
