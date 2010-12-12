@@ -443,7 +443,7 @@ geraReport exer res =
 \end{frame}
 
 \subsubsection{XSD}
-\begin{frame}[fragile] \frametitle{Modelo de dados - excerto do XSD do Enunciado}
+\begin{frame}[fragile] \frametitle{Modelo de dados - XSD - excerto XSD Enunciado }
 Exemplo de elemento com restrições:\\
 \begin{lstlisting}[language=XML,basicstyle=\tiny,breaklines=true]
 <ed:element name="Peso" default="25">
@@ -457,7 +457,7 @@ Exemplo de elemento com restrições:\\
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile] \frametitle{Modelo de dados - excerto do XSD do Enunciado}
+\begin{frame}[fragile] \frametitle{Modelo de dados - XSD - Linguagem}
 Exemplo de elemento com restrições:\\
 \begin{lstlisting}[language=XML,basicstyle=\tiny,breaklines=true]
 <ed:element name="Linguagem" maxOccurs="unbounded">
@@ -472,7 +472,7 @@ Exemplo de elemento com restrições:\\
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile] \frametitle{Modelo de dados - Diagrama correspondete ao XSD do Enunciado}
+\begin{frame}[fragile] \frametitle{Modelo de dados - XSD - Enunciado}
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{../report1/Images/enunciado_schema}
@@ -482,7 +482,7 @@ Exemplo de elemento com restrições:\\
 \end{frame}
 
 
-\begin{frame}[fragile] \frametitle{Modelo de dados - excerto do XSD do Enunciado}
+\begin{frame}[fragile] \frametitle{Modelo de dados - XSD - Tentativa}
 Exemplo de elemento que pode ocorrer mais do que uma vez:\\
 \begin{lstlisting}[language=XML,basicstyle=\tiny,breaklines=true]
 <tt:element name="Dict">
@@ -503,7 +503,7 @@ Exemplo de elemento que pode ocorrer mais do que uma vez:\\
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile] \frametitle{Modelo de dados - Diagrama correspondete ao XSD da Tentativa}
+\begin{frame}[fragile] \frametitle{Modelo de dados - XSD - Tentativa}
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{../report1/Images/tentativa_schema}
