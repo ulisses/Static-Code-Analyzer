@@ -5,10 +5,10 @@
 
 \chapter{Modelação do Problema} \label{chap modprob}
 
-Contextualização do cap 3
+Neste capítulo, pretende-se dar uma descrição textual da várias modelações que foram feitas ao sistema, mais precisamente, a modelação informal, a modelação formal, o modelo de dados e, por fim, a importação de dados.
 
 \section{Modelação Informal}\label{sec modinf}
-Com o diagrama da arquitectura do sistema, figura~\ref{fig diaact},pretende-se mostrar as várias entidades que podem aceder ao sistema, assim como as várias
+Com o diagrama da arquitectura do sistema, figura~\ref{fig diaact}, pretende-se mostrar as várias entidades que podem aceder ao sistema, assim como as várias
 actividades que cada uma pode realizar e tarefas para o sistema processar.
 Também é realçada a ideia de que alguns dos recursos do sistema só estão dispóniveis ao utilizador depois 
 de passar por outros passos, ou seja, o diagrama dá a entender a ordem pelas quais o utilizador e o sistema podem/devem executar as tarefas.\\
@@ -24,8 +24,8 @@ Para começar, como temos duas entidades diferentes que podem aceder ao sistema 
 dividiu-se o diagrama em duas partes distintas (uma para cada entidade referida), de modo a facilitar a leitura.\\
 
 Em ambos os casos, o login é a primeira actividade que pode ser realizada.
-Se o login não foi efectuado com sucesso, é adicionado no log file uma entrada com a descrição do erro.
-No caso de o login ser efectuado com sucesso, consoante as permissões do utilizador em questão, tem diferentes opções ao seu dispôr.\\
+Caso o login não seja efectuado com sucesso, é adicionado ao log file uma entrada com a descrição do erro.
+Caso contrário, e o login ser efectuado com sucesso, consoante as permissões do utilizador em questão, tem diferentes opções ao seu dispôr.\\
 
 No caso do login pertencer a um docente, este terá acesso aos dados de cada um dos grupos, podendo verificar os resultados que estes 
 obtiveram na resolução das questões do(s) concurso(s), assim como ao ficheiro que contém a análise das métricas dos vários programas submetidos 
@@ -45,25 +45,25 @@ Para terminar, será feito um estudo das métricas do ficheiro submetido, tendo 
 
 Afim de haver algum rigor na definição do sistema decidiu-se fazer um modelo mais formal do ponto de vista dos dados e das funcionalidades que o sistema apresenta.
 A ideia desta modelação é ainda ser um modelo formal da especificação atrás descrita. Para isso utilizou-se uma notação orientada aos contratos (design by contract),
-com a riqueza que as pré e pós condições de funções nos oferecem.\\
+com a riqueza que as pré e pós condições de funções oferecem.\\
 
-Assim sendo, temos descritos os contratos da seguinte forma:
+Assim sendo, os contratos estão descritos da seguinte forma:
 $$\noindent\begin{array}{c} \{P\} \\ C \\ \{R\} \\ \end{array}$$
 em que $P$ define uma pré condição, $C$ uma assinatura de uma função e $R$ uma pós condição.
-De notar que tanto a pré como a pós condição teem de ser elementos booleanos e devem-se referir à assinatura da função. Assim sendo estamos a definir que apenas o contrato $C$
+De notar que tanto a pré como a pós condição têm de ser elementos booleanos e devem-se referir à assinatura da função. Assim sendo definiu-se que apenas o contrato $C$
 é válido se a sua pré e pós condições devolverem $true$. A pré e pós condição podem ser vazias.\\
 
-Neste sistema que difinimos a assinatura $C$ da função pode ter uma particularidade, que é a instânciação de um elemento que pertença a um determinado tipo.
+Neste sistema, definiu-se que a assinatura $C$ da função pode ter uma particularidade, que é a instânciação de um elemento que pertença a um determinado tipo.
 Ou seja, pode-se dizer $$soma :: a \unif Int \rarrow b \unif Int \rarrow Int$$ para expressar que a função $soma$ recebe dois parametros $a$ e $b$ que são inteiros e devolve
 um elemento do tipo inteiro.\\
 
-Decidimos, por motivos de facilidade de leitura e afim de evitar a complexidade formal, não especificar o estado interno do sistema, como por exemplo o estado do Apache,
-da base de dados entre outros componentes do sistema. Achamos que especificar isso não iria trazer nada de interessante ao que pretendemos mostrar aqui.
+Decidiu-se também, que por motivos de facilidade de leitura e afim de evitar a complexidade formal, não especificar o estado interno do sistema, como por exemplo o estado do Apache,
+da base de dados entre outros componentes do sistema. Especificar isso não iria trazer nada de interessante ao que se pretende mostrar aqui.
 Assim, neste modelo formal apenas se vê de forma clara, os contratos que queremos que o nosso sitema tenha.\\
 
-Começamos então por definir o contrato da função $login$ que permite a um determinado utilizador entrar no sistema. Este contrato estipula que recebendo um par
-$Username \times Hash$ e um $SessionID$ devolve ou um $Error$ ou um novo $SessionID$ que associa o utilizador à sua sessão no sistema. Afim de haver provacidade
-sobre os dados criticos do utilizador, como a password, decidimos apenas receber do lado do servidor a $Hash$ respectiva da sua palavra-passe, sendo esta hash
+Começou-se então por definir o contrato da função $login$ que permite a um determinado utilizador entrar no sistema. Esse contrato estipula que recebendo um par
+$Username \times Hash$ e um $SessionID$ devolve ou um $Error$ ou um novo $SessionID$ que associa o utilizador à sua sessão no sistema. Afim de haver privacidade
+sobre os dados críticos do utilizador, como a password, decidiu-se apenas receber do lado do servidor a $Hash$ respectiva da sua palavra-passe, sendo esta hash
 gerada do lado do cliente. Esta técnica não tem nada de novo, mas por incrível que pareça ainda há sistemas online que não usam este tipo de mecanismos.\\
 
 \prop
@@ -71,8 +71,8 @@ gerada do lado do cliente. Esta técnica não tem nada de novo, mas por incríve
 {login :: u \unif Username \times Hash \rarrow SessionID \rarrow Error + SessionID}
 { }
 
-Aprenta-se de seguida o modelo de dados formal que o sistema usa. Consideramos que um $Exercicio$ tem um $Enunciado$ e um dicionário a relacionar $Input's$ com $Output's$,
-um concurso tem um nome, um tipo e um conjunto de exercicios.\\
+Aprenta-se de seguida o modelo de dados formal que o sistema usa. Considerou-se que um $Exercício$ tem um $Enunciado$ e um dicionário a relacionar $Input's$ com $Output's$,
+um concurso tem um nome, um tipo e um conjunto de exercícios.\\
 
 $\begin{array}{l}
 data~Dict~a~b = (a \times b)^{*} \\
@@ -80,15 +80,15 @@ data~Exercicio = Exercicio~Enunciado~(Dict~Input~Output) \\
 data~Contest =  Contest~Nome~Tipo~Exercicio^{*}
 \end{array}$\\
 
-Para criar um novo concurso, temos de assegurar que o utilizador que requisita este serviço é um professor, visto não nos interessar que alunos criem concursos.
-Temos ainda de assegurar que o concurso que se vai criar tem no minimo um exercicio.\\
+Para criar um novo concurso, é necessário assegurar que o utilizador que requisita este serviço é um professor, visto não sendo requisito alunos criarem concursos.
+É necessário ainda assegurar que o concurso que se vai criar tem no mínimo um exercicio.\\
 
 \prop
 { existeSession(s)  \wedge isProf(s) \wedge (notEmpty \circ getExercice)~c}
 {createContest :: s \unif SessionID \rarrow c \unif Contest \rarrow 1}
 { (notEmpty \circ getDict)~c }
 
-Para criar um novo exercicio, o utilizador tem de ser um professor e o exercicio em questão não pode ser repetido no sistema. Decidiu-se assim para evitar redundância
+Para criar um novo exercício, o utilizador tem de ser um professor e o exercício em questão não pode ser repetido no sistema. Decidiu-se desse modo para evitar redundância
 na informação que se tem armazenada.
 
 \prop
@@ -96,15 +96,15 @@ na informação que se tem armazenada.
 {createExercice :: s\unif SessionID \rarrow e \unif Enunciado \rarrow d \unif (Dict a b) \rarrow 1}
 { exerciceCreated(Exercicio e d) }
 
-Pode-se ainda consultar os logs de um concurso especifico. Aqui apresentamos como argumento toda o concurso - $Contest$ para apenas evitar a definição evidente
-de identificadores. É claro que a implementação desta acção, irá receber como parametro o identificador do concurso, como em outros parametros deste modelo formal.
+Pode-se ainda consultar os logs de um concurso específico. Aqui apresenta-se como argumento todo o concurso - $Contest$ para apenas evitar a definição evidente
+de identificadores. É claro que a implementação desta acção, irá receber como parâmetro o identificador do concurso, como em outros parâmetros deste modelo formal.
 
 \prop 
 { existeSession(s) \wedge isProf(s) \wedge contestIsClosed(c) }
 {consultarLogsContest :: s \unif SessionID \rarrow c \unif Contest \rarrow LogsContest}
 {}
 
-De seguida mostra-se a especificação de efectuar um registo no concurso, queremos apenas que o concurso não esteja cheio.
+De seguida mostra-se a especificação de efectuar um registo no concurso, pretende-se apenas que o concurso não esteja cheio.
 
 \prop
 { existSession(s) \wedge contestNotFull(c)}
@@ -120,34 +120,33 @@ ao participante de um concurso.
 { rep = geraReport s e res }
 
 \subsubsection{Modelação de acções de selecção}
-Temos acções do nosso sistema que envolvem a selecção de items nos forms ou então métodos que geram efeitos secundários, assim decidimos explicar aqui esse conjunto de
-contractos. Estes métodos são interessantes de modelar porque, assim fica mais claro ver os parametros que recebemos para os concretizar.\\
+Existem acções do sistema proposto que envolvem a selecção de items nos forms ou então métodos que geram efeitos secundários, assim decidiu-se explicar aqui esse conjunto de
+contractos. Estes métodos são interessantes de modelar porque, assim fica mais claro ver os parâmetros que recebemos para os concretizar.\\
 
-Temos então a acção de escolha de um exercicio numa panoplia de exercicios disponiveis no concurso que o utilizador está actualmente inscrito e a participar.\\
-Relembramos que o uso do tipo $1$ significa o tipo unitário, ou seja, queremos denotar que do ponto de vista formal esta operação não devolve nada, apenas altera o sistema.
-Sistema esse que no inicio explicamos que por motivos de complexidade não tinha interesse expecificar formalmente.
+Tem-se então a acção de escolha de um exercício numa panóplia de exercícios disponíveis no concurso que o utilizador está actualmente inscrito e a participar.\\
+De relembrar que o uso do tipo $1$ significa o tipo unitário, ou seja, do ponto de vista formal esta operação não devolve nada, apenas altera o sistema.
+Sistema esse que no inicio explicou-se que por motivos de complexidade não tinha interesse expecificar formalmente.
 
 \prop
 { existeSession(s) \wedge exerciceExist(e) }
 {escolheExercicio :: s \unif SessionID \rarrow e \unif Exercicio \rarrow 1}
 { }
 
-Temos ainda a escolha do concurso para um grupo que está já registado.
+Tem-se ainda a escolha do concurso para um grupo que está já registado.
 
 \prop
 { existSession(s) \wedge existContest(c) \wedge userRegistadoNoContest(s,c) }
 {escolheConcursoJaRegistado :: s \unif SessionID \rarrow c \unif Contest \rarrow 1}
 { }
 
-Mostramos de seguida o contracto da função que gera um relatório ao concorrente.
+Apresenta-se de seguida o contracto da função que gera um relatório ao concorrente.
 
 \prop
 { }
 {geraReport :: e \unif Exercicio \rarrow res \unif Resolucao \rarrow Report}
 { }
 
-A titulo de exemplo, da potencialidade deste tipo de modelação, servimo-nos agora da linguagem do Haskell para especificar a definição desta operação em maior detalhe.
-Temos então as seguintes definições:
+A título de exemplo, da potencialidade deste tipo de modelação, serviu-se agora da linguagem do Haskell para especificar a definição desta operação em maior detalhe, como se pode ver a partir das seguintes definições:
 
 \begin{eqnarray*}
 geraReportBugCompile :: Exercicio \rarrow Error \rarrow Report\\
@@ -157,13 +156,13 @@ geraReportNoBug :: Exercicio \rarrow Resolucao \rarrow Report\\
 execute :: Program \rarrow Exercicio \rarrow ResolucaoProposta\\
 \end{eqnarray*}
 
-Temos ainda que $ResolucaoProposta$ é a resolução submetida pelos concorrentes e aprenstenta o seguinte tipo:
+A $ResolucaoProposta$ é a resolução submetida pelos concorrentes e aprenstenta o seguinte tipo:
 
 $\begin{array}{l}
 data~ResolucaoProposta = Dict~Input~Output
 \end{array}$\\
 
-Temos ainda a função que recebe uma resolução como input e devolve ora um programa pronto já compilado, ora um erro no caso de surgir algum problema na compilação.
+Tem-se ainda a função que recebe uma resolução como input e devolve ora um programa pronto já compilado, ora um erro no caso de surgir algum problema na compilação.
 
 \prop
 { }
@@ -189,7 +188,7 @@ geraReport exer res = do
 				(Right errado) -> geraReportBugCompare errado res
 \end{lstlisting}
 
-Se quisessemos este código de um ponto de vista de composição de funções a sua conversão poderia ser fácilmente atingida pelas seguintes definições:
+Se fosse pretendido este código de um ponto de vista de composição de funções a sua conversão poderia ser fácilmente atingida pelas seguintes definições:
 
 \begin{lstlisting}[language=HaskellUlisses]
 geraReport exer res =
@@ -199,7 +198,7 @@ geraReport exer res =
 
 %geraReport e res = compile res >>= \p \rarrow compare(e (execute p e)) >>= pageCerto)
 
-Temos ainda o contrato da função que gera o relatório final baseando-se na participação de uma equipa num determinado concurso.
+O contrato da função que gera o relatório final baseando-se na participação de uma equipa num determinado concurso:
 
 \prop
 { existSession(s) \wedge existContest(c) \wedge }
@@ -228,7 +227,7 @@ o grupo é que possui as credenciais para entrar no sistema (nome de utilizador 
 Além disso também tem um nome pelo qual é identificado, um e-mail que será usado no caso de haver necessidade de se entrar em contacto
 com o grupo, e um conjunto de .\\
 
-Achamos importante incluir a informação de cada concorrente no grupo para, se possível, automatizar várias tarefas tais como lançamento de notas.
+É importante incluir a informação de cada concorrente no grupo para, se possível, automatizar várias tarefas tais como lançamento de notas.
 Cada concorrente é caracterizado pelo seu nome completo, número de aluno (se for o caso), e e-mail.\\
 
 \begin{figure}[htbp]
@@ -239,10 +238,10 @@ Cada concorrente é caracterizado pelo seu nome completo, número de aluno (se f
 \end{figure}
 
 
-Para finalizar vamos explicar em que consistem os concursos, enunciados e tentativas.
+Para finalizar, pretende-se explicar em que consistem os concursos, enunciados e tentativas.
 
 Um concurso, resumidamente, é um agregado de enunciados. 
-Tem outras propriedades tais como um título, data de inicio e data de fim (período em que o concurso está disponível para que os grupos se registem), 
+Contém outras propriedades, tais como um título, data de início e data de fim (período em que o concurso está disponível para que os grupos se registem), 
 chave de acesso (necessária para o registo dos grupos), duração do concurso (tempo que o grupo tem para resolver os exercícios do concurso, 
 a partir do momento que dá inicio à prova), e por fim, regras de classificação.\\
 \\
@@ -265,7 +264,7 @@ submetido.
 
 \section{Importação de dados}\label{sec xml}
 
-Uma das funcionalidades requeridas ao nosso sistema é a importação de enunciados e tentativas no formato xml.
+Uma das funcionalidades requeridas ao sistema proposto é a importação de enunciados e tentativas no formato xml.
 Esta funcionalidade será bastante útil para demonstrar e testar o sistema, sem que se tenha de criar manualmente os enunciados
  usando a interface gráfica, ou se tenha que submeter ficheiros com código fonte, de modo a serem geradas tentativas.
 Os campos presentes no xml de cada uma das entidades, \textit{enunciado} e \textit{tentativa}, são praticamente os mesmos 
@@ -277,7 +276,7 @@ automaticamente pelo sistema. Passamos agora a apresentar um exemplo do mesmo.
 \lstinputlisting{resources/enunciado.xml}
 
 
-Quanto ao xml para a \textit{tentativa} há que realçar o facto de que o código fonte do programa vai dentro de uma tag xml.  Além da tag xml, o código fonte
+Quanto ao xml para a \textit{tentativa} há que realçar o facto de que o código fonte do programa vai dentro de uma tag xml. Além da tag xml, o código fonte
 terá de ir cercado de uma secção CDATA. Isto acontece para que o que o código fonte não seja processado com o restante xml que o contém.\\
 \\
 
@@ -285,13 +284,13 @@ terá de ir cercado de uma secção CDATA. Isto acontece para que o que o códig
 
 
 Para que todos os dados contidos nos ficheiros xml possam ser facilmente validados, foram criados dois \textit{XML schema}.
-Neste schema definimos quais as tags que devem existir em cada xml, o tipo de dados e até a gama de valores que serão contido por cada tag e
+Neste schema, definiu-se quais as tags que devem existir em cada xml, o tipo de dados e até a gama de valores que serão contido por cada tag e
  a multiplicidade das tags .\\
 
-Nesta fase inicial do projecto ainda não foram sempre especificados  os tipos de dados que serão contidos por cada tag.\\
-No entanto, para alguns dos casos em que tal aconteceu apresentaremos alguns exemplos e explicações.\\
+Nesta fase inicial do projecto, ainda não foram sempre especificados os tipos de dados que serão contidos por cada tag.\\
+No entanto, para alguns dos casos em que tal aconteceu apresenta-se alguns exemplos e explicações.\\
 \\
-No xsd referente ao \textit{enunciado} encontramos o elemento \textit{Peso}, que é um exemplo de uma tag que contém restrições.
+No xsd referente ao \textit{enunciado} encontra-se o elemento \textit{Peso}, que é um exemplo de uma tag que contém restrições.
 O \textit{Peso} terá de ser um inteiro e terá um valor entre 0 e 100.
 
 \begin{lstlisting}
@@ -322,7 +321,7 @@ apenas poderá tomar um dos valores enumerados no xsd.\\
 
 No xsd para a \textit{tentativa} podemos evidenciar a multiplicidade das tags, ou seja, quantas vezes algumas delas se podem repetir.
 Na \textit{tentativa}, existe um \textit{Dict}, que contém uma ou mais tags \textit{Teste}.
-Para definirmos que possam existir mais de que uma tag \textit{Teste} dentro de \textit{Dict}, adicionamos o atributo \textit{maxOccurs},
+Para definir que possam existir mais de que uma tag \textit{Teste} dentro de \textit{Dict}, adicionou-se o atributo \textit{maxOccurs},
 na entidade \textit{Teste}, com o valor \textit{``unbounded''}. O valor mínimo não é necessário definir, porque é um por default.
 \begin{lstlisting}
 <tt:element name="Dict">
@@ -342,11 +341,11 @@ na entidade \textit{Teste}, com o valor \textit{``unbounded''}. O valor mínimo 
 </tt:element>
 \end{lstlisting}
 
-Para dar uma ideia mais geral sobre ambos os \textit{xml schema} criados, em vez de apresentarmos aqui ambos os ficheiros integralmente,
-vamos antes expor os diagramas que o programa \textit{oxygen} constrói e coloca ao nosso dispor, pois pensamos que torna o entendimento do
+Para dar uma ideia mais geral sobre ambos os \textit{xml schema} criados, em vez de se apresentar aqui ambos os ficheiros integralmente,
+ expôr-se-á os diagramas que o programa \textit{oxygen} constrói e coloca ao nosso dispor, pois decidiu-se que torna o entendimento do
 schema muito mais simples.\\
 \newpage
-Desta forma aqui ficam os diagramas para o enunciado e para a tentativa:\\
+Desta forma, de seguida apresentam-se os diagramas para o enunciado e para a tentativa:\\
  
 \begin{figure}[htbp]
 \begin{center}
