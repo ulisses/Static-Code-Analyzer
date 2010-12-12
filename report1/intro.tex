@@ -1,0 +1,93 @@
+\chapter{Introdução} \label{chap int}
+Este relatório descreve o projecto desenvolvido para o módulo Projecto Integrado da UCE de Engenharia Linguagens do Mestrado em Engenharia Informática da Universidade do Minho.\\
+
+Pretende-se que este projecto seja um \emph{Software} para Análise e Avaliação de Programas (SAAP), tendo este \emph{software} como objectivo criar um 
+ambiente de trabalho, com um interface Web, que permita a docentes/alunos avaliar/submeter programas automaticamente.
+
+\section{Motivação}
+Este trabalho é muito interessante do ponto de vista de produto final, como de obra didáctica para a sua concretização. Para a sua feitura os autores terão de aplicar
+conhecimentos adquiridos na área de arquitectura de um sistema de informação, desenvolvimento para a web, linguagens de scripting, bases de dados, processamento de textos, etc\ldots\\
+Como se pode facilmente concluir, este é um projecto que do ponto de vista técnico é muito motivador para nós devido à sua magnitude e inovação técnica que implica aos seus autores.
+
+\section{Objectivos}
+Este projecto tem como objectivos consolidar conhecimentos adquiridos nos diferentes módulos da UCE de Engenharia de Linguagens
+Assim sendo, vamos recorrer a tecnologia aprendida durante as aulas, bem como tecnologia que já conheciamos e aprendemos durante a nossa formação académica ou à parte desta.
+Um dos nossos grandes objectivos pessoais é consolidar e desenvolver ainda mais o uso de tecnologias variadas, para arranjar uma solução elegante, funcional e que cumpra os requesitos do sistema descrito.
+Assim, este projecto é mais do que mais um projecto de mestrado, passando a ser encarado como um desafio ao conhecimento e a por em prática conhecimentos adquiridos.
+
+\subsection{Ferramentas}
+As ferramentas/tecnologias que pensamos ir precisar são as seguinte:
+\begin{itemize}
+\item DB2
+\item Perl
+\item Ruby on Rails
+\item Haskell
+\end{itemize}
+
+Iremos usar DB2 por suportar nativamente XML e ainda XPath e XQuery para fazer travessias no XML. O uso de Perl prende-se com o facto de ser incrivelmente fácil criar
+sem muito esforço pequenas ferramentas que acreditamos serem uteis para identificar padrões em texto ou cortar pequenos pedaços de texto.\\
+O uso de RoR deve-se ao facto da simplicidade em criar ambientes web. Decidimos ainda utilizar Haskell eventualmente em tarefas mais complexas, por ser uma linguagem de rápida
+implementação e bastante segura.
+
+
+\section{Contextualização}
+\subsection{Descrição do Sistema}
+O SAAP - Software para Análise e Avaliação de Programas é um sistema disponível através de uma interface web, que terá como principal função 
+submeter, analisar e avaliar automaticamente programas.\\
+O sistema estará disponível em parte para utilizadores não registados, mas a suas principais funcionalidades estarão apenas disponíveis para docentes 
+e grupos já registados no sistema.\\
+O sistema poderá ser utilizado para várias finalidades, no entanto estará direccionado para ser utilizado em concursos de programação e em elementos 
+de avaliação universitários.
+
+\subsection{Utilizadores}
+Existem três entidades que podem aceder ao sistema.\\ \\
+O administrador, que além de poder aceder às mesmas funcionalidades do docente, funcionalidades essas que já iremos descrever, é quem tem o poder de
+criar contas para os docentes.\\
+\\
+O docente tem acesso a todo o tipo de funcionalidades relacionadas com a criação, edição e eliminação de concursos e enunciados, assim como consulta
+de resultados dos concursos e geração/consulta de métricas para os ficheiros submetidos no sistema.\\
+\\
+O grupo, que pode ser constituído por um ou mais concorrentes, terá acesso aos concursos disponíveis, poderá tentar registar-se nos mesmos, e submeter
+tentativas de resposta para cada um dos seus enunciados.\\
+\\
+Além do que já foi referido, todos os utilizadores podem editar os dados da sua conta.\\ 
+Falta referir que um utilizador não registado (guest), pode criar uma conta para o seu grupo, de modo a poder entrar no sistema.
+
+\subsection{Funcionalidades do sistema}
+As várias funcionalidades do sistema já foram praticamente todas mencionadas, vamos no entanto tentar explicar a sua maioria, com um maior nível de
+detalhe.
+
+\subsubsection{Criação de contas de grupo e de docente}
+\begin{description}
+ \item[Criação de conta de grupo:] Qualquer utilizador não registado poderá criar uma conta no sistema para o seu grupo, através da página principal do sistema.
+Terá de preencher dados referentes ao grupo e aos respectivos concorrentes.
+ \item[Criação de conta de docente:] Como já foi referido, o administrador terá acesso a uma página onde poderá criar contas para docentes.
+\end{description}
+
+\subsubsection{Criação de concursos e enunciados}
+Tanto o administrador como o docente podem criar concursos. Depois de preencher todos os dados do concurso podem passar à criação de enunciados.
+Nesta altura caso prefiram, podem importar enunciados previamente criados em xml.
+O concurso só ficará disponível na data definida aquando da criação do concurso.
+
+\subsubsection{Registo e participação nos concursos}
+Um grupo que esteja autenticado no sistema pode tentar registar-se num dos concursos disponíveis, e será bem sucedido se a chave que utilizar for a correcta.\\
+Depois de se registar no concurso, o tempo para a participação no mesmo inicia a contagem decrescente e o grupo poderá começar a submeter tentativas para
+cada um dos enunciados. O sistema informará, pouco depois da submissão, se a resposta estaria correcta ou não.
+Depois do tempo esgotar o grupo não pode submeter mais tentativas.
+
+\subsubsection{Geração das métricas para os ficheiros submetidos}
+O docente ou o administrador a qualquer altura podem pedir ao sistema que gere as métricas para as tentativas submetidas.
+
+\subsubsection{Consulta dos ficheiros com as métricas e dos resultados do concurso}
+O docente pode aceder aos logs que contêm a informação sobre as tentativas submetidas, ou se desejar, apenas aceder a informações mais específicas, tal como 
+qual exercício tentou submeter determinado grupo, e se teve sucesso ou não.\\
+Pode também visualizar os ficheiros com as informações das métricas.
+
+\section{Estrutura do Relatório}
+Este documento foi pensado em duas sec. São elas:\\
+
+\textbf{\textit{Capítulo 1º}} O leitor é introduzido ao tema abordado, e é justificada a utilidade do projecto.\\
+
+\textbf{\textit{Capítulo 2º}} Neste capítulo é explicada a modelação e todas as decições tomadas para a modelação do sistema a que nos propomos a concretizar.\\
+
+\textbf{\textit{Capítulo 3º}} No capítulo final são tecidos alguns comentários relativos ao trabalho efectuado e motivação para trabalho futuro.\\
