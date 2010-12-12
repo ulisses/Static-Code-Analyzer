@@ -187,12 +187,149 @@ AFOGA-TE EM FORMALISMOS PRH
 \end{figure}
 \end{frame}
 
-\begin{frame} \frametitle{Modelo de dados - Concurso, tentativa e enunciado}
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=0.9\textwidth]{../report1/Images/concurso-enunciado}
-\end{center}
-\end{figure}
+\begin{frame}[fragile] \frametitle{Modelo de dados - XML - Enunciado}
+\begin{lstlisting}[language=XML,basicstyle=\tiny,breaklines=true]
+<?xm l version="1.0" encoding="UTF-8"?>
+<Enunciado xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="enunciado.xsd">
+    <idConcurso> 1 </idConcurso>
+    <Peso>20</Peso>
+    <Titulo> Exercicio 1 </Titulo>
+    <Descricao> Some os numeros que lhe sao passados como argumento, e apresente o resultado. </Descricao>
+    <Exemplo>Input: 1 1 1 1 1   Output: 5</Exemplo>
+    <Docente> PRH </Docente>
+    <FuncAval>Diff</FuncAval>  
+    <Linguagens> 
+        <Linguagem>C</Linguagem>        
+    </Linguagens> 
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Modelo de dados - XML - Enunciado - Part2}
+\begin{lstlisting}[language=XML,basicstyle=\tiny,breaklines=true]
+    <Dict>
+        <Teste>
+            <Nome>Lista vazia</Nome>
+            <Input></Input>
+            <Output>0</Output>
+        </Teste>
+        <Teste>
+            <Nome>Lista c/ 1 elem</Nome>
+            <Input>1</Input>
+            <Output>1</Output>
+        </Teste>
+        <Teste>
+            <Nome>Lista c/ varios elem</Nome>
+            <Input> 2 3 4 5 </Input>
+            <Output>14</Output>
+        </Teste>
+    </Dict>
+</Enunciado>
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Modelo de dados - XML - Tentativa}
+\begin{lstlisting}[language=XML,basicstyle=\tiny,breaklines=true]
+<?xm l version="1.0" encoding="UTF-8"?>
+<Enunciado xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="tentativa.xsd">
+    <idConcurso>1</idConcurso>
+    <idEnunciado>1</idEnunciado>
+    <idGrupo>36</idGrupo>
+    
+    <data>2010-12-08</data>
+    <hora>16:33:00</hora>
+    
+    <compilou>1</compilou>
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Modelo de dados - XML - Tentativa - Part2}
+\begin{lstlisting}[language=XML,basicstyle=\tiny,breaklines=true]
+    <Dict>
+        <Teste>
+            <Nome>Lista vazia</Nome>
+            <Input></Input>
+            <Output>0</Output>
+        </Teste>
+        <Teste>
+            <Nome>Lista c/ 1 elem</Nome>
+            <Input>1</Input>
+            <Output>1</Output>
+        </Teste>
+        <Teste>
+            <Nome>Lista c/ varios elem</Nome>
+            <Input> 2 3 4 5 </Input>
+            <Output>14</Output>
+        </Teste>
+    </Dict>
+    <pathMetricas>sasas</pathMetricas>
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Modelo de dados - XML - Tentativa - Part3}
+\begin{lstlisting}[language=XML,basicstyle=\tiny,breaklines=true]
+    <codigoFonte>
+        <nome>prog.c</nome>
+        <codigo>
+            <![CDATA[
+            #include <stdio.h>
+            
+            ...restante codigo...
+            
+            ]]>
+        </codigo>
+    </codigoFonte>
+        
+</Enunciado>
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Modelo de dados - XSD - Enunciado}
+\begin{lstlisting}[language=XML,basicstyle=\tiny,breaklines=true]
+<ed:element name="Peso" default="25">
+  <ed:simpleType>
+    <ed:restriction base="ed:integer">
+      <ed:minInclusive value="0"/>
+      <ed:maxInclusive value="100"/>
+    </ed:restriction>
+  </ed:simpleType>
+</ed:element>
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Modelo de dados - XSD - Linguagem}
+\begin{lstlisting}[language=XML,basicstyle=\tiny,breaklines=true]
+<ed:element name="Linguagem" maxOccurs="unbounded">
+    <ed:simpleType>
+    <ed:restriction base="ed:string">
+        <ed:enumeration value="C"/>
+        <ed:enumeration value="Java"/>
+        <ed:enumeration value="Haskell"/>
+    </ed:restriction>
+    </ed:simpleType>
+</ed:element>
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Modelo de dados - XSD - Tentativa}
+\begin{lstlisting}[language=XML,basicstyle=\tiny,breaklines=true]
+<tt:element name="Dict">
+    <tt:complexType>
+    <tt:sequence>
+        <tt:element name="Teste" maxOccurs="unbounded">
+        <tt:complexType>
+            <tt:sequence>
+            <tt:element name="Nome" type="tt:string"/>
+            <tt:element name="Input" type="tt:string"/>
+            <tt:element name="Output" type="tt:string"/>
+            </tt:sequence>
+        </tt:complexType>
+        </tt:element>
+    </tt:sequence>
+    </tt:complexType>
+</tt:element>
+\end{lstlisting}
 \end{frame}
 
 \section*{Perguntas}
