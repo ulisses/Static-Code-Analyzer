@@ -9,10 +9,12 @@
 }
 
 \usepackage{enumerate}
+\usepackage{array}
 \usepackage{graphics}
 \usepackage{ucs}
 \usepackage[utf8x]{inputenc}
 \usepackage[english]{babel}
+\usepackage{amsmath, amsthm, amssymb}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{xcolor}
@@ -58,23 +60,81 @@
        breakautoindent=false,
        showstringspaces=false
 }
+\definecolor{gray_ulisses}{gray}{0.55}
+\definecolor{castanho_ulisses}{rgb}{0.71,0.33,0.14}
+\definecolor{preto_ulisses}{rgb}{0.41,0.20,0.04}
+\definecolor{green_ulises}{rgb}{0.2,0.75,0}
+
+\lstdefinelanguage{HaskellUlisses}
+{
+        basicstyle=\ttfamily\scriptsize,
+        %backgroundcolor=\color{yellow},
+        %frameshape={RYRYNYYYY}{yny}{yny}{RYRYNYYYY}, %contornos... muito nice...
+        sensitive=true,
+        morecomment=[l][\color{gray_ulisses}\ttfamily\tiny]{--},
+        morecomment=[s][\color{gray_ulisses}\ttfamily\tiny]{\{-}{-\}},
+        morestring=[b]",
+        stringstyle=\color{red},
+        showstringspaces=false,
+%       numbers=left,
+%       firstnumber=\thelstnumber,
+        numberstyle=\tiny,
+        numberblanklines=true,
+        showspaces=false,
+        breaklines=true,
+        showtabs=false,
+%       xleftmargin=15pt,
+%       xrightmargin=-20pt,
+        emph=
+        {[1]
+                FilePath,IOError,abs,acos,acosh,all,and,any,appendFile,approxRational,asTypeOf,asin,
+                asinh,atan,atan2,atanh,basicIORun,break,catch,ceiling,chr,compare,concat,concatMap,
+                const,cos,cosh,curry,cycle,decodeFloat,denominator,digitToInt,div,divMod,drop,
+                dropWhile,either,elem,encodeFloat,enumFrom,enumFromThen,enumFromThenTo,enumFromTo,
+                error,even,exp,exponent,fail,filter,flip,floatDigits,floatRadix,floatRange,floor,
+                fmap,foldl,foldl1,foldr,foldr1,fromDouble,fromEnum,fromInt,fromInteger,fromIntegral,
+                fromRational,fst,gcd,getChar,getContents,getLine,head,id,inRange,index,init,intToDigit,
+                interact,ioError,isAlpha,isAlphaNum,isAscii,isControl,isDenormalized,isDigit,isHexDigit,
+                isIEEE,isInfinite,isLower,isNaN,isNegativeZero,isOctDigit,isPrint,isSpace,isUpper,iterate,
+                last,lcm,length,lex,lexDigits,lexLitChar,lines,log,logBase,lookup,map,mapM,mapM_,max,
+                maxBound,maximum,maybe,min,minBound,minimum,mod,negate,not,notElem,null,numerator,odd,
+                or,ord,otherwise,pi,pred,primExitWith,print,product,properFraction,putChar,putStr,putStrLn,quot,
+                quotRem,range,rangeSize,read,readDec,readFile,readFloat,readHex,readIO,readInt,readList,readLitChar,
+                readLn,readOct,readParen,readSigned,reads,readsPrec,realToFrac,recip,rem,repeat,replicate,return,
+                reverse,round,scaleFloat,scanl,scanl1,scanr,scanr1,seq,sequence,sequence_,show,showChar,showInt,
+                showList,showLitChar,showParen,showSigned,showString,shows,showsPrec,significand,signum,sin,
+                sinh,snd,span,splitAt,sqrt,subtract,succ,sum,tail,take,takeWhile,tan,tanh,threadToIOResult,toEnum,
+                toInt,toInteger,toLower,toRational,toUpper,truncate,uncurry,undefined,unlines,until,unwords,unzip,
+                unzip3,userError,words,writeFile,zip,zip3,zipWith,zipWith3,listArray,doParse
+        },
+        emphstyle={[1]\color{blue}},
+        emph=
+        {[2]
+                Bool,Char,Double,Either,Float,IO,Integer,Int,Maybe,Ordering,Rational,Ratio,ReadS,ShowS,String,
+                Word8,InPacket
+        },
+        emphstyle={[2]\color{castanho_ulisses}},
+        emph=
+        {[3]
+                case,class,data,deriving,do,else,if,import,in,infixl,infixr,instance,let,
+                module,of,primitive,then,type,where
+        },
+        emphstyle={[3]\color{preto_ulisses}\textbf},
+        emph=
+        {[4]
+                quot,rem,div,mod,elem,notElem,seq
+        },
+        emphstyle={[4]\color{castanho_ulisses}\textbf},
+        emph=
+        {[5]
+                EQ,False,GT,Just,LT,Left,Nothing,Right,True,Show,Eq,Ord,Num
+        },
+        emphstyle={[5]\color{preto_ulisses}\textbf}
+}
 % % % fim do listings e ref
 
 % % % inicio da definicao de comandos
-\newcommand{\ixload}{\emph{IxLoad}}
-\newcommand{\ixos}{\emph{IxOS}}
-\newcommand{\ats}{\emph{ATS}}
-\newcommand{\autoeasy}{\emph{AutoEASY}}
-\newcommand{\ixia}{\emph{Ixia}}
-\newcommand{\http}{\emph{HTTP}}
-\newcommand{\ftp}{\emph{FTP}}
-\newcommand{\ssl}{\emph{SSL}}
-\newcommand{\pop}{\emph{POP$3$}}
-\newcommand{\smtp}{\emph{SMTP}}
-\newcommand{\fpm}{\emph{FPM}}
-\newcommand{\sfpm}{\emph{SFPM}}
-\newcommand{\ffpm}{\emph{FFPM}}
-\newcommand{\cisco}{\emph{Cisco}}
+
 % % % fim da definicao de comandos
 
 \title{SAAP - Software para Análise e Avaliação de Programas}
@@ -166,8 +226,112 @@ Descrição do sistema e funcionalidades:
 \end{figure}
 \end{frame}
 
+\newcommand{\rarrow}{\rightarrow}
+\newcommand{\larrow}{\leftarrow}
+\newcommand{\unif}{\sim}
+\def\prop#1#2#3{\noindent\\\begin{array}{l} \{#1\} \\ #2 \\ \{#3\} \\ \end{array}\\\\}
+
 \begin{frame} \frametitle{Modelação formal}
-AFOGA-TE EM FORMALISMOS PRH
+\begin{displaymath}
+\begin{array}{l}
+\prop
+{existsInDatabase(u)}
+{login :: u \unif Username \times Hash \rarrow SessionID \rarrow Error + SessionID}
+{ }
+\end{array}
+\end{displaymath}
+\\
+\begin{displaymath}
+\begin{array}{l}
+\prop
+{ existeSession(s)  \wedge isProf(s) \wedge (notEmpty \circ getExercice)~c}
+{createContest :: s \unif SessionID \rarrow c \unif Contest \rarrow 1}
+{ (notEmpty \circ getDict)~c }
+\end{array}
+\end{displaymath}
+\end{frame}
+
+\begin{frame} \frametitle{Modelação formal}
+$\begin{array}{l}
+data~Dict~a~b = (a \times b)^{*} \\
+data~Exercicio = Exercicio~Enunciado~(Dict~Input~Output) \\
+data~Contest =  Contest~Nome~Tipo~Exercicio^{*}
+\end{array}$\\
+\begin{displaymath}
+\begin{array}{l}
+\prop
+{ existeSession(s)  \wedge isProf(s) \wedge (not \circ exist) (Exercicio~e~d)}
+{createExercice :: s\unif SessionID \rarrow e \unif Enunciado \rarrow d \unif (Dict~a~b) \rarrow 1}
+{ exerciceCreated(Exercicio e d) }
+\end{array}
+\end{displaymath}
+\end{frame}
+
+\begin{frame} \frametitle{Modelação formal}
+\begin{displaymath}
+\begin{array}{l}
+\prop
+{ existSession(s) \wedge contestNotFull(c)}
+{registerOnContest :: s \unif SessionID \rarrow c\unif Contest \rarrow Credenciais}
+{ }
+\end{array}
+\end{displaymath}
+\\
+\begin{displaymath}
+\begin{array}{l}
+\prop 
+{ existeSession(s) \wedge isProf(s) \wedge contestIsClosed(c) }
+{consultarLogsContest :: s \unif SessionID \rarrow c \unif Contest \rarrow LogsContest}
+{}
+\end{array}
+\end{displaymath}
+\end{frame}
+
+\begin{frame} \frametitle{Modelação formal}
+\begin{displaymath}
+\begin{array}{l}
+\prop
+{ }
+{geraReport :: e \unif Exercicio \rarrow res \unif Resolucao \rarrow Report}
+{ }
+\end{array}
+\end{displaymath}
+\\
+\begin{eqnarray*}
+geraReportBugCompile :: Exercicio \rarrow Error \rarrow Report\\
+geraReportBugCompare :: Exercicio \rarrow Errado \rarrow Report\\
+geraReportNoBug :: Exercicio \rarrow Resolucao \rarrow Report\\
+\\
+execute :: Program \rarrow Exercicio \rarrow ResolucaoProposta\\
+\end{eqnarray*}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Modelação formal}
+\begin{lstlisting}[language=HaskellUlisses]
+geraReport :: Exercicio -> Resolucao -> Report
+geraReport exer res = do
+    case compile res of
+    (Left error) -> geraReportBugCompile error res
+    (Right p) ->
+        let resProps = execute p exer
+        in case (compare exer resProps) of
+            (Left certo) -> geraReportNoBug e res
+            (Right errado) -> geraReportBugCompare errado res
+\end{lstlisting}
+
+\begin{lstlisting}[language=HaskellUlisses]
+geraReport exer res =
+    compile res >>= \p -> compare exer (execute p exer)
+        >>= \c -> geraReportNoBug exer res
+\end{lstlisting}
+\end{frame}
+
+\begin{frame} \frametitle{Modelo de dados - Concurso, tentativa e enunciado}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.9\textwidth]{../report1/Images/concurso-enunciado}
+\end{center}
+\end{figure}
 \end{frame}
 
 \subsection{Modelação de dados}
@@ -179,14 +343,7 @@ AFOGA-TE EM FORMALISMOS PRH
 \end{figure}
 \end{frame}
 
-\begin{frame} \frametitle{Modelo de dados - Concurso, tentativa e enunciado}
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=0.9\textwidth]{../report1/Images/concurso-enunciado}
-\end{center}
-\end{figure}
-\end{frame}
-
+\subsubsection{XML}
 \begin{frame}[fragile] \frametitle{Modelo de dados - XML - Enunciado}
 \begin{lstlisting}[language=XML,basicstyle=\tiny,breaklines=true]
 <?xm l version="1.0" encoding="UTF-8"?>
@@ -285,7 +442,9 @@ AFOGA-TE EM FORMALISMOS PRH
 \end{lstlisting}
 \end{frame}
 
+\subsubsection{XSD}
 \begin{frame}[fragile] \frametitle{Modelo de dados - XSD - Enunciado}
+Exemplo de elemento com restrições:\\
 \begin{lstlisting}[language=XML,basicstyle=\tiny,breaklines=true]
 <ed:element name="Peso" default="25">
   <ed:simpleType>
@@ -298,7 +457,17 @@ AFOGA-TE EM FORMALISMOS PRH
 \end{lstlisting}
 \end{frame}
 
+\begin{frame}[fragile] \frametitle{Modelo de dados - XSD - Enunciado}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{../report1/Images/enunciado_schema}
+\caption{diagrama do schema para o enunciado}\label{fig xsd enunciado}
+\end{center}
+\end{figure}
+\end{frame}
+
 \begin{frame}[fragile] \frametitle{Modelo de dados - XSD - Linguagem}
+Exemplo de elemento com restrições:\\
 \begin{lstlisting}[language=XML,basicstyle=\tiny,breaklines=true]
 <ed:element name="Linguagem" maxOccurs="unbounded">
     <ed:simpleType>
@@ -330,6 +499,15 @@ AFOGA-TE EM FORMALISMOS PRH
     </tt:complexType>
 </tt:element>
 \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Modelo de dados - XSD - Tentativa}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{../report1/Images/tentativa_schema}
+\caption{diagrama do schema para a tentativa}\label{fig xsd tentativa}
+\end{center}
+\end{figure}
 \end{frame}
 
 \section*{Perguntas}
