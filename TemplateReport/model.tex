@@ -15,7 +15,7 @@ de passar por outros passos, ou seja, o diagrama dá a entender a ordem pelas qu
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=0.5\textwidth]{Images/EL-PI}
+\includegraphics[width=0.9\textwidth]{Images/EL-PI}
 \caption{Arquitectura do sistema}\label{fig diaact}
 \end{center}
 \end{figure}
@@ -160,14 +160,14 @@ execute :: Program \rarrow Exercicio \rarrow ResolucaoProposta\\
 Temos ainda que $ResolucaoProposta$ é a resolução submetida pelos concorrentes e aprenstenta o seguinte tipo:
 
 $\begin{array}{l}
-data ResolucaoProposta = Dict Input Output
+data~ResolucaoProposta = Dict~Input~Output
 \end{array}$\\
 
 Temos ainda a função que recebe uma resolução como input e devolve ora um programa pronto já compilado, ora um erro no caso de surgir algum problema na compilação.
 
 \prop
 { }
-{compile :: Resolucao \rarrow Either Error Program}
+{compile :: Resolucao \rarrow Error + Program}
 { }
 
 E ainda uma função de comparação que recebe uma resolução e um exercicio e devolve se o Output pretendido é o mesmo que o que o programa submetido origina.
@@ -179,17 +179,25 @@ E ainda uma função de comparação que recebe uma resolução e um exercicio e
 
 \begin{lstlisting}[language=HaskellUlisses]
 geraReport :: Exercicio -> Resolucao -> Report
-geraReport e res = do
-	case compile(res) of
+geraReport exer res = do
+	case compile res of
 		(Left error) -> geraReportBugCompile error res
 		(Right p) ->
-			let resProps = execute p e
-			in case (compare e resProps) of
+			let resProps = execute p exer
+			in case (compare exer resProps) of
 				(Left certo) -> geraReportNoBug e res
 				(Right errado) -> geraReportBugCompare errado res
 \end{lstlisting}
 
-%rep = compile res >>= \p \rarrow compare(e (execute p e)) >>= pageCerto)
+Se quisessemos este código de um ponto de vista de composição de funções a sua conversão poderia ser fácilmente atingida pelas seguintes definições:
+
+\begin{lstlisting}[language=HaskellUlisses]
+geraReport exer res =
+	compile res >>= \p -> compare exer (execute p exer)
+		>>= \c -> geraReportNoBug exer res
+\end{lstlisting}
+
+%geraReport e res = compile res >>= \p \rarrow compare(e (execute p e)) >>= pageCerto)
 
 Temos ainda o contrato da função que gera o relatório final baseando-se na participação de uma equipa num determinado concurso.
 
@@ -225,7 +233,7 @@ Cada concorrente é caracterizado pelo seu nome completo, número de aluno (se f
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=0.5\textwidth]{Images/grupo-docente}
+\includegraphics[width=0.9\textwidth]{Images/grupo-docente}
 \caption{Modelo de dados - Grupo e Docente/Admin}\label{fig modedados-grupo-doc}
 \end{center}
 \end{figure}
@@ -250,7 +258,7 @@ submetido, data e hora da tentativa, dados referentes à compilação e um dicio
 submetido.
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=0.5\textwidth]{Images/concurso-enunciado}
+\includegraphics[width=0.9\textwidth]{Images/concurso-enunciado}
 \caption{Modelo de dados - Concurso, tentativa e enunciado}\label{fig modedados-conc-enunc}
 \end{center}
 \end{figure}
@@ -342,14 +350,14 @@ Desta forma aqui ficam os diagramas para o enunciado e para a tentativa:\\
  
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=0.5\textwidth]{Images/enunciado_schema}
+\includegraphics[width=0.9\textwidth]{Images/enunciado_schema}
 \caption{diagrama do schema para o enunciado}\label{fig xsd enunciado}
 \end{center}
 \end{figure}
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=0.5\textwidth]{Images/tentativa_schema}
+\includegraphics[width=0.9\textwidth]{Images/tentativa_schema}
 \caption{diagrama do schema para a tentativa}\label{fig xsd tentativa}
 \end{center}
 \end{figure}
