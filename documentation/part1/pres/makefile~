@@ -1,0 +1,9 @@
+all:pres.tex
+	pdflatex pres.tex
+	make open
+
+open:pres.pdf
+	open pres.pdf
+
+clean:
+	find . -maxdepth 1 \( \! -iname "*\.sty" \! -iname "*\.tex" -type f \! -iname "makefile" \) -exec rm '{}' \;

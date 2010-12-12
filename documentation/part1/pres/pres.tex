@@ -1,0 +1,786 @@
+\documentclass{beamer}
+
+\mode<presentation>
+{
+   \usetheme{EEng}
+%   \usetheme{Warsaw}
+  \setbeamercovered{transparent}
+  \setbeamercolor{background canvas}{bg=black!0}
+}
+
+\usepackage{enumerate}
+\usepackage{graphics}
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{xcolor}
+\usepackage{pgf}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{multicol}   % add-on
+\usepackage{boxedminipage} 
+\usepackage{indentfirst}   % add-on
+\usepackage{float}
+\usepackage[all]{xypic}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{boxedminipage}
+
+% % % inicio do listings e ref
+\definecolor{darkblue}{rgb}{0,0,0.6}
+\definecolor{gray_ulisses}{gray}{0.55}
+\definecolor{castanho_ulisses}{rgb}{0.71,0.33,0.14}
+\definecolor{preto_ulisses}{rgb}{0.41,0.20,0.04}
+\definecolor{green_ulises}{rgb}{0.2,0.75,0}
+
+\hypersetup{
+	a4paper,
+	pdftex,
+	bookmarks,
+	colorlinks,
+    citecolor=darkblue,
+    linkcolor=darkblue,
+    urlcolor=darkblue,
+    filecolor=darkblue
+}
+
+\lstdefinelanguage{TclUlisses}
+{
+		language=tcl,
+        basicstyle=\ttfamily\scriptsize,
+        sensitive=true,
+        morecomment=[l][\color{gray_ulisses}\ttfamily\scriptsize]{\#},
+        morestring=[b]",
+        stringstyle=\color{red},
+        showstringspaces=false,
+        numberstyle=\tiny,
+        numberblanklines=true,
+        showspaces=false,
+        breaklines=true,
+        showtabs=false,
+        emph=
+        {[1]
+                join,reverse,split,take,tail,drop,theorem
+        },
+        emphstyle={[1]\color{blue}},
+        emph=
+        {[2]
+                Bit,inf,fin
+        },
+        emphstyle={[2]\color{castanho_ulisses}},
+        emph=
+        {[3]
+                case,class,data,deriving,do,else,if,import,in,infixl,infixr,instance,let,
+                module,of,primitive,then,type,where
+        },
+        emphstyle={[3]\color{preto_ulisses}\textbf},
+        emph=
+        {[4]
+                True,False
+        },
+        emphstyle={[4]\color{castanho_ulisses}\textbf},
+}
+
+\lstdefinelanguage{Terminall} {
+       basicstyle=\scriptsize\ttfamily,
+       breaklines=true,
+       breakautoindent=false,
+       showstringspaces=false
+}
+\lstdefinelanguage{Terminal} {
+       basicstyle=\tiny\ttfamily,
+       breaklines=true,
+       breakautoindent=false,
+       showstringspaces=false
+}
+% % % fim do listings e ref
+
+% % % inicio da definicao de comandos
+\newcommand{\ixload}{\emph{IxLoad}}
+\newcommand{\ixos}{\emph{IxOS}}
+\newcommand{\ats}{\emph{ATS}}
+\newcommand{\autoeasy}{\emph{AutoEASY}}
+\newcommand{\ixia}{\emph{Ixia}}
+\newcommand{\http}{\emph{HTTP}}
+\newcommand{\ftp}{\emph{FTP}}
+\newcommand{\ssl}{\emph{SSL}}
+\newcommand{\pop}{\emph{POP$3$}}
+\newcommand{\smtp}{\emph{SMTP}}
+\newcommand{\fpm}{\emph{FPM}}
+\newcommand{\sfpm}{\emph{SFPM}}
+\newcommand{\ffpm}{\emph{FFPM}}
+\newcommand{\cisco}{\emph{Cisco}}
+% % % fim da definicao de comandos
+
+\title{\sfpm~Threat Mitigation}
+\author{Ulisses Ara\'ujo Costa (ucosta)}
+\date{\today}
+\institute{Cisco Systems Inc.}
+
+\AtBeginSubsection[] {
+  \begin{frame}<beamer>
+    \frametitle{Index}
+    \scriptsize{\tableofcontents[currentsection,currentsubsection]}
+  \end{frame}
+}
+
+\AtBeginSection[] {
+  \begin{frame}<beamer>
+    \frametitle{Index}
+    \scriptsize{\tableofcontents[currentsection]}
+  \end{frame}
+}
+\begin{document}
+\begin{frame}
+   \titlepage
+\end{frame}
+
+%IxLoad is a highly scalable solution to accurately assess the performance of content-aware devices and networks. IxLoad creates
+%real-world traffic scenarios at the TCP (Layer 4) and application layers (Layer 7) by emulating clients and servers for a variety of
+%protocols including HTTP, SSL, FTP, Mail (SMTP, POP3) and Streaming (RTP, RTSP) protocols. IxLoad utilizes Ixia's purpose-built
+%hardware including the Application Load Module (ALM) and the TXS family of Ethernet Load Modules. Each port of these Load Modules has a
+%CPU running the Linux operating system with a standards-compliant TCP/IP protocol stack and can emulate thousands of users.
+
+\section{Introduction to Testing}
+\pgfdeclareimage[width=.1\textwidth]{tcl}{images/tcl}
+\pgfdeclareimage[width=.2\textwidth]{solaris}{images/solaris}
+\pgfdeclareimage[width=.1\textwidth]{passfail}{images/green_check_red_cross}
+\pgfdeclareimage[width=.8\textwidth]{topo}{images/topo}
+
+\begin{frame} \frametitle{Tests Jargon}
+\begin{itemize}
+    \item ATS - Automated Test Solutions
+    \item \href{http://earms-app.cisco.com/server/earms}{eARMS - Extended Automated Regression Management System}\\
+    \item \href{http://tft.cisco.com/run-search.cmd?search=8607691}{TFT - Test Feature Tracker}\\
+    \item \href{http://tims.cisco.com/browsing.cmd?proj=91\&folder=95370}{TIMS - Test Information Management System}\\
+    \item \href{http://earms-trade.cisco.com/tradeui/dashboardviewer.faces?ats=/auto/stg-devtest/ucosta/ats5.1.0}{TRADe - Test Results Analysis and Debugging}\\
+    \item Testbed
+\end{itemize}
+\begin{center}
+	 \pgfuseimage{topo}
+\end{center}
+\end{frame}
+
+\begin{frame} \frametitle{\ats~Setup}
+\xyoption{matrix}
+\xymatrix{ &\pgfuseimage{tcl}  \ar@/^/[rd]^{} \ar@/^/[ld]_{}& \\
+           \boxed{CONFIG~file} \ar@/^/[rd]^{autoeasy}&  &\boxed{.job~file} \ar@/^/[ld]_{autoeasy} \\
+           & \pgfuseimage{solaris} &
+         }
+\begin{block}{}
+\begin{itemize}
+\item Scripts written in Tcl
+\item CONFIG file with topology of the testbed (plus cleanup and setup)
+\item .job file with all calls to the scripts
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame} \frametitle{Management of Scripts and Results}
+\xyoption{matrix}
+\xymatrix{ \boxed{makefile} \ar@/^/[rd]^{make}&  &\boxed{\href{http://earms-app.cisco.com/server/earms}{eARMS}} \ar@/^/[ld]_{run} \\
+           \boxed{CVS}& \ar@/^/[ld]^{report} \ar@/^/[l]^{commit} \pgfuseimage{tcl} \pgfuseimage{tcl}  \ar@/^/[rd]_{report} \ar@/^/[r]_{production} &\boxed{\href{http://tft.cisco.com/run-search.cmd?search=8607691}{TFT}}\\
+           \boxed{\href{http://earms-trade.cisco.com/tradeui/dashboardviewer.faces?ats=/auto/stg-devtest/ucosta/ats5.1.0}{TRADe}} \pgfuseimage{passfail} & &  \pgfuseimage{passfail} \boxed{\href{http://tims.cisco.com/browsing.cmd?proj=91\&folder=95370}{TIMS}}
+         }
+\end{frame}
+
+\section{Sessin-based Flexible Packet Matching (SFPM)}
+\begin{frame}[fragile] \frametitle{\fpm~vs \sfpm}
+    \begin{block}{Flexible Packet Matching (\fpm)}
+        \begin{itemize}
+            \item Current \fpm~is a stateless per packet classification mechanism.
+            \item \fpm~works well when the filter information exists in all packets of a flow.
+            \item However, \fpm~can only apply actions to the those packets, and miss the rest of the packets in the same flow.
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{Session-based Flexible Packet Matching (\sfpm)}
+        \begin{itemize}
+            \item \sfpm~allows customers to create their own filtering policies that can immediately detect and block attacks.
+            \item Session-based \fpm~allows session-based classification and actions.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Configuration Example - Action}
+\begin{lstlisting}[language=Terminal]
+router(config)#load fpm
+Try to load bundle PHDF files ...
+router(config)#class-map type access-control match-all c1
+router(config-cmap)#match field TCP source-port eq 1024
+router(config-cmap)#class-map type access-control match-any c2
+router(config-cmap)#match start TCP payload-start offset 0 size 5 regex "GET /"
+router(config-cmap)#policy-map type access-control p1
+router(config-pmap)#class c1
+router(config-pmap-c)#log all
+router(config-pmap-c)#class c2
+router(config-pmap-c)#log all
+router(config-pmap-c)#policy-map type access-control fpm1
+router(config-pmap)#class ip_tcp_stack
+router(config-pmap-c)#service-policy p1
+router(config-pmap-c)#interface FastEthernet0/1
+router(config-int)#service-policy type access-control input fpm1
+\end{lstlisting}
+\begin{block}{}
+\begin{itemize}
+	\item Match TCP source-port number
+    \item Match TCP payload regular expression
+	\item log the sessions
+	\item Attach the policy to the interface
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Configuration Example - Nested}
+\begin{lstlisting}[language=Terminal]
+router(config)#load fpm
+Try to load bundle PHDF files ...
+router(config)#class-map type access-control match-all c1
+router(config-cmap)#match field ICMP type eq 8
+router(config-cmap)#class-map type access-control match-all c2
+router(config-cmap)#match field ICMP checksum eq 123456
+router(config-cmap)#class-map type access-control match-all c3
+router(config-cmap)#match class c1 session
+router(config-cmap)#policy-map type access-control p1
+router(config-pmap)#class c3
+router(config-pmap-c)#drop all
+router(config-pmap-c)#policy-map type access-control fpm1
+router(config-pmap)#class ip_icmp_stack
+router(config-pmap-c)#service-policy p1
+router(config-pmap-c)#interface FastEthernet0/1
+router(config-if)#service-policy type access-control input fpm1
+\end{lstlisting}
+\begin{block}{}
+\begin{itemize}
+	\item Match ICMP type
+    \item Match ICMP checksum
+	\item drop the sessions
+	\item Attach the policy to the interface
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Configuration Example - Session Packet Range}
+\begin{lstlisting}[language=Terminal]
+router(config)#load fpm
+Try to load bundle PHDF files ...
+router(config)#class-map type access-control match-all c2
+router(config-cmap)#match field TCP source-port eq 1024
+router(config-cmap)#class-map type access-control match-all c3
+router(config-cmap)#$ TCP payload-start offset 0 size 5 regex "GET /"        
+router(config-cmap)#class-map type access-control match-all c1
+router(config-cmap)#match class c3 packet-range 3 4
+router(config-cmap)#policy-map type access-control p1
+router(config-pmap)#class c1
+router(config-pmap-c)#log all
+router(config-pmap-c)#policy-map type access-control fpm1
+router(config-pmap)#class ip_tcp_stack
+router(config-pmap)#service-policy p1
+router(config-pmap-c)#interface FastEthernet0/1
+router(config-if)#service-policy type access-control input fpm1
+\end{lstlisting}
+\begin{block}{}
+\begin{itemize}
+	\item Match TCP source-port
+    \item Match TCP regexp (HTTP)
+	\item log all sessions that have this match between packet 3 and 4
+	\item Attach the policy to the interface
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{\sfpm~Demo}
+\begin{center}
+	 \huge{\sfpm~Demo}
+\end{center}
+\end{frame}
+
+\section{SFPM Tests}
+\subsection{Testcases}
+\begin{frame}[fragile] \frametitle{TCP/UDP/ICMP testcases - case1\_config}
+\begin{enumerate}
+    \item Add a filter to existing class-map
+    \item Remove then add a new filter to existing class-map
+    \item Add a SFPM action for class-map
+    \item Remove action from class-map
+    \item Add class-map to using policy-map
+    \item Remove class-map from policy-map
+    \item Add child class-map in stack class-map
+    \item Remove child class-map from stack class-map
+    \item Remove child policy-map
+    \item Remove parent policy-map
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{TCP/UDP/ICMP testcases - case2\_config}
+\begin{enumerate}
+    \item Add nested class session into class-map
+    \item Remove nested class session from class-map
+    \item Add filter in nested class
+    \item Remove filter from nested class
+    \item Add action into nested class
+    \item Remove action from nested class
+    \item Remove parent class-map (contains nested class) in policy-map
+    \item Add parent class-map (contains nested class) in policy-map
+    \item Remove child policy-map (contains nested class)
+    \item Remove parent policy-map attached to interface
+    \item Create consecutive nested class-map
+    \item Create circular nested class
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{TCP/UDP/ICMP testcases - case3\_config}
+\begin{enumerate}
+    \item Add nested class session into class-map
+    \item Remove nested class session from class-map
+    \item Add filter in nested class
+    \item Remove filter from nested class
+    \item Add action into nested class
+    \item Remove action from nested class
+    \item Remove parent class-map (contains nested class) in policy-map
+    \item Add parent class-map (contains nested class) in policy-map
+    \item Remove child policy-map (contains nested class)
+    \item Remove parent policy-map attached to interface
+    \item Create consecutive nested class-map
+    \item Create circular nested class
+    \item Check packet range number
+\end{enumerate}
+\end{frame}
+\begin{frame}[fragile] \frametitle{TCP/UDP/ICMP testcases - Case Ingress}
+\begin{lstlisting}[language=Terminall]
+                      +------------+
+               fpm1   |            |
+  Client  ... =======>|            |===== ... Server
+                  G0/3|    U U T   |
+                      |            |
+                      |            |
+                      +------------+
+\end{lstlisting}
+\end{frame}
+	
+\begin{frame}[fragile] \frametitle{TCP/UDP/ICMP testcases - Case Egress}
+\begin{lstlisting}[language=Terminall]
+                      +------------+
+                      |            | fpm1
+  Client  ... ========|            |=====> ... Server
+                      |    U U T   |G0/2
+                      |            |
+                      |            |
+                      +------------+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{TCP/UDP/ICMP testcases - Case Ingress$+$Egress}
+\begin{lstlisting}[language=Terminall]
+                      +------------+
+               fpm1   |            | fpm1
+  Client  ... =======>|            |====> ... Server
+                G0/3  |    U U T   |G0/2
+                      |            |
+                      |            |
+                      +------------+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{TCP/UDP/ICMP testcases - Case Input$+$Output}
+\begin{lstlisting}[language=Terminall]
+                      +------------+
+         |            |            |
+         |     fpm1   |            |
+         |... =======>|            |
+         |      G0/3  |    U U T   |
+  Client |            |            |===== ... Server
+         |     fpm3   |            |
+         |... <=======|            |
+         |       G0/3 |            |
+         |            |            |
+                      +------------+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Testcases - CEF/Process}
+    \begin{block}{Cisco Express Forwarding}
+        \begin{itemize}
+            \item Cisco's Express Forwarding (CEF) is an advanced, Layer 3 switching technology inside a router. It defines the fastest method by which a Cisco router forwards packets from ingress to egress interfaces.
+            \item Process switching uses the CPU on every packet, CEF only needs to the CPU for the first packet of each session.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{TCP/UDP/ICMP testcases - case1\_$<$config$|$traffic$>$\_$<$cef$|$process$>$\_$<$TCP$|$UDP$|$ICMP$>$}
+Action policies with log all as action
+\begin{itemize}
+    \item case1 config
+	\item case1\_traffic\_cef\_TCP
+	\item case1\_traffic\_process\_TCP
+	\item case1\_traffic\_cef\_UDP
+	\item case1\_traffic\_process\_UDP
+	\item case1\_traffic\_cef\_ICMP
+	\item case1\_traffic\_process\_ICMP
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{TCP/UDP/ICMP testcases - case1\_2\_traffic\_$<$cef$|$process$>$\_$<$TCP$|$UDP$|$ICMP$>$}
+Nested policies with log as action
+\begin{itemize}
+	\item case1\_2\_traffic\_process\_TCP
+	\item case1\_2\_traffic\_cef\_TCP
+	\item case1\_2\_traffic\_process\_UDP
+	\item case1\_2\_traffic\_cef\_UDP
+	\item case1\_2\_traffic\_process\_ICMP
+	\item case1\_2\_traffic\_cef\_ICMP
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{TCP/UDP/ICMP testcases - case2\_$<$config$|$traffic$>$\_$<$cef$|$process$>$\_$<$TCP$|$UDP$|$ICMP$>$}
+Nested policies with log all as action
+\begin{itemize}
+    \item case2\_config
+	\item case2\_traffic\_cef\_TCP
+	\item case2\_traffic\_process\_TCP
+    \item case2\_traffic\_cef\_UDP
+    \item case2\_traffic\_process\_UDP
+    \item case2\_traffic\_cef\_ICMP
+    \item case2\_traffic\_process\_ICMP
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Multiple Flows testcases}
+\begin{block}{}
+    For each testcase send multiple-flows TCP/UDP/ICMP traffic
+\end{block}
+\begin{itemize}
+    \item action\_multiple\_flow\_process
+	\item action\_multiple\_flow\_cef
+	\item nested\_multiple\_flow\_cef\_log
+    \item nested\_multiple\_flow\_cef\_logAll
+    \item nested\_multiple\_flow\_process\_log
+    \item nested\_multiple\_flow\_process\_logAll
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Change Configuration testcases - Change config}
+\begin{itemize}
+    \item action\_change\_config\_cef
+    \item action\_change\_config\_process
+    \item nested\_change\_config\_cef
+    \item nested\_change\_config\_process
+\end{itemize}
+\begin{block}{Method}
+\begin{enumerate}
+    \item Create a new policy
+    \item Send TCP traffic
+    \item In the midlle of traffic sending change the policies
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Change Configuration testcases - Apply config}
+\begin{itemize}
+    \item action\_apply\_config\_cef
+    \item action\_apply\_config\_process
+    \item nested\_apply\_config\_cef
+    \item nested\_apply\_config\_process
+\end{itemize}
+\begin{block}{Method}
+\begin{enumerate}
+    \item Delete all the policies
+    \item Send TCP traffic
+    \item In the midlle of traffic sending apply the policies
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Change Configuration testcases - Delete config}
+\begin{itemize}
+    \item action\_delete\_config\_cef
+    \item action\_delete\_config\_process
+    \item nested\_delete\_config\_cef
+    \item nested\_delete\_config\_process
+\end{itemize}
+\begin{block}{Method}
+\begin{enumerate}
+    \item Create a new policy
+    \item Send TCP traffic
+    \item In the midlle of traffic sending delete the policies
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Bugs}
+\begin{description}
+    \item[\href{http://cdets.cisco.com/apps/dumpcr?identifier=CSCtg61173\&content=summary\&format=html}{CSCtg61173}] UDP classification fails for output direction in cef
+    \item[\href{http://cdets.cisco.com/apps/dumpcr?identifier=CSCtg60872\&content=summary\&format=html}{CSCtg60872}] Regex classification is not working in TCP traffic with input+output
+    \item[\href{http://cdets.cisco.com/apps/dumpcr?identifier=CSCtg61221\&content=summary\&format=html}{CSCtg61221}] SFPM (FFPM) Stateful classification in input and output direction
+\end{description}
+\end{frame}
+
+\subsection{Traffic generators}
+\begin{frame}[fragile] \frametitle{Pagent Make your NET{\color{red}WORK}}
+PAGENT is an IOS Based Testing Tool used to generate and capture, emulate large routed networks, and generate session based traffic.\\
+The test tools are included in special IOS Pagent images.
+\begin{block}{}
+\begin{description}
+    \item[TGN] Traffic Generator - generates TCP/UDP/ICMP traffic
+    \item[HTTPSE] HTTP Session Emulator
+    \item[PKTS] Packet Count and Capture
+\end{description}
+\end{block}
+\end{frame}
+
+\section{Performance Tests}
+\begin{frame}[fragile] \frametitle{Why \ixload?}
+\begin{block}{}
+\begin{itemize}
+	\item Works on L4 and up
+	\item Creates real-world traffic scenarios
+	\item Emulate clients and servers of \http, \ssl, \ftp, \smtp, \pop
+\end{itemize}
+\end{block}
+\end{frame}
+
+\pgfdeclareimage[width=.9\textwidth]{solarispcixia}{images/unix_pc_ixia}
+\begin{frame}[fragile] \frametitle{Getting started - \ixia~Lab Setup}
+\begin{center}
+	 \pgfuseimage{solarispcixia}
+\end{center}
+\begin{itemize}
+	\item SunOS 5.10 running in sjc-cde-006
+	\item PC running Windows in 172.27.241.81
+	\item \ixia~chassis in 172.27.240.23
+\end{itemize}
+\end{frame}
+
+\pgfdeclareimage[width=.9\textwidth]{picture}{images/picture}
+\begin{frame} \frametitle{Whole picture}
+	\begin{center}
+		 \pgfuseimage{picture}
+	\end{center}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Getting started - Download}
+\begin{itemize}
+	\item Dowload\footnote{\href{http://www.ixiacom.com/support/downloads\_and\_updates/index.php}{Download and Updates page}} compatible versions\footnote{\href{http://www.ixiacom.com/support/product\_compatibility\_matrix/index.php}{Compatibility Matrix}}
+	\begin{itemize}
+		\item IxLoad 4.30 EA SP1 Build Number: 4.30.119.78
+		\item IxOS 5.50 EA SP3 (Early Adopter) Build Number: 5.50.500.27
+	\end{itemize}
+	\item Make sure you have installed in chassis and in Windows PC compatible versions
+	\begin{itemize}
+		\item If you have multiple \ixos~and/or \ixload~versions, force the system to use the one you want (with Ixia Application Selector)
+	\end{itemize}
+	\item If you don't have an \ixia~account you can request for one from their web site.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Getting started - Install}
+I will suppose that you already have \ats~installed under {\scriptsize\ttfamily \$ATS\_USER\_PATH}
+\begin{itemize}
+	\item Install first \ixos~and then \ixload~on Windows PC and \ixia~Chassis if so needed
+	\item For Solaris 10 machine
+	\begin{itemize}
+		\item Install \ixos~under {\scriptsize\ttfamily \$IXIA\_ATS\_FOLDER}\footnote{This variable must be created by you, see next slide for further understanding}
+		\item Install \ixload~under {\scriptsize\ttfamily \$IXIA\_HOME}
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Getting started - Install - Solaris}
+\begin{block}{Your .bashrc file should look like this}
+\begin{lstlisting}[language=Terminal]
+IXIA_ATS_FOLDER="/auto/stg-devtest/ucosta/"
+
+IXIA_HOME="${IXIA_ATS_FOLDER}/ixia"
+IXIA_VERSION="5.50.500.27"
+IXIA_RESULTS_DIR="${HOME}/results_ixia"
+IXIA_LOGS_DIR="${HOME}/logs_ixia"
+IXIA_TCL_DIR="${IXIA_HOME}/lib"
+TCLLIBPATH="${IXIA_TCL_DIR}"
+
+ATS_USER_PATH="${IXIA_ATS_FOLDER}/ats"
+AUTOTEST="$ATS_USER_PATH"
+ATS_EASY="$ATS_USER_PATH"
+
+MANPATH="${MANTPATH}:${IXIA_HOME}/man:/usr/local/man:/usr/man:/usr/share/man:/usr/autotool/devel/man:"
+PATH="${PATH}:${ATS_USER_PATH}/bin:$IXIA_HOME/bin:${ATS_USER_PATH}/man:"
+export ATS_USER_PATH AUTOTEST ATS_EASY PATH MANPATH LD_LIBRARY_PATH IXIA_HOME IXIA_VERSION IXIA_RESULTS_DIR IXIA_LOGS_DIR IXIA_TCL_DIR TCLLIBPATH IXIA_ATS_FOLDER
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Getting started - Install - Solaris - part 2}
+After change the .bashrc file\footnote{If you use csh as your shell, translate the previous code} don't forget to type:
+\begin{lstlisting}[language=Terminal]
+[ucosta@sjc-cde-006:/]-$ source $HOME/.bashrc
+\end{lstlisting}
+\begin{block}{If the installation of \ixload~in Solaris $10$ fails}
+You can activate the debug flag and then try to understand whats wrong ({\scriptsize\ttfamily log.txt} file):
+\begin{lstlisting}[language=Terminal]
+[ucosta@sjc-cde-006:ixia]-$ export LAX_DEBUG=true
+[ucosta@sjc-cde-006:ixia]-$ ./IxLoadTclAPI4.30.119.78 2> log.txt
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Getting started - Install - Solaris - part 3}
+\begin{block}{If the installation of \ixload~in Solaris $10$ fails and you run out of patience}
+You can copy my \ixload~directory into your \ixia~folder.
+\begin{lstlisting}[language=Terminal]
+[ucosta@sjc-cde-006:ixia]-$ cp -r /auto/stg-devtest/ucosta/ixia/IxLoadTclAPI4.30.119.78-EB $IXIA_HOME
+\end{lstlisting}
+\end{block}
+I also have a zip file that contains this folder, if you want copy that and unzip it in your folder
+\begin{block}{}
+\begin{lstlisting}[language=Terminal]
+[ucosta@sjc-cde-006:ixia]-$ cp /auto/stg-devtest/ucosta/ixia/IxLoad4.30EASP1.zip $IXIA_HOME
+[ucosta@sjc-cde-006:ixia]-$ cd $IXIA_HOME
+[ucosta@sjc-cde-006:ixia]-$ unzip IxLoad4.30EASP1.zip
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Getting started - Checking installation}
+If you follow the steps you should be able to see that \ixos~and \ixload~are properly installed
+\begin{block}{}
+\begin{lstlisting}[language=Terminal]
+[ucosta@sjc-cde-006:ixia]-$ expect
+expect1.1> package require IxLoad
+Tcl Client is running Ixia Software version: 5.50.500.27
+4.30.119.78
+expect1.2>
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{\autoeasy}
+\begin{block}{\autoeasy~files}
+\begin{description}
+	\item[CONFIG file] contains how to access our routers, passwords, etc
+	\item[Job file] contains the scripts and parameters that need to be submitted for execution
+	\item[Script] is where the recipe is (in this case \ats+\ixload~tests)
+\end{description}
+\end{block}
+\end{frame}
+
+%Task execution in single process (-on_proc)
+%This execution mode is similar to the synchronous mode with the exception that all tasks execute within the same UNIX process. A unique 
+%string (process name) is associated with the process that was created to execute the task remains so that future programs can be run on 
+%the same process and have access to the same Tcl data structures.
+%ats_run -on_proc procname -tid taskid1 task1 parameters1
+\begin{frame}[fragile] \frametitle{\ats~files - .job and CONFIG files}
+\begin{block}{CONFIG file}
+\begin{lstlisting}[language=Terminal]
+#activate ATS debug
+set LOG_LEVEL { 
+    aereport debug
+}
+set REPORTS ucosta@cisco.com
+set TESTBEDS {ucosta_router_tb}
+set ROUTERS(ucosta_router_tb) {ucosta_router}
+
+global _device
+set _device(ucosta_router) "telnet 172.19.218.32 2013"
+TacacsPw {}
+EnablePw {}
+
+\end{lstlisting}
+\end{block}
+\begin{block}{run.job file}
+\begin{lstlisting}[language=Terminal]
+ats_run -on_proc abc123 test.ixload test.ixload 1 ixia DEBUG  172.27.240.23 "1,1,9  1,1,10" 100 full 172.27.241.81
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{\ats~files - Makefile(optional)}
+Makefile to automate the process of run the test scripts
+\begin{description}
+	\item[make run\_log] works only in Solaris machine
+	\item[make watch] its good to watch the output that is being generated
+	\item[make run] run the test scripts and send the output to sdtout
+	\item[make clean] keep our dir clean
+\end{description}
+\begin{block}{makefile}
+\begin{lstlisting}[language=Terminal]
+run_log:run.job CONFIG
+    autoeasy -D run.job -cf CONFIG > log
+watch:log
+    watch -n 1 'cat log | tail -n 30'
+run:run.job CONFIG
+    autoeasy -D run.job -cf CONFIG
+clean:
+    rm -f *~ *.*~ *.log *.report *.rerun log
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{\ixload+\ats~script}
+For now we will use the GSBU Dev Test team framework\footnote{Can be found in regression/tests/functionality/gsg/ after you checkout the most recent version of regression tests}\\
+We will use as example a generation of \http~traffic.
+\begin{block}{Structure of the script}
+\begin{lstlisting}[language=TclUlisses]
+<imports>
+<parse args>
+test_config { ... }
+test_analyze { ... }
+test_unconfig { ... }
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{\ixload+\ats~script - test\_config}
+\begin{block}{Structure of the script}
+\begin{lstlisting}[language=TclUlisses]
+test_config {
+	tg-ixiaLoad_connect $PCServerIP $tgArgs
+	tg-ixiaLoad_client_net -port $tgPort2 -firstIp $IxLoadClientIP  -firstMac 00:C6:12:02:01:00 -ipCount 1  -networkMask $netmask -gateway 172.31.254.254 #configure client network
+	tg-ixiaLoad_server_net -port $tgPort1 -firstIp $IxLoadServerIP  -firstMac 00:B6:12:02:01:00 -ipCount 1  -networkMask $netmask -gateway 172.16.254.254 #configure server network
+	tg-ixiaLoad_client_http_traffic -maxSessions 1 -pageList $pageList -httpVersion 1.1 #configure client
+	tg-ixiaLoad_server_http_traffic -httpPort 80 #configure server
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{\ixload+\ats~script - test\_config - part 2}
+\begin{block}{Structure of the script - cont.}
+\begin{lstlisting}[language=TclUlisses]
+test_config {
+	tg-ixiaLoad_client_traf_net_map -objectiveType concurrentConnections -objectiveValue 2000 -iterations 1 -rampDownTime 10  -sustainTime 20 #configure client traffic
+	tg-ixiaLoad_server_traf_net_map #configure server traffic
+	tg-ixiaLoad_create_test #create test
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{\ixload+\ats~script - test\_analyze}
+\begin{block}{Structure of the script - cont.}
+\begin{lstlisting}[language=TclUlisses]
+test_analyze {
+	set ixLoadStats tg-ixiaLoad_run_test_with_stats #run HTTP test and get IxLoad stats
+}
+\end{lstlisting}
+\end{block}
+The result is given in the form of HashTable, we can access it by:
+\begin{lstlisting}[language=TclUlisses]
+set clientBytesReceived [keylget ixLoadStats client,BytesReceived]
+set clientBytesReceived [double $clientBytesReceived]
+set serverBytesSent     [keylget ixLoadStats server,BytesSent]
+set serverBytesSent     [double $serverBytesSent]
+echo "--- clientPacketsReceived = $clientPacketsReceived"
+echo "--- serverPacketsSent     = $serverPacketsSent"
+\end{lstlisting}
+\end{frame}
+
+\begin{frame} \frametitle{Demo}
+	\begin{center}\huge{Demo}\end{center}
+\end{frame}
+
+\begin{frame} \frametitle{Questions}
+	\begin{center}\huge{?}\end{center}
+\end{frame}
+
+\end{document}
