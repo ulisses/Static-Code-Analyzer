@@ -1,9 +1,6 @@
 #!/usr/bin/perl -w
-# Change above line to point to your perl binary
 
 use Path::Class;
-use CGI ':standard';
-use GD::Graph::area;
 use GD::Graph::bars;
 use strict;
 
@@ -12,19 +9,15 @@ my @dataNrFiles;
 my @dataRatioNrFilesNrLines;
 my @dataTypes;
 
-for my $file (@ARGV) {
-	open(FILE, '<', $file) or do {
-		warn "can't open $file\n";
-	};
-	
-	my $type = +(split "_" , $file)[1];
-	
+my @types = ("tcl", "cpp", "c", "hs", "java", "pl");
+my $filePath = $ARGV[0];
+
+for my $type (@types) {
 	my $nrLines = 0;
 	my $nrFiles = 0;
-	for my $file_source (<FILE>) {
+	for my $file_source ( get_files($filePath,$type) ) {
+		chomp $file_source;
 		$nrFiles++;
-		$file_source =~ s/\n//g; 
-		$file_source =~ s/\r//g; 
 		
 		my $file_source_name = file($file_source);
 		$file_source_name =~ $file_source_name->stringify;
@@ -38,9 +31,9 @@ for my $file (@ARGV) {
 	push(@dataTypes,$type);
 	
 	push(@dataNrFiles,$nrFiles);
-	push(@dataRatioNrFilesNrLines,$nrLines / $nrFiles);
-
-#	print "temos $nrLines linhas em $nrFiles ficheiros de $type \n";
+	if($nrFiles != 0) {
+		push(@dataRatioNrFilesNrLines,$nrLines / $nrFiles);
+	}
 }
 
 plotToPng("LinesPerLanguage.png",[@dataTypes],[@dataNrLines],"Languages", "Number of lines", "Number of lines per language");
@@ -72,5 +65,22 @@ sub plotToPng {
 	open (MYFILE, '>' , $fileName);
 	print MYFILE $myimage->png;
 	close (MYFILE);
+}
+
+sub get_files {
+	my $path = $_[0];
+	my $ext = $_[1];
+
+	opendir (DIR, $path) or die "Unable to open $path: $!";
+
+	my @files =
+		map { $path . '/' . $_ }
+		grep { !/^\.{1,2}$/ }
+		readdir (DIR);
+
+	return
+		grep { (/\.$ext$/) }
+		map { -d $_ ? get_files ($_ ,$ext) : $_ }
+		@files;
 }
 
