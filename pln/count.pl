@@ -2,28 +2,26 @@
 
 use Path::Class;
 use GD::Graph::bars;
-use strict;
 
 my @_dataNrLines;
 my @_dataNrFiles;
 my @_dataRatioNrFilesNrLines;
 my @_dataTypes;
 
-# type => (nrFiles,nrLines)
+# type => [nrFiles,nrLines]
 my %_types = ("tcl" => [0,0] , "cpp" => [0,0], "c" => [0,0], "hs" => [0,0], "java" => [0,0], "pl" => [0,0]);
 my $_filePath = $ARGV[0];
 my @_files = getAllFiles($_filePath);
 
 for my $type (keys %_types) {
+	print "Working on $type...\n";
 	for my $file_source ( getFiles($type) ) {
 		chomp $file_source;
 		$_types{$type}[0]++;
 
 		my $file_source_name = file($file_source);
 		$file_source_name =~ $file_source_name->stringify;
-		open(FILESOURCE,'<',$file_source_name) or do {
-			warn "can't open $file_source_name\n";
-		};
+		open(FILESOURCE,'<',$file_source_name) or warn "can't open $file_source_name\n";
 		$_types{$type}[1]++ while <FILESOURCE>;
 	}
 	
@@ -54,22 +52,36 @@ sub plotToPng {
 
 	my $mygraph = GD::Graph::bars->new(500, 300);
 	$mygraph->set(
-		x_label     => $x_label,
-		y_label     => $y_label,
-		title       => $title,
+		transparent   => 1,
+
+		# show the values for each bar in integer format separated 10 pixels from the top of the bar
+		show_values   => 1,
+		values_format => sub { return sprintf("\%d", shift); } ,
+		values_space  => 10,
+
+		x_label       => $x_label,
+		y_label       => $y_label,
+		title         => $title,
+		dclrs         =>  [ qw(gold red green) ],
 	) or warn $mygraph->error;
 
-	my $myimage = $mygraph->plot(\@data) or die $mygraph->error;
+	my $myimage = $mygraph->plot(\@data) or warn $mygraph->error;
 	
-	open (MYFILE, '>' , $fileName);
-	print MYFILE $myimage->png;
-	close (MYFILE);
+	open (IMG, '>' , $fileName);
+	binmode IMG;
+	print IMG $myimage->png;
+	close (IMG);
+}
+
+sub fun {
+	my $value = shift;
+	return sprintf("\%d", int($_));
 }
 
 sub getAllFiles {
 	my $path = $_[0];
 
-	opendir (DIR, $path) or die "can't open $path\n";
+	opendir (DIR, $path) or warn "can't open $path\n";
 
 	my @files =
 		map { $path . '/' . $_ }
@@ -91,6 +103,8 @@ sub getAllFiles {
 
 sub getFiles {
 	my $ext = $_[0];
-	return grep { (/\.$ext$/) } @_files;
+
+	@list = grep { /\.$ext$/ } @_files;
+	return @list;
 }
 
