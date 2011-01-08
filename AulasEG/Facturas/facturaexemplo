@@ -1,0 +1,40 @@
+@idfact:ajf84R5dd5
+	@ide:
+		@nome:Pedro
+		@nif:1234512345
+		@morada:Av. D. Joao IV 175
+		@nib:13351342
+	@idr:
+		@nome:Maria
+		@nif:1234612345
+		@morada:Urbanizacao Salgueiral
+	@corpo
+		@p:
+		g73cc9d90
+		2
+		10
+		descricao ..
+		@p:
+		g23ac9gg0
+		3
+		1
+		descricao2 ..
+	@fimcorpo
+
+@idfact:zf8XXu80e
+	@ide:
+		@nome:Josuef
+		@nif:1278945621
+		@morada:Avenida dos Aliados
+		@nib:13377597
+	@idr:
+		@nome:Maria
+		@nif:1234612345
+		@morada:Urbanizacao Salgueiral
+	@corpo
+		@p:
+		g73cc9d90
+		2
+		50
+		descricao3 ..
+	@fimcorpo

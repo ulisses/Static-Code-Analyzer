@@ -66,6 +66,7 @@ emphstyle={[3]\color{castanho_ulisses}\textbf}
 {
        basicstyle=\ttfamily\scriptsize,
        showstringspaces=false,
+breaklines=true,
        numbers=left,
        numberstyle=\tiny,
        numberblanklines=true,
@@ -115,29 +116,29 @@ A GIC abaixo define formalmente uma primeira versão da linguagem Factura, de ac
       N = { Lisp, SExp, SExplist }
       S = Lisp
       P = {
-            p1:  Factura  --> Cabec Corpo
-            p2:  Cabec    --> IdFact IdE IdR
-            p3:  IdFact   --> NumFact
-            p4:  NumFact  --> id
-            p5:  IdE      --> Nome NIF Morada NIB
-            p6:  IdR      --> Nome NIF Morada
-            p7:  Nome     --> str
-            p8:  NIF      --> str
-            p9:  Morada   --> str
-            p10: NIB      --> str
-            p11: Corpo    --> ...
+            p1: Factura --> Cabec Corpo
+            p2: Cabec --> IdFact IdE IdR
+            p3: IdFact --> NumFact
+            p4: NumFact --> id
+            p5: IdE --> Nome NIF Morada NIB
+            p6: IdR --> Nome NIF Morada
+            p7: Nome --> str
+            p8: NIF --> str
+            p9: Morada --> str
+            p10: NIB --> str
+            p11: Corpo --> ...
           }
 \end{code_txt}
 
 Pede-se então que escreva uma Gramática de Atributos, GA, para
 \begin{itemize}
-    \item a) calcular o total por linha e total geral. 
+    \item a) calcular o total por linha e total geral.
 
-    \item b) estender a linguagem original para permitir mais do que uma factura (calculando os mesmos totais). 
+    \item b) estender a linguagem original para permitir mais do que uma factura (calculando os mesmos totais).
 
-    \item c) modificar a linguagem de modo a suportar inicialmente a descrição do stock (referência, descrição, preço unitário e quantidade em stock); neste caso, cada linha só terá a referência e a quantidade vendida. 
+    \item c) modificar a linguagem de modo a suportar inicialmente a descrição do stock (referência, descrição, preço unitário e quantidade em stock); neste caso, cada linha só terá a referência e a quantidade vendida.
 
-    \item d) estender a semântica da nova linguagem de modo a também actualizar o stock. 
+    \item d) estender a semântica da nova linguagem de modo a também actualizar o stock.
 \end{itemize}
 
 \section{Solução}
@@ -145,14 +146,14 @@ As subsecções que se seguem referem-se à resolução de cada alínea do capí
 \subsection{Alínea a)}
 A solução para a primeira alínea passa por calcular o total por linha na produção linha, multiplicando a quantidade pelo preço unitário.
 
-\begin{code_txt} 
+\begin{code_txt}
 Linha -> Ref Desc Qtd PU {Linha.totalLinha = Qtd.quantidade * PU.pu;}
 \end{code_txt}
 
 Para calcular o montante total da factura, temos que somar na produção Linhas, o preço de cada linha com o preço já calculado das restantes linhas.
 No caso de só haver uma linha, o montante total é igual ao montante da linha.
 
-\begin{code_txt} 
+\begin{code_txt}
 Linhas -> Linha {Linhas.total = Linhas.totalLinha;}
 Linhas -> Linha Linhas {Linhas0.total = Linha1.totalLinha + Linhas2.total;}
 \end{code_txt}
@@ -160,7 +161,7 @@ Linhas -> Linha Linhas {Linhas0.total = Linha1.totalLinha + Linhas2.total;}
 \subsection{Alínea b)}
 Para a linguagem passar a permitir multiplas facturas, temos de acrescentar as seguintes produções à gramática:
 
-\begin{code_txt} 
+\begin{code_txt}
 LivroF -> Facturas
 
 Facturas -> Factura
@@ -173,7 +174,7 @@ E agora \textit{LivroF} toma o lugar de símbolo inícial, que pertencia a \text
 \subsection{Alínea c)}
 Nesta alínea a descrição e preço unitário desaparecem de cada linha da factura, porque passa a existir um stock, que contém as informações de todos os produtos.
 
-\begin{code_txt} 
+\begin{code_txt}
 Inicial -> Stock LivroF { LivroF.stock = Stock.stock; }
 
 Stock -> Produtos
@@ -188,34 +189,262 @@ Produto -> Ref Desc Qtd PU
 As informações lidas no stock são depois herdadas pelo livro de facturas (\textit{LivroF}), depois pelas Facturas, e assim sucessivamente atée chegar à Linha.
 Na linha é calculado o preço total da linha através da quantidade e do preço unitário, tal como anteriormente. A diferença é que agora o preço unitário é acessido através do stock.
 
-\begin{code_txt} 
-Linha -> Ref Qtd {  
-	int pu = Linha.stock.getPU(Ref.num);
-	Linha.totalLinha = Qtd.quantidade * pu;
-	imprime Linha.totalLinha;
+\begin{code_txt}
+Linha -> Ref Qtd {
+int pu = Linha.stock.getPU(Ref.num);
+Linha.totalLinha = Qtd.quantidade * pu;
+imprime Linha.totalLinha;
 }
-\end{code_txt} 
+\end{code_txt}
 
 
 \subsection{Alínea d)}
 De modo a actualizar o stock, na produção \textit{Linha} retiramos ao produto referenciado por \textit{Ref}, a quantidade vendida.
 
-\begin{code_txt} 
-Linha -> Ref Qtd {  
-		int pu = stock.getPU(Ref.num);
- 		Linha.totalLinha = Qtd.quantidade * pu;
-		imprime Linha.totalLinha;
-		
-		int qt = Linha.stock.getQuantidade(Ref.num);
-		Linha.stock.setQuantidade(qt-Qtd.quantidade);	
-		}
-\end{code_txt} 
+\begin{code_txt}
+Linha -> Ref Qtd {
+int pu = stock.getPU(Ref.num);
+  Linha.totalLinha = Qtd.quantidade * pu;
+imprime Linha.totalLinha;
+
+int qt = Linha.stock.getQuantidade(Ref.num);
+Linha.stock.setQuantidade(qt-Qtd.quantidade);
+}
+\end{code_txt}
 
 \newpage
 
+\section{AntLR}
+Nesta secção será apresentado um estudo sobre a ferramenta \emph{AntLR} usando como caso de estudo 
+o problema e a solução proposta nas secções anteriores. Assim, começar-se-à por dar um exemplo de input da linguagem, a gramática desenvolvida 
+e a semântica associada.
+\subsection{Exemplo de input}
+
+O texto seguinte representa um exemplo de frases no qual a linguagem foi baseada. Cada frase será constituída por uma factura, em que esta contém 
+um \emph{id} associado, dados sobre o emissor e receptor, e uma lista de produtos.
+
+\begin{code_txt}
+ @idfact:ajf84R5dd5
+	@ide:
+		@nome:Pedro
+		@nif:1234512345
+		@morada:Av. D. Joao IV 175
+		@nib:13351342
+	@idr:
+		@nome:Maria
+		@nif:1234612345
+		@morada:Urbanizacao Salgueiral
+	@corpo
+		@p:
+		g73cc9d90
+		2
+		10
+		descricao ..
+		@p:
+		g23ac9gg0
+		3
+		1
+		descricao2 ..
+	@fimcorpo
+
+@idfact:zf8XXu80e
+	@ide:
+		@nome:Josuef
+		@nif:1278945621
+		@morada:Avenida dos Aliados
+		@nib:13377597
+	@idr:
+		@nome:Maria
+		@nif:1234612345
+		@morada:Urbanizacao Salgueiral
+	@corpo
+		@p:
+		g73cc9d90
+		2
+		50
+		descricao3 ..
+	@fimcorpo
+\end{code_txt}
+
+Como objectivo final, pretendia-se implementar um \emph{pretty print} da informação mais o número de produtos e custo totais. 
+
+\subsection{Tokens}
+
+Como se pode ver no exemplo anterior, existem certas linhas com \emph{tags} no começo. Essas linhas serviram apenas como auxílio para \emph{debug} da 
+linguagem e para explorar a definição de \emph{tokens} da ferramenta. Sendo assim, desenvolveram-se as seguintes \emph{tags}:
+
+\begin{code_txt}
+ 
+tokens{
+	TAGidfact = '@idfact:';
+	TAGide = '@ide:';
+	TAGnome = '@nome:';
+	TAGnif = '@nif:';
+	TAGmorada = '@morada:';
+	TAGnib = '@nib:';
+	TAGidr = '@idr:';
+	TAGcorpo = '@corpo';
+	TAGfimcorpo = '@fimcorpo';
+	TAGproduto = '@p:';
+}
+
+\end{code_txt}
+
+\subsection{Gramática sem semântica}
+
+De seguida, apresenta-se a gramática criada com a \emph{syntax} do \emph{AntLR}. A explicação segue a que foi dada nas secções anteriores, com a 
+excepção de não ter sido criado um Stock para esta linguagem. Como se pode ver também, foram adicionados os tokens referidos na subsecção anterior à gramática. 
+
+\begin{code_txt}
+ 
+livrofact	:	(factura)+
+		;
+
+factura		:	cabec	corpo
+		;
+	
+cabec 		:	idfact 	ide	idr
+		;
+	
+corpo		:	TAGcorpo	(produto)+	TAGfimcorpo
+		;	
+	
+produto 	:	(TAGproduto	referencia 	precouni	quantidade	descricao)
+		;	
+	
+referencia	:	ID
+		;	
+	
+descricao	:	STRINGPLUS
+		;	
+	
+quantidade	:	NUM
+		;	
+	
+precouni	:	NUM
+		;	
+	
+idfact 		:	numfact
+		;
+	
+numfact		:	TAGidfact	ID
+		;
+	
+ide		:	TAGide	nome	nif	morada	nib	
+		;
+	
+idr		:	TAGidr	nome	nif	morada
+		;
+
+nome		:	TAGnome	STRING
+		;
+	
+nif		:	TAGnif	NUM
+		;
+
+morada		:	TAGmorada	STRINGPLUS
+		;
+
+nib		:	TAGnib	NUM
+		;
+
+NUM 		:	('0'..'9')+
+		;
+
+STRING		:	('a'..'z'|'A'..'Z')+
+		;
+
+ID		:	('a'..'z'|'A'..'Z'|'0'..'9')+
+		;
+	
+STRINGPLUS	:	('a'..'z'|'A'..'Z'|'0'..'9'|'\.'|' ')+
+		;
+
+NS		:  	(' ' | '\t' | '\n' | 'r') { skip(); }
+   		;
+\end{code_txt}
+
+Em relação às listas que possam surgir nesta linguagem (de facturas e/ou produtos) foram definidas com uma notação, do estilo expressões regulares,
+ que esta ferramenta permite.
+
+\subsection{Semântica}
+
+Para desenvolvimento dos problemas decidiu-se tirar vantagem do \emph{AntLR} ser perfeitamente compatível com \emph{Java}. Assim, um \texttt{livrofact}
+ seria um \emph{ArrayList} de objectos \texttt{Factura}. Cada objecto \texttt{Factura} teria 4 variáveis: uma \texttt{String} id; um objecto \texttt{Emissor}; 
+um objecto \texttt{Receptor}; e uma \emph{ArrayList} de objectos \texttt{Produto}. \\
+
+Os objectos \texttt{Receptor}, \texttt{Emissor} e \texttt{Produto} apenas teriam informação de tipos primitivos. \\
+
+Assim, no começo da gramática, é inicializado o \emph{ArrayList} de \texttt{Factura}, como se pode ver na linha 2 do pedaço de código seguinte:\\
+
+\begin{code_txt}
+livrofact 
+@init{ArrayList<Factura> livrof_in = new ArrayList<Factura>();}
+	:	(factura {livrof_in.add(\$factura.factura_out);})+ {System.out.println("Livro de Facturas\n"); 
+						for(Factura f : livrof_in){System.out.println(f.toString());}}
+	;
+\end{code_txt}
+
+A cada factura lida, seria guardado um atributo sintetizado do tipo \texttt{Factura} (linha 3). E no final seria imprimida a informação (linha 4).\\
+
+O pedaço de código seguinte, diz respeito à criação de facturas. A cada início da produção \texttt{factura}, é inicializado um objecto \texttt{Factura} 
+(linha 3). Esse objecto criado será passado como um atributo herdado para as produções \texttt{cabec} e \texttt{corpo} (linhas 4 e 5). Na produção
+ \texttt{cabec}, o atributo herdado \texttt{factura\_in} terá a variável \emph{id} alterada pelo atributo sintetizado vindo do nodo \texttt{idfact} (linha 10).
+ Para os nodos \texttt{ide} e \texttt{idr} serão mandados as variáveis \texttt{emi} e \texttt{rec}, os objectos \texttt{Emissor} e \texttt{Receptor} 
+respectivamente (linhas 11 e 12). O processamento do corpo da factura ocorre de maneira semelhante ao da criação da linha de facturas, a 
+cada ocorrência de um nodo \texttt{produto} seria adicionado à lista de produtos um atributo sintetizado do tipo \texttt{Produto}.
+
+\begin{code_txt}
+ factura 
+returns[Factura factura_out]
+@init{Factura factura_in = new Factura();}
+	:	cabec[factura_in] {  }
+		corpo[factura_in] { factura_out = factura_in; }
+	;
+	
+cabec [Factura factura_in]
+
+	:	idfact {$factura_in.id = $idfact.id_out;}
+		ide[factura_in.emi]
+		idr[factura_in.rec]
+	;
+	
+corpo [Factura factura_in]	
+	:	TAGcorpo
+		(produto{$factura_in.addProduto($produto.prod_out);})+
+		TAGfimcorpo
+	;
+\end{code_txt}
+
+Tanto o Emissor como o Receptor e os Produto têm processos de criação semelhantes. Não serão precisos de ser inicializados objectos dos tipos
+ Emissor e Receptor, pois o seu processo ocorre em simultâneo com a inicialização do objecto \texttt{Factura}. Assim, cada variável do 
+objecto herdado \texttt{Emissor} fica com os valores sintetizados correspondentes (linhas 3, 4, 5 e 6).
+
+\begin{code_txt}
+ide [Emissor emissor_in]
+	:	TAGide	
+		nome	{$emissor_in.nome = $nome.nome_out;}
+		nif	{$emissor_in.nif = $nif.nif_out;}
+		morada	{$emissor_in.morada = $morada.morada_out;}
+		nib	{$emissor_in.nib = $nib.nib_out;}
+	;
+\end{code_txt}
+
+Os nodos \texttt{nome}, \texttt{nif}, \texttt{morada} e \texttt{nib} são bastante semelhantes, apenas retornam o valor para os nodos superiores respectivos, como por exemplo:
+
+\begin{code_txt}
+ nib
+returns[int nib_out]
+	:	TAGnib	NUM{$nib_out = Integer.parseInt($NUM.text);}
+	;
+\end{code_txt}
+
+Todo o restante código semântico será adicionado na seção \texttt{Anexo}.
+
+\newpage
 \section{Anexo}
 \subsection{Código da alínea a)}
-\begin{code_txt} 
+\begin{code_txt}
 synthesided attribute quantidade occurs on Qtd;
 synthesided attribute pu occurs on PU;
 synthesided attribute totalLinha occurs on Linha;
@@ -256,17 +485,17 @@ NumPro -> id
 
 Desc -> string
 
-Qtd -> num  { Qtd.quantidade = num.lexeme;}
+Qtd -> num { Qtd.quantidade = num.lexeme;}
 
-PU -> num	{ PU.quantidade = num.lexeme;}
-
-
+PU -> num { PU.quantidade = num.lexeme;}
 
 
-\end{code_txt} 
+
+
+\end{code_txt}
 \newpage
 \subsection{Código da alínea b)}
-\begin{code_txt} 
+\begin{code_txt}
 synthesided attribute quantidade occurs on Qtd;
 synthesided attribute pu occurs on PU;
 
@@ -316,17 +545,17 @@ NumPro -> id
 
 Desc -> string
 
-Qtd -> num  { Qtd.quantidade = num.lexeme;}
+Qtd -> num { Qtd.quantidade = num.lexeme;}
 
-PU -> num	{ PU.quantidade = num.lexeme;}
-
-
+PU -> num { PU.quantidade = num.lexeme;}
 
 
-\end{code_txt} 
+
+
+\end{code_txt}
 \newpage
 \subsection{Código da alínea c)}
-\begin{code_txt} 
+\begin{code_txt}
 synthesided attribute quantidade occurs on Qtd;
 synthesided attribute pu occurs on PU;
 
@@ -352,7 +581,7 @@ LivroF -> Facturas { Facturas.stock = LivroF.stock;}
 
 Facturas -> Factura {Factura.stock = Facturas.stock;}
 
-Facturas -> Factura Facturas {Factura1.stock = Facturas0.stock; Facturas2.stock = Facturas0.stock;} 
+Facturas -> Factura Facturas {Factura1.stock = Facturas0.stock; Facturas2.stock = Facturas0.stock;}
 
 Factura -> CabecaF CorpoF { imprime(CorpoF.total); CorpoF.stock = Factura.stock;}
 
@@ -374,16 +603,16 @@ Mor -> string
 
 NIB -> num
 
-CorpoF -> Linhas {CorpoF.total = Linhas.total; Linhas.stock = CorpoF.stock;} 
+CorpoF -> Linhas {CorpoF.total = Linhas.total; Linhas.stock = CorpoF.stock;}
 
 Linhas -> Linha {Linhas.total = Linhas.totalLinha; Linha.stock = Linhas.stock;}
 
-Linhas -> Linha Linhas {Linhas0.total = Linha1.totalLinhas + Linhas2.total; Linha1.stock = Linhas0.stock; Linhas2.stock = Linhas0.stock; } 
+Linhas -> Linha Linhas {Linhas0.total = Linha1.totalLinhas + Linhas2.total; Linha1.stock = Linhas0.stock; Linhas2.stock = Linhas0.stock; }
 
-Linha -> Ref Qtd {  int pu = Linha.stock.getPU(Ref.num);
- 					Linha.totalLinha = Qtd.quantidade * pu;
-					imprime Linha.totalLinha;
-						}
+Linha -> Ref Qtd { int pu = Linha.stock.getPU(Ref.num);
+  Linha.totalLinha = Qtd.quantidade * pu;
+imprime Linha.totalLinha;
+}
 
 Ref -> NumProd { Ref.num = Numprod.num}
 
@@ -391,17 +620,17 @@ NumPro -> id {NumPro.num = id.lexeme}
 
 Desc -> string
 
-Qtd -> num  { Qtd.quantidade = num.lexeme;}
+Qtd -> num { Qtd.quantidade = num.lexeme;}
 
-PU -> num	{ PU.quantidade = num.lexeme;}
-
-
+PU -> num { PU.quantidade = num.lexeme;}
 
 
-\end{code_txt} 
+
+
+\end{code_txt}
 \newpage
 \subsection{Código da alínea d)}
-\begin{code_txt} 
+\begin{code_txt}
 synthesided attribute quantidade occurs on Qtd;
 synthesided attribute pu occurs on PU;
 
@@ -420,7 +649,7 @@ LivroF -> Facturas { Facturas.stock = LivroF.stock;}
 
 Facturas -> Factura {Factura.stock = Facturas.stock;}
 
-Facturas -> Factura Facturas {Factura1.stock = Facturas0.stock; Facturas2.stock = Facturas0.stock;} 
+Facturas -> Factura Facturas {Factura1.stock = Facturas0.stock; Facturas2.stock = Facturas0.stock;}
 
 Factura -> CabecaF CorpoF { imprime(CorpoF.total); CorpoF.stock = Factura.stock;}
 
@@ -442,19 +671,19 @@ Mor -> string
 
 NIB -> num
 
-CorpoF -> Linhas {CorpoF.total = Linhas.total; Linhas.stock = CorpoF.stock;} 
+CorpoF -> Linhas {CorpoF.total = Linhas.total; Linhas.stock = CorpoF.stock;}
 
 Linhas -> Linha {Linhas.total = Linhas.totalLinha; Linha.stock = Linhas.stock;}
 
-Linhas -> Linha Linhas {Linhas0.total = Linha1.totalLinhas + Linhas2.total; Linha1.stock = Linhas0.stock; Linhas2.stock = Linhas0.stock; } 
+Linhas -> Linha Linhas {Linhas0.total = Linha1.totalLinhas + Linhas2.total; Linha1.stock = Linhas0.stock; Linhas2.stock = Linhas0.stock; }
 
-Linha -> Ref Qtd {  int pu = stock.getPU(Ref.num);
- 					Linha.totalLinha = Qtd.quantidade * pu;
-					imprime Linha.totalLinha;
-					
-					int qt = Linha.stock.getQuantidade(Ref.num);
-					Linha.stock.setQuantidade(qt-Qtd.quantidade);	
-						}
+Linha -> Ref Qtd { int pu = stock.getPU(Ref.num);
+  Linha.totalLinha = Qtd.quantidade * pu;
+imprime Linha.totalLinha;
+
+int qt = Linha.stock.getQuantidade(Ref.num);
+Linha.stock.setQuantidade(qt-Qtd.quantidade);
+}
 
 Ref -> NumProd { Ref.num = Numprod.num}
 
@@ -462,13 +691,288 @@ NumPro -> id {NumPro.num = id.lexeme}
 
 Desc -> string
 
-Qtd -> num  { Qtd.quantidade = num.lexeme;}
+Qtd -> num { Qtd.quantidade = num.lexeme;}
 
-PU -> num	{ PU.quantidade = num.lexeme;}
+PU -> num { PU.quantidade = num.lexeme;}
 
 
 
-\end{code_txt} 
+\end{code_txt}
+\newpage
+\subsection{AntLR}
+\begin{code_txt}
+ grammar livrofact;
+
+tokens{
+	TAGidfact = '@idfact:';
+	TAGide = '@ide:';
+	TAGnome = '@nome:';
+	TAGnif = '@nif:';
+	TAGmorada = '@morada:';
+	TAGnib = '@nib:';
+	TAGidr = '@idr:';
+	TAGcorpo = '@corpo';
+	TAGfimcorpo = '@fimcorpo';
+	TAGproduto = '@p:';
+}
+
+@header{
+	;
+}
+
+@members{
+
+/*===========  Classe Emissor ============= */
+public class Emissor{
+
+	public String nome;
+	public String morada;
+	public int nib;
+	public int nif;
+	
+	public Emissor(){
+		this.nome = "";
+		this.morada = "";
+		this.nib = 0;
+		this.nif = 0;
+	}
+	
+	public Emissor(String name, String street, int enib, int enif){
+		this.nome = name;
+		this.morada = street;
+		this.nib = enib;
+		this.nif = enif;
+	}
+	
+	public String toString(){
+		return "\nDados Emissor" + "\nNome: " + this.nome + "\nMorada: " + this.morada + "\n";
+		//return "\nEmissor\n";
+	}
+
+}
+
+/*===========  Classe Receptor ============= */
+public class Receptor{
+
+	public String nome;
+	public String morada;
+	public int nif;
+	
+	public Receptor(){
+		this.nome = "";
+		this.morada = "";
+		this.nif = 0;
+	}
+	
+	public Receptor(String name, String street, int enif){
+		this.nome = name;
+		this.morada = street;
+		this.nif = enif;
+	}
+	
+	public String toString(){
+		return "\nDados Receptor" + "\nNome: " + this.nome + "\nMorada: " + this.morada + "\n";
+		//return "\nReceptor\n";
+	}
+
+}
+
+/*===========  Produto ============= */
+public class Produto{
+	public String referencia;
+	public String descricao;
+	public int quantidade;
+	public int precouni;
+	
+	public Produto(){
+		this.referencia = "";
+		this.descricao = "";
+		this.precouni = 0;
+		this.quantidade = 0;
+	}
+	
+	public Produto(String ref, String desc, int pu, int qtd){
+		this.referencia = ref;
+		this.descricao = desc;
+		this.precouni = pu;
+		this.quantidade = qtd;
+	}
+	
+	public String toString(){
+		return "Produto -> " + this.referencia + "\nDescricao: " + this.descricao + "\nPreco por unidade: " + 
+		this.precouni + "\nQuantidade" + this.quantidade + "\n";
+	}
+	
+	public int precoTotal(){
+		return this.precouni * this.quantidade;
+	}
+}
+
+/*===========  Factura ============= */
+public class Factura{
+	public Emissor emi;
+	public Receptor rec;
+	public String id;
+	public ArrayList<Produto> al;
+	
+	public Factura(){
+		this.id = "";
+		this.emi = new Emissor();
+		this.rec = new Receptor();
+		this.al = new ArrayList<Produto>();
+	}
+	
+	public Factura(Emissor e, Receptor r){
+		this.id = "";
+		this.emi = new Emissor(e.nome, e.morada, e.nib, e.nif);
+		this.rec = new Receptor(r.nome, r.morada, r.nif);
+		this.al = new ArrayList<Produto>();
+	}
+	
+	public void addProduto(Produto p){
+		this.al.add(p);
+	}
+	
+	public String toString(){
+		int custo = 0;
+		for(Produto p : this.al){
+			custo += p.precoTotal();
+		}
+	
+		return "\nFactura " + this.id + "\n" +
+			this.emi.toString() + 
+			this.rec.toString() + 
+			"\nTotal de Produtos = " + this.al.size() +
+			"\nCusto Total = " + custo;
+	}
+}
+
+}
+
+livrofact 
+@init{ArrayList<Factura> livrof_in = new ArrayList<Factura>();}
+	:	(factura {livrof_in.add(\$factura.factura_out);})+ {System.out.println("Livro de Facturas\n"); 
+						for(Factura f : livrof_in){System.out.println(f.toString());}}
+	;
+
+factura 
+returns[Factura factura_out]
+@init{Factura factura_in = new Factura();}
+	:	cabec[factura_in] {  }//System.out.println(factura_in.toString());}
+		corpo[factura_in] { factura_out = factura_in; }
+	;
+	
+cabec [Factura factura_in]
+
+	:	idfact {\$factura_in.id = \$idfact.id_out;}
+		ide[factura_in.emi]
+		idr[factura_in.rec]
+	;
+	
+corpo [Factura factura_in]	
+	:	TAGcorpo
+		(produto{\$factura_in.addProduto(\$produto.prod_out);})+
+		TAGfimcorpo
+	;	
+	
+produto 
+returns[Produto prod_out]
+@init{Produto prod_in = new Produto();}	
+	:	(TAGproduto	
+		referencia {prod_in.referencia = \$referencia.id_out;}
+		precouni {prod_in.precouni = \$precouni.pu_out;}
+		quantidade {prod_in.quantidade = \$quantidade.qtd_out;} 
+		descricao {prod_in.descricao = \$descricao.descri_out;}) {\$prod_out = prod_in;}
+		
+	;	
+	
+referencia
+returns[String id_out]
+	:	ID{\$id_out = \$ID.text;}
+	;	
+	
+descricao
+returns[String descri_out]
+	:	STRINGPLUS{\$descri_out = \$STRINGPLUS.text;}
+	;	
+	
+quantidade	
+returns[int qtd_out]
+	:	NUM{\$qtd_out = Integer.parseInt(\$NUM.text);}
+	;	
+	
+precouni
+returns[int pu_out]	
+	:	NUM{\$pu_out = Integer.parseInt(\$NUM.text);}
+	;	
+	
+	
+idfact 
+returns[String id_out]
+	:	numfact {\$id_out = \$numfact.id_out;}
+	;
+	
+numfact
+returns[String id_out]
+	:	TAGidfact	ID{\$id_out = \$ID.text;}
+	;
+	
+ide [Emissor emissor_in]
+
+	:	TAGide	
+		nome	{\$emissor_in.nome = \$nome.nome_out;}
+		nif	{\$emissor_in.nif = \$nif.nif_out;}
+		morada	{\$emissor_in.morada = \$morada.morada_out;}
+		nib	{\$emissor_in.nib = \$nib.nib_out;}
+	;
+	
+idr [Receptor receptor_in]	
+
+	:	TAGidr	
+		nome	{\$receptor_in.nome = \$nome.nome_out;}
+		nif	{\$receptor_in.nif = \$nif.nif_out;}
+		morada	{\$receptor_in.morada = \$morada.morada_out;}
+	;
+
+nome
+returns[String nome_out]
+	:	TAGnome	STRING{\$nome_out = \$STRING.text;}
+	;
+	
+nif
+returns[int nif_out]
+	:	TAGnif	NUM{\$nif_out = Integer.parseInt(\$NUM.text);}
+	;
+
+morada
+returns[String morada_out]
+	:	TAGmorada	STRINGPLUS{\$morada_out = \$STRINGPLUS.text;}
+	;
+
+nib
+returns[int nib_out]
+	:	TAGnib	NUM{\$nib_out = Integer.parseInt(\$NUM.text);}
+	;
+
+NUM 	:	('0'..'9')+
+	;
+
+STRING	:	('a'..'z'|'A'..'Z')+
+	;
+
+ID	:	('a'..'z'|'A'..'Z'|'0'..'9')+
+	;
+	
+STRINGPLUS	:	('a'..'z'|'A'..'Z'|'0'..'9'|'\.'|'º'|' ')+
+	;
+
+NS	:  	(' ' | '\t' | '\n' | 'r') { skip(); }
+   	;
+\end{code_txt}
+
+
 
 \end{document}
+
+
 
