@@ -1,6 +1,6 @@
 USE
 ===
-perl count.pl -open <dirPath> [-verbose] [-separated] [-allTogether] [-percent] -out <fileNamePrefix>
+perl count.pl -open \<dirPath\> [-verbose] [-separated] [-allTogether] [-percent] -out \<fileNamePrefix\>
 
 DEPENDENCIES
 ============
