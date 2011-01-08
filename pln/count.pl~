@@ -146,5 +146,3 @@ sub getFiles {
 	return grep { /\.$ext$/ } @_files;
 }
 
-__END__
-=head2 Object Attributes

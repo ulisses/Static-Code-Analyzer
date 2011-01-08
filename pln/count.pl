@@ -5,8 +5,8 @@ use GD::Graph::bars;
 use Getopt::Long;
 
 GetOptions("open=s"       => \$_opt_filePath,
-		   "separated!"   => \$_opt_allTogether,
-		   "verbose!"     => \$_opt_verbose,
+           "separated!"   => \$_opt_allTogether,
+           "verbose!"     => \$_opt_verbose,
            "string=s"     => \$stringmandatory,
            "optional:s"   => \$optionalstring,
            "int=i"        => \$mandatoryinteger,
@@ -146,6 +146,3 @@ sub getFiles {
 	return grep { /\.$ext$/ } @_files;
 }
 
-__END__
-=pod laal
-=head2 Object Attributes
