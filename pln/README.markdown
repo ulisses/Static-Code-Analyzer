@@ -1,7 +1,6 @@
 USE
 ===
 perl count.pl -open <dirPath> [-verbose] [-separated] [-allTogether] [-percent] -out <fileNamePrefix>
-
 DEPENDENCIES
 ============
 We need to have GD installed, so if you are in MacOSX and you use DarwinPorts you should do:
