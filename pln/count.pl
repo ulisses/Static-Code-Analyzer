@@ -4,41 +4,40 @@ use Path::Class;
 use GD::Graph::bars;
 use strict;
 
-my @dataNrLines;
-my @dataNrFiles;
-my @dataRatioNrFilesNrLines;
-my @dataTypes;
+my @_dataNrLines;
+my @_dataNrFiles;
+my @_dataRatioNrFilesNrLines;
+my @_dataTypes;
 
-my @types = ("tcl", "cpp", "c", "hs", "java", "pl");
-my $filePath = $ARGV[0];
+# type => (nrFiles,nrLines)
+my %_types = ("tcl" => [0,0] , "cpp" => [0,0], "c" => [0,0], "hs" => [0,0], "java" => [0,0], "pl" => [0,0]);
+my $_filePath = $ARGV[0];
+my @_files = getAllFiles($_filePath);
 
-for my $type (@types) {
-	my $nrLines = 0;
-	my $nrFiles = 0;
-	for my $file_source ( get_files($filePath,$type) ) {
+for my $type (keys %_types) {
+	for my $file_source ( getFiles($type) ) {
 		chomp $file_source;
-		$nrFiles++;
-		
+		$_types{$type}[0]++;
+
 		my $file_source_name = file($file_source);
 		$file_source_name =~ $file_source_name->stringify;
 		open(FILESOURCE,'<',$file_source_name) or do {
 			warn "can't open $file_source_name\n";
 		};
-		$nrLines++ while <FILESOURCE>;
+		$_types{$type}[1]++ while <FILESOURCE>;
 	}
 	
-	push(@dataNrLines,$nrLines);
-	push(@dataTypes,$type);
-	
-	push(@dataNrFiles,$nrFiles);
-	if($nrFiles != 0) {
-		push(@dataRatioNrFilesNrLines,$nrLines / $nrFiles);
+	if($_types{$type}[0] != 0) {
+		push(@_dataRatioNrFilesNrLines,$_types{$type}[1] / $_types{$type}[0]);
+		push(@_dataNrLines,$_types{$type}[1]);
+		push(@_dataTypes,$type);
+		push(@_dataNrFiles,$_types{$type}[0]);
 	}
 }
 
-plotToPng("LinesPerLanguage.png",[@dataTypes],[@dataNrLines],"Languages", "Number of lines", "Number of lines per language");
-plotToPng("FilesPerLanguage.png",[@dataTypes],[@dataNrFiles],"Languages", "Number of files", "Number of files per language");
-plotToPng("RatioFilesLines.png",[@dataTypes],[@dataRatioNrFilesNrLines],"Languages", "Number of lines per file", "Ratio of nr lines/nr files per language");
+plotToPng("LinesPerLanguage.png",[@_dataTypes],[@_dataNrLines],"Languages", "Number of lines", "Number of lines per language");
+plotToPng("FilesPerLanguage.png",[@_dataTypes],[@_dataNrFiles],"Languages", "Number of files", "Number of files per language");
+plotToPng("RatioFilesLines.png",[@_dataTypes],[@_dataRatioNrFilesNrLines],"Languages", "Number of lines per file", "Ratio of nr lines/nr files per language");
 
 # plotToPng(FileName,dataX,dataY,x_label,y_label,title)
 sub plotToPng {
@@ -67,20 +66,31 @@ sub plotToPng {
 	close (MYFILE);
 }
 
-sub get_files {
+sub getAllFiles {
 	my $path = $_[0];
-	my $ext = $_[1];
 
-	opendir (DIR, $path) or die "Unable to open $path: $!";
+	opendir (DIR, $path) or die "can't open $path\n";
 
 	my @files =
 		map { $path . '/' . $_ }
 		grep { !/^\.{1,2}$/ }
 		readdir (DIR);
 
+	closedir(DIR);
+
 	return
-		grep { (/\.$ext$/) }
-		map { -d $_ ? get_files ($_ ,$ext) : $_ }
+		map {
+				if((-d $_) && (-r $_)) {
+					getAllFiles ($_);
+				} elsif((-r $_) && (-T $_)) {
+					$_;
+				}
+			}
 		@files;
+}
+
+sub getFiles {
+	my $ext = $_[0];
+	return grep { (/\.$ext$/) } @_files;
 }
 
