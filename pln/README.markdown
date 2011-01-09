@@ -1,6 +1,6 @@
 USE
 ===
-perl count.pl -open <dirPath> [-verbose] [-separated] [-allTogether] [-percent] -out <fileNamePrefix>
+perl count.pl -open \<dirPath\> [-verbose] [-separated] [-allTogether] [-percent] -out \<fileNamePrefix\>
 
 DEPENDENCIES
 ============
@@ -9,7 +9,6 @@ We need to have GD installed, so if you are in MacOSX and you use DarwinPorts yo
 
 If you use linux you shoul do:
 	sudo aptitude install libgd-dev
-
 
 OPTIONS
 =======

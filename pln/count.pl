@@ -9,7 +9,7 @@ GetOptions("open=s"       => \$_opt_filePath,
            "allTogether!" => \$_opt_allTogether,
            "percent!"     => \$_opt_percent,
            "verbose!"     => \$_opt_verbose,
-           "out=s"        => \$_opt_out,
+           "out=s"        => \$_opt_fileNamePrefix,
 
            "optional:s"   => \$optionalstring,
            "int=i"        => \$mandatoryinteger,
@@ -85,11 +85,11 @@ if($_opt_percent) {
 }
 
 if($_opt_allTogether) {
-    plotToPng("$_opt_out\_projectLanguages.png",\@_dataTypes,\@_dataNrLines,\@_dataNrFiles,\@_dataRatioNrFilesNrLines,"Languages", "Percentage", "");
+    plotToPng("$_opt_fileNamePrefix\_projectLanguages.png",\@_dataTypes,\@_dataNrLines,\@_dataNrFiles,\@_dataRatioNrFilesNrLines,"Languages", "Percentage", "");
 } elsif($_opt_separated) {
-    plotToPng("$_opt_out\_LinesPerLanguage.png",\@_dataTypes,\@_dataNrLines,"Languages", "Number of lines", "Number of lines per language");
-    plotToPng("$_opt_out\_FilesPerLanguage.png",\@_dataTypes,\@_dataNrFiles,"Languages", "Number of files", "Number of files per language");
-    plotToPng("$_opt_out\_RatioFilesLines.png",\@_dataTypes,\@_dataRatioNrFilesNrLines,"Languages", "Number of lines per file", "Ratio of nr lines/nr files per language");
+    plotToPng("$_opt_fileNamePrefix\_LinesPerLanguage.png",\@_dataTypes,\@_dataNrLines,"Languages", "Number of lines", "Number of lines per language");
+    plotToPng("$_opt_fileNamePrefix\_FilesPerLanguage.png",\@_dataTypes,\@_dataNrFiles,"Languages", "Number of files", "Number of files per language");
+    plotToPng("$_opt_fileNamePrefix\_RatioFilesLines.png",\@_dataTypes,\@_dataRatioNrFilesNrLines,"Languages", "Number of lines per file", "Ratio of nr lines/nr files per language");
 }
 
 # plotToPng(FileName,dataX,dataY,x_label,y_label,title)
