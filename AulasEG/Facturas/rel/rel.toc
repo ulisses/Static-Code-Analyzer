@@ -3,10 +3,16 @@
 \contentsline {section}{\numberline {2}Solu\IeC {\c c}\IeC {\~a}o}{2}
 \contentsline {subsection}{\numberline {2.1}Al\IeC {\'\i }nea a)}{2}
 \contentsline {subsection}{\numberline {2.2}Al\IeC {\'\i }nea b)}{2}
-\contentsline {subsection}{\numberline {2.3}Al\IeC {\'\i }nea c)}{2}
+\contentsline {subsection}{\numberline {2.3}Al\IeC {\'\i }nea c)}{3}
 \contentsline {subsection}{\numberline {2.4}Al\IeC {\'\i }nea d)}{3}
-\contentsline {section}{\numberline {3}Anexo}{4}
-\contentsline {subsection}{\numberline {3.1}C\IeC {\'o}digo da al\IeC {\'\i }nea a)}{4}
-\contentsline {subsection}{\numberline {3.2}C\IeC {\'o}digo da al\IeC {\'\i }nea b)}{5}
-\contentsline {subsection}{\numberline {3.3}C\IeC {\'o}digo da al\IeC {\'\i }nea c)}{6}
-\contentsline {subsection}{\numberline {3.4}C\IeC {\'o}digo da al\IeC {\'\i }nea d)}{7}
+\contentsline {section}{\numberline {3}AntLR}{4}
+\contentsline {subsection}{\numberline {3.1}Exemplo de input}{4}
+\contentsline {subsection}{\numberline {3.2}Tokens}{4}
+\contentsline {subsection}{\numberline {3.3}Gram\IeC {\'a}tica sem sem\IeC {\^a}ntica}{5}
+\contentsline {subsection}{\numberline {3.4}Sem\IeC {\^a}ntica}{6}
+\contentsline {section}{\numberline {4}Anexo}{8}
+\contentsline {subsection}{\numberline {4.1}C\IeC {\'o}digo da al\IeC {\'\i }nea a)}{8}
+\contentsline {subsection}{\numberline {4.2}C\IeC {\'o}digo da al\IeC {\'\i }nea b)}{9}
+\contentsline {subsection}{\numberline {4.3}C\IeC {\'o}digo da al\IeC {\'\i }nea c)}{10}
+\contentsline {subsection}{\numberline {4.4}C\IeC {\'o}digo da al\IeC {\'\i }nea d)}{11}
+\contentsline {subsection}{\numberline {4.5}AntLR}{12}
