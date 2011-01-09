@@ -1,0 +1,37 @@
+<table class="enunciado" summary="concorrentes do grupo">
+	<tr>
+	  <td class="enunciado">
+		
+		
+		<table class="enunciado" summary="concorrentes do grupo">
+			<tr>
+			  <td class="enunciado">
+		
+					<h1>Testes</h1>
+
+
+					<ul class="testes">
+					  <%= render 'new_test' %>
+					</ul>
+					<% if @tests %>
+						<%= will_paginate %>
+	
+						<ul class="testes">
+					  		<%= render @tests %>
+						</ul>
+	
+						<%= will_paginate %>
+					<% else %>
+						<h2>Não existem testes para este enunciado</h2>
+					<% end %>
+				</td>
+			</tr>
+		</table>
+
+		</td>
+		<%= render 'sidebar' %>
+	</tr>
+</table>
+
+
+

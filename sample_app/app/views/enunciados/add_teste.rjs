@@ -1,0 +1,3 @@
+page.insert_html :bottom, :testes, :partial => 'testes', :locals => { :teste => @teste,  :index => params[:index]}
+
+page.replace :add_teste_link, :partial => 'add_teste_link', :locals => { :index => (params[:index].to_i + 1) }

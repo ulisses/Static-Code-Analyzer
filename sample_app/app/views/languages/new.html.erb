@@ -1,0 +1,21 @@
+<table class="concurso" summary="Informacao concurso">
+	<tr>
+		<td>
+			<h1>Nova linguagem</h1>
+
+			<%= form_for @language do |f| %>
+			  <%= render 'shared/error_messages', :object => f.object %>
+			  <div class="field">
+				<%= f.label :ling %><br />
+				<%= f.text_field :ling %>
+			  </div>
+			  <div class="actions">
+				<%= f.submit "Criar" %>
+			  </div>
+			<% end %>
+		</td>
+					
+			<%= render 'languages/sidebar2' %>
+			
+	</tr>
+</table>				

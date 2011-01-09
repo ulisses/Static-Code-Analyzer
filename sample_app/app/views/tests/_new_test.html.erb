@@ -1,0 +1,30 @@
+<% if @enunciado %>
+	
+	<br\><br\>
+	Submeter informação com Input e Output<br/>
+	<b>Importante:<br/></b> <b> Ficheiros submetidos terão prioridade sobre texto</b><br/><br/>
+	
+		<% form_for(@test,:html => { :multipart => true} ) do |form| %>  <!-- :url => {:action => 'submit' }-->
+		<b>Nome:</b><br/>
+	   <div class="field">
+	   	<%= form.text_field :nome %>
+	   </div>     
+	   <b>Input:</b><br/>
+		Submeter ficheiro:
+      <%= form.file_field :pathIn %><br/> <b>Ou</b> <br/>
+		Inserir texto:	
+	   <%= form.text_area :input %><br/><br/>
+		<b>Output:</b>	<br/>	
+		Submeter ficheiro:
+		<%= form.file_field :pathOut %>	<br/> <b>Ou</b> <br/>
+		Inserir texto:		
+		<%= form.text_area :output %>	
+	
+		<%= hidden_field_tag(:enunciado_id, @enunciado.id) %>
+
+		<%= form.submit "Submeter teste" %>
+	<% end %>
+	
+<% else %>
+FAILBOAT	
+<% end %>

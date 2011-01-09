@@ -1,0 +1,26 @@
+<table class="concurso" summary="Informacao concurso">
+	<tr>
+		<td>
+			<h1>Funções de avaliação</h1>
+
+			<%= will_paginate %>
+
+			<ul class="funcoes">
+				<% @functions.each do |f|%>
+					<li>
+						<b>Funcao:</b><br/>
+						<%= f.func %>
+					  | <%= link_to "delete", f, :method => :delete,
+												 :confirm => "You sure?",
+												 :title => "Delete #{f.func}" %>
+					</li>
+				<% end %>
+			</ul>
+
+			<%= will_paginate %>
+		</td>
+					
+			<%= render 'functions/sidebar' %>
+			
+	</tr>
+</table>	

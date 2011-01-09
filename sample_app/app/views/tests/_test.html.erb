@@ -1,0 +1,10 @@
+<li>
+	Nome: <%= test.nome %><br\>
+	Input: <%= test.input %><br\>
+	Output: <%= test.output %><br\>
+  | <%= link_to "delete", test ,:method => :delete,
+											:controller => 'tests',
+											
+ 											:confirm => "You sure?",
+                                 :title => "Delete #{test.nome}" %>
+</li>

@@ -1,0 +1,41 @@
+<td class="sidebar round">
+	<%= link_to "Voltar ao concurso", concurso_path(@concurso) %> <br/>
+	------------------------<br/>
+	<%= link_to "Ver todas as minhas tentativas (este enunciado)", tentativas_path(:user_id=>current_user.id,:enunciado_id=>@enunciado.id) %>
+	<br/>
+	<%= link_to "Ver todas as minhas tentativas", tentativas_path(:user_id=>current_user.id) %>
+	<br/>
+	<%= link_to "Ver todas as tentativas para este enunciado",  tentativas_path(:user_id=>current_user.id,:enunciado_id=>@enunciado.id)%>
+	<br/>	
+	------------------------<br/>
+	<% if current_user.admin? %>
+ 		<%= link_to "Ver e adicionar testes", tests_path(:enunciado_id=>@enunciado.id) %> <br/>
+  		<%= link_to "Editar enunciado", edit_enunciado_path(@enunciado) %>
+  		<br/>
+  		<%= link_to "Eliminar enunciado", @enunciado, :method => :delete,
+													  :confirm => "You sure?",
+													  :title => @enunciado.titulo %><br/>
+	<% end %>
+	
+	<br/><br/>	
+	<!--Infomacoes para os participantes do concurso --> 
+	<% if participante(@concurso) %>
+		<b>Começou em:</b><br/>
+		<!-- imprimir data e hora-->
+		<%=participante(@concurso).dataRegisto.strftime("%H:%M:%S %d/%m/%Y")%>
+		<br/>
+		<b>Termina em:</b><br/>
+		<!-- imprimir data e hora-->
+		<%=terminaC(@concurso).strftime("%H:%M:%S %d/%m/%Y")%>
+		<br/>
+
+		<b>Tempo Restante:</b><br/>
+		<% if (tRestante(@concurso)>0)%>
+			<%= "%.0f" % tRestante(@concurso) %> minutos
+		<% else %>			
+			Tempo esgotado!
+		<% end %>
+	<% end %>
+	
+	
+</td>

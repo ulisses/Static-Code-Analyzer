@@ -1,0 +1,18 @@
+<h1>Software para Analise e Avaliacao de Programas</h1>
+
+<% if current_user && current_user.admin?%>
+	<li><%= link_to "Funções", functions_path %></li>
+	<li><%= link_to "Funções nova", new_function_path %></li>
+
+	<li><%= link_to "Linguagens", languages_path %></li>
+	<li><%= link_to " nova linguagem", new_language_path %></li>
+<% end %>
+
+<p>
+  This is the home page for the
+  <a href="http://railstutorial.org/">Ruby on Rails Tutorial</a>
+  sample application.
+</p>
+
+<%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>
+

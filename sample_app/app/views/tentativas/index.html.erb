@@ -1,0 +1,47 @@
+<table class="tentativas" summary="Informacao das tentativas">
+	<tr>
+		<td>
+			<h1>Tentativas</h1>
+			
+			<% if @user %>
+				<% if @user.admin? %></b>Docente: </b><% else %><b>Grupo: </b><% end %>
+				<%= @user.name %><br/>
+			<% end %>
+			
+			<% if @concurso %>
+				<b>Concurso:</b>
+				<%= @concurso.tit %><br/>
+			<% end %>
+			
+			<% if @enunciado %>
+				<b>Enunciado:</b>
+				<%= @enunciado.titulo %><br/>
+			<% end %>
+			
+			<% if @tentativas %>
+			
+				<%= will_paginate %>
+			
+				<ul class="tentativas">
+				  <%= render @tentativas %>
+				</ul>
+	
+				<%= will_paginate %>
+			<% else %>	
+				<ul class="tentativas">
+					Actualmente não existem participantes neste concurso!
+				</ul>
+			<% end %>	
+			</td>
+			
+			
+		<td class="sidebar round">
+			<% if(@enunciado) %>
+				<%= link_to "Voltar para o enunciado", enunciado_path(@enunciado) %>
+			<% end %>
+		</td>
+	
+	</tr>
+</table>
+
+

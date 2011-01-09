@@ -1,0 +1,35 @@
+<% if (!current_user.admin? && concursoActivo(concurso)) %>
+	<li>
+		<%= link_to concurso.tit, concurso %>
+		<% if current_user.admin? %>
+		 |	<%= link_to "delete", concurso, :method => :delete,
+									 		:confirm => "You sure?",
+		                             	 	:title => "Delete #{concurso.tit}" %>
+		|
+			<% if concursoActivo(concurso) %>
+			(Estado: Activo)
+			<% else %>
+			(Estado: Inactivo)
+			<% end %>
+		<% end %>
+	</li>
+<% end %>
+
+
+<% if (current_user.admin?) %>
+	<li>
+		<%= link_to concurso.tit, concurso %>
+		<% if current_user.admin? %>
+		 |	<%= link_to "delete", concurso, :method => :delete,
+									 		:confirm => "You sure?",
+		                             	 	:title => "Delete #{concurso.tit}" %>
+		|
+			<% if concursoActivo(concurso) %>
+			(Estado: Activo)
+			<% else %>
+			(Estado: Inactivo)
+			<% end %>
+		<% end %>
+	</li>
+<% end %>
+

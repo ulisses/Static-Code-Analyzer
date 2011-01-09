@@ -1,0 +1,36 @@
+<table class="concurso" summary="Informacao concurso">
+	<tr>
+		
+    	<td class="main">
+			<h1><b>Enunciado</b>  <%= @enunciado.titulo %></h1>
+			<table class="enunciado" summary="concorrentes do grupo">
+				<tr>
+				  <td class="enunciado">
+				    <b>Descricao: </b>
+						<span class="enunciado"><%= @enunciado.desc %></span> <br/>
+				    <b>Peso: </b>
+						<span class="enunciado"><%= @enunciado.peso %></span> <br/>
+					<b>funcao de aval: </b> 
+				    	<span class="func">
+							<%=@function.func%>
+						</span> <br/>
+					<b>Linguagem: </b> 
+				    	<span class="func">
+							<%=@language.ling%>
+						</span> <br/>
+				  	</td>
+
+				</tr>
+				
+
+				<%= render 'enunciados/submit'%>
+				
+			</table>
+		</td>
+		
+
+		<%= render 'enunciados/sidebar'%>
+
+
+  </tr>
+</table>

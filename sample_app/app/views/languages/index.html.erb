@@ -1,0 +1,26 @@
+<table class="concurso" summary="Informacao concurso">
+	<tr>
+		<td>
+			<h1>Linguagens</h1>
+
+			<%= will_paginate %>
+
+			<ul class="funcoes">
+				<% @languages.each do |f|%>
+					<li>
+						<b>Linguagem:</b><br/>
+						<%= f.ling %>
+					  | <%= link_to "delete", f, :method => :delete,
+												 :confirm => "You sure?",
+												 :title => "Delete #{f.ling}" %>
+					</li>
+				<% end %>
+			</ul>
+
+			<%= will_paginate %>
+		</td>
+					
+			<%= render 'languages/sidebar' %>
+			
+	</tr>
+</table>	

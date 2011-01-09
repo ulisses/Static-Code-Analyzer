@@ -1,0 +1,19 @@
+<%= form_for @concorrente do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+  <br/>	
+  <b>Nome:</b><br/>
+  <div class="field">
+    <%= f.text_area :nome %>
+  </div>
+  <b>Número de aluno:</b><br/>
+  <div class="field">
+    <%= f.text_area :num %>
+  </div>
+  <b>e-mail:</b><br/>
+  <div class="field">
+    <%= f.text_area :email %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit" %>
+  </div>
+<% end %>

@@ -1,0 +1,47 @@
+<table class="concurso" summary="Informacao concurso">
+	<tr>
+		
+    	<td class="main">
+			<h1><b>Concurso</b>  <%= @concurso.tit %></h1>
+			<table class="concurso" summary="concorrentes do grupo">
+				<tr>
+				  <td class="concursos">
+				    <b>Título: </b>
+						<span class="titulo"><%= @concurso.tit %></span> <br/>
+					<% if current_user.admin? %>	
+				    	<b>chave de acesso: </b>
+						<span class="chave"><%=@concurso.chave %></span> <br/>
+					<% end %>
+					<b>data início: </b> 
+				    	<span class="inicio">
+							<%=@concurso.inicio.day%>-<%=	@concurso.inicio.month%>-<%=@concurso.inicio.year%> 
+							<%=	@concurso.inicio.hour %>:<%=@concurso.inicio.min %>
+						</span> <br/>
+					<b>data início: </b> 
+				    	<span class="fim">
+							<%=@concurso.fim.day%>-<%=	@concurso.fim.month%>-<%=@concurso.fim.year%> 
+							<%=	@concurso.fim.hour %>:<%=@concurso.fim.min %>
+						</span> <br/>
+					<b>Duração: </b> 
+				    	<span class="dur">
+							<%=	@concurso.dur.hour %>:<%=@concurso.dur.min %>
+						</span> <br/>	
+				  	</td>
+
+				</tr>
+				
+
+				<% unless @enunciados.nil? %>
+					<b>Enunciados</b>
+		    		<%= render @enunciados %>
+				<% end %>		
+				
+			</table>
+		</td>
+		
+		<%= render 'concursos/sidebar'%>
+		
+
+
+  </tr>
+</table>

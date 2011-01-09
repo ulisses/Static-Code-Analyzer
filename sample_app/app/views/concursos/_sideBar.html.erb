@@ -1,0 +1,56 @@
+<td class="sidebar round">
+	<% if current_user.admin? %>
+  		<%= link_to "Editar concurso", edit_concurso_path(@concurso) %>
+  		<br/>
+  		<%= link_to "Eliminar concurso", @concurso, :method => :delete,
+                                     			:confirm => "You sure?",
+                                     			:title => @concurso.tit %><br/>
+ 		<%= link_to "Adicionar enunciado", new_enunciado_path(:concurso_id=>@concurso.id) %>
+	<% end %>
+	<br/>
+	<%= link_to "Listar Participantes", participantes_path(:concurso_id => @concurso.id) %>	
+	<br/>
+	<b>Núm. de concorrentes: </b><%= @concurso.participantes.count%>
+	<br/><br/>	
+	
+	<% if concursoActivo(@concurso) %>
+		<%if !participante(@concurso) %>
+			<%= form_for(@participante) do |f| %>
+				<%= render 'shared/error_messages', :object => f.object %>
+					<div class="field">
+						<%= hidden_field_tag('participante[user_id]', current_user.id) %>
+					</div>
+					<div class="field">
+						<%= hidden_field_tag('participante[concurso_id]', @concurso.id) %>
+					</div>
+					<div class="field">
+				    	<%= f.label :chave %><br />
+					    <%= f.text_field :chave %>
+					</div>
+					<div class="actions">
+				    <%= f.submit "Concorrer" %>
+				  	</div>
+			<% end %>
+		<% end %>
+	<% end %>
+	
+	<% if participante(@concurso) %>
+		<b>Começou em:</b><br/>
+		<!-- imprimir data e hora-->
+		<%=participante(@concurso).dataRegisto.strftime("%H:%M:%S %d/%m/%Y")%>
+		<br/>
+		<b>Termina em:</b><br/>
+		<!-- imprimir data e hora-->
+		<%=terminaC(@concurso).strftime("%H:%M:%S %d/%m/%Y")%>
+		<br/>
+
+		<b>Tempo Restante:</b><br/>
+		<% if (tRestante(@concurso)>0)%>
+			<%= "%.0f" % tRestante(@concurso) %> minutos
+		<% else %>			
+			Tempo esgotado!
+		<% end %>
+	<% end %>
+	
+	
+</td>

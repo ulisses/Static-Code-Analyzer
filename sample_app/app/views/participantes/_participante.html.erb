@@ -1,0 +1,10 @@
+<li>
+	<%= link_to User.find(participante.user_id).name, User.find(participante.user_id) %>
+	<% if current_user.admin? %>
+	 |	<%= link_to "delete", participante, :method => :delete,
+								 			:confirm => "You sure?",
+	                             	 		:title => "Delete #{User.find(participante.user_id).name}" %>
+	<% end %>
+</li>
+
+

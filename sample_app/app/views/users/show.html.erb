@@ -1,0 +1,34 @@
+<table class="profile" summary="Profile information">
+  <tr>
+    <td class="main">
+      <h2>
+        <%= gravatar_for @user %>
+		<%= !@user.admin? ? "Grupo " : "" %>
+        <%= @user.name %>
+      </h2>
+		
+		<b>E-mail: </b><%= @user.email %><br/>
+		<b>Criado em: </b><%= @user.created_at.strftime("%d/%m/%Y %H:%M:%S") %>
+		<br/><br/>
+    
+
+		<% unless @user.concorrentes.empty? %>
+			<table class="concorrentes" summary="concorrentes do grupo">
+			<br/>
+			<h3>Concorrentes</h3>
+		    	<%= render @concorrentes %>
+	        </table>
+		        <%= will_paginate @concorrentes %>
+		 <% end %>
+    </td>
+
+    <td class="sidebar round">
+      <strong>Name</strong> <%= @user.name %><br/>
+      <strong>URL</strong>  <%= link_to user_path(@user), @user %>
+	  <strong>Concorrentes</strong> <%= @user.concorrentes.count %>
+	  <br/>
+	  <br/>
+      <%= link_to "Associar novo concorrente ao grupo", novo_concorrente_path %>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,10 @@
+<div id="teste_<%= index %>">
+	<% fields_for "testes[#{index}]", teste do |f| %>
+		<%= f.label "Nome:" %><br/>
+		<p><%= f.text_field :nome %></p>
+		<p><%= f.text_field :input %></p>
+		<p><%= f.text_field :output %></p>	
+		<%= link_to 'remove', :url => { :action => 'remove_teste', :index => index }, :remote=> true %>	
+	<% end %>
+	
+</div>
