@@ -2,6 +2,7 @@
 
 use Path::Class;
 use GD::Graph::bars;
+use GD::Graph::pie;
 use Getopt::Long;
 
 GetOptions("open=s"       => \$_opt_filePath,
@@ -24,7 +25,7 @@ if(!$_opt_separated && !$_opt_allTogether) {
 
 if($_opt_separated) {
     if($_opt_percent && $_opt_verbose) {
-        print "***WARNING: will deactivate -percentage, this don't make sense with -separated\n";
+        print "***WARNING: will deactivate -percent, this don't make sense with -separated\n";
     }
     $_opt_allTogether = 0;
     $_opt_percent = 0;
@@ -35,38 +36,38 @@ if($_opt_separated) {
 
 my %_types = ("tcl"  => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { return shift =~ m/^[ \t\n]*#.*/; },                           "nrComments" => 0,
                          "percentageNrFiles" => 0, "percentageNrLines" => 0, "percentageNrComments" => 0
-						},
+                        },
               "cpp"  => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { return shift =~ m/(\*(.|\n|\r)*?\*)|(^[ \t\n]*\/\/.*)/; },    "nrComments" => 0,
                          "percentageNrFiles" => 0, "percentageNrLines" => 0, "percentageNrComments" => 0
-						},
+                        },
               "c"    => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { return shift =~ m/(\*(.|\n|\r)*?\*)|(^[ \t\n]*\/\/.*)/; },    "nrComments" => 0,
                          "percentageNrFiles" => 0, "percentageNrLines" => 0, "percentageNrComments" => 0
-						},
+                        },
               "hs"   => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { return shift =~ m/({-(.|\n|\r)*?-})|(^[ \t\n]*--.*)/; },      "nrComments" => 0,
                          "percentageNrFiles" => 0, "percentageNrLines" => 0, "percentageNrComments" => 0
-						},
+                        },
               "java" => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { return shift =~ m/(\*(.|\n|\r)*?\*)|(^[ \t\n]*\/\/.*)/; },    "nrComments" => 0,
                          "percentageNrFiles" => 0, "percentageNrLines" => 0, "percentageNrComments" => 0
-						},
+                        },
               "pl"   => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { return shift =~ m/^[ \t\n]*#.*/; },                           "nrComments" => 0,
                          "percentageNrFiles" => 0, "percentageNrLines" => 0, "percentageNrComments" => 0
-						},
+                        },
               "py"   => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { return shift =~ m/(^[ \t\n]*#.*)|('''(.|\n|\r)*?''')/; },     "nrComments" => 0,
                          "percentageNrFiles" => 0, "percentageNrLines" => 0, "percentageNrComments" => 0
-						},
+                        },
               "rb"   => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { return shift =~ m/(^[ \t\n]*#.*)|(=begin(.|\n|\r)*?=end)/; }, "nrComments" => 0,
                          "percentageNrFiles" => 0, "percentageNrLines" => 0, "percentageNrComments" => 0
-						},
+                        },
               "tex"  => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { return shift =~ m/^[ \t\n]*%.*/; },                           "nrComments" => 0,
                          "percentageNrFiles" => 0, "percentageNrLines" => 0, "percentageNrComments" => 0
-						},
+                        },
               "xml"  => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { return shift =~ m/(<!--(.|\n|\r)*?-->)/; },                   "nrComments" => 0,
                          "percentageNrFiles" => 0, "percentageNrLines" => 0, "percentageNrComments" => 0
-						},
+                        },
               "xsl"  => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { return shift =~ m/(<!--(.|\n|\r)*?-->)/; },                   "nrComments" => 0,
                          "percentageNrFiles" => 0, "percentageNrLines" => 0, "percentageNrComments" => 0
-						}
-			);
+                        }
+            );
 my @_files = getAllFiles($_opt_filePath);
 
 for my $type (keys %_types) {
@@ -86,16 +87,6 @@ for my $type (keys %_types) {
             $_types{$type}{"nrComments"} += $_types{$type}{"comments"}($_);
         }
     }
-    # if we don't want percentages , let's set the variables with row information
-#    if(!$_opt_percent) {
-#        if($_types{$type}{"nrFiles"} != 0) {
-#            push(@_dataRatioNrFilesNrLines,$_types{$type}{"nrLines"} / $_types{$type}{"nrFiles"});
-#            push(@_dataNrLines,$_types{$type}{"nrFiles"});
-#            push(@_dataTypes,$type);
-#            push(@_dataNrFiles,$_types{$type}{"nrLines"});
-#            push(@_dataNrComments,$_types{$type}{"nrComments"});
-#        }
-#    }
 }
 
 if($_opt_percent) {
@@ -104,17 +95,17 @@ if($_opt_percent) {
     my $totalNrComments = 0;
 
     map {
-	    $totalNrFiles += $_types{$_}{"nrFiles"};
+        $totalNrFiles += $_types{$_}{"nrFiles"};
         $totalNrLines += $_types{$_}{"nrLines"};
         $totalNrComments += $_types{$_}{"nrComments"};
-	} (keys %_types);
+    } (keys %_types);
 
     map {
         $_types{$_}{"percentageNrFiles"} = ($_types{$_}{"nrFiles"} / $totalNrFiles) * 100;
         $_types{$_}{"percentageNrLines"} = ($_types{$_}{"nrLines"} / $totalNrLines) * 100;
         $_types{$_}{"percentageNrComments"} = ($_types{$_}{"nrComments"} / $totalNrComments) * 100;
         #push(@_dataRatioNrFilesNrLines, (($_types{$type}[1] / $totalNrLines) / ($_types{$type}[0] / $totalNrFiles)) * 100);
-	} grep($_types{$_}{"nrFiles"} != 0,keys %_types);
+    } grep($_types{$_}{"nrFiles"} != 0,keys %_types);
 }
 
 my @_dataTypes = grep($_types{$_}{"nrFiles"} != 0,keys %_types);
@@ -157,6 +148,16 @@ sub plotToPngLinesAndComments {
         transparent   => 1,
         overwrite => 0,
 
+        fgclr => black ,
+        labelclr => black,
+        axislabelclr => black,
+        legendclr => black,
+        valuesclr => black,
+        textclr => black,
+        transparent   => 1,
+        overwrite => 2,
+
+        bargroup_spacing => 10,
         # show the values for each bar in integer format separated 10 pixels from the top of the bar
         show_values   => 1,
         values_format => sub { return sprintf("\%d", shift); } ,
@@ -210,9 +211,16 @@ sub plotToPng {
     }
 
     $mygraph->set(
+        fgclr => black ,
+        labelclr => black,
+        axislabelclr => black,
+        legendclr => black,
+        valuesclr => black,
+        textclr => black,
         transparent   => 1,
         overwrite => 0,
 
+        bargroup_spacing => 10,
         # show the values for each bar in integer format separated 10 pixels from the top of the bar
         show_values   => 1,
         values_format => sub { return sprintf("\%d", shift); } ,
