@@ -12,15 +12,17 @@
   	</div>
   	<div class="field">
 		<%= f.label "Peso:" %><br/>
-		<%= select_tag(:peso,options_for_select(nums)) %>%
+		<%= f.select(:peso,options_for_select(nums)) %>%
   	</div>
   	<div class="field">
-		<%= f.label "Linguagem:" %><br/>
-		<%= select_tag(:linguagem_id,options_for_select(arrayLing)) %>
+	<% @languages.each do |l|  %>
+	<%= f.label l.ling %>
+	<%= check_box_tag	"langs[]" , l.id%> 
+	<% end %>
   	</div>
 	<div class="field">
 		<%= f.label "Função:" %><br/>
-		<%= select_tag(:funcao_id,options_for_select(arrayFunc)) %>
+		<%= f.select(:funcao_id,options_for_select(arrayFunc)) %>
 	</div>
 	<div class="field">
 		<%= hidden_field_tag(:concurso_id, @concurso_id) %>

@@ -15,6 +15,7 @@ class EnunciadosController < ApplicationController
   def new
     @title = "Novo enunciado"
     @enunciado = Enunciado.new
+	  @languages = Language.all
     @concurso_id = params[:concurso_id]
     @array = Array.new
   
@@ -22,23 +23,29 @@ class EnunciadosController < ApplicationController
   end
 
   def create
-	params[:enunciado][:funcao_id] = params[:funcao_id]
-	params[:enunciado][:linguagem_id] = params[:linguagem_id]
-	params[:enunciado][:peso] = params[:peso]
+	#params[:enunciado][:funcao_id] = params[:funcao_id]
+	params[:enunciado][:linguagem_id] = 2
+	#params[:enunciado][:peso] = params[:peso]
 	
     @concurso = Concurso.find(params[:concurso_id])
     @enunciado = @concurso.enunciados.build(params[:enunciado])
-    
+
   #  params[:testes].each_value { |teste| @enunciado.testes.build(teste) }##constroi os testes
     
     if @enunciado.save
       flash[:success] = "Enunciado criado com sucesso!"
       redirect_to tests_path(:enunciado_id=>@enunciado.id)
-	  createFolder
+	    createFolder
     else
       @title = "Novo enunciado"
+  	  @languages = Language.all
+      @concurso_id = params[:concurso_id]
+      @array = Array.new
       render 'new'
     end
+  
+#  flash[:success] = params[:enunciado]
+#  redirect_to new_enunciado_path
   end
   
 	def destroy
