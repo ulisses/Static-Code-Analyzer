@@ -18,29 +18,39 @@ GetOptions("open=s"       => \$_opt_filePath,
            "float=f"      => \$mandatoryfloat,
            "optfloat:f"   => \$optionalfloat);
 
-if(!$_opt_separated && !$_opt_allTogether) {
-    $_opt_separated = 1;
-    $_opt_percent = 0;
-}
-
-if($_opt_separated) {
-    if($_opt_percent && $_opt_verbose) {
-        print "***WARNING: will deactivate -percent, this don't make sense with -separated\n";
-    }
+if($_opt_separated eq $_opt_allTogether) {
+    $_opt_separated   = 1;
     $_opt_allTogether = 0;
-    $_opt_percent = 0;
+}
+if($_opt_separated) {
+    $_opt_allTogether = 0;
 } else {
     $_opt_allTogether = 1;
-    $_opt_percent = 1;
+	$_opt_percent = 1;
 }
 
 my %_types = ("tcl"  => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { return shift =~ m/^[ \t\n]*#.*/; },                           "nrComments" => 0,
                          "percentageNrFiles" => 0, "percentageNrLines" => 0, "percentageNrComments" => 0
                         },
+              "cs"   => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { return shift =~ m/(\*(.|\n|\r)*?\*)|(^[ \t\n]*\/\/.*)/; },    "nrComments" => 0,
+                         "percentageNrFiles" => 0, "percentageNrLines" => 0, "percentageNrComments" => 0
+                        },
+              "h"    => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { return shift =~ m/(\*(.|\n|\r)*?\*)|(^[ \t\n]*\/\/.*)/; },    "nrComments" => 0,
+                         "percentageNrFiles" => 0, "percentageNrLines" => 0, "percentageNrComments" => 0
+                        },
               "cpp"  => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { return shift =~ m/(\*(.|\n|\r)*?\*)|(^[ \t\n]*\/\/.*)/; },    "nrComments" => 0,
                          "percentageNrFiles" => 0, "percentageNrLines" => 0, "percentageNrComments" => 0
                         },
+              "php"  => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { return shift =~ m/(\*(.|\n|\r)*?\*)|(^[ \t\n]*\/\/.*)/; },    "nrComments" => 0,
+                         "percentageNrFiles" => 0, "percentageNrLines" => 0, "percentageNrComments" => 0
+                        },
+              "js"    => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { return shift =~ m/(\*(.|\n|\r)*?\*)|(^[ \t\n]*\/\/.*)/; },    "nrComments" => 0,
+                         "percentageNrFiles" => 0, "percentageNrLines" => 0, "percentageNrComments" => 0
+                        },
               "c"    => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { return shift =~ m/(\*(.|\n|\r)*?\*)|(^[ \t\n]*\/\/.*)/; },    "nrComments" => 0,
+                         "percentageNrFiles" => 0, "percentageNrLines" => 0, "percentageNrComments" => 0
+                        },
+              "css"   => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { return shift =~ m/(\*(.|\n|\r)*?\*)|(^[ \t\n]*\/\/.*)/; },      "nrComments" => 0,
                          "percentageNrFiles" => 0, "percentageNrLines" => 0, "percentageNrComments" => 0
                         },
               "hs"   => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { return shift =~ m/({-(.|\n|\r)*?-})|(^[ \t\n]*--.*)/; },      "nrComments" => 0,
@@ -83,7 +93,7 @@ for my $type (keys %_types) {
         open(FILESOURCE,'<',$file_source_name) or warn "can't open $file_source_name\n";
         
         while(<FILESOURCE>) {
-            $_types{$type}{"nrLines"}++;
+            $_types{$type}{"nrLines"} += 1-$_types{$type}{"comments"}($_);
             $_types{$type}{"nrComments"} += $_types{$type}{"comments"}($_);
         }
     }
@@ -104,7 +114,6 @@ if($_opt_percent) {
         $_types{$_}{"percentageNrFiles"} = ($_types{$_}{"nrFiles"} / $totalNrFiles) * 100;
         $_types{$_}{"percentageNrLines"} = ($_types{$_}{"nrLines"} / $totalNrLines) * 100;
         $_types{$_}{"percentageNrComments"} = ($_types{$_}{"nrComments"} / $totalNrComments) * 100;
-        #push(@_dataRatioNrFilesNrLines, (($_types{$type}[1] / $totalNrLines) / ($_types{$type}[0] / $totalNrFiles)) * 100);
     } grep($_types{$_}{"nrFiles"} != 0,keys %_types);
 }
 
@@ -113,36 +122,57 @@ my @_dataNrLines = map { $_types{$_}{"nrLines"} } @_dataTypes;
 my @_dataNrFiles = map { $_types{$_}{"nrFiles"} } @_dataTypes;
 my @_dataNrComments = map { $_types{$_}{"nrComments"} } @_dataTypes;
 my @_dataRatioNrFilesNrLines = map { $_types{$_}{"nrLines"} / $_types{$_}{"nrFiles"} } @_dataTypes;
-
 my @_dataPercentageLines = map { $_types{$_}{"percentageNrLines"} } @_dataTypes;
 my @_dataPercentageFiles = map { $_types{$_}{"percentageNrFiles"} } @_dataTypes;
 my @_dataPercentageComments = map { $_types{$_}{"percentageNrComments"} } @_dataTypes;
 
 if($_opt_allTogether) {
     plotToPng("$_opt_fileNamePrefix\_projectLanguages.png",\@_dataTypes,\@_dataPercentageLines,\@_dataPercentageFiles,\@_dataPercentageComments,"Languages", "Percentage", "Global project");
-} elsif($_opt_separated) {
-    plotToPngLinesAndComments("$_opt_fileNamePrefix\_LinesPerLanguage.png",\@_dataTypes,\@_dataNrLines,\@_dataNrComments,"Languages", "Number of lines", "Number of lines per language");
+}
+if($_opt_separated && !$_opt_percent) {
+	my @arr = ("Nr of lines","Nr of comments");
+
+    plotToPngLinesAndComments("$_opt_fileNamePrefix\_LinesPerLanguage.png"
+	                         ,\@_dataTypes,\@_dataNrLines,\@_dataNrComments,
+							 "Languages", "Number of lines", "Number of lines per language"
+							 ,\@arr);
     plotToPng("$_opt_fileNamePrefix\_FilesPerLanguage.png",\@_dataTypes,\@_dataNrFiles,"Languages", "Number of files", "Number of files per language");
     plotToPng("$_opt_fileNamePrefix\_RatioFilesLines.png",\@_dataTypes,\@_dataRatioNrFilesNrLines,"Languages", "Number of lines per file", "Ratio of nr lines/nr files per language");
 }
+if($_opt_separated && $_opt_percent) {
+	my @arr = ("% of lines","% of comments");
+
+    plotToPngLinesAndComments("$_opt_fileNamePrefix\_LinesPerLanguage.png"
+	                         ,\@_dataTypes,\@_dataPercentageLines,\@_dataPercentageComments
+							 ,"Languages", "Percentage", "% number of lines per language"
+							 ,\@arr);
+    plotToPng("$_opt_fileNamePrefix\_FilesPerLanguage.png"
+	         ,\@_dataTypes,\@_dataPercentageFiles
+			 ,"Languages", "% number of files", "% number of files per language"
+			 );
+    plotToPng("$_opt_fileNamePrefix\_RatioFilesLines.png"
+	         ,\@_dataTypes,\@_dataRatioNrFilesNrLines
+			 ,"Languages", "Number of lines per file", "Ratio of nr lines/nr files per language"
+			 );
+}
 
 sub plotToPngLinesAndComments {
-    my $fileName  = $_[0];
-    my $dX        = $_[1];
-    my $dY        = $_[2];
-    my $dY2       = $_[3];
-    my $x_label   = $_[4];
-    my $y_label   = $_[5];
-    my $title     = $_[6];
-    
+    my $fileName    = $_[0];
+    my $dX          = $_[1];
+    my $dY          = $_[2];
+    my $dY2         = $_[3];
+    my $x_label     = $_[4];
+    my $y_label     = $_[5];
+    my $title       = $_[6];
+	my $legend_keys = $_[7];
+
     my @data;
     push(@data,$dX);
     push(@data,$dY);
     push(@data,$dY2);
     my $mygraph = GD::Graph::bars->new(600, 400);
     
-    my @legend_keys = ("Nr of lines","Nr of comments");
-    $mygraph->set_legend(@legend_keys);
+	$mygraph->set_legend( @$legend_keys );
 
     $mygraph->set(
         transparent   => 1,
@@ -155,7 +185,7 @@ sub plotToPngLinesAndComments {
         valuesclr => black,
         textclr => black,
         transparent   => 1,
-        overwrite => 2,
+        overwrite => 0,
 
         bargroup_spacing => 10,
         # show the values for each bar in integer format separated 10 pixels from the top of the bar

@@ -18,7 +18,9 @@ OPTIONS
     -verbose              - Show the languages the program is analyzing
     -separated            - Generates separated images (this is the default)
     -allTogether          - Generates one image with all the analysis
-    -percent              - Generates the image with percentage of code analyzed (this is used by default when -allTogether is set otherwise no)
+    -percent              - Generates the image with percentage of code analyzed (this is used by default when -allTogether is set).
+	                        By default this flag is set to 0.
+							If you use -percent with -separated this script will produce 3 files, the ratio file will not be in percentage
     -out <fileNamePrefix> - This flag is mandatory, and fileNamePrefix is the prefix to be places before each filename image produced
 
 EXAMPLES
