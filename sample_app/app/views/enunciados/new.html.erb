@@ -15,6 +15,7 @@
 		<%= f.select(:peso,options_for_select(nums)) %>%
   	</div>
   	<div class="field">
+	<%= f.label "Linguagens possíveis de se resolver:" %><br/>
 	<% @languages.each do |l|  %>
 	<%= f.label l.ling %>
 	<%= check_box_tag	"langs[]" , l.id%> 

@@ -8,7 +8,12 @@ class EnunciadosController < ApplicationController
 	@enunciado = Enunciado.find(params[:id])
 	@concurso = Concurso.find(@enunciado.concurso_id)
 	@function = Function.find(@enunciado.funcao_id)
-	@language = Language.find(@enunciado.linguagem_id)		
+	langIds = EnunciadoLang.where(:enunciado_id=> @enunciado.id)
+	@languages = Array.new
+  langIds.each do |l|
+	  @languages << Language.find(l.language_id) 
+	end 
+	@title = langIds.size
 	@tentativa = Tentativa.new
   end
 
@@ -17,35 +22,30 @@ class EnunciadosController < ApplicationController
     @enunciado = Enunciado.new
 	  @languages = Language.all
     @concurso_id = params[:concurso_id]
-    @array = Array.new
-  
- #   @enunciado.testes.build # cria um teste
   end
 
-  def create
-	#params[:enunciado][:funcao_id] = params[:funcao_id]
-	params[:enunciado][:linguagem_id] = 2
-	#params[:enunciado][:peso] = params[:peso]
-	
-    @concurso = Concurso.find(params[:concurso_id])
-    @enunciado = @concurso.enunciados.build(params[:enunciado])
-
-  #  params[:testes].each_value { |teste| @enunciado.testes.build(teste) }##constroi os testes
+  def create	    
+      @concurso = Concurso.find(params[:concurso_id])
+      @enunciado = @concurso.enunciados.build(params[:enunciado])
     
-    if @enunciado.save
-      flash[:success] = "Enunciado criado com sucesso!"
-      redirect_to tests_path(:enunciado_id=>@enunciado.id)
-	    createFolder
-    else
-      @title = "Novo enunciado"
-  	  @languages = Language.all
-      @concurso_id = params[:concurso_id]
-      @array = Array.new
-      render 'new'
-    end
-  
-#  flash[:success] = params[:enunciado]
-#  redirect_to new_enunciado_path
+      if params[:langs] && @enunciado.save
+        #guarda as linguagens 
+        params[:langs].each do |l|
+  	      EnunciadoLang.create(:enunciado_id=>@enunciado.id, :language_id=> l.to_i)
+        end
+        flash[:success] = "Enunciado criado com sucesso!"
+        redirect_to tests_path(:enunciado_id=>@enunciado.id)
+  	    createFolder
+      else
+        @title = "Novo enunciado"
+    	  @languages = Language.all
+        @concurso_id = params[:concurso_id]
+        @array = Array.new
+        if !params[:langs]
+          @enunciado.errors.add "Linguagens:", "Tem de escolher pelo menos uma linguagem!"
+        end
+        render 'new'
+      end
   end
   
 	def destroy

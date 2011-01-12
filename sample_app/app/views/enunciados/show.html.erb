@@ -9,14 +9,16 @@
 				    <b>Descricao: </b>
 						<span class="enunciado"><%= @enunciado.desc %></span> <br/>
 				    <b>Peso: </b>
-						<span class="enunciado"><%= @enunciado.peso %></span> <br/>
+						<span class="enunciado"><%= @enunciado.peso %></span>% <br/>
 					<b>funcao de aval: </b> 
 				    	<span class="func">
 							<%=@function.func%>
 						</span> <br/>
-					<b>Linguagem: </b> 
+					<b>Linguagens: </b><br/> 
 				    	<span class="func">
-							<%=@language.ling%>
+							<% @languages.each do |l| %>
+							<%= l.ling%> |
+							<% end %>
 						</span> <br/>
 				  	</td>
 

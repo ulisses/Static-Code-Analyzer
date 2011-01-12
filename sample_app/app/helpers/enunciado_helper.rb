@@ -1,12 +1,12 @@
 module EnunciadoHelper
   
-  def arrayLing
-    array = Array.new
-    Language.all.each do |l|
-      array << [l.ling,l.id]
-    end
-    return array
-  end
+  #def arrayLing
+  #  array = Array.new
+  #  Language.all.each do |l|
+  #    array << [l.ling,l.id]
+  #  end
+  #  return array
+  #end
 
   def arrayFunc
     array = Array.new
