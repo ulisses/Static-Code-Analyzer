@@ -86,14 +86,14 @@ class ConcursosController < ApplicationController
 				Dir.mkdir(path)
 			end
 			
-			path = File.join(Rails.root, "data/concursos",@concurso.id.to_s)
+			path = File.join(Rails.root, "data/concursos","contest-"+@concurso.id.to_s)
 			if !File.exists?(path)
 				Dir.mkdir(path)
 			end
 		end
 	
 		def deleteFolder
-			path = File.join(Rails.root, "data/concursos",@concurso.id.to_s)
+			path = File.join(Rails.root, "data/concursos","contest"-@concurso.id.to_s)
 			if File.exists?(path)
 				`rm -rf #{path}`
 			end

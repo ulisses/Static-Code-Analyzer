@@ -27,7 +27,7 @@ SampleApp::Application.routes.draw do
   resources :languages# , :only => [:new,:create,:destroy,:index]
   resources :functions #, :only => [:new,:create,:destroy,:index]  
   resources :tentativas
-  resources :tests#, :only => [:index]
+  resources :baterias#, :only => [:index]
   
   resource :tests do
   collection do

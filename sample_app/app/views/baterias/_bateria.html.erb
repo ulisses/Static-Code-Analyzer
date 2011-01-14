@@ -1,0 +1,10 @@
+<li>
+	Nome: <%= bateria.nome %><br\>
+	Input: <%= bateria.input %><br\>
+	Output: <%= bateria.output %><br\>
+  | <%= link_to "delete", bateria ,:method => :delete,
+											:controller => 'baterias',
+											
+ 											:confirm => "You sure?",
+                                 :title => "Delete #{bateria.nome}" %>
+</li>

@@ -1,0 +1,24 @@
+# == Schema Information
+# Schema version: 20110113200625
+#
+# Table name: results
+#
+#  id           :integer         not null, primary key
+#  bateria_id   :integer
+#  tentativa_id :integer
+#  output       :string(255)
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  test_id: 1
+  tentativa_id: 1
+  output: MyString
+
+two:
+  test_id: 1
+  tentativa_id: 1
+  output: MyString

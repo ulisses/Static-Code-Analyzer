@@ -34,7 +34,7 @@ class EnunciadosController < ApplicationController
   	      EnunciadoLang.create(:enunciado_id=>@enunciado.id, :language_id=> l.to_i)
         end
         flash[:success] = "Enunciado criado com sucesso!"
-        redirect_to tests_path(:enunciado_id=>@enunciado.id)
+        redirect_to baterias_path(:enunciado_id=>@enunciado.id)
   	    createFolder
       else
         @title = "Novo enunciado"
@@ -68,20 +68,14 @@ class EnunciadosController < ApplicationController
     end
 	
 	def createFolder
-		path = File.join(Rails.root, "data/concursos",@concurso.id.to_s,"enunciados")
-		if !File.exists?(path)
-			Dir.mkdir(path)
-		end
-		
-		path = File.join(Rails.root, "data/concursos",@concurso.id.to_s,"enunciados",@enunciado.id.to_s)
-		
+		path = File.join(Rails.root, "data/concursos","contest-"+@concurso.id.to_s,"en-"+@enunciado.id.to_s)
 		if !File.exists?(path)
 			Dir.mkdir(path)
 		end
 	end
 	
 	def deleteFolder
-		path = File.join(Rails.root, "data/concursos",@concurso.id.to_s,"enunciados",@enunciado.id.to_s)
+		path = File.join(Rails.root, "data/concursos","contest-"+@concurso.id.to_s,"en-"+@enunciado.id.to_s)
 		if File.exists?(path)
 			`rm -rf #{path}`
 		end
