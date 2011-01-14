@@ -29,6 +29,23 @@ class ConcursosController < ApplicationController
 	createFolder
   end
   
+  def edit
+    @title = "Editar concurso"
+    @concurso = Concurso.find(params[:id])
+  end
+
+  def update
+     @concurso = Concurso.find(params[:id])
+     
+     if @concurso.update_attributes(params[:concurso]) 	       
+       flash[:success] = "Concurso alterado com sucesso."
+       redirect_to @concurso
+     else
+       @title = "Editar concurso."
+       render 'edit'
+     end
+   end
+  
   def show
     @concurso = Concurso.find(params[:id])
     @title = @concurso.tit

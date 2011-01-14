@@ -4,24 +4,57 @@ class EnunciadosController < ApplicationController
   before_filter :authenticate  
   
   def show
-	@title = "Enunciado"
-	@enunciado = Enunciado.find(params[:id])
-	@concurso = Concurso.find(@enunciado.concurso_id)
-	@function = Function.find(@enunciado.funcao_id)
-	langIds = EnunciadoLang.where(:enunciado_id=> @enunciado.id)
-	@languages = Array.new
-  langIds.each do |l|
-	  @languages << Language.find(l.language_id) 
-	end 
-	@title = langIds.size
-	@tentativa = Tentativa.new
+  	@title = "Enunciado"
+  	@enunciado = Enunciado.find(params[:id])
+  	@concurso = Concurso.find(@enunciado.concurso_id)
+  	@function = Function.find(@enunciado.funcao_id)
+  	langIds = EnunciadoLang.where(:enunciado_id=> @enunciado.id)
+  	@languages = Array.new
+    langIds.each do |l|
+  	  @languages << Language.find(l.language_id) 
+  	end 
+  	@title = langIds.size
+  	@tentativa = Tentativa.new
+  end
+  
+  def edit
+    @title = "Editar enunciado"
+    @enunciado = Enunciado.find(params[:id])
+    @languages = Language.all
+    @myLanguages = EnunciadoLang.where(:enunciado_id=>@enunciado.id)
   end
 
+  def update
+     @enunciado = Enunciado.find(params[:id])
+     if @enunciado.update_attributes(params[:enunciado])
+
+       #apaga as linguagens do enunciado
+       @enunciado.enunciadoLangs.each do |el|
+         el.destroy
+       end
+       
+       #coloca as novas linguagens
+       params[:langs].each do |l|
+ 	       el = @enunciado.enunciadoLangs.build(:language_id=> l.to_i)
+ 	       el.save
+       end
+ 	       
+       flash[:success] = "Enunciado alterado com sucesso."
+       redirect_to @enunciado
+     else
+       @languages = Language.all
+       @myLanguages = EnunciadoLang.where(:enunciado_id=>@enunciado.id)
+       @title = "Editar enunciado."
+       render 'edit'
+     end
+   end
+   
   def new
     @title = "Novo enunciado"
     @enunciado = Enunciado.new
 	  @languages = Language.all
     @concurso_id = params[:concurso_id]
+    @concurso = Concurso.find(@concurso_id)
   end
 
   def create	    
@@ -31,7 +64,8 @@ class EnunciadosController < ApplicationController
       if params[:langs] && @enunciado.save
         #guarda as linguagens 
         params[:langs].each do |l|
-  	      EnunciadoLang.create(:enunciado_id=>@enunciado.id, :language_id=> l.to_i)
+  	      el = @enunciado.enunciadoLangs.build(:language_id=> l.to_i)
+  	      el.save
         end
         flash[:success] = "Enunciado criado com sucesso!"
         redirect_to baterias_path(:enunciado_id=>@enunciado.id)
@@ -57,9 +91,6 @@ class EnunciadosController < ApplicationController
       redirect_back_or concurso_path(Concurso.find(con))
 	end
 	
-#	def add_teste
-#    @teste = Teste.new
-#  end
 
   private 
   

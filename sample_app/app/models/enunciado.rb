@@ -18,6 +18,7 @@ class Enunciado < ActiveRecord::Base
   
   has_many :tentativas
   has_many :baterias#, :class_name => 'Teste' 
+  has_many :enunciadoLangs
   
   attr_accessible :titulo, :desc, :funcao_id, :peso
   

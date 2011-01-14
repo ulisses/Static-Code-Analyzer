@@ -11,6 +11,8 @@
 #
 
 class EnunciadoLang < ActiveRecord::Base
+  belongs_to :enunciado
+  
    attr_accessible :enunciado_id, :language_id
    
    validates_uniqueness_of :enunciado_id, :scope => [:language_id]
