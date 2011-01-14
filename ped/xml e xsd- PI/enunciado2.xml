@@ -1,0 +1,38 @@
+<?xm l version="1.0" encoding="UTF-8"?>
+
+<Enunciado xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="enunciado.xsd">
+    <idConcurso> 1 </idConcurso>
+    <Peso>20</Peso>
+    <Titulo> Exercicio 2 </Titulo>
+    <Descricao> Ordena os números por ordem crescente, usando uma lista ligada. </Descricao>
+    <Exemplo>Input: 5 4 3 2 1    Output: 1 2 3 4 5</Exemplo>
+    <Docente> PRH </Docente>
+    <FuncAval>Diff</FuncAval>  
+    <Linguagens> 
+        <Linguagem>C</Linguagem>        
+    </Linguagens>
+    <Dict>
+        <Teste>
+            <Nome>Lista vazia</Nome>
+            <Input></Input>
+            <Output></Output>
+        </Teste>
+        <Teste>
+            <Nome>Lista c/ 1 elem</Nome>
+            <Input>1</Input>
+            <Output>1</Output>
+        </Teste>
+        <Teste>
+            <Nome>Lista c/ varios elem</Nome>
+            <Input> 8 9 10 2 3 5 6 </Input>
+            <Output>2 3 5 6 8 9 10</Output>
+        </Teste>
+        <Teste>
+            <Nome>Lista c/ elem repetidos</Nome>
+            <Input> 8 9 10 2 3 5  3 6 8 </Input>
+            <Output>2 3 3 5 6 8  8 9 10</Output>
+        </Teste>
+    </Dict>
+        
+</Enunciado>
