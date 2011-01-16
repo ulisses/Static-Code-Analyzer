@@ -247,8 +247,6 @@ class TentativasController < ApplicationController
     @tentativa = @enunciado.tentativas.build(:user_id=>user,:path=>path_para_source,:compilou=>comp)
     @tentativa.save
     
-    bat_id = ""
-    out=""
     REXML::XPath.each( doc, "//Teste" ){ |teste_element|
       teste_element.each_element do |e|
         if e.name == "Bateria_id"
@@ -260,7 +258,8 @@ class TentativasController < ApplicationController
         end
       end
       @result = Result.new
-      @result = @tentativa.results.build(:bateria_id=>bat_id,:output=>out)        
+      @result = @tentativa.results.build(:bateria_id=>bat_id,:output=>out)     
+      @result.save   
     }
   end
 

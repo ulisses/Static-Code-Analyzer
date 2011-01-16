@@ -9,7 +9,7 @@
 	<br/>	
 	------------------------<br/>
 	<% if current_user.admin? %>
- 		<%= link_to "Ver e adicionar testes", tests_path(:enunciado_id=>@enunciado.id) %> <br/>
+ 		<%= link_to "Ver e adicionar testes", baterias_path(:enunciado_id=>@enunciado.id) %> <br/>
   		<%= link_to "Editar enunciado", edit_enunciado_path(@enunciado) %>
   		<br/>
   		<%= link_to "Eliminar enunciado", @enunciado, :method => :delete,

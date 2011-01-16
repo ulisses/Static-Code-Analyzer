@@ -3,8 +3,7 @@
     <ed:element name="Enunciado">
         <ed:complexType>
             <ed:sequence>
-
-                <ed:element name="idConcurso" type="ed:string"/>
+                
                 <ed:element name="Peso" default="25">
                     <ed:simpleType>
                         <ed:restriction base="ed:integer">
@@ -15,9 +14,7 @@
                 </ed:element>
                 <ed:element name="Titulo" type="ed:string"/>
                 <ed:element name="Descricao" type="ed:string"/>
-                <ed:element name="Exemplo" type="ed:string" default="nao existe"/>
-                <ed:element name="Docente" type="ed:string" default="unknown"/>
-                <ed:element name="FuncAval" type="ed:string"/>
+                <ed:element name="Func" type="ed:string"/>
 
                 <ed:element name="Linguagens">
                     <ed:complexType>

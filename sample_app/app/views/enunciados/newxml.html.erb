@@ -1,0 +1,33 @@
+<table class="concurso" summary="Informacao concurso">
+	<tr>
+		<td>
+			
+			<% if @erros.size > 0 %>
+				<div id="error_explanation">
+				    <ul>
+				    <% @erros.each do |msg| %>
+				      <li><%= msg %></li>
+				    <% end %>
+				    </ul>
+				  </div>
+				<% end %>
+			
+			
+			
+			<h1>Submeter enunciados</h1>
+				<% form_for(@enunciado,:html => { :multipart => true }, :url => { :action => "createxml" }) do |form| %>
+
+					<%= hidden_field_tag(:concurso_id, @concurso.id) %>
+					Submeter tentativa:
+					<%= form.file_field :blob %>
+					<br/>
+					<%= form.submit "Submeter enunciado - XML" %>
+				<% end %>
+		</td>
+		
+		<td class="sidebar round">
+				<%= link_to "Voltar ao concurso",concurso_path(@concurso) %>
+		</td>
+	
+	</tr>
+</table>

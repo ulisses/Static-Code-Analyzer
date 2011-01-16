@@ -2,13 +2,10 @@
 
 <Enunciado xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="enunciado.xsd">
-    <idConcurso> 1 </idConcurso>
     <Peso>20</Peso>
     <Titulo> Exercicio 1 </Titulo>
-    <Descricao> Some os números que lhe são passados como argumento, e apresente o resultado. </Descricao>
-    <Exemplo>Input: 1 1 1 1 1   Output: 5</Exemplo>
-    <Docente> PRH </Docente>
-    <FuncAval>Diff</FuncAval>  
+    <Descricao> Some os números que lhe sao passados como argumento, e apresente o resultado. </Descricao>
+    <Func>Diff</Func>  
     <Linguagens> 
         <Linguagem>C</Linguagem>        
     </Linguagens>

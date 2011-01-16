@@ -23,21 +23,21 @@ SampleApp::Application.routes.draw do
   resources :users
   resources :concursos
   resources :participantes
+  match '/enunciados/newxml',  :to => 'enunciados#newxml'
+  match '/enunciados/createxml',  :to => 'enunciados#createxml'  
   resources :enunciados 
   resources :languages# , :only => [:new,:create,:destroy,:index]
   resources :functions #, :only => [:new,:create,:destroy,:index]  
   resources :tentativas
   resources :baterias#, :only => [:index]
   
-  resource :tests do
-  collection do
-  get 'submit'
-  end
-  end
+#  resource :tests do
+#  collection do
+#  get 'submit'
+#  end
+#  end
   
   get "sessions/new"
-
-  match '/signup',  :to => 'users#new'
 
   match '/contact', :to => 'pages#contact'
   match '/about',   :to => 'pages#about'
@@ -50,7 +50,6 @@ SampleApp::Application.routes.draw do
   
   match '/novo_concorrente', :to => 'concorrentes#new'
   #match '/editar_concorrente', :to => 'concorrentes#edit'
-
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
