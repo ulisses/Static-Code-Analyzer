@@ -2,6 +2,18 @@
 	<tr>
 		
     	<td class="main">
+	
+		<% if @erros.size > 0 %>
+			<div id="error_explanation">
+			    <ul>
+			    <% @erros.each do |msg| %>
+			      <li><%= msg %></li>
+			    <% end %>
+			    </ul>
+			  </div>
+			<% end %>
+	
+	
 			<h1><b>Enunciado</b>  <%= @enunciado.titulo %></h1>
 			<table class="enunciado" summary="concorrentes do grupo">
 				<tr>

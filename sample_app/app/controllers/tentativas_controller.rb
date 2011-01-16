@@ -30,7 +30,8 @@ class TentativasController < ApplicationController
 
   def create
   	@enunciado = Enunciado.find(params[:enunciado_id])
-
+    @erros = ""
+    
   	if (params[:tentativa])
   	  
   	  path = createFolderAndFile
@@ -45,8 +46,20 @@ class TentativasController < ApplicationController
         when "Submeter tentativa - XML" 
           if current_user.admin?
             trataXML(path)
-            flash[:success] = "Tentativa(s) submetida(s) com sucesso!"
-            redirect_to @enunciado
+            if @erros.empty?
+              flash[:success] = "Tentativa(s) submetida(s) com sucesso!"
+              redirect_to @enunciado
+            else
+              @title = "SOPINHA DASSE"
+            	langIds = EnunciadoLang.where(:enunciado_id=> @enunciado.id)
+            	@languages = Array.new
+              langIds.each do |l|
+            	  @languages << Language.find(l.language_id) 
+          	  end 
+            	@tentativa = Tentativa.new
+            	flash[:error] = @erros
+              redirect_to @enunciado
+            end
           else
             flash[:success] = "So um docente pode submeter tentativas no formato XML!"
             redirect_to @enunciado
@@ -208,8 +221,15 @@ class TentativasController < ApplicationController
     files = Dir.glob(File.dirname(path)+"/*.xml")
 
     files.each do |xml_file_path|
-      ##IMPORTANTE antes de fazer a tentativa valta validar com o XSD
-      parseTentativaXML(xml_file_path)
+      ##tenta validar o enunciado com o xsd
+      xsdpath = File.join(Rails.root,"public/xsd/tentativa.xsd")
+      resVal = `xmlstarlet val -b -s #{xsdpath} #{xml_file_path}`
+      if resVal.empty?
+        #se for valido faz parse
+        parseTentativaXML(xml_file_path)
+      else
+        @erros += "O ficheiro #{xml_file_path} nao foi validado pelo xmlschema!"
+      end
     end
 
   end
@@ -232,9 +252,13 @@ class TentativasController < ApplicationController
     REXML::XPath.each( doc, "//user_id" ){ |user_id_element|
       user = user_id_element.text.to_i
     }
-    comp = 0
+    comp = false
     REXML::XPath.each( doc, "//compilou" ){ |compilou_element|
-      comp = compilou_element.text.to_i
+      if compilou_element.text == "true"
+        comp = true
+      else
+        comp = false
+      end
     }
     source_name=""
     REXML::XPath.each( doc, "//codigoFonte" ){ |codigoFonte_element|
@@ -247,6 +271,8 @@ class TentativasController < ApplicationController
     @tentativa = @enunciado.tentativas.build(:user_id=>user,:path=>path_para_source,:compilou=>comp)
     @tentativa.save
     
+    bat_id=0
+    out = ""
     REXML::XPath.each( doc, "//Teste" ){ |teste_element|
       teste_element.each_element do |e|
         if e.name == "Bateria_id"

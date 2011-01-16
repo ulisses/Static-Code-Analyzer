@@ -8,7 +8,7 @@
                 
                 <tt:element name="datetime" type="tt:dateTime"/>
                 
-                <tt:element name="compilou" type="tt:integer"/>
+                <tt:element name="compilou" type="tt:boolean"/>
                 
                 <tt:element name="Dict">
                     <tt:complexType>

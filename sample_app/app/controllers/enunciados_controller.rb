@@ -10,12 +10,12 @@ class EnunciadosController < ApplicationController
   	@enunciado = Enunciado.find(params[:id])
   	@concurso = Concurso.find(@enunciado.concurso_id)
   	@function = Function.find(@enunciado.funcao_id)
+  	@erros = Array.new
   	langIds = EnunciadoLang.where(:enunciado_id=> @enunciado.id)
   	@languages = Array.new
     langIds.each do |l|
   	  @languages << Language.find(l.language_id) 
   	end 
-  	@title = langIds.size
   	@tentativa = Tentativa.new
   end
   
@@ -220,6 +220,7 @@ class EnunciadosController < ApplicationController
 
   def trataXML(path)
     files = Dir.glob(File.dirname(path)+"/*.xml")
+    @success = ""
 
     #se nao houver ficheiros xml, sai e mostra erro
     if files.size == 0
@@ -231,8 +232,15 @@ class EnunciadosController < ApplicationController
     end
 
     files.each do |xml_file_path|
-      ##IMPORTANTE antes de fazer a tentativa valta validar com o XSD
-      parseEnunciadoXML(xml_file_path)
+      ##tenta validar o enunciado com o xsd
+      xsdpath = File.join(Rails.root,"public/xsd/enunciado.xsd")
+      resVal = `xmlstarlet val -b -s #{xsdpath} #{xml_file_path}`
+      if resVal.empty?
+        #se for valido faz parse
+        parseEnunciadoXML(xml_file_path)
+      else
+        @erros << "O ficheiro #{xml_file_path} nao foi validado pelo xmlschema!"
+      end
     end
     
     
@@ -256,7 +264,6 @@ class EnunciadosController < ApplicationController
   def parseEnunciadoXML(xml_file_path)
     xml_data = ""
     @alert = ""
-    @success = ""
      
     file = File.new(xml_file_path,"r")
     if file
@@ -308,6 +315,7 @@ class EnunciadosController < ApplicationController
        end
        @erros << err
     else
+      createFolder
       @success +=basename+ "  " 
 
       #cria e guarda linguagens
