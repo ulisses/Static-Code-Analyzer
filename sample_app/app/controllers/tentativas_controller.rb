@@ -2,6 +2,9 @@ class TentativasController < ApplicationController
     before_filter :admin_or_validParticipant, :only => [:create]
     before_filter :authenticate
     
+    require "rexml/document"
+    
+    
   def index      
     if (params[:enunciado_id] && params[:user_id])
       @user = current_user      
@@ -27,62 +30,113 @@ class TentativasController < ApplicationController
 
   def create
   	@enunciado = Enunciado.find(params[:enunciado_id])
+    @erros = ""
+    
+  	if (params[:tentativa])
+  	  
+  	  path = createFolderAndFile
+  	  
+  	  if params[:tentativa][:path].content_type!= "application/octet-stream"
+  	    tryToDescompact(path)
+	    end
 
-  	if (params[:tentativa])  	 
-  	  params[:tentativa][:user_id] = params[:user_id]
-	   
-    	auxPath
-    	compileAndExecute
-
-    	@tentativa = @enunciado.tentativas.build(params[:tentativa])
-      if @tentativa.save
-        flash[:success] = "Tentativa submetida com sucesso!"
-        redirect_to @tentativa
-      else
-        @title = "Enunciado"
-        render @enunciado
+	    case params[:commit]
+        when "Submeter tentativa - Codigo" 
+          trataSource(path)
+        when "Submeter tentativa - XML" 
+          if current_user.admin?
+            trataXML(path)
+            if @erros.empty?
+              flash[:success] = "Tentativa(s) submetida(s) com sucesso!"
+              redirect_to @enunciado
+            else
+              @title = "SOPINHA DASSE"
+            	langIds = EnunciadoLang.where(:enunciado_id=> @enunciado.id)
+            	@languages = Array.new
+              langIds.each do |l|
+            	  @languages << Language.find(l.language_id) 
+          	  end 
+            	@tentativa = Tentativa.new
+            	flash[:error] = @erros
+              redirect_to @enunciado
+            end
+          else
+            flash[:success] = "So um docente pode submeter tentativas no formato XML!"
+            redirect_to @enunciado
+          end
       end
+        	  	  
     else
       flash[:error] = "Nao selecionou nenhum ficheiro para submissao!"
       redirect_to @enunciado
-    end      
+    end        
   end
 
-  def destroy
-  end
 
   def show
-	@tentativa = Tentativa.find(params[:id])
-	@enunciado = Enunciado.find(@tentativa.enunciado_id)
+	  @tentativa = Tentativa.find(params[:id])
+  	@enunciado = Enunciado.find(@tentativa.enunciado_id)
+	
+  	@codigo = Array.new
+  	file = File.new(@tentativa.path,"r")
+    if file
+      file.each_line do |line| @codigo << line end
+    end
   end
   
+  ########################################################################################################################
   
   
   private
-	def auxPath
-		#timestamp
-		t = DateTime.now
+  
+  #verifica se e admin ou um participante e ainda em tempo de participacao
+	def admin_or_validParticipant
+	  concurso = Concurso.find(Enunciado.find(params[:enunciado_id]).concurso_id)
+    redirect_to(root_path) unless 
+      (current_user.admin? || ( participante(concurso) && (tRestante(concurso) > 0) ) ) 
+  end
+  
+	#verifica se é participante, se for retorna-o
+  def participante(concurso)
+    aux = Participante.where(:user_id=>current_user.id , :concurso_id=>concurso.id).first
+  end
+  
+  #calcula hora do fim do concurso para o utilizador actual
+  def terminaC(concurso)
+    advanceMin = concurso.dur.hour*60 + concurso.dur.min
+    return participante(concurso).dataRegisto.advance(:minutes=> advanceMin)
+  end
+  
+  #calcula o tempo que resta ao utilizador logado para continuar a participar
+  def tRestante(concurso)
+    return ((terminaC(concurso) - DateTime.now) / 60)
+  end
+	
+  ##############################################################################################################
+  #### trata  do caso em que tenta submeter codigo fonte
 
-		# cria o caminho físico do arquivo
-		filename = t.to_s(:number) + "-" + params[:tentativa][:path].original_filename
-		path = File.join(Rails.root, "data/concursos",@enunciado.concurso_id.to_s,"/enunciados",@enunciado.id.to_s,"user-"+current_user.id.to_s)
-		#completa o path com o nome do ficheiro
-		path = File.join(path,filename)
+  def trataSource (path)
+    x =params[:tentativa][:path].content_type
+    case params[:tentativa][:path].content_type
+      when "application/octet-stream"
+        params[:tentativa][:path]=path
+        compileAndExecute##falta por isto a funcar bem
+      else
+        ##qualquer coisa como encntrar e correr o make file e so dps executar..
+    end
+     
+    params[:tentativa][:user_id] = params[:user_id]
 
-		#cria a pasta caso nao exista
-		if !File.exists?(File.dirname(path))
-			Dir.mkdir(File.dirname(path))
-		end
-		
-		# escreve o arquivo no local designado
-		File.open(path, "wb") do |f| 
-			f.write(params[:tentativa][:path].read)
-		end
-		
-		#guarda na @tentativa.path o path onde ficou guardado o ficheiro
-		params[:tentativa][:path] = path
-
-	end
+   	@tentativa = @enunciado.tentativas.build(params[:tentativa])
+     if @tentativa.save
+       flash[:success] = "Tentativa submetida com sucesso!" + x
+       redirect_to @tentativa
+     else
+       @title = "Enunciado"
+       render @enunciado
+     end
+ 	  
+  end
 	
 	def compileAndExecute
 	  path= params[:tentativa][:path]
@@ -107,29 +161,134 @@ class TentativasController < ApplicationController
 	  #compileRes.empty? ? params[:tentativa][:compilou] = true : params[:tentativa][:compilou] = false
   end
   
-	#verifica se e admin ou um participante e ainda em tempo de participacao
-	def admin_or_validParticipant
-	  concurso = Concurso.find(Enunciado.find(params[:enunciado_id]).concurso_id)
-    redirect_to(root_path) unless 
-      (current_user.admin? || ( participante(concurso) && (tRestante(concurso) > 0) ) ) 
+  ##########################       ############################
+  
+  #cria a pasta para o user, para a tentativa e escreve o ficheiro
+  def createFolderAndFile
+    #timestamp
+		t = DateTime.now
+		
+		# cria o caminho físico do arquivo
+		filename = params[:tentativa][:path].original_filename
+		path = File.join(Rails.root, "data/concursos","contest-"+@enunciado.concurso_id.to_s,"en-"+@enunciado.id.to_s,"user-"+current_user.id.to_s)
+		#completa o path com o nome do ficheiro
+		
+		#cria a pasta caso nao exista (para o user)
+		if !File.exists?(path)
+			Dir.mkdir(path)
+		end
+		
+		path = File.join(path,"tent-"+t.to_s(:number))
+		#cria a pasta caso nao exista (para a tentativa)
+		if !File.exists?(path)
+			Dir.mkdir(path)
+		end
+		
+		path = File.join(path,filename)
+		
+		# escreve o arquivo no local designado
+		File.open(path, "wb") do |f| 
+			f.write(params[:tentativa][:path].read)
+		end
+		
+		#guarda na @tentativa.path o path onde ficou guardado o ficheiro
+		#params[:tentativa][:path] = path
+		return path
   end
   
-	#verifica se é participante, se for retorna-o
-  def participante(concurso)
-    aux = Participante.where(:user_id=>current_user.id , :concurso_id=>concurso.id).first
+  #descompacta caso o ficheiro venha comprimido
+  def tryToDescompact (path)
+    dir = File.dirname(path)
+    file = File.basename(path)
+    #ext = File.extname(path)
+        
+    case params[:tentativa][:path].content_type
+      when "application/zip"
+        `cd #{dir} && unzip #{file}`
+      when "application/x-gzip" #.tar.gz
+        `cd #{dir} && tar -vzxf #{file}`
+      when "application/x-bzip2" #.tar.bz2
+        `cd #{dir} && tar -jxvf #{file}`
+      when "application/x-tar" #.tar
+        `cd #{dir} && tar -xvf #{file}`  
+    end
   end
   
-  #calcula hora do fim do concurso para o utilizador actual
-  def terminaC(concurso)
-    advanceMin = concurso.dur.hour*60 + concurso.dur.min
-    return participante(concurso).dataRegisto.advance(:minutes=> advanceMin)
+  ############  ############  ############  ############  ############  ############  ############  ############
+  #Parte referente a submissao do xml
+
+  def trataXML(path)
+    files = Dir.glob(File.dirname(path)+"/*.xml")
+
+    files.each do |xml_file_path|
+      ##tenta validar o enunciado com o xsd
+      xsdpath = File.join(Rails.root,"public/xsd/tentativa.xsd")
+      resVal = `xmlstarlet val -b -s #{xsdpath} #{xml_file_path}`
+      if resVal.empty?
+        #se for valido faz parse
+        parseTentativaXML(xml_file_path)
+      else
+        @erros += "O ficheiro #{xml_file_path} nao foi validado pelo xmlschema!"
+      end
+    end
+
   end
   
-  #calcula o tempo que resta ao utilizador logado para continuar a participar
-  def tRestante(concurso)
-    return ((terminaC(concurso) - DateTime.now) / 60)
-  end  
-  
+  #faz parse do ficheiro xml, adiciona a tentativa e os resultados a BD
+  def parseTentativaXML(xml_file_path)
+    xml_data = ""
+       
+    file = File.new(xml_file_path,"r")
+    if file
+      file.each_line do |line| xml_data+= line end
+    end 
+
+
+    doc = REXML::Document.new( xml_data )
+    REXML::XPath.each( doc, "//datetime" ){ |datetime_element|
+      datetime = Time.xmlschema(datetime_element.text)
+    }
+    user = 1
+    REXML::XPath.each( doc, "//user_id" ){ |user_id_element|
+      user = user_id_element.text.to_i
+    }
+    comp = false
+    REXML::XPath.each( doc, "//compilou" ){ |compilou_element|
+      if compilou_element.text == "true"
+        comp = true
+      else
+        comp = false
+      end
+    }
+    source_name=""
+    REXML::XPath.each( doc, "//codigoFonte" ){ |codigoFonte_element|
+      source_name = codigoFonte_element.text
+    }
+
+    path_para_source = File.join(File.dirname(xml_file_path),source_name)
+    
+    @tentativa = Tentativa.new
+    @tentativa = @enunciado.tentativas.build(:user_id=>user,:path=>path_para_source,:compilou=>comp)
+    @tentativa.save
+    
+    bat_id=0
+    out = ""
+    REXML::XPath.each( doc, "//Teste" ){ |teste_element|
+      teste_element.each_element do |e|
+        if e.name == "Bateria_id"
+          bat_id = e.text.to_i
+        else
+          if e.name == "Output"
+            out = e.text
+          end
+        end
+      end
+      @result = Result.new
+      @result = @tentativa.results.build(:bateria_id=>bat_id,:output=>out)     
+      @result.save   
+    }
+  end
+
   
   
 end

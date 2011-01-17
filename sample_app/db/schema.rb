@@ -10,7 +10,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110104011140) do
+ActiveRecord::Schema.define(:version => 20110113200625) do
+
+  create_table "baterias", :force => true do |t|
+    t.string   "nome"
+    t.string   "input"
+    t.string   "output"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "enunciado_id"
+  end
 
   create_table "concorrentes", :force => true do |t|
     t.string   "nome"
@@ -32,12 +41,18 @@ ActiveRecord::Schema.define(:version => 20110104011140) do
     t.time     "dur"
   end
 
+  create_table "enunciado_langs", :force => true do |t|
+    t.integer  "enunciado_id"
+    t.integer  "language_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "enunciados", :force => true do |t|
     t.string   "titulo"
     t.string   "desc"
     t.integer  "funcao_id"
     t.integer  "peso"
-    t.integer  "linguagem_id"
     t.integer  "concurso_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -63,6 +78,14 @@ ActiveRecord::Schema.define(:version => 20110104011140) do
     t.datetime "dataRegisto"
   end
 
+  create_table "results", :force => true do |t|
+    t.integer  "bateria_id"
+    t.integer  "tentativa_id"
+    t.string   "output"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "tentativas", :force => true do |t|
     t.integer  "user_id"
     t.string   "path"
@@ -70,15 +93,6 @@ ActiveRecord::Schema.define(:version => 20110104011140) do
     t.integer  "enunciado_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "tests", :force => true do |t|
-    t.string   "nome"
-    t.string   "input"
-    t.string   "output"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "enunciado_id"
   end
 
   create_table "users", :force => true do |t|

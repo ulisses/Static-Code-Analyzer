@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ed:schema xmlns:ed="http://www.w3.org/2001/XMLSchema">
+    <ed:element name="Enunciado">
+        <ed:complexType>
+            <ed:sequence>
+                
+                <ed:element name="Peso" default="25">
+                    <ed:simpleType>
+                        <ed:restriction base="ed:integer">
+                            <ed:minInclusive value="0"/>
+                            <ed:maxInclusive value="100"/>
+                        </ed:restriction>
+                    </ed:simpleType>
+                </ed:element>
+                <ed:element name="Titulo" type="ed:string"/>
+                <ed:element name="Descricao" type="ed:string"/>
+                <ed:element name="Func" type="ed:string"/>
+
+                <ed:element name="Linguagens">
+                    <ed:complexType>
+                        <ed:sequence>
+                            <ed:element name="Linguagem" maxOccurs="unbounded">
+                                <ed:simpleType>
+                                    <ed:restriction base="ed:string">
+                                        <ed:enumeration value="C"/>
+                                        <ed:enumeration value="Java"/>
+                                        <ed:enumeration value="Haskell"/>
+                                    </ed:restriction>
+                                </ed:simpleType>
+                            </ed:element>
+                        </ed:sequence>
+                    </ed:complexType>
+                </ed:element>
+              
+                <ed:element name="Dict">
+                    <ed:complexType>
+                        <ed:sequence>
+                            <ed:element name="Teste" maxOccurs="unbounded">
+                                <ed:complexType>
+                                    <ed:sequence>
+                                        <ed:element name="Nome" type="ed:string"/>
+                                        <ed:element name="Input" type="ed:string"/>
+                                        <ed:element name="Output" type="ed:string"/>
+                                    </ed:sequence>
+                                </ed:complexType>
+                            </ed:element>
+                        </ed:sequence>
+                    </ed:complexType>
+                </ed:element>
+            </ed:sequence>
+        </ed:complexType>
+    </ed:element>
+</ed:schema>

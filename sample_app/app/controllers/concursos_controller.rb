@@ -29,6 +29,23 @@ class ConcursosController < ApplicationController
 	createFolder
   end
   
+  def edit
+    @title = "Editar concurso"
+    @concurso = Concurso.find(params[:id])
+  end
+
+  def update
+     @concurso = Concurso.find(params[:id])
+     
+     if @concurso.update_attributes(params[:concurso]) 	       
+       flash[:success] = "Concurso alterado com sucesso."
+       redirect_to @concurso
+     else
+       @title = "Editar concurso."
+       render 'edit'
+     end
+   end
+  
   def show
     @concurso = Concurso.find(params[:id])
     @title = @concurso.tit
@@ -86,14 +103,14 @@ class ConcursosController < ApplicationController
 				Dir.mkdir(path)
 			end
 			
-			path = File.join(Rails.root, "data/concursos",@concurso.id.to_s)
+			path = File.join(Rails.root, "data/concursos","contest-"+@concurso.id.to_s)
 			if !File.exists?(path)
 				Dir.mkdir(path)
 			end
 		end
 	
 		def deleteFolder
-			path = File.join(Rails.root, "data/concursos",@concurso.id.to_s)
+			path = File.join(Rails.root, "data/concursos","contest"-@concurso.id.to_s)
 			if File.exists?(path)
 				`rm -rf #{path}`
 			end

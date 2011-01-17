@@ -1,0 +1,49 @@
+<table class="concurso" summary="Informacao concurso">
+	<tr>
+		<td>
+			<h1>Novo concurso</h1>
+
+			<%= form_for(@concurso) do |f| %>
+			  <%= render 'shared/error_messages', :object => f.object %>
+			  <div class="field">
+			    <%= f.label "Título:" %><br />
+			    <%= f.text_field :tit %>
+			  </div>
+			  <div class="field">
+			    <%= f.label "Chave de acesso:" %><br />
+			    <%= f.text_field :chave %>
+			  </div>
+			  <div class="field">
+			    <%= f.label "Data de início:" %><br />
+			    <%= datetime_select("concurso", "inicio", :default => @concurso.inicio,  
+			    :order => [:day, :month, :year], :start_year => Date.today.year,  
+			    :end_year => Date.today.year + 10)%><br />
+			  </div>
+			  <div class="field">
+			    <%= f.label "Data de fim:" %><br />
+			    <%= datetime_select("concurso", "fim", :default => @concurso.fim,  
+			    :order => [:day, :month, :year], :start_year => Date.today.year,  
+			    :end_year => Date.today.year + 10)%><br />
+			  </div>
+			  <div class="field">
+			    <%= f.label "Duração:" %><br />
+			    <%= time_select("concurso", "dur", :default => @concurso.dur,  
+			    :order => [:day, :month, :year], :start_year => Date.today.year,  
+			    :end_year => Date.today.year + 10)%><br />
+			  </div>
+			  <div class="actions">
+			    <%= f.submit "Criar" %>
+			  </div>
+			<% end %>
+		</td>
+		
+		
+		<td class="sidebar round">
+			<% if current_user.admin? %>
+				<%= link_to "Voltar ao concurso",concurso_path(@concurso) %>
+			<% end%>
+		</td>
+		
+	</tr>
+</table>	
+		

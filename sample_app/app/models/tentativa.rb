@@ -14,4 +14,8 @@
 
 class Tentativa < ActiveRecord::Base
 	belongs_to :enunciado
+	has_many :results
+	
+	attr_accessible :user_id, :path, :compilou
+	
 end

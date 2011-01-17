@@ -1,33 +1,49 @@
-<h1>Novo Enunciado</h1>
+<table class="concurso" summary="Informacao concurso">
+	<tr>
+		<td>
+			<h1>Novo Enunciado</h1>
 
-<%= form_for @enunciado, new_enunciado_path(@enunciado, :concurso_id => params[:concurso_id]) do |f| %>
-  	<%= render 'shared/error_messages', :object => f.object %>
-	<div class="field">
-    	<%= f.label "Título:" %><br/>
-		<%= f.text_field :titulo %>
-  	</div>
-  	<div class="field">
-    	<%= f.label "Descrição:" %><br/>
-    	<%= f.text_area :desc %>
-  	</div>
-  	<div class="field">
-		<%= f.label "Peso:" %><br/>
-		<%= select_tag(:peso,options_for_select(nums)) %>%
-  	</div>
-  	<div class="field">
-		<%= f.label "Linguagem:" %><br/>
-		<%= select_tag(:linguagem_id,options_for_select(arrayLing)) %>
-  	</div>
-	<div class="field">
-		<%= f.label "Função:" %><br/>
-		<%= select_tag(:funcao_id,options_for_select(arrayFunc)) %>
-	</div>
-	<div class="field">
-		<%= hidden_field_tag(:concurso_id, @concurso_id) %>
-		<%= hidden_field_tag :concurso_id, params[:concurso_id] %>
-	</div>
+			<%= form_for @enunciado, new_enunciado_path(@enunciado, :concurso_id => params[:concurso_id]) do |f| %>
+			  	<%= render 'shared/error_messages', :object => f.object %>
+				<div class="field">
+			    	<%= f.label "Título:" %><br/>
+					<%= f.text_field :titulo %>
+			  	</div>
+			  	<div class="field">
+			    	<%= f.label "Descrição:" %><br/>
+			    	<%= f.text_area :desc %>
+			  	</div>
+			  	<div class="field">
+					<%= f.label "Peso:" %><br/>
+					<%= f.select(:peso,options_for_select(nums)) %>%
+			  	</div>
+			  	<div class="field">
+				<%= f.label "Linguagens possíveis de se resolver:" %><br/>
+				<% @languages.each do |l|  %>
+				<%= f.label l.ling %>
+				<%= check_box_tag	"langs[]" , l.id%> 
+				<% end %>
+			  	</div>
+				<div class="field">
+					<%= f.label "Função:" %><br/>
+					<%= f.select(:funcao_id,options_for_select(arrayFunc)) %>
+				</div>
+				<div class="field">
+					<%= hidden_field_tag(:concurso_id, @concurso_id) %>
+					<%= hidden_field_tag :concurso_id, params[:concurso_id] %>
+				</div>
 	
-	<div class="actions">
-		<%= f.submit "Criar" %>
-	</div>
-<% end %>
+				<div class="actions">
+					<%= f.submit "Criar" %>
+				</div>
+			<% end %>
+		</td>
+		
+		<td class="sidebar round">
+			<% if current_user.admin? %>
+				<%= link_to "Voltar ao concurso",concurso_path(@concurso) %>
+			<% end%>
+		</td>
+
+	</tr>
+</table>			

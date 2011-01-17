@@ -1,0 +1,56 @@
+<table class="concurso" summary="Informacao concurso">
+	<tr>
+		<td>
+			<h1>Editar Enunciado</h1>
+
+			<%= form_for(@enunciado) do |f| %>
+			  <%= render 'shared/error_messages', :object => f.object %>
+				<div class="field">
+			   	<%= f.label "Titulo:" %><br/>
+					<%= f.text_field :titulo %>
+			 	</div>
+			 	<div class="field">
+			   	<%= f.label "Descrição:" %><br/>
+			   	<%= f.text_area :desc %>
+			 	</div>
+			 	<div class="field">
+					<%= f.label "Peso:" %><br/>
+					<%= f.select(:peso,options_for_select(nums,@enunciado.peso)) %>%
+			 	</div>
+			 	<div class="field">
+					<%= f.label "Linguagens possíveis de se resolver:" %><br/>
+					<% @languages.each do |l|  %>
+						<%if languageIsOnEnunciado(l) == true %>
+							<%= f.label l.ling %>
+							<%= check_box_tag	"langs[]" , l.id, 1%> 
+						<% else %>
+							<%= f.label l.ling %>
+							<%= check_box_tag	"langs[]" , l.id%>
+						<% end %>
+					<% end %>
+			  	</div>	
+				<div class="field">
+					<%= f.label "Função:" %><br/>
+					<%= f.select(:funcao_id,options_for_select(arrayFunc,@enunciado.funcao_id)) %>
+				</div>
+				<div class="field">
+					<%= hidden_field_tag(:concurso_id, @concurso_id) %>
+					<%= hidden_field_tag :concurso_id, params[:concurso_id] %>
+				</div>
+
+
+			  <div class="actions">
+			    <%= f.submit "Update" %>
+			  </div>
+			<% end %>
+		</td>
+		
+		<td class="sidebar round">
+			<% if current_user.admin? %>
+				<%= link_to "Voltar ao enunciado",enunciado_path(@enunciado) %>
+			<% end%>
+		</td>
+	
+	</tr>
+</table>	
+

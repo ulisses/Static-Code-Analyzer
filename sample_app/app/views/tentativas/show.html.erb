@@ -10,7 +10,11 @@
 					<h1>Tentativa</h1>
 						
 					<b>Path:	</b><br/><%= @tentativa.path %><br/>
-					<b>Compilou: </b><%= @tentativa.compilou %>	
+					<b>Compilou: </b><%= @tentativa.compilou %><br/>
+					<b>Codigo Submetido:</b><br/><br/>
+					<% @codigo.each do |linha| %>
+					<%= linha %><br/>
+					<% end %>
 						
 				</td>
 			</tr>

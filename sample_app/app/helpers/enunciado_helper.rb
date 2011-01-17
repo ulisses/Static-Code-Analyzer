@@ -1,13 +1,6 @@
 module EnunciadoHelper
   
-  def arrayLing
-    array = Array.new
-    Language.all.each do |l|
-      array << [l.ling,l.id]
-    end
-    return array
-  end
-
+  
   def arrayFunc
     array = Array.new
     Function.all.each do |f|
@@ -21,6 +14,15 @@ module EnunciadoHelper
     (0..100).to_a.each do |n|
       array << [n,n]
     end
+  end
+  
+  def languageIsOnEnunciado (language)
+    @myLanguages.each do |myL|
+      if myL.language_id == language.id
+        return true
+      end
+    end 
+    return false
   end
   
 end

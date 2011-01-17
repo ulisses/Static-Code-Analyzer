@@ -1,0 +1,21 @@
+# == Schema Information
+# Schema version: 20110112145528
+#
+# Table name: enunciado_langs
+#
+#  id           :integer         not null, primary key
+#  enunciado_id :integer
+#  language_id  :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  enunciado_id: 1
+  language_id: 1
+
+two:
+  enunciado_id: 1
+  language_id: 1

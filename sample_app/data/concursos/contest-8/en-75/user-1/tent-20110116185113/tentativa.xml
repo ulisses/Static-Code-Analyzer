@@ -1,0 +1,29 @@
+<?xm l version="1.0" encoding="UTF-8"?>
+
+<Tentativa xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="tentativa.xsd">
+
+    <user_id>36</user_id>
+    
+    <datetime>2010-12-08T16:33:00</datetime>
+    
+    <compilou>true</compilou>
+    
+    <Dict>
+        <Teste>
+            <Bateria_id>13</Bateria_id>
+            <Output>0</Output>
+        </Teste>
+        <Teste>
+            <Bateria_id>12</Bateria_id>
+            <Output>0</Output>
+        </Teste>
+        <Teste>
+            <Bateria_id>11</Bateria_id>
+            <Output>0</Output>
+        </Teste>
+    </Dict>
+    
+    <codigoFonte>/lol/cool </codigoFonte>
+        
+</Tentativa>

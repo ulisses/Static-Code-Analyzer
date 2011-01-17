@@ -2,6 +2,18 @@
 	<tr>
 		
     	<td class="main">
+	
+		<% if @erros.size > 0 %>
+			<div id="error_explanation">
+			    <ul>
+			    <% @erros.each do |msg| %>
+			      <li><%= msg %></li>
+			    <% end %>
+			    </ul>
+			  </div>
+			<% end %>
+	
+	
 			<h1><b>Enunciado</b>  <%= @enunciado.titulo %></h1>
 			<table class="enunciado" summary="concorrentes do grupo">
 				<tr>
@@ -9,14 +21,16 @@
 				    <b>Descricao: </b>
 						<span class="enunciado"><%= @enunciado.desc %></span> <br/>
 				    <b>Peso: </b>
-						<span class="enunciado"><%= @enunciado.peso %></span> <br/>
+						<span class="enunciado"><%= @enunciado.peso %></span>% <br/>
 					<b>funcao de aval: </b> 
 				    	<span class="func">
 							<%=@function.func%>
 						</span> <br/>
-					<b>Linguagem: </b> 
+					<b>Linguagens: </b><br/> 
 				    	<span class="func">
-							<%=@language.ling%>
+							<% @languages.each do |l| %>
+							<%= l.ling%> |
+							<% end %>
 						</span> <br/>
 				  	</td>
 
