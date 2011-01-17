@@ -10,6 +10,8 @@ GetOptions("open=s"       => \$_opt_filePath,
            "allTogether!" => \$_opt_allTogether,
            "percent!"     => \$_opt_percent,
            "verbose!"     => \$_opt_verbose,
+           "pie!"         => \$_opt_pie,
+           "bars!"        => \$_opt_abrs,
            "out=s"        => \$_opt_fileNamePrefix,
 
            "optional:s"   => \$optionalstring,
@@ -17,6 +19,16 @@ GetOptions("open=s"       => \$_opt_filePath,
            "optint:i"     => \$optionalinteger,
            "float=f"      => \$mandatoryfloat,
            "optfloat:f"   => \$optionalfloat);
+
+if($_opt_bars == $_opt_pie) {
+	$_opt_bars = 1;
+	$_opt_pie = 1;
+}
+if($_opt_bars) {
+	$_opt_pie = 0;
+} else {
+	$_opt_pie = 1;
+}
 
 if($_opt_separated eq $_opt_allTogether) {
     $_opt_separated   = 1;
@@ -26,7 +38,7 @@ if($_opt_separated) {
     $_opt_allTogether = 0;
 } else {
     $_opt_allTogether = 1;
-	$_opt_percent = 1;
+    $_opt_percent = 1;
 }
 
 my %_types = ("tcl"  => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { return shift =~ m/^[ \t\n]*#.*/; },                           "nrComments" => 0,
@@ -130,30 +142,30 @@ if($_opt_allTogether) {
     plotToPng("$_opt_fileNamePrefix\_projectLanguages.png",\@_dataTypes,\@_dataPercentageLines,\@_dataPercentageFiles,\@_dataPercentageComments,"Languages", "Percentage", "Global project");
 }
 if($_opt_separated && !$_opt_percent) {
-	my @arr = ("Nr of lines","Nr of comments");
+    my @arr = ("Nr of lines","Nr of comments");
 
     plotToPngLinesAndComments("$_opt_fileNamePrefix\_LinesPerLanguage.png"
-	                         ,\@_dataTypes,\@_dataNrLines,\@_dataNrComments,
-							 "Languages", "Number of lines", "Number of lines per language"
-							 ,\@arr);
+                             ,\@_dataTypes,\@_dataNrLines,\@_dataNrComments,
+                             "Languages", "Number of lines", "Number of lines per language"
+                             ,\@arr);
     plotToPng("$_opt_fileNamePrefix\_FilesPerLanguage.png",\@_dataTypes,\@_dataNrFiles,"Languages", "Number of files", "Number of files per language");
     plotToPng("$_opt_fileNamePrefix\_RatioFilesLines.png",\@_dataTypes,\@_dataRatioNrFilesNrLines,"Languages", "Number of lines per file", "Ratio of nr lines/nr files per language");
 }
 if($_opt_separated && $_opt_percent) {
-	my @arr = ("% of lines","% of comments");
+    my @arr = ("% of lines","% of comments");
 
     plotToPngLinesAndComments("$_opt_fileNamePrefix\_LinesPerLanguage.png"
-	                         ,\@_dataTypes,\@_dataPercentageLines,\@_dataPercentageComments
-							 ,"Languages", "Percentage", "% number of lines per language"
-							 ,\@arr);
+                             ,\@_dataTypes,\@_dataPercentageLines,\@_dataPercentageComments
+                             ,"Languages", "Percentage", "% number of lines per language"
+                             ,\@arr);
     plotToPng("$_opt_fileNamePrefix\_FilesPerLanguage.png"
-	         ,\@_dataTypes,\@_dataPercentageFiles
-			 ,"Languages", "% number of files", "% number of files per language"
-			 );
+             ,\@_dataTypes,\@_dataPercentageFiles
+             ,"Languages", "% number of files", "% number of files per language"
+             );
     plotToPng("$_opt_fileNamePrefix\_RatioFilesLines.png"
-	         ,\@_dataTypes,\@_dataRatioNrFilesNrLines
-			 ,"Languages", "Number of lines per file", "Ratio of nr lines/nr files per language"
-			 );
+             ,\@_dataTypes,\@_dataRatioNrFilesNrLines
+             ,"Languages", "Number of lines per file", "Ratio of nr lines/nr files per language"
+             );
 }
 
 sub plotToPngLinesAndComments {
@@ -164,40 +176,66 @@ sub plotToPngLinesAndComments {
     my $x_label     = $_[4];
     my $y_label     = $_[5];
     my $title       = $_[6];
-	my $legend_keys = $_[7];
+    my $legend_keys = $_[7];
 
     my @data;
     push(@data,$dX);
     push(@data,$dY);
     push(@data,$dY2);
-    my $mygraph = GD::Graph::bars->new(600, 400);
     
-	$mygraph->set_legend( @$legend_keys );
+	my $mygraph;
+	if($_opt_pie) {
+		$mygraph = GD::Graph::pie->new(600, 400);
+	}
+    if($_opt_bars) {
+		$mygraph = GD::Graph::bars->new(600, 400);
+	}
 
-    $mygraph->set(
-        transparent   => 1,
-        overwrite => 0,
+    if(!$_opt_pie) {
+	    $mygraph->set_legend( @$legend_keys );
+	}
+    if($_opt_bars) {
+        $mygraph->set(
+            transparent   => 1,
+            overwrite => 0,
 
-        fgclr => black ,
-        labelclr => black,
-        axislabelclr => black,
-        legendclr => black,
-        valuesclr => black,
-        textclr => black,
-        transparent   => 1,
-        overwrite => 0,
+            fgclr => black ,
+            labelclr => black,
+            axislabelclr => black,
+            legendclr => black,
+            valuesclr => black,
+            textclr => black,
+            transparent   => 1,
+            overwrite => 0,
 
-        bargroup_spacing => 10,
-        # show the values for each bar in integer format separated 10 pixels from the top of the bar
-        show_values   => 1,
-        values_format => sub { return sprintf("\%d", shift); } ,
-        values_space  => 10,
+            bargroup_spacing => 10,
+            # show the values for each bar in integer format separated 10 pixels from the top of the bar
+            show_values   => 1,
+            values_format => sub { return sprintf("\%d", shift); } ,
+            values_space  => 10,
 
-        x_label       => $x_label,
-        y_label       => $y_label,
-        title         => $title,
-        dclrs         =>  [ qw(gold red green) ],
-    ) or warn $mygraph->error;
+            x_label       => $x_label,
+            y_label       => $y_label,
+            title         => $title,
+            dclrs         =>  [ qw(gold red green) ],
+        ) or warn $mygraph->error;
+    }
+    if($_opt_pie) {
+        $mygraph->set(
+            transparent   => 1,
+
+            fgclr => black ,
+            labelclr => black,
+            axislabelclr => black,
+            legendclr => black,
+            valuesclr => black,
+            textclr => black,
+            transparent   => 1,
+
+            title         => $title,
+            dclrs         =>  [ qw(gold red green) ],
+        ) or warn $mygraph->error;
+    }
 
     my $myimage = $mygraph->plot(\@data) or warn $mygraph->error;
     
@@ -233,35 +271,57 @@ sub plotToPng {
         push(@data,$dY2);
         push(@data,$dY3);
     }
-    my $mygraph = GD::Graph::bars->new(600, 400);
+	
+	my $mygraph;
+	if($_opt_pie) {
+		$mygraph = GD::Graph::pie->new(600, 400);
+	}
+    if($_opt_bars) {
+		$mygraph = GD::Graph::bars->new(600, 400);
+	}
     
-    if($_opt_allTogether) {
+    if($_opt_allTogether && !$_opt_pie) {
         my @legend_keys = ("% of lines","% of files","% of comments");
         $mygraph->set_legend(@legend_keys);
     }
 
-    $mygraph->set(
-        fgclr => black ,
-        labelclr => black,
-        axislabelclr => black,
-        legendclr => black,
-        valuesclr => black,
-        textclr => black,
-        transparent   => 1,
-        overwrite => 0,
+	if($_opt_pie) {
+	    $mygraph->set(
+		    fgclr => black ,
+			labelclr => black,
+	        axislabelclr => black,
+		    legendclr => black,
+			valuesclr => black,
+	        textclr => black,
+		    transparent   => 1,
 
-        bargroup_spacing => 10,
-        # show the values for each bar in integer format separated 10 pixels from the top of the bar
-        show_values   => 1,
-        values_format => sub { return sprintf("\%d", shift); } ,
-        values_space  => 10,
+		    title         => $title,
+			dclrs         =>  [ qw(gold red green) ],
+	    ) or warn $mygraph->error;
+	}
+	if($_opt_bars) {
+	    $mygraph->set(
+		    fgclr => black ,
+			labelclr => black,
+	        axislabelclr => black,
+		    legendclr => black,
+			valuesclr => black,
+	        textclr => black,
+		    transparent   => 1,
+			overwrite => 0,
 
-        x_label       => $x_label,
-        y_label       => $y_label,
-        title         => $title,
-        dclrs         =>  [ qw(gold red green) ],
-    ) or warn $mygraph->error;
+	        bargroup_spacing => 10,
+		    # show the values for each bar in integer format separated 10 pixels from the top of the bar
+			show_values   => 1,
+	        values_format => sub { return sprintf("\%d", shift); } ,
+		    values_space  => 10,
 
+			x_label       => $x_label,
+	        y_label       => $y_label,
+		    title         => $title,
+			dclrs         =>  [ qw(gold red green) ],
+	    ) or warn $mygraph->error;
+	}
     my $myimage = $mygraph->plot(\@data) or warn $mygraph->error;
     
     open (IMG, '>' , $fileName);
