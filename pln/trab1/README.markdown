@@ -14,16 +14,16 @@ If you use linux you shoul do:
 
 OPTIONS
 =======
--open <dirPath>       - This flag is required, ditPath should be the directory you want to analyze your code
--verbose              - Show the languages the program is analyzing
--separated            - Generates separated images (this is the default)
--allTogether          - Generates one image with all the analysis
--percent              - Generates the image with percentage of code analyzed (this is used by default when -allTogether is set).
-                        By default this flag is set to 0.
-                        If you use -percent with -separated this script will produce 3 files, the ratio file will not be in percentage
--pie                  - This fag will generate all the images in a pie chart
--bars                 - This fag will generate all the images in a bars chart (this is the default)
--out <fileNamePrefix> - This flag is mandatory, and fileNamePrefix is the prefix to be places before each filename image produced
+    -open <dirPath>       - This flag is required, ditPath should be the directory you want to analyze your code
+    -verbose              - Show the languages the program is analyzing
+    -separated            - Generates separated images (this is the default)
+    -allTogether          - Generates one image with all the analysis
+    -percent              - Generates the image with percentage of code analyzed (this is used by default when -allTogether is set).
+                            By default this flag is set to 0.
+                            If you use -percent with -separated this script will produce 3 files, the ratio file will not be in percentage
+    -pie                  - This fag will generate all the images in a pie chart
+    -bars                 - This fag will generate all the images in a bars chart (this is the default)
+    -out <fileNamePrefix> - This flag is mandatory, and fileNamePrefix is the prefix to be places before each filename image produced
 
 EXAMPLES
 ========
