@@ -20,7 +20,7 @@ GetOptions("open=s"       => \$_opt_filePath,
            "float=f"      => \$mandatoryfloat,
            "optfloat:f"   => \$optionalfloat);
 
-if($_opt_bars == $_opt_pie) {
+if($_opt_bars eq $_opt_pie) {
 	$_opt_bars = 1;
 	$_opt_pie = 1;
 }
@@ -48,6 +48,9 @@ my %_types = ("tcl"  => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { ret
                          "percentageNrFiles" => 0, "percentageNrLines" => 0, "percentageNrComments" => 0
                         },
               "h"    => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { return shift =~ m/(\*(.|\n|\r)*?\*)|(^[ \t\n]*\/\/.*)/; },    "nrComments" => 0,
+                         "percentageNrFiles" => 0, "percentageNrLines" => 0, "percentageNrComments" => 0
+                        },
+              "hpp"  => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { return shift =~ m/(\*(.|\n|\r)*?\*)|(^[ \t\n]*\/\/.*)/; },    "nrComments" => 0,
                          "percentageNrFiles" => 0, "percentageNrLines" => 0, "percentageNrComments" => 0
                         },
               "cpp"  => {"nrFiles" => 0, "nrLines" => 0, "comments" => sub { return shift =~ m/(\*(.|\n|\r)*?\*)|(^[ \t\n]*\/\/.*)/; },    "nrComments" => 0,

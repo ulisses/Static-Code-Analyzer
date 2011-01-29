@@ -6,7 +6,7 @@ import System.Environment
 
 process :: String -> IO ()
 process file = do
-	putStrLn file
+	putStr file
 	stream <- readInputStream file
 	putStr (take (20 - length file) $ repeat ' ')
 	either print (const $ putStrLn "Pass") (parseC stream nopos)

@@ -16,7 +16,7 @@ OPTIONS
 =======
     -open <dirPath>       - This flag is required, ditPath should be the directory you want to analyze your code
     -verbose              - Show the languages the program is analyzing
-    -separated            - Generates separated images (this is the default)
+    -separated            - Generates 3 separated images (this is the default)
     -allTogether          - Generates one image with all the analysis
     -percent              - Generates the image with percentage of code analyzed (this is used by default when -allTogether is set).
                             By default this flag is set to 0.

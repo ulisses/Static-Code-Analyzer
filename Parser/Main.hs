@@ -1,7 +1,6 @@
 module Main where
 
 import Language.C
-import Language.C.System.GCC
 import System.Environment
 
 process :: String -> IO ()
