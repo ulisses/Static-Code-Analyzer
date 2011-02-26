@@ -250,3 +250,7 @@ form.new_concorrente textarea {
   height: 4em;
   margin-bottom: 0;
 }
+
+.vertaligntop { vertical-align:top; 
+margin-top:0; 
+}

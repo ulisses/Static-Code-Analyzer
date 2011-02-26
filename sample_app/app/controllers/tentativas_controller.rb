@@ -3,7 +3,7 @@ class TentativasController < ApplicationController
     before_filter :authenticate
     
     require "rexml/document"
-    
+    require 'fileutils'    
     
   def index      
     if (params[:enunciado_id] && params[:user_id])
@@ -50,7 +50,6 @@ class TentativasController < ApplicationController
               flash[:success] = "Tentativa(s) submetida(s) com sucesso!"
               redirect_to @enunciado
             else
-              @title = "SOPINHA DASSE"
             	langIds = EnunciadoLang.where(:enunciado_id=> @enunciado.id)
             	@languages = Array.new
               langIds.each do |l|
@@ -120,7 +119,7 @@ class TentativasController < ApplicationController
     case params[:tentativa][:path].content_type
       when "application/octet-stream"
         params[:tentativa][:path]=path
-        compileAndExecute##falta por isto a funcar bem
+        compile##falta por isto a funcar bem
       else
         ##qualquer coisa como encntrar e correr o make file e so dps executar..
     end
@@ -129,7 +128,11 @@ class TentativasController < ApplicationController
 
    	@tentativa = @enunciado.tentativas.build(params[:tentativa])
      if @tentativa.save
-       flash[:success] = "Tentativa submetida com sucesso!" + x
+       if @erros.empty?
+         flash[:success] = "Tentativa submetida com sucesso! A sua tentativa passou todos os testes a que foi submetida."
+       else
+         flash[:error] = "A sua tentativa foi submetida com sucesso, mas passou em apenas "+ @erros
+       end
        redirect_to @tentativa
      else
        @title = "Enunciado"
@@ -138,7 +141,7 @@ class TentativasController < ApplicationController
  	  
   end
 	
-	def compileAndExecute
+	def compile
 	  path= params[:tentativa][:path]
 	  file = File.basename(path) 
 	  #dir passa a ser a pasta na qual trabalhamos
@@ -149,18 +152,84 @@ class TentativasController < ApplicationController
     end
     #tenta compilar
     `cd #{dir} && gcc #{file}`
-    flash[:error] = "cd "+ dir + "\n gcc " + file
     #se a.out existe compilou, se nao, nao compilou
     if File.exists?(dir + "/a.out")
       params[:tentativa][:compilou] = true
+      execGeral(dir)
 	    File.delete(dir + "/a.out")
     else
       params[:tentativa][:compilou] = false
+      flash[:error] = "A tentativa submetida nao compilou!"
     end
 	  #flash[:error] = "gcc " + params[:tentativa][:path]
 	  #compileRes.empty? ? params[:tentativa][:compilou] = true : params[:tentativa][:compilou] = false
   end
   
+  def execGeral(dir)
+    baterias = @enunciado.baterias
+    total = baterias.size
+    correct = 0
+    
+    baterias.each do |bateria|
+      res = execEach(bateria,dir) 
+      if res == true
+        correct += 1
+      end
+    end
+    
+    if !((total - correct) == 0)
+     @erros += correct.to_s + " dos "+total.to_s + " testes!"
+    end
+  end
+  
+  def execEach(bateria,dir)
+    input = bateria.input
+    out = `cd #{dir} && ./a.out #{input}`
+    
+    #timestamp
+    t = DateTime.now
+    t = t.to_s(:number)
+    
+    # cria o caminho físico da pasta
+		path = File.join(Rails.root, "data/temp/#{t}--#{bateria.id}--#{current_user.id}")
+		
+		#cria a pasta caso nao exista (temporaria)
+		if !File.exists?(path)
+			Dir.mkdir(path)
+		end
+		
+		#cria path para os dois ficheiros temporarios
+		path1 = File.join(path,"file1")
+		path2 = File.join(path,"file2")
+		
+		#escreve o output num ficheiro para poder ser usado pelo diff
+		File.open(path1, "wb") do |f| 
+			f.write(out)
+		end
+
+		#escreve o output num ficheiro para poder ser usado pelo diff		
+		File.open(path2, "wb") do |f| 
+			f.write(bateria.output)
+		end
+		
+		#vai buscar a funcao de aval deste enunciado
+    func = Function.find(@enunciado.funcao_id).func
+    
+    #compara os ficheiros
+    `#{func} #{path1} #{path2}` ; result=$?.success?
+    
+    #eliminar pasta temporaria
+    if File.exists?(path)
+	    FileUtils.rm_rf path
+    end
+
+    if result == true
+     return true
+   else
+     return false
+   end
+   
+  end
   ##########################       ############################
   
   #cria a pasta para o user, para a tentativa e escreve o ficheiro
@@ -220,16 +289,20 @@ class TentativasController < ApplicationController
   def trataXML(path)
     files = Dir.glob(File.dirname(path)+"/*.xml")
 
-    files.each do |xml_file_path|
-      ##tenta validar o enunciado com o xsd
-      xsdpath = File.join(Rails.root,"public/xsd/tentativa.xsd")
-      resVal = `xmlstarlet val -b -s #{xsdpath} #{xml_file_path}`
-      if resVal.empty?
-        #se for valido faz parse
-        parseTentativaXML(xml_file_path)
-      else
-        @erros += "O ficheiro #{xml_file_path} nao foi validado pelo xmlschema!"
+    if (files.size != 0)
+      files.each do |xml_file_path|
+        ##tenta validar o enunciado com o xsd
+        xsdpath = File.join(Rails.root,"public/xsd/tentativa.xsd")
+        resVal = `xmlstarlet val -b -s #{xsdpath} #{xml_file_path}`
+        if resVal.empty?
+          #se for valido faz parse
+          parseTentativaXML(xml_file_path)
+        else
+          @erros += "O ficheiro #{xml_file_path} nao foi validado pelo xmlschema!"
+        end
       end
+    else
+      @erros += "Nao foram encontrados ficheiros do tipo xml na sua submissao!"
     end
 
   end
