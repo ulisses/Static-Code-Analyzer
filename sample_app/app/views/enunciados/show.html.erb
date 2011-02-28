@@ -1,23 +1,20 @@
-<table class="concurso" summary="Informacao concurso">
+<table class="vertaligntop" summary="Informacao concurso" border= "1">
 	<tr>
 		
-    	<td class="main">
+    	<td class="vertaligntop">
 	
-		<% if @erros.size > 0 %>
-			<div id="error_explanation">
-			    <ul>
-			    <% @erros.each do |msg| %>
-			      <li><%= msg %></li>
-			    <% end %>
-			    </ul>
-			  </div>
+			<% if @erros.size > 0 %>
+				<div id="error_explanation">
+			    	<ul>
+			    		<% @erros.each do |msg| %>
+			      		<li><%= msg %></li>
+			    		<% end %>
+			    	</ul>
+			  	</div>
 			<% end %>
 	
-	
-			<h1><b>Enunciado</b>  <%= @enunciado.titulo %></h1>
-			<table class="enunciado" summary="concorrentes do grupo">
-				<tr>
-				  <td class="enunciado">
+		<h3><b>Enunciado</b>  <%= @enunciado.titulo %></h3>
+
 				    <b>Descricao: </b>
 						<span class="enunciado"><%= @enunciado.desc %></span> <br/>
 				    <b>Peso: </b>
@@ -29,22 +26,23 @@
 					<b>Linguagens: </b><br/> 
 				    	<span class="func">
 							<% @languages.each do |l| %>
-							<%= l.ling%> |
+								<% if l == @languages.first%>
+									<%= l.ling%>
+								<% else %>
+									| <%= l.ling %> 
+								<% end %>
 							<% end %>
 						</span> <br/>
-				  	</td>
-
-				</tr>
 				
 
 				<%= render 'enunciados/submit'%>
-				
-			</table>
-		</td>
+
+			  	</td>
+
 		
-
+		<td>		
 		<%= render 'enunciados/sidebar'%>
-
+		</td>
 
   </tr>
 </table>
