@@ -11,7 +11,25 @@
 						
 					<b>Path:	</b><br/><%= @tentativa.path %><br/>
 					<b>Compilou: </b><%= @tentativa.compilou %><br/>
-					<b>Codigo Submetido:</b><br/><br/>
+					
+					<b>Execução abortada: </b>
+					<% if @tentativa.execStop%>
+						Sim
+					<% else %>
+						Não
+					<% end %><br/>
+					
+					<% if @tentativa.tExec >= 0%>
+						<b>Tempo de execução para todos os testes: </b>
+						<%= @tentativa.tExec.round(6) %> segundos
+						
+						<b>Tempo médio de execução para um teste: </b>
+						<%= (@tentativa.tExec / @enunciado.baterias.size).round(6)  %> segundos
+					<% end %><br/>
+					
+					
+					<b>Percentagem de testes que passou com sucesso: </b><%= @tentativa.passedTests %>%<br/><br/>
+					<b>Código Submetido:</b><br/><br/>
 					<% @codigo.each do |linha| %>
 					<%= linha %><br/>
 					<% end %>

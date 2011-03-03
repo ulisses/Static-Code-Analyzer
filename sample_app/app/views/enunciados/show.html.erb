@@ -19,19 +19,9 @@
 						<span class="enunciado"><%= @enunciado.desc %></span> <br/>
 				    <b>Peso: </b>
 						<span class="enunciado"><%= @enunciado.peso %></span>% <br/>
-					<b>funcao de aval: </b> 
+					<b>função de avaliação: </b> 
 				    	<span class="func">
 							<%=@function.func%>
-						</span> <br/>
-					<b>Linguagens: </b><br/> 
-				    	<span class="func">
-							<% @languages.each do |l| %>
-								<% if l == @languages.first%>
-									<%= l.ling%>
-								<% else %>
-									| <%= l.ling %> 
-								<% end %>
-							<% end %>
 						</span> <br/>
 				
 

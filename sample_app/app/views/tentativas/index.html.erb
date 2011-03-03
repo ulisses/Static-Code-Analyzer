@@ -4,18 +4,23 @@
 			<h1>Tentativas</h1>
 			
 			<% if @user %>
-				<% if @user.admin? %></b>Docente: </b><% else %><b>Grupo: </b><% end %>
-				<%= @user.name %><br/>
+				<% if @user.admin? %><b>Docente: </b><% else %><b>Grupo: </b><% end %>
+				<%= link_to @user.name, @user %><br/>
 			<% end %>
 			
 			<% if @concurso %>
 				<b>Concurso:</b>
-				<%= @concurso.tit %><br/>
+				<%= link_to @concurso.tit, @concurso %>
+				<% if concursoActivo(@concurso) %>
+					 <span style="color:green">(Activo)</span> 
+				<% else %>
+				 	<span style="color:red">(Inactivo)</span> 
+				<% end %>
 			<% end %>
-			
+			<br/>
 			<% if @enunciado %>
 				<b>Enunciado:</b>
-				<%= @enunciado.titulo %><br/>
+				<%= link_to @enunciado.titulo, @enunciado %><br/>
 			<% end %>
 			
 			<% if @tentativas %>
@@ -23,7 +28,22 @@
 				<%= will_paginate %>
 			
 				<ul class="tentativas">
-				  <%= render @tentativas %>
+					<table border="1">
+						<tr>
+							<td>Num Tentativa</td>
+							<td>Grupo</td>
+							<% if !@concurso%>
+								<td>Concurso</td>
+							<% end %>
+							<% if !@enunciado%>
+								<td>Enunciado</td>
+							<% end %>
+							<td>Resultado</td>
+							<td>Compilou</td>
+							<td>Terminou a execução</td>														
+						</tr>
+				  		<%= render @tentativas %>
+					</table>
 				</ul>
 	
 				<%= will_paginate %>

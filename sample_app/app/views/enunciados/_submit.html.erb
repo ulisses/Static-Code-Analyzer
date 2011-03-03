@@ -1,6 +1,11 @@
 
 		<% form_for(@tentativa,:html => { :multipart => true }) do |form| %>
-
+			
+			<div class="field">
+				<%= form.label "Linguagem:" %>
+				<%= form.select(:language_id,options_for_select(arrayLang)) %>
+			</div>
+			
 			<%= hidden_field_tag(:enunciado_id, @enunciado.id) %>
 			<%= hidden_field_tag(:user_id, current_user.id) %>		
 			Submeter tentativa:

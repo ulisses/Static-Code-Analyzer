@@ -1,5 +1,25 @@
-<li>
-	<%= link_to tentativa.id, tentativa %>
-</li>
+
+	
+	<tr>
+	<td><%= link_to tentativa.id, tentativa %></td>
+	<td><%= link_to current_user.name, current_user %></td>
+	<% if !@enunciado && ! @concurso%>
+			<% enunciado = Enunciado.find(tentativa.enunciado_id)%>
+			<% concurso = Concurso.find(enunciado.concurso_id)%>
+		<td>
+			<%= link_to concurso.tit, concurso %>
+			<% if concursoActivo(concurso) %>
+				 <span style="color:green">(Activo)</span> 
+			<% else %>
+			 	<span style="color:red">(Inactivo)</span> 
+			<% end %>
+		</td>			
+		<td><%= link_to enunciado.titulo, enunciado %></td>
+	<% end %>
+	<td><%= tentativa.passedTests %></td>
+	<td><%= tentativa.compilou %></td>
+	<td><%= tentativa.execStop %></td>		
+
+	</tr>
 
 

@@ -30,6 +30,7 @@ SampleApp::Application.routes.draw do
   resources :functions #, :only => [:new,:create,:destroy,:index]  
   resources :tentativas
   resources :baterias#, :only => [:index]
+  resources :results
   
 #  resource :tests do
 #  collection do

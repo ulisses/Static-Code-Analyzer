@@ -21,7 +21,7 @@ class TentativasController < ApplicationController
           @concurso = Concurso.find(@enunciado.concurso_id)
           @tentativas = @enunciado.tentativas.paginate(:page => params[:page])
         else
-            @tentativas = Tentativa.all.paginate(:page => params[:page])
+          @tentativas = Tentativa.all.paginate(:page => params[:page])
       end
     end
   end
@@ -39,6 +39,8 @@ class TentativasController < ApplicationController
   	  if params[:tentativa][:path].content_type!= "application/octet-stream"
   	    tryToDescompact(path)
 	    end
+      params[:tentativa][:execStop] = false
+      params[:tentativa][:tExec] = -1
 
 	    case params[:commit]
         when "Submeter tentativa - Codigo" 
@@ -123,15 +125,17 @@ class TentativasController < ApplicationController
       else
         ##qualquer coisa como encntrar e correr o make file e so dps executar..
     end
-     
+      
     params[:tentativa][:user_id] = params[:user_id]
+
+    guardaMelhorResultado
 
    	@tentativa = @enunciado.tentativas.build(params[:tentativa])
      if @tentativa.save
        if @erros.empty?
          flash[:success] = "Tentativa submetida com sucesso! A sua tentativa passou todos os testes a que foi submetida."
        else
-         flash[:error] = "A sua tentativa foi submetida com sucesso, mas passou em apenas "+ @erros
+         flash[:error] = @erros
        end
        redirect_to @tentativa
      else
@@ -167,24 +171,70 @@ class TentativasController < ApplicationController
   
   def execGeral(dir)
     baterias = @enunciado.baterias
-    total = baterias.size
-    correct = 0
     
-    baterias.each do |bateria|
-      res = execEach(bateria,dir) 
-      if res == true
-        correct += 1
+    #para o caso de não existirem testes para este enunciado
+    if baterias && baterias.size > 0 
+      total = baterias.size
+      correct = 0
+    
+      before = Time.now.to_f
+      baterias.each do |bateria|
+        if params[:tentativa][:execStop] == false
+          res = execEach(bateria,dir) 
+          if res == true
+            correct += 1
+          end
+        end
       end
-    end
+      after = Time.now.to_f
+      params[:tentativa][:tExec] = after - before
     
-    if !((total - correct) == 0)
-     @erros += correct.to_s + " dos "+total.to_s + " testes!"
+      #guarda percentagem de testes no qual o codigo passou
+      params[:tentativa][:passedTests] = (correct/total) * 100
+    
+      #se nao passou em todos os testes, cria erro para apresentar
+      if !((total - correct) == 0)
+        aux = @erros
+        @erros = "A sua tentativa foi submetida com sucesso, mas passou em apenas em " +correct.to_s + " dos "+total.to_s + " testes!      " + aux
+      end
+
+    else
+      params[:tentativa][:passedTests] = 0
+      @erros = "Nao existem testes para este enunciado!"
     end
   end
   
   def execEach(bateria,dir)
     input = bateria.input
-    out = `cd #{dir} && ./a.out #{input}`
+    
+    #thread que executa o a.out 
+    out = "default";i=0
+    exec = Thread.new do
+      out = `cd #{dir} && ./a.out #{input}`
+    end
+    
+    #thread que conta x segundos e dps termina a execucao do programa
+    timer = Thread.new do
+      sleep 5
+      if exec.alive?
+        Thread.kill(exec)
+        i=1
+        if params[:tentativa][:execStop] == false
+          @erros += "Time out! Pelo menos a execucao de um dos inputs foi terminada por demorar demasiado tempo!"
+        end
+        params[:tentativa][:execStop] = true
+      end
+    end
+    
+    exec.join
+    if timer.alive?
+      Thread.kill(timer)
+    end
+    timer.join
+    
+    if i==1
+      return false
+    end
     
     #timestamp
     t = DateTime.now
@@ -204,7 +254,7 @@ class TentativasController < ApplicationController
 		
 		#escreve o output num ficheiro para poder ser usado pelo diff
 		File.open(path1, "wb") do |f| 
-			f.write(out)
+			f.write(out.chomp)#ATENÇAO RETIRA OS \n -> PODE GERAR PROBLEMAS? 
 		end
 
 		#escreve o output num ficheiro para poder ser usado pelo diff		
@@ -229,6 +279,22 @@ class TentativasController < ApplicationController
      return false
    end
    
+  end
+  
+  def guardaMelhorResultado
+    res = current_user.results.where(:enunciado_id=>@enunciado.id,:concurso_id=>@enunciado.concurso_id)
+    if res.size == 0
+      r = current_user.results.build(:enunciado_id=>@enunciado.id,
+                                 :concurso_id=>@enunciado.concurso_id,
+                                 :bestRes=>params[:tentativa][:passedTests]);
+      r.save
+    else
+      result = res.first
+      if result.bestRes < params[:tentativa][:passedTests]
+        result.bestRes = params[:tentativa][:passedTests]
+        result.save
+      end
+    end
   end
   ##########################       ############################
   
@@ -356,9 +422,8 @@ class TentativasController < ApplicationController
           end
         end
       end
-      @result = Result.new
-      @result = @tentativa.results.build(:bateria_id=>bat_id,:output=>out)     
-      @result.save   
+
+#####FALTA GUARDAR RES AQUI
     }
   end
 

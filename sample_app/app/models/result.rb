@@ -1,20 +1,22 @@
 # == Schema Information
-# Schema version: 20110113200625
+# Schema version: 20110228222423
 #
 # Table name: results
 #
 #  id           :integer         not null, primary key
-#  bateria_id   :integer
-#  tentativa_id :integer
-#  output       :string(255)
 #  created_at   :datetime
 #  updated_at   :datetime
+#  user_id      :integer
+#  concurso_id  :integer
+#  enunciado_id :integer
+#  bestRes      :float
 #
 
 class Result < ActiveRecord::Base
-  	belongs_to :tentativa
+  	belongs_to :user
   	
-  	attr_accessible :bateria_id, :tentativa_id, :output
+  	attr_accessible :enunciado_id, :concurso_id, :bestRes
   	
+  	validates :user_id, :presence => true
   
 end

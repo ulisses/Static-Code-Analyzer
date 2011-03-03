@@ -8,6 +8,14 @@ module EnunciadoHelper
     end
     return array
   end
+  
+  def arrayLang
+    array = Array.new
+    @languages.each do |l|
+      array << [l.ling,l.id]
+    end
+    return array
+  end
 
   def nums
     array = Array.new
