@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110228222423
+# Schema version: 20110305165245
 #
 # Table name: results
 #
@@ -10,6 +10,7 @@
 #  concurso_id  :integer
 #  enunciado_id :integer
 #  bestRes      :float
+#  tentativa_id :integer
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

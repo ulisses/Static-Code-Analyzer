@@ -1,0 +1,24 @@
+<tr>
+<td><%= link_to result.id, result %></td>
+<% tentativa = Tentativa.find(result.tentativa_id)%>
+<td><%= link_to tentativa.id, tentativa %></td>
+<td><%= link_to current_user.name, current_user %></td>
+<% enunciado = Enunciado.find(result.enunciado_id)%>	
+<% if !@concurso%>
+		
+		<% concurso = Concurso.find(enunciado.concurso_id)%>
+	<td>
+		<%= link_to concurso.tit, concurso %>
+		<% if concursoActivo(concurso) %>
+			 <span style="color:green">(Activo)</span> 
+		<% else %>
+		 	<span style="color:red">(Inactivo)</span> 
+		<% end %>
+	</td>
+<% end %>	
+			
+	<td><%= link_to enunciado.titulo, enunciado %></td>
+
+<td><%= result.bestRes %></td>
+
+</tr>

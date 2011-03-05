@@ -10,18 +10,18 @@ class TentativasController < ApplicationController
       @user = current_user      
       @enunciado = Enunciado.find(params[:enunciado_id])
       @concurso = Concurso.find(@enunciado.concurso_id)
-      @tentativas = Tentativa.where(:user_id=>current_user.id, :enunciado_id=>@enunciado.id).paginate(:page => params[:page])
+      @tentativas = Tentativa.where(:user_id=>current_user.id, :enunciado_id=>@enunciado.id).order('created_at DESC').paginate(:page => params[:page])
     else
       if (params[:user_id])
         @user = current_user
-        @tentativas = Tentativa.where(:user_id=>current_user.id).paginate(:page => params[:page])
+        @tentativas = Tentativa.where(:user_id=>current_user.id).order('created_at DESC').paginate(:page => params[:page])
       else
         if (params[:enunciado_id])
           @enunciado = Enunciado.find(params[:enunciado_id])
           @concurso = Concurso.find(@enunciado.concurso_id)
-          @tentativas = @enunciado.tentativas.paginate(:page => params[:page])
+          @tentativas = @enunciado.tentativas.order('created_at DESC').paginate(:page => params[:page])
         else
-          @tentativas = Tentativa.all.paginate(:page => params[:page])
+          @tentativas = Tentativa.order('created_at DESC').paginate(:page => params[:page])
       end
     end
   end
@@ -31,6 +31,8 @@ class TentativasController < ApplicationController
   def create
   	@enunciado = Enunciado.find(params[:enunciado_id])
     @erros = ""
+    @executavel = ""
+    @user = current_user
     
   	if (params[:tentativa])
   	  
@@ -40,8 +42,8 @@ class TentativasController < ApplicationController
   	    tryToDescompact(path)
 	    end
       params[:tentativa][:execStop] = false
-      params[:tentativa][:tExec] = -1
-
+      params[:tentativa][:tExec] = -1      
+      
 	    case params[:commit]
         when "Submeter tentativa - Codigo" 
           trataSource(path)
@@ -128,10 +130,12 @@ class TentativasController < ApplicationController
       
     params[:tentativa][:user_id] = params[:user_id]
 
-    guardaMelhorResultado
-
+    
    	@tentativa = @enunciado.tentativas.build(params[:tentativa])
      if @tentativa.save
+       @user = current_user
+       guardaMelhorResultado
+       
        if @erros.empty?
          flash[:success] = "Tentativa submetida com sucesso! A sua tentativa passou todos os testes a que foi submetida."
        else
@@ -150,23 +154,29 @@ class TentativasController < ApplicationController
 	  file = File.basename(path) 
 	  #dir passa a ser a pasta na qual trabalhamos
 	  dir = File.dirname(path)
-	  #se existir o ficheiro a.out apaga-o
-	  if File.exists?(dir + "/a.out")
-	    File.delete(dir + "/a.out")
-    end
-    #tenta compilar
-    `cd #{dir} && gcc #{file}`
-    #se a.out existe compilou, se nao, nao compilou
-    if File.exists?(dir + "/a.out")
-      params[:tentativa][:compilou] = true
-      execGeral(dir)
-	    File.delete(dir + "/a.out")
+	  
+	  #se a linguagem nao for compilada passa para a execução
+	  lang = Language.find(params[:tentativa][:language_id])
+	  if lang.compString.eql? "" && !(lang.execString.eql? "")
+      params[:tentativa][:compilou] = false	    
+	    execGeral(dir)
+	    
     else
-      params[:tentativa][:compilou] = false
-      flash[:error] = "A tentativa submetida nao compilou!"
+      #tenta compilar
+      compString = lang.compString
+      compString = compString.gsub("\#{file}",file)
+      final = "cd " + dir + " && " + compString
+      comp = system(final)
+    
+      #se compilou, executa
+      if params[:tentativa][:compilou] = comp
+        execGeral(dir)
+      else
+        params[:tentativa][:compilou] = false
+        params[:tentativa][:passedTests] = 0
+        @erros+= "A tentativa submetida nao compilou!"
+      end
     end
-	  #flash[:error] = "gcc " + params[:tentativa][:path]
-	  #compileRes.empty? ? params[:tentativa][:compilou] = true : params[:tentativa][:compilou] = false
   end
   
   def execGeral(dir)
@@ -206,11 +216,20 @@ class TentativasController < ApplicationController
   
   def execEach(bateria,dir)
     input = bateria.input
+
+    #tratar a string de execuçao
+    if @executavel.eql? ""
+      execString = Language.find(params[:tentativa][:language_id]).execString
+    else
+      execString = Language.find(params[:tentativa][:language_id]).complexExecString
+      execString = compString.gsub("\#{file}",@executavel)      
+    end
+    execString = "cd " + dir + " && " + execString
     
     #thread que executa o a.out 
     out = "default";i=0
     exec = Thread.new do
-      out = `cd #{dir} && ./a.out #{input}`
+      out = `#{execString} #{input}`
     end
     
     #thread que conta x segundos e dps termina a execucao do programa
@@ -282,11 +301,13 @@ class TentativasController < ApplicationController
   end
   
   def guardaMelhorResultado
-    res = current_user.results.where(:enunciado_id=>@enunciado.id,:concurso_id=>@enunciado.concurso_id)
+    res = @user.results.where(:enunciado_id=>@enunciado.id,:concurso_id=>@enunciado.concurso_id)
+
     if res.size == 0
-      r = current_user.results.build(:enunciado_id=>@enunciado.id,
+      r = @user.results.build(:enunciado_id=>@enunciado.id,
                                  :concurso_id=>@enunciado.concurso_id,
-                                 :bestRes=>params[:tentativa][:passedTests]);
+                                 :bestRes=>params[:tentativa][:passedTests],
+                                 :tentativa_id=>@tentativa.id);
       r.save
     else
       result = res.first
@@ -295,6 +316,7 @@ class TentativasController < ApplicationController
         result.save
       end
     end
+
   end
   ##########################       ############################
   
@@ -399,16 +421,52 @@ class TentativasController < ApplicationController
         comp = false
       end
     }
+    
     source_name=""
     REXML::XPath.each( doc, "//codigoFonte" ){ |codigoFonte_element|
       source_name = codigoFonte_element.text
     }
-
     path_para_source = File.join(File.dirname(xml_file_path),source_name)
     
+    execStop = false
+    REXML::XPath.each( doc, "//execStop" ){ |execStop_element|
+      if execStop_element.text == "true"
+        execStop = true
+      else
+        execStop = false
+      end
+    }
+    
+    passedTests = 0
+    REXML::XPath.each( doc, "//passedTests" ){ |passedTests_element|
+      passedTests = passedTests_element.text.to_f
+    }
+    
+    tExec = 0
+    REXML::XPath.each( doc, "//tExec" ){ |tExec_element|
+      tExec = tExec_element.text.to_f
+    }
+    
+    language_id = 0
+    REXML::XPath.each( doc, "//language_id" ){ |language_id_element|
+      language_id = language_id_element.text.to_i
+    }
+    
+    
+    params[:tentativa][:user_id] = user
+    params[:tentativa][:path] = path_para_source 
+    params[:tentativa][:compilou] = comp
+    params[:tentativa][:execStop] = execStop           
+    params[:tentativa][:passedTests] = passedTests
+    params[:tentativa][:tExec] = tExec
+    params[:tentativa][:language_id] = language_id 
+             
     @tentativa = Tentativa.new
-    @tentativa = @enunciado.tentativas.build(:user_id=>user,:path=>path_para_source,:compilou=>comp)
+    @tentativa = @enunciado.tentativas.build(params[:tentativa])                                          
     @tentativa.save
+
+    @user = User.find(user)
+    guardaMelhorResultado
     
     bat_id=0
     out = ""
@@ -422,9 +480,8 @@ class TentativasController < ApplicationController
           end
         end
       end
-
-#####FALTA GUARDAR RES AQUI
     }
+    
   end
 
   

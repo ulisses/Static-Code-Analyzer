@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110303170356) do
+ActiveRecord::Schema.define(:version => 20110305165245) do
 
   create_table "baterias", :force => true do |t|
     t.string   "nome"
@@ -68,6 +68,9 @@ ActiveRecord::Schema.define(:version => 20110303170356) do
     t.string   "ling"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "compString"
+    t.string   "execString"
+    t.string   "complexExecString"
   end
 
   create_table "participantes", :force => true do |t|
@@ -85,6 +88,7 @@ ActiveRecord::Schema.define(:version => 20110303170356) do
     t.integer  "concurso_id"
     t.integer  "enunciado_id"
     t.float    "bestRes"
+    t.integer  "tentativa_id"
   end
 
   create_table "tentativas", :force => true do |t|

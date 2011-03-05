@@ -1,9 +1,60 @@
-<h1>Últimas tentativas</h1>
+<table class="tentativas" summary="Informacao das tentativas">
+	<tr>
+		<td>
+			<h1>Melhores resultados por enunciado</h1>
+			
+			<% if @user %>
+				<% if @user.admin? %><b>Docente: </b><% else %><b>Grupo: </b><% end %>
+				<%= link_to @user.name, @user %><br/>
+			<% end %>
+			
+			<% if @concurso %>
+				<b>Concurso:</b>
+				<%= link_to @concurso.tit, @concurso %>
+				<% if concursoActivo(@concurso) %>
+					 <span style="color:green">(Activo)</span> 
+				<% else %>
+				 	<span style="color:red">(Inactivo)</span> 
+				<% end %>
+			<% end %>
+			<br/>
+			
+			<% if @results %>
+			
+				<%= will_paginate %>
+			
+				<ul class="tentativas">
+					<table border="1">
+						<tr>
+							<td>Num Resultdado</td>
+							<td>Tentativa respectiva</td>
+							<% if !@user%>
+								<td>Grupo</td>
+							<% end %>
+							<% if !@concurso%>
+								<td>Concurso</td>
+							<% end %>
+								<td>Enunciado</td>
+							<td>Resultado</td>													
+						</tr>
+				  		<%= render @results %>
+					</table>
+				</ul>
+	
+				<%= will_paginate %>
+			<% else %>	
+				<ul class="tentativas">
+					Actualmente não existem resultados para apresentar!
+				</ul>
+			<% end %>	
+			</td>
+			
+			
+		<td class="sidebar round">
 
-<% if @tentativas %>
+		</td>
+	
+	</tr>
+</table>
 
-	<ul class="users">
-	  <%= render "results/tentativa" %>
-	</ul>
 
-<% end %>

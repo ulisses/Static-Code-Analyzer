@@ -6,8 +6,23 @@
 			<%= form_for @language do |f| %>
 			  <%= render 'shared/error_messages', :object => f.object %>
 			  <div class="field">
-				<%= f.label :ling %><br />
+				<%= f.label "Nome da linguagem" %><br />
 				<%= f.text_field :ling %>
+			  </div>
+				<div class="field">
+				<%= f.label "String usada para compilar" %><br/>
+				(coloque #{file} aonde colocaria o nome do ficheiro a compilar)<br/>
+				<%= f.text_field :compString %>
+			  	</div>
+				<div class="field">
+				<%= f.label "Sring usada para executar" %><br/>
+				(no lugar do nome do executavel coloque o nome default do ficheiro (ex:a.out))<br/>
+				<%= f.text_field :execString %>
+			  </div>
+				<div class="field">
+				<%= f.label "Sring usada para executar" %><br/>
+				(coloque #{file} aonde colocaria o nome do ficheiro a executar)<br/>
+				<%= f.text_field :complexExecString %>
 			  </div>
 			  <div class="actions">
 				<%= f.submit "Criar" %>

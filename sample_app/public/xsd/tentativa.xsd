@@ -4,7 +4,7 @@
         <tt:complexType>
             <tt:sequence>
                 
-                <tt:element name="user_id"/>
+                <tt:element name="user_id" type="tt:integer"/>
                 
                 <tt:element name="datetime" type="tt:dateTime"/>
                 
@@ -28,7 +28,11 @@
                 
     
                <tt:element name="codigoFonte" type="tt:string"/>
-    
+                
+               <tt:element name="execStop" type="tt:boolean"/>
+               <tt:element name="passedTests" type="tt:float"/>
+               <tt:element name="tExec" type="tt:float"/>
+               <tt:element name="language_id" type="tt:integer"/>                
 
             </tt:sequence>
         </tt:complexType>
