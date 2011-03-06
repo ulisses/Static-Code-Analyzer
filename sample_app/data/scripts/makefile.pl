@@ -1,10 +1,13 @@
 use Makefile::Parser;
+use Getopt::Long;
 
 #use this way:
-#	perl makefile.pl makefile
+#	perl makefile.pl -open makefile
 
-$parser = Makefile::Parser->new($ARGV[0]);
-$parser->parse() or die Makefile::Parser->error;
+GetOptions("open=s"       => \$_opt_makefile);
+
+$parser = Makefile::Parser->new($_opt_makefile);
+$parser->parse($_opt_makefile) or die Makefile::Parser->error;
 
 @l = $parser->target->commands;
 $command = @l[-1];

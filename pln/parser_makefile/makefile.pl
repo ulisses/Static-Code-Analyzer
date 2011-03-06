@@ -3,6 +3,9 @@ use Makefile::Parser;
 #use this way:
 #	perl makefile.pl makefile
 
+
+#open(FILESOURCE,'<',$file_source_name) or warn "can't open $file_source_name\n";
+
 $parser = Makefile::Parser->new($ARGV[0]);
 $parser->parse() or die Makefile::Parser->error;
 
