@@ -125,7 +125,7 @@ class TentativasController < ApplicationController
         params[:tentativa][:path]=path
         compile##falta por isto a funcar bem
       else
-        ##qualquer coisa como encntrar e correr o make file e so dps executar..
+        trataMake(path)
     end
       
     params[:tentativa][:user_id] = params[:user_id]
@@ -134,9 +134,8 @@ class TentativasController < ApplicationController
    	@tentativa = @enunciado.tentativas.build(params[:tentativa])
      if @tentativa.save
        @user = current_user
-       guardaMelhorResultado
-       
        if @erros.empty?
+         guardaMelhorResultado
          flash[:success] = "Tentativa submetida com sucesso! A sua tentativa passou todos os testes a que foi submetida."
        else
          flash[:error] = @erros
@@ -177,6 +176,40 @@ class TentativasController < ApplicationController
         @erros+= "A tentativa submetida nao compilou!"
       end
     end
+  end
+  
+  def trataMake(path)
+    dir = File.dirname(path)
+    
+    #verifica se existe makefile
+    if File.exists?(File.join(dir,"makefile")) 
+      makefile = "makefile"
+    else
+      if File.exists?(File.join(dir,"Makefile")) 
+        makefile = "Makefile"
+      else
+        @erros+= "Dentro da pasta compactada nao foi encontrado nenhum makefile!"
+        return
+      end
+    end
+
+    params[:tentativa][:path]=dir + "/"+makefile
+    #correr o sript, ver se corre bem, e apanhar o output-...
+    ok = system("cd data/scripts/ && " + "perl makefile.pl " + dir + "/" +makefile )
+    st = "cd data/scripts/ && pwd" + "perl makefile.pl " + dir + "/" +makefile
+    @erros+= "cd data/scripts/ && pwd" + "perl makefile.pl " + dir + "/" +makefile
+    
+    if ok
+      params[:tentativa][:compilou] = true
+      execName = `cd data/scripts/ && perl makefile.pl #{dir}/#{makefile}`
+    else
+      params[:tentativa][:compilou] = false      
+      @erros+= "Nao foi possivel extrair o nome do executavel a partir do makefile."
+    end
+      params[:tentativa][:passedTests]=0
+      
+
+    
   end
   
   def execGeral(dir)
