@@ -1,0 +1,8 @@
+\beamer@endinputifotherversion {3.07pt}
+\select@language {english}
+\beamer@sectionintoc {1}{Motiva\IeC {\c c}\IeC {\~a}o e Tecnologias}{2}{0}{1}
+\beamer@sectionintoc {2}{Contextualiza\IeC {\c c}\IeC {\~a}o}{5}{0}{2}
+\beamer@sectionintoc {3}{Modela\IeC {\c c}\IeC {\~a}o}{9}{0}{3}
+\beamer@subsectionintoc {3}{1}{Modela\IeC {\c c}\IeC {\~a}o de dados}{16}{0}{3}
+\beamer@subsubsectionintoc {0}{3}{1}{1}{19}{3}{XML}
+\beamer@subsubsectionintoc {0}{3}{1}{2}{24}{3}{XSD}
