@@ -194,20 +194,28 @@ class TentativasController < ApplicationController
     end
 
     params[:tentativa][:path]=dir + "/"+makefile
-    #correr o sript, ver se corre bem, e apanhar o output-...
-    ok = system("cd data/scripts/ && " + "perl makefile.pl " + dir + "/" +makefile )
-    st = "cd data/scripts/ && pwd" + "perl makefile.pl " + dir + "/" +makefile
-    @erros+= "cd data/scripts/ && pwd" + "perl makefile.pl " + dir + "/" +makefile
     
-    if ok
-      params[:tentativa][:compilou] = true
-      execName = `cd data/scripts/ && perl makefile.pl #{dir}/#{makefile}`
-    else
-      params[:tentativa][:compilou] = false      
-      @erros+= "Nao foi possivel extrair o nome do executavel a partir do makefile."
-    end
-      params[:tentativa][:passedTests]=0
+    #tentar fazer make
+    make = system("cd "+ dir + " && make")
+    if make
       
+      #correr o sript, ver se corre bem
+      ok = system("cd data/scripts/ && " + "perl makefile.pl -open " + dir + "/" +makefile )
+    
+      #se correr apanhar o nome do executavel
+      if ok
+        params[:tentativa][:compilou] = true
+        getExecName = "cd data/scripts/ &&" + "perl makefile.pl -open " + dir + "/" +makefile
+        @executavel = `#{getExecName}`
+        execGeral(dir)
+      else
+        params[:tentativa][:compilou] = false      
+        @erros+= "Nao foi possivel extrair o nome do executavel a partir do makefile."
+      end
+      
+    else
+      @erros+="O comando make nao foi efectuado com sucesso!"
+    end  
 
     
   end
@@ -255,7 +263,7 @@ class TentativasController < ApplicationController
       execString = Language.find(params[:tentativa][:language_id]).execString
     else
       execString = Language.find(params[:tentativa][:language_id]).complexExecString
-      execString = compString.gsub("\#{file}",@executavel)      
+      execString = execString.gsub("\#{file}",@executavel)      
     end
     execString = "cd " + dir + " && " + execString
     
