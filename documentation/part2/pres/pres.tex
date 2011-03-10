@@ -166,6 +166,18 @@ Projecto integrado
    \titlepage
 \end{frame}
 
+\section{Até agora}
+\begin{frame} \frametitle{Até agora:}
+Concretizado até ao ínicio da segunda fase:
+\begin{itemize}
+\item Modelação formal e informal do problema
+\item Modelo de dados
+\item Descrição do sistema
+\item Ínicio da implementação e respectivo tool demo
+\end{itemize}
+\end{frame}
+
+
 \section{Objectivos}
 \pgfdeclareimage[width=.8\textwidth]{topo}{images/topo}
 
@@ -180,30 +192,34 @@ Objectivos para segunda fase:
 \end{frame}
 
 \section{Aplicação Web}
-\begin{frame} \frametitle{Implementação:}
+
+\subsection{Implementação: até à segunda fase}
+\begin{frame} \frametitle{Implementação: até à segunda fase}
 Já implementado para o último checkpoint:
 \begin{itemize}
 \item Criação de contas de utilizador (grupo)
 \item Associação de concorrentes a determinado grupo
 \item Criação de concursos
 \item Criação de enunciados (através da interface web ou submetendo em formato xml)
-\item Inserção baterias de teste para os enunciados
+\item Inserção de baterias de teste para os enunciados
 \item Submissão de programas para avaliação
 \end{itemize}
 \end{frame}
 
+\subsection{Implementação: linguagens de programação}
 \begin{frame} \frametitle{Implementação: linguagens de programação}
 Configuração de linguagens de programação:
 \begin{itemize}
 \item Estando a linguagem correctamente configurada no servidor, é 
 simples preparar o sistema de submissão para avaliar código submetido nessa linguagem
-\item Para isso basta inserir o comando usado para compilar e para executar, que em c seria:\\
+\item Para isso basta inserir o comando usado para compilar e para executar, que por exemplo, em C seria:\\
 String compilação: \textit{gcc -O2 -Wall \#\{file\}}\\
 String de execução default: \textit{./a.out}\\
-String de execução para makefile: \textit{./\#\{file\}}\\
+String de execução para makefile: \textit{./\#\{file\}}
 \end{itemize}
 \end{frame}
 
+\subsection{Implementação: Compilação}
 \begin{frame} \frametitle{Implementação: Compilação}
 \begin{itemize}
 \item Caso seja necessário compilar o código fonte submetido, é usada a string de compilação definida
@@ -213,6 +229,7 @@ o nome do executável criado é obtido a partir de um script perl
 \end{itemize}
 \end{frame}
 
+\subsection{Implementação: Execução}
 \begin{frame} \frametitle{Implementação: Execução}
 \begin{itemize}
 \item Para executar o programa para os diferentes inputs, é usada a string de execução simples (no caso de ser submetido
@@ -234,8 +251,8 @@ participantes)
 \section{Scripts Auxiliares}
 \begin{frame} \frametitle{Scripts auxiliares}
 \begin{itemize} 
-\item Script para obter o nome do executável gerado pelo makefile (em c)
-\item Script que gera estatísticas relativamente à quantidade de ficheiros submetidos para cada linguagem de programação
+\item Script (em Perl) para obter o nome do executável gerado pelo makefile (para C)
+\item Script (em Perl) que gera estatísticas relativamente à quantidade de ficheiros submetidos para cada linguagem de programação
 \end{itemize}
 \end{frame}
 
@@ -256,6 +273,14 @@ participantes)
 \section{Frontend}
 \begin{frame} \frametitle{Language.C}
 \end{frame}
+
+\section{Conclusão e trabalho futuro}
+\begin{frame} \frametitle{Conclusão e trabalho futuro}
+\begin{itemize} 
+\item Tornar a interface utilizador mais intuitiva e mais agradável à vista
+\end{itemize}
+\end{frame}
+
 
 \section*{Perguntas}
 \begin{frame} \frametitle{Perguntas}

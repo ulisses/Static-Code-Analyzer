@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.3.15)  7 MAR 2011 16:36
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.3.15)  10 MAR 2011 11:59
 entering extended mode
  %&-line parsing enabled.
 **pres.tex
@@ -1133,54 +1133,70 @@ LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <4> not available
 ]
 (./pres.toc) [2
 
+] [3
+
+] (./pres.toc) [4
+
 ]
 
 Package pgf Warning: File "images/topo" not found when defining image "topo".
 (pgf)                Tried all extensions in ".pdf:.jpg:.jpeg:.png:" on input l
-ine 170.
+ine 182.
 
 
 Package pgf Warning: Missing height for image "topo" in draft mode.
-(pgf)                Using 1cm instead on input line 170.
+(pgf)                Using 1cm instead on input line 182.
 
-[3
+[5
 
-] (./pres.toc) [4
+] (./pres.toc) [6
 
-] [5
+] (./pres.toc) [7
+
+] [8
+
+] (./pres.toc) [9
 
 ]
-LaTeX Font Info:    Try loading font information for OMS+cmss on input line 205
+LaTeX Font Info:    Try loading font information for OMS+cmss on input line 220
 .
-LaTeX Font Info:    No file OMScmss.fd. on input line 205.
+LaTeX Font Info:    No file OMScmss.fd. on input line 220.
 
 
 LaTeX Font Warning: Font shape `OMS/cmss/m/it' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbraceleft' on input line 205.
+(Font)              for symbol `textbraceleft' on input line 220.
 
-[6
+[10
 
-] [7
-
-] [8
-
-] [9
-
-] (./pres.toc) [10
-
-] [11
+] (./pres.toc) [11
 
 ] [12
 
-] [13
+] (./pres.toc) [13
 
-] (./pres.toc) [14
+] [14
 
 ] [15
 
+] (./pres.toc) [16
+
 ]
-[16
+[17
+
+] [18
+
+] [19
+
+] (./pres.toc) [20
+
+] [21
+
+] (./pres.toc) [22
+
+] [23
+
+] [24
 
 ]
 \tf@nav=\write7
@@ -1202,22 +1218,22 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 18106 strings out of 493848
- 301261 string characters out of 3149207
- 437835 words of memory out of 3000000
- 20881 multiletter control sequences out of 15000+200000
+ 18218 strings out of 493848
+ 303138 string characters out of 3149207
+ 443835 words of memory out of 3000000
+ 20959 multiletter control sequences out of 15000+200000
  7514 words of font info for 30 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 45i,20n,64p,332b,776s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 45i,20n,67p,332b,776s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb
 ></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb>
 </usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmss17.pfb><
 /usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></u
 sr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></u
 sr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on pres.pdf (16 pages, 116841 bytes).
+Output written on pres.pdf (24 pages, 184323 bytes).
 PDF statistics:
- 259 PDF objects out of 1000 (max. 8388607)
- 38 named destinations out of 1000 (max. 500000)
- 107 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 575 PDF objects out of 1000 (max. 8388607)
+ 60 named destinations out of 1000 (max. 500000)
+ 169 words of extra memory for PDF output out of 10000 (max. 10000000)
 
