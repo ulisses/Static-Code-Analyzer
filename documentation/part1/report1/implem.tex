@@ -1,0 +1,23 @@
+\chapter{Implementação} \label{chap implem}
+
+Neste capítulo vamos expôr alguns pormenores relacionados com a implementação do problema proposto.
+
+\section{Linguagens de programação}\label{sec lps}
+O nosso sistema é multilingue, ou seja, é possível submeter código fonte em várias linguagens de programação diferentes, desde que 
+a linguagem tenha sido correctamente configurada por um docente.
+Cada linguagem é caracterizada por uma séria de campos, os quais serão explicados de seguida:
+\begin{itemize}
+\item string de compilação : string que será executada quando se pretender compilar determinado código fonte. Esta string tem a
+particularidade de no lugar em que é suposto conter o nome do ficheiro a compilar, contém \textit{#{file}}.\\
+Desta forma a string de compilação torna-se genérica, e idependente do nome do ficheiro a compilar.
+exemplo: gcc -O2 -Wall #{file}
+
+\item string simples de execução
+
+\end{itemize}
+
+
+\section{Compilação}\label{sec comp}
+
+Para começarmos a explicar como se procede à compilação do código submetido, quando tal é necessário, temos primeiro de explicar que o
+nosso sistema permite a 
