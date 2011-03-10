@@ -61,9 +61,61 @@ sub get_users {
   print "\n";
 }
 
-get_concorrentes();
+sub findall {
+  my $input;
+  my $flag = 1;
+
+  while($flag){
+
+	system("clear");
+
+	print " Lista de: ",
+		"\n\t1 - Users",
+		"\n\t2 - Concorrentes",
+		"\n\t3 - Enunciados",
+		"\n\t4 - Concursos",
+		"\n\t5 - Linguagens",
+		"\n\n";
+
+	chomp($input = <STDIN>);
+		
+	$input == 1 && do {
+		get_users();
+		
+	};
+	$input == 2 && do {
+		get_concorrentes();
+
+	};
+	$input == 3 && do {
+		get_enunciados();
+
+	};
+	$input == 4 && do {
+		get_concursos();
+
+	};
+	$input == 5 && do {
+		get_languages();
+
+	};
+
+	print "\n<======>\nContinuar com as pesquisas? [S/N]\n";
+	chomp($input = <STDIN>);
+	if($input eq "N" || $input eq "n") {$flag = 0;}
+  }
+
+}
+
+
+main:
+{
+
+findall();
+
+#get_concorrentes();
 #get_concursos();
 #get_enunciados();
 #get_languages();
 #get_users();
-
+}
