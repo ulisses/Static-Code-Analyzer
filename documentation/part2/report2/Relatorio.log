@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live/MacPorts 2009_6) (format=pdflatex 2010.9.7)  12 DEC 2010 22:28
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live/MacPorts 2009_6) (format=pdflatex 2010.9.7)  10 MAR 2011 19:50
 entering extended mode
  %&-line parsing enabled.
 **Relatorio.tex
@@ -772,7 +772,7 @@ driver: pdftex
 
 (1in=72.27pt, 1cm=28.45pt)
 -----------------------
-<Images/DI-UM.png, id=55, 274.02374pt x 101.62968pt>
+<Images/DI-UM.png, id=80, 274.02374pt x 101.62968pt>
 File: Images/DI-UM.png Graphic file (type png)
  <use Images/DI-UM.png>
 LaTeX Font Info:    Try loading font information for U+msa on input line 158.
@@ -804,7 +804,24 @@ l.170 \include{abstract}
                          [1
 
 
-] (./Relatorio.toc)
+] (./Relatorio.toc
+
+! Package inputenc Error: Unicode char \u 8:\GenericError {(inputenc)          
+      }{Package inputenc Error: Unicode char \u8:Á„o not set up for use with La
+TeX}{See the inputenc package documentation for explanation.}{Your command was 
+ignored.
+(inputenc) Type  I <command> <return>  to replace it with another command,
+(inputenc) or  <return>  to continue without it.} not set up for use with LaTeX
+.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.25 ...ontinue without it.} Web}{18}{section*.15}
+                                                  
+? 
+)
 \tf@toc=\write5
 \openout5 = `Relatorio.toc'.
 
@@ -817,8 +834,7 @@ l.170 \include{abstract}
 
  [3
 
-]
-(./Relatorio.lot)
+] (./Relatorio.lot)
 \tf@lot=\write7
 \openout7 = `Relatorio.lot'.
 
@@ -924,7 +940,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 11--15
 
  []
 
-<Images/EL-PI.png, id=129, 1525.7pt x 1257.69875pt>
+<Images/EL-PI.png, id=162, 1525.7pt x 1257.69875pt>
 File: Images/EL-PI.png Graphic file (type png)
  <use Images/EL-PI.png>
 Underfull \hbox (badness 10000) in paragraph at lines 23--25
@@ -1149,11 +1165,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 230--232
 
  []
 
-<Images/grupo-docente.jpeg, id=157, 1314.9125pt x 929.4725pt>
+<Images/grupo-docente.jpeg, id=190, 1314.9125pt x 929.4725pt>
 File: Images/grupo-docente.jpeg Graphic file (type jpg)
 
 <use Images/grupo-docente.jpeg>
-<Images/concurso-enunciado.jpeg, id=158, 1314.9125pt x 929.4725pt>
+<Images/concurso-enunciado.jpeg, id=191, 1314.9125pt x 929.4725pt>
 File: Images/concurso-enunciado.jpeg Graphic file (type jpg)
 
 <use Images/concurso-enunciado.jpeg>
@@ -1215,39 +1231,99 @@ Underfull \hbox (badness 10000) in paragraph at lines 348--349
 
  []
 
-<Images/enunciado_schema.jpg, id=186, 708.6475pt x 678.535pt>
+<Images/enunciado_schema.jpg, id=219, 708.6475pt x 678.535pt>
 File: Images/enunciado_schema.jpg Graphic file (type jpg)
 
 <use Images/enunciado_schema.jpg>
-<Images/tentativa_schema.jpg, id=187, 703.62875pt x 658.46pt>
+<Images/tentativa_schema.jpg, id=220, 703.62875pt x 658.46pt>
 File: Images/tentativa_schema.jpg Graphic file (type jpg)
 
 <use Images/tentativa_schema.jpg>) [14 <./Images/enunciado_schema.jpg (PNG copy
-)>] [15 <./Images/tentativa_schema.jpg (PNG copy)>] (./conc.tex
+)>] [15 <./Images/tentativa_schema.jpg (PNG copy)>] (./implem.tex
 Cap\'{\i }tulo 3.
+
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 5.
+
+! Illegal parameter number in definition of \reserved@a.
+<to be read again> 
+                   {
+l.11 ...heiro a compilar, cont√©m \textit{#{file}}
+                                                  .\\
+? 
+! Illegal parameter number in definition of \reserved@b.
+<to be read again> 
+                   }
+l.11 ...heiro a compilar, cont√©m \textit{#{file}}
+                                                  .\\
+? 
+! You can't use `macro parameter character #' in horizontal mode.
+<recently read> ##
+                  
+l.11 ...heiro a compilar, cont√©m \textit{#{file}}
+                                                  .\\
+? 
+! You can't use `macro parameter character #' in horizontal mode.
+l.13 exemplo: gcc -O2 -Wall #
+                             {file}
+? 
+) [16
+
+] (./metricas.tex
+Cap\'{\i }tulo 4.
+) [17
+
+] (./web.tex
+Cap\'{\i }tulo 5.
+
+! Package inputenc Error: Unicode char \u8:Á„o not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \chapter{AplicaÁ„o Web}
+                           
+? 
+) [18
+
+] (./perlz.tex
+Cap\'{\i }tulo 6.
+) [19
+
+] (./scripts.tex
+Cap\'{\i }tulo 7.
+) [20
+
+] (./frontend.tex
+Cap\'{\i }tulo 8.
+) [21
+
+] (./conc.tex
+Cap\'{\i }tulo 9.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 2--182
+Underfull \hbox (badness 10000) in paragraph at lines 2--194
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2--182
+Underfull \hbox (badness 10000) in paragraph at lines 2--194
 
  []
 
-[16
+[22
 
 ]
 No file Relatorio.bbl.
 AED: lastpage setting LastPage (./Relatorio.aux (./abstract.aux)) ) 
 Here is how much of TeX's memory you used:
- 9684 strings out of 495061
- 132476 string characters out of 3181965
- 369354 words of memory out of 3000000
- 12558 multiletter control sequences out of 15000+200000
+ 9714 strings out of 495061
+ 132751 string characters out of 3181965
+ 369496 words of memory out of 3000000
+ 12563 multiletter control sequences out of 15000+200000
  23417 words of font info for 55 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 38i,12n,43p,322b,1790s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,12n,43p,454b,1790s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/opt/local/
 share/texmf-texlive-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</opt/local/s
 hare/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></opt/local/s
@@ -1269,9 +1345,9 @@ xlive-dist/fonts/type1/public/cm-super/sfrm0900.pfb></opt/local/share/texmf-tex
 live-dist/fonts/type1/public/cm-super/sfrm1000.pfb></opt/local/share/texmf-texl
 ive-dist/fonts/type1/public/cm-super/sfti1000.pfb></opt/local/share/texmf-texli
 ve-dist/fonts/type1/public/cm-super/sftt0800.pfb>
-Output written on Relatorio.pdf (21 pages, 1351077 bytes).
+Output written on Relatorio.pdf (27 pages, 1364613 bytes).
 PDF statistics:
- 274 PDF objects out of 1000 (max. 8388607)
- 43 named destinations out of 1000 (max. 500000)
- 143 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 333 PDF objects out of 1000 (max. 8388607)
+ 50 named destinations out of 1000 (max. 500000)
+ 207 words of extra memory for PDF output out of 10000 (max. 10000000)
 
