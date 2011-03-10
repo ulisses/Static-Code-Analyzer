@@ -170,13 +170,12 @@ Projecto integrado
 \begin{frame} \frametitle{Até agora:}
 Concretizado até ao ínicio da segunda fase:
 \begin{itemize}
-\item Modelação formal e informal do problema
-\item Modelo de dados
-\item Descrição do sistema
-\item Ínicio da implementação e respectivo tool demo
+\item Descrição do sistema {\color{green}$\checkmark$}
+\item Modelação formal e informal do problema {\color{green}$\checkmark$}
+\item Modelo de dados {\color{green}$\checkmark$}
+\item Ínicio da implementação e respectivo tool demo {\color{green}$\checkmark$}
 \end{itemize}
 \end{frame}
-
 
 \section{Objectivos}
 \pgfdeclareimage[width=.8\textwidth]{topo}{images/topo}
@@ -185,9 +184,10 @@ Concretizado até ao ínicio da segunda fase:
 Objectivos para segunda fase:
 \begin{itemize}
 \item Terminar a aplicação web (compilar e executar o código fonte submetido)
-\item Apresentar resultados
+\item Investigação das métricas existentes
 \item Scripts auxiliares
 \item Exploração de um frontend
+\item Apresentar resultados
 \end{itemize}
 \end{frame}
 
@@ -258,15 +258,23 @@ participantes)
 
 \begin{frame} \frametitle{Script makefile.pl}
 \begin{itemize} 
-\item utiliza o módulo perl \textit{Makefile::Parser} para fazer parse do makefile, e obter o nome do executável gerado
-\item no caso de não ser definido um nome para o output, retorna \textit{a.out}
+\item Utiliza o módulo perl \textit{Makefile::Parser} para fazer parse do makefile, e obter o nome do executável gerado
+\item No caso de não ser definido um nome para o output, retorna \textit{a.out}
+\item TODO: Suportar mais linguagens par além do C.
 \end{itemize}
 \end{frame}
 
 \begin{frame} \frametitle{Script count.pl}
 \begin{itemize} 
-\item dada uma pasta, explora recursivamente os seus directórios, e conta o número de ficheiros para cada linguagem
-\item utiliza o módulo perl \textit{GD} para gerar gráficos
+\item Dada uma pasta, explora recursivamente os seus directórios, e extraí várias estatisticas relativas á quantidade de número de linhas
+  \begin{itemize}
+    \item Número de linhas de código por linguagem
+    \item Número de linhas comentadas por linguagem
+	\item Rácio entre linhas de código e número de ficheiros para cada linguagem
+	\item Percentagem de linguagem mais usadas no projecto
+	\item ...
+  \end{itemize}
+\item Utiliza o módulo perl \textit{GD} para gerar gráficos
 \end{itemize}
 \end{frame}
 
@@ -274,10 +282,15 @@ participantes)
 \begin{frame} \frametitle{Language.C}
 \end{frame}
 
+\section{Terminal Interface - Powered by Perl}
+\begin{frame} \frametitle{Terminal Interface}
+\end{frame}
+
 \section{Conclusão e trabalho futuro}
 \begin{frame} \frametitle{Conclusão e trabalho futuro}
-\begin{itemize} 
-\item Tornar a interface utilizador mais intuitiva e mais agradável à vista
+\begin{itemize}
+\item Implementar várias métricas para C com o FrontEnd
+\item Tornar a interface utilizador mais intuitiva e mais agradável de utilizar
 \end{itemize}
 \end{frame}
 
