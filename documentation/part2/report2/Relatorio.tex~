@@ -1,0 +1,189 @@
+%%!TEX encoding = UTF-8 Unicode 
+\documentclass[english,a4paper]{report}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[portuges]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[pdftex]{color,graphicx}
+% pretty collors.. :)
+\usepackage[a4paper, pdftex, bookmarks, colorlinks,citecolor=darkblue,linkcolor=darkblue,urlcolor=darkblue,filecolor=darkblue]{hyperref}
+%\usepackage{t1enc}
+%\usepackage{aeguill}
+\usepackage{varioref}
+\usepackage{fancyvrb}
+\usepackage{color}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{harvard}
+\usepackage{geometry}
+\usepackage{graphics}
+\usepackage{setspace}
+\usepackage{thumbpdf}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{alltt}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{color}
+\usepackage{url}
+\usepackage{epsf}
+\usepackage{listings}
+\usepackage[refpages]{gloss}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{slashbox}
+\usepackage{rotating}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{darkblue}{rgb}{0,0.1,0.5}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{gray_ulisses}{gray}{0.55}
+\definecolor{castanho_ulisses}{rgb}{0.71,0.33,0.14}
+\definecolor{preto_ulisses}{rgb}{0.41,0.20,0.04}
+\definecolor{green_ulises}{rgb}{0.2,0.75,0}
+
+\lstdefinelanguage{HaskellUlisses}
+{
+        basicstyle=\ttfamily\scriptsize,
+        %backgroundcolor=\color{yellow},
+        %frameshape={RYRYNYYYY}{yny}{yny}{RYRYNYYYY}, %contornos... muito nice...
+        sensitive=true,
+        morecomment=[l][\color{gray_ulisses}\ttfamily\tiny]{--},
+        morecomment=[s][\color{gray_ulisses}\ttfamily\tiny]{\{-}{-\}},
+        morestring=[b]",
+        stringstyle=\color{red},
+        showstringspaces=false,
+%       numbers=left,
+%       firstnumber=\thelstnumber,
+        numberstyle=\tiny,
+        numberblanklines=true,
+        showspaces=false,
+        breaklines=true,
+        showtabs=false,
+%       xleftmargin=15pt,
+%       xrightmargin=-20pt,
+        emph=
+        {[1]
+                FilePath,IOError,abs,acos,acosh,all,and,any,appendFile,approxRational,asTypeOf,asin,
+                asinh,atan,atan2,atanh,basicIORun,break,catch,ceiling,chr,compare,concat,concatMap,
+                const,cos,cosh,curry,cycle,decodeFloat,denominator,digitToInt,div,divMod,drop,
+                dropWhile,either,elem,encodeFloat,enumFrom,enumFromThen,enumFromThenTo,enumFromTo,
+                error,even,exp,exponent,fail,filter,flip,floatDigits,floatRadix,floatRange,floor,
+                fmap,foldl,foldl1,foldr,foldr1,fromDouble,fromEnum,fromInt,fromInteger,fromIntegral,
+                fromRational,fst,gcd,getChar,getContents,getLine,head,id,inRange,index,init,intToDigit,
+                interact,ioError,isAlpha,isAlphaNum,isAscii,isControl,isDenormalized,isDigit,isHexDigit,
+                isIEEE,isInfinite,isLower,isNaN,isNegativeZero,isOctDigit,isPrint,isSpace,isUpper,iterate,
+                last,lcm,length,lex,lexDigits,lexLitChar,lines,log,logBase,lookup,map,mapM,mapM_,max,
+                maxBound,maximum,maybe,min,minBound,minimum,mod,negate,not,notElem,null,numerator,odd,
+                or,ord,otherwise,pi,pred,primExitWith,print,product,properFraction,putChar,putStr,putStrLn,quot,
+                quotRem,range,rangeSize,read,readDec,readFile,readFloat,readHex,readIO,readInt,readList,readLitChar,
+                readLn,readOct,readParen,readSigned,reads,readsPrec,realToFrac,recip,rem,repeat,replicate,return,
+                reverse,round,scaleFloat,scanl,scanl1,scanr,scanr1,seq,sequence,sequence_,show,showChar,showInt,
+                showList,showLitChar,showParen,showSigned,showString,shows,showsPrec,significand,signum,sin,
+                sinh,snd,span,splitAt,sqrt,subtract,succ,sum,tail,take,takeWhile,tan,tanh,threadToIOResult,toEnum,
+                toInt,toInteger,toLower,toRational,toUpper,truncate,uncurry,undefined,unlines,until,unwords,unzip,
+                unzip3,userError,words,writeFile,zip,zip3,zipWith,zipWith3,listArray,doParse
+        },
+        emphstyle={[1]\color{blue}},
+        emph=
+        {[2]
+                Bool,Char,Double,Either,Float,IO,Integer,Int,Maybe,Ordering,Rational,Ratio,ReadS,ShowS,String,
+                Word8,InPacket
+        },
+        emphstyle={[2]\color{castanho_ulisses}},
+        emph=
+        {[3]
+                case,class,data,deriving,do,else,if,import,in,infixl,infixr,instance,let,
+                module,of,primitive,then,type,where
+        },
+        emphstyle={[3]\color{preto_ulisses}\textbf},
+        emph=
+        {[4]
+                quot,rem,div,mod,elem,notElem,seq
+        },
+        emphstyle={[4]\color{castanho_ulisses}\textbf},
+        emph=
+        {[5]
+                EQ,False,GT,Just,LT,Left,Nothing,Right,True,Show,Eq,Ord,Num
+        },
+        emphstyle={[5]\color{preto_ulisses}\textbf}
+}
+
+
+\geometry{verbose,a4paper,tmargin=30mm,bmargin=30mm,lmargin=30mm,rmargin=30mm}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{\markboth{ \thesection.\ \emph{#1}}{}}
+\renewcommand{\chaptermark}[1]{\markboth{ \thechapter.\ \emph{#1}}{}}
+
+\fancyhead[RO]{\leftmark}
+
+\fancyhead[LE]{\small{\it Visual Languages}}
+
+\fancyfoot[CE,CO]{\thepage}
+\lstset{basicstyle=\small,
+numbers=left, numberstyle=\tiny, numbersep=5pt,
+breaklines=true, mathescape=true, frame=tB}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.3\textwidth]{Images/DI-UM}
+\end{center}
+\end{figure}
+{\centering \large
+{\large\bf \textbf{Universidade do Minho} \\ Departamento de Informática}\\
+\vspace{1cm}
+\bf{Engenharia de Linguagens}\\
+\vspace{2cm}
+{\Large \bf {Projecto Integrado}}\\
+\vspace{1cm}
+{\LARGE \bf {\emph{Software} para Análise e Avaliação de Programas}}\\
+\vspace{1cm}
+%{\large \bf {}}
+\vspace{8.5cm}
+}
+
+\flushleft{ \emph{Grupo 2:\\}
+\vspace{0.4cm}
+\begin{tabular}{ll}
+José Pedro Silva & pg17628 \\
+Mário Ulisses Costa & pg15817 \\
+Pedro Faria & pg17684 \\
+\end{tabular}
+\\
+}
+\vspace {1.5cm}
+\textbf{Braga, \today}\\
+\pagebreak
+\end{titlepage}
+
+\include{abstract}
+\tableofcontents
+\listoffigures
+\listoftables
+\newpage
+\pagenumbering{arabic}
+\newpage
+\input{intro}
+\newpage
+\input{model}
+\newpage
+\input{implem}
+\newpage
+\input{conc}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{harvard}
+%\bibliographystyle{plain}
+\bibliography{bib}
+\end{document} 

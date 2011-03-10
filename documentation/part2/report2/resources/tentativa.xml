@@ -1,0 +1,46 @@
+<?xm l version="1.0" encoding="UTF-8"?>
+
+<Enunciado xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="tentativa.xsd">
+    <idConcurso>1</idConcurso>
+    <idEnunciado>1</idEnunciado>
+    <idGrupo>36</idGrupo>
+    
+    <data>2010-12-08</data>
+    <hora>16:33:00</hora>
+    
+    <compilou>1</compilou>
+    
+    <Dict>
+        <Teste>
+            <Nome>Lista vazia</Nome>
+            <Input></Input>
+            <Output>0</Output>
+        </Teste>
+        <Teste>
+            <Nome>Lista c/ 1 elem</Nome>
+            <Input>1</Input>
+            <Output>1</Output>
+        </Teste>
+        <Teste>
+            <Nome>Lista c/ varios elem</Nome>
+            <Input> 2 3 4 5 </Input>
+            <Output>14</Output>
+        </Teste>
+    </Dict>
+
+    <pathMetricas>sasas</pathMetricas>
+    
+    <codigoFonte>
+        <nome>prog.c</nome>
+        <codigo>
+            <![CDATA[
+            #include <stdio.h>
+            
+            ...restante codigo...
+            
+            ]]>
+        </codigo>
+    </codigoFonte>
+        
+</Enunciado>

@@ -166,348 +166,121 @@ Projecto integrado
    \titlepage
 \end{frame}
 
-\section{Motivação e Tecnologias}
+\section{Até agora}
+\begin{frame} \frametitle{Até agora:}
+Concretizado até ao ínicio da segunda fase:
+\begin{itemize}
+\item Modelação formal e informal do problema
+\item Modelo de dados
+\item Descrição do sistema
+\item Ínicio da implementação e respectivo tool demo
+\end{itemize}
+\end{frame}
+
+
+\section{Objectivos}
 \pgfdeclareimage[width=.8\textwidth]{topo}{images/topo}
 
 \begin{frame} \frametitle{Motivação e Objectivos}
-Aprofundar e demonstrar conhecimentos em:
+Objectivos para segunda fase:
 \begin{itemize}
-\item Desenhar arquitectura de um sistema de informação
-\item Desenvolvimento web
-\item Linguagens de Scripting
-\item Bases de dados
-\item Processamentos de texto
+\item Terminar a aplicação web (compilar e executar o código fonte submetido)
+\item Apresentar resultados
+\item Scripts auxiliares
+\item Exploração de um frontend
 \end{itemize}
 \end{frame}
 
-\begin{frame} \frametitle{Tecnologia}
-Principais ferramentas a usar:
+\section{Aplicação Web}
+
+\subsection{Implementação: até à segunda fase}
+\begin{frame} \frametitle{Implementação: até à segunda fase}
+Já implementado para o último checkpoint:
 \begin{itemize}
-\item RoR - interface web
-\item Perl - scripting
-\item DB2 - motor de base de dados
-\item Haskell
+\item Criação de contas de utilizador (grupo)
+\item Associação de concorrentes a determinado grupo
+\item Criação de concursos
+\item Criação de enunciados (através da interface web ou submetendo em formato xml)
+\item Inserção de baterias de teste para os enunciados
+\item Submissão de programas para avaliação
 \end{itemize}
 \end{frame}
 
-\section{Contextualização}
-\begin{frame} \frametitle{Descrição do Sistema}
-Descrição do sistema e funcionalidades:
+\subsection{Implementação: linguagens de programação}
+\begin{frame} \frametitle{Implementação: linguagens de programação}
+Configuração de linguagens de programação:
 \begin{itemize}
-\item Disponivel através de uma interface web
-\item Criação de concursos e enunciados
-\item Permite a submissão de programas
-\item Avalia os programas submetidos
-\item Gera métricas para programas existentes no sistema
+\item Estando a linguagem correctamente configurada no servidor, é 
+simples preparar o sistema de submissão para avaliar código submetido nessa linguagem
+\item Para isso basta inserir o comando usado para compilar e para executar, que por exemplo, em C seria:\\
+String compilação: \textit{gcc -O2 -Wall \#\{file\}}\\
+String de execução default: \textit{./a.out}\\
+String de execução para makefile: \textit{./\#\{file\}}
 \end{itemize}
 \end{frame}
 
-\begin{frame} \frametitle{Utilizadores do sistema - Docente}
+\subsection{Implementação: Compilação}
+\begin{frame} \frametitle{Implementação: Compilação}
 \begin{itemize}
-\item Pode criar, editar e eliminar concursos e enunciados
-\item Pedir ao sistema para gerar métricas
-\item Consultar todo o tipo de resultados
+\item Caso seja necessário compilar o código fonte submetido, é usada a string de compilação definida
+aquando da configuração da linguagem
+\item Se for submetido um ficheiro comprimido que inclua um makefile, é executado o comando \textit{make} e, 
+o nome do executável criado é obtido a partir de um script perl
 \end{itemize}
 \end{frame}
 
-\begin{frame} \frametitle{Utilizadores do sistema}
-\begin{description}
-\item[Admin] Entidade com mais poder no sistema, pode criar contas para docentes
-\item[Grupo] Pode submeter ficheiros que serão avaliados pelo sistema
-\end{description}
+\subsection{Implementação: Execução}
+\begin{frame} \frametitle{Implementação: Execução}
+\begin{itemize}
+\item Para executar o programa para os diferentes inputs, é usada a string de execução simples (no caso de ser submetido
+apenas um ficheiro) ou a string de execução para makefile (no caso de ser submetido um makefile)
+\item Para cada input o comando é corrido uma vez
+\item O output é capturado e comparado com o esperado
+\item É guardada a percentagem de testes no qual o código submetido passou
+\end{itemize}
 \end{frame}
 
-\section{Modelação}
-\begin{frame} \frametitle{Modelação informal da arquitectura}
-\begin{figure}[htbp]
-\begin{center}
-\end{center}
-\end{figure}
+\begin{frame} \frametitle{Implementação: Apresentação de resultados}
+\begin{itemize}
+\item A qualquer altura o utilizador pode consultar os resultados das últimas submissões (suas ou dos restantes 
+participantes)
+\item Pode também consultar os seus melhores resultados, para cada enunciado
+\end{itemize}
 \end{frame}
 
-\newcommand{\rarrow}{\rightarrow}
-\newcommand{\larrow}{\leftarrow}
-\newcommand{\unif}{\sim}
-\def\prop#1#2#3{\noindent\\\begin{array}{l} \{#1\} \\ #2 \\ \{#3\} \\ \end{array}\\\\}
-
-\begin{frame} \frametitle{Modelação formal}
-\begin{displaymath}
-\begin{array}{l}
-\prop
-{existsInDatabase(u)}
-{login :: u \unif Username \times Hash \rarrow SessionID \rarrow Error + SessionID}
-{ }
-\end{array}
-\end{displaymath}
-\\
-\begin{displaymath}
-\begin{array}{l}
-\prop
-{ existeSession(s)  \wedge isProf(s) \wedge (notEmpty \circ getExercice)~c}
-{createContest :: s \unif SessionID \rarrow c \unif Contest \rarrow 1}
-{ (notEmpty \circ getDict)~c }
-\end{array}
-\end{displaymath}
+\section{Scripts Auxiliares}
+\begin{frame} \frametitle{Scripts auxiliares}
+\begin{itemize} 
+\item Script (em Perl) para obter o nome do executável gerado pelo makefile (para C)
+\item Script (em Perl) que gera estatísticas relativamente à quantidade de ficheiros submetidos para cada linguagem de programação
+\end{itemize}
 \end{frame}
 
-\begin{frame} \frametitle{Modelação formal}
-$\begin{array}{l}
-data~Dict~a~b = (a \times b)^{*} \\
-data~Exercicio = Exercicio~Enunciado~(Dict~Input~Output) \\
-data~Contest =  Contest~Nome~Tipo~Exercicio^{*}
-\end{array}$\\
-\begin{displaymath}
-\begin{array}{l}
-\prop
-{ existeSession(s)  \wedge isProf(s) \wedge (not \circ exist) (Exercicio~e~d)}
-{createExercice :: s\unif SessionID \rarrow e \unif Enunciado \rarrow d \unif (Dict~a~b) \rarrow 1}
-{ exerciceCreated(Exercicio e d) }
-\end{array}
-\end{displaymath}
+\begin{frame} \frametitle{Script makefile.pl}
+\begin{itemize} 
+\item utiliza o módulo perl \textit{Makefile::Parser} para fazer parse do makefile, e obter o nome do executável gerado
+\item no caso de não ser definido um nome para o output, retorna \textit{a.out}
+\end{itemize}
 \end{frame}
 
-\begin{frame} \frametitle{Modelação formal}
-\begin{displaymath}
-\begin{array}{l}
-\prop
-{ existSession(s) \wedge contestNotFull(c)}
-{registerOnContest :: s \unif SessionID \rarrow c\unif Contest \rarrow Credenciais}
-{ }
-\end{array}
-\end{displaymath}
-\\
-\begin{displaymath}
-\begin{array}{l}
-\prop 
-{ existeSession(s) \wedge isProf(s) \wedge contestIsClosed(c) }
-{consultarLogsContest :: s \unif SessionID \rarrow c \unif Contest \rarrow LogsContest}
-{}
-\end{array}
-\end{displaymath}
+\begin{frame} \frametitle{Script count.pl}
+\begin{itemize} 
+\item dada uma pasta, explora recursivamente os seus directórios, e conta o número de ficheiros para cada linguagem
+\item utiliza o módulo perl \textit{GD} para gerar gráficos
+\end{itemize}
 \end{frame}
 
-\begin{frame} \frametitle{Modelação formal}
-\begin{displaymath}
-\begin{array}{l}
-\prop
-{ }
-{geraReport :: e \unif Exercicio \rarrow res \unif Resolucao \rarrow Report}
-{ }
-\end{array}
-\end{displaymath}
-\\
-\begin{eqnarray*}
-geraReportBugCompile :: Exercicio \rarrow Error \rarrow Report\\
-geraReportBugCompare :: Exercicio \rarrow Errado \rarrow Report\\
-geraReportNoBug :: Exercicio \rarrow Resolucao \rarrow Report\\
-\\
-execute :: Program \rarrow Exercicio \rarrow ResolucaoProposta\\
-\end{eqnarray*}
+\section{Frontend}
+\begin{frame} \frametitle{Language.C}
 \end{frame}
 
-\begin{frame}[fragile] \frametitle{Modelação formal}
-\begin{lstlisting}[language=HaskellUlisses]
-geraReport :: Exercicio -> Resolucao -> Report
-geraReport exer res = do
-    case compile res of
-    (Left error) -> geraReportBugCompile error res
-    (Right p) ->
-        let resProps = execute p exer
-        in case (compare exer resProps) of
-            (Left certo) -> geraReportNoBug e res
-            (Right errado) -> geraReportBugCompare errado res
-\end{lstlisting}
-
-\begin{lstlisting}[language=HaskellUlisses]
-geraReport exer res =
-    compile res >>= \p -> compare exer (execute p exer)
-        >>= \c -> geraReportNoBug exer res
-\end{lstlisting}
+\section{Conclusão e trabalho futuro}
+\begin{frame} \frametitle{Conclusão e trabalho futuro}
+\begin{itemize} 
+\item Tornar a interface utilizador mais intuitiva e mais agradável à vista
+\end{itemize}
 \end{frame}
 
-\subsection{Modelação de dados}
-
-\begin{frame} \frametitle{Modelo de dados - Concurso, tentativa e enunciado}
-\begin{figure}[htbp]
-\begin{center}
-\end{center}
-\end{figure}
-\end{frame}
-
-
-\begin{frame} \frametitle{Modelo de dados - Grupo e Doecente/Admin}
-\begin{figure}[htbp]
-\begin{center}
-\end{center}
-\end{figure}
-\end{frame}
-
-\subsubsection{XML}
-\begin{frame}[fragile] \frametitle{Modelo de dados - XML - Enunciado}
-\begin{lstlisting}[language=XML,basicstyle=\tiny,breaklines=true]
-<?xm l version="1.0" encoding="UTF-8"?>
-<Enunciado xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="enunciado.xsd">
-    <idConcurso> 1 </idConcurso>
-    <Peso>20</Peso>
-    <Titulo> Exercicio 1 </Titulo>
-    <Descricao> Some os numeros que lhe sao passados como argumento, e apresente o resultado. </Descricao>
-    <Exemplo>Input: 1 1 1 1 1   Output: 5</Exemplo>
-    <Docente> PRH </Docente>
-    <FuncAval>Diff</FuncAval>  
-    <Linguagens> 
-        <Linguagem>C</Linguagem>        
-    </Linguagens> 
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile] \frametitle{Modelo de dados - XML - Enunciado - Part2}
-\begin{lstlisting}[language=XML,basicstyle=\tiny,breaklines=true]
-    <Dict>
-        <Teste>
-            <Nome>Lista vazia</Nome>
-            <Input></Input>
-            <Output>0</Output>
-        </Teste>
-        <Teste>
-            <Nome>Lista c/ 1 elem</Nome>
-            <Input>1</Input>
-            <Output>1</Output>
-        </Teste>
-        <Teste>
-            <Nome>Lista c/ varios elem</Nome>
-            <Input> 2 3 4 5 </Input>
-            <Output>14</Output>
-        </Teste>
-    </Dict>
-</Enunciado>
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile] \frametitle{Modelo de dados - XML - Tentativa}
-\begin{lstlisting}[language=XML,basicstyle=\tiny,breaklines=true]
-<?xm l version="1.0" encoding="UTF-8"?>
-<Enunciado xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="tentativa.xsd">
-    <idConcurso>1</idConcurso>
-    <idEnunciado>1</idEnunciado>
-    <idGrupo>36</idGrupo>
-    
-    <data>2010-12-08</data>
-    <hora>16:33:00</hora>
-    
-    <compilou>1</compilou>
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile] \frametitle{Modelo de dados - XML - Tentativa - Part2}
-\begin{lstlisting}[language=XML,basicstyle=\tiny,breaklines=true]
-    <Dict>
-        <Teste>
-            <Nome>Lista vazia</Nome>
-            <Input></Input>
-            <Output>0</Output>
-        </Teste>
-        <Teste>
-            <Nome>Lista c/ 1 elem</Nome>
-            <Input>1</Input>
-            <Output>1</Output>
-        </Teste>
-        <Teste>
-            <Nome>Lista c/ varios elem</Nome>
-            <Input> 2 3 4 5 </Input>
-            <Output>14</Output>
-        </Teste>
-    </Dict>
-    <pathMetricas>sasas</pathMetricas>
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile] \frametitle{Modelo de dados - XML - Tentativa - Part3}
-\begin{lstlisting}[language=XML,basicstyle=\tiny,breaklines=true]
-    <codigoFonte>
-        <nome>prog.c</nome>
-        <codigo>
-            <![CDATA[
-            #include <stdio.h>
-            
-            ...restante codigo...
-            
-            ]]>
-        </codigo>
-    </codigoFonte>
-        
-</Enunciado>
-\end{lstlisting}
-\end{frame}
-
-\subsubsection{XSD}
-\begin{frame}[fragile] \frametitle{Modelo de dados - excerto do XSD do Enunciado}
-Exemplo de elemento com restrições:\\
-\begin{lstlisting}[language=XML,basicstyle=\tiny,breaklines=true]
-<ed:element name="Peso" default="25">
-  <ed:simpleType>
-    <ed:restriction base="ed:integer">
-      <ed:minInclusive value="0"/>
-      <ed:maxInclusive value="100"/>
-    </ed:restriction>
-  </ed:simpleType>
-</ed:element>
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile] \frametitle{Modelo de dados - excerto do XSD do Enunciado}
-Exemplo de elemento com restrições:\\
-\begin{lstlisting}[language=XML,basicstyle=\tiny,breaklines=true]
-<ed:element name="Linguagem" maxOccurs="unbounded">
-    <ed:simpleType>
-    <ed:restriction base="ed:string">
-        <ed:enumeration value="C"/>
-        <ed:enumeration value="Java"/>
-        <ed:enumeration value="Haskell"/>
-    </ed:restriction>
-    </ed:simpleType>
-</ed:element>
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile] \frametitle{Modelo de dados - Diagrama correspondete ao XSD do Enunciado}
-\begin{figure}[htbp]
-\begin{center}
-\caption{diagrama do schema para o enunciado}\label{fig xsd enunciado}
-\end{center}
-\end{figure}
-\end{frame}
-
-
-\begin{frame}[fragile] \frametitle{Modelo de dados - excerto do XSD da Tentativa}
-Exemplo de elemento que pode ocorrer mais do que uma vez:\\
-\begin{lstlisting}[language=XML,basicstyle=\tiny,breaklines=true]
-<tt:element name="Dict">
-    <tt:complexType>
-    <tt:sequence>
-        <tt:element name="Teste" maxOccurs="unbounded">
-        <tt:complexType>
-            <tt:sequence>
-            <tt:element name="Nome" type="tt:string"/>
-            <tt:element name="Input" type="tt:string"/>
-            <tt:element name="Output" type="tt:string"/>
-            </tt:sequence>
-        </tt:complexType>
-        </tt:element>
-    </tt:sequence>
-    </tt:complexType>
-</tt:element>
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile] \frametitle{Modelo de dados - Diagrama correspondete ao XSD da Tentativa}
-\begin{figure}[htbp]
-\begin{center}
-\caption{diagrama do schema para a tentativa}\label{fig xsd tentativa}
-\end{center}
-\end{figure}
-\end{frame}
 
 \section*{Perguntas}
 \begin{frame} \frametitle{Perguntas}
