@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.3.15)  11 MAR 2011 17:23
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.3.15)  11 MAR 2011 22:31
 entering extended mode
  %&-line parsing enabled.
 **Relatorio.tex
@@ -768,7 +768,7 @@ driver: pdftex
 
 (1in=72.27pt, 1cm=28.45pt)
 -----------------------
-<Images/DI-UM.png, id=86, 274.02374pt x 101.62968pt>
+<Images/DI-UM.png, id=89, 274.02374pt x 101.62968pt>
 File: Images/DI-UM.png Graphic file (type png)
  <use Images/DI-UM.png>
 LaTeX Font Info:    Try loading font information for U+msa on input line 158.
@@ -913,7 +913,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 11--15
 
  []
 
-<Images/EL-PI.png, id=170, 1525.7pt x 1257.69875pt>
+<Images/EL-PI.png, id=174, 1525.7pt x 1257.69875pt>
 File: Images/EL-PI.png Graphic file (type png)
  <use Images/EL-PI.png>
 Underfull \hbox (badness 10000) in paragraph at lines 23--25
@@ -1138,11 +1138,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 230--232
 
  []
 
-<Images/grupo-docente.jpeg, id=198, 1314.9125pt x 929.4725pt>
+<Images/grupo-docente.jpeg, id=202, 1314.9125pt x 929.4725pt>
 File: Images/grupo-docente.jpeg Graphic file (type jpg)
 
 <use Images/grupo-docente.jpeg>
-<Images/concurso-enunciado.jpeg, id=199, 1314.9125pt x 929.4725pt>
+<Images/concurso-enunciado.jpeg, id=203, 1314.9125pt x 929.4725pt>
 File: Images/concurso-enunciado.jpeg Graphic file (type jpg)
 
 <use Images/concurso-enunciado.jpeg>
@@ -1204,11 +1204,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 348--349
 
  []
 
-<Images/enunciado_schema.jpg, id=227, 708.6475pt x 678.535pt>
+<Images/enunciado_schema.jpg, id=231, 708.6475pt x 678.535pt>
 File: Images/enunciado_schema.jpg Graphic file (type jpg)
 
 <use Images/enunciado_schema.jpg>
-<Images/tentativa_schema.jpg, id=228, 703.62875pt x 658.46pt>
+<Images/tentativa_schema.jpg, id=232, 703.62875pt x 658.46pt>
 File: Images/tentativa_schema.jpg Graphic file (type jpg)
 
 <use Images/tentativa_schema.jpg>) [14 <./Images/enunciado_schema.jpg (PNG copy
@@ -1219,7 +1219,7 @@ Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 5.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 15--22
+Underfull \hbox (badness 10000) in paragraph at lines 23--30
 
  []
 
@@ -1227,23 +1227,149 @@ Underfull \hbox (badness 10000) in paragraph at lines 15--22
 
 ]) [17] (./metricas.tex
 Cap\'{\i }tulo 4.
-) [18
 
-] (./web.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--6
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--8
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--16
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--30
+
+ []
+
+[18
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 40--42
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 43--46
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 70--73
+
+ []
+
+[19]
+Underfull \hbox (badness 10000) in paragraph at lines 74--75
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 76--77
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 78--79
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 80--81
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 87--88
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--90
+
+ []
+
+
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 96.
+
+) [20] (./web.tex
 Cap\'{\i }tulo 5.
-) [19
+) [21
 
 ] (./perlz.tex
 Cap\'{\i }tulo 6.
-) [20
 
-] (./scripts.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--6
+
+ []
+
+
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 7.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--13
+
+ []
+
+
+LaTeX Warning: Reference `img menuprinc' on page 22 undefined on input line 18.
+
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 18--19
+
+ []
+
+<Images/menuPrinc.png, id=283, 426.59375pt x 383.4325pt>
+File: Images/menuPrinc.png Graphic file (type png)
+
+<use Images/menuPrinc.png> [22
+
+]
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 30.
+
+
+LaTeX Warning: Reference `img linguagens' on page 23 undefined on input line 37
+.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--38
+
+ []
+
+<Images/linguagens.png, id=290, 426.59375pt x 383.4325pt>
+File: Images/linguagens.png Graphic file (type png)
+
+<use Images/linguagens.png>
+
+LaTeX Warning: Reference `img zelladouglas' on page 23 undefined on input line 
+47.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 46--48
+
+ []
+
+<Images/zelladouglas.png, id=291, 426.59375pt x 383.4325pt>
+File: Images/zelladouglas.png Graphic file (type png)
+
+<use Images/zelladouglas.png> [23 <./Images/menuPrinc.png (PNG copy)> <./Images
+/linguagens.png (PNG copy)>]) [24 <./Images/zelladouglas.png (PNG copy)>]
+(./scripts.tex
 Cap\'{\i }tulo 7.
-) [21
+) [25
 
 ] (./frontend.tex
 Cap\'{\i }tulo 8.
-) [22
+) [26
 
 ] (./conc.tex
 Cap\'{\i }tulo 9.
@@ -1257,43 +1383,53 @@ Underfull \hbox (badness 10000) in paragraph at lines 2--194
 
  []
 
-[23
+[27
 
 ]
 No file Relatorio.bbl.
-AED: lastpage setting LastPage (./Relatorio.aux (./abstract.aux)) ) 
+AED: lastpage setting LastPage (./Relatorio.aux (./abstract.aux))
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 9712 strings out of 493848
- 132522 string characters out of 3149207
+ 9763 strings out of 493848
+ 133276 string characters out of 3149207
  370754 words of memory out of 3000000
- 12659 multiletter control sequences out of 15000+200000
- 23417 words of font info for 55 fonts, out of 3000000 for 9000
+ 12682 multiletter control sequences out of 15000+200000
+ 26062 words of font info for 60 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  38i,12n,43p,322b,1790s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/local/
-texlive/2009/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/local/te
-xlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
-live/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texli
-ve/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texliv
-e/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/
-2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/20
-09/texmf-dist/fonts/type1/public/cm-super/sfbi0700.pfb></usr/local/texlive/2009
-/texmf-dist/fonts/type1/public/cm-super/sfbi1000.pfb></usr/local/texlive/2009/t
-exmf-dist/fonts/type1/public/cm-super/sfbi1728.pfb></usr/local/texlive/2009/tex
-mf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/local/texlive/2009/texmf
--dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2009/texmf-d
-ist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2009/texmf-dis
-t/fonts/type1/public/cm-super/sfbx1728.pfb></usr/local/texlive/2009/texmf-dist/
-fonts/type1/public/cm-super/sfbx2074.pfb></usr/local/texlive/2009/texmf-dist/fo
-nts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2009/texmf-dist/font
-s/type1/public/cm-super/sfrm0500.pfb></usr/local/texlive/2009/texmf-dist/fonts/
-type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2009/texmf-dist/fonts/ty
-pe1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2009/texmf-dist/fonts/type
-1/public/cm-super/sfti1000.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/
-public/cm-super/sftt0800.pfb>
-Output written on Relatorio.pdf (28 pages, 1370509 bytes).
+{/usr/local/texlive/2009/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
+</usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
+/usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
+sr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></us
+r/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/
+local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/lo
+cal/texlive/2009/texmf-dist/fonts/type1/public/cm-super/sfbi0700.pfb></usr/loca
+l/texlive/2009/texmf-dist/fonts/type1/public/cm-super/sfbi1000.pfb></usr/local/
+texlive/2009/texmf-dist/fonts/type1/public/cm-super/sfbi1440.pfb></usr/local/te
+xlive/2009/texmf-dist/fonts/type1/public/cm-super/sfbi1728.pfb></usr/local/texl
+ive/2009/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/local/texliv
+e/2009/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/
+2009/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/20
+09/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/local/texlive/2009
+/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/local/texlive/2009/t
+exmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2009/tex
+mf-dist/fonts/type1/public/cm-super/sfrm0500.pfb></usr/local/texlive/2009/texmf
+-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2009/texmf-d
+ist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2009/texmf-dis
+t/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2009/texmf-dist/
+fonts/type1/public/cm-super/sfti1000.pfb></usr/local/texlive/2009/texmf-dist/fo
+nts/type1/public/cm-super/sftt0800.pfb></usr/local/texlive/2009/texmf-dist/font
+s/type1/public/cm-super/sftt1000.pfb></usr/local/texlive/2009/texmf-dist/fonts/
+type1/public/cm-super/sftt1200.pfb>
+Output written on Relatorio.pdf (32 pages, 1544254 bytes).
 PDF statistics:
- 345 PDF objects out of 1000 (max. 8388607)
- 51 named destinations out of 1000 (max. 500000)
- 223 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 405 PDF objects out of 1000 (max. 8388607)
+ 72 named destinations out of 1000 (max. 500000)
+ 246 words of extra memory for PDF output out of 10000 (max. 10000000)
 
