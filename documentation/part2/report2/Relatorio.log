@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live/MacPorts 2009_6) (format=pdflatex 2010.9.7)  10 MAR 2011 19:50
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live/MacPorts 2009_6) (format=pdflatex 2010.9.7)  10 MAR 2011 21:46
 entering extended mode
  %&-line parsing enabled.
 **Relatorio.tex
@@ -820,7 +820,8 @@ Type  H <return>  for immediate help.
                                                   
 l.25 ...ontinue without it.} Web}{18}{section*.15}
                                                   
-? 
+? q
+OK, entering \batchmode...
 )
 \tf@toc=\write5
 \openout5 = `Relatorio.toc'.
@@ -856,6 +857,7 @@ Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 18.
 
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 21.
+
 (/opt/local/share/texmf-texlive-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
@@ -940,7 +942,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 11--15
 
  []
 
-<Images/EL-PI.png, id=162, 1525.7pt x 1257.69875pt>
+ <Images/EL-PI.png, id=162, 1525.7pt x 1257.69875pt>
 File: Images/EL-PI.png Graphic file (type png)
  <use Images/EL-PI.png>
 Underfull \hbox (badness 10000) in paragraph at lines 23--25
@@ -1033,7 +1035,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 89--90
 
  []
 
-[6]
+ [6]
 Underfull \hbox (badness 10000) in paragraph at lines 97--98
 
  []
@@ -1088,7 +1090,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 133--134
 
  []
 
-[7]
+ [7]
 Underfull \hbox (badness 10000) in paragraph at lines 140--141
 
  []
@@ -1135,6 +1137,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 177--178
 
 LaTeX Font Info:    Try loading font information for T1+cmtt on input line 179.
 
+
 (/opt/local/share/texmf-texlive-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
@@ -1150,7 +1153,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 206--207
 
  []
 
-[8]
+ [8]
 Underfull \hbox (badness 10000) in paragraph at lines 210--211
 
  []
@@ -1165,14 +1168,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 230--232
 
  []
 
+
 <Images/grupo-docente.jpeg, id=190, 1314.9125pt x 929.4725pt>
 File: Images/grupo-docente.jpeg Graphic file (type jpg)
-
-<use Images/grupo-docente.jpeg>
+ <use Images/grupo-docente.jpeg>
 <Images/concurso-enunciado.jpeg, id=191, 1314.9125pt x 929.4725pt>
 File: Images/concurso-enunciado.jpeg Graphic file (type jpg)
-
-<use Images/concurso-enunciado.jpeg>
+ <use Images/concurso-enunciado.jpeg>
 Underfull \hbox (badness 10000) in paragraph at lines 243--264
 
  []
@@ -1192,11 +1194,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 267--276
 
  []
 
-[9] [10 <./Images/grupo-docente.jpeg> <./Images/concurso-enunciado.jpeg>]
+ [9] [10 <./Images/grupo-docente.jpeg> <./Images/concurso-enunciado.jpeg>]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
 nput line 276.
-
-(./resources/enunciado.xml)
+ (./resources/enunciado.xml)
 Underfull \hbox (badness 10000) in paragraph at lines 279--282
 
  []
@@ -1206,7 +1207,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 279--282
 
  []
 
-(./resources/tentativa.xml [11])
+ (./resources/tentativa.xml [11])
 Underfull \hbox (badness 10000) in paragraph at lines 286--289
 
  []
@@ -1216,7 +1217,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 290--295
 
  []
 
-[12]
+ [12]
 Underfull \hbox (badness 10000) in paragraph at lines 306--308
 
  []
@@ -1226,20 +1227,19 @@ Underfull \hbox (badness 10000) in paragraph at lines 344--347
 
  []
 
-[13]
+ [13]
 Underfull \hbox (badness 10000) in paragraph at lines 348--349
 
  []
 
+
 <Images/enunciado_schema.jpg, id=219, 708.6475pt x 678.535pt>
 File: Images/enunciado_schema.jpg Graphic file (type jpg)
-
-<use Images/enunciado_schema.jpg>
+ <use Images/enunciado_schema.jpg>
 <Images/tentativa_schema.jpg, id=220, 703.62875pt x 658.46pt>
 File: Images/tentativa_schema.jpg Graphic file (type jpg)
-
-<use Images/tentativa_schema.jpg>) [14 <./Images/enunciado_schema.jpg (PNG copy
-)>] [15 <./Images/tentativa_schema.jpg (PNG copy)>] (./implem.tex
+ <use Images/tentativa_schema.jpg>) [14 <./Images/enunciado_schema.jpg (PNG cop
+y)>] [15 <./Images/tentativa_schema.jpg (PNG copy)>] (./implem.tex
 Cap\'{\i }tulo 3.
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
@@ -1250,23 +1250,37 @@ Package hyperref Warning: The anchor of a bookmark and its parent's must not
                    {
 l.11 ...heiro a compilar, cont√©m \textit{#{file}}
                                                   .\\
-? 
+You meant to type ## instead of #, right?
+Or maybe a } was forgotten somewhere earlier, and things
+are all screwed up? I'm going to assume that you meant ##.
+
 ! Illegal parameter number in definition of \reserved@b.
 <to be read again> 
                    }
 l.11 ...heiro a compilar, cont√©m \textit{#{file}}
                                                   .\\
-? 
+You meant to type ## instead of #, right?
+Or maybe a } was forgotten somewhere earlier, and things
+are all screwed up? I'm going to assume that you meant ##.
+
 ! You can't use `macro parameter character #' in horizontal mode.
 <recently read> ##
                   
 l.11 ...heiro a compilar, cont√©m \textit{#{file}}
                                                   .\\
-? 
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
 ! You can't use `macro parameter character #' in horizontal mode.
 l.13 exemplo: gcc -O2 -Wall #
                              {file}
-? 
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
 ) [16
 
 ] (./metricas.tex
@@ -1284,7 +1298,10 @@ Type  H <return>  for immediate help.
                                                   
 l.1 \chapter{AplicaÁ„o Web}
                            
-? 
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
 ) [18
 
 ] (./perlz.tex
@@ -1311,11 +1328,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 2--194
 
  []
 
-[22
+ [22
 
 ]
 No file Relatorio.bbl.
-AED: lastpage setting LastPage (./Relatorio.aux (./abstract.aux)) ) 
+ AED: lastpage setting LastPage (./Relatorio.aux (./abstract.aux)) ) 
 Here is how much of TeX's memory you used:
  9714 strings out of 495061
  132751 string characters out of 3181965
@@ -1324,27 +1341,27 @@ Here is how much of TeX's memory you used:
  23417 words of font info for 55 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  38i,12n,43p,454b,1790s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/opt/local/
-share/texmf-texlive-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</opt/local/s
-hare/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></opt/local/s
-hare/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></opt/local/sh
-are/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></opt/local/sh
-are/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></opt/local/sha
-re/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></opt/local/shar
-e/texmf-texlive-dist/fonts/type1/public/cm-super/sfbi0700.pfb></opt/local/share
-/texmf-texlive-dist/fonts/type1/public/cm-super/sfbi1000.pfb></opt/local/share/
-texmf-texlive-dist/fonts/type1/public/cm-super/sfbi1728.pfb></opt/local/share/t
-exmf-texlive-dist/fonts/type1/public/cm-super/sfbx1000.pfb></opt/local/share/te
-xmf-texlive-dist/fonts/type1/public/cm-super/sfbx1200.pfb></opt/local/share/tex
-mf-texlive-dist/fonts/type1/public/cm-super/sfbx1440.pfb></opt/local/share/texm
-f-texlive-dist/fonts/type1/public/cm-super/sfbx1728.pfb></opt/local/share/texmf
--texlive-dist/fonts/type1/public/cm-super/sfbx2074.pfb></opt/local/share/texmf-
-texlive-dist/fonts/type1/public/cm-super/sfbx2488.pfb></opt/local/share/texmf-t
-exlive-dist/fonts/type1/public/cm-super/sfrm0500.pfb></opt/local/share/texmf-te
-xlive-dist/fonts/type1/public/cm-super/sfrm0900.pfb></opt/local/share/texmf-tex
-live-dist/fonts/type1/public/cm-super/sfrm1000.pfb></opt/local/share/texmf-texl
-ive-dist/fonts/type1/public/cm-super/sfti1000.pfb></opt/local/share/texmf-texli
-ve-dist/fonts/type1/public/cm-super/sftt0800.pfb>
+{/opt/local
+/share/texmf-texlive-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</opt/local/
+share/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></opt/local/
+share/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></opt/local/s
+hare/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></opt/local/s
+hare/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></opt/local/sh
+are/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></opt/local/sha
+re/texmf-texlive-dist/fonts/type1/public/cm-super/sfbi0700.pfb></opt/local/shar
+e/texmf-texlive-dist/fonts/type1/public/cm-super/sfbi1000.pfb></opt/local/share
+/texmf-texlive-dist/fonts/type1/public/cm-super/sfbi1728.pfb></opt/local/share/
+texmf-texlive-dist/fonts/type1/public/cm-super/sfbx1000.pfb></opt/local/share/t
+exmf-texlive-dist/fonts/type1/public/cm-super/sfbx1200.pfb></opt/local/share/te
+xmf-texlive-dist/fonts/type1/public/cm-super/sfbx1440.pfb></opt/local/share/tex
+mf-texlive-dist/fonts/type1/public/cm-super/sfbx1728.pfb></opt/local/share/texm
+f-texlive-dist/fonts/type1/public/cm-super/sfbx2074.pfb></opt/local/share/texmf
+-texlive-dist/fonts/type1/public/cm-super/sfbx2488.pfb></opt/local/share/texmf-
+texlive-dist/fonts/type1/public/cm-super/sfrm0500.pfb></opt/local/share/texmf-t
+exlive-dist/fonts/type1/public/cm-super/sfrm0900.pfb></opt/local/share/texmf-te
+xlive-dist/fonts/type1/public/cm-super/sfrm1000.pfb></opt/local/share/texmf-tex
+live-dist/fonts/type1/public/cm-super/sfti1000.pfb></opt/local/share/texmf-texl
+ive-dist/fonts/type1/public/cm-super/sftt0800.pfb>
 Output written on Relatorio.pdf (27 pages, 1364613 bytes).
 PDF statistics:
  333 PDF objects out of 1000 (max. 8388607)
