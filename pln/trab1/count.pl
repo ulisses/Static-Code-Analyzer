@@ -2,6 +2,7 @@
 
 use Path::Class;
 use GD::Graph::bars;
+use Lib;
 use GD::Graph::pie;
 use Getopt::Long;
 

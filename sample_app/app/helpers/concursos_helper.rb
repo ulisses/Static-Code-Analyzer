@@ -20,6 +20,6 @@ module ConcursosHelper
   def tRestante(concurso)
     return ((terminaC(concurso) - DateTime.now) / 60)
   end
-  
+    
 
 end
