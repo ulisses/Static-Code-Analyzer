@@ -1,1 +1,96 @@
 \chapter{Métricas}
+
+Existem diversas métricas, com objectivos diferentes, para analisar um projecto de \emph{software}. Essas métricas podem ser vistas como diferentes 'lentes' com as quais olhamos para um software. 
+Neste capítulo, pretende-se mostrar a investigação que foi realizada relativamente a este tema, começando primeiro por definir alguns conceitos e depois dividir as métricas 
+por categorias. Cada categoria será estruturada da mesma maneira, indicada mais à frente.\\
+
+Assim, encarou-se a análise a um software como sendo uma área que se divide em dois ramos, a \textbf{Análise Estática} e a \textbf{Análise Dinâmica}.\\
+
+A Análise Estática e olhar para um programa sob o ponto de vista do seu código ou ficheiro já compilado, e retirar conclusões às suas características, 
+sem nunca recorrer à sua execução ou análise de resultados da execução.
+Ainda relativamente à Análise Estática, temos essencialmente duas maneiras de olhar para o software. Podemos ver este tendo em conta a qualidade do ficheiro objecto 
+produzido ( o código máquina que ira correr, p. ex: em java seria o \emph{bytecode}) ou então tendo única e exclusivamente como objecto de observação os ficheiros de 
+texto correspondentes ao código que compõe o programa.
+De notar que a Análise Estática é sempre relativa ao código do programa, ou seja, até mesmo uma análise que tenha em vista a qualidade do ficheiro objecto vai 
+ser feita sobre o código do programa.\\
+
+Assim sendo, no que diz respeito à qualidade do ficheiro objecto produzido, temos:
+
+\paragraph{Syntax checking} é um programa ou parte de um programa que tenta atestar a correcção da linguagem escrita.
+
+\paragraph{Type checking} é o processo de verificacao dos tipos de dados num software que visa garantir a restrição 
+no que diz respeito aos tipos, implicando assim maior qualidade do software produzido e menos probabilidade de acontecerem erros aquando da execução. 
+Cada vez mais as linguagens recentes apresentam este tipo de sistemas, o que levam a que muitos dos erros ocorram em tempo de compilação, ou seja: 
+completamente ainda a tempo de serem corrigidos pelos programadores, por exemplo: \texttt{Haskell, C++0x, JAVA6}. 
+Estas linguagens apresentam um sistema de tipos forte o que garante este processo. 
+
+\paragraph{Decompilation} é o processo de pegar num ficheiro objecto e tentar inferir ou descobrir o seu código fonte que o originou. 
+Designa-se assim porque é o inverso do processo de compilação. 
+Com a ajuda deste tipo de análise consegue-se obter, entre outras coisas, os algoritmos alto nível do código máquina em questão.\\
+
+No que diz respeito à análise da qualidade do código como produto final temos as seguintes metodologias:
+
+\paragraph{Code metrics} é uma vasta área que se dedica a análise do código em si para tirar conclusão acerca da sua qualidade, estabilidade e manutenção.
+
+\paragraph{Style checking} funciona como uma análise para verificar determinadas regras que à partida se acreditam como boas na produção de código. 
+Estas regras podem ser relativas a identação,  existência de ficheiros \texttt{README} e de documentação.
+
+\paragraph{Verification reverse engineering}, o método que serve para verificar se a implementação de um determinado sistema cumpre a sua especificação.
+
+O objectivo deste trabalho é puramente analisar estaticamente um programa, relativamente às metricas de código e eventualmente relativamente ao estilo também.
+Mesmo assim este tema tão vasto deixou-nos com motivação para conhecer o que é este mundo da análise de software.\\
+
+Outros tipos de análises existentes são as chamadas análises dinâmicas, estas pegam numa peça de \emph{software} e não tendo em conta, 
+nem se preocupando com o código que a constitui, executam simplesmente o programa e analisam exaustivamente sob vários prismas o seu comportamento.
+De seguida vamos dissertar sobre alguns destes métodos e práticas que existem para analisar a execução de um programa.\\
+
+\paragraph{Log analysis} é o método que consiste em pesquisar (automaticamente ou manualmente) 
+os ficheiros de log produzidos por um determinado \emph{software}, para perceber o que este está a fazer. 
+Este tipo de análise muitas das vezes é feita a programas muito complexos e extensos que comunicam com o mundo real (rede, stdin, mundo IO).
+Um exemplo de quem faz este tipo de análise são os administradores de sistemas.
+
+\paragraph{Testing} é investigar o comportamento de um software através de uma bateria de testes que podem ter em consideração um determinado uso num caso que pode ser real. 
+Geralmente, este tipo de análise simula os casos extremos a que o \emph{software} pode ir, porque se acredita empiricamente que ao ter sucesso em situações extremas, 
+há-de ter sucesso nos restantes casos.
+O que se pretende obter com este tipo de análise é o aumento na confiança de que o programa está a fazer o que é suposto, por parte de quem fabrica o produto.
+
+\paragraph{Debugging} é um método que ajuda as pessoas a terem conhecimento do que determinado \emph{software} está a fazer. Este método geralmente é usado ainda numa 
+fase inicial do produto, quando está a ser desenvolvido pelos programadores. É um bom método de detectar defeitos, falhas ou pequenos \emph{bugs} no \emph{software}.
+
+\paragraph{Instrumentation} é o método de monitorizar e medir o nível de performance de um determinado produto.
+
+\paragraph{Profiling} é a investigação sobre o comportamento de um programa aquando a sua execução, usando para isso informações do género recursos computacionais. 
+Este tipo de análise é útil para por exemplo efectuar gestão de memória.
+
+\paragraph{Benchmarking} é o processo de comparar o processo do utilizador com os processos conhecidos de outros, de modo a obter conhecimento 
+sobre as melhores práticas efectuadas na indústria.
+
+\section{Métricas de qualidade de \emph{software}}
+
+A presença de testes num determinado programa de \emph{software}, leva a que esse artefacto ganhe pontos no que diz respeito à análise estática sob o ponto de vista da 
+qualidade, porque, como dissemos anteiormente, a presença de testes num projecto de \emph{software} leva a que tenhamos mais confiança neste.
+Existem algumas fórmulas que nos dão alguns indicadores numerários sobre o nível desta confiança. De seguida são apresentadas algumas sobre a cobertura de testes.\\
+
+\[ \emph{\text{Line Coverage}} = \frac{\emph{\text{Nr of test lines}}}{\emph{\text{nr of tested lines}}} \] \\
+
+\[ \emph{\text{Decision coverage}} = \frac{\emph{\text{Nr of test methods}}}{\emph{\text{Sum of McCabe complexity}}} \] \\
+
+\[ \emph{\text{Test granularity}} = \frac{\emph{\text{Nr of test lines}}}{\emph{\text{nr of tests}}} \] \\
+
+\[\emph{\text{Test efficiency}} = \frac{\emph{\text{Decision coverage}}}{\emph{\text{line coverage}}} \] \\
+
+
+Podemos sempre aumentar a nossa precisão na análise se considerarmos apenas as linhas que contêem código e não as linhas em branco ou linhas com apenas um caracter, 
+como por exemplo as aberturas de blocos em \texttt{C, JAVA}.
+Ainda podemos também considerar não apenas o numero total de linhas mas também o número de métodos/funções testados.
+
+De notar que as formulas atrás descritas podem ser modificadas para obter outros tipos de métricas, não só referentes a testes, como por exemplo:\\
+
+\[\emph{\text{Code granularity}} = \frac{\emph{\text{Nr of lines}}}{\emph{\text{Nr of (methods/functions)}}} \] \\
+
+Como já referimos anteriormente, a análise que se pretende, por agora, é essencialmente estática. Assim sendo, segue-se uma lista de técnicas no que diz respeito à análise
+ estática, estando estruturada da seguinte maneira: duas secções, uma para \emph{\textbf{Patterns}} e outra para \emph{\textbf{Métricas de qualidade}}
+
+\large{ULISSES, O WRITEBOARD DISTO ESTA UM BOCADO INCOERENTE, VOU PASSAR PRA PARTE DA INTERFACE PERL E DPS VOLTAMOS A ISTO}
+
+\subsection{Patterns}
