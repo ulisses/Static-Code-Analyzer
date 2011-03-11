@@ -12,13 +12,18 @@
 \BOOKMARK [1][-]{lstlisting.2.-2}{Modelo de Dados}{section*.12}
 \BOOKMARK [1][-]{figure.2.3}{Importa\347\343o de dados}{section*.12}
 \BOOKMARK [0][-]{figure.2.5}{Implementa\347\343o}{}
+\BOOKMARK [1][-]{section*.15}{Cria\347\343o de grupos, docentes e concorrenctes}{figure.2.5}
 \BOOKMARK [1][-]{section*.15}{Linguagens de programa\347\343o}{figure.2.5}
 \BOOKMARK [1][-]{section*.15}{Compila\347\343o}{figure.2.5}
 \BOOKMARK [1][-]{section*.15}{Execu\347\343o}{figure.2.5}
 \BOOKMARK [1][-]{section*.15}{Guardar resultados}{figure.2.5}
 \BOOKMARK [0][-]{section*.15}{M\351tricas}{}
-\BOOKMARK [0][-]{section*.15}{Aplica\347\343o Web}{}
-\BOOKMARK [0][-]{section*.15}{Interface pelo terminal}{}
-\BOOKMARK [0][-]{section*.15}{Scripts de avalia\347\343o}{}
-\BOOKMARK [0][-]{section*.15}{Front-end}{}
-\BOOKMARK [0][-]{section*.15}{Conclus\343o e Trabalho Futuro}{}
+\BOOKMARK [1][-]{section*.27}{M\351tricas de qualidade de software}{section*.15}
+\BOOKMARK [2][-]{section*.28}{Patterns}{section*.27}
+\BOOKMARK [0][-]{section*.28}{Aplica\347\343o Web}{}
+\BOOKMARK [0][-]{section*.28}{Interface pelo terminal}{}
+\BOOKMARK [1][-]{section*.29}{Perl}{section*.28}
+\BOOKMARK [1][-]{section*.29}{Menus e exemplos}{section*.28}
+\BOOKMARK [0][-]{figure.6.3}{Scripts de avalia\347\343o}{}
+\BOOKMARK [0][-]{figure.6.3}{Front-end}{}
+\BOOKMARK [0][-]{figure.6.3}{Conclus\343o e Trabalho Futuro}{}
