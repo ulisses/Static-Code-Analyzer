@@ -22,6 +22,7 @@ SampleApp::Application.routes.draw do
   resources :concorrentes
   resources :users
   resources :concursos
+  match '/concursos/stats',  :to => 'concursos#stats'
   resources :participantes
   match '/enunciados/newxml',  :to => 'enunciados#newxml'
   match '/enunciados/createxml',  :to => 'enunciados#createxml'  

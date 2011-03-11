@@ -7,17 +7,48 @@ O nosso sistema é multilingue, ou seja, é possível submeter código fonte em 
 a linguagem tenha sido correctamente configurada por um docente.
 Cada linguagem é caracterizada por uma séria de campos, os quais serão explicados de seguida:
 \begin{itemize}
-\item string de compilação : string que será executada quando se pretender compilar determinado código fonte. Esta string tem a
-particularidade de no lugar em que é suposto conter o nome do ficheiro a compilar, contém \textit{#{file}}.\\
+\item string de compilação: string que será executada quando se pretender compilar determinado código fonte. Esta string tem a
+particularidade de no lugar em que é suposto conter o nome do ficheiro a compilar, contém \textit{\#\{file\}}.\\
 Desta forma a string de compilação torna-se genérica, e idependente do nome do ficheiro a compilar.
-exemplo: gcc -O2 -Wall #{file}
+exemplo: gcc -O2 -Wall \#\{file\}
 
-\item string simples de execução
+\item string simples de execução: string utilizada para executar quando o código fonte foi compilado pela string de compilação.\\
+exemplo 1:\\ 
+- string de compilação: gcc -O2 -Wall \#\{file\}\\
+- string de execução respectiva: ./a.out\\
+exemplo 2:\\
+- string de compilação: gcc -O2 -Wall \#\{file\} -o exec\\
+- string de execução respectiva: ./exec\\
+
+\item string complexa de execução: a necessidade de uma segunda string de execução surgiu quando tentamos preparar o sistema para receber makefiles (inicialmente apenas para C). Nestes casos, o nome do executável gerado pela compilação não é conhecido à partida.
+Desta forma é necessário analisar o makefile, e só depois executar, tendo em conta a informação que retiramos do makefile.\\
+Assim, e para a linguagem C, a string complexa de execução seria:\\
+- ./\#\{file\}\\
+em que \#\{file\} representa o nome do executável.
 
 \end{itemize}
 
 
 \section{Compilação}\label{sec comp}
 
-Para começarmos a explicar como se procede à compilação do código submetido, quando tal é necessário, temos primeiro de explicar que o
-nosso sistema permite a 
+Estando as linguagens de programação correctamente configuradas, a compilação torna-se bastante simples. Quando uma tentativa
+é submetida no sistema, começamos por verificar se foi submetida apenas um ficheiro de código, ou um ficheiro comprimido.\\
+Caso seja apenas um ficheiro, o sistema tenta compilar o código submetido, com a string de compilação da linguagem de programação em causa.\\
+No caso de se tratar de um ficheiro comprimido, depois de o descomprimir, o sistema verifica se existe um makefile entre os ficheiros extraídos. Caso se verifique, é corrido o comando \textit{make}, e tenta retirar o nome do executável gerado, de mode a poder
+ser usado na execução.
+
+\section{Execução}\label{sec exec}
+No fim da compilação, o sistema vai executar o programa uma vez para cada input. O processo de execução no caso de a compilação ter
+sido feita à custa do makefile, é feita usando a string complexa de execução (sendo o nome do executável aquele que foi retirado do
+makefile) . Se tal não tiver acontecido, é usada a string simples.\\
+A execução pode ser abortada se ultrapassar o tempo máximo de execução, que é definido aquando da criação do enunciado em
+questão.
+
+\section{Guardar resultados}\label{sec res}
+Para cada input do enunciado em questão, o programa é executado uma vez. O seu output é comparado com o output esperado e 
+é guardada uma entrada na base de dados com a percentagem de testes nos quais o programa teve sucesso.\\
+No caso de o código não compilar, ou da execução do programa demorar mais tempo do que o máximo previsto pelo docente quando 
+criou o enunciado, estas informações são também guardadas na base de dados.\\
+Além de se guardarem todas as tentativas, a melhor é também guardada numa tabela à parte, para que o melhor resultado para cada
+enunciado seja de fácil acesso.
+

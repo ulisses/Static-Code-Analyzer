@@ -63,8 +63,32 @@ class ConcursosController < ApplicationController
   def destroy
 	  @concurso = Concurso.find(params[:id])
 	  deleteFolder
-      @concurso.destroy
-      redirect_back_or concursos_path
+    @concurso.destroy
+    redirect_back_or concursos_path
+  end
+  
+  def stats
+    @title = "Stats1"
+    
+    if params[:type]
+      #verifica se existe id de concurso,se nao apresenta stats para todos
+      if params[:concurso_id]
+        @concurso = Concurso.find(params[:concurso_id])
+        dir = File.join(Rails.root, "data/concursos","contest-"+@concurso.id.to_s)
+        if params[:type] == 1
+          scriptCommand =  "perl count.pl -open #{dir} -perc -out pre"
+          @imagePath =  
+      else
+        
+      end
+    else
+      
+    end
+    
+    #executa o comando
+    ok = system("cd data/scripts && #{scriptCommand} ")
+    
+    
   end
 
   
