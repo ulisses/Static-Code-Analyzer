@@ -44,6 +44,7 @@ block (CBlockStmt cStat) = statement cStat
 ii :: CDeclr -> IO()
 ii (CDeclr Nothing lCDerivedDeclr (Just cStrLit) lcAtrb _) = putStrLn "N J"
 ii (CDeclr (Just ident) lCDerivedDeclr Nothing lcAtrb _)   = do
+	
 	let funName = identToString ident
 	putStr funName
 	mapM_ jj lCDerivedDeclr
