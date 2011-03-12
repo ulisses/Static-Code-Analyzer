@@ -20,24 +20,24 @@ Assim sendo, no que diz respeito à qualidade do ficheiro objecto produzido, tem
 
 \paragraph{Syntax checking} é um programa ou parte de um programa que tenta atestar a correcção da linguagem escrita.
 
-\paragraph{Type checking} é o processo de verificacao dos tipos de dados num software que visa garantir a restrição 
+\paragraph{Type checking}é o processo de verificacao dos tipos de dados num software que visa garantir a restrição 
 no que diz respeito aos tipos, implicando assim maior qualidade do software produzido e menos probabilidade de acontecerem erros aquando da execução. 
 Cada vez mais as linguagens recentes apresentam este tipo de sistemas, o que levam a que muitos dos erros ocorram em tempo de compilação, ou seja: 
 completamente ainda a tempo de serem corrigidos pelos programadores, por exemplo: \texttt{Haskell, C++0x, JAVA6}. 
-Estas linguagens apresentam um sistema de tipos forte o que garante este processo. 
+Estas linguagens apresentam um sistema de tipos forte o que garante este processo.~\footnote{Mais informação em: \url{http://en.wikipedia.org/wiki/Type_checking\#Type_checking}}
 
 \paragraph{Decompilation} é o processo de pegar num ficheiro objecto e tentar inferir ou descobrir o seu código fonte que o originou. 
 Designa-se assim porque é o inverso do processo de compilação. 
-Com a ajuda deste tipo de análise consegue-se obter, entre outras coisas, os algoritmos alto nível do código máquina em questão.\\
+Com a ajuda deste tipo de análise consegue-se obter, entre outras coisas, os algoritmos alto nível do código máquina em questão.~\footnote{Mais informação em: \url{http://en.wikipedia.org/wiki/Decompiler}}\\
 
 No que diz respeito à análise da qualidade do código como produto final temos as seguintes metodologias:
 
 \paragraph{Code metrics} é uma vasta área que se dedica a análise do código em si para tirar conclusão acerca da sua qualidade, estabilidade e manutenção.
 
 \paragraph{Style checking} funciona como uma análise para verificar determinadas regras que à partida se acreditam como boas na produção de código. 
-Estas regras podem ser relativas a identação,  existência de ficheiros \texttt{README} e de documentação.
+Estas regras podem ser relativas a identação,  existência de ficheiros \texttt{README} e de documentação.~\footnote{Mais informação em: \url{http://en.wikipedia.org/wiki/Programming_style}}
 
-\paragraph{Verification reverse engineering} é o método que serve para verificar se a implementação de um determinado sistema cumpre a sua especificação.
+\paragraph{Verification reverse engineering} é o método que serve para verificar se a implementação de um determinado sistema cumpre a sua especificação.~\footnote{Exemplo \href{http://docs.google.com/viewer?a=v&q=cache:_L5qP0rI96EJ:citeseerx.ist.psu.edu/viewdoc/download\%3Fdoi\%3D10.1.1.4.3018\%26rep\%3Drep1\%26type\%3Dpdf+verification+reverse+engineering&hl=en&pid=bl&srcid=ADGEESia4DLaaR6tVvzu1taWn_c19TP6FB9Tjb7UuLp5DlgboBCt4JN33qutEXnlmxS5dpUzVIfJy-sNUj38vQJaEz-F5GmQxYlbs7ei97y28QaKaxovm5vicKnCBc441jF2M2wi6JQg&sig=AHIEtbSaUaw3fdOCFHTavKW5ulxx4zPiWw}{Aqui}}\\
 
 O objectivo deste trabalho é puramente analisar estaticamente um programa, relativamente às metricas de código e eventualmente relativamente ao estilo também.
 Mesmo assim este tema tão vasto deixou-nos com motivação para conhecer o que é este mundo da análise de software.\\
@@ -50,23 +50,23 @@ De seguida vamos dissertar sobre alguns destes métodos e práticas que existem 
 \paragraph{Log analysis} é o método que consiste em pesquisar (automaticamente ou manualmente) 
 os ficheiros de log produzidos por um determinado \emph{software}, para perceber o que este está a fazer. 
 Este tipo de análise muitas das vezes é feita a programas muito complexos e extensos que comunicam com o mundo real (rede, stdin, mundo IO).
-Um exemplo de quem faz este tipo de análise são os administradores de sistemas.
+Um exemplo de quem faz este tipo de análise são os administradores de sistemas.~\footnote{Mais informação em: \url{http://en.wikipedia.org/wiki/Log_analysis}}
 
 \paragraph{Testing} é investigar o comportamento de um software através de uma bateria de testes que podem ter em consideração um determinado uso num caso que pode ser real. 
 Geralmente, este tipo de análise simula os casos extremos a que o \emph{software} pode ir, porque se acredita empiricamente que ao ter sucesso em situações extremas, 
 há-de ter sucesso nos restantes casos.
-O que se pretende obter com este tipo de análise é o aumento na confiança de que o programa está a fazer o que é suposto, por parte de quem fabrica o produto.
+O que se pretende obter com este tipo de análise é o aumento na confiança de que o programa está a fazer o que é suposto, por parte de quem fabrica o produto.~\footnote{Mais informação em: \url{http://en.wikipedia.org/wiki/Software_testing}}
 
 \paragraph{Debugging} é um método que ajuda as pessoas a terem conhecimento do que determinado \emph{software} está a fazer. Este método geralmente é usado ainda numa 
-fase inicial do produto, quando está a ser desenvolvido pelos programadores. É um bom método de detectar defeitos, falhas ou pequenos \emph{bugs} no \emph{software}.
+fase inicial do produto, quando está a ser desenvolvido pelos programadores. É um bom método de detectar defeitos, falhas ou pequenos \emph{bugs} no \emph{software}.~\footnote{Mais informação em: \url{http://en.wikipedia.org/wiki/Debugging}}
 
-\paragraph{Instrumentation} é o método de monitorizar e medir o nível de performance de um determinado produto.
+\paragraph{Instrumentation} é o método de monitorizar e medir o nível de performance de um determinado produto.~\footnote{Mais informação em: \url{http://en.wikipedia.org/wiki/Instrumentation_(computer_programming)}}
 
 \paragraph{Profiling} é a investigação sobre o comportamento de um programa aquando a sua execução, usando para isso informações do género recursos computacionais. 
-Este tipo de análise é útil para por exemplo efectuar gestão de memória.
+Este tipo de análise é útil para por exemplo efectuar gestão de memória.~\footnote{Mais informação em: \url{http://en.wikipedia.org/wiki/Profiling_(computer_programming)}}
 
 \paragraph{Benchmarking} é o processo de comparar o processo do utilizador com os processos conhecidos de outros, de modo a obter conhecimento 
-sobre as melhores práticas efectuadas na indústria.
+sobre as melhores práticas efectuadas na indústria.~\footnote{Mais informação em: \url{http://en.wikipedia.org/wiki/Benchmarking}}
 
 \section{Métricas de qualidade de \emph{software}}
 
