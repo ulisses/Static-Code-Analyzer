@@ -11,3 +11,17 @@ utilizando este Front-end.\\
 
 Inicialmente decidimos partir para a exploração da linguagem (dos tipos de dados) que estavam definidos neste parser. Rápidamente encontramos a AST da linguagem \textrm{C99}
 e assim descobrimos que a linguagem C não é assim tão grande como estariamos à espera, como podemos ver no Apêndice \ref{chap:ast}.
+
+\section{Estudo do Front-End}
+Todos os tipos deste parser estão munidos de um \textrm{NodeInfo}, que nada mais é do que a informação relativa ao ficheiro, número de linha e coluna onde apareceu
+esta derivação.\\
+Um ficheiro em linguagem \textrm{C99} é representado como uma lista de declarações externas que pode ser uma declaração ou uma definição de função como podemos ver
+na secção \ref{chap:extdefin}.
+
+\begin{haskell}
+data CTranslUnit = CTranslUnit [CExtDecl] NodeInfo
+data CExtDecl = CDeclExt CDecl
+              | CFDefExt CFunDef
+			  | CAsmExt CStrLit
+\end{haskell}
+

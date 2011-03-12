@@ -1,4 +1,6 @@
 \chapter{AST da Linguagem \textrm{C99}}\label{chap:ast}
+\minitoc
+Esta definição de AST é parte da original descrita no Apendix A do K\&R\cite{ker}.
 \section{Gramática Lexica}
 \subsection{Elementos Lexicos}
 
@@ -452,7 +454,7 @@ jump-statement:
 	return expressionopt ;
 \end{code_files}
 
-\subsection{External definitions}
+\subsection{External definitions}\label{chap:extdefin}
 \begin{code_files}
 translation-unit:
 	external-declaration
