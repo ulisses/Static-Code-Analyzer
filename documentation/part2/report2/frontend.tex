@@ -22,6 +22,44 @@ na secção \ref{chap:extdefin}.
 data CTranslUnit = CTranslUnit [CExtDecl] NodeInfo
 data CExtDecl = CDeclExt CDecl
               | CFDefExt CFunDef
-			  | CAsmExt CStrLit
+              | CAsmExt CStrLit
 \end{haskell}
 
+Depois podemos ver que uma declaração externa pode ser então uma declaração como podemo ver na secção \ref{chap:decl}, vejamos o que é isto de declaração no \textrm{Haskell}:
+\begin{haskell}
+data CDecl = CDecl [CDeclSpec] [(Maybe CDeclr, Maybe CInit, Maybe CExpr)] NodeInfo
+\end{haskell}
+Este tipo de declarações é bastante abrangente e inclui declaraçõoes de estruturas de dados, declaração de parâmetros e tipos de dados.\\
+
+Tal como  a definição é uma lista de declarações C e qualificadores:
+\begin{haskell}
+data CDeclSpec = CStorageSpec CStorageSpec  -- ^ storage-class specifier or typedef
+               | CTypeSpec    CTypeSpec     -- ^ type name
+               | CTypeQual    CTypeQual     -- ^ type qualifier
+
+data CStorageSpec = CAuto     NodeInfo     -- ^ auto
+                  | CRegister NodeInfo     -- ^ register
+                  | CStatic   NodeInfo     -- ^ static
+                  | CExtern   NodeInfo     -- ^ extern
+                  | CTypedef  NodeInfo     -- ^ typedef
+                  | CThread   NodeInfo     -- ^ GNUC thread local storage
+
+data CTypeSpec = CVoidType    NodeInfo
+               | CCharType    NodeInfo
+               | CShortType   NodeInfo
+               | CIntType     NodeInfo
+               | CLongType    NodeInfo
+               | CFloatType   NodeInfo
+               | CDoubleType  NodeInfo
+               | CSignedType  NodeInfo
+               | CUnsigType   NodeInfo
+               | CBoolType    NodeInfo
+               | CComplexType NodeInfo
+               | CSUType      CStructUnion NodeInfo  -- ^ Struct or Union specifier
+               | CEnumType    CEnum        NodeInfo  -- ^ Enumeration specifier
+               | CTypeDef     Ident        NodeInfo  -- ^ Typedef name
+               | CTypeOfExpr  CExpr        NodeInfo  -- ^ @typeof(expr)@
+               | CTypeOfType  CDecl        NodeInfo  -- ^ @typeof(type)@
+\end{haskell}
+
+E ainda uma lista de triplos de \textrm{Maybe}s.
