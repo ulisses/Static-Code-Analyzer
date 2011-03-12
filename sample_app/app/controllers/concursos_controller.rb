@@ -68,6 +68,7 @@ class ConcursosController < ApplicationController
   end
   
   def stats
+=begin
     @title = "Stats1"
     
     if params[:type]
@@ -88,7 +89,7 @@ class ConcursosController < ApplicationController
     #executa o comando
     ok = system("cd data/scripts && #{scriptCommand} ")
     
-    
+=end    
   end
 
   

@@ -1,0 +1,39 @@
+\select@language {portuges}
+\addvspace {10\p@ }
+\contentsline {xchapter}{Introdu\IeC {\c c}\IeC {\~a}o}{1}{chapter*.4}
+\contentsline {xpart}{Milestone I}{5}{section*.12}
+\addvspace {10\p@ }
+\contentsline {xchapter}{Modela\IeC {\c c}\IeC {\~a}o do Problema}{5}{section*.13}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Arquitectura do sistema}}{6}{figure.2.1}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Modelo de dados - Grupo e Docente/Admin}}{11}{figure.2.2}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Modelo de dados - Concurso, tentativa e enunciado}}{11}{figure.2.3}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces diagrama do schema para o enunciado}}{15}{figure.2.4}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces diagrama do schema para a tentativa}}{16}{figure.2.5}
+\contentsline {xpart}{Milestone II}{18}{figure.2.5}
+\addvspace {10\p@ }
+\contentsline {xchapter}{Web Application}{18}{section*.15}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces P\IeC {\'a}gina de registo}}{18}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Dados de um grupo}}{19}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Comandos necess\IeC {\'a}rios para tornar um utilizador sem privil\IeC {\'e}gios num docente.}}{19}{figure.3.3}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Configura\IeC {\c c}\IeC {\~a}o de uma nova linguagem de programa\IeC {\c c}\IeC {\~a}o no sistema}}{20}{figure.3.4}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces P\IeC {\'a}gina de submiss\IeC {\~a}o de programas (vista de administrador)}}{21}{figure.3.5}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces P\IeC {\'a}gina aonde pode consultar as tentativas (vista das tentativas de todos os utilizadores)}}{22}{figure.3.6}
+\addvspace {10\p@ }
+\contentsline {xchapter}{M\IeC {\'e}tricas}{23}{figure.3.6}
+\addvspace {10\p@ }
+\contentsline {xchapter}{Interface pelo terminal}{29}{table.4.1}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Menu Principal}}{30}{figure.5.1}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Linguagens dispon\IeC {\'\i }veis}}{30}{figure.5.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Procura e altera\IeC {\c c}\IeC {\~a}o do \texttt {user} Zella Douglas}}{31}{figure.5.3}
+\addvspace {10\p@ }
+\contentsline {xchapter}{Scripts de avalia\IeC {\c c}\IeC {\~a}o}{32}{figure.5.3}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Linhas por Linguagem}}{33}{figure.6.1}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Ficheiros por Linguagem}}{33}{figure.6.2}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Linhas por Linguagem}}{34}{figure.6.3}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Vis\IeC {\~a}o global do projecto}}{35}{figure.6.4}
+\addvspace {10\p@ }
+\contentsline {xchapter}{Front-end}{36}{figure.6.4}
+\addvspace {10\p@ }
+\contentsline {xchapter}{Conclus\IeC {\~a}o e Trabalho Futuro}{38}{lstlisting.7.-19}
+\addvspace {10\p@ }
+\contentsline {xchapter}{AST da Linguagem \textrm {C99}}{40}{chapter*.33}
