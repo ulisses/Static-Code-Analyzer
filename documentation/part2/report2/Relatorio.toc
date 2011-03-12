@@ -1,0 +1,77 @@
+\select@language {portuges}
+\contentsline {chapter}{Resumo}{i}{chapter*.1}
+\contentsline {chapter}{\IeC {\'I}ndice}{iii}{chapter*.2}
+\contentsline {section}{\IeC {\'I}ndice de Figuras}{iv}{chapter*.3}
+\contentsline {chapter}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{1}{chapter*.3}
+\contentsline {section}{\numberline {1.1}Motiva\IeC {\c c}\IeC {\~a}o}{1}{section*.4}
+\contentsline {section}{\numberline {1.2}Objectivos}{1}{section*.4}
+\contentsline {subsection}{\numberline {1.2.1}Ferramentas}{2}{section*.5}
+\contentsline {section}{\numberline {1.3}Descri\IeC {\c c}\IeC {\~a}o do Sistema}{2}{section*.5}
+\contentsline {subsection}{\numberline {1.3.1}Utilizadores}{2}{section*.6}
+\contentsline {subsection}{\numberline {1.3.2}Funcionalidades do sistema}{2}{section*.6}
+\contentsline {subsubsection}{Cria\IeC {\c c}\IeC {\~a}o de contas de grupo e de docente}{2}{section*.7}
+\contentsline {subsubsection}{Cria\IeC {\c c}\IeC {\~a}o de concursos e enunciados}{3}{section*.8}
+\contentsline {subsubsection}{Registo e participa\IeC {\c c}\IeC {\~a}o nos concursos}{3}{section*.9}
+\contentsline {subsubsection}{Gera\IeC {\c c}\IeC {\~a}o das m\IeC {\'e}tricas para os ficheiros submetidos}{3}{section*.10}
+\contentsline {subsubsection}{Consulta dos ficheiros com as m\IeC {\'e}tricas e dos resultados do concurso}{3}{section*.11}
+\contentsline {section}{\numberline {1.4}Estrutura do Relat\IeC {\'o}rio}{3}{section*.11}
+\contentsline {part}{I\hspace {1em}Milestone I}{5}{section*.11}
+\contentsline {xpart}{Milestone I}{6}{section*.11}
+\contentsline {chapter}{\numberline {2}Modela\IeC {\c c}\IeC {\~a}o do Problema}{6}{section*.12}
+\contentsline {section}{\numberline {2.1}Modela\IeC {\c c}\IeC {\~a}o Informal}{6}{section*.12}
+\contentsline {section}{\numberline {2.2}Modela\IeC {\c c}\IeC {\~a}o Formal}{8}{figure.2.1}
+\contentsline {subsubsection}{Modela\IeC {\c c}\IeC {\~a}o de ac\IeC {\c c}\IeC {\~o}es de selec\IeC {\c c}\IeC {\~a}o}{9}{section*.13}
+\contentsline {section}{\numberline {2.3}Modelo de Dados}{11}{lstlisting.2.-2}
+\contentsline {section}{\numberline {2.4}Importa\IeC {\c c}\IeC {\~a}o de dados}{12}{figure.2.3}
+\contentsline {part}{II\hspace {1em}Milestone II}{18}{figure.2.5}
+\contentsline {xpart}{Milestone II}{19}{figure.2.5}
+\contentsline {chapter}{\numberline {3}Web Application}{19}{section*.14}
+\contentsline {section}{\numberline {3.1}Cria\IeC {\c c}\IeC {\~a}o de grupos, docentes e concorrenctes}{19}{section*.14}
+\contentsline {section}{\numberline {3.2}Linguagens de programa\IeC {\c c}\IeC {\~a}o}{21}{figure.3.3}
+\contentsline {section}{\numberline {3.3}Submiss\IeC {\~a}o de programas}{22}{figure.3.4}
+\contentsline {section}{\numberline {3.4}Compila\IeC {\c c}\IeC {\~a}o}{22}{figure.3.5}
+\contentsline {section}{\numberline {3.5}Execu\IeC {\c c}\IeC {\~a}o}{23}{figure.3.5}
+\contentsline {section}{\numberline {3.6}Guardar resultados}{23}{figure.3.5}
+\contentsline {chapter}{\numberline {4}M\IeC {\'e}tricas}{24}{figure.3.5}
+\contentsline {section}{\numberline {4.1}An\IeC {\'a}lise Est\IeC {\'a}tica}{24}{section*.15}
+\contentsline {paragraph}{Syntax checking}{24}{section*.16}
+\contentsline {paragraph}{Type checking}{24}{section*.17}
+\contentsline {paragraph}{Decompilation}{25}{section*.18}
+\contentsline {paragraph}{Code metrics}{25}{section*.19}
+\contentsline {paragraph}{Style checking}{25}{section*.20}
+\contentsline {paragraph}{Verification reverse engineering}{25}{section*.21}
+\contentsline {section}{\numberline {4.2}An\IeC {\'a}lise Din\IeC {\^a}mica}{25}{section*.21}
+\contentsline {paragraph}{Log analysis}{25}{section*.22}
+\contentsline {paragraph}{Testing}{25}{section*.23}
+\contentsline {paragraph}{Debugging}{26}{section*.24}
+\contentsline {paragraph}{Instrumentation}{26}{section*.25}
+\contentsline {paragraph}{Profiling}{26}{section*.26}
+\contentsline {paragraph}{Benchmarking}{26}{section*.27}
+\contentsline {section}{\numberline {4.3}M\IeC {\'e}tricas de qualidade de \emph {software}}{26}{section*.27}
+\contentsline {subsection}{\numberline {4.3.1}Patterns}{27}{section*.28}
+\contentsline {chapter}{\numberline {5}Interface pelo terminal}{28}{section*.28}
+\contentsline {section}{\numberline {5.1}Perl}{28}{section*.29}
+\contentsline {section}{\numberline {5.2}Menus e exemplos}{28}{section*.29}
+\contentsline {chapter}{\numberline {6}Scripts de avalia\IeC {\c c}\IeC {\~a}o}{31}{figure.5.3}
+\contentsline {section}{\numberline {6.1}Gera\IeC {\c c}\IeC {\~a}o de imagens}{31}{section*.30}
+\contentsline {section}{\numberline {6.2}Makefile}{33}{figure.6.4}
+\contentsline {section}{\numberline {6.3}Cloning}{34}{figure.6.4}
+\contentsline {chapter}{\numberline {7}Front-end}{35}{figure.6.4}
+\contentsline {section}{\numberline {7.1}Estudo do Front-End}{35}{section*.31}
+\contentsline {chapter}{\numberline {8}Conclus\IeC {\~a}o e Trabalho Futuro}{37}{lstlisting.7.-15}
+\contentsline {chapter}{Bibliografia}{38}{lstlisting.7.-15}
+\contentsline {chapter}{\numberline {A}AST da Linguagem \textrm {C99}}{39}{chapter*.32}
+\contentsline {section}{\numberline {A.1}Gram\IeC {\'a}tica Lexica}{39}{section*.33}
+\contentsline {subsection}{\numberline {A.1.1}Elementos Lexicos}{39}{section*.33}
+\contentsline {subsection}{\numberline {A.1.2}Keywords}{39}{lstlisting.A.-16}
+\contentsline {subsection}{\numberline {A.1.3}Identificadores}{39}{lstlisting.A.-17}
+\contentsline {subsection}{\numberline {A.1.4}Universal character names}{39}{lstlisting.A.-18}
+\contentsline {subsection}{\numberline {A.1.5}Constantes}{40}{lstlisting.A.-19}
+\contentsline {subsection}{\numberline {A.1.6}String literals}{41}{lstlisting.A.-20}
+\contentsline {subsection}{\numberline {A.1.7}Header names}{41}{lstlisting.A.-21}
+\contentsline {section}{\numberline {A.2}Phrase structure grammar}{41}{lstlisting.A.-22}
+\contentsline {subsection}{\numberline {A.2.1}Expressions}{41}{section*.34}
+\contentsline {subsection}{\numberline {A.2.2}Declarations}{42}{lstlisting.A.-23}
+\contentsline {subsection}{\numberline {A.2.3}Statements}{44}{lstlisting.A.-24}
+\contentsline {subsection}{\numberline {A.2.4}External definitions}{44}{lstlisting.A.-25}
+\contentsline {section}{\numberline {A.3}Preprocessing directives}{45}{lstlisting.A.-26}
