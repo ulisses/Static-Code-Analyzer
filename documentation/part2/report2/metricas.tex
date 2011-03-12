@@ -1,4 +1,5 @@
 \chapter{Métricas}
+\minitoc
 
 Existem diversas métricas, com objectivos diferentes, para analisar um projecto de \emph{software}. Essas métricas podem ser vistas como diferentes 'lentes' com as quais olhamos para um software. 
 Neste capítulo, pretende-se mostrar a investigação que foi realizada relativamente a este tema, começando primeiro por definir alguns conceitos e depois dividir as métricas 
@@ -6,7 +7,8 @@ por categorias. Cada categoria será estruturada da mesma maneira, indicada mais
 
 Assim, encarou-se a análise a um software como sendo uma área que se divide em dois ramos, a \textbf{Análise Estática} e a \textbf{Análise Dinâmica}.\\
 
-A Análise Estática e olhar para um programa sob o ponto de vista do seu código ou ficheiro já compilado, e retirar conclusões às suas características, 
+\section{Análise Estática}
+A Análise Estática é olhar para um programa sob o ponto de vista do seu código ou ficheiro já compilado, e retirar conclusões sobre as suas características, 
 sem nunca recorrer à sua execução ou análise de resultados da execução.
 Ainda relativamente à Análise Estática, temos essencialmente duas maneiras de olhar para o software. Podemos ver este tendo em conta a qualidade do ficheiro objecto 
 produzido ( o código máquina que ira correr, p. ex: em java seria o \emph{bytecode}) ou então tendo única e exclusivamente como objecto de observação os ficheiros de 
@@ -40,6 +42,7 @@ Estas regras podem ser relativas a identação,  existência de ficheiros \textt
 O objectivo deste trabalho é puramente analisar estaticamente um programa, relativamente às metricas de código e eventualmente relativamente ao estilo também.
 Mesmo assim este tema tão vasto deixou-nos com motivação para conhecer o que é este mundo da análise de software.\\
 
+\section{Análise Dinâmica}
 Outros tipos de análises existentes são as chamadas análises dinâmicas, estas pegam numa peça de \emph{software} e não tendo em conta, 
 nem se preocupando com o código que a constitui, executam simplesmente o programa e analisam exaustivamente sob vários prismas o seu comportamento.
 De seguida vamos dissertar sobre alguns destes métodos e práticas que existem para analisar a execução de um programa.\\

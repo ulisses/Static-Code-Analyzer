@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live/MacPorts 2009_6) (format=pdflatex 2010.9.7)  12 MAR 2011 00:20
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live/MacPorts 2009_6) (format=pdflatex 2010.9.7)  12 MAR 2011 02:01
 entering extended mode
  %&-line parsing enabled.
 **Relatorio.tex
@@ -51,10 +51,82 @@ Package babel Warning: No hyphenation patterns were loaded for
 
 \l@portuges = a dialect from \language0
 Package babel Info: Making " an active character on input line 145.
-)) (/opt/local/share/texmf-texlive-dist/tex/latex/base/inputenc.sty
+)) (/opt/local/share/texmf-texlive-dist/tex/latex/minitoc/minitoc.sty
+Package: minitoc 2008/07/16 v60 Package minitoc (JPFD)
+
+(/opt/local/share/texmf-texlive-dist/tex/latex/minitoc/mtcmess.sty
+Package: mtcmess 2006/03/14
+)
+Package minitoc Info: I0001
+(minitoc)             *** minitoc package, version 60 ***.
+\tf@mtc=\write3
+\mtcindent=\skip43
+\mtcskipamount=\skip44
+Package minitoc Info: I0005
+(minitoc)             compatible with hyperref.
+Package minitoc Info: I0023
+(minitoc)             part level macros available.
+Package minitoc Info: I0003
+(minitoc)             chapter level macros available.
+\mtc@toks=\toks14
+\mtc@strutbox=\box26
+\mtc@hstrutbox=\box27
+Package minitoc Info: I0002
+(minitoc)             Autoconfiguration of extensions.
+\openout3 = `Relatorio.mtc0'.
+
+\openout3 = `Relatorio.mtc'.
+
+
+(./Relatorio.mtc0)
+Package minitoc Info: I0012
+(minitoc)             Long extensions (Unix-like) will be used.
+Package minitoc Info: I0031
+(minitoc)             ==> this version is configured for UNIX-like 
+(minitoc)                 (long extensions) file names.
+\openout3 = `Relatorio.mtc'.
+
+\openout3 = `Relatorio.mtc0'.
+
+\c@mtc=\count89
+\c@minitocdepth=\count90
+\c@ptc=\count91
+\c@parttocdepth=\count92
+\ptcindent=\skip45
+Package minitoc Info: I0010
+(minitoc)             The english language is selected.
+(minitoc)              on input line 4910.
+
+(/opt/local/share/texmf-texlive-dist/tex/latex/minitoc/english.mld
+File: english.mld 2006/01/13
+)
+(/opt/local/share/texmf-texlive-dist/tex/latex/minitoc/english.mld
+File: english.mld 2006/01/13
+)
+Package minitoc Info: I0010
+(minitoc)             The english language is selected.
+(minitoc)              on input line 4911.
+
+(/opt/local/share/texmf-texlive-dist/tex/latex/minitoc/english.mld
+File: english.mld 2006/01/13
+)
+Package minitoc Info: I0010
+(minitoc)             The portuges language is selected.
+(minitoc)              on input line 4911.
+
+(/opt/local/share/texmf-texlive-dist/tex/latex/minitoc/portuges.mld
+File: portuges.mld 2005/06/07
+Package minitoc Info: I0010
+(minitoc)             The portuguese language is selected.
+(minitoc)              on input line 33.
+
+(/opt/local/share/texmf-texlive-dist/tex/latex/minitoc/portuguese.mld
+File: portuguese.mld 2006/01/13
+)))
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2008/03/30 v1.1d Input encoding file
-\inpenc@prehook=\toks14
-\inpenc@posthook=\toks15
+\inpenc@prehook=\toks15
+\inpenc@posthook=\toks16
 
 (/opt/local/share/texmf-texlive-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
@@ -285,14 +357,14 @@ Package color Info: Driver file: pdftex.def on input line 130.
 
 (/opt/local/share/texmf-texlive-dist/tex/latex/pdftex-def/pdftex.def
 File: pdftex.def 2009/08/25 v0.04m Graphics/color for pdfTeX
-\Gread@gobject=\count89
+\Gread@gobject=\count93
 ))
 (/opt/local/share/texmf-texlive-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
 (/opt/local/share/texmf-texlive-dist/tex/latex/graphics/keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
-\KV@toks@=\toks16
+\KV@toks@=\toks17
 )
 (/opt/local/share/texmf-texlive-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
@@ -330,8 +402,8 @@ O)
 Package: xcolor-patch 2009/10/02 xcolor patch
 ))
 \@linkdim=\dimen106
-\Hy@linkcounter=\count90
-\Hy@pagecounter=\count91
+\Hy@linkcounter=\count94
+\Hy@pagecounter=\count95
 
 (/opt/local/share/texmf-texlive-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2009/10/09 v6.79a Hyperref: PDFDocEncoding definition (HO)
@@ -400,10 +472,10 @@ Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 )))
-\Fld@menulength=\count92
+\Fld@menulength=\count96
 \Field@Width=\dimen107
 \Fld@charsize=\dimen108
-\Field@toks=\toks17
+\Field@toks=\toks18
 Package hyperref Info: Hyper figures OFF on input line 4377.
 Package hyperref Info: Link nesting OFF on input line 4382.
 Package hyperref Info: Hyper index ON on input line 4385.
@@ -415,30 +487,34 @@ Package hyperref Info: PDF/A mode OFF on input line 4407.
 (/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/atbegshi.sty
 Package: atbegshi 2008/07/31 v1.9 At begin shipout hook (HO)
 )
-\Hy@abspage=\count93
-\c@Item=\count94
-\c@Hfootnote=\count95
+\Hy@abspage=\count97
+\c@Item=\count98
+\c@Hfootnote=\count99
 )
 *hyperref using driver hpdftex*
 (/opt/local/share/texmf-texlive-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2009/10/09 v6.79a Hyperref driver for pdfTeX
-\Fld@listcount=\count96
+\Fld@listcount=\count100
+)
+(/opt/local/share/texmf-texlive-dist/tex/latex/quotchap/quotchap.sty
+Package: quotchap 1998/02/09 v0.9f Decorative Chapter Headings with Quotes
+\@quotebox=\box28
 )
 (/opt/local/share/texmf-texlive-dist/tex/latex/tools/varioref.sty
 Package: varioref 2009/09/13 v1.4w package for extended references (FMi)
-\c@vrcnt=\count97
+\c@vrcnt=\count101
 )
 (/opt/local/share/texmf-texlive-dist/tex/latex/fancyvrb/fancyvrb.sty
 Package: fancyvrb 2008/02/07
 
 Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
 <2008/02/07> (tvz)
-\FV@CodeLineNo=\count98
+\FV@CodeLineNo=\count102
 \FV@InFile=\read1
-\FV@TabBox=\box26
-\c@FancyVerbLine=\count99
-\FV@StepNumber=\count100
-\FV@OutFile=\write3
+\FV@TabBox=\box29
+\c@FancyVerbLine=\count103
+\FV@StepNumber=\count104
+\FV@OutFile=\write4
 )
 (/opt/local/share/texmf-texlive-dist/tex/latex/cite/cite.sty
 LaTeX Info: Redefining \cite on input line 285.
@@ -447,31 +523,31 @@ Package: cite 2009/08/29  v 5.2
 )
 (/opt/local/share/texmf-texlive-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count101
-\float@exts=\toks18
-\float@box=\box27
-\@float@everytoks=\toks19
-\@floatcapt=\box28
+\c@float@type=\count105
+\float@exts=\toks19
+\float@box=\box30
+\@float@everytoks=\toks20
+\@floatcapt=\box31
 )
 (/opt/local/share/texmf-texlive-dist/tex/latex/listings/listings.sty
-\lst@mode=\count102
-\lst@gtempboxa=\box29
-\lst@token=\toks20
-\lst@length=\count103
+\lst@mode=\count106
+\lst@gtempboxa=\box32
+\lst@token=\toks21
+\lst@length=\count107
 \lst@currlwidth=\dimen109
-\lst@column=\count104
-\lst@pos=\count105
+\lst@column=\count108
+\lst@pos=\count109
 \lst@lostspace=\dimen110
 \lst@width=\dimen111
-\lst@newlines=\count106
-\lst@lineno=\count107
+\lst@newlines=\count110
+\lst@lineno=\count111
 \lst@maxwidth=\dimen112
 
 (/opt/local/share/texmf-texlive-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
-\c@lstnumber=\count108
-\lst@skipnumbers=\count109
-\lst@framebox=\box30
+\c@lstnumber=\count112
+\lst@skipnumbers=\count113
+\lst@framebox=\box33
 )
 (/opt/local/share/texmf-texlive-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2007/02/22 1.4 listings configuration
@@ -486,14 +562,14 @@ Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 ))
 (/opt/local/share/texmf-texlive-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2008/12/21 v4.2 Page Geometry
-\Gm@cnth=\count110
-\Gm@cntv=\count111
-\c@Gm@tempcnt=\count112
+\Gm@cnth=\count114
+\Gm@cntv=\count115
+\c@Gm@tempcnt=\count116
 \Gm@bindingoffset=\dimen113
 \Gm@wd@mp=\dimen114
 \Gm@odd@mp=\dimen115
 \Gm@even@mp=\dimen116
-\Gm@dimlist=\toks21
+\Gm@dimlist=\toks22
 
 (/opt/local/share/texmf-texlive-dist/tex/xelatex/xetexconfig/geometry.cfg))
 (/opt/local/share/texmf-texlive-dist/tex/latex/setspace/setspace.sty
@@ -507,15 +583,15 @@ Package: thumbpdf 2008/04/16 v3.10 Inclusion of thumbnails (HO)
 Package thumbpdf Warning: Thumbnail data file `Relatorio.tpt' not found.
 
 ) (/opt/local/share/texmf-texlive-dist/tex/latex/fancyhdr/fancyhdr.sty
-\fancy@headwidth=\skip43
-\f@ncyO@elh=\skip44
-\f@ncyO@erh=\skip45
-\f@ncyO@olh=\skip46
-\f@ncyO@orh=\skip47
-\f@ncyO@elf=\skip48
-\f@ncyO@erf=\skip49
-\f@ncyO@olf=\skip50
-\f@ncyO@orf=\skip51
+\fancy@headwidth=\skip46
+\f@ncyO@elh=\skip47
+\f@ncyO@erh=\skip48
+\f@ncyO@olh=\skip49
+\f@ncyO@orh=\skip50
+\f@ncyO@elf=\skip51
+\f@ncyO@erf=\skip52
+\f@ncyO@olf=\skip53
+\f@ncyO@orf=\skip54
 )
 (/opt/local/share/texmf-texlive-dist/tex/latex/lastpage/lastpage.sty
 Package: lastpage 1994/06/25 v0.1b LaTeX2e package for refs to last page number
@@ -526,8 +602,8 @@ Package: alltt 1997/06/16 v2.0g defines alltt environment
 )
 (/opt/local/share/texmf-texlive-dist/tex/latex/tools/verbatim.sty
 Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
-\every@verbatim=\toks22
-\verbatim@line=\toks23
+\every@verbatim=\toks23
+\verbatim@line=\toks24
 \verbatim@in@stream=\read2
 )
 (/opt/local/share/texmf-texlive-dist/tex/generic/epsf/epsf.sty
@@ -543,40 +619,40 @@ This is `epsf.tex' v2.7.3 <23 July 2005>
 \pspoints=\dimen124
 ) (/opt/local/share/texmf-texlive-dist/tex/latex/gloss/gloss.sty
 Package: gloss 2002/07/26 1.5.2 Gloss package
-\glosshang=\skip52
+\glosshang=\skip55
 )
 (/opt/local/share/texmf-texlive-dist/tex/latex/tools/array.sty
 Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
 \col@sep=\dimen125
 \extrarowheight=\dimen126
-\NC@list=\toks24
-\extratabsurround=\skip53
-\backup@length=\skip54
+\NC@list=\toks25
+\extratabsurround=\skip56
+\backup@length=\skip57
 )
 (/opt/local/share/texmf-texlive-dist/tex/latex/tools/longtable.sty
 Package: longtable 2004/02/01 v4.11 Multi-page Table package (DPC)
-\LTleft=\skip55
-\LTright=\skip56
-\LTpre=\skip57
-\LTpost=\skip58
-\LTchunksize=\count113
+\LTleft=\skip58
+\LTright=\skip59
+\LTpre=\skip60
+\LTpost=\skip61
+\LTchunksize=\count117
 \LTcapwidth=\dimen127
-\LT@head=\box31
-\LT@firsthead=\box32
-\LT@foot=\box33
-\LT@lastfoot=\box34
-\LT@cols=\count114
-\LT@rows=\count115
-\c@LT@tables=\count116
-\c@LT@chunks=\count117
-\LT@p@ftn=\toks25
+\LT@head=\box34
+\LT@firsthead=\box35
+\LT@foot=\box36
+\LT@lastfoot=\box37
+\LT@cols=\count118
+\LT@rows=\count119
+\c@LT@tables=\count120
+\c@LT@chunks=\count121
+\LT@p@ftn=\toks26
 )
 (/opt/local/share/texmf-texlive-dist/tex/latex/multirow/multirow.sty
 \bigstrutjot=\dimen128
 )
 (/opt/local/share/texmf-texlive-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2000/07/18 v2.13 AMS math features
-\@mathmargin=\skip59
+\@mathmargin=\skip62
 
 For additional information on amsmath, use the `?' option.
 (/opt/local/share/texmf-texlive-dist/tex/latex/amsmath/amstext.sty
@@ -584,7 +660,7 @@ Package: amstext 2000/06/29 v2.01
 
 (/opt/local/share/texmf-texlive-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0
-\@emptytoks=\toks26
+\@emptytoks=\toks27
 \ex@=\dimen129
 ))
 (/opt/local/share/texmf-texlive-dist/tex/latex/amsmath/amsbsy.sty
@@ -594,55 +670,55 @@ Package: amsbsy 1999/11/29 v1.2d
 (/opt/local/share/texmf-texlive-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
 )
-\inf@bad=\count118
+\inf@bad=\count122
 LaTeX Info: Redefining \frac on input line 211.
-\uproot@=\count119
-\leftroot@=\count120
+\uproot@=\count123
+\leftroot@=\count124
 LaTeX Info: Redefining \overline on input line 307.
-\classnum@=\count121
-\DOTSCASE@=\count122
+\classnum@=\count125
+\DOTSCASE@=\count126
 LaTeX Info: Redefining \ldots on input line 379.
 LaTeX Info: Redefining \dots on input line 382.
 LaTeX Info: Redefining \cdots on input line 467.
-\Mathstrutbox@=\box35
-\strutbox@=\box36
+\Mathstrutbox@=\box38
+\strutbox@=\box39
 \big@size=\dimen131
 LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
-\macc@depth=\count123
-\c@MaxMatrixCols=\count124
+\macc@depth=\count127
+\c@MaxMatrixCols=\count128
 \dotsspace@=\muskip11
-\c@parentequation=\count125
-\dspbrk@lvl=\count126
-\tag@help=\toks27
-\row@=\count127
-\column@=\count128
-\maxfields@=\count129
-\andhelp@=\toks28
+\c@parentequation=\count129
+\dspbrk@lvl=\count130
+\tag@help=\toks28
+\row@=\count131
+\column@=\count132
+\maxfields@=\count133
+\andhelp@=\toks29
 \eqnshift@=\dimen132
 \alignsep@=\dimen133
 \tagshift@=\dimen134
 \tagwidth@=\dimen135
 \totwidth@=\dimen136
 \lineht@=\dimen137
-\@envbody=\toks29
-\multlinegap=\skip60
-\multlinetaggap=\skip61
-\mathdisplay@stack=\toks30
+\@envbody=\toks30
+\multlinegap=\skip63
+\multlinetaggap=\skip64
+\mathdisplay@stack=\toks31
 LaTeX Info: Redefining \[ on input line 2666.
 LaTeX Info: Redefining \] on input line 2667.
 )
 (/opt/local/share/texmf-texlive-dist/tex/latex/amscls/amsthm.sty
 Package: amsthm 2004/08/06 v2.20
-\thm@style=\toks31
-\thm@bodyfont=\toks32
-\thm@headfont=\toks33
-\thm@notefont=\toks34
-\thm@headpunct=\toks35
-\thm@preskip=\skip62
-\thm@postskip=\skip63
-\thm@headsep=\skip64
-\dth@everypar=\toks36
+\thm@style=\toks32
+\thm@bodyfont=\toks33
+\thm@headfont=\toks34
+\thm@notefont=\toks35
+\thm@headpunct=\toks36
+\thm@preskip=\skip65
+\thm@postskip=\skip66
+\thm@headsep=\skip67
+\dth@everypar=\toks37
 )
 (/opt/local/share/texmf-texlive-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2009/06/22 v3.00
@@ -656,80 +732,103 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 ))
 (/opt/local/share/texmf-texlive-dist/tex/latex/slashbox/slashbox.sty
 slashbox style by K.Yasuoka, May 1993.
-\@slashboxa=\box37
-\@slashboxb=\box38
-\@slashboxc=\box39
-\@slashboxwd=\count130
-\@slashboxht=\count131
+\@slashboxa=\box40
+\@slashboxb=\box41
+\@slashboxc=\box42
+\@slashboxwd=\count134
+\@slashboxht=\count135
 \@slashsepl=\dimen138
 \@slashsepr=\dimen139
 ) (/opt/local/share/texmf-texlive-dist/tex/latex/rotating/rotating.sty
 Package: rotating 2009/03/28 v2.16a rotated objects in LaTeX
-\c@r@tfl@t=\count132
-\rotFPtop=\skip65
-\rotFPbot=\skip66
-\rot@float@box=\box40
-\rot@mess@toks=\toks37
+\c@r@tfl@t=\count136
+\rotFPtop=\skip68
+\rotFPbot=\skip69
+\rot@float@box=\box43
+\rot@mess@toks=\toks38
 )
 
 Package Fancyhdr Warning: \fancyhead's `E' option without twoside option is use
-less on input line 126.
+less on input line 138.
 
 
 Package Fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
-less on input line 128.
+less on input line 140.
 
 (./Relatorio.aux (./abstract.aux))
 \openout1 = `Relatorio.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 135.
-LaTeX Font Info:    ... okay on input line 135.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 135.
-LaTeX Font Info:    ... okay on input line 135.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 135.
-LaTeX Font Info:    ... okay on input line 135.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 135.
-LaTeX Font Info:    ... okay on input line 135.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 135.
-LaTeX Font Info:    ... okay on input line 135.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 135.
-LaTeX Font Info:    ... okay on input line 135.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 135.
-LaTeX Font Info:    ... okay on input line 135.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+Package minitoc(hints) Info: I0049
+(minitoc(hints))             ==> You requested the hints option. 
+(minitoc(hints))             Some hints are eventually given below.
+
+
+Package minitoc(hints) Warning: W0030
+(minitoc(hints))                --- The \part command is altered 
+(minitoc(hints))                after minitoc.
+
+
+Package minitoc(hints) Warning: W0023
+(minitoc(hints))                --- It may be the consequence 
+(minitoc(hints))                of loading the ``hyperref'' package.
+
+
+Package minitoc(hints) Warning: W0028
+(minitoc(hints))                --- The \chapter command is altered 
+(minitoc(hints))                after minitoc.
+
+
+Package minitoc(hints) Warning: W0023
+(minitoc(hints))                --- It may be the consequence 
+(minitoc(hints))                of loading the ``hyperref'' package.
 
 (/opt/local/share/texmf-texlive-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count133
+\scratchcounter=\count137
 \scratchdimen=\dimen140
-\scratchbox=\box41
-\nofMPsegments=\count134
-\nofMParguments=\count135
-\everyMPshowfont=\toks38
-\MPscratchCnt=\count136
+\scratchbox=\box44
+\nofMPsegments=\count138
+\nofMParguments=\count139
+\everyMPshowfont=\toks39
+\MPscratchCnt=\count140
 \MPscratchDim=\dimen141
-\MPnumerator=\count137
-\everyMPtoPDFconversion=\toks39
+\MPnumerator=\count141
+\everyMPtoPDFconversion=\toks40
 )
-Package hyperref Info: Link coloring ON on input line 135.
+Package hyperref Info: Link coloring ON on input line 147.
  (/opt/local/share/texmf-texlive-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
 
 (/opt/local/share/texmf-texlive-dist/tex/latex/oberdiek/refcount.sty
 Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
 )
-\c@section@level=\count138
+\c@section@level=\count142
 LaTeX Info: Redefining \Ref on input line 396.
 )
-LaTeX Info: Redefining \ref on input line 135.
-LaTeX Info: Redefining \pageref on input line 135.
+LaTeX Info: Redefining \ref on input line 147.
+LaTeX Info: Redefining \pageref on input line 147.
 
 (./Relatorio.out) (./Relatorio.out)
-\@outlinefile=\write4
-\openout4 = `Relatorio.out'.
+\@outlinefile=\write5
+\openout5 = `Relatorio.out'.
 
-\AtBeginShipoutBox=\box42
-LaTeX Info: Redefining \Ref on input line 135.
-\c@lstlisting=\count139
+\AtBeginShipoutBox=\box45
+LaTeX Info: Redefining \Ref on input line 147.
+\c@lstlisting=\count143
 
 *geometry auto-detecting driver*
 *geometry detected driver: pdftex*
@@ -772,15 +871,15 @@ driver: pdftex
 
 (1in=72.27pt, 1cm=28.45pt)
 -----------------------
-<Images/DI-UM.png, id=111, 274.02374pt x 101.62968pt>
+<Images/DI-UM.png, id=126, 274.02374pt x 101.62968pt>
 File: Images/DI-UM.png Graphic file (type png)
  <use Images/DI-UM.png>
-LaTeX Font Info:    Try loading font information for U+msa on input line 158.
+LaTeX Font Info:    Try loading font information for U+msa on input line 170.
 
 (/opt/local/share/texmf-texlive-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 158.
+LaTeX Font Info:    Try loading font information for U+msb on input line 170.
 
 (/opt/local/share/texmf-texlive-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
@@ -792,79 +891,163 @@ g>]
 
 
 (./abstract.tex
+LaTeX Font Info:    Try loading font information for T1+pag on input line 2.
+ (/opt/local/share/texmf-texlive-dist/tex/latex/psnfss/t1pag.fd
+File: t1pag.fd 2001/06/04 font definitions for T1/pag.
+)
+LaTeX Font Info:    Font shape `T1/pag/b/n' in size <20.74> not available
+(Font)              Font shape `T1/pag/db/n' tried instead on input line 2.
+LaTeX Font Info:    Font shape `T1/pag/b/n' in size <100> not available
+(Font)              Font shape `T1/pag/db/n' tried instead on input line 2.
+
 Underfull \hbox (badness 10000) in paragraph at lines 4--8
 
  []
 
-)pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
- been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.170 \include{abstract}
-                         [1
+) [1
 
 
-] (./Relatorio.toc)
-\tf@toc=\write5
-\openout5 = `Relatorio.toc'.
+]
+Package minitoc Info: I0024
+(minitoc)             PREPARING MINITOCS FROM Relatorio.toc on input line 186.
+Package minitoc Info: I0033
+(minitoc)             Writing Relatorio.mtc1.
+\openout3 = `Relatorio.mtc1'.
+
+Package minitoc Info: I0033
+(minitoc)             Writing Relatorio.mtc2.
+\openout3 = `Relatorio.mtc2'.
+
+Package minitoc Info: I0033
+(minitoc)             Writing Relatorio.mtc3.
+\openout3 = `Relatorio.mtc3'.
+
+Package minitoc Info: I0033
+(minitoc)             Writing Relatorio.mtc4.
+\openout3 = `Relatorio.mtc4'.
+
+Package minitoc Info: I0033
+(minitoc)             Writing Relatorio.mtc5.
+\openout3 = `Relatorio.mtc5'.
+
+Package minitoc Info: I0033
+(minitoc)             Writing Relatorio.mtc6.
+\openout3 = `Relatorio.mtc6'.
+
+Package minitoc Info: I0033
+(minitoc)             Writing Relatorio.mtc7.
+\openout3 = `Relatorio.mtc7'.
+
+Package minitoc Info: I0033
+(minitoc)             Writing Relatorio.mtc8.
+\openout3 = `Relatorio.mtc8'.
+
+Package minitoc Info: I0033
+(minitoc)             Writing Relatorio.mtc9.
+\openout3 = `Relatorio.mtc9'.
+
+Package minitoc Info: I0033
+(minitoc)             Writing Relatorio.mtc10.
+\openout3 = `Relatorio.mtc10'.
+
+Package minitoc Info: I0034
+(minitoc)             PREPARING MINILOFS FROM Relatorio.lof on input line 187.
+Package minitoc Info: I0033
+(minitoc)             Writing Relatorio.mlf1.
+\openout3 = `Relatorio.mlf1'.
+
+Package minitoc Info: I0033
+(minitoc)             Writing Relatorio.mlf2.
+\openout3 = `Relatorio.mlf2'.
+
+Package minitoc Info: I0033
+(minitoc)             Writing Relatorio.mlf3.
+\openout3 = `Relatorio.mlf3'.
+
+Package minitoc Info: I0033
+(minitoc)             Writing Relatorio.mlf4.
+\openout3 = `Relatorio.mlf4'.
+
+Package minitoc Info: I0033
+(minitoc)             Writing Relatorio.mlf5.
+\openout3 = `Relatorio.mlf5'.
+
+Package minitoc Info: I0033
+(minitoc)             Writing Relatorio.mlf6.
+\openout3 = `Relatorio.mlf6'.
+
+Package minitoc Info: I0033
+(minitoc)             Writing Relatorio.mlf7.
+\openout3 = `Relatorio.mlf7'.
+
+Package minitoc Info: I0033
+(minitoc)             Writing Relatorio.mlf8.
+\openout3 = `Relatorio.mlf8'.
+
+Package minitoc Info: I0033
+(minitoc)             Writing Relatorio.mlf9.
+\openout3 = `Relatorio.mlf9'.
+
+
+
+Package minitoc Warning: W0009
+(minitoc)                No file Relatorio.lot. 
+(minitoc)                MINILOTS NOT PREPARED on input line 188.
+
+(./Relatorio.toc)
+\tf@toc=\write6
+\openout6 = `Relatorio.toc'.
 
  [2
 
 
 ] (./Relatorio.lof
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 15.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 23.
 
 (/opt/local/share/texmf-texlive-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 ))
-\tf@lof=\write6
-\openout6 = `Relatorio.lof'.
+\tf@lof=\write7
+\openout7 = `Relatorio.lof'.
 
  [3
 
 ]
-(./Relatorio.lot)
-\tf@lot=\write7
-\openout7 = `Relatorio.lot'.
-
- [4
-
-]pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
- been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.177 \part{Milestone I}
-                         [1
-
-] (./intro.tex
+(./intro.tex
 Cap\'{\i }tulo 1.
+\openout3 = `Relatorio.mtc'.
 
-Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 1.
+\openout3 = `Relatorio.mtc'.
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 2--3
+(./Relatorio.mtc2)
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
 
  []
 
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 18.
+(hyperref)                be the same. Added a new anchor on input line 8.
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 21.
+
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 19.
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.22 \item D
+            B2 [1
+
+]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 22.
+
 (/opt/local/share/texmf-texlive-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 21.
-pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has 
-been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.31 
-      [2
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 22.
 
-]
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 41.
@@ -895,365 +1078,87 @@ Underfull \hbox (badness 10000) in paragraph at lines 42--54
 
  []
 
-pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has 
-been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.76 
-      [3]
-Underfull \hbox (badness 10000) in paragraph at lines 86--87
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 86--88
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 88--89
+Underfull \hbox (badness 10000) in paragraph at lines 89--90
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 90--91
+Underfull \hbox (badness 10000) in paragraph at lines 91--92
 
  []
 
-)
-Underfull \hbox (badness 10000) in paragraph at lines 92--179
+
+Underfull \hbox (badness 10000) in paragraph at lines 93--94
 
  []
 
-pdfTeX warning (ext4): destination with the same identifier (name{page.4}) has 
-been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.179 \newpage
-               [4] (./model.tex
+
+Underfull \hbox (badness 10000) in paragraph at lines 95--96
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 97--98
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 99--100
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 101--102
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 103--104
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 105--106
+
+ []
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 107--108
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 109--110
+
+ []
+
+) [4] [5
+
+] (./model.tex
 Cap\'{\i }tulo 2.
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 10.
+(hyperref)                be the same. Added a new anchor on input line 6.
 
+\openout3 = `Relatorio.mtc'.
 
-Underfull \hbox (badness 10000) in paragraph at lines 11--15
+\openout3 = `Relatorio.mtc'.
+
+(./Relatorio.mtc3)
+Underfull \hbox (badness 10000) in paragraph at lines 12--16
 
  []
 
-<Images/EL-PI.png, id=211, 1525.7pt x 1257.69875pt>
+<Images/EL-PI.png, id=246, 1525.7pt x 1257.69875pt>
 File: Images/EL-PI.png Graphic file (type png)
  <use Images/EL-PI.png>
-Underfull \hbox (badness 10000) in paragraph at lines 23--25
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 26--29
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 30--35
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 36--43
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 46--49
-
- []
-
-[5
-
-] [6 <./Images/EL-PI.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 51--55
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 57--59
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 60--63
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 64--68
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 72--73
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 72--73
-
- []
-
-
-LaTeX Warning: Command \' invalid in math mode on input line 74.
-
-Missing character: There is no í in font cmr10!
-
-Underfull \hbox (badness 10000) in paragraph at lines 74--76
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 77--82
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 83--85
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 89--90
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 89--90
-
- []
-
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 97--98
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 97--98
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 105--106
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 105--106
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 112--113
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 112--113
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 120--121
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 120--121
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 123--125
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 133--134
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 133--134
-
- []
-
-[8]
-Underfull \hbox (badness 10000) in paragraph at lines 140--141
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 140--141
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 147--148
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 147--148
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 161--164
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 170--171
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 170--171
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 177--178
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 177--178
-
- []
-
-LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <7> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 181.
-
-Underfull \hbox (badness 10000) in paragraph at lines 206--207
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 206--207
-
- []
-
-[9]
-Underfull \hbox (badness 10000) in paragraph at lines 210--211
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 225--229
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 230--232
-
- []
-
-<Images/grupo-docente.jpeg, id=240, 1314.9125pt x 929.4725pt>
-File: Images/grupo-docente.jpeg Graphic file (type jpg)
-
-<use Images/grupo-docente.jpeg>
-<Images/concurso-enunciado.jpeg, id=241, 1314.9125pt x 929.4725pt>
-File: Images/concurso-enunciado.jpeg Graphic file (type jpg)
-
-<use Images/concurso-enunciado.jpeg>
-Underfull \hbox (badness 10000) in paragraph at lines 243--264
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 243--264
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 267--276
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 267--276
-
- []
-
-[10] [11 <./Images/grupo-docente.jpeg> <./Images/concurso-enunciado.jpeg>]
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 276.
-
-(./resources/enunciado.xml)
-Underfull \hbox (badness 10000) in paragraph at lines 279--282
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 279--282
-
- []
-
-(./resources/tentativa.xml [12])
-Underfull \hbox (badness 10000) in paragraph at lines 286--289
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 290--295
-
- []
-
-[13]
-Underfull \hbox (badness 10000) in paragraph at lines 306--308
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 344--347
-
- []
-
-[14]
-Underfull \hbox (badness 10000) in paragraph at lines 348--349
-
- []
-
-<Images/enunciado_schema.jpg, id=270, 708.6475pt x 678.535pt>
-File: Images/enunciado_schema.jpg Graphic file (type jpg)
-
-<use Images/enunciado_schema.jpg>
-<Images/tentativa_schema.jpg, id=271, 703.62875pt x 658.46pt>
-File: Images/tentativa_schema.jpg Graphic file (type jpg)
-
-<use Images/tentativa_schema.jpg>) [15 <./Images/enunciado_schema.jpg (PNG copy
-)>] [16 <./Images/tentativa_schema.jpg (PNG copy)>] [17
-
-] (./implem.tex
-Cap\'{\i }tulo 3.
-
-Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 1.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 23--30
-
- []
-
-[18
-
-]) [19] (./metricas.tex
-Cap\'{\i }tulo 4.
-
-Underfull \hbox (badness 10000) in paragraph at lines 3--6
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 7--8
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9--16
+Underfull \hbox (badness 10000) in paragraph at lines 24--26
 
  []
 
@@ -1262,169 +1167,536 @@ Underfull \hbox (badness 10000) in paragraph at lines 27--30
 
  []
 
-[20
 
-]
-Underfull \hbox (badness 10000) in paragraph at lines 40--42
+Underfull \hbox (badness 10000) in paragraph at lines 31--36
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 43--46
+Underfull \hbox (badness 10000) in paragraph at lines 37--44
+
+ []
+
+[6
+
+] [7 <./Images/EL-PI.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 47--50
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 70--73
-
- []
-
-[21]
-Underfull \hbox (badness 10000) in paragraph at lines 74--75
+Underfull \hbox (badness 10000) in paragraph at lines 52--56
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 76--77
+Underfull \hbox (badness 10000) in paragraph at lines 58--60
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 78--79
+Underfull \hbox (badness 10000) in paragraph at lines 61--64
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 80--81
+Underfull \hbox (badness 10000) in paragraph at lines 65--69
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 87--88
+Underfull \hbox (badness 10000) in paragraph at lines 73--74
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 89--90
+Underfull \hbox (badness 10000) in paragraph at lines 73--74
+
+ []
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 75.
+
+Missing character: There is no í in font cmr10!
+
+Underfull \hbox (badness 10000) in paragraph at lines 75--77
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 78--83
+
+ []
+
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 84--86
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--91
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--91
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 98--99
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 98--99
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 106--107
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 106--107
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 113--114
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 113--114
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 121--122
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 121--122
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 124--126
+
+ []
+
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 134--135
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 134--135
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 141--142
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 141--142
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 148--149
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 148--149
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 162--165
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 171--172
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 171--172
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 178--179
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 178--179
+
+ []
+
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <7> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 182.
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 207--208
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 207--208
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 211--212
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 226--230
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 231--233
+
+ []
+
+<Images/grupo-docente.jpeg, id=275, 1314.9125pt x 929.4725pt>
+File: Images/grupo-docente.jpeg Graphic file (type jpg)
+
+<use Images/grupo-docente.jpeg>
+<Images/concurso-enunciado.jpeg, id=276, 1314.9125pt x 929.4725pt>
+File: Images/concurso-enunciado.jpeg Graphic file (type jpg)
+
+<use Images/concurso-enunciado.jpeg>
+Underfull \hbox (badness 10000) in paragraph at lines 244--265
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 244--265
+
+ []
+
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 268--277
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 268--277
+
+ []
+
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
+nput line 277.
+(./resources/enunciado.xml [12 <./Images/grupo-docente.jpeg>])
+Underfull \hbox (badness 10000) in paragraph at lines 280--283
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 280--283
+
+ []
+
+[13 <./Images/concurso-enunciado.jpeg>] (./resources/tentativa.xml)
+Underfull \hbox (badness 10000) in paragraph at lines 287--290
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 291--296
+
+ []
+
+[14]
+Underfull \hbox (badness 10000) in paragraph at lines 307--309
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 345--348
+
+ []
+
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 349--350
+
+ []
+
+<Images/enunciado_schema.jpg, id=305, 708.6475pt x 678.535pt>
+File: Images/enunciado_schema.jpg Graphic file (type jpg)
+
+<use Images/enunciado_schema.jpg>
+<Images/tentativa_schema.jpg, id=306, 703.62875pt x 658.46pt>
+File: Images/tentativa_schema.jpg Graphic file (type jpg)
+
+<use Images/tentativa_schema.jpg>) [16 <./Images/enunciado_schema.jpg (PNG copy
+)>] [17 <./Images/tentativa_schema.jpg (PNG copy)>] [18
+
+] (./implem.tex
+Cap\'{\i }tulo 3.
+
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 1.
+
+\openout3 = `Relatorio.mtc'.
+
+\openout3 = `Relatorio.mtc'.
+
+(./Relatorio.mtc4)
+Underfull \hbox (badness 10000) in paragraph at lines 24--31
+
+ []
+
+[19
+
+]) [20] (./metricas.tex
+Cap\'{\i }tulo 4.
+\openout3 = `Relatorio.mtc'.
+
+\openout3 = `Relatorio.mtc'.
+
+(./Relatorio.mtc5)
+Underfull \hbox (badness 10000) in paragraph at lines 4--7
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
 
  []
 
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 94.
+(hyperref)                be the same. Added a new anchor on input line 10.
 
-) [22] (./web.tex
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--18
+
+ []
+
+[21
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 29--32
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--44
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 46--49
+
+ []
+
+[22]
+Underfull \hbox (badness 10000) in paragraph at lines 73--76
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 77--78
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 79--80
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 81--82
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 83--84
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--91
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--93
+
+ []
+
+
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 97.
+
+) [23] (./web.tex
 Cap\'{\i }tulo 5.
-) [23
+Package minitoc Info: I0006
+(minitoc)             Relatorio.mtc6 is empty on input line 3.
+) [24
 
 ] (./perlz.tex
 Cap\'{\i }tulo 6.
+\openout3 = `Relatorio.mtc'.
 
-Underfull \hbox (badness 10000) in paragraph at lines 3--6
+\openout3 = `Relatorio.mtc'.
+
+(./Relatorio.mtc7)
+Underfull \hbox (badness 10000) in paragraph at lines 4--7
 
  []
 
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 7.
+(hyperref)                be the same. Added a new anchor on input line 8.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 9--13
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 18--19
+Underfull \hbox (badness 10000) in paragraph at lines 10--14
 
  []
 
-<Images/menuPrinc.png, id=322, 426.59375pt x 383.4325pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--20
+
+ []
+
+<Images/menuPrinc.png, id=368, 426.59375pt x 383.4325pt>
 File: Images/menuPrinc.png Graphic file (type png)
 
-<use Images/menuPrinc.png> [24
+<use Images/menuPrinc.png> [25
 
 ]
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 30.
-
-Underfull \hbox (badness 10000) in paragraph at lines 35--37
+Underfull \hbox (badness 10000) in paragraph at lines 36--38
 
  []
 
-<Images/linguagens.png, id=329, 426.59375pt x 383.4325pt>
+<Images/linguagens.png, id=375, 426.59375pt x 383.4325pt>
 File: Images/linguagens.png Graphic file (type png)
 
 <use Images/linguagens.png>
-Underfull \hbox (badness 10000) in paragraph at lines 45--47
+Underfull \hbox (badness 10000) in paragraph at lines 46--48
 
  []
 
-[25 <./Images/menuPrinc.png (PNG copy)> <./Images/linguagens.png (PNG copy)>]
-<Images/zacarias.png, id=336, 635.37375pt x 537.00626pt>
+<Images/zacarias.png, id=377, 635.37375pt x 537.00626pt>
 File: Images/zacarias.png Graphic file (type png)
 
-<use Images/zacarias.png>) [26 <./Images/zacarias.png (PNG copy)>]
+<use Images/zacarias.png>) [26 <./Images/menuPrinc.png (PNG copy)> <./Images/li
+nguagens.png (PNG copy)>] [27 <./Images/zacarias.png (PNG copy)>]
 (./scripts.tex
 Cap\'{\i }tulo 7.
-) [27
+)
+Package minitoc Info: I0006
+(minitoc)             Relatorio.mtc8 is empty on input line 218.
+ [28
 
 ] (./frontend.tex
 Cap\'{\i }tulo 8.
-) [28
+)
+Package minitoc Info: I0006
+(minitoc)             Relatorio.mtc9 is empty on input line 220.
+ [29
 
 ] (./conc.tex
 Cap\'{\i }tulo 9.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 2--196
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2--196
-
- []
-
-[29
-
-]
 No file Relatorio.bbl.
-AED: lastpage setting LastPage (./Relatorio.aux (./abstract.aux)) ) 
+Package minitoc Info: I0009
+(minitoc)             Listing minitoc auxiliary files. 
+(minitoc)             Creating the Relatorio.maf file.
+\openout3 = `Relatorio.maf'.
+
+
+Package minitoc(hints) Warning: W0079
+(minitoc(hints))                You have used \dominilof, 
+(minitoc(hints))                but not \minilof.
+
+
+Package minitoc(hints) Warning: W0080
+(minitoc(hints))                You have used \dominilot, 
+(minitoc(hints))                but not \minilot.
+
+
+Package minitoc(hints) Warning: W0087
+(minitoc(hints))                The quotchap package should be 
+(minitoc(hints))                loaded BEFORE the minitoc package.
+
+Package minitoc(hints) Info: I0053
+(minitoc(hints))             You have loaded the float package; 
+(minitoc(hints))             please be aware that the minitoc package 
+(minitoc(hints))             facilities can not be used for new types 
+(minitoc(hints))             of floats defined by the float package.
+
+Package minitoc(hints) Warning: W0024
+(minitoc(hints))                Some hints have been written 
+(minitoc(hints))                in the Relatorio.log file.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--226
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--226
+
+ []
+
+[30
+
+] AED: lastpage setting LastPage (./Relatorio.aux (./abstract.aux)) ) 
 Here is how much of TeX's memory you used:
- 9773 strings out of 495061
- 133570 string characters out of 3181965
- 369834 words of memory out of 3000000
- 12591 multiletter control sequences out of 15000+200000
- 26062 words of font info for 60 fonts, out of 3000000 for 9000
+ 11359 strings out of 495061
+ 155580 string characters out of 3181965
+ 383462 words of memory out of 3000000
+ 13907 multiletter control sequences out of 15000+200000
+ 30943 words of font info for 62 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 38i,12n,43p,396b,1790s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/opt/local/
-share/texmf-texlive-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</opt/local/s
-hare/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></opt/local/s
-hare/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></opt/local/sh
-are/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></opt/local/sh
-are/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></opt/local/sha
-re/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></opt/local/shar
-e/texmf-texlive-dist/fonts/type1/public/cm-super/sfbi0700.pfb></opt/local/share
-/texmf-texlive-dist/fonts/type1/public/cm-super/sfbi1000.pfb></opt/local/share/
-texmf-texlive-dist/fonts/type1/public/cm-super/sfbi1440.pfb></opt/local/share/t
-exmf-texlive-dist/fonts/type1/public/cm-super/sfbi1728.pfb></opt/local/share/te
-xmf-texlive-dist/fonts/type1/public/cm-super/sfbx1000.pfb></opt/local/share/tex
-mf-texlive-dist/fonts/type1/public/cm-super/sfbx1200.pfb></opt/local/share/texm
-f-texlive-dist/fonts/type1/public/cm-super/sfbx1440.pfb></opt/local/share/texmf
--texlive-dist/fonts/type1/public/cm-super/sfbx1728.pfb></opt/local/share/texmf-
-texlive-dist/fonts/type1/public/cm-super/sfbx2074.pfb></opt/local/share/texmf-t
-exlive-dist/fonts/type1/public/cm-super/sfbx2488.pfb></opt/local/share/texmf-te
-xlive-dist/fonts/type1/public/cm-super/sfrm0500.pfb></opt/local/share/texmf-tex
-live-dist/fonts/type1/public/cm-super/sfrm0900.pfb></opt/local/share/texmf-texl
-ive-dist/fonts/type1/public/cm-super/sfrm1000.pfb></opt/local/share/texmf-texli
-ve-dist/fonts/type1/public/cm-super/sfrm1200.pfb></opt/local/share/texmf-texliv
-e-dist/fonts/type1/public/cm-super/sfti1000.pfb></opt/local/share/texmf-texlive
--dist/fonts/type1/public/cm-super/sftt0800.pfb></opt/local/share/texmf-texlive-
-dist/fonts/type1/public/cm-super/sftt1000.pfb></opt/local/share/texmf-texlive-d
-ist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on Relatorio.pdf (34 pages, 1566550 bytes).
+ 38i,12n,43p,436b,2181s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/opt/loca
+l/share/texmf-texlive-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/opt/local
+/share/texmf-texlive-dist/fonts/enc/dvips/base/8r.enc}</opt/local/share/texmf-t
+exlive-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></opt/local/share/texmf-t
+exlive-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></opt/local/share/texmf-te
+xlive-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></opt/local/share/texmf-te
+xlive-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></opt/local/share/texmf-tex
+live-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></opt/local/share/texmf-texl
+ive-dist/fonts/type1/public/cm-super/sfbi0700.pfb></opt/local/share/texmf-texli
+ve-dist/fonts/type1/public/cm-super/sfbi0900.pfb></opt/local/share/texmf-texliv
+e-dist/fonts/type1/public/cm-super/sfbi1000.pfb></opt/local/share/texmf-texlive
+-dist/fonts/type1/public/cm-super/sfbi1440.pfb></opt/local/share/texmf-texlive-
+dist/fonts/type1/public/cm-super/sfbi1728.pfb></opt/local/share/texmf-texlive-d
+ist/fonts/type1/public/cm-super/sfbx0900.pfb></opt/local/share/texmf-texlive-di
+st/fonts/type1/public/cm-super/sfbx1000.pfb></opt/local/share/texmf-texlive-dis
+t/fonts/type1/public/cm-super/sfbx1200.pfb></opt/local/share/texmf-texlive-dist
+/fonts/type1/public/cm-super/sfbx1440.pfb></opt/local/share/texmf-texlive-dist/
+fonts/type1/public/cm-super/sfbx1728.pfb></opt/local/share/texmf-texlive-dist/f
+onts/type1/public/cm-super/sfbx2074.pfb></opt/local/share/texmf-texlive-dist/fo
+nts/type1/public/cm-super/sfbx2488.pfb></opt/local/share/texmf-texlive-dist/fon
+ts/type1/public/cm-super/sfrm0500.pfb></opt/local/share/texmf-texlive-dist/font
+s/type1/public/cm-super/sfrm0900.pfb></opt/local/share/texmf-texlive-dist/fonts
+/type1/public/cm-super/sfrm1000.pfb></opt/local/share/texmf-texlive-dist/fonts/
+type1/public/cm-super/sfrm1200.pfb></opt/local/share/texmf-texlive-dist/fonts/t
+ype1/public/cm-super/sfrm2074.pfb></opt/local/share/texmf-texlive-dist/fonts/ty
+pe1/public/cm-super/sfti1000.pfb></opt/local/share/texmf-texlive-dist/fonts/typ
+e1/public/cm-super/sftt0800.pfb></opt/local/share/texmf-texlive-dist/fonts/type
+1/public/cm-super/sftt1000.pfb></opt/local/share/texmf-texlive-dist/fonts/type1
+/urw/avantgar/uagd8a.pfb>
+Output written on Relatorio.pdf (34 pages, 1613488 bytes).
 PDF statistics:
- 445 PDF objects out of 1000 (max. 8388607)
- 74 named destinations out of 1000 (max. 500000)
- 294 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 500 PDF objects out of 1000 (max. 8388607)
+ 78 named destinations out of 1000 (max. 500000)
+ 326 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -2,6 +2,7 @@
 \documentclass[english,a4paper]{report}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[portuges]{babel}
+\usepackage[portuges]{minitoc}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[pdftex]{color,graphicx}
@@ -9,6 +10,7 @@
 \usepackage[a4paper, pdftex, bookmarks, colorlinks,citecolor=darkblue,linkcolor=darkblue,urlcolor=darkblue,filecolor=darkblue]{hyperref}
 %\usepackage{t1enc}
 %\usepackage{aeguill}
+ \usepackage[avantgarde]{quotchap}
 \usepackage{varioref}
 \usepackage{fancyvrb}
 \usepackage{color}
@@ -46,6 +48,16 @@
 \definecolor{preto_ulisses}{rgb}{0.41,0.20,0.04}
 \definecolor{green_ulises}{rgb}{0.2,0.75,0}
 
+%% stuff do minitoc %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{minitocdepth}{2}
+\setlength{\mtcindent}{24pt}
+\renewcommand{\mtcfont}{\small\rm}
+\renewcommand{\mtcSSfont}{\small\bf}
+%\newenvironment{mtc}{\secttoc\sectlof\sectlot}{\pagebreak}
+%                        ^       ^        ^
+%                    conteudos  figuras  tabelas
+% \newenvironment{mtc}{\minitoc\minilof\minilot}{\pagebreak}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \lstdefinelanguage{HaskellUlisses}
 {
         basicstyle=\ttfamily\scriptsize,
@@ -167,16 +179,30 @@ Pedro Faria & pg17684 \\
 \pagebreak
 \end{titlepage}
 
+\pagenumbering{roman}
 \include{abstract}
+% indices
+\dominitoc
+\dominilof
+\dominilot
+\renewcommand{\contentsname}{Índice}
 \tableofcontents
+\addcontentsline{toc}{chapter}{\contentsname}
+\renewcommand{\listfigurename}{Índice de Figuras}
 \listoffigures
-\listoftables
+\addcontentsline{toc}{section}{\listfigurename}
+% \renewcommand{\listtablename}{Índice de Tabelas}
+% \listoftables
+% \addcontentsline{toc}{section}{\listtablename}
+ 
+
 \newpage
 \pagenumbering{arabic}
+\addtocounter{mtc}{+1}
 \newpage
-\part{Milestone I}
 \input{intro}
 \newpage
+\part{Milestone I}
 \input{model}
 \newpage
 \part{Milestone II}
@@ -193,7 +219,6 @@ Pedro Faria & pg17684 \\
 \input{frontend}
 \newpage
 \input{conc}
-\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliographystyle{harvard}
 %\bibliographystyle{plain}

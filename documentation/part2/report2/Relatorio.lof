@@ -1,18 +1,29 @@
 \select@language {portuges}
 \addvspace {10\p@ }
+\contentsline {xchapter}{Introdu\IeC {\c c}\IeC {\~a}o}{1}{chapter*.3}
+\contentsline {xpart}{Milestone I}{6}{section*.11}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Arquitectura do sistema}}{6}{figure.2.1}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Modelo de dados - Grupo e Docente/Admin}}{11}{figure.2.2}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Modelo de dados - Concurso, tentativa e enunciado}}{11}{figure.2.3}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces diagrama do schema para o enunciado}}{15}{figure.2.4}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces diagrama do schema para a tentativa}}{16}{figure.2.5}
+\contentsline {xchapter}{Modela\IeC {\c c}\IeC {\~a}o do Problema}{6}{section*.12}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Arquitectura do sistema}}{7}{figure.2.1}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Modelo de dados - Grupo e Docente/Admin}}{12}{figure.2.2}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Modelo de dados - Concurso, tentativa e enunciado}}{13}{figure.2.3}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces diagrama do schema para o enunciado}}{16}{figure.2.4}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces diagrama do schema para a tentativa}}{17}{figure.2.5}
+\contentsline {xpart}{Milestone II}{19}{figure.2.5}
 \addvspace {10\p@ }
+\contentsline {xchapter}{Implementa\IeC {\c c}\IeC {\~a}o}{19}{section*.14}
 \addvspace {10\p@ }
+\contentsline {xchapter}{M\IeC {\'e}tricas}{21}{section*.14}
 \addvspace {10\p@ }
+\contentsline {xchapter}{Aplica\IeC {\c c}\IeC {\~a}o Web}{24}{section*.28}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Menu Principal}}{25}{figure.6.1}
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Linguagens dispon\IeC {\'\i }veis}}{25}{figure.6.2}
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Procura e altera\IeC {\c c}\IeC {\~a}o do \texttt {user} Zella Douglas}}{26}{figure.6.3}
+\contentsline {xchapter}{Interface pelo terminal}{25}{section*.28}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Menu Principal}}{26}{figure.6.1}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Linguagens dispon\IeC {\'\i }veis}}{26}{figure.6.2}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Procura e altera\IeC {\c c}\IeC {\~a}o do \texttt {user} Zella Douglas}}{27}{figure.6.3}
 \addvspace {10\p@ }
+\contentsline {xchapter}{Scripts de avalia\IeC {\c c}\IeC {\~a}o}{28}{figure.6.3}
 \addvspace {10\p@ }
+\contentsline {xchapter}{Front-end}{29}{figure.6.3}
 \addvspace {10\p@ }
+\contentsline {xchapter}{Conclus\IeC {\~a}o e Trabalho Futuro}{30}{figure.6.3}
