@@ -4,17 +4,41 @@ Neste capítulo vamos expôr alguns pormenores relacionados com a implementaçã
 Será explicada a maneira que encontramos para que seja seja cumprida a arquitectura que escolhemos e modelamos inicialmente.
 
 \section{Criação de grupos, docentes e concorrenctes}\label{sec gdc}
-O sistema permite que qualquer utilizador não registado se registe como grupo, e associe a si, um ou mais concorrentes. Este login
-é utilizado por todo o grupo, para participar nos mais variados concursos.\\
+O sistema permite que qualquer utilizador não registado se registe como grupo ~\ref{img:signup}, e associe a si um ou mais concorrentes. Para efectuar o registo terá de preencher o nome do grupo/docente, um e-mail válido e uma password que tenha entre 6 a 40 caractéres.\\
+Este login é utilizado por todo o grupo, para participar nos mais variados concursos.\\
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.45\textwidth]{Images/signup}
+\caption{Página de registo}\label{img:signup}
+\end{center}
+\end{figure} 
+
+Um concorrente é caracterizado por um nome, um número de aluno e um e-mail ~\ref{img:grupo}.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.6]{Images/grupo}
+\caption{Dados de um grupo}\label{img:grupo}
+\end{center}
+\end{figure} 
+
+
+
 As contas de docente só podem ser criados pelo administrador. Para simplificar o trabalho do administrador, o docente pode criar 
-uma conta de grupo, à qual mais tarde será concedida privilégios de docente.
+uma conta de grupo, à qual mais tarde será concedida privilégios de docente ~\ref{img:userToAdmin}.
 
-
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.60]{Images/userToAdmin}
+\caption{Comandos necessários para tornar um utilizador sem privilégios num docente.}\label{img:userToAdmin}
+\end{center}
+\end{figure} 
 
 \section{Linguagens de programação}\label{sec lps}
 O nosso sistema é multilingue, ou seja, é possível submeter código fonte em várias linguagens de programação diferentes, desde que 
 a linguagem tenha sido correctamente configurada por um docente.
-Cada linguagem é caracterizada por uma séria de campos, os quais serão explicados de seguida:
+Cada linguagem é caracterizada por uma séria de campos ~\ref{img:newLang}, os quais serão explicados de seguida:
 \begin{itemize}
 \item string de compilação: string que será executada quando se pretender compilar determinado código fonte. Esta string tem a
 particularidade de no lugar em que é suposto conter o nome do ficheiro a compilar, contém \textit{\#\{file\}}.\\
@@ -35,8 +59,25 @@ Assim, e para a linguagem C, a string complexa de execução seria:\\
 - ./\#\{file\}\\
 em que \#\{file\} representa o nome do executável.
 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.60]{Images/newLang}
+\caption{Configuração de uma nova linguagem de programação no sistema}\label{img:newLang}
+\end{center}
+\end{figure} 
+
 \end{itemize}
 
+\section{Submissão de programas}\label{sec subm}
+Sempre que acharem adequado, os grupos podem submeter os seus programas para serem avaliados. Para tal têm de escolher a linguagem de programação na qual resolveram o problema, de entre as disponíveis. E de seguida basta escolherem o ficheiro que pretendem submeter e carregar no botão de submissão.\\
+No caso do administrador, pode ainda submeter tentativas no formato xml.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.60]{Images/submissao}
+\caption{Página de submissão de programas (vista de administrador)}\label{img:subm}
+\end{center}
+\end{figure} 
 
 \section{Compilação}\label{sec comp}
 
