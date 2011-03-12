@@ -274,14 +274,93 @@ que estão descritos no modelo de dados das respectivas entidades.\\
 No xml do enunciado, não há nada muito relevante a acrescentar, além de que não contém um id para o enunciado, pois este será gerada 
 automaticamente pelo sistema. Passamos agora a apresentar um exemplo do mesmo.
 \\
-\lstinputlisting{resources/enunciado.xml}
+\begin{myxml}
+<?xm l version="1.0" encoding="UTF-8"?>
+
+<Enunciado xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="enunciado.xsd">
+    <idConcurso> 1 </idConcurso>
+    <Peso>20</Peso>
+    <Titulo> Exercicio 1 </Titulo>
+    <Descricao> Some os numeros que lhe sao passados como argumento, e apresente o resultado. </Descricao>
+    <Exemplo>Input: 1 1 1 1 1   Output: 5</Exemplo>
+    <Docente> PRH </Docente>
+    <FuncAval>Diff</FuncAval>  
+    <Linguagens> 
+        <Linguagem>C</Linguagem>        
+    </Linguagens>
+    <Dict>
+        <Teste>
+            <Nome>Lista vazia</Nome>
+            <Input></Input>
+            <Output>0</Output>
+        </Teste>
+        <Teste>
+            <Nome>Lista c/ 1 elem</Nome>
+            <Input>1</Input>
+            <Output>1</Output>
+        </Teste>
+        <Teste>
+            <Nome>Lista c/ varios elem</Nome>
+            <Input> 2 3 4 5 </Input>
+            <Output>14</Output>
+        </Teste>
+    </Dict>
+</Enunciado>
+\end{myxml}
 
 
 Quanto ao xml para a \textit{tentativa} há que realçar o facto de que o código fonte do programa vai dentro de uma tag xml. Além da tag xml, o código fonte
 terá de ir cercado de uma secção CDATA. Isto acontece para que o que o código fonte não seja processado com o restante xml que o contém.\\
 \\
 
-\lstinputlisting{resources/tentativa.xml}
+\begin{myxml}
+<?xm l version="1.0" encoding="UTF-8"?>
+
+<Enunciado xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="tentativa.xsd">
+    <idConcurso>1</idConcurso>
+    <idEnunciado>1</idEnunciado>
+    <idGrupo>36</idGrupo>
+    
+    <data>2010-12-08</data>
+    <hora>16:33:00</hora>
+    
+    <compilou>1</compilou>
+    
+    <Dict>
+        <Teste>
+            <Nome>Lista vazia</Nome>
+            <Input></Input>
+            <Output>0</Output>
+        </Teste>
+        <Teste>
+            <Nome>Lista c/ 1 elem</Nome>
+            <Input>1</Input>
+            <Output>1</Output>
+        </Teste>
+        <Teste>
+            <Nome>Lista c/ varios elem</Nome>
+            <Input> 2 3 4 5 </Input>
+            <Output>14</Output>
+        </Teste>
+    </Dict>
+
+    <pathMetricas>sasas</pathMetricas>
+    
+    <codigoFonte>
+        <nome>prog.c</nome>
+        <codigo>
+            <![CDATA[
+            #include <stdio.h>
+            
+            ...restante codigo...
+            
+            ]]>
+        </codigo>
+    </codigoFonte>
+</Enunciado>
+\end{myxml}
 
 
 Para que todos os dados contidos nos ficheiros xml possam ser facilmente validados, foram criados dois \textit{XML schema}.
@@ -294,7 +373,7 @@ No entanto, para alguns dos casos em que tal aconteceu apresenta-se alguns exemp
 No xsd referente ao \textit{enunciado} encontra-se o elemento \textit{Peso}, que é um exemplo de uma tag que contém restrições.
 O \textit{Peso} terá de ser um inteiro e terá um valor entre 0 e 100.
 
-\begin{lstlisting}
+\begin{myxml}
 <ed:element name="Peso" default="25">
   <ed:simpleType>
     <ed:restriction base="ed:integer">
@@ -303,11 +382,11 @@ O \textit{Peso} terá de ser um inteiro e terá um valor entre 0 e 100.
     </ed:restriction>
   </ed:simpleType>
 </ed:element>
-\end{lstlisting}
+\end{myxml}
 Já o elemento \textit{Linguagem} é também restringido, mas de uma forma ligeiramente diferente. A \textit{Linguagem} será uma string, mas
 apenas poderá tomar um dos valores enumerados no xsd.\\
 
-\begin{lstlisting}
+\begin{myxml}
 <ed:element name="Linguagem" maxOccurs="unbounded">
     <ed:simpleType>
 	<ed:restriction base="ed:string">
@@ -317,14 +396,14 @@ apenas poderá tomar um dos valores enumerados no xsd.\\
 	</ed:restriction>
     </ed:simpleType>
 </ed:element>
-\end{lstlisting}
+\end{myxml}
 
 
 No xsd para a \textit{tentativa} podemos evidenciar a multiplicidade das tags, ou seja, quantas vezes algumas delas se podem repetir.
 Na \textit{tentativa}, existe um \textit{Dict}, que contém uma ou mais tags \textit{Teste}.
 Para definir que possam existir mais de que uma tag \textit{Teste} dentro de \textit{Dict}, adicionou-se o atributo \textit{maxOccurs},
 na entidade \textit{Teste}, com o valor \textit{``unbounded''}. O valor mínimo não é necessário definir, porque é um por default.
-\begin{lstlisting}
+\begin{myxml}
 <tt:element name="Dict">
     <tt:complexType>
 	<tt:sequence>
@@ -340,7 +419,7 @@ na entidade \textit{Teste}, com o valor \textit{``unbounded''}. O valor mínimo 
 	</tt:sequence>
     </tt:complexType>
 </tt:element>
-\end{lstlisting}
+\end{myxml}
 
 Para dar uma ideia mais geral sobre ambos os \textit{xml schema} criados, em vez de se apresentar aqui ambos os ficheiros integralmente,
  expôr-se-á os diagramas que o programa \textit{oxygen} constrói e coloca ao nosso dispor, pois decidiu-se que torna o entendimento do
