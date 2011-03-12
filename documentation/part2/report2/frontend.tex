@@ -1,2 +1,13 @@
 \chapter{Front-end}
 \minitoc
+Como já tinhamos explicado na primeira milestone, decidimos que o nosso sistema vai tentar suportar ao máximo avaliação de métricas sobre código C.
+Seria muito interessante suportar outras, mas acreditamos nesta altura que se o nosso sistema for extendido para suportar a avaliação de outras linguagens que não o C
+então deveriamos recorrer a ferramentas externas que fizessem algum trabalho por nós.\\
+Relativamente ao Front-end que utilizamos, ele está feito em Haskell e foi um GSoc (Google Summer of Code) feito em 2008, chama-se Language.C.
+Este pacote de software apresenta um completo e bem testado parser e pretty printer para a definição da linguagem \textrm{C99} e ainda muitas das \textrm{GNU extensions}.\\
+
+A nossa ideia é pegar em toda a investigação e trabalho dedicado à análise e descoberta de métricas, que estão descritas no Capítulo \ref{chap:metricas}, e implementa-las
+utilizando este Front-end.\\
+
+Inicialmente decidimos partir para a exploração da linguagem (dos tipos de dados) que estavam definidos neste parser. Rápidamente encontramos a AST da linguagem \textrm{C99}
+e assim descobrimos que a linguagem C não é assim tão grande como estariamos à espera, como podemos ver no Apêndice \ref{chap:ast}.
