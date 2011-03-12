@@ -199,3 +199,33 @@ entre elas sobressaem-se as seguintes aplicações proprietárias:
 \item \texttt{Coverity} para \texttt{C C++ C\#}~\footnote{Ferramenta pode ser encontrada em \url{https://www.coverity.com/}} 
 \end{itemize}
 
+\subsection{Cyclomatic complexity}
+Esta métrica é bastante completa e tem como objectivo indicar a complexidade de um programa. Para isso representa-se um programa como um grafo de controlo de fluxo ( um grafo orientado ), onde os nodos são as instruções e uma aresta que liga dois nodos significa que aquelas duas instruções são executadas uma seguida da outra.\\
+A definição é bastante simples, mas este tipo de representação de um programa pode ter grandes vantagens, por exemplo para medir a quantidade de \emph{test cases} necessários desenvolver para testar todo um programa. Para atingir este objectivo apenas teríamos de contar o número de caminhos linearmente independentes que compõe este grafo.\\
+
+A definição matemática deste conceito é:
+
+$$M = E - N + 2P$$
+
+onde:
+
+\begin{description}
+\item[M] cyclomatic complexity
+\item[E] o número de arestas no grafo
+\item[N] o número de nodos no grafo
+\item[P] o número de componentes ligados no grafo
+\end{description}
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{|l|l|}\hline
+Cyclomatic Complexity & Risco \\\hline
+1-10  & um programa simples sem muito risco\\\hline
+11-20 & programa mais complexo de risco moderado\\\hline
+21-50  & programa complexo, alto risco\\\hline
+>50  & programa instável (muito alto risco)\\\hline
+\end{tabular}
+\caption{Avaliação da cyclomatic complexity}
+\end{center}
+\end{table}
+
