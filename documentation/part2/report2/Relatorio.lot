@@ -1,22 +1,22 @@
 \select@language {portuges}
 \addvspace {10\p@ }
 \contentsline {xchapter}{Introdu\IeC {\c c}\IeC {\~a}o}{1}{chapter*.4}
-\contentsline {xpart}{Milestone I}{5}{section*.12}
+\contentsline {xpart}{Milestone I}{6}{section*.12}
 \addvspace {10\p@ }
-\contentsline {xchapter}{Modela\IeC {\c c}\IeC {\~a}o do Problema}{5}{section*.13}
-\contentsline {xpart}{Milestone II}{18}{figure.2.5}
+\contentsline {xchapter}{Modela\IeC {\c c}\IeC {\~a}o do Problema}{6}{section*.13}
+\contentsline {xpart}{Milestone II}{19}{figure.2.5}
 \addvspace {10\p@ }
-\contentsline {xchapter}{Web Application}{18}{section*.15}
+\contentsline {xchapter}{Web Application}{19}{section*.15}
 \addvspace {10\p@ }
-\contentsline {xchapter}{M\IeC {\'e}tricas}{23}{figure.3.6}
-\contentsline {table}{\numberline {4.1}{\ignorespaces Avalia\IeC {\c c}\IeC {\~a}o da cyclomatic complexity}}{28}{table.4.1}
+\contentsline {xchapter}{M\IeC {\'e}tricas}{25}{figure.3.6}
+\contentsline {table}{\numberline {4.1}{\ignorespaces Avalia\IeC {\c c}\IeC {\~a}o da cyclomatic complexity}}{30}{table.4.1}
 \addvspace {10\p@ }
-\contentsline {xchapter}{Interface pelo terminal}{29}{table.4.1}
+\contentsline {xchapter}{Interface pelo terminal}{31}{table.4.1}
 \addvspace {10\p@ }
-\contentsline {xchapter}{Scripts de avalia\IeC {\c c}\IeC {\~a}o}{32}{figure.5.3}
+\contentsline {xchapter}{Scripts de avalia\IeC {\c c}\IeC {\~a}o}{34}{figure.5.3}
 \addvspace {10\p@ }
-\contentsline {xchapter}{Front-end}{36}{figure.6.4}
+\contentsline {xchapter}{Front-end}{39}{figure.6.4}
 \addvspace {10\p@ }
-\contentsline {xchapter}{Conclus\IeC {\~a}o e Trabalho Futuro}{38}{lstlisting.7.-19}
+\contentsline {xchapter}{Conclus\IeC {\~a}o e Trabalho Futuro}{41}{lstlisting.7.-19}
 \addvspace {10\p@ }
-\contentsline {xchapter}{AST da Linguagem \textrm {C99}}{40}{chapter*.33}
+\contentsline {xchapter}{AST da Linguagem \textrm {C99}}{43}{chapter*.33}

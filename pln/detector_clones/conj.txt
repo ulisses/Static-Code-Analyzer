@@ -17,13 +17,13 @@
 //dbajkdbasjkdajskdbajksdba dsj baskjdb ka
 
 
+int sopas (){}
+	
+//dbajkdbasjkdajskdbajksdba dsj baskjdb ka	
 
 int mult (int t,int x){
 	return t*x;
 	}
-	
-//dbajkdbasjkdajskdbajksdba dsj baskjdb ka	
-
 	
 	/*  dsadasd asd asd asda d*/
 int main (){
