@@ -91,7 +91,111 @@ De notar que as formulas atrás descritas podem ser modificadas para obter outro
 
 \[\emph{\text{Code granularity}} = \frac{\emph{\text{Nr of lines}}}{\emph{\text{Nr of (methods/functions)}}} \] \\
 
-Como já referimos anteriormente, a análise que se pretende, por agora, é essencialmente estática. Assim sendo, segue-se uma lista de técnicas no que diz respeito à análise
- estática, estando estruturada da seguinte maneira: duas secções, uma para \emph{\textbf{Patterns}} e outra para \emph{\textbf{Métricas de qualidade}}
+Como já referimos anteriormente, a análise que se pretende, por agora, é essencialmente estática. Assim sendo, segue-se uma lista de métricas estudadas que se pretendem 
+implementar no sistema.
 
-\subsection{Patterns}
+
+\subsection{Bug patterns}
+Um grave problema na utilização de linguagens de baixo nível como é o exemplo do C, é 
+que tem de existir uma grande responsabilidade por parte do progrmador. 
+Este tem de ter cuidado com pormenores que em linguagens de mais alto nível nem sequer pensa nisso.
+Um exemplo da falta de segurança do C, pode ser visto de seguida:
+
+\begin{code_files}
+// foo.c file
+#include <stdio.h>
+
+int main() {
+    char *a = "I like you";
+    char *b = "I hate you";
+
+    if(&a < &b) a = *(&a + 1);
+    else        a = *(&a - 1); 
+
+    printf("%s\n", a);
+}
+\end{code_files}
+
+Quando o utilizador executa o código acima descrito o que ele vai ter é o seguinte:
+
+\begin{code_files}
+[ulissesaraujocosta@maclisses:c]-$ gcc -o foo foo.c
+[ulissesaraujocosta@maclisses:c]-$ ./foo
+I hate you
+\end{code_files}
+
+Isto demonstra que conseguimos aceder ao espaço de uma variável através de uma outra, simplesmente para isso tendo conhecimento de como funciona a stack de 
+alocação de funcões. Repare-se que o código prevê até o crescimento da stack, quer seja para cima ou para baixo. 
+Assim conseguimos aceder ao valor de uma variável através de uma outra que esta declarada contiguamente.\\
+
+Á medida que subimos de nível nas linguagens vários problemas vão sendo melhorados e cada vez menos "poder" é dado ao programador. 
+Por outra lado cada vez mais segurança também é dada. 
+Mesmo assim há problemas sobre os quais nenhuma linguagem, por muito alto nível que ela seja, consegue resolver, um exemplo disso é:
+
+\begin{itemize}
+\item Null-dereferencing
+\item Lack of array bounds checking
+\item Buffer overflow
+\end{itemize}
+
+Como exemplo de uma ferramenta muito poderosa e que detecta vários padrões tidos como \emph{bugs} é o 
+\emph{FindBugs}~\footnote{Ferramenta em \url{http://findbugs.sourceforge.net/}} para \texttt{JAVA} que é gratuito. 
+Todas essas ferramentas têm como objectivo principal ajudar o programador a ter alguma correcção do seu código.
+
+\subsection{Source Lines of code (SLOC)}
+
+Este tipo métricas diz respeito à informação que uma linha de código pode conter. 
+Se pensarmos levianamente no assunto podemos, erradamente, chegar a conclusão que contar o número de linhas é um problema fácil, 
+mas mais uma vez aqui se mostra o quão empírico pode ser a tarefa de medir um software no que confere à sua qualidade.\\
+
+Assim, podemos pensar em linhas de código, como linhas onde tenhamos alguma certeza de que se encontram partes fundamentais 
+dos algoritmos e da implementação. Por exemplo, uma linha que esteja em branco ou que tenha comentários não deve ser contada, 
+mais ainda, uma linha que apenas tenha (por motivos de identação) um fechar bloco "\}" também não é útil de contar para efeitos de ter uma noção total do \texttt{SLOC}.\\
+
+Como podemos concluir, esta é uma métrica muito dependente da linguagem de programacao que se está a usar. E é necessario arranjar um 
+\emph{tradeoff} entre a medição do esforço e a productividade efectiva.\\
+
+Como exemplo podemos ver~\footnote{Informação e exemplo: \url{http://en.wikipedia.org/wiki/Source_lines_of_code}}:
+
+\begin{code_files}
+for (i = 0; i < 100; i += 1) printf("hello"); /* How many lines of code is this? */
+\end{code_files}
+
+Neste exemplo temos:
+
+\begin{itemize}
+\item $1$ Linha fisica de código (LOC)
+\item $2$ Linhas logicas de codigo (LLOC) (o for e o printf)
+\item $1$ Linha de comentário
+\end{itemize}
+
+Neste caso, seria interessante contar este código como $2$ linhas de código e nao apenas como uma única.
+
+\subsection{Métricas de Segurança}
+
+No que diz respeito a avaliação de software relativamente a métricas de segurança, é necessário compreender os tipos de ataques possíveis que uma 
+aplicação que comunica online ou com serviços terceiros pode sofrer. Existem várias técnicas de tentativa de corrupção ou alteração de um sistema online, 
+entre elas as que se podem identificar automaticamente são:
+
+\begin{description}
+\item[SQL injection attack] falarfalarfalarfalarfalar falar falarfalarfalarfalar falarfalarfalarfalarfalarfalar 
+falarfalarfalarfalar falarfalarfalarfalarfalarfalarfalar falarfalarfalarfalar falarfalarfalarfalarfalar
+\item[Storing plaintext and sending passwords] falarfalarfalarfalarfalarfalarfalarfalarfalarfalarfalarfalar
+falarfalarfalarfalarfalarfalar falarfalarfalarfalarfalarfalarfalarfalarfalarfalar falarfalarfalarfalarfalarfalarfalarfalar 
+falarfalarfalarfalarfalarfalarfalarfalar falarfalarfalarfalarfalarfalar
+\item[XSS - Cross-site scripting] falarfalarfalarfalarfalar
+falarfalarfalarfalarfalarfalarfalarfalarfalarfalar
+falarfalarfalarfalar
+falarfalarfalarfalarfalarfalarfalarfalar
+falarfalarfalarfalarfalarfalarfalarfalarfalar
+falarfalarfalarfalarfalarfalarfalarfalarfalar
+\end{description}
+
+Existem várias ferramentas que procuram por estes padrões e tentam avisar o programador que o seu código pode ser vunerável a algum destes tipos de ataques, 
+entre elas sobressaem-se as seguintes aplicações proprietárias:
+
+\begin{itemize}
+\item \texttt{Fortify} para \texttt{Java}~\footnote{Ferramenta pode ser encontrada em \url{https://www.fortify.com/}}
+\item \texttt{Coverity} para \texttt{C C++ C\#}~\footnote{Ferramenta pode ser encontrada em \url{https://www.coverity.com/}} 
+\end{itemize}
+
