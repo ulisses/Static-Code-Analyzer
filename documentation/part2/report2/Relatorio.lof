@@ -17,22 +17,23 @@
 \contentsline {figure}{\numberline {3.3}{\ignorespaces Comandos necess\IeC {\'a}rios para tornar um utilizador sem privil\IeC {\'e}gios num docente.}}{21}{figure.3.3}
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Configura\IeC {\c c}\IeC {\~a}o de uma nova linguagem de programa\IeC {\c c}\IeC {\~a}o no sistema}}{22}{figure.3.4}
 \contentsline {figure}{\numberline {3.5}{\ignorespaces P\IeC {\'a}gina de submiss\IeC {\~a}o de programas (vista de administrador)}}{22}{figure.3.5}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces P\IeC {\'a}gina aonde pode consultar as tentativas (vista das tentativas de todos os utilizadores)}}{24}{figure.3.6}
 \addvspace {10\p@ }
-\contentsline {xchapter}{M\IeC {\'e}tricas}{24}{figure.3.5}
+\contentsline {xchapter}{M\IeC {\'e}tricas}{25}{figure.3.6}
 \addvspace {10\p@ }
-\contentsline {xchapter}{Interface pelo terminal}{28}{section*.28}
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Menu Principal}}{29}{figure.5.1}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Linguagens dispon\IeC {\'\i }veis}}{29}{figure.5.2}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Procura e altera\IeC {\c c}\IeC {\~a}o do \texttt {user} Zella Douglas}}{30}{figure.5.3}
+\contentsline {xchapter}{Interface pelo terminal}{29}{section*.28}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Menu Principal}}{30}{figure.5.1}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Linguagens dispon\IeC {\'\i }veis}}{30}{figure.5.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Procura e altera\IeC {\c c}\IeC {\~a}o do \texttt {user} Zella Douglas}}{31}{figure.5.3}
 \addvspace {10\p@ }
-\contentsline {xchapter}{Scripts de avalia\IeC {\c c}\IeC {\~a}o}{31}{figure.5.3}
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Linhas por Linguagem}}{32}{figure.6.1}
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Ficheiros por Linguagem}}{32}{figure.6.2}
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Linhas por Linguagem}}{33}{figure.6.3}
-\contentsline {figure}{\numberline {6.4}{\ignorespaces Vis\IeC {\~a}o global do projecto}}{34}{figure.6.4}
+\contentsline {xchapter}{Scripts de avalia\IeC {\c c}\IeC {\~a}o}{32}{figure.5.3}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Linhas por Linguagem}}{33}{figure.6.1}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Ficheiros por Linguagem}}{33}{figure.6.2}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Linhas por Linguagem}}{34}{figure.6.3}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Vis\IeC {\~a}o global do projecto}}{35}{figure.6.4}
 \addvspace {10\p@ }
-\contentsline {xchapter}{Front-end}{35}{figure.6.4}
+\contentsline {xchapter}{Front-end}{36}{figure.6.4}
 \addvspace {10\p@ }
-\contentsline {xchapter}{Conclus\IeC {\~a}o e Trabalho Futuro}{37}{lstlisting.7.-15}
+\contentsline {xchapter}{Conclus\IeC {\~a}o e Trabalho Futuro}{38}{lstlisting.7.-16}
 \addvspace {10\p@ }
-\contentsline {xchapter}{AST da Linguagem \textrm {C99}}{39}{chapter*.32}
+\contentsline {xchapter}{AST da Linguagem \textrm {C99}}{40}{chapter*.32}
