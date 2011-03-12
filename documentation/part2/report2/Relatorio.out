@@ -1,4 +1,5 @@
-\BOOKMARK [0][-]{chapter*.4}{Introdu\347\343o}{}
+\BOOKMARK [-1][-]{chapter*.4}{I Milestone I}{}
+\BOOKMARK [0][-]{section*.5}{Introdu\347\343o}{chapter*.4}
 \BOOKMARK [1][-]{section*.5}{Motiva\347\343o}{chapter*.4}
 \BOOKMARK [1][-]{section*.5}{Objectivos}{chapter*.4}
 \BOOKMARK [2][-]{section*.6}{Ferramentas}{section*.5}
@@ -6,24 +7,25 @@
 \BOOKMARK [2][-]{section*.7}{Utilizadores}{section*.6}
 \BOOKMARK [2][-]{section*.7}{Funcionalidades do sistema}{section*.6}
 \BOOKMARK [1][-]{section*.12}{Estrutura do Relat\363rio}{chapter*.4}
-\BOOKMARK [0][-]{section*.12}{Modela\347\343o do Problema}{}
+\BOOKMARK [0][-]{section*.12}{Modela\347\343o do Problema}{chapter*.4}
 \BOOKMARK [1][-]{section*.13}{Modela\347\343o Informal}{section*.12}
 \BOOKMARK [1][-]{figure.2.1}{Modela\347\343o Formal}{section*.12}
 \BOOKMARK [1][-]{lstlisting.2.-2}{Modelo de Dados}{section*.12}
 \BOOKMARK [1][-]{figure.2.3}{Importa\347\343o de dados}{section*.12}
-\BOOKMARK [0][-]{figure.2.5}{Implementa\347\343o}{}
+\BOOKMARK [-1][-]{figure.2.5}{II Milestone II}{}
+\BOOKMARK [0][-]{section*.15}{Implementa\347\343o}{figure.2.5}
 \BOOKMARK [1][-]{section*.15}{Cria\347\343o de grupos, docentes e concorrenctes}{figure.2.5}
 \BOOKMARK [1][-]{section*.15}{Linguagens de programa\347\343o}{figure.2.5}
 \BOOKMARK [1][-]{section*.15}{Compila\347\343o}{figure.2.5}
 \BOOKMARK [1][-]{section*.15}{Execu\347\343o}{figure.2.5}
 \BOOKMARK [1][-]{section*.15}{Guardar resultados}{figure.2.5}
-\BOOKMARK [0][-]{section*.15}{M\351tricas}{}
+\BOOKMARK [0][-]{section*.15}{M\351tricas}{figure.2.5}
 \BOOKMARK [1][-]{section*.27}{M\351tricas de qualidade de software}{section*.15}
 \BOOKMARK [2][-]{section*.28}{Patterns}{section*.27}
-\BOOKMARK [0][-]{section*.28}{Aplica\347\343o Web}{}
-\BOOKMARK [0][-]{section*.28}{Interface pelo terminal}{}
+\BOOKMARK [0][-]{section*.28}{Aplica\347\343o Web}{figure.2.5}
+\BOOKMARK [0][-]{section*.28}{Interface pelo terminal}{figure.2.5}
 \BOOKMARK [1][-]{section*.29}{Perl}{section*.28}
 \BOOKMARK [1][-]{section*.29}{Menus e exemplos}{section*.28}
-\BOOKMARK [0][-]{figure.6.3}{Scripts de avalia\347\343o}{}
-\BOOKMARK [0][-]{figure.6.3}{Front-end}{}
-\BOOKMARK [0][-]{figure.6.3}{Conclus\343o e Trabalho Futuro}{}
+\BOOKMARK [0][-]{figure.6.3}{Scripts de avalia\347\343o}{figure.2.5}
+\BOOKMARK [0][-]{figure.6.3}{Front-end}{figure.2.5}
+\BOOKMARK [0][-]{figure.6.3}{Conclus\343o e Trabalho Futuro}{figure.2.5}
