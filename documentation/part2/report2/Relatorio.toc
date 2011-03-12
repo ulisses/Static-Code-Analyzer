@@ -31,47 +31,47 @@
 \contentsline {section}{\numberline {3.3}Submiss\IeC {\~a}o de programas}{22}{figure.3.4}
 \contentsline {section}{\numberline {3.4}Compila\IeC {\c c}\IeC {\~a}o}{22}{figure.3.5}
 \contentsline {section}{\numberline {3.5}Execu\IeC {\c c}\IeC {\~a}o}{23}{figure.3.5}
-\contentsline {section}{\numberline {3.6}Guardar resultados}{23}{figure.3.5}
-\contentsline {chapter}{\numberline {4}M\IeC {\'e}tricas}{24}{figure.3.5}
-\contentsline {section}{\numberline {4.1}An\IeC {\'a}lise Est\IeC {\'a}tica}{24}{section*.15}
-\contentsline {paragraph}{Syntax checking}{24}{section*.16}
-\contentsline {paragraph}{Type checking}{24}{section*.17}
-\contentsline {paragraph}{Decompilation}{25}{section*.18}
-\contentsline {paragraph}{Code metrics}{25}{section*.19}
-\contentsline {paragraph}{Style checking}{25}{section*.20}
-\contentsline {paragraph}{Verification reverse engineering}{25}{section*.21}
-\contentsline {section}{\numberline {4.2}An\IeC {\'a}lise Din\IeC {\^a}mica}{25}{section*.21}
-\contentsline {paragraph}{Log analysis}{25}{section*.22}
-\contentsline {paragraph}{Testing}{25}{section*.23}
-\contentsline {paragraph}{Debugging}{26}{section*.24}
-\contentsline {paragraph}{Instrumentation}{26}{section*.25}
-\contentsline {paragraph}{Profiling}{26}{section*.26}
-\contentsline {paragraph}{Benchmarking}{26}{section*.27}
-\contentsline {section}{\numberline {4.3}M\IeC {\'e}tricas de qualidade de \emph {software}}{26}{section*.27}
-\contentsline {subsection}{\numberline {4.3.1}Patterns}{27}{section*.28}
-\contentsline {chapter}{\numberline {5}Interface pelo terminal}{28}{section*.28}
-\contentsline {section}{\numberline {5.1}Perl}{28}{section*.29}
-\contentsline {section}{\numberline {5.2}Menus e exemplos}{28}{section*.29}
-\contentsline {chapter}{\numberline {6}Scripts de avalia\IeC {\c c}\IeC {\~a}o}{31}{figure.5.3}
-\contentsline {section}{\numberline {6.1}Gera\IeC {\c c}\IeC {\~a}o de imagens}{31}{section*.30}
-\contentsline {section}{\numberline {6.2}Makefile}{33}{figure.6.4}
-\contentsline {section}{\numberline {6.3}Cloning}{34}{figure.6.4}
-\contentsline {chapter}{\numberline {7}Front-end}{35}{figure.6.4}
-\contentsline {section}{\numberline {7.1}Estudo do Front-End}{35}{section*.31}
-\contentsline {chapter}{\numberline {8}Conclus\IeC {\~a}o e Trabalho Futuro}{37}{lstlisting.7.-15}
-\contentsline {chapter}{Bibliografia}{38}{lstlisting.7.-15}
-\contentsline {chapter}{\numberline {A}AST da Linguagem \textrm {C99}}{39}{chapter*.32}
-\contentsline {section}{\numberline {A.1}Gram\IeC {\'a}tica Lexica}{39}{section*.33}
-\contentsline {subsection}{\numberline {A.1.1}Elementos Lexicos}{39}{section*.33}
-\contentsline {subsection}{\numberline {A.1.2}Keywords}{39}{lstlisting.A.-16}
-\contentsline {subsection}{\numberline {A.1.3}Identificadores}{39}{lstlisting.A.-17}
-\contentsline {subsection}{\numberline {A.1.4}Universal character names}{39}{lstlisting.A.-18}
-\contentsline {subsection}{\numberline {A.1.5}Constantes}{40}{lstlisting.A.-19}
-\contentsline {subsection}{\numberline {A.1.6}String literals}{41}{lstlisting.A.-20}
-\contentsline {subsection}{\numberline {A.1.7}Header names}{41}{lstlisting.A.-21}
-\contentsline {section}{\numberline {A.2}Phrase structure grammar}{41}{lstlisting.A.-22}
-\contentsline {subsection}{\numberline {A.2.1}Expressions}{41}{section*.34}
-\contentsline {subsection}{\numberline {A.2.2}Declarations}{42}{lstlisting.A.-23}
-\contentsline {subsection}{\numberline {A.2.3}Statements}{44}{lstlisting.A.-24}
-\contentsline {subsection}{\numberline {A.2.4}External definitions}{44}{lstlisting.A.-25}
-\contentsline {section}{\numberline {A.3}Preprocessing directives}{45}{lstlisting.A.-26}
+\contentsline {section}{\numberline {3.6}Guardar resultados}{23}{lstlisting.3.-8}
+\contentsline {chapter}{\numberline {4}M\IeC {\'e}tricas}{25}{figure.3.6}
+\contentsline {section}{\numberline {4.1}An\IeC {\'a}lise Est\IeC {\'a}tica}{25}{section*.15}
+\contentsline {paragraph}{Syntax checking}{25}{section*.16}
+\contentsline {paragraph}{Type checking}{25}{section*.17}
+\contentsline {paragraph}{Decompilation}{26}{section*.18}
+\contentsline {paragraph}{Code metrics}{26}{section*.19}
+\contentsline {paragraph}{Style checking}{26}{section*.20}
+\contentsline {paragraph}{Verification reverse engineering}{26}{section*.21}
+\contentsline {section}{\numberline {4.2}An\IeC {\'a}lise Din\IeC {\^a}mica}{26}{section*.21}
+\contentsline {paragraph}{Log analysis}{26}{section*.22}
+\contentsline {paragraph}{Testing}{26}{section*.23}
+\contentsline {paragraph}{Debugging}{27}{section*.24}
+\contentsline {paragraph}{Instrumentation}{27}{section*.25}
+\contentsline {paragraph}{Profiling}{27}{section*.26}
+\contentsline {paragraph}{Benchmarking}{27}{section*.27}
+\contentsline {section}{\numberline {4.3}M\IeC {\'e}tricas de qualidade de \emph {software}}{27}{section*.27}
+\contentsline {subsection}{\numberline {4.3.1}Patterns}{28}{section*.28}
+\contentsline {chapter}{\numberline {5}Interface pelo terminal}{29}{section*.28}
+\contentsline {section}{\numberline {5.1}Perl}{29}{section*.29}
+\contentsline {section}{\numberline {5.2}Menus e exemplos}{29}{section*.29}
+\contentsline {chapter}{\numberline {6}Scripts de avalia\IeC {\c c}\IeC {\~a}o}{32}{figure.5.3}
+\contentsline {section}{\numberline {6.1}Gera\IeC {\c c}\IeC {\~a}o de imagens}{32}{section*.30}
+\contentsline {section}{\numberline {6.2}Makefile}{34}{figure.6.4}
+\contentsline {section}{\numberline {6.3}Cloning}{35}{figure.6.4}
+\contentsline {chapter}{\numberline {7}Front-end}{36}{figure.6.4}
+\contentsline {section}{\numberline {7.1}Estudo do Front-End}{36}{section*.31}
+\contentsline {chapter}{\numberline {8}Conclus\IeC {\~a}o e Trabalho Futuro}{38}{lstlisting.7.-16}
+\contentsline {chapter}{Bibliografia}{39}{lstlisting.7.-16}
+\contentsline {chapter}{\numberline {A}AST da Linguagem \textrm {C99}}{40}{chapter*.32}
+\contentsline {section}{\numberline {A.1}Gram\IeC {\'a}tica Lexica}{40}{section*.33}
+\contentsline {subsection}{\numberline {A.1.1}Elementos Lexicos}{40}{section*.33}
+\contentsline {subsection}{\numberline {A.1.2}Keywords}{40}{lstlisting.A.-17}
+\contentsline {subsection}{\numberline {A.1.3}Identificadores}{40}{lstlisting.A.-18}
+\contentsline {subsection}{\numberline {A.1.4}Universal character names}{40}{lstlisting.A.-19}
+\contentsline {subsection}{\numberline {A.1.5}Constantes}{41}{lstlisting.A.-20}
+\contentsline {subsection}{\numberline {A.1.6}String literals}{42}{lstlisting.A.-21}
+\contentsline {subsection}{\numberline {A.1.7}Header names}{42}{lstlisting.A.-22}
+\contentsline {section}{\numberline {A.2}Phrase structure grammar}{42}{lstlisting.A.-23}
+\contentsline {subsection}{\numberline {A.2.1}Expressions}{42}{section*.34}
+\contentsline {subsection}{\numberline {A.2.2}Declarations}{43}{lstlisting.A.-24}
+\contentsline {subsection}{\numberline {A.2.3}Statements}{45}{lstlisting.A.-25}
+\contentsline {subsection}{\numberline {A.2.4}External definitions}{45}{lstlisting.A.-26}
+\contentsline {section}{\numberline {A.3}Preprocessing directives}{46}{lstlisting.A.-27}

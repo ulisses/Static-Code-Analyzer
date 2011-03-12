@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.3.15)  12 MAR 2011 17:03
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.3.15)  12 MAR 2011 18:18
 entering extended mode
  %&-line parsing enabled.
 **Relatorio.tex
@@ -891,7 +891,7 @@ driver: pdftex
 
 (1in=72.27pt, 1cm=28.45pt)
 -----------------------
-<Images/DI-UM.png, id=214, 274.02374pt x 101.62968pt>
+<Images/DI-UM.png, id=213, 274.02374pt x 101.62968pt>
 File: Images/DI-UM.png Graphic file (type png)
  <use Images/DI-UM.png>
 LaTeX Font Info:    Try loading font information for U+msa on input line 225.
@@ -981,10 +981,6 @@ Package minitoc Info: I0033
 (minitoc)             Writing Relatorio.mtc12.
 \openout3 = `Relatorio.mtc12'.
 
-Package minitoc Info: I0033
-(minitoc)             Writing Relatorio.mtc13.
-\openout3 = `Relatorio.mtc13'.
-
 Package minitoc Info: I0034
 (minitoc)             PREPARING MINILOFS FROM Relatorio.lof on input line 242.
 Package minitoc Info: I0033
@@ -1023,10 +1019,6 @@ Package minitoc Info: I0033
 (minitoc)             Writing Relatorio.mlf9.
 \openout3 = `Relatorio.mlf9'.
 
-Package minitoc Info: I0033
-(minitoc)             Writing Relatorio.mlf10.
-\openout3 = `Relatorio.mlf10'.
-
 
 
 Package minitoc Warning: W0009
@@ -1052,7 +1044,7 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 [3
 Non-PDF special ignored!
 Non-PDF special ignored!] (./Relatorio.lof
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 28.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 27.
 
 (/usr/local/texlive/2009/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
@@ -1212,7 +1204,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 12--16
 
  []
 
-<Images/EL-PI.png, id=376, 1525.7pt x 1257.69875pt>
+<Images/EL-PI.png, id=375, 1525.7pt x 1257.69875pt>
 File: Images/EL-PI.png Graphic file (type png)
  <use Images/EL-PI.png>
 Underfull \hbox (badness 10000) in paragraph at lines 24--26
@@ -1437,11 +1429,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 231--233
 
  []
 
-<Images/grupo-docente.jpeg, id=404, 1314.9125pt x 929.4725pt>
+<Images/grupo-docente.jpeg, id=403, 1314.9125pt x 929.4725pt>
 File: Images/grupo-docente.jpeg Graphic file (type jpg)
 
 <use Images/grupo-docente.jpeg>
-<Images/concurso-enunciado.jpeg, id=405, 1314.9125pt x 929.4725pt>
+<Images/concurso-enunciado.jpeg, id=404, 1314.9125pt x 929.4725pt>
 File: Images/concurso-enunciado.jpeg Graphic file (type jpg)
 
 <use Images/concurso-enunciado.jpeg>
@@ -1509,11 +1501,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 428--429
 
  []
 
-<Images/enunciado_schema.jpg, id=433, 708.6475pt x 678.535pt>
+<Images/enunciado_schema.jpg, id=432, 708.6475pt x 678.535pt>
 File: Images/enunciado_schema.jpg Graphic file (type jpg)
 
 <use Images/enunciado_schema.jpg>
-<Images/tentativa_schema.jpg, id=434, 703.62875pt x 658.46pt>
+<Images/tentativa_schema.jpg, id=433, 703.62875pt x 658.46pt>
 File: Images/tentativa_schema.jpg Graphic file (type jpg)
 
 <use Images/tentativa_schema.jpg>) [16
@@ -1539,18 +1531,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 7--9
 
  []
 
-<Images/signup.png, id=454, 356.33125pt x 390.45876pt>
+<Images/signup.png, id=453, 356.33125pt x 390.45876pt>
 File: Images/signup.png Graphic file (type png)
  <use Images/signup.png>
 [19
 
 
 Non-PDF special ignored!
-Non-PDF special ignored!] <Images/grupo.png, id=460, 479.7925pt x 473.77pt>
+Non-PDF special ignored!] <Images/grupo.png, id=459, 479.7925pt x 473.77pt>
 File: Images/grupo.png Graphic file (type png)
 
 <use Images/grupo.png>
-<Images/userToAdmin.png, id=462, 696.6025pt x 186.6975pt>
+<Images/userToAdmin.png, id=461, 696.6025pt x 186.6975pt>
 File: Images/userToAdmin.png Graphic file (type png)
 
 <use Images/userToAdmin.png> [20
@@ -1561,21 +1553,31 @@ Underfull \hbox (badness 10000) in paragraph at lines 48--55
 
  []
 
-<Images/newLang.png, id=469, 473.77pt x 453.695pt>
+<Images/newLang.png, id=468, 473.77pt x 453.695pt>
 File: Images/newLang.png Graphic file (type png)
  <use Images/newLang.png>
 [21
 Non-PDF special ignored!
 Non-PDF special ignored! <./Images/userToAdmin.png (PNG copy)>]
-<Images/submissao.png, id=474, 368.37625pt x 222.8325pt>
+<Images/submissao.png, id=473, 368.37625pt x 222.8325pt>
 File: Images/submissao.png Graphic file (type png)
 
 <use Images/submissao.png> [22
 Non-PDF special ignored!
 Non-PDF special ignored! <./Images/newLang.png (PNG copy)> <./Images/submissao.
-png (PNG copy)>]) [23
+png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 127--134
+
+ []
+
+<Images/tentativas.png, id=479, 591.20876pt x 615.29875pt>
+File: Images/tentativas.png Graphic file (type png)
+
+<use Images/tentativas.png>) [23
 Non-PDF special ignored!
-Non-PDF special ignored!] (./metricas.tex
+Non-PDF special ignored!] [24
+Non-PDF special ignored!
+Non-PDF special ignored! <./Images/tentativas.png (PNG copy)>] (./metricas.tex
 Cap\'{\i }tulo 4.
 \openout3 = `Relatorio.mtc'.
 
@@ -1600,7 +1602,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 11--18
 
  []
 
-[24
+[25
 
 
 Non-PDF special ignored!
@@ -1624,7 +1626,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 46--49
 
  []
 
-[25
+[26
 Non-PDF special ignored!
 Non-PDF special ignored!]
 Underfull \hbox (badness 10000) in paragraph at lines 73--76
@@ -1661,20 +1663,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 92--93
 
  []
 
-[26
+[27
 Non-PDF special ignored!
 Non-PDF special ignored!]
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 97.
 
-) [27
+) [28
 Non-PDF special ignored!
 Non-PDF special ignored!] (./perlz.tex
 Cap\'{\i }tulo 5.
-Package minitoc Info: I0006
-(minitoc)             Relatorio.mtc7 is empty on input line 3.
+\openout3 = `Relatorio.mtc'.
 
+\openout3 = `Relatorio.mtc'.
+
+(./Relatorio.mtc7)
 Underfull \hbox (badness 10000) in paragraph at lines 4--7
 
  []
@@ -1689,37 +1693,37 @@ Underfull \hbox (badness 10000) in paragraph at lines 10--14
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 19--20
+Underfull \hbox (badness 10000) in paragraph at lines 26--27
 
  []
 
-<Images/menuPrinc.png, id=550, 426.59375pt x 383.4325pt>
+<Images/menuPrinc.png, id=557, 426.59375pt x 383.4325pt>
 File: Images/menuPrinc.png Graphic file (type png)
 
-<use Images/menuPrinc.png> [28
+<use Images/menuPrinc.png> [29
 
 
 Non-PDF special ignored!
 Non-PDF special ignored!]
-Underfull \hbox (badness 10000) in paragraph at lines 36--38
+Underfull \hbox (badness 10000) in paragraph at lines 43--45
 
  []
 
-<Images/linguagens.png, id=557, 426.59375pt x 383.4325pt>
+<Images/linguagens.png, id=563, 426.59375pt x 383.4325pt>
 File: Images/linguagens.png Graphic file (type png)
 
 <use Images/linguagens.png>
-Underfull \hbox (badness 10000) in paragraph at lines 46--48
+Underfull \hbox (badness 10000) in paragraph at lines 53--55
 
  []
 
-<Images/zacarias.png, id=559, 635.37375pt x 537.00626pt>
+<Images/zacarias.png, id=565, 635.37375pt x 537.00626pt>
 File: Images/zacarias.png Graphic file (type png)
 
-<use Images/zacarias.png>) [29
+<use Images/zacarias.png>) [30
 Non-PDF special ignored!
 Non-PDF special ignored! <./Images/menuPrinc.png (PNG copy)> <./Images/linguage
-ns.png (PNG copy)>] [30
+ns.png (PNG copy)>] [31
 Non-PDF special ignored!
 Non-PDF special ignored! <./Images/zacarias.png (PNG copy)>] (./scripts.tex
 Cap\'{\i }tulo 6.
@@ -1732,22 +1736,22 @@ Cap\'{\i }tulo 6.
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 10.
 
-<Images/projecto_LinesPerLanguage.png, id=574, 602.25pt x 401.5pt>
+<Images/projecto_LinesPerLanguage.png, id=578, 602.25pt x 401.5pt>
 File: Images/projecto_LinesPerLanguage.png Graphic file (type png)
 
 <use Images/projecto_LinesPerLanguage.png>
-<Images/projecto_FilesPerLanguage.png, id=575, 602.25pt x 401.5pt>
+<Images/projecto_FilesPerLanguage.png, id=579, 602.25pt x 401.5pt>
 File: Images/projecto_FilesPerLanguage.png Graphic file (type png)
 
 <use Images/projecto_FilesPerLanguage.png>
-<Images/projecto_RatioFilesLines.png, id=576, 602.25pt x 401.5pt>
+<Images/projecto_RatioFilesLines.png, id=580, 602.25pt x 401.5pt>
 File: Images/projecto_RatioFilesLines.png Graphic file (type png)
 
-<use Images/projecto_RatioFilesLines.png> [31
+<use Images/projecto_RatioFilesLines.png> [32
 
 
 Non-PDF special ignored!
-Non-PDF special ignored!] [32
+Non-PDF special ignored!] [33
 Non-PDF special ignored!
 Non-PDF special ignored! <./Images/projecto_LinesPerLanguage.png> <./Images/pro
 jecto_FilesPerLanguage.png>]
@@ -1755,7 +1759,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 74--75
 
  []
 
-<Images/projecto_projectLanguages.png, id=593, 602.25pt x 401.5pt>
+<Images/projecto_projectLanguages.png, id=597, 602.25pt x 401.5pt>
 File: Images/projecto_projectLanguages.png Graphic file (type png)
 
 <use Images/projecto_projectLanguages.png>
@@ -1763,14 +1767,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 95--99
 
  []
 
-
+[34
+Non-PDF special ignored!
+Non-PDF special ignored! <./Images/projecto_RatioFilesLines.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 100--102
 
  []
 
-[33
-Non-PDF special ignored!
-Non-PDF special ignored! <./Images/projecto_RatioFilesLines.png>]) [34
+) [35
 Non-PDF special ignored!
 Non-PDF special ignored! <./Images/projecto_projectLanguages.png>]
 (./frontend.tex
@@ -1798,11 +1802,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 32--33
 
  []
 
-[35
+[36
 
 
 Non-PDF special ignored!
-Non-PDF special ignored!]) [36
+Non-PDF special ignored!]) [37
 Non-PDF special ignored!
 Non-PDF special ignored!] (./conc.tex
 Cap\'{\i }tulo 8.
@@ -1816,11 +1820,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 2--275
 
  []
 
-[37
+[38
 
 
 Non-PDF special ignored!
-Non-PDF special ignored!] (./bibliografia.tex) [38
+Non-PDF special ignored!] (./bibliografia.tex) [39
 
 
 Non-PDF special ignored!
@@ -1829,30 +1833,30 @@ Ap\^endice A.
 Package minitoc Info: I0006
 (minitoc)             Relatorio.mtc11 is empty on input line 3.
 
-LaTeX Warning: Citation 'ker' on page 39 undefined on input line 3.
+LaTeX Warning: Citation 'ker' on page 40 undefined on input line 3.
 
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 4.
 
-[39
+[40
 
 
 Non-PDF special ignored!
-Non-PDF special ignored!] [40
+Non-PDF special ignored!] [41
 Non-PDF special ignored!
 Non-PDF special ignored!]
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 192.
 
-[41
-Non-PDF special ignored!
-Non-PDF special ignored!] [42
+[42
 Non-PDF special ignored!
 Non-PDF special ignored!] [43
 Non-PDF special ignored!
 Non-PDF special ignored!] [44
+Non-PDF special ignored!
+Non-PDF special ignored!] [45
 Non-PDF special ignored!
 Non-PDF special ignored!])
 No file Relatorio.bbl.
@@ -1886,25 +1890,22 @@ Package minitoc(hints) Warning: W0024
 (minitoc(hints))                Some hints have been written 
 (minitoc(hints))                in the Relatorio.log file.
 
-[45
+[46
 Non-PDF special ignored!
 Non-PDF special ignored!] AED: lastpage setting LastPage (./Relatorio.aux
 (./abstract.aux))
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 11985 strings out of 493848
- 164025 string characters out of 3149207
+ 12020 strings out of 493848
+ 164497 string characters out of 3149207
  425054 words of memory out of 3000000
- 14532 multiletter control sequences out of 15000+200000
+ 14567 multiletter control sequences out of 15000+200000
  40901 words of font info for 79 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 38i,17n,51p,625b,1840s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,17n,48p,625b,1900s stack positions out of 5000i,500n,10000p,200000b,50000s
 pdfTeX warning (dest): name{Hfootnote.10} has been referenced but does not ex
 ist, replaced by a fixed one
 
@@ -1935,21 +1936,6 @@ pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exist
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist
 , replaced by a fixed one
 
-pdfTeX warning (dest): name{figure.7.3} has been referenced but does not exist,
- replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.7.2} has been referenced but does not exist,
- replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.7.1} has been referenced but does not exist,
- replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.8.-15} has been referenced but does not 
-exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.7.4} has been referenced but does not exist,
- replaced by a fixed one
-
 {/usr/local/texlive/2009/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/
 usr/local/texlive/2009/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texli
 ve/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texliv
@@ -1972,20 +1958,19 @@ e1/public/cm-super/sfss0500.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1
 ublic/cm-super/sfss0700.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/pub
 lic/cm-super/sfss0800.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/publi
 c/cm-super/sfss1000.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/
-cm-super/sfss1200.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm
--super/sfss2074.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-s
-uper/sfsx0900.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-sup
-er/sfsx1000.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-super
-/sfsx1200.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-super/s
-fsx1440.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-super/sfs
-x1728.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-super/sfsx2
-074.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-super/sfsx248
-8.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-super/sftt0800.
-pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-super/sftt1000.pf
-b></usr/local/texlive/2009/texmf-dist/fonts/type1/urw/avantgar/uagd8a.pfb>
-Output written on Relatorio.pdf (50 pages, 1856335 bytes).
+cm-super/sfss2074.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm
+-super/sfsx0900.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-s
+uper/sfsx1000.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-sup
+er/sfsx1200.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-super
+/sfsx1440.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-super/s
+fsx1728.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-super/sfs
+x2074.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-super/sfsx2
+488.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-super/sftt080
+0.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-super/sftt1000.
+pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/urw/avantgar/uagd8a.pfb>
+Output written on Relatorio.pdf (51 pages, 1917320 bytes).
 PDF statistics:
- 799 PDF objects out of 1000 (max. 8388607)
- 144 named destinations out of 1000 (max. 500000)
- 547 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 796 PDF objects out of 1000 (max. 8388607)
+ 142 named destinations out of 1000 (max. 500000)
+ 544 words of extra memory for PDF output out of 10000 (max. 10000000)
 
