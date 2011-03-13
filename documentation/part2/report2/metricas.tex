@@ -189,7 +189,9 @@ SELECT descricao FROM enunciados WHERE titulo = 'exemplo1'; DROP TABLE users ; -
 \end{code_files}
 Assim, um simples campo a pedir um dado a um utilizador poderia significar na destruição total da base de dados.~\footnote{Mais informção em: \url{http://en.wikipedia.org/wiki/SQL_injection}}
 
-\item[Storing plaintext and sending passwords] 
+\item[Storing plaintext and sending passwords] são falhas de segurança relacionadas com a falta de protecção sobre as \emph{passwords}. Imagine-se o seguinte caso, um sistema de login em que as \emph{passwords}, 
+em vez de estarem guardadas numa base de dados e protegidas por funções de \emph{hash} (como no nosso sistema), estão guardadas num ficheiro de texto simples, ou na própria aplicação. 
+Seria então trivial para um utilizador mal intencionado descobrir as \emph{passwords}. 
 
 \item[XSS - Cross-site scripting] é um tipo de vulnerabilidade na segurança muitas vezes encontradas em páginas \emph{Web}. Consiste em um cliente inserir \emph{scripts}
  nessas páginas para que seja vista por outros utilizadores. Assim, um simples tarefa como descobrir uma \emph{password} de um determinado sujeito seria bastante simples, bastando 
