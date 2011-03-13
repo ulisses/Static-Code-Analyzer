@@ -189,16 +189,11 @@ SELECT descricao FROM enunciados WHERE titulo = 'exemplo1'; DROP TABLE users ; -
 \end{code_files}
 Assim, um simples campo a pedir um dado a um utilizador poderia significar na destruição total da base de dados.~\footnote{Mais informção em: \url{http://en.wikipedia.org/wiki/SQL_injection}}
 
-\item[Storing plaintext and sending passwords] falarfalarfalarfalarfalarfalarfalarfalarfalarfalarfalarfalar
-falarfalarfalarfalarfalarfalar falarfalarfalarfalarfalarfalarfalarfalarfalarfalar falarfalarfalarfalarfalarfalarfalarfalar 
-falarfalarfalarfalarfalarfalarfalarfalar falarfalarfalarfalarfalarfalar
+\item[Storing plaintext and sending passwords] 
 
-\item[XSS - Cross-site scripting] falarfalarfalarfalarfalar
-falarfalarfalarfalarfalarfalarfalarfalarfalarfalar
-falarfalarfalarfalar
-falarfalarfalarfalarfalarfalarfalarfalar
-falarfalarfalarfalarfalarfalarfalarfalarfalar
-falarfalarfalarfalarfalarfalarfalarfalarfalar
+\item[XSS - Cross-site scripting] é um tipo de vulnerabilidade na segurança muitas vezes encontradas em páginas \emph{Web}. Consiste em um cliente inserir \emph{scripts}
+ nessas páginas para que seja vista por outros utilizadores. Assim, um simples tarefa como descobrir uma \emph{password} de um determinado sujeito seria bastante simples, bastando 
+para isso que esse sujeito entrasse na página aquando o ataque.~\footnote{Mais informação em: \url{http://en.wikipedia.org/wiki/Cross-site_scripting}}
 \end{description}
 
 Existem várias ferramentas que procuram por estes padrões e tentam avisar o programador que o seu código pode ser vunerável a algum destes tipos de ataques, 
