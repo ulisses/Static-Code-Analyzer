@@ -62,4 +62,191 @@ data CTypeSpec = CVoidType    NodeInfo
                | CTypeOfType  CDecl        NodeInfo  -- ^ @typeof(type)@
 \end{haskell}
 
-E ainda uma lista de triplos de \textrm{Maybe}s.
+\textrm{CTypeQual} diz respeito a qualificadores de tipos, por exemplo:
+\begin{itemize}
+\item const
+\item volatile
+\item restrict
+\item inline
+\item \_\_attribute\_\_
+\end{itemize}
+
+\begin{haskell}
+data CTypeQual = CConstQual NodeInfo
+               | CVolatQual NodeInfo
+               | CRestrQual NodeInfo
+               | CInlineQual NodeInfo
+               | CAttrQual  CAttr
+\end{haskell}
+
+E ainda uma lista de triplos de \textrm{Maybe}s (Maybe CDeclr, Maybe CInit, Maybe CExpr).
+Esta lista como tem 3 Maybes pode apresentar várias formas, estas formas definem o tipo de declaração que temos:
+
+\begin{description}
+\item[Toplevel declarations] Uma declaração na forma (Just declr, init?, Nothing)
+\item[Structure declarations] Declarações na forma (Just declr, Nothing, size?)
+\item[Parameter declarations] Declarações na forma (Just declr, Nothing, Nothing) ou (Nothing, Nothing, Just size)
+\item[Toplevel declarations] Declarações na forma (Just declr, Nothing, Nothing)
+\end{description}
+
+Tempo agora para mostrar o que são estas definições \textrm{CDeclr}, \textrm{CInit} e \textrm{CExpr}.
+
+\begin{haskell}
+data CDeclr = CDeclr (Maybe Ident) [CDerivedDeclr] (Maybe CStrLit) [CAttr] NodeInfo
+\end{haskell}
+\textrm{CDeclr} corresponde a declarações de funções ou tipos em C. Por exemplo:
+
+\begin{code_files}
+int x;
+CDeclr "x" []
+\end{code_files}
+
+\begin{code_files}
+const int * const * restrict x;
+CDeclr "x" [CPtrDeclr [restrict], CPtrDeclr [const]]
+\end{code_files}
+
+\begin{code_files}
+int* const f();
+CDeclr "f" [CFunDeclr [],CPtrDeclr [const]]
+\end{code_files}
+
+Ou seja, primeiro temos um possivel identificador, seguido de uma lista de 
+declaraçõe derivadas seguido de um string literal.
+
+Vejamos agora a definição de \textrm{CDerivedDeclr}:
+
+\begin{haskell}
+data CDerivedDeclr = CPtrDeclr [CTypeQual] NodeInfo
+                   -- ^ Pointer declarator @CPtrDeclr tyquals declr@
+                   | CArrDeclr [CTypeQual] (CArrSize) NodeInfo
+                   -- ^ Array declarator @CArrDeclr declr tyquals size-expr?@
+                   | CFunDeclr (Either [Ident] ([CDecl],Bool)) [CAttr] NodeInfo
+                   -- ^ Function declarator @CFunDeclr declr (old-style-params | new-style-params) c-attrs@
+\end{haskell}
+
+Isto basicamente corresponde a uma atribuição de um pointer (CPtrDeclr attrs),
+uma atribuição do resultado da computação de uma função (CFunDeclr attrs) e
+atribuição de um array de elementos (CArrayDeclr attrs).
+
+\textrm{CAttr} é simplesmente a utilização da anotação \_\_attribute\_\_
+
+Voltando ao triplo de Maybes, temos ainda como segundo elemento \textrm{CInit} que correpondem a inicializações em C.
+
+\begin{haskell}
+data CInit = CInitExpr CExpr
+             NodeInfo            -- ^ assignment expression
+           | CInitList CInitList
+             NodeInfo            -- ^ initialization list (see 'CInitList')
+\end{haskell}
+Estes inicializadoes podem ser uma de duas coisas, ou um assignment a uma expressao ou então
+uma inicialização de uma lista, rodeada de parêntices de bloco.\\
+Usemos então o caso das inicializações para introduzir as \textrm{CExpr}.
+
+\begin{haskell}
+data CExpr = CComma       [CExpr]       -- comma expression list, n >= 2
+             NodeInfo
+           | CAssign      CAssignOp     -- assignment operator
+             CExpr         -- l-value
+             CExpr         -- r-value
+             NodeInfo
+           | CCond        CExpr         -- conditional
+             NodeInfo
+           | CBinary      CBinaryOp     -- binary operator
+             CExpr         -- lhs
+             CExpr         -- rhs
+             NodeInfo
+           | CCast        CDecl         -- type name
+             CExpr
+             NodeInfo
+           | CUnary       CUnaryOp      -- unary operator
+             CExpr
+             NodeInfo
+           | CSizeofExpr  CExpr
+             NodeInfo
+           | CSizeofType  CDecl         -- type name
+             NodeInfo
+           | CAlignofExpr CExpr
+             NodeInfo
+           | CAlignofType CDecl         -- type name
+             NodeInfo
+           | CComplexReal CExpr         -- real part of complex number
+             NodeInfo
+           | CComplexImag CExpr         -- imaginary part of complex number
+             NodeInfo
+           | CIndex       CExpr         -- array
+             CExpr         -- index
+             NodeInfo
+           | CCall        CExpr         -- function
+             [CExpr]       -- arguments
+             NodeInfo
+           | CMember      CExpr         -- structure
+             Ident         -- member name
+             Bool          -- deref structure? (True for `->')
+             NodeInfo
+           | CVar         Ident         -- identifier (incl. enumeration const)
+             NodeInfo
+           | CConst       CConst        -- ^ integer, character, floating point and string constants
+           | CCompoundLit CDecl
+             CInitList     -- type name & initialiser list
+             NodeInfo      -- ^ C99 compound literal
+           | CStatExpr    CStat NodeInfo  -- ^ GNU C compound statement as expr
+           | CLabAddrExpr Ident NodeInfo  -- ^ GNU C address of label
+           | CBuiltinExpr CBuiltin        -- ^ builtin expressions, see 'CBuiltin'
+\end{haskell}
+Esta definição é tão completa que abrabge também algumas extenções feitas à linguagem C pelo, conhecidas como
+GCC Extensions, como por exemplo as: alignof, \_\_real, \_\_imag, (\{ stmt-expr \}).
+
+Terminada a explicação extensa de \textrm{CDecl}, continuamos a explicação de \textrm{CExtDecl} e passamos à definição de
+\textrm{CFunDef}, ou seja uma definição de função como podemos ver em \textrm{function-definition} na secção \ref{chap:extdefin}.
+
+\begin{haskell}
+data CFunDef = CFunDef [CDeclSpec]      -- type specifier and qualifier
+               CDeclr           -- declarator
+               [CDecl]          -- optional declaration list
+               CStat            -- compound statement
+               NodeInfo
+\end{haskell}
+
+Esta definição usa uma lista de especificadores de tipo e de quantificação, uma declaração,
+uma lista adicional de declarações e um C Statement. Como já explicamos todos, passamos para a explicação
+do \textrm{CStat}.\\
+
+Esta definição é capaz de ser a mais familiar e fácil de perceber na medida em que é aqui que estão
+definidos os statements C que caracterizam esta linguagem:
+
+\begin{haskell}
+data CStat = CLabel  Ident CStat [CAttr] NodeInfo  -- ^ An (attributed) label followed by a statement
+           | CCase CExpr CStat NodeInfo            -- ^ A statement of the form @case expr : stmt@
+           | CCases CExpr CExpr CStat NodeInfo     -- ^ A case range of the form @case lower ... upper : stmt@
+           | CDefault CStat NodeInfo               -- ^ The default case @default : stmt@
+           | CExpr (Maybe CExpr) NodeInfo
+             -- ^ A simple statement, that is in C: evaluating an expression with side-effects
+             --   and discarding the result.
+           | CCompound [Ident] [CBlockItem] NodeInfo    -- ^ compound statement @CCompound localLabels blockItems at@
+           | CIf CExpr CStat (Maybe CStat) NodeInfo     -- ^ conditional statement @CIf ifExpr thenStmt maybeElseStmt at@
+           | CSwitch CExpr CStat NodeInfo
+             -- ^ switch statement @CSwitch selectorExpr switchStmt@, where @switchStmt@ usually includes
+             -- /case/, /break/ and /default/ statements
+           | CWhile CExpr CStat Bool NodeInfo      -- ^ while or do-while statement @CWhile guard stmt isDoWhile at@
+           | CFor (Either (Maybe CExpr) CDecl)
+             (Maybe CExpr)
+             (Maybe CExpr)
+             CStat
+             NodeInfo
+             -- ^ for statement @CFor init expr-2 expr-3 stmt@, where @init@ is either a declaration or
+             -- initializing expression
+           | CGoto Ident NodeInfo            -- ^ goto statement @CGoto label@
+           | CGotoPtr CExpr NodeInfo         -- ^ computed goto @CGotoPtr labelExpr@
+           | CCont NodeInfo                  -- ^ continue statement
+           | CBreak    NodeInfo              -- ^ break statement
+           | CReturn (Maybe CExpr)NodeInfo   -- ^ return statement @CReturn returnExpr@
+           | CAsm CAsmStmt NodeInfo          -- ^ assembly statement
+\end{haskell}
+
+Aqui podemos então ver as Labels, Cases, statements de default dos Cases, expressões, ifs, switches,
+whiles, fors, gotos, continues, breaks, retuns e instruções assembly.\\
+
+Grande parte deste Front-End, Language.C, fica assim explicado. Achamos que explicar os detalhes
+sobre o \textrm{CStat} não seria necessáario, visto já termos detalhado os mais importantes.
+
