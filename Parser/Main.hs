@@ -8,7 +8,8 @@ import System.Environment
 process :: String -> IO ()
 process file = do
 	--stream <- readInputStream file
-	stream <- parseCFile (newGCC "gcc") Nothing ["-I../../../../../2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp3/"] file
+	--stream <- parseCFile (newGCC "gcc") Nothing ["-I../../../../../2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp3/"] file
+	stream <- parseCFile (newGCC "gcc") Nothing [] file
 --	putStr (take (20 - length file) $ repeat ' ')
 	case stream of
 		( Left error  ) -> print error
