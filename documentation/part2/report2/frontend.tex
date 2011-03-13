@@ -250,3 +250,83 @@ whiles, fors, gotos, continues, breaks, retuns e instruções assembly.\\
 Grande parte deste Front-End, Language.C, fica assim explicado. Achamos que explicar os detalhes
 sobre o \textrm{CStat} não seria necessáario, visto já termos detalhado os mais importantes.
 
+\section{Bug no \textrm{Language.C} em \textrm{MacOSX}}
+Depois de explorar e usar, sempre com exemplos pequenos este front-end descobrimos que se os ficheiros C submetidos fizerem uso de biliotecas externas teriamos um
+problema ao correr o avaliador de software em MacOSX. Este problema já é conhecido pela equipa que desenvolve o Language.C\footnote{Conforme se pode ver neste ticket: \url{http://trac.sivity.net/language_c/ticket/2}}.\\
+Embora o nosso sistema final corra numa máquina com Linux, o desenvolvimento desta aplicação de avaliação será feito em MacOSX e assim isto confere um problema nesta fase.
+Mesmo assim também foi interessante descorbrir este bug porque pretendemos que a nossa aplicação corra no máximo de plataformas possíveis. Imagine-se o caso em que
+queremos rápidamente instalar numa máquina o nosso sistema para demonstração ou montar um concurso rápido, sem que seja necessário um servidor.\\
+
+Este bug prende-se com o facto do Language.C na sua versão mais recente, 3.2.1, não suportar a notação de \_\_BLOCKS\_\_ que as librarias do MacOSX têem.\\
+Imagine-se o seguinte código Haskell a usar Language.C:
+
+\begin{haskell}
+module Main where
+
+import Language.C
+import Language.C.System.GCC
+import Language.C.Data.Ident
+import System.Environment
+
+process :: String -> IO ()
+process file = do
+	stream <- parseCFile (newGCC "gcc") Nothing [] file
+	case stream of
+		( Left error  ) -> print error
+		( Right cprog ) -> print "OK"
+
+main :: IO ()
+main = do
+	files <- getArgs
+	mapM_ process files
+\end{haskell}
+
+O comportamento deste programa seria receber $n$ ficheiros e a cada um deles passar ao preprocessador do GCC, seguidamente é construída a árvore de parsing que fica
+guardada em $stream$ e posteriormente verificamos se tivemos algum erro, se sim reportamos o erro para o $stdout$ se não então imprimimos "OK" para o $stdout$.\\
+
+Ao alimentar este programa com o seguinte pedaço de código:
+
+\begin{haskell}
+#include <stdlib.h>
+
+void main(int argc, char **argv) {
+	malloc(10);
+	return 0;
+}
+\end{haskell}
+
+acontece o seguinte erro:
+
+\begin{code_files}
+[ulissesaraujocosta@maclisses:Parser]-$ ./main main.c
+/usr/include/stdlib.h:272: (column 20) [ERROR]  >>> Syntax Error !
+  Syntax error !
+  The symbol `^' does not fit here.
+\end{code_files}
+
+Ao inspeccionar a linha 272 do stdlib.h verificamos a presença do seguinte código:
+
+\begin{haskell}
+#ifdef __BLOCKS__
+int  atexit_b(void (^)(void));
+void    *bsearch_b(const void *, const void *, size_t,
+size_t, int (^)(const void *, const void *));
+#endif /* __BLOCKS__ */
+\end{haskell}
+
+O problema reside exactamente aqui, ou seja o Language.C não consegue descobrir esta notação. Este problema parece já ter sido aberto há alguns meses e está previsto
+para correcção na próxima versão 4.0 do Language.C.\\
+
+Afim de tentarmos mesmo assim conseguir usar este front-end lembramos-nos de proibir o preprocessador do GCC para definir a variável \_\_BLOCKS\_\_. Assim sendo
+temos que incluír no nosso código a injecção de uma linha de código que fará com que todos os ficheiro C processados pelo nosso programa apresentem a desactivação desta variável:
+
+\begin{haskell}
+#undef __BLOCKS__
+#include <stdlib.h>
+
+void main(int argc) {
+	malloc(10);
+	return 0;
+}
+\end{haskell}
+
