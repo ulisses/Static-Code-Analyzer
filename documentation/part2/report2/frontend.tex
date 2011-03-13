@@ -25,11 +25,11 @@ data CExtDecl = CDeclExt CDecl
               | CAsmExt CStrLit
 \end{haskell}
 
-Depois podemos ver que uma declaração externa pode ser então uma declaração como podemo ver na secção \ref{chap:decl}, vejamos o que é isto de declaração no \textrm{Haskell}:
+Depois podemos ver que uma declaração externa pode ser então uma declaração como podemos ver na secção \ref{chap:decl}, vejamos o que é isto de declaração no \textrm{Haskell}:
 \begin{haskell}
 data CDecl = CDecl [CDeclSpec] [(Maybe CDeclr, Maybe CInit, Maybe CExpr)] NodeInfo
 \end{haskell}
-Este tipo de declarações é bastante abrangente e inclui declaraçõoes de estruturas de dados, declaração de parâmetros e tipos de dados.\\
+Este tipo de declarações é bastante abrangente e inclui declarações de estruturas de dados, declaração de parâmetros e tipos de dados.\\
 
 Tal como  a definição é uma lista de declarações C e qualificadores:
 \begin{haskell}

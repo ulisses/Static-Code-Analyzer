@@ -1,10 +1,10 @@
 \chapter{Web Application} \label{chap webApp}
 \minitoc
-Neste capítulo vamos expôr alguns pormenores relacionados com a implementação do problema proposto.
+Neste capítulo vamos expor alguns pormenores relacionados com a implementação do problema proposto.
 Será explicada a maneira que encontramos para que seja seja cumprida a arquitectura que escolhemos e modelamos inicialmente.
 
-\section{Criação de grupos, docentes e concorrenctes}\label{sec gdc}
-O sistema permite que qualquer utilizador não registado se registe como grupo ~\ref{img:signup}, e associe a si um ou mais concorrentes. Para efectuar o registo terá de preencher o nome do grupo/docente, um e-mail válido e uma password que tenha entre 6 a 40 caractéres.\\
+\section{Criação de grupos, docentes e concorrentes}\label{sec gdc}
+O sistema permite que qualquer utilizador não registado se registe como grupo ~\ref{img:signup}, e associe a si um ou mais concorrentes. Para efectuar o registo terá de preencher o nome do grupo/docente, um e-mail válido e uma password que tenha entre 6 a 40 caracteres.\\
 Este login é utilizado por todo o grupo, para participar nos mais variados concursos.\\
 
 \begin{figure}[H]
@@ -38,11 +38,11 @@ uma conta de grupo, à qual mais tarde será concedida privilégios de docente ~
 \section{Linguagens de programação}\label{sec lps}
 O nosso sistema é multilingue, ou seja, é possível submeter código fonte em várias linguagens de programação diferentes, desde que 
 a linguagem tenha sido correctamente configurada por um docente.
-Cada linguagem é caracterizada por uma séria de campos ~\ref{img:newLang}, os quais serão explicados de seguida:
+Cada linguagem é caracterizada por uma série de campos ~\ref{img:newLang}, os quais serão explicados de seguida:
 \begin{itemize}
 \item string de compilação: string que será executada quando se pretender compilar determinado código fonte. Esta string tem a
 particularidade de no lugar em que é suposto conter o nome do ficheiro a compilar, contém \textit{\#\{file\}}.\\
-Desta forma a string de compilação torna-se genérica, e idependente do nome do ficheiro a compilar.
+Desta forma a string de compilação torna-se genérica, e independente do nome do ficheiro a compilar.
 exemplo: gcc -O2 -Wall \#\{file\}
 
 \item string simples de execução: string utilizada para executar quando o código fonte foi compilado pela string de compilação.\\
@@ -70,7 +70,7 @@ em que \#\{file\} representa o nome do executável.
 
 \section{Submissão de programas}\label{sec subm}
 Sempre que acharem adequado, os grupos podem submeter os seus programas para serem avaliados. Para tal têm de escolher a linguagem de programação na qual resolveram o problema, de entre as disponíveis. E de seguida basta escolherem o ficheiro que pretendem submeter e carregar no botão de submissão.\\
-No caso do administrador, pode ainda submeter tentativas no formato xml.
+No caso do administrador, pode ainda submeter tentativas no formato XML.
 
 \begin{figure}[H]
 \begin{center}
@@ -84,7 +84,7 @@ No caso do administrador, pode ainda submeter tentativas no formato xml.
 Estando as linguagens de programação correctamente configuradas, a compilação torna-se bastante simples. Quando uma tentativa
 é submetida no sistema, começamos por verificar se foi submetida apenas um ficheiro de código, ou um ficheiro comprimido.\\
 Caso seja apenas um ficheiro, o sistema tenta compilar o código submetido, com a string de compilação da linguagem de programação em causa.\\
-No caso de se tratar de um ficheiro comprimido, depois de o descomprimir, o sistema verifica se existe um makefile entre os ficheiros extraídos. Caso se verifique, é corrido o comando \textit{make}, e tenta retirar o nome do executável gerado, de mode a poder
+No caso de se tratar de um ficheiro comprimido, depois de o descomprimir, o sistema verifica se existe um makefile entre os ficheiros extraídos. Caso se verifique, é corrido o comando \textit{make}, e tenta retirar o nome do executável gerado, de modo a poder
 ser usado na execução.
 
 \section{Execução}\label{sec exec}
@@ -135,6 +135,6 @@ A qualquer momento o grupo pode consultar os dados relativos às suas últimas t
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.60]{Images/tentativas}
-\caption{Página aonde pode consultar as tentativas (vista das tentativas de todos os utilizadores)}\label{img:tentativas}
+\caption{Página onde pode consultar as tentativas (vista das tentativas de todos os utilizadores)}\label{img:tentativas}
 \end{center}
 \end{figure}
