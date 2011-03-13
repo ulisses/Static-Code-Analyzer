@@ -177,11 +177,22 @@ aplicação que comunica online ou com serviços terceiros pode sofrer. Existem 
 entre elas as que se podem identificar automaticamente são:
 
 \begin{description}
-\item[SQL injection attack] falarfalarfalarfalarfalar falar falarfalarfalarfalar falarfalarfalarfalarfalarfalar 
-falarfalarfalarfalar falarfalarfalarfalarfalarfalarfalar falarfalarfalarfalar falarfalarfalarfalarfalar
+\item[SQL injection attack] é um tipo de ameaça que ocorre quando são pedidos dados ao utilizador e este, aproveitando-se de falhas de segurança, injecta as suas pŕoprias 
+\emph{querys} à base de dados. Segue-se um pequeno exemplo de como este ataque é efectuado, imagine-se a seguinte \emph{query}:
+\begin{code_files}
+SELECT descricao FROM enunciados WHERE titulo = 'exemplo1';
+\end{code_files}
+O campo \texttt{titulo} é dado por um utilizador do sistema. Com falta de controlo sobre esse campo, um utilizador com más intenções poderia escrever \texttt{exmplo1'; DROP TABLE users ;--}, 
+o que resultaria na seguinte \emph{query}:
+\begin{code_files}
+SELECT descricao FROM enunciados WHERE titulo = 'exemplo1'; DROP TABLE users ; --'
+\end{code_files}
+Assim, um simples campo a pedir um dado a um utilizador poderia significar na destruição total da base de dados.~\footnote{Mais informção em: \url{http://en.wikipedia.org/wiki/SQL_injection}}
+
 \item[Storing plaintext and sending passwords] falarfalarfalarfalarfalarfalarfalarfalarfalarfalarfalarfalar
 falarfalarfalarfalarfalarfalar falarfalarfalarfalarfalarfalarfalarfalarfalarfalar falarfalarfalarfalarfalarfalarfalarfalar 
 falarfalarfalarfalarfalarfalarfalarfalar falarfalarfalarfalarfalarfalar
+
 \item[XSS - Cross-site scripting] falarfalarfalarfalarfalar
 falarfalarfalarfalarfalarfalarfalarfalarfalarfalar
 falarfalarfalarfalar
