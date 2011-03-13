@@ -1,17 +1,19 @@
 module Main where
 
 import Language.C
+import Language.C.System.GCC
 import Language.C.Data.Ident
 import System.Environment
 
 process :: String -> IO ()
 process file = do
-	putStr file
-	stream <- readInputStream file
-	putStr (take (20 - length file) $ repeat ' ')
-	case parseC stream nopos of
+	--stream <- readInputStream file
+	stream <- parseCFile (newGCC "gcc") Nothing ["-I../../../../../2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp3/"] file
+--	putStr (take (20 - length file) $ repeat ' ')
+	case stream of
 		( Left error  ) -> print error
-		( Right cprog ) -> f cprog
+		--( Right cprog ) -> f cprog
+		( Right cprog ) -> print "OK"
 
 f :: CTranslUnit -> IO()
 f (CTranslUnit l n) = mapM_ g l
