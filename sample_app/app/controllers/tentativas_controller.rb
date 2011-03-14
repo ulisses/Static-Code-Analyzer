@@ -3,7 +3,7 @@ class TentativasController < ApplicationController
     before_filter :authenticate
     
     require "rexml/document"
-    require 'fileutils'    
+    require 'fileutils'
     
   def index      
     if (params[:enunciado_id] && params[:user_id])
@@ -174,6 +174,8 @@ class TentativasController < ApplicationController
         params[:tentativa][:compilou] = false
         params[:tentativa][:passedTests] = 0
         @erros+= "A tentativa submetida nao compilou!"
+#       status, stdout, stderr = systemu final  
+#          @erros+= "[" + status + "] [" +stdout + "] [" +stderr + "]" 
       end
     end
   end
@@ -275,7 +277,7 @@ class TentativasController < ApplicationController
     
     #thread que conta x segundos e dps termina a execucao do programa
     timer = Thread.new do
-      sleep 5
+      sleep @enunciado.maxTempExec
       if exec.alive?
         Thread.kill(exec)
         i=1

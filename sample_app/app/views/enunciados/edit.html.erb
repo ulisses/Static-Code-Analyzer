@@ -34,6 +34,10 @@
 					<%= f.select(:funcao_id,options_for_select(arrayFunc,@enunciado.funcao_id)) %>
 				</div>
 				<div class="field">
+					<%= f.label "Tempo máximo para a execução de um teste (segundos):" %><br/>
+					<%= f.select :maxTempExec,options_for_select(temps,@enunciado.maxTempExec) %>
+				</div>
+				<div class="field">
 					<%= hidden_field_tag(:concurso_id, @concurso_id) %>
 					<%= hidden_field_tag :concurso_id, params[:concurso_id] %>
 				</div>

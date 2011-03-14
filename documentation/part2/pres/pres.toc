@@ -10,4 +10,4 @@
 \beamer@sectionintoc {4}{Scripts Auxiliares}{16}{0}{4}
 \beamer@sectionintoc {5}{Frontend}{20}{0}{5}
 \beamer@sectionintoc {6}{Terminal Interface - Powered by Perl}{22}{0}{6}
-\beamer@sectionintoc {7}{Conclus\IeC {\~a}o e trabalho futuro}{24}{0}{7}
+\beamer@sectionintoc {7}{Conclus\IeC {\~a}o e trabalho futuro}{26}{0}{7}
