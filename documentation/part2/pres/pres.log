@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.3.15)  13 MAR 2011 20:45
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.3.15)  13 MAR 2011 22:53
 entering extended mode
  %&-line parsing enabled.
 **pres.tex
@@ -1210,11 +1210,22 @@ File: imagens/tentativas.png Graphic file (type png)
 ]
 [23
 
-] (./pres.toc) [24
+] [24
 
-] [25
+] <imagens/zacarias.png, id=584, 635.37375pt x 537.00626pt>
+File: imagens/zacarias.png Graphic file (type png)
 
-] [26
+<use imagens/zacarias.png>
+Overfull \vbox (15.48402pt too high) detected at line 325
+ []
+
+[25
+
+ <./imagens/zacarias.png (PNG copy)>] (./pres.toc) [26
+
+] [27
+
+] [28
 
 ]
 \tf@nav=\write7
@@ -1226,7 +1237,8 @@ File: imagens/tentativas.png Graphic file (type png)
 \tf@snm=\write9
 \openout9 = `pres.snm'.
 
- (./pres.aux)
+
+(./pres.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
@@ -1236,23 +1248,25 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 18329 strings out of 493848
- 305449 string characters out of 3149207
+ 18340 strings out of 493848
+ 305625 string characters out of 3149207
  444835 words of memory out of 3000000
- 21042 multiletter control sequences out of 15000+200000
- 13008 words of font info for 51 fonts, out of 3000000 for 9000
+ 21047 multiletter control sequences out of 15000+200000
+ 13302 words of font info for 52 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  45i,20n,67p,332b,776s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb
 ></usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb>
 </usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmss17.pfb><
 /usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></u
-sr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></u
-sr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></us
-r/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on pres.pdf (26 pages, 242089 bytes).
+sr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></
+usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></
+usr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></u
+sr/local/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
+>
+Output written on pres.pdf (28 pages, 294510 bytes).
 PDF statistics:
- 662 PDF objects out of 1000 (max. 8388607)
- 65 named destinations out of 1000 (max. 500000)
- 188 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 696 PDF objects out of 1000 (max. 8388607)
+ 69 named destinations out of 1000 (max. 500000)
+ 193 words of extra memory for PDF output out of 10000 (max. 10000000)
 

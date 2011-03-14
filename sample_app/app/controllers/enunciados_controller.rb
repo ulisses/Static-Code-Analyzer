@@ -234,9 +234,11 @@ class EnunciadosController < ApplicationController
     files.each do |xml_file_path|
       ##tenta validar o enunciado com o xsd
       xsdpath = File.join(Rails.root,"public/xsd/enunciado.xsd")
+      lol = "xmlstarlet val -b -s #{xsdpath} #{xml_file_path}"
+      debugger
       resVal = `xmlstarlet val -b -s #{xsdpath} #{xml_file_path}`
       if resVal.empty?
-        #se for valido faz parse
+        #se for valido faz parse    
         parseEnunciadoXML(xml_file_path)
       else
         @erros << "O ficheiro #{xml_file_path} nao foi validado pelo xmlschema!"
@@ -244,17 +246,19 @@ class EnunciadosController < ApplicationController
     end
     
     
-  	removeFolder(path)
+#  	removeFolder(path)
     if @erros.empty?
       flash.now[:success] = "#{files.size} enunciado(s) submetido(s) com sucesso."
       if !@alert.empty?
         flash.now[:notice] = "Importante: "+@alert
       end
+      @enunciado = Enunciado.new
       render '/enunciados/newxml',:concurso_id=>@concurso.id
     else 
       if !@success.empty?
         @erros << "Os seguintes ficheiros foram adicionados sem problemas: "+@success
       end
+      @enunciado = Enunciado.new
       render '/enunciados/newxml',:concurso_id=>@concurso.id
   	end
 
@@ -269,7 +273,6 @@ class EnunciadosController < ApplicationController
     if file
       file.each_line do |line| xml_data+= line end
     end 
-
 
     doc = REXML::Document.new( xml_data )
     tit = ""
@@ -288,6 +291,11 @@ class EnunciadosController < ApplicationController
     REXML::XPath.each( doc, "//Func" ){ |func_element|
       fun = func_element.text
     }
+    
+    max = 0.0
+    REXML::XPath.each( doc, "//MaxExecTime" ){ |max_element|
+      max = max_element.text.to_i
+    }
   
     #vai buscar o id da funcao de avaliaçao, se nao existir cria-a
     function = Function.where(:func=>fun).first
@@ -305,7 +313,9 @@ class EnunciadosController < ApplicationController
     @enunciado = @concurso.enunciados.build(:titulo=>tit,
                                             :desc=>des,
                                             :funcao_id=>f_id,
-                                            :peso=>p)
+                                            :peso=>p,
+                                            :maxTempExec=>max
+                                            )
     
     basename = File.basename(xml_file_path)
     if !@enunciado.save

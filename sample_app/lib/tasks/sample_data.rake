@@ -25,9 +25,15 @@ namespace :db do
             user.concorrentes.create!(:email =>"a@a.com",
                                       :num => Faker::Lorem.sentence(5),
                                       :nome => Faker::Lorem.sentence(5))
-                 end
-
-
+          end
     end
+    
+     Language.create!(:ling=>"C",
+                      :compString=>"gcc -Wall -O2 \#{file}",
+                      :execString=>"./a.out",
+                      :complexExecString=>"./\#{file}")
+                      
+    Function.create!(:func=>"diff -wiB")
+    
   end
 end

@@ -5,11 +5,12 @@
     <Peso>20</Peso>
     <Titulo> Exercicio 1 </Titulo>
     <Descricao> Some os números que lhe sao passados como argumento, e apresente o resultado. </Descricao>
-    <Func>Diff</Func>  
+    <Func>Diff</Func>
+    <MaxExecTime>2.0</MaxExecTime>    
     <Linguagens> 
         <Linguagem>C</Linguagem>        
     </Linguagens>
-    <Dict>
+    <Dict>    
         <Teste>
             <Nome>Lista vazia</Nome>
             <Input></Input>

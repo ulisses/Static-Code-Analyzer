@@ -1,20 +1,23 @@
 <table class="concurso" summary="Informacao concurso">
 	<tr>
 		<td>
-			
-			<% if @erros.size > 0 %>
-				<div id="error_explanation">
-				    <ul>
-				    <% @erros.each do |msg| %>
-				      <li><%= msg %></li>
-				    <% end %>
-				    </ul>
-				  </div>
+			<% if @erros %>
+				<% if @erros.size > 0 %>
+					<div id="error_explanation">
+					    <ul>
+					    <% @erros.each do |msg| %>
+					      <li><%= msg %></li>
+					    <% end %>
+					    </ul>
+					  </div>
 				<% end %>
-			
-						
+			<% end %>
+				
 			<h1>Submeter enunciados</h1>
-				<% form_for(@enunciado,:html => { :multipart => true }, :url => { :action => "createxml" }) do |form| %>
+				<% form_for(
+				@enunciado,
+				:html => { :multipart => true },
+				 :url => { :action => "createxml" }) do |form| %>
 
 					<%= hidden_field_tag(:concurso_id, @concurso.id) %>
 					Submeter tentativa:
