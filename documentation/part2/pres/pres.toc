@@ -1,13 +1,13 @@
 \beamer@endinputifotherversion {3.07pt}
 \select@language {english}
-\beamer@sectionintoc {1}{At\IeC {\'e} agora}{2}{0}{1}
-\beamer@sectionintoc {2}{Objectivos}{4}{0}{2}
-\beamer@sectionintoc {3}{Aplica\IeC {\c c}\IeC {\~a}o Web}{6}{0}{3}
-\beamer@subsectionintoc {3}{1}{Implementa\IeC {\c c}\IeC {\~a}o: at\IeC {\'e} \IeC {\`a} segunda fase}{7}{0}{3}
-\beamer@subsectionintoc {3}{2}{Implementa\IeC {\c c}\IeC {\~a}o: linguagens de programa\IeC {\c c}\IeC {\~a}o}{9}{0}{3}
-\beamer@subsectionintoc {3}{3}{Implementa\IeC {\c c}\IeC {\~a}o: Compila\IeC {\c c}\IeC {\~a}o}{11}{0}{3}
-\beamer@subsectionintoc {3}{4}{Implementa\IeC {\c c}\IeC {\~a}o: Execu\IeC {\c c}\IeC {\~a}o}{13}{0}{3}
-\beamer@sectionintoc {4}{Scripts Auxiliares}{16}{0}{4}
-\beamer@sectionintoc {5}{Frontend}{20}{0}{5}
-\beamer@sectionintoc {6}{Terminal Interface - Powered by Perl}{22}{0}{6}
-\beamer@sectionintoc {7}{Conclus\IeC {\~a}o e trabalho futuro}{26}{0}{7}
+\beamer@sectionintoc {1}{Objectivos}{2}{0}{1}
+\beamer@sectionintoc {2}{Aplica\IeC {\c c}\IeC {\~a}o Web}{5}{0}{2}
+\beamer@subsectionintoc {2}{1}{Implementa\IeC {\c c}\IeC {\~a}o: at\IeC {\'e} \IeC {\`a} segunda fase}{6}{0}{2}
+\beamer@subsectionintoc {2}{2}{Implementa\IeC {\c c}\IeC {\~a}o: linguagens de programa\IeC {\c c}\IeC {\~a}o}{8}{0}{2}
+\beamer@subsectionintoc {2}{3}{Implementa\IeC {\c c}\IeC {\~a}o: Compila\IeC {\c c}\IeC {\~a}o}{10}{0}{2}
+\beamer@subsectionintoc {2}{4}{Implementa\IeC {\c c}\IeC {\~a}o: Execu\IeC {\c c}\IeC {\~a}o}{12}{0}{2}
+\beamer@sectionintoc {3}{Scripts Auxiliares}{15}{0}{3}
+\beamer@sectionintoc {4}{M\IeC {\'e}tricas}{19}{0}{4}
+\beamer@sectionintoc {5}{Frontend}{25}{0}{5}
+\beamer@sectionintoc {6}{Terminal Interface - Powered by Perl}{28}{0}{6}
+\beamer@sectionintoc {7}{Conclus\IeC {\~a}o e trabalho futuro}{32}{0}{7}

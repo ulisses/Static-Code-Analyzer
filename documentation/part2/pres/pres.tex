@@ -54,12 +54,16 @@
        breakautoindent=false,
        showstringspaces=false
 }
+\lstnewenvironment{code_files}{\lstset{language=Terminall}}{}
+
 \lstdefinelanguage{Terminal} {
        basicstyle=\tiny\ttfamily,
        breaklines=true,
        breakautoindent=false,
        showstringspaces=false
 }
+\lstnewenvironment{code}{\lstset{language=Terminal}}{}
+
 \definecolor{gray_ulisses}{gray}{0.55}
 \definecolor{castanho_ulisses}{rgb}{0.71,0.33,0.14}
 \definecolor{preto_ulisses}{rgb}{0.41,0.20,0.04}
@@ -67,7 +71,7 @@
 
 \lstdefinelanguage{HaskellUlisses}
 {
-        basicstyle=\ttfamily\scriptsize,
+        basicstyle=\ttfamily\tiny,
         %backgroundcolor=\color{yellow},
         %frameshape={RYRYNYYYY}{yny}{yny}{RYRYNYYYY}, %contornos... muito nice...
         sensitive=true,
@@ -131,6 +135,7 @@
         },
         emphstyle={[5]\color{preto_ulisses}\textbf}
 }
+\lstnewenvironment{haskell}{\lstset{language=HaskellUlisses}}{}
 % % % fim do listings e ref
 
 % % % inicio da definicao de comandos
@@ -166,7 +171,7 @@ Projecto integrado
    \titlepage
 \end{frame}
 
-\section{Até agora}
+\section{Objectivos}
 \begin{frame} \frametitle{Até agora:}
 Concretizado até ao ínicio da segunda fase:
 \begin{itemize}
@@ -176,8 +181,6 @@ Concretizado até ao ínicio da segunda fase:
 \item Ínicio da implementação e respectivo tool demo {\color{green}$\checkmark$}
 \end{itemize}
 \end{frame}
-
-\section{Objectivos}
 \pgfdeclareimage[width=.8\textwidth]{topo}{images/topo}
 
 \begin{frame} \frametitle{Motivação e Objectivos}
@@ -287,8 +290,115 @@ participantes)
 \end{itemize}
 \end{frame}
 
+\section{Métricas}
+\begin{frame} \frametitle{Análise Dinâmica}
+\begin{description}
+\item[Log analysis] extrair informação dos logs
+\item[Testing] investigar comportamento através de casos
+\item[Debugging] bom para detectar defeitos
+\item[Instrumentation] monitorizar e medir o nível de performance
+\item[Profiling] investigação sobre o comportamento de um programa (CPU, mem)
+\item[Benchmarking] comparação de medidas
+\end{description}
+\end{frame}
+
+\begin{frame} \frametitle{Análise Estática}
+\begin{description}
+\item[Syntax checking] atestar a correcção da linguagem
+\item[Type checking] garantir restrição dos tipos
+\item[Decompilation] inferir ou descobrir código através de binário
+\item[Code metrics] tirar conclusões sobre a qualidade
+\item[Style checking] verificar determinadas regras que se acredita serem boas prácticas
+\item[Verification reverse engineering] verificar se a implementação cumpre a especificação
+\end{description}
+\end{frame}
+
+\begin{frame} \frametitle{Métricas de qualidade de software}
+$$\text{Line Coverage} = \frac{\textrm{Nr of test lines}}{\textrm{nr of tested lines}}$$
+$$\text{Decision coverage} = \frac{\text{Nr of test methods}}{\text{Sum of McCabe complexity}}$$
+$$\text{Test granularity} = \frac{\text{Nr of test lines}}{\text{nr of tests}}$$
+$$\text{Test efficiency} = \frac{\text{Decision coverage}}{\text{line coverage}}$$
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Bug Patterns}
+\begin{code_files}
+// foo.c file
+#include <stdio.h>
+
+int main() {
+    char *a = "I like you";
+    char *b = "I hate you";
+
+    if(&a < &b) a = *(&a + 1);
+    else        a = *(&a - 1); 
+
+    printf("%s\n", a);
+}
+\end{code_files}
+\begin{code_files}
+[ulissesaraujocosta@maclisses:c]-$ gcc -o foo foo.c
+[ulissesaraujocosta@maclisses:c]-$ ./foo
+I hate you
+\end{code_files}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Source Lines of code (SLOC)}
+Este tipo métricas diz respeito à informação que uma linha de código pode conter. 
+\begin{code_files}
+for (i = 0; i < 100; i += 1) printf("hello"); /* How many lines of code is this? */
+\end{code_files}
+\begin{itemize}
+\item $1$ Linha fisica de código (LOC)
+\item $2$ Linhas logicas de codigo (LLOC) (o for e o printf)
+\item $1$ Linha de comentário
+\end{itemize}
+\end{frame}
+
 \section{Frontend}
-\begin{frame} \frametitle{Language.C}
+\begin{frame}[fragile]  \frametitle{Language.C}
+Language.C é um front-end para Haskell que implementa a linguagem C e muitas extensões do GCC.\\
+\begin{haskell}
+data CStat = CLabel  Ident CStat [CAttr] NodeInfo
+           | CCase CExpr CStat NodeInfo            
+           | CCases CExpr CExpr CStat NodeInfo     
+           | CDefault CStat NodeInfo               
+           | CExpr (Maybe CExpr) NodeInfo
+           | CCompound [Ident] [CBlockItem] NodeInfo    
+           | CIf CExpr CStat (Maybe CStat) NodeInfo     
+           | CSwitch CExpr CStat NodeInfo
+           | CWhile CExpr CStat Bool NodeInfo      
+           | CFor (Either (Maybe CExpr) CDecl) (Maybe CExpr) (Maybe CExpr) CStat
+             NodeInfo
+           | CGoto Ident NodeInfo            
+           | CGotoPtr CExpr NodeInfo         
+           | CCont NodeInfo                  
+           | CBreak    NodeInfo              
+           | CReturn (Maybe CExpr)NodeInfo   
+           | CAsm CAsmStmt NodeInfo          
+\end{haskell}
+\end{frame}
+
+\begin{frame}[fragile]  \frametitle{Language.C - Utilização (simples)}
+\begin{haskell}
+module Main where
+
+import Language.C
+import Language.C.System.GCC
+import Language.C.Data.Ident
+import System.Environment
+
+process :: String -> IO ()
+process file = do
+    stream <- parseCFile (newGCC "gcc") Nothing [] file
+    case stream of
+        ( Left error  ) -> print error
+        ( Right cprog ) -> print "OK"
+
+main :: IO ()
+main = do
+    files <- getArgs
+    mapM_ process files
+\end{haskell}
 \end{frame}
 
 \section{Terminal Interface - Powered by Perl}
@@ -328,11 +438,11 @@ Desses módulos, usa-se e pretende-se usar:
 \section{Conclusão e trabalho futuro}
 \begin{frame} \frametitle{Conclusão e trabalho futuro}
 \begin{itemize}
-\item Implementar várias métricas para C com o FrontEnd
+\item Implementar as várias métricas descritas no relatório para C com o FrontEnd
+\item Melhorar a utilização pelo terminal e as suas funcionalidades
 \item Tornar a interface utilizador mais intuitiva e mais agradável de utilizar
 \end{itemize}
 \end{frame}
-
 
 \section*{Perguntas}
 \begin{frame} \frametitle{Perguntas}
