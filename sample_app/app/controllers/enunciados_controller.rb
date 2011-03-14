@@ -246,7 +246,7 @@ class EnunciadosController < ApplicationController
     end
     
     
-#  	removeFolder(path)
+  	removeFolder(path)
     if @erros.empty?
       flash.now[:success] = "#{files.size} enunciado(s) submetido(s) com sucesso."
       if !@alert.empty?
