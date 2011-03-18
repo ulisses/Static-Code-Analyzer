@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live/MacPorts 2009_6) (format=pdflatex 2010.9.7)  14 MAR 2011 02:20
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live/MacPorts 2009_6) (format=pdflatex 2010.9.7)  14 MAR 2011 10:15
 entering extended mode
  %&-line parsing enabled.
 **pres.tex
@@ -1251,7 +1251,7 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Here is how much of TeX's memory you used:
  19033 strings out of 495061
  311794 string characters out of 3181965
- 565724 words of memory out of 3000000
+ 565725 words of memory out of 3000000
  21616 multiletter control sequences out of 15000+200000
  14406 words of font info for 57 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
