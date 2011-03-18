@@ -1,20 +1,14 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.3.15)  13 MAR 2011 22:49
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live/MacPorts 2009_6) (format=pdflatex 2010.9.7)  14 MAR 2011 02:22
 entering extended mode
  %&-line parsing enabled.
 **Relatorio.tex
 (./Relatorio.tex
 LaTeX2e <2009/09/24>
 Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
-yphenation, german-x-2009-06-19, ngerman-x-2009-06-19, ancientgreek, ibycus, ar
-abic, basque, bulgarian, catalan, pinyin, coptic, croatian, czech, danish, dutc
-h, esperanto, estonian, farsi, finnish, french, galician, german, ngerman, mono
-greek, greek, hungarian, icelandic, indonesian, interlingua, irish, italian, ku
-rmanji, latin, latvian, lithuanian, mongolian, mongolian2a, bokmal, nynorsk, po
-lish, portuguese, romanian, russian, sanskrit, serbian, slovak, slovenian, span
-ish, swedish, turkish, ukenglish, ukrainian, uppersorbian, welsh, loaded.
-(/usr/local/texlive/2009/texmf-dist/tex/latex/base/report.cls
+yphenation, loaded.
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/report.cls
 Document Class: report 2007/10/19 v1.4h Standard LaTeX document class
-(/usr/local/texlive/2009/texmf-dist/tex/latex/base/size10.clo
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/size10.clo
 File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -30,29 +24,37 @@ File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(/usr/local/texlive/2009/texmf-dist/tex/generic/babel/babel.sty
+(/opt/local/share/texmf-texlive-dist/tex/generic/babel/babel.sty
 Package: babel 2008/07/06 v3.8l The Babel package
 
-(/usr/local/texlive/2009/texmf-dist/tex/generic/babel/english.ldf
+(/opt/local/share/texmf-texlive-dist/tex/generic/babel/english.ldf
 Language: english 2005/03/30 v3.3o English support from the babel system
 
-(/usr/local/texlive/2009/texmf-dist/tex/generic/babel/babel.def
+(/opt/local/share/texmf-texlive-dist/tex/generic/babel/babel.def
 File: babel.def 2008/07/06 v3.8l Babel common definitions
 \babel@savecnt=\count88
 \U@D=\dimen103
 )
+\l@british = a dialect from \language\l@english 
+\l@UKenglish = a dialect from \language\l@english 
 \l@canadian = a dialect from \language\l@american 
 \l@australian = a dialect from \language\l@british 
 \l@newzealand = a dialect from \language\l@british 
 )
-(/usr/local/texlive/2009/texmf-dist/tex/generic/babel/portuges.ldf
+(/opt/local/share/texmf-texlive-dist/tex/generic/babel/portuges.ldf
 Language: portuges 2008/03/18 v1.2q Portuguese support from the babel system
+
+
+Package babel Warning: No hyphenation patterns were loaded for
+(babel)                the language `Portuguese'
+(babel)                I will use the patterns loaded for \language=0 instead.
+
+\l@portuges = a dialect from \language0
 Package babel Info: Making " an active character on input line 145.
-))
-(/usr/local/texlive/2009/texmf-dist/tex/latex/minitoc/minitoc.sty
+)) (/opt/local/share/texmf-texlive-dist/tex/latex/minitoc/minitoc.sty
 Package: minitoc 2008/07/16 v60 Package minitoc (JPFD)
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/minitoc/mtcmess.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/minitoc/mtcmess.sty
 Package: mtcmess 2006/03/14
 )
 Package minitoc Info: I0001
@@ -95,45 +97,45 @@ Package minitoc Info: I0010
 (minitoc)             The english language is selected.
 (minitoc)              on input line 4910.
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/minitoc/english.mld
+(/opt/local/share/texmf-texlive-dist/tex/latex/minitoc/english.mld
 File: english.mld 2006/01/13
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/minitoc/english.mld
+(/opt/local/share/texmf-texlive-dist/tex/latex/minitoc/english.mld
 File: english.mld 2006/01/13
 )
 Package minitoc Info: I0010
 (minitoc)             The english language is selected.
 (minitoc)              on input line 4911.
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/minitoc/english.mld
+(/opt/local/share/texmf-texlive-dist/tex/latex/minitoc/english.mld
 File: english.mld 2006/01/13
 )
 Package minitoc Info: I0010
 (minitoc)             The portuges language is selected.
 (minitoc)              on input line 4911.
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/minitoc/portuges.mld
+(/opt/local/share/texmf-texlive-dist/tex/latex/minitoc/portuges.mld
 File: portuges.mld 2005/06/07
 Package minitoc Info: I0010
 (minitoc)             The portuguese language is selected.
 (minitoc)              on input line 33.
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/minitoc/portuguese.mld
+(/opt/local/share/texmf-texlive-dist/tex/latex/minitoc/portuguese.mld
 File: portuguese.mld 2006/01/13
 )))
-(/usr/local/texlive/2009/texmf-dist/tex/latex/base/inputenc.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2008/03/30 v1.1d Input encoding file
 \inpenc@prehook=\toks15
 \inpenc@posthook=\toks16
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/base/utf8.def
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OML ...
 ... no UTF-8 mapping file for font encoding OML
 Now handling font encoding T1 ...
 ... processing UTF-8 mapping file for font encoding T1
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/base/t1enc.dfu
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/t1enc.dfu
 File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
@@ -283,7 +285,7 @@ File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OT1 ...
 ... processing UTF-8 mapping file for font encoding OT1
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/base/ot1enc.dfu
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/ot1enc.dfu
 File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
@@ -314,7 +316,7 @@ File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OMS ...
 ... processing UTF-8 mapping file for font encoding OMS
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/base/omsenc.dfu
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/omsenc.dfu
 File: omsenc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A7 (decimal 167)
    defining Unicode char U+00B6 (decimal 182)
@@ -338,39 +340,39 @@ Now handling font encoding U ...
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
 ))
-(/usr/local/texlive/2009/texmf-dist/tex/latex/base/fontenc.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/base/t1enc.def
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/t1enc.def
 File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
 ))
-(/usr/local/texlive/2009/texmf-dist/tex/latex/graphics/color.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/graphics/color.sty
 Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/latexconfig/color.cfg
+(/opt/local/share/texmf-texlive-dist/tex/latex/latexconfig/color.cfg
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 130.
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/pdftex-def/pdftex.def
+(/opt/local/share/texmf-texlive-dist/tex/latex/pdftex-def/pdftex.def
 File: pdftex.def 2009/08/25 v0.04m Graphics/color for pdfTeX
 \Gread@gobject=\count93
 ))
-(/usr/local/texlive/2009/texmf-dist/tex/latex/graphics/graphicx.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/graphics/keyval.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/graphics/keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks17
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/graphics/graphics.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/graphics/trig.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/latexconfig/graphics.cfg
+(/opt/local/share/texmf-texlive-dist/tex/latex/latexconfig/graphics.cfg
 File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
 )
 Package graphics Info: Driver file: pdftex.def on input line 91.
@@ -378,40 +380,40 @@ Package graphics Info: Driver file: pdftex.def on input line 91.
 \Gin@req@height=\dimen104
 \Gin@req@width=\dimen105
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2009/10/09 v6.79a Hypertext links for LaTeX
 
-(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2009/04/10 v2.0 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in pdf mode detected.
 )
-(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/ifvtex.sty
 Package: ifvtex 2008/11/04 v1.4 Switches for detecting VTeX and its modes (HO)
 Package ifvtex Info: VTeX not detected.
 )
-(/usr/local/texlive/2009/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+(/opt/local/share/texmf-texlive-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2009/01/23 v0.5 Provides ifxetex conditional
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/oberdiek/hycolor.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/oberdiek/hycolor.sty
 Package: hycolor 2009/10/02 v1.5 Code for color options of hyperref/bookmark (H
 O)
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/oberdiek/xcolor-patch.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/oberdiek/xcolor-patch.sty
 Package: xcolor-patch 2009/10/02 xcolor patch
 ))
 \@linkdim=\dimen106
 \Hy@linkcounter=\count94
 \Hy@pagecounter=\count95
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/hyperref/pd1enc.def
+(/opt/local/share/texmf-texlive-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2009/10/09 v6.79a Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
-(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/etexcmds.sty
 Package: etexcmds 2007/12/12 v1.2 Prefix for e-TeX command names (HO)
 
-(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/infwarerr.sty
 Package: infwarerr 2007/09/09 v1.2 Providing info/warning/message (HO)
 )
 Package etexcmds Info: Could not find \expanded.
@@ -419,13 +421,13 @@ Package etexcmds Info: Could not find \expanded.
 (etexcmds)             that some package has redefined \expanded.
 (etexcmds)             In the latter case, load this package earlier.
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+(/opt/local/share/texmf-texlive-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2009/08/13 v3.4 Keyval support for LaTeX options (HO)
 
-(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/kvsetkeys.sty
 Package: kvsetkeys 2009/07/30 v1.5 Key value parser with default handler suppor
 t (HO)
 ))
@@ -439,30 +441,30 @@ Package hyperref Info: Backreferencing OFF on input line 2995.
 
 Implicit mode ON; LaTeX internals redefined
 Package hyperref Info: Bookmarks ON on input line 3191.
-(/usr/local/texlive/2009/texmf-dist/tex/latex/ltxmisc/url.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/ltxmisc/url.sty
 \Urlmuskip=\muskip10
 Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 3428.
 
-(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/bitset.sty
+(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/bitset.sty
 Package: bitset 2007/09/28 v1.0 Data type bit set (HO)
 
-(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/intcalc.sty
+(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/intcalc.sty
 Package: intcalc 2007/09/27 v1.1 Expandable integer calculations (HO)
 )
-(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/bigintcalc.sty
+(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/bigintcalc.sty
 Package: bigintcalc 2007/11/11 v1.1 Expandable big integer calculations (HO)
 
-(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2009/09/23 v0.6 LuaTeX support for pdfTeX utility functions
  (HO)
 
-(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/ifluatex.sty
 Package: ifluatex 2009/04/17 v1.2 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
 )
-(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/ltxcmds.sty
 Package: ltxcmds 2009/08/05 v1.0 Some LaTeX kernel commands for general use (HO
 )
 )
@@ -482,7 +484,7 @@ Package hyperref Info: Link coloring ON on input line 4395.
 Package hyperref Info: Link coloring with OCG OFF on input line 4402.
 Package hyperref Info: PDF/A mode OFF on input line 4407.
 
-(/usr/local/texlive/2009/texmf-dist/tex/generic/oberdiek/atbegshi.sty
+(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/atbegshi.sty
 Package: atbegshi 2008/07/31 v1.9 At begin shipout hook (HO)
 )
 \Hy@abspage=\count97
@@ -490,23 +492,23 @@ Package: atbegshi 2008/07/31 v1.9 At begin shipout hook (HO)
 \c@Hfootnote=\count99
 )
 *hyperref using driver hpdftex*
-(/usr/local/texlive/2009/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/opt/local/share/texmf-texlive-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2009/10/09 v6.79a Hyperref driver for pdfTeX
 \Fld@listcount=\count100
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/quotchap/quotchap.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/quotchap/quotchap.sty
 Package: quotchap 1998/02/09 v0.9f Decorative Chapter Headings with Quotes
 \@quotebox=\box28
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/tools/varioref.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/tools/varioref.sty
 Package: varioref 2009/09/13 v1.4w package for extended references (FMi)
 \c@vrcnt=\count101
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/misc209/psboxit.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/misc209/psboxit.sty
 \gray@box=\box29
 \gray@space=\dimen109
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/fancybox/fancybox.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/fancybox/fancybox.sty
 Package: fancybox 2000/09/19 1.3
 
 Style option: `fancybox' v1.3 <2000/09/19> (tvz)
@@ -519,7 +521,7 @@ Style option: `fancybox' v1.3 <2000/09/19> (tvz)
 \EndVerbatimTokens=\toks22
 \Verbatim@Outfile=\write4
 \Verbatim@Infile=\read1
-) (/usr/local/texlive/2009/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+) (/opt/local/share/texmf-texlive-dist/tex/latex/fancyvrb/fancyvrb.sty
 Package: fancyvrb 2008/02/07
 
 Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
@@ -530,11 +532,13 @@ Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix
 \c@FancyVerbLine=\count103
 \FV@StepNumber=\count104
 \FV@OutFile=\write5
-) (/usr/local/texlive/2009/texmf-dist/tex/latex/cite/cite.sty
+)
+(/opt/local/share/texmf-texlive-dist/tex/latex/cite/cite.sty
 LaTeX Info: Redefining \cite on input line 285.
 LaTeX Info: Redefining \nocite on input line 356.
 Package: cite 2009/08/29  v 5.2
-) (/usr/local/texlive/2009/texmf-dist/tex/latex/float/float.sty
+)
+(/opt/local/share/texmf-texlive-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count105
 \float@exts=\toks23
@@ -542,7 +546,7 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks24
 \@floatcapt=\box34
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/listings/listings.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/listings/listings.sty
 \lst@mode=\count106
 \lst@gtempboxa=\box35
 \lst@token=\toks25
@@ -556,24 +560,24 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \lst@lineno=\count111
 \lst@maxwidth=\dimen114
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/listings/lstmisc.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
 \c@lstnumber=\count112
 \lst@skipnumbers=\count113
 \lst@framebox=\box36
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/listings/listings.cfg
+(/opt/local/share/texmf-texlive-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2007/02/22 1.4 listings configuration
 ))
 Package: listings 2007/02/22 1.4 (Carsten Heinz)
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/harvard/harvard.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/harvard/harvard.sty
 Package: harvard 
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/base/ifthen.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 ))
-(/usr/local/texlive/2009/texmf-dist/tex/latex/geometry/geometry.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2008/12/21 v4.2 Page Geometry
 \Gm@cnth=\count114
 \Gm@cntv=\count115
@@ -584,18 +588,18 @@ Package: geometry 2008/12/21 v4.2 Page Geometry
 \Gm@even@mp=\dimen118
 \Gm@dimlist=\toks26
 
-(/usr/local/texlive/2009/texmf-dist/tex/xelatex/xetexconfig/geometry.cfg))
-(/usr/local/texlive/2009/texmf-dist/tex/latex/setspace/setspace.sty
+(/opt/local/share/texmf-texlive-dist/tex/xelatex/xetexconfig/geometry.cfg))
+(/opt/local/share/texmf-texlive-dist/tex/latex/setspace/setspace.sty
 Package: setspace 2000/12/01 6.7 Contributed and Supported LaTeX2e package
 
 Package: `setspace' 6.7 <2000/12/01>
-) (/usr/local/texlive/2009/texmf-dist/tex/generic/thumbpdf/thumbpdf.sty
+) (/opt/local/share/texmf-texlive-dist/tex/generic/thumbpdf/thumbpdf.sty
 Package: thumbpdf 2008/04/16 v3.10 Inclusion of thumbnails (HO)
 
 
 Package thumbpdf Warning: Thumbnail data file `Relatorio.tpt' not found.
 
-) (/usr/local/texlive/2009/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+) (/opt/local/share/texmf-texlive-dist/tex/latex/fancyhdr/fancyhdr.sty
 \fancy@headwidth=\skip46
 \f@ncyO@elh=\skip47
 \f@ncyO@erh=\skip48
@@ -606,20 +610,20 @@ Package thumbpdf Warning: Thumbnail data file `Relatorio.tpt' not found.
 \f@ncyO@olf=\skip53
 \f@ncyO@orf=\skip54
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/lastpage/lastpage.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/lastpage/lastpage.sty
 Package: lastpage 1994/06/25 v0.1b LaTeX2e package for refs to last page number
  (JPG)
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/base/alltt.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/alltt.sty
 Package: alltt 1997/06/16 v2.0g defines alltt environment
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/tools/verbatim.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/tools/verbatim.sty
 Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
 \every@verbatim=\toks27
 \verbatim@line=\toks28
 \verbatim@in@stream=\read3
 )
-(/usr/local/texlive/2009/texmf-dist/tex/generic/epsf/epsf.sty
+(/opt/local/share/texmf-texlive-dist/tex/generic/epsf/epsf.sty
 This is `epsf.tex' v2.7.3 <23 July 2005>
 \epsffilein=\read4
 \epsfframemargin=\dimen119
@@ -630,11 +634,11 @@ This is `epsf.tex' v2.7.3 <23 July 2005>
 \epsfxsize=\dimen124
 \epsfysize=\dimen125
 \pspoints=\dimen126
-) (/usr/local/texlive/2009/texmf-dist/tex/latex/gloss/gloss.sty
+) (/opt/local/share/texmf-texlive-dist/tex/latex/gloss/gloss.sty
 Package: gloss 2002/07/26 1.5.2 Gloss package
 \glosshang=\skip55
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/tools/array.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/tools/array.sty
 Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
 \col@sep=\dimen127
 \extrarowheight=\dimen128
@@ -642,7 +646,7 @@ Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
 \extratabsurround=\skip56
 \backup@length=\skip57
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/tools/longtable.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/tools/longtable.sty
 Package: longtable 2004/02/01 v4.11 Multi-page Table package (DPC)
 \LTleft=\skip58
 \LTright=\skip59
@@ -660,27 +664,27 @@ Package: longtable 2004/02/01 v4.11 Multi-page Table package (DPC)
 \c@LT@chunks=\count121
 \LT@p@ftn=\toks30
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/multirow/multirow.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/multirow/multirow.sty
 \bigstrutjot=\dimen130
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/amsmath/amsmath.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2000/07/18 v2.13 AMS math features
 \@mathmargin=\skip62
 
 For additional information on amsmath, use the `?' option.
-(/usr/local/texlive/2009/texmf-dist/tex/latex/amsmath/amstext.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2000/06/29 v2.01
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/amsmath/amsgen.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0
 \@emptytoks=\toks31
 \ex@=\dimen131
 ))
-(/usr/local/texlive/2009/texmf-dist/tex/latex/amsmath/amsbsy.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d
 \pmbraise@=\dimen132
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/amsmath/amsopn.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count122
@@ -721,7 +725,7 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
 LaTeX Info: Redefining \[ on input line 2666.
 LaTeX Info: Redefining \] on input line 2667.
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/amscls/amsthm.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/amscls/amsthm.sty
 Package: amsthm 2004/08/06 v2.20
 \thm@style=\toks36
 \thm@bodyfont=\toks37
@@ -733,17 +737,17 @@ Package: amsthm 2004/08/06 v2.20
 \thm@headsep=\skip67
 \dth@everypar=\toks41
 )
-(/usr/local/texlive/2009/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2009/06/22 v3.00
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 96.
 ))
-(/usr/local/texlive/2009/texmf-dist/tex/latex/slashbox/slashbox.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/slashbox/slashbox.sty
 slashbox style by K.Yasuoka, May 1993.
 \@slashboxa=\box43
 \@slashboxb=\box44
@@ -752,7 +756,7 @@ slashbox style by K.Yasuoka, May 1993.
 \@slashboxht=\count135
 \@slashsepl=\dimen140
 \@slashsepr=\dimen141
-) (/usr/local/texlive/2009/texmf-dist/tex/latex/rotating/rotating.sty
+) (/opt/local/share/texmf-texlive-dist/tex/latex/rotating/rotating.sty
 Package: rotating 2009/03/28 v2.16a rotated objects in LaTeX
 \c@r@tfl@t=\count136
 \rotFPtop=\skip68
@@ -789,7 +793,7 @@ LaTeX Font Info:    ... okay on input line 200.
 LaTeX Font Info:    Try loading font information for T1+cmss on input line 200.
 
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/base/t1cmss.fd
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/t1cmss.fd
 File: t1cmss.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 Package minitoc(hints) Info: I0049
@@ -816,7 +820,7 @@ Package minitoc(hints) Warning: W0023
 (minitoc(hints))                --- It may be the consequence 
 (minitoc(hints))                of loading the ``hyperref'' package.
 
-(/usr/local/texlive/2009/texmf-dist/tex/context/base/supp-pdf.mkii
+(/opt/local/share/texmf-texlive-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count138
 \scratchdimen=\dimen142
@@ -830,10 +834,10 @@ Package minitoc(hints) Warning: W0023
 \everyMPtoPDFconversion=\toks44
 )
 Package hyperref Info: Link coloring ON on input line 200.
- (/usr/local/texlive/2009/texmf-dist/tex/latex/hyperref/nameref.sty
+ (/opt/local/share/texmf-texlive-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/oberdiek/refcount.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/oberdiek/refcount.sty
 Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
 )
 \c@section@level=\count143
@@ -896,24 +900,24 @@ File: Images/DI-UM.png Graphic file (type png)
  <use Images/DI-UM.png>
 LaTeX Font Info:    Try loading font information for U+msa on input line 223.
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/amsfonts/umsa.fd
+(/opt/local/share/texmf-texlive-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 223.
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/amsfonts/umsb.fd
+(/opt/local/share/texmf-texlive-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 ) [1
 
 
-Non-PDF special ignored!{/usr/local/texlive/2009/texmf-var/fonts/map/pdftex/upd
-map/pdftex.map} <./Images/DI-UM.png>]
+Non-PDF special ignored!{/opt/local/var/db/texmf/fonts/map/pdftex/updmap/pdftex
+.map} <./Images/DI-UM.png>]
 \openout2 = `abstract.aux'.
 
  (./abstract.tex
 LaTeX Font Info:    Try loading font information for T1+pag on input line 2.
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/t1pag.fd
+(/opt/local/share/texmf-texlive-dist/tex/latex/psnfss/t1pag.fd
 File: t1pag.fd 2001/06/04 font definitions for T1/pag.
 )
 LaTeX Font Info:    Font shape `T1/pag/b/n' in size <20.74> not available
@@ -1074,7 +1078,7 @@ Non-PDF special ignored!
 Non-PDF special ignored!] (./Relatorio.lof
 LaTeX Font Info:    Try loading font information for T1+cmtt on input line 27.
 
-(/usr/local/texlive/2009/texmf-dist/tex/latex/base/t1cmtt.fd
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 ))
 \tf@lof=\write8
@@ -1757,6 +1761,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 10--14
  []
 
 
+Overfull \hbox (1.78455pt too wide) in paragraph at lines 26--27
+\T1/cmss/m/n/10 Na fase ac-tual desta in-ter-face, o uti-lizador desta in-ter-f
+ace terá pela frente um menu prin-ci-pal (Figura [][]5.1[][]). 
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 26--27
 
  []
@@ -1998,12 +2008,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 12180 strings out of 493848
- 166507 string characters out of 3149207
- 557054 words of memory out of 3000000
- 14691 multiletter control sequences out of 15000+200000
+ 12184 strings out of 495061
+ 166783 string characters out of 3181965
+ 555539 words of memory out of 3000000
+ 14596 multiletter control sequences out of 15000+200000
  41676 words of font info for 80 fonts, out of 3000000 for 9000
- 714 hyphenation exceptions out of 8191
+ 28 hyphenation exceptions out of 8191
  38i,17n,58p,625b,1840s stack positions out of 5000i,500n,10000p,200000b,50000s
 pdfTeX warning (dest): name{Hfootnote.19} has been referenced but does not ex
 ist, replaced by a fixed one
@@ -2062,40 +2072,41 @@ pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exist
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist
 , replaced by a fixed one
 
-{/usr/local/texlive/2009/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/
-usr/local/texlive/2009/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texli
-ve/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texliv
-e/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/
-2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2
-009/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/200
-9/texmf-dist/fonts/type1/public/cm-super/sfbi0900.pfb></usr/local/texlive/2009/
-texmf-dist/fonts/type1/public/cm-super/sfbx0900.pfb></usr/local/texlive/2009/te
-xmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/local/texlive/2009/texm
-f-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2009/texmf-
-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2009/texmf-di
-st/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2009/texmf-dist
-/fonts/type1/public/cm-super/sfrm2074.pfb></usr/local/texlive/2009/texmf-dist/f
-onts/type1/public/cm-super/sfsi1000.pfb></usr/local/texlive/2009/texmf-dist/fon
-ts/type1/public/cm-super/sfso0700.pfb></usr/local/texlive/2009/texmf-dist/fonts
-/type1/public/cm-super/sfso1000.pfb></usr/local/texlive/2009/texmf-dist/fonts/t
-ype1/public/cm-super/sfso1440.pfb></usr/local/texlive/2009/texmf-dist/fonts/typ
-e1/public/cm-super/sfso1728.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1
-/public/cm-super/sfss0500.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/p
-ublic/cm-super/sfss0600.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/pub
-lic/cm-super/sfss0700.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/publi
-c/cm-super/sfss0800.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/
-cm-super/sfss1000.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm
--super/sfss2074.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-s
-uper/sfsx0900.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-sup
-er/sfsx1000.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-super
-/sfsx1200.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-super/s
-fsx1440.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-super/sfs
-x1728.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-super/sfsx2
-074.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-super/sfsx248
-8.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-super/sftt0800.
-pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/public/cm-super/sftt1000.pf
-b></usr/local/texlive/2009/texmf-dist/fonts/type1/urw/avantgar/uagd8a.pfb>
-Output written on Relatorio.pdf (58 pages, 1993310 bytes).
+{/opt/local/share/texmf-texlive-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{
+/opt/local/share/texmf-texlive-dist/fonts/enc/dvips/base/8r.enc}</opt/local/sha
+re/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></opt/local/sha
+re/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></opt/local/shar
+e/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></opt/local/shar
+e/texmf-texlive-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></opt/local/share
+/texmf-texlive-dist/fonts/type1/public/cm-super/sfbi0900.pfb></opt/local/share/
+texmf-texlive-dist/fonts/type1/public/cm-super/sfbx0900.pfb></opt/local/share/t
+exmf-texlive-dist/fonts/type1/public/cm-super/sfbx1000.pfb></opt/local/share/te
+xmf-texlive-dist/fonts/type1/public/cm-super/sfbx1200.pfb></opt/local/share/tex
+mf-texlive-dist/fonts/type1/public/cm-super/sfbx1440.pfb></opt/local/share/texm
+f-texlive-dist/fonts/type1/public/cm-super/sfrm1000.pfb></opt/local/share/texmf
+-texlive-dist/fonts/type1/public/cm-super/sfrm2074.pfb></opt/local/share/texmf-
+texlive-dist/fonts/type1/public/cm-super/sfsi1000.pfb></opt/local/share/texmf-t
+exlive-dist/fonts/type1/public/cm-super/sfso0700.pfb></opt/local/share/texmf-te
+xlive-dist/fonts/type1/public/cm-super/sfso1000.pfb></opt/local/share/texmf-tex
+live-dist/fonts/type1/public/cm-super/sfso1440.pfb></opt/local/share/texmf-texl
+ive-dist/fonts/type1/public/cm-super/sfso1728.pfb></opt/local/share/texmf-texli
+ve-dist/fonts/type1/public/cm-super/sfss0500.pfb></opt/local/share/texmf-texliv
+e-dist/fonts/type1/public/cm-super/sfss0600.pfb></opt/local/share/texmf-texlive
+-dist/fonts/type1/public/cm-super/sfss0700.pfb></opt/local/share/texmf-texlive-
+dist/fonts/type1/public/cm-super/sfss0800.pfb></opt/local/share/texmf-texlive-d
+ist/fonts/type1/public/cm-super/sfss1000.pfb></opt/local/share/texmf-texlive-di
+st/fonts/type1/public/cm-super/sfss2074.pfb></opt/local/share/texmf-texlive-dis
+t/fonts/type1/public/cm-super/sfsx0900.pfb></opt/local/share/texmf-texlive-dist
+/fonts/type1/public/cm-super/sfsx1000.pfb></opt/local/share/texmf-texlive-dist/
+fonts/type1/public/cm-super/sfsx1200.pfb></opt/local/share/texmf-texlive-dist/f
+onts/type1/public/cm-super/sfsx1440.pfb></opt/local/share/texmf-texlive-dist/fo
+nts/type1/public/cm-super/sfsx1728.pfb></opt/local/share/texmf-texlive-dist/fon
+ts/type1/public/cm-super/sfsx2074.pfb></opt/local/share/texmf-texlive-dist/font
+s/type1/public/cm-super/sfsx2488.pfb></opt/local/share/texmf-texlive-dist/fonts
+/type1/public/cm-super/sftt0800.pfb></opt/local/share/texmf-texlive-dist/fonts/
+type1/public/cm-super/sftt1000.pfb></opt/local/share/texmf-texlive-dist/fonts/t
+ype1/urw/avantgar/uagd8a.pfb>
+Output written on Relatorio.pdf (58 pages, 1993335 bytes).
 PDF statistics:
  918 PDF objects out of 1000 (max. 8388607)
  178 named destinations out of 1000 (max. 500000)

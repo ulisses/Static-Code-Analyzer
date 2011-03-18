@@ -23,6 +23,16 @@ module EnunciadoHelper
       array << [n,n]
     end
   end
+
+  def temps
+    array = Array.new
+    inicio = 0.1
+    while (inicio <= 4) do
+      array << [inicio,inicio]
+      inicio = (inicio + 0.1).round(1)
+    end
+    return array
+  end
   
   def languageIsOnEnunciado (language)
     @myLanguages.each do |myL|

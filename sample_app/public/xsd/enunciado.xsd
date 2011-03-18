@@ -15,6 +15,7 @@
                 <ed:element name="Titulo" type="ed:string"/>
                 <ed:element name="Descricao" type="ed:string"/>
                 <ed:element name="Func" type="ed:string"/>
+                <ed:element name="MaxExecTime" type="ed:float"/>
 
                 <ed:element name="Linguagens">
                     <ed:complexType>
