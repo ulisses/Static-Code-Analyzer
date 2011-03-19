@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.3.15)  14 MAR 2011 08:18
+=======
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live/MacPorts 2009_6) (format=pdflatex 2010.9.7)  14 MAR 2011 10:15
+>>>>>>> b8b31fa6097f069a3048c638eadd86bb5edf0ca0
 entering extended mode
  %&-line parsing enabled.
 **pres.tex
@@ -1276,10 +1280,17 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
+<<<<<<< HEAD
  19031 strings out of 493848
  312666 string characters out of 3149207
  567240 words of memory out of 3000000
  21713 multiletter control sequences out of 15000+200000
+=======
+ 19033 strings out of 495061
+ 311794 string characters out of 3181965
+ 565725 words of memory out of 3000000
+ 21616 multiletter control sequences out of 15000+200000
+>>>>>>> b8b31fa6097f069a3048c638eadd86bb5edf0ca0
  14406 words of font info for 57 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  45i,20n,67p,332b,1546s stack positions out of 5000i,500n,10000p,200000b,50000s
