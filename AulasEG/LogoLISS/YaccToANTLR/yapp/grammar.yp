@@ -47,11 +47,11 @@ sub init_lex{ join("", <>) ; }
 
 sub lex{
 	for($text){
-		print "apanhei<" . $text . ">\n";
-		s/^\s+//  ;
-		s/^([A-Z]+)//   and return ("STRING_TERMINAL", $1);
-		s/^([a-z]+)//   and return ("STRING_NON_TERMINAL", $1);
-		s/^([:;])//     and return ($1, $1);
+		s/^\s+//            ;
+		s/^([A-Z]+)//       and return ("STRING_TERMINAL", $1);
+		s/^([A-Z][a-z]+)//  and return ("STRING_NON_TERMINAL", $1);
+		s/^([:;])//         and return ($1, $1);
+		return ('',undef);
 		print STDERR "Erro: unknown char <$_>\n";
 	}
 }
