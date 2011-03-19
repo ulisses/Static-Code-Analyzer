@@ -1,0 +1,58 @@
+%token STRING_TERMINAL STRING_NON_TERMINAL
+
+%%
+production : nonTerminal ':' derivs ';'
+           ;
+derivs : deriv
+       | derivs deriv
+       ;
+deriv : terminal
+      | nonTerminal
+      ;
+terminal : STRING_TERMINAL
+         ;
+nonTerminal : STRING_NON_TERMINAL
+            ;
+
+%%
+package main;
+
+our($debug);
+
+my $parser=new YaccToANTLR();
+my $text = init_lex();
+
+if($debug){testlex(); exit 0;}
+
+my $value=$parser->YYParse(yylex => \&lex, yyerror => \&yyerror);
+
+sub yyerror {
+	print  STDERR "Syntax Error:";
+	if ($_[0]->YYCurtok) {
+		printf STDERR (' a "%s" (%s) was found where %s was expected'."\n",
+		$_[0]->YYCurtok, $_[0]->YYCurval, $_[0]->YYExpect)
+	}
+	else{ print STDERR "Expecting one of ",join(", ",$_[0]->YYExpect),"\n";}
+}
+
+sub testlex{
+	my ($t,$e)=lex();
+	while($t){
+		print "T=$t;V=$e\n";
+		($t,$e)=lex();
+	}
+}
+
+sub init_lex{ join("", <>) ; }
+
+sub lex{
+	for($text){
+		print "apanhei<" . $text . ">\n";
+		s/^\s+//  ;
+		s/^([A-Z]+)//   and return ("STRING_TERMINAL", $1);
+		s/^([a-z]+)//   and return ("STRING_NON_TERMINAL", $1);
+		s/^([:;])//     and return ($1, $1);
+		print STDERR "Erro: unknown char <$_>\n";
+	}
+}
+
