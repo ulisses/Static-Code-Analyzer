@@ -274,8 +274,7 @@ class TentativasController < ApplicationController
     exec = Thread.new do
       out = `#{execString} #{input}`
     end
-    @erros+= "[" + out + "]"
-        @erros+= "[" + bateria.output + "]"
+
     #thread que conta x segundos e dps termina a execucao do programa
     timer = Thread.new do
       sleep @enunciado.maxTempExec
@@ -299,6 +298,9 @@ class TentativasController < ApplicationController
       return false
     end
     
+    @erros+= "[" + out + "]"
+        @erros+= "[" + bateria.output + "]"
+        
     #timestamp
     t = DateTime.now
     t = t.to_s(:number)
