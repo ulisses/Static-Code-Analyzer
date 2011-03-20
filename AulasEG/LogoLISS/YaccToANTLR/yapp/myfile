@@ -1,0 +1,108 @@
+%{
+my @nonTerms = ();
+%}
+
+%token STRING_TERMINAL STRING_NON_TERMINAL SEPARATOR
+
+%%
+productions : production             { return $_[1]; }
+            | productions production {
+                                       push @{$_[1]},@{$_[2]};
+                                       return $_[1];
+                                     }
+
+            ;
+
+production  : nonTerminal ':' derivs ';' { return [ { $_[1] => $_[3] } ]; }
+            ;
+
+derivs      : nts            { return [$_[1]]; }
+            | derivs '|' nts {
+                               push @{$_[1]},$_[3];
+                               return $_[1];
+			                 }
+            | '|' nts        { return [$_[2]]; }
+            | '|'            { return []; }
+            ;
+nts         : nt     { return $_[1]; }
+            | nts nt {
+                       push @{$_[1]},@{$_[2]};
+					   return $_[1];
+                     }
+            ;
+nt          : terminal    {
+                            return [ { $_[1] => 'terminal' } ];
+                          }
+            | nonTerminal {
+                            return [ { $_[1] => 'nonTerminal' } ];
+                          }
+            | sep         {
+                            return [ { $_[1] => 'sep' } ];
+                          }
+            ;
+terminal    : STRING_TERMINAL     {
+                                    return $_[1];
+                                  }
+            ;
+nonTerminal : STRING_NON_TERMINAL {
+                                    return $_[1];
+                                  }
+            ;
+sep         : SEPARATOR           {
+                                    return $_[1];
+                                  }
+            ;
+
+%%
+package main;
+use Data::Dumper;
+
+our($debug);
+
+#$debug = 1;
+
+my $parser=new YaccToANTLR();
+my $text = init_lex();
+
+if($debug){testlex(); exit 0;}
+
+my $value=$parser->YYParse(yylex => \&lex, yyerror => \&yyerror);
+
+sub yyerror {
+    print  STDERR "Syntax Error:";
+    if ($_[0]->YYCurtok) {
+        printf STDERR (' a "%s" (%s) was found where "%s" was expected'."\n",
+        $_[0]->YYCurtok, $_[0]->YYCurval, $_[0]->YYExpect)
+    }
+    else{ print STDERR "Expecting one of ",join(", ",$_[0]->YYExpect),"\n";}
+}
+
+sub testlex{
+    my ($t,$e)=lex();
+    while($t){
+        print "T=$t V=$e\n";
+        ($t,$e)=lex();
+    }
+}
+
+sub init_lex{ join("", <>) ; }
+
+sub lex {
+    for($text){
+        s/^[ \t\n\r]+//          ;
+        s/^([A-Z_]\w*[a-z_])//  and return ("STRING_NON_TERMINAL", $1);
+        s/^([A-Z]+)//     and return ("STRING_TERMINAL", $1);
+        s/^([:;|])//       and return ($1, $1);
+        s/^(['"]\W['"])//         and return ("SEPARATOR", $1);
+
+        return ('',undef);
+        print STDERR "Erro: unknown char <$_>\n";
+    }
+}
+
+sub main {
+    print Dumper $value;
+}
+
+main();
+
