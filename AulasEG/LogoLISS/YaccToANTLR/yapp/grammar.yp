@@ -1,31 +1,49 @@
+%{
+my $nonTerm;
+my $sep;
+my $terminal;
+my @nonTerms = ();
+%}
+
 %token STRING_TERMINAL STRING_NON_TERMINAL SEPARATOR
 
 %%
-productions : production
-            | productions production
-			;
+productions : production             {
+                                     }
+            | productions production {
+                                     }
+            ;
 
-production : nonTerminal ':' derivs ';' { print $_[1] . "\n"; }
-           ;
+production  : nonTerminal ':' derivs ';' {
+                                           push(@nonTerms, $_[0]->{'nonTerminal'});
+                                         }
+            ;
 
-derivs : nts
-       | derivs '|' nts
-       | '|' nts
-	   | '|'
-	   ;
-nts : nt
-    | nts nt
-	;
-nt : terminal
-   | nonTerminal
-   | sep
-   ;
-terminal : STRING_TERMINAL
-         ;
+derivs      : nts
+            | derivs '|' nts
+            | '|' nts
+            | '|'
+            ;
+nts         : nt
+            | nts nt
+            ;
+nt          : terminal    {
+                            return { 'terminal' => $_[1] } ;
+                          }
+            | nonTerminal {
+                            return { 'nonTerminal' => $_[1] } ;
+                          }
+            | sep         {
+                            return { 'sep' => $_[1] } ;
+                          }
+            ;
+terminal    : STRING_TERMINAL
+            ;
 nonTerminal : STRING_NON_TERMINAL
             ;
-sep : SEPARATOR
-    ;
+sep         : SEPARATOR
+            ;
+
 %%
 package main;
 
@@ -41,34 +59,40 @@ if($debug){testlex(); exit 0;}
 my $value=$parser->YYParse(yylex => \&lex, yyerror => \&yyerror);
 
 sub yyerror {
-	print  STDERR "Syntax Error:";
-	if ($_[0]->YYCurtok) {
-		printf STDERR (' a "%s" (%s) was found where "%s" was expected'."\n",
-		$_[0]->YYCurtok, $_[0]->YYCurval, $_[0]->YYExpect)
-	}
-	else{ print STDERR "Expecting one of ",join(", ",$_[0]->YYExpect),"\n";}
+    print  STDERR "Syntax Error:";
+    if ($_[0]->YYCurtok) {
+        printf STDERR (' a "%s" (%s) was found where "%s" was expected'."\n",
+        $_[0]->YYCurtok, $_[0]->YYCurval, $_[0]->YYExpect)
+    }
+    else{ print STDERR "Expecting one of ",join(", ",$_[0]->YYExpect),"\n";}
 }
 
 sub testlex{
-	my ($t,$e)=lex();
-	while($t){
-		print "T=$t V=$e\n";
-		($t,$e)=lex();
-	}
+    my ($t,$e)=lex();
+    while($t){
+        print "T=$t V=$e\n";
+        ($t,$e)=lex();
+    }
 }
 
 sub init_lex{ join("", <>) ; }
 
 sub lex {
-	for($text){
-		s/^[ \t\n\r]+//          ;
-		s/^([A-Z_]\w*[a-z_])//  and return ("STRING_NON_TERMINAL", $1);
-		s/^([A-Z]+)//     and return ("STRING_TERMINAL", $1);
-		s/^([:;|])//       and return ($1, $1);
-		s/^(['"]\W['"])//         and return ("SEPARATOR", $1);
+    for($text){
+        s/^[ \t\n\r]+//          ;
+        s/^([A-Z_]\w*[a-z_])//  and return ("STRING_NON_TERMINAL", $1);
+        s/^([A-Z]+)//     and return ("STRING_TERMINAL", $1);
+        s/^([:;|])//       and return ($1, $1);
+        s/^(['"]\W['"])//         and return ("SEPARATOR", $1);
 
-		return ('',undef);
-		print STDERR "Erro: unknown char <$_>\n";
-	}
+        return ('',undef);
+        print STDERR "Erro: unknown char <$_>\n";
+    }
 }
+
+sub main {
+    print join("\n",@nonTerms);
+}
+
+main();
 

@@ -490,6 +490,12 @@ sub _Parse {
 #End of include--------------------------------------------------
 
 
+#line 1 "grammar.yp"
+
+my $nonTerm;
+my $sep;
+my $terminal;
+my @nonTerms = ();
 
 
 sub new {
@@ -661,16 +667,26 @@ sub new {
 		 '$start', 2, undef
 	],
 	[#Rule 1
-		 'productions', 1, undef
+		 'productions', 1,
+sub
+#line 11 "grammar.yp"
+{
+                                     }
 	],
 	[#Rule 2
-		 'productions', 2, undef
+		 'productions', 2,
+sub
+#line 13 "grammar.yp"
+{
+                                     }
 	],
 	[#Rule 3
 		 'production', 4,
 sub
-#line 8 "grammar.yp"
-{ print $_[1] . "\n"; }
+#line 17 "grammar.yp"
+{
+                                           push(@nonTerms, $_[0]->{'nonTerminal'});
+                                         }
 	],
 	[#Rule 4
 		 'derivs', 1, undef
@@ -691,13 +707,28 @@ sub
 		 'nts', 2, undef
 	],
 	[#Rule 10
-		 'nt', 1, undef
+		 'nt', 1,
+sub
+#line 30 "grammar.yp"
+{
+                            return { 'terminal' => $_[1] } ;
+                          }
 	],
 	[#Rule 11
-		 'nt', 1, undef
+		 'nt', 1,
+sub
+#line 33 "grammar.yp"
+{
+                            return { 'nonTerminal' => $_[1] } ;
+                          }
 	],
 	[#Rule 12
-		 'nt', 1, undef
+		 'nt', 1,
+sub
+#line 36 "grammar.yp"
+{
+                            return { 'sep' => $_[1] } ;
+                          }
 	],
 	[#Rule 13
 		 'terminal', 1, undef
@@ -713,7 +744,7 @@ sub
     bless($self,$class);
 }
 
-#line 29 "grammar.yp"
+#line 47 "grammar.yp"
 
 package main;
 
@@ -729,36 +760,42 @@ if($debug){testlex(); exit 0;}
 my $value=$parser->YYParse(yylex => \&lex, yyerror => \&yyerror);
 
 sub yyerror {
-	print  STDERR "Syntax Error:";
-	if ($_[0]->YYCurtok) {
-		printf STDERR (' a "%s" (%s) was found where "%s" was expected'."\n",
-		$_[0]->YYCurtok, $_[0]->YYCurval, $_[0]->YYExpect)
-	}
-	else{ print STDERR "Expecting one of ",join(", ",$_[0]->YYExpect),"\n";}
+    print  STDERR "Syntax Error:";
+    if ($_[0]->YYCurtok) {
+        printf STDERR (' a "%s" (%s) was found where "%s" was expected'."\n",
+        $_[0]->YYCurtok, $_[0]->YYCurval, $_[0]->YYExpect)
+    }
+    else{ print STDERR "Expecting one of ",join(", ",$_[0]->YYExpect),"\n";}
 }
 
 sub testlex{
-	my ($t,$e)=lex();
-	while($t){
-		print "T=$t V=$e\n";
-		($t,$e)=lex();
-	}
+    my ($t,$e)=lex();
+    while($t){
+        print "T=$t V=$e\n";
+        ($t,$e)=lex();
+    }
 }
 
 sub init_lex{ join("", <>) ; }
 
 sub lex {
-	for($text){
-		s/^[ \t\n\r]+//          ;
-		s/^([A-Z_]\w*[a-z_])//  and return ("STRING_NON_TERMINAL", $1);
-		s/^([A-Z]+)//     and return ("STRING_TERMINAL", $1);
-		s/^([:;|])//       and return ($1, $1);
-		s/^(['"]\W['"])//         and return ("SEPARATOR", $1);
+    for($text){
+        s/^[ \t\n\r]+//          ;
+        s/^([A-Z_]\w*[a-z_])//  and return ("STRING_NON_TERMINAL", $1);
+        s/^([A-Z]+)//     and return ("STRING_TERMINAL", $1);
+        s/^([:;|])//       and return ($1, $1);
+        s/^(['"]\W['"])//         and return ("SEPARATOR", $1);
 
-		return ('',undef);
-		print STDERR "Erro: unknown char <$_>\n";
-	}
+        return ('',undef);
+        print STDERR "Erro: unknown char <$_>\n";
+    }
 }
+
+sub main {
+    print join("\n",@nonTerms);
+}
+
+main();
 
 
 1;
