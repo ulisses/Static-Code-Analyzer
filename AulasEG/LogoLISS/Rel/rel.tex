@@ -190,7 +190,48 @@ Simples	:	('S'|'s')('I'|'i')('M'|'m')('P'|'p')('L'|'l')('E'|'e')('S'|'s')
 A resolução deste primeiro documento, trata de guardar todas as definições de expressões regulares e retorno de \emph{tokens} para duas estruturas \emph{hash} diferentes.
 Como foi explicado anteriormente, o \emph{parser} funciona de maneira diferente consoante o estado em que se encontra.\\
 
-Antes da primeira ocorrência do primeiro separador (o \texttt{\%\%}), guarda todas as definições para a \emph{hash} \texttt{definitions}. 
+Antes da primeira ocorrência do primeiro separador (o \texttt{\%\%}), guarda-se todas as definições para a \emph{hash} \texttt{definitions}. De seguida apresenta-se exemplos de 
+como o texto está no ficheiro \texttt{Lex} e o pedaço de código que guarda essa informação.\\
+
+\begin{code_txt}
+PROGRAM         [Pp][Rr][Oo][Gg][Rr][Aa][Mm]
+DECLARATIONS    [Dd][Ee][Cc][Ll][Aa][Rr][Aa][Tt][Ii][Oo][Nn][Ss]
+STATEMENTS      [Ss][Tt][Aa][Tt][Ee][Mm][Ee][Nn][Tt][Ss]
+\%\%
+\end{code_txt}
+
+A variável \texttt{\$flag} representa o estado em que se encontra.\\
+
+\begin{code_c}
+        if(\$flag == 0){
+        \#       print "Definition State\n";
+                m/(\w+)\s+(.+)/g;
+                \$definitions{\$1} = \$2;
+
+        }
+\end{code_c}
+
+Finalizando esta primeira fase, seguia-se a procura do retorno de \emph{tokens}, que se guardariam na \emph{hash} \texttt{hashtokens}. Como geralmente se encontram as definições
+em vez das expressões regulares respectivas, procurou-se de imediato a expressão regular correspondente, visto que a sua definição de nada iria valer no processo final de transformação.
+O código respectivo para esta fase:\\
+
+\begin{code_c}
+        elsif(\$flag == 1){
+        \#       print "Token state\n"
+                m/([^\t\n]+)\s+(\S+)/g;
+                my \$aux = \$1;
+                my \$aux2 = \$2; 
+
+                if(\$aux =~ /^{[A-Za-z]+}\$/){
+                        \$aux =~ s/^\{//g;
+                        \$aux =~ s/\}\$//g;
+                        \$hashtokens{\$aux} = \$definitions{\$aux};
+                }
+                print "RE: \$aux -> SEMANTICA: \$aux2 \n";
+        }
+\end{code_c}
+
+O passo final de transformar as ers de \texttt{Lex} para a syntax \texttt{AntLR} ainda não foi concluído.
 
 \subsection{Gramática}
 O problema de tentar traduzir gramáticas \textbf{LALR} para \textbf{LL} não é recente, mas também não é um problema trivial. Tendo isto em mente e motivados pela proposta
