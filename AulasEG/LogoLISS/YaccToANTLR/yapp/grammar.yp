@@ -5,61 +5,57 @@ my @nonTerms = ();
 %token STRING_TERMINAL STRING_NON_TERMINAL SEPARATOR
 
 %%
-productions : production             {
-                                     }
+productions : production             { return $_[1]; }
             | productions production {
+                                       push @{$_[1]},@{$_[2]};
+                                       return $_[1];
                                      }
+
             ;
 
-production  : nonTerminal ':' derivs ';' {
-                                         }
+production  : nonTerminal ':' derivs ';' { return [ { $_[1] => $_[3] } ]; }
             ;
 
-derivs      : nts            {
-							   use Data::Dumper; print Dumper $_[1];
-							 }
+derivs      : nts            { return [$_[1]]; }
             | derivs '|' nts {
-							   use Data::Dumper; print Dumper $_[3];
+                               push @{$_[1]},$_[3];
+                               return $_[1];
 			                 }
-            | '|' nts        {
-							   use Data::Dumper; print Dumper $_[2];
-			                 }
-            | '|'            {
-			                 }
+            | '|' nts        { return [$_[2], undef]; }
+            | '|'            { return [undef]; }
             ;
-nts         : nt     {
-					   return $_[1];
-                     }
+nts         : nt     { return $_[1]; }
             | nts nt {
                        push @{$_[1]},@{$_[2]};
 					   return $_[1];
                      }
             ;
 nt          : terminal    {
-                            return [{ 'terminal' => $_[1] }] ;
+                            return [ { $_[1] => 'terminal' } ];
                           }
             | nonTerminal {
-                            return [{ 'nonTerminal' => $_[1] }] ;
+                            return [ { $_[1] => 'nonTerminal' } ];
                           }
             | sep         {
-                            return [{ 'sep' => $_[1] }] ;
+                            return [ { $_[1] => 'sep' } ];
                           }
             ;
 terminal    : STRING_TERMINAL     {
-                                    return $_[1] ;
+                                    return $_[1];
                                   }
             ;
 nonTerminal : STRING_NON_TERMINAL {
-                                    return $_[1] ;
+                                    return $_[1];
                                   }
             ;
 sep         : SEPARATOR           {
-                                    return $_[1] ;
+                                    return $_[1];
                                   }
             ;
 
 %%
 package main;
+use Data::Dumper;
 
 our($debug);
 
@@ -105,7 +101,7 @@ sub lex {
 }
 
 sub main {
-    print join("\n",@nonTerms);
+    print Dumper $value;
 }
 
 main();
