@@ -502,118 +502,156 @@ sub new {
 [
 	{#State 0
 		ACTIONS => {
-			'STRING_NON_TERMINAL' => 1
+			'STRING_NON_TERMINAL' => 2
 		},
 		GOTOS => {
-			'production' => 2,
-			'nonTerminal' => 3
+			'productions' => 1,
+			'production' => 3,
+			'nonTerminal' => 4
 		}
 	},
 	{#State 1
-		DEFAULT => -11
+		ACTIONS => {
+			'' => 5,
+			'STRING_NON_TERMINAL' => 2
+		},
+		GOTOS => {
+			'production' => 6,
+			'nonTerminal' => 4
+		}
 	},
 	{#State 2
-		ACTIONS => {
-			'' => 4
-		}
+		DEFAULT => -14
 	},
 	{#State 3
-		ACTIONS => {
-			":" => 5
-		}
-	},
-	{#State 4
-		DEFAULT => 0
-	},
-	{#State 5
-		ACTIONS => {
-			"|" => 8,
-			'STRING_TERMINAL' => 6,
-			'STRING_NON_TERMINAL' => 1,
-			'SEPARATOR' => 14
-		},
-		GOTOS => {
-			'sep' => 9,
-			'terminal' => 10,
-			'nonTerminal' => 11,
-			'nts' => 13,
-			'derivs' => 12,
-			'nt' => 7
-		}
-	},
-	{#State 6
-		DEFAULT => -10
-	},
-	{#State 7
-		DEFAULT => -5
-	},
-	{#State 8
-		DEFAULT => -4
-	},
-	{#State 9
-		DEFAULT => -9
-	},
-	{#State 10
-		DEFAULT => -7
-	},
-	{#State 11
-		DEFAULT => -8
-	},
-	{#State 12
-		ACTIONS => {
-			"|" => 16,
-			";" => 15
-		}
-	},
-	{#State 13
-		ACTIONS => {
-			'STRING_TERMINAL' => 6,
-			'STRING_NON_TERMINAL' => 1,
-			'SEPARATOR' => 14
-		},
-		DEFAULT => -2,
-		GOTOS => {
-			'sep' => 9,
-			'terminal' => 10,
-			'nonTerminal' => 11,
-			'nt' => 17
-		}
-	},
-	{#State 14
-		DEFAULT => -12
-	},
-	{#State 15
 		DEFAULT => -1
 	},
-	{#State 16
+	{#State 4
 		ACTIONS => {
-			'STRING_TERMINAL' => 6,
-			'STRING_NON_TERMINAL' => 1,
-			'SEPARATOR' => 14
-		},
-		GOTOS => {
-			'sep' => 9,
-			'terminal' => 10,
-			'nonTerminal' => 11,
-			'nts' => 18,
-			'nt' => 7
+			":" => 7
 		}
 	},
+	{#State 5
+		DEFAULT => 0
+	},
+	{#State 6
+		DEFAULT => -2
+	},
+	{#State 7
+		ACTIONS => {
+			"|" => 10,
+			'STRING_TERMINAL' => 8,
+			'STRING_NON_TERMINAL' => 2,
+			'SEPARATOR' => 16
+		},
+		GOTOS => {
+			'sep' => 11,
+			'terminal' => 12,
+			'nonTerminal' => 13,
+			'nts' => 15,
+			'derivs' => 14,
+			'nt' => 9
+		}
+	},
+	{#State 8
+		DEFAULT => -13
+	},
+	{#State 9
+		DEFAULT => -8
+	},
+	{#State 10
+		ACTIONS => {
+			'STRING_TERMINAL' => 8,
+			'STRING_NON_TERMINAL' => 2,
+			'SEPARATOR' => 16
+		},
+		DEFAULT => -7,
+		GOTOS => {
+			'sep' => 11,
+			'terminal' => 12,
+			'nonTerminal' => 13,
+			'nts' => 17,
+			'nt' => 9
+		}
+	},
+	{#State 11
+		DEFAULT => -12
+	},
+	{#State 12
+		DEFAULT => -10
+	},
+	{#State 13
+		DEFAULT => -11
+	},
+	{#State 14
+		ACTIONS => {
+			"|" => 19,
+			";" => 18
+		}
+	},
+	{#State 15
+		ACTIONS => {
+			'STRING_TERMINAL' => 8,
+			'STRING_NON_TERMINAL' => 2,
+			'SEPARATOR' => 16
+		},
+		DEFAULT => -4,
+		GOTOS => {
+			'sep' => 11,
+			'terminal' => 12,
+			'nonTerminal' => 13,
+			'nt' => 20
+		}
+	},
+	{#State 16
+		DEFAULT => -15
+	},
 	{#State 17
-		DEFAULT => -6
+		ACTIONS => {
+			'STRING_TERMINAL' => 8,
+			'STRING_NON_TERMINAL' => 2,
+			'SEPARATOR' => 16
+		},
+		DEFAULT => -6,
+		GOTOS => {
+			'sep' => 11,
+			'terminal' => 12,
+			'nonTerminal' => 13,
+			'nt' => 20
+		}
 	},
 	{#State 18
+		DEFAULT => -3
+	},
+	{#State 19
 		ACTIONS => {
-			'STRING_TERMINAL' => 6,
-			'STRING_NON_TERMINAL' => 1,
-			'SEPARATOR' => 14
+			'STRING_TERMINAL' => 8,
+			'STRING_NON_TERMINAL' => 2,
+			'SEPARATOR' => 16
 		},
-		DEFAULT => -3,
 		GOTOS => {
-			'sep' => 9,
-			'terminal' => 10,
-			'nonTerminal' => 11,
-			'nt' => 17
+			'sep' => 11,
+			'terminal' => 12,
+			'nonTerminal' => 13,
+			'nts' => 21,
+			'nt' => 9
+		}
+	},
+	{#State 20
+		DEFAULT => -9
+	},
+	{#State 21
+		ACTIONS => {
+			'STRING_TERMINAL' => 8,
+			'STRING_NON_TERMINAL' => 2,
+			'SEPARATOR' => 16
+		},
+		DEFAULT => -5,
+		GOTOS => {
+			'sep' => 11,
+			'terminal' => 12,
+			'nonTerminal' => 13,
+			'nt' => 20
 		}
 	}
 ],
@@ -623,39 +661,51 @@ sub new {
 		 '$start', 2, undef
 	],
 	[#Rule 1
-		 'production', 4, undef
+		 'productions', 1, undef
 	],
 	[#Rule 2
-		 'derivs', 1, undef
+		 'productions', 2, undef
 	],
 	[#Rule 3
-		 'derivs', 3, undef
+		 'production', 4,
+sub
+#line 8 "grammar.yp"
+{ print $_[1] . "\n"; }
 	],
 	[#Rule 4
 		 'derivs', 1, undef
 	],
 	[#Rule 5
-		 'nts', 1, undef
+		 'derivs', 3, undef
 	],
 	[#Rule 6
-		 'nts', 2, undef
+		 'derivs', 2, undef
 	],
 	[#Rule 7
-		 'nt', 1, undef
+		 'derivs', 1, undef
 	],
 	[#Rule 8
-		 'nt', 1, undef
+		 'nts', 1, undef
 	],
 	[#Rule 9
-		 'nt', 1, undef
+		 'nts', 2, undef
 	],
 	[#Rule 10
-		 'terminal', 1, undef
+		 'nt', 1, undef
 	],
 	[#Rule 11
-		 'nonTerminal', 1, undef
+		 'nt', 1, undef
 	],
 	[#Rule 12
+		 'nt', 1, undef
+	],
+	[#Rule 13
+		 'terminal', 1, undef
+	],
+	[#Rule 14
+		 'nonTerminal', 1, undef
+	],
+	[#Rule 15
 		 'sep', 1, undef
 	]
 ],
@@ -663,13 +713,13 @@ sub new {
     bless($self,$class);
 }
 
-#line 24 "grammar.yp"
+#line 29 "grammar.yp"
 
 package main;
 
 our($debug);
 
-$debug = 1;
+#$debug = 1;
 
 my $parser=new YaccToANTLR();
 my $text = init_lex();
@@ -681,7 +731,7 @@ my $value=$parser->YYParse(yylex => \&lex, yyerror => \&yyerror);
 sub yyerror {
 	print  STDERR "Syntax Error:";
 	if ($_[0]->YYCurtok) {
-		printf STDERR (' a "%s" (%s) was found where %s was expected'."\n",
+		printf STDERR (' a "%s" (%s) was found where "%s" was expected'."\n",
 		$_[0]->YYCurtok, $_[0]->YYCurval, $_[0]->YYExpect)
 	}
 	else{ print STDERR "Expecting one of ",join(", ",$_[0]->YYExpect),"\n";}
@@ -699,7 +749,7 @@ sub init_lex{ join("", <>) ; }
 
 sub lex {
 	for($text){
-		s/^\s+//          ;
+		s/^[ \t\n\r]+//          ;
 		s/^([A-Z_]\w*[a-z_])//  and return ("STRING_NON_TERMINAL", $1);
 		s/^([A-Z]+)//     and return ("STRING_TERMINAL", $1);
 		s/^([:;|])//       and return ($1, $1);

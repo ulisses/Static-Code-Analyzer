@@ -1,2 +1,1 @@
-liss : nonterm TERM ;
-
+Liss : Nonterm TERM ;

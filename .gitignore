@@ -1,2 +1,10 @@
 *.*~
 *~
+*.hi
+*.o
+*.pdf
+*.tar.gz
+*.zip
+*.rar
+*.swp
+

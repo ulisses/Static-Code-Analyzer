@@ -1,11 +1,16 @@
 %token STRING_TERMINAL STRING_NON_TERMINAL SEPARATOR
 
 %%
-production : nonTerminal ':' derivs ';'
+productions : production
+            | productions production
+			;
+
+production : nonTerminal ':' derivs ';' { print $_[1] . "\n"; }
            ;
 
 derivs : nts
        | derivs '|' nts
+       | '|' nts
 	   | '|'
 	   ;
 nts : nt
@@ -26,7 +31,7 @@ package main;
 
 our($debug);
 
-$debug = 1;
+#$debug = 1;
 
 my $parser=new YaccToANTLR();
 my $text = init_lex();
@@ -38,7 +43,7 @@ my $value=$parser->YYParse(yylex => \&lex, yyerror => \&yyerror);
 sub yyerror {
 	print  STDERR "Syntax Error:";
 	if ($_[0]->YYCurtok) {
-		printf STDERR (' a "%s" (%s) was found where %s was expected'."\n",
+		printf STDERR (' a "%s" (%s) was found where "%s" was expected'."\n",
 		$_[0]->YYCurtok, $_[0]->YYCurval, $_[0]->YYExpect)
 	}
 	else{ print STDERR "Expecting one of ",join(", ",$_[0]->YYExpect),"\n";}
@@ -56,7 +61,7 @@ sub init_lex{ join("", <>) ; }
 
 sub lex {
 	for($text){
-		s/^\s+//          ;
+		s/^[ \t\n\r]+//          ;
 		s/^([A-Z_]\w*[a-z_])//  and return ("STRING_NON_TERMINAL", $1);
 		s/^([A-Z]+)//     and return ("STRING_TERMINAL", $1);
 		s/^([:;|])//       and return ($1, $1);
