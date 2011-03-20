@@ -1,0 +1,196 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{graphics}
+\usepackage{alltt}
+\usepackage[portuges]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{color}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{babel}
+\usepackage{hyperref}
+\usepackage{t1enc}
+%\usepackage{aeguill}
+\usepackage{varioref}
+\usepackage{fancyvrb}
+\usepackage{color}
+\usepackage{cite}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{harvard}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{thumbpdf}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{alltt}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{color}
+\usepackage{url}
+\usepackage{epsf}
+\usepackage{listings}
+\usepackage[refpages]{gloss}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{slashbox}
+\usepackage{rotating}
+
+\setlength{\textwidth}{16.5cm}
+\setlength{\textheight}{24cm}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{0pt plus 1pt}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{-1.1cm}
+\setlength{\headsep}{20pt}
+\setlength{\columnsep}{1.5pc}
+\setlength\columnseprule{.4pt}
+\setlength\premulticols{6\baselineskip}
+\pagestyle{fancy}
+
+\definecolor{castanho_ulisses}{rgb}{0.71,0.33,0.14}
+\definecolor{gray_ulisses}{gray}{0.55}
+\definecolor{green_ulises}{rgb}{0.2,0.75,0}
+
+\lstdefinelanguage{C_ulisses}{
+	basicstyle=\ttfamily\scriptsize,
+    sensitive=true,
+	morecomment=[l][\color{gray_ulisses}\scriptsize]{//},
+	morecomment=[s][\color{gray_ulisses}\scriptsize]{/*}{*/},
+	morestring=[b]",
+	morestring=[b]',
+	stringstyle=\color{red},
+	showstringspaces=false,
+	numbers=left,
+	numberstyle=\tiny,
+	numberblanklines=true,
+	showspaces=false,
+	showtabs=false,
+	xleftmargin=-10pt,
+	xrightmargin=-20pt,
+	emph=
+	{[1]
+		return,printf,fprintf,if,else,scanf,sscanf,sprintf,malloc,
+		calloc,realloc,fgets,fputs,puts,system,strcmp,strstr,
+		strchr,exit,for,while,fclose,fopen,atoi,sizeof,sin,cos
+	},
+	emphstyle={[1]\color{blue}\textbf},
+	emph={[2]char,float,double,void,NULL,int,bool},
+	emphstyle={[2]\color{green_ulises}\textbf},
+	emph={[3]typedef, struct},
+	emphstyle={[3]\color{castanho_ulisses}\textbf}
+}
+
+\lstdefinelanguage{txt}
+{
+       basicstyle=\ttfamily\scriptsize,
+       showstringspaces=false,
+       numbers=left,
+       numberstyle=\tiny,
+       numberblanklines=true,
+       showspaces=false,
+       showtabs=false
+}
+\lstnewenvironment{code_txt}{\lstset{language=txt}}{}
+\lstnewenvironment{code_c}{\lstset{language=C_ulisses}}{}
+
+\lstnewenvironment{code_lex}
+{\textbf{Código Lex} \hspace{1cm} \hrulefill \lstset{language=txt}}
+{\hrule\smallskip}
+
+\title{\sf  Engenharia de Linguagens \\ Engenharia Gramatical \\
+\begin{tabular}{c}
+    \includegraphics[width=.1\textwidth]{stuff/uminho.jpg}
+    \includegraphics[width=.07\textwidth]{stuff/informatica.jpg}\\
+    {\small Universidade do Minho}, {\small MEI}\\
+    {\small Ano lectivo 2010/2011}\\
+    {\small Trabalho Prático}\\
+\end{tabular}
+}
+\author{
+    {\small José Pedro Silva - pg17628} \and
+    {\small Mário Ulisses Costa - pg15817} \and
+    {\small Pedro Faria - pg17684}}
+\date{{\small \today}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Transformação da gramática da linguagem \texttt{LogoLISS} feita em \texttt{Yacc} para \texttt{AntLR} 
+\end{abstract}
+
+\tableofcontents
+
+\newpage
+\section{Problema}
+A ideia deste trabalho seria implementar um programa que transformasse gramáticas em \texttt{Yacc} para \texttt{AntLR}. Para isso, escolheu-se fazer uma gramática em 
+\texttt{Yapp} ( um módulo de \texttt{Perl} próprio para implementação de gramáticas ) para tratar do ficheiro \texttt{.y} e um pequeno parser em \texttt{Perl} para retirar os 
+\emph{tokens} do fichero \texttt{.l}. \\
+
+Para testar, usou-se um trabalho realizado para a cadeira de Processamento de Linguagens lecionada no ano passado. 
+
+\section{Solução}
+
+As subsecções que se seguem referem-se à resolução para cada ficheiro pretendido, cada um contendo informação acerca da estrutura, das dificuldades e 
+do estado da implementação.
+
+\subsection{Lex}
+Neste documento, estão contidas os \emph{tokens} da linguagem, que serão necessários para a gramática em \texttt{AntLR}. Assim, decidiu-se criar um \texttt{script} em \texttt{Perl}
+que fizesse \emph{parse} desse ficheiro, de modo a devolver um ficheiro contendo os \emph{tokens} definidos no modo \texttt{AntLR} ou respectivas produções para não terminais.
+
+Encarou-se um documento em \texttt{Lex} como estando estruturado da seguinte forma:\\
+
+\begin{itemize}
+ \item Um cabeçalho, onde se encontram definições, \emph{flags} e outras informções relevantes.
+ \item O corpo do documento, divido, ou não, em estados. Cada estado contendo uma expressão regular (\textbf{er}) para fazer correspondência com o texto fornecido, as expressões
+ ordenadas de forma crescente consoante o tamanho do seu domínio.
+ \item Um terceiro espaço reservado, essencialmente, para funções.
+\end{itemize}
+
+Cada espaço encontra-se separado por \texttt{\%\%}, como se pode observar no seguinte pequeno exemplo.\\
+
+\begin{code_txt}
+IDENT           [a-zA-Z][a-zA-Z0-9]*
+
+\%\%
+
+{IDENT}                 {yylval.vals=(char*)strdup(yytext);return(IDENT);}
+" "|\n|\t               {;}
+
+\%\%
+
+int yywrap()
+{ return(1); }
+
+\end{code_txt}
+
+\paragraph{Dificuldades} foram encontrados para o \emph{parsing} deste ficheiro. Principalmente no facto de no ficheiro \texttt{.l} com que se trabalhou não ter definido 
+nenhum \emph{token} que fosse simplesmente uma palavra, sendo todos definidos como expressões regulares. Isso significa que não se poderia definir os \emph{tokens} em \texttt{AntLR}
+da forma mais simples, que seria:\\
+
+\begin{code_txt}
+tokens{
+	Simples = 'simples';
+}
+\end{code_txt}
+Esse modo não permite definir os \emph{tokens} como expressões regulares, sendo a sua definição como um símbolo não terminal:\\
+
+\begin{code_txt}
+Simples	:	('S'|'s')('I'|'i')('M'|'m')('P'|'p')('L'|'l')('E'|'e')('S'|'s')
+	;
+\end{code_txt}
+
+\paragraph{Outras dificuldades} foram as transformações das expressões regulares. A sua definição em \texttt{Lex} difere muito da sua definição em \texttt{AntLR}
+
+\subsubsection{Resolução}
+A resolução deste primeiro documento, trata de guardar todas as definições de expressões regulares e retorno de \emph{tokens} para duas estruturas \emph{hash} diferentes.
+Como foi explicado anteriormente, o \emph{parser} funciona de maneira diferente consoante o estado em que se encontra.\\
+
+Antes da primeira ocorrência do primeiro separador (o \texttt{\%\%}), guarda todas as definições para a \emph{hash} \texttt{definitions}. 
+
+
+\end{document}
