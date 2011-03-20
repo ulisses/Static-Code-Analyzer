@@ -192,5 +192,216 @@ Como foi explicado anteriormente, o \emph{parser} funciona de maneira diferente 
 
 Antes da primeira ocorrência do primeiro separador (o \texttt{\%\%}), guarda todas as definições para a \emph{hash} \texttt{definitions}. 
 
+\subsection{Gramática}
+O problema de tentar traduzir gramáticas \textbf{LALR} para \textbf{LL} não é recente, mas também não é um problema trivial. Tendo isto em mente e motivados pela proposta
+para este trabalho que nos foi lançada, decidimos tentarmos fazer o nosso próprio conversor.\\
+Começamos por investigar que tipo de regras seriam interessantes avaliar e verificar para este problema. Assim, conseguimos chegar com 5 regras, que nos parecem ser a chave
+para o problema, eventualmente existem mais regras, mas estas pareceram-nos ser as mais importantes. E foram estas que mais tempo dedicamos a compreender e analizar.
+
+\subsubsection{Regras}
+\begin{figure}[H]
+\begin{center}
+\begin{tabular}{|l|l|c|}\hline
+\textbf{LALR (BNF)} & \textbf{LL (EBNF)} & Nome da Regra\\\hline
+\begin{tabular}{ccl}
+vars & : & var\\
+    & | & vars var
+\end{tabular}
+&
+\begin{tabular}{ccl}
+vars & : & (var)$+$
+\end{tabular}
+&
+removeLeftRecursionPlus\\\hline
+\begin{tabular}{ccl}
+vars & : & \\
+    & | & vars var
+\end{tabular}
+&
+\begin{tabular}{ccl}
+vars & : & (var)$*$
+\end{tabular}
+&
+removeLeftRecursionTimes\\\hline
+\begin{tabular}{ccl}
+a & : & A b | A\\
+b & : & B a | B
+\end{tabular}
+&
+\begin{tabular}{ccl}
+a & : & A (B a | B) | A\\
+b & : & B a | B
+\end{tabular}
+&
+removeCircularRecursion\\\hline
+\begin{tabular}{ccl}
+a & : & A b | A c
+\end{tabular}
+&
+\begin{tabular}{ccl}
+a & : & A ( b | c )
+\end{tabular}
+&
+leftFactoring1\\\hline
+\begin{tabular}{ccl}
+a & : & b | c\\
+b & : & A d\\
+c & : & A e
+\end{tabular}
+&
+\begin{tabular}{ccl}
+a & : & A ( b | c )\\
+b & : & d\\
+c & : & e
+\end{tabular}
+&
+leftFactoring2\\\hline
+\end{tabular}
+\caption{Regras de conversão de \textbf{LALR} para \textbf{LL}}
+\end{center}
+\end{figure}
+
+Como podemos ver todas estas regras nos ajudam a fazer uma conversão automática entre estes dois tipos de gramáticas. Um pequena extensão poderia ser feita a ambas as regras
+de remoção da recursividade à esquerda:
+
+\begin{figure}[H]
+\begin{center}
+\begin{tabular}{|l|l|c|}\hline
+\textbf{LALR (BNF)} & \textbf{LL (EBNF)} & Nome da Regra\\\hline
+\begin{tabular}{ccl}
+vars & : & var\\
+    & | & vars a b c d e \ldots
+\end{tabular}
+&
+\begin{tabular}{ccl}
+vars & : & var (a b c d e \ldots)+
+\end{tabular}
+&
+removeLeftRecursionPlusExt\\\hline
+\begin{tabular}{ccl}
+vars & : & \\
+    & | & vars a b c d e \ldots
+\end{tabular}
+&
+\begin{tabular}{ccl}
+vars & : &  (a b c d e \ldots)*
+\end{tabular}
+&
+removeLeftRecursionTimesExt\\\hline
+\end{tabular}
+\caption{Regras para remoção da recursividade à esquerda extendidas}
+\end{center}
+\end{figure}
+
+\subsubsection{Implementação}
+Para a implementação desta parte do conversor decidimos usar o \textbf{yapp}, porque já temos algum avontade com a linguagem \textbf{Perl} e por já termos
+mexido neste modulo para outras cadeiras. \\
+A gramática que implementamos foi a seguinte:
+
+\begin{code_txt}
+productions : production             
+            | productions production 
+            ;
+
+production  : nonTerminal ':' derivs ';' 
+            ;
+
+derivs      : nts            
+            | derivs '|' nts 
+            | '|' nts        
+            | '|'            
+            ;
+nts         : nt     
+            | nts nt 
+            ;
+nt          : terminal    
+            | nonTerminal 
+            | sep         
+            ;
+terminal    : STRING_TERMINAL     
+            ;
+nonTerminal : STRING_NON_TERMINAL
+            ;
+sep         : SEPARATOR 
+            ;
+\end{code_txt}
+
+Esta foi a gramática que criamos para fazer parsing de uma cramática em \textbf{Yacc}.
+A gramática acima descrita com acções semânticas escritas em \textbf{Perl} ficaria da seguinte forma:
+
+\begin{code_txt}
+productions : production             { return $_[1]; }
+            | productions production {
+                                       push @{$_[1]},@{$_[2]};
+                                       return $_[1];
+                                     }
+
+            ;
+
+production  : nonTerminal ':' derivs ';' { return [ { $_[1] => $_[3] } ]; }
+            ;
+
+derivs      : nts            { return [$_[1]]; }
+            | derivs '|' nts {
+                               push @{$_[1]},$_[3];
+                               return $_[1];
+			                 }
+            | '|' nts        { return [ [ { 'epsilon' => 'epsilon' } ],$_[2]]; }
+            | '|'            { return [ { 'epsilon' => 'epsilon' } ]; }
+            ;
+nts         : nt     { return $_[1]; }
+            | nts nt {
+                       push @{$_[1]},@{$_[2]};
+					   return $_[1];
+                     }
+            ;
+nt          : terminal    {
+                            return [ { $_[1] => 'terminal' } ];
+                          }
+            | nonTerminal {
+                            return [ { $_[1] => 'nonTerminal' } ];
+                          }
+            | sep         {
+                            return [ { $_[1] => 'sep' } ];
+                          }
+            ;
+terminal    : STRING_TERMINAL     {
+                                    return $_[1];
+                                  }
+            ;
+nonTerminal : STRING_NON_TERMINAL {
+                                    return $_[1];
+                                  }
+            ;
+sep         : SEPARATOR           {
+                                    return $_[1];
+                                  }
+            ;
+\end{code_txt}
+
+Depois de executar este código conseguimos obter de forma estruturada a gramática do \textbf{Yacc}.\\
+Esta estrutura foi pensada para comportar uma gramática onde fosse fácil fazer cálculos sobre ela, como por exemplo a aplicação das regras atrás mencionadas.\\
+
+Esta estrutura é a seguinte (utilizando os tipos do \textbf{Haskell}):
+$$type~Grammar = [Production]$$
+
+$$type~Production = HashTable~ProductionName~[Derivation]$$
+
+$$type~Derivation = [HashTable~NTS~Type]$$
+
+$$type~Type = String$$
+
+$$type~NT = String$$
+
+Onde $Type$ pode ser do tipo $nonTerminal$, $terminal$ ou $separator$ e $NT$ representa o nome do não terminal, terminal ou separador.
+
+\section{Trabalho Futuro}
+Este trabalho, como já dissemos não é trivial de todo. Principalmente no que diz respeito à aplicação de regras nas estruturas de dados.\\
+No entanto já temos noção de como abordar este problema, precisando para isso de mais tempo para a sua conclusão.
+
+\section{Conclusão}
+Achamos este trabalho importantíssimo do ponto de vista de engenharia de linguagens, especialmente para transformação de programas. Consideramos até que deveriamos de continuar
+este trabalho e até explorar e discutir mais sobre esta problemática.
 
 \end{document}
+

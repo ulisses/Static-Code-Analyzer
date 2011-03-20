@@ -54,6 +54,7 @@ sep         : SEPARATOR           {
 
 %%
 package main;
+use List::Permutor;
 use Data::Dumper;
 
 our($debug);
@@ -106,16 +107,18 @@ sub main {
 		for my $prod_name (keys %production) {
 			my $list_productions = $production{$prod_name};
 			print "<" . $prod_name . ">" . "\n";
-			analyzeListProduction($prod_name,$list_productions);
+			removeLeftRecursionPlus($prod_name,$list_productions);
 		}
 	}
 }
 
-sub analyzeListProduction {
+sub removeLeftRecursionPlus {
 	my $prod_name = $_[0];
 	my $list_productions = $_[1];
 
-	print Dumper $list_productions;
+	#print Dumper $list_productions;
+	#my @list = my $perm = new List::Permutor @{$list_productions};
+	#print Dumper @list;
 	
 	for my $deriv (@{$list_productions}) {
 		for my $e (@{$deriv}) {
