@@ -1,5 +1,4 @@
 %{
-my @nonTerms = ();
 %}
 
 %token STRING_TERMINAL STRING_NON_TERMINAL SEPARATOR
@@ -21,8 +20,8 @@ derivs      : nts            { return [$_[1]]; }
                                push @{$_[1]},$_[3];
                                return $_[1];
 			                 }
-            | '|' nts        { return [$_[2], undef]; }
-            | '|'            { return [undef]; }
+            | '|' nts        { return [ [ { 'epsilon' => 'epsilon' } ],$_[2]]; }
+            | '|'            { return [ { 'epsilon' => 'epsilon' } ]; }
             ;
 nts         : nt     { return $_[1]; }
             | nts nt {
@@ -101,8 +100,57 @@ sub lex {
 }
 
 sub main {
-    print Dumper $value;
+    #print Dumper $value;
+	for my $elem ( @{$value} ) {
+		my %production = %{$elem};
+		for my $prod_name (keys %production) {
+			my $list_productions = $production{$prod_name};
+			print "<" . $prod_name . ">" . "\n";
+			analyzeListProduction($prod_name,$list_productions);
+		}
+	}
 }
+
+sub analyzeListProduction {
+	my $prod_name = $_[0];
+	my $list_productions = $_[1];
+
+	print Dumper $list_productions;
+	
+	for my $deriv (@{$list_productions}) {
+		for my $e (@{$deriv}) {
+			my %elem = %{$e};
+			if(exists $elem{$prod_name}) {
+				print "ENCONTREI UMA DERIVACAO COM O MEMO NOME K A PRODUCAO\n";
+			}
+		}
+	}
+	
+#	$list_productions =
+#		[
+#			[
+#				{
+#					'Declaration' => 'nonTerminal'
+#				}
+#			],
+#			[
+#				{
+#					'Declarations' => 'nonTerminal'
+#				},
+#				{
+#					'Declaration' => 'nonTerminal'
+#				}
+#			]
+#		];
+
+#	for my $deriv (@{$list_productions}) {
+#		#print "ANOTHER DERIV from $prod_name" . "\n" ;
+#		for my $nt (@{$deriv}) {
+#			#print Dumper $nt;
+#		}
+#	}
+}
+
 
 main();
 

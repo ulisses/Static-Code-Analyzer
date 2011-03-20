@@ -492,7 +492,6 @@ sub _Parse {
 
 #line 1 "grammar.yp"
 
-my @nonTerms = ();
 
 
 sub new {
@@ -666,13 +665,13 @@ sub new {
 	[#Rule 1
 		 'productions', 1,
 sub
-#line 8 "grammar.yp"
+#line 7 "grammar.yp"
 { return $_[1]; }
 	],
 	[#Rule 2
 		 'productions', 2,
 sub
-#line 9 "grammar.yp"
+#line 8 "grammar.yp"
 {
                                        push @{$_[1]},@{$_[2]};
                                        return $_[1];
@@ -681,19 +680,19 @@ sub
 	[#Rule 3
 		 'production', 4,
 sub
-#line 16 "grammar.yp"
+#line 15 "grammar.yp"
 { return [ { $_[1] => $_[3] } ]; }
 	],
 	[#Rule 4
 		 'derivs', 1,
 sub
-#line 19 "grammar.yp"
+#line 18 "grammar.yp"
 { return [$_[1]]; }
 	],
 	[#Rule 5
 		 'derivs', 3,
 sub
-#line 20 "grammar.yp"
+#line 19 "grammar.yp"
 {
                                push @{$_[1]},$_[3];
                                return $_[1];
@@ -702,25 +701,25 @@ sub
 	[#Rule 6
 		 'derivs', 2,
 sub
-#line 24 "grammar.yp"
-{ return [$_[2], undef]; }
+#line 23 "grammar.yp"
+{ return [ [ { 'epsilon' => 'epsilon' } ],$_[2]]; }
 	],
 	[#Rule 7
 		 'derivs', 1,
 sub
-#line 25 "grammar.yp"
-{ return [undef]; }
+#line 24 "grammar.yp"
+{ return [ { 'epsilon' => 'epsilon' } ]; }
 	],
 	[#Rule 8
 		 'nts', 1,
 sub
-#line 27 "grammar.yp"
+#line 26 "grammar.yp"
 { return $_[1]; }
 	],
 	[#Rule 9
 		 'nts', 2,
 sub
-#line 28 "grammar.yp"
+#line 27 "grammar.yp"
 {
                        push @{$_[1]},@{$_[2]};
 					   return $_[1];
@@ -729,7 +728,7 @@ sub
 	[#Rule 10
 		 'nt', 1,
 sub
-#line 33 "grammar.yp"
+#line 32 "grammar.yp"
 {
                             return [ { $_[1] => 'terminal' } ];
                           }
@@ -737,7 +736,7 @@ sub
 	[#Rule 11
 		 'nt', 1,
 sub
-#line 36 "grammar.yp"
+#line 35 "grammar.yp"
 {
                             return [ { $_[1] => 'nonTerminal' } ];
                           }
@@ -745,7 +744,7 @@ sub
 	[#Rule 12
 		 'nt', 1,
 sub
-#line 39 "grammar.yp"
+#line 38 "grammar.yp"
 {
                             return [ { $_[1] => 'sep' } ];
                           }
@@ -753,7 +752,7 @@ sub
 	[#Rule 13
 		 'terminal', 1,
 sub
-#line 43 "grammar.yp"
+#line 42 "grammar.yp"
 {
                                     return $_[1];
                                   }
@@ -761,7 +760,7 @@ sub
 	[#Rule 14
 		 'nonTerminal', 1,
 sub
-#line 47 "grammar.yp"
+#line 46 "grammar.yp"
 {
                                     return $_[1];
                                   }
@@ -769,7 +768,7 @@ sub
 	[#Rule 15
 		 'sep', 1,
 sub
-#line 51 "grammar.yp"
+#line 50 "grammar.yp"
 {
                                     return $_[1];
                                   }
@@ -779,7 +778,7 @@ sub
     bless($self,$class);
 }
 
-#line 56 "grammar.yp"
+#line 55 "grammar.yp"
 
 package main;
 use Data::Dumper;
@@ -828,8 +827,57 @@ sub lex {
 }
 
 sub main {
-    print Dumper $value;
+    #print Dumper $value;
+	for my $elem ( @{$value} ) {
+		my %production = %{$elem};
+		for my $prod_name (keys %production) {
+			my $list_productions = $production{$prod_name};
+			print "<" . $prod_name . ">" . "\n";
+			analyzeListProduction($prod_name,$list_productions);
+		}
+	}
 }
+
+sub analyzeListProduction {
+	my $prod_name = $_[0];
+	my $list_productions = $_[1];
+
+	print Dumper $list_productions;
+	
+	for my $deriv (@{$list_productions}) {
+		for my $e (@{$deriv}) {
+			my %elem = %{$e};
+			if(exists $elem{$prod_name}) {
+				print "ENCONTREI UMA DERIVACAO COM O MEMO NOME K A PRODUCAO\n";
+			}
+		}
+	}
+	
+#	$list_productions =
+#		[
+#			[
+#				{
+#					'Declaration' => 'nonTerminal'
+#				}
+#			],
+#			[
+#				{
+#					'Declarations' => 'nonTerminal'
+#				},
+#				{
+#					'Declaration' => 'nonTerminal'
+#				}
+#			]
+#		];
+
+#	for my $deriv (@{$list_productions}) {
+#		#print "ANOTHER DERIV from $prod_name" . "\n" ;
+#		for my $nt (@{$deriv}) {
+#			#print Dumper $nt;
+#		}
+#	}
+}
+
 
 main();
 
