@@ -682,69 +682,84 @@ sub
 sub
 #line 14 "grammar.yp"
 {
-                       #                    push(@nonTerms, $_[1]->{'nonTerminal'});
                                          }
 	],
 	[#Rule 4
-		 'derivs', 1, undef
+		 'derivs', 1,
+sub
+#line 18 "grammar.yp"
+{
+							   use Data::Dumper; print Dumper $_[1];
+							 }
 	],
 	[#Rule 5
-		 'derivs', 3, undef
+		 'derivs', 3,
+sub
+#line 21 "grammar.yp"
+{
+							   use Data::Dumper; print Dumper $_[3];
+			                 }
 	],
 	[#Rule 6
-		 'derivs', 2, undef
+		 'derivs', 2,
+sub
+#line 24 "grammar.yp"
+{
+							   use Data::Dumper; print Dumper $_[2];
+			                 }
 	],
 	[#Rule 7
-		 'derivs', 1, undef
+		 'derivs', 1,
+sub
+#line 27 "grammar.yp"
+{
+			                 }
 	],
 	[#Rule 8
 		 'nts', 1,
 sub
-#line 24 "grammar.yp"
+#line 30 "grammar.yp"
 {
-					   use Data::Dumper; print Dumper $_[1];
 					   return $_[1];
                      }
 	],
 	[#Rule 9
 		 'nts', 2,
 sub
-#line 28 "grammar.yp"
+#line 33 "grammar.yp"
 {
-                       my ($tipo) = keys %{$_[2]};
-                       $_[1]->{$tipo} = [] if (!exists $_[1]->{$tipo});
-                       push @{$_[1]->{$tipo}},@{$_[2]->{$tipo}};
+                       push @{$_[1]},@{$_[2]};
 					   return $_[1];
                      }
 	],
 	[#Rule 10
 		 'nt', 1,
 sub
-#line 35 "grammar.yp"
+#line 38 "grammar.yp"
 {
-                            return { 'terminal' => [$_[1]] } ;
+                            return [{ 'terminal' => $_[1] }] ;
                           }
 	],
 	[#Rule 11
 		 'nt', 1,
 sub
-#line 38 "grammar.yp"
+#line 41 "grammar.yp"
 {
-                            return { 'nonTerminal' => [$_[1]] } ;
+                            return [{ 'nonTerminal' => $_[1] }] ;
                           }
 	],
 	[#Rule 12
 		 'nt', 1,
 sub
-#line 41 "grammar.yp"
+#line 44 "grammar.yp"
 {
-                            return { 'sep' => [$_[1]] } ;
+                            return [{ 'sep' => [$_[1]] }] ;
                           }
 	],
 	[#Rule 13
 		 'terminal', 1,
 sub
-#line 45 "grammar.yp"
+#line 48 "grammar.yp"
 {
                                     return $_[1] ;
                                   }
@@ -752,7 +767,7 @@ sub
 	[#Rule 14
 		 'nonTerminal', 1,
 sub
-#line 49 "grammar.yp"
+#line 52 "grammar.yp"
 {
                                     return $_[1] ;
                                   }
@@ -760,7 +775,7 @@ sub
 	[#Rule 15
 		 'sep', 1,
 sub
-#line 53 "grammar.yp"
+#line 56 "grammar.yp"
 {
                                     return $_[1] ;
                                   }
@@ -770,7 +785,7 @@ sub
     bless($self,$class);
 }
 
-#line 58 "grammar.yp"
+#line 61 "grammar.yp"
 
 package main;
 
