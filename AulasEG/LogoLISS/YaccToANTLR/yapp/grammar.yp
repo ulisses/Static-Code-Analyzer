@@ -1,23 +1,32 @@
-%token STRING_TERMINAL STRING_NON_TERMINAL
+%token STRING_TERMINAL STRING_NON_TERMINAL SEPARATOR
 
 %%
 production : nonTerminal ':' derivs ';'
            ;
-derivs : deriv
-       | derivs deriv
-       ;
-deriv : terminal
-      | nonTerminal
-      ;
+
+derivs : nts
+       | derivs '|' nts
+	   | '|'
+	   ;
+nts : nt
+    | nts nt
+	;
+nt : terminal
+   | nonTerminal
+   | sep
+   ;
 terminal : STRING_TERMINAL
          ;
 nonTerminal : STRING_NON_TERMINAL
             ;
-
+sep : SEPARATOR
+    ;
 %%
 package main;
 
 our($debug);
+
+$debug = 1;
 
 my $parser=new YaccToANTLR();
 my $text = init_lex();
@@ -38,19 +47,21 @@ sub yyerror {
 sub testlex{
 	my ($t,$e)=lex();
 	while($t){
-		print "T=$t;V=$e\n";
+		print "T=$t V=$e\n";
 		($t,$e)=lex();
 	}
 }
 
 sub init_lex{ join("", <>) ; }
 
-sub lex{
+sub lex {
 	for($text){
-		s/^\s+//            ;
-		s/^([A-Z]+)//       and return ("STRING_TERMINAL", $1);
-		s/^([A-Z][a-z]+)//  and return ("STRING_NON_TERMINAL", $1);
-		s/^([:;])//         and return ($1, $1);
+		s/^\s+//          ;
+		s/^([A-Z_]\w*[a-z_])//  and return ("STRING_NON_TERMINAL", $1);
+		s/^([A-Z]+)//     and return ("STRING_TERMINAL", $1);
+		s/^([:;|])//       and return ($1, $1);
+		s/^(['"]\W['"])//         and return ("SEPARATOR", $1);
+
 		return ('',undef);
 		print STDERR "Erro: unknown char <$_>\n";
 	}

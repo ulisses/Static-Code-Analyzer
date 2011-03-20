@@ -1,2 +1,2 @@
-liss:nonterm TERMN;
+liss : nonterm TERM ;
 
