@@ -1,7 +1,4 @@
 %{
-my $nonTerm;
-my $sep;
-my $terminal;
 my @nonTerms = ();
 %}
 
@@ -15,33 +12,48 @@ productions : production             {
             ;
 
 production  : nonTerminal ':' derivs ';' {
-                                           push(@nonTerms, $_[0]->{'nonTerminal'});
+                       #                    push(@nonTerms, $_[1]->{'nonTerminal'});
                                          }
             ;
 
-derivs      : nts
-            | derivs '|' nts
-            | '|' nts
+derivs      : nts            { return $_[1]; }
+            | derivs '|' nts {
+			                 }
+            | '|' nts        {
+			                 }
             | '|'
             ;
-nts         : nt
-            | nts nt
+nts         : nt     {
+					   return $_[1];
+                     }
+            | nts nt {
+                       my ($tipo) = keys %{$_[2]};
+                       $_[1]->{$tipo} = [] if (!exists $_[1]->{$tipo});
+                       push @{$_[1]->{$tipo}},@{$_[2]->{$tipo}};
+					   return $_[1];
+                     }
             ;
 nt          : terminal    {
-                            return { 'terminal' => $_[1] } ;
+                            return { 'terminal' => [$_[1]] } ;
                           }
             | nonTerminal {
-                            return { 'nonTerminal' => $_[1] } ;
+                            return { 'nonTerminal' => [$_[1]] } ;
                           }
             | sep         {
-                            return { 'sep' => $_[1] } ;
+                            return { 'sep' => [$_[1]] } ;
                           }
             ;
-terminal    : STRING_TERMINAL
+terminal    : STRING_TERMINAL     {
+                                    return $_[1] ;
+                                  }
             ;
-nonTerminal : STRING_NON_TERMINAL
+nonTerminal : STRING_NON_TERMINAL {
+                                    return $_[1] ;
+                                  }
             ;
-sep         : SEPARATOR
+sep         : SEPARATOR           {
+                                    return $_[1] ;
+                                  }
             ;
 
 %%
