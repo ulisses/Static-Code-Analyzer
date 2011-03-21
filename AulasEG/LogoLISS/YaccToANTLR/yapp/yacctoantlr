@@ -523,7 +523,7 @@ sub new {
 		}
 	},
 	{#State 2
-		DEFAULT => -14
+		DEFAULT => -13
 	},
 	{#State 3
 		DEFAULT => -1
@@ -541,119 +541,90 @@ sub new {
 	},
 	{#State 7
 		ACTIONS => {
-			"|" => 10,
 			'STRING_TERMINAL' => 8,
 			'STRING_NON_TERMINAL' => 2,
-			'SEPARATOR' => 16
+			'SEPARATOR' => 15
 		},
+		DEFAULT => -6,
 		GOTOS => {
-			'sep' => 11,
-			'terminal' => 12,
-			'nonTerminal' => 13,
-			'nts' => 15,
-			'derivs' => 14,
+			'sep' => 10,
+			'terminal' => 11,
+			'nonTerminal' => 12,
+			'nts' => 14,
+			'derivs' => 13,
 			'nt' => 9
 		}
 	},
 	{#State 8
-		DEFAULT => -13
+		DEFAULT => -12
 	},
 	{#State 9
-		DEFAULT => -8
+		DEFAULT => -7
 	},
 	{#State 10
-		ACTIONS => {
-			'STRING_TERMINAL' => 8,
-			'STRING_NON_TERMINAL' => 2,
-			'SEPARATOR' => 16
-		},
-		DEFAULT => -7,
-		GOTOS => {
-			'sep' => 11,
-			'terminal' => 12,
-			'nonTerminal' => 13,
-			'nts' => 17,
-			'nt' => 9
-		}
+		DEFAULT => -11
 	},
 	{#State 11
-		DEFAULT => -12
+		DEFAULT => -9
 	},
 	{#State 12
 		DEFAULT => -10
 	},
 	{#State 13
-		DEFAULT => -11
+		ACTIONS => {
+			"|" => 17,
+			";" => 16
+		}
 	},
 	{#State 14
 		ACTIONS => {
-			"|" => 19,
-			";" => 18
-		}
-	},
-	{#State 15
-		ACTIONS => {
 			'STRING_TERMINAL' => 8,
 			'STRING_NON_TERMINAL' => 2,
-			'SEPARATOR' => 16
+			'SEPARATOR' => 15
 		},
 		DEFAULT => -4,
 		GOTOS => {
-			'sep' => 11,
-			'terminal' => 12,
-			'nonTerminal' => 13,
-			'nt' => 20
+			'sep' => 10,
+			'terminal' => 11,
+			'nonTerminal' => 12,
+			'nt' => 18
 		}
 	},
+	{#State 15
+		DEFAULT => -14
+	},
 	{#State 16
-		DEFAULT => -15
+		DEFAULT => -3
 	},
 	{#State 17
 		ACTIONS => {
 			'STRING_TERMINAL' => 8,
 			'STRING_NON_TERMINAL' => 2,
-			'SEPARATOR' => 16
+			'SEPARATOR' => 15
 		},
-		DEFAULT => -6,
 		GOTOS => {
-			'sep' => 11,
-			'terminal' => 12,
-			'nonTerminal' => 13,
-			'nt' => 20
+			'sep' => 10,
+			'terminal' => 11,
+			'nonTerminal' => 12,
+			'nts' => 19,
+			'nt' => 9
 		}
 	},
 	{#State 18
-		DEFAULT => -3
+		DEFAULT => -8
 	},
 	{#State 19
 		ACTIONS => {
 			'STRING_TERMINAL' => 8,
 			'STRING_NON_TERMINAL' => 2,
-			'SEPARATOR' => 16
-		},
-		GOTOS => {
-			'sep' => 11,
-			'terminal' => 12,
-			'nonTerminal' => 13,
-			'nts' => 21,
-			'nt' => 9
-		}
-	},
-	{#State 20
-		DEFAULT => -9
-	},
-	{#State 21
-		ACTIONS => {
-			'STRING_TERMINAL' => 8,
-			'STRING_NON_TERMINAL' => 2,
-			'SEPARATOR' => 16
+			'SEPARATOR' => 15
 		},
 		DEFAULT => -5,
 		GOTOS => {
-			'sep' => 11,
-			'terminal' => 12,
-			'nonTerminal' => 13,
-			'nt' => 20
+			'sep' => 10,
+			'terminal' => 11,
+			'nonTerminal' => 12,
+			'nt' => 18
 		}
 	}
 ],
@@ -699,76 +670,70 @@ sub
 			                 }
 	],
 	[#Rule 6
-		 'derivs', 2,
+		 'derivs', 0,
 sub
 #line 23 "grammar.yp"
-{ return [ [ { 'epsilon' => 'epsilon' } ],$_[2]]; }
-	],
-	[#Rule 7
-		 'derivs', 1,
-sub
-#line 24 "grammar.yp"
 { return [ { 'epsilon' => 'epsilon' } ]; }
 	],
-	[#Rule 8
+	[#Rule 7
 		 'nts', 1,
 sub
-#line 26 "grammar.yp"
+#line 25 "grammar.yp"
 { return $_[1]; }
 	],
-	[#Rule 9
+	[#Rule 8
 		 'nts', 2,
 sub
-#line 27 "grammar.yp"
+#line 26 "grammar.yp"
 {
                        push @{$_[1]},@{$_[2]};
 					   return $_[1];
                      }
 	],
+	[#Rule 9
+		 'nt', 1,
+sub
+#line 31 "grammar.yp"
+{
+                            return [ { $_[1] => 'terminal' } ];
+                          }
+	],
 	[#Rule 10
 		 'nt', 1,
 sub
-#line 32 "grammar.yp"
+#line 34 "grammar.yp"
 {
-                            return [ { $_[1] => 'terminal' } ];
+                            return [ { $_[1] => 'nonTerminal' } ];
                           }
 	],
 	[#Rule 11
 		 'nt', 1,
 sub
-#line 35 "grammar.yp"
-{
-                            return [ { $_[1] => 'nonTerminal' } ];
-                          }
-	],
-	[#Rule 12
-		 'nt', 1,
-sub
-#line 38 "grammar.yp"
+#line 37 "grammar.yp"
 {
                             return [ { $_[1] => 'sep' } ];
                           }
 	],
-	[#Rule 13
+	[#Rule 12
 		 'terminal', 1,
 sub
-#line 42 "grammar.yp"
+#line 41 "grammar.yp"
+{
+                                    return $_[1];
+                                  }
+	],
+	[#Rule 13
+		 'nonTerminal', 1,
+sub
+#line 45 "grammar.yp"
 {
                                     return $_[1];
                                   }
 	],
 	[#Rule 14
-		 'nonTerminal', 1,
-sub
-#line 46 "grammar.yp"
-{
-                                    return $_[1];
-                                  }
-	],
-	[#Rule 15
 		 'sep', 1,
 sub
-#line 50 "grammar.yp"
+#line 49 "grammar.yp"
 {
                                     return $_[1];
                                   }
@@ -778,7 +743,7 @@ sub
     bless($self,$class);
 }
 
-#line 55 "grammar.yp"
+#line 54 "grammar.yp"
 
 package main;
 use List::Permutor;
