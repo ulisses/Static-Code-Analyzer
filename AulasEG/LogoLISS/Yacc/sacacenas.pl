@@ -9,7 +9,6 @@ my $flag=0;
 my %definitions;
 my %hashtokens;
 my %productions;
-my %ass;
 
 while(<>){
 	chomp($_);
