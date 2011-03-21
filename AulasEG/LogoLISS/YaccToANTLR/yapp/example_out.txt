@@ -1,0 +1,856 @@
+./yacctoantlr example.y
+$VAR1 = [
+          {
+            'Liss' => [
+                        [
+                          {
+                            'PROGRAM' => 'terminal'
+                          },
+                          {
+                            'IDENT' => 'terminal'
+                          },
+                          {
+                            '\'{\'' => 'sep'
+                          },
+                          {
+                            'Body' => 'nonTerminal'
+                          },
+                          {
+                            '\'}\'' => 'sep'
+                          }
+                        ]
+                      ]
+          },
+          {
+            'Body' => [
+                        [
+                          {
+                            'DECLARATIONS' => 'terminal'
+                          },
+                          {
+                            'Declarations' => 'nonTerminal'
+                          },
+                          {
+                            'STATEMENTS' => 'terminal'
+                          },
+                          {
+                            'Statements' => 'nonTerminal'
+                          }
+                        ]
+                      ]
+          },
+          {
+            'Declarations' => [
+                                [
+                                  {
+                                    'Declaration' => 'nonTerminal'
+                                  }
+                                ],
+                                [
+                                  {
+                                    'Declarations' => 'nonTerminal'
+                                  },
+                                  {
+                                    'Declaration' => 'nonTerminal'
+                                  }
+                                ]
+                              ]
+          },
+          {
+            'Declaration' => [
+                               [
+                                 {
+                                   'Variable_Declaration' => 'nonTerminal'
+                                 }
+                               ]
+                             ]
+          },
+          {
+            'Variable_Declaration' => [
+                                        [
+                                          {
+                                            'Vars' => 'nonTerminal'
+                                          },
+                                          {
+                                            'SETA' => 'terminal'
+                                          },
+                                          {
+                                            'Type' => 'nonTerminal'
+                                          },
+                                          {
+                                            '\';\'' => 'sep'
+                                          }
+                                        ]
+                                      ]
+          },
+          {
+            'Vars' => [
+                        [
+                          {
+                            'Var' => 'nonTerminal'
+                          }
+                        ],
+                        [
+                          {
+                            'Vars' => 'nonTerminal'
+                          },
+                          {
+                            '\',\'' => 'sep'
+                          },
+                          {
+                            'Var' => 'nonTerminal'
+                          }
+                        ]
+                      ]
+          },
+          {
+            'Var' => [
+                       [
+                         {
+                           'IDENT' => 'terminal'
+                         },
+                         {
+                           'Value_Var' => 'nonTerminal'
+                         }
+                       ]
+                     ]
+          },
+          {
+            'Value_Var' => [
+                             [
+                               {
+                                 'epsilon' => 'epsilon'
+                               }
+                             ],
+                             [
+                               {
+                                 '\'=\'' => 'sep'
+                               },
+                               {
+                                 'Inic_Var' => 'nonTerminal'
+                               }
+                             ]
+                           ]
+          },
+          {
+            'Type' => [
+                        [
+                          {
+                            'INTEGER' => 'terminal'
+                          }
+                        ],
+                        [
+                          {
+                            'BOOLEAN' => 'terminal'
+                          }
+                        ],
+                        [
+                          {
+                            'ARRAY' => 'terminal'
+                          },
+                          {
+                            'SIZE' => 'terminal'
+                          },
+                          {
+                            'NUM' => 'terminal'
+                          }
+                        ]
+                      ]
+          },
+          {
+            'Inic_Var' => [
+                            [
+                              {
+                                'Constant' => 'nonTerminal'
+                              }
+                            ],
+                            [
+                              {
+                                'Array_Definition' => 'nonTerminal'
+                              }
+                            ]
+                          ]
+          },
+          {
+            'Constant' => [
+                            [
+                              {
+                                '\'(\'' => 'sep'
+                              },
+                              {
+                                'Sign' => 'nonTerminal'
+                              },
+                              {
+                                'NUM' => 'terminal'
+                              },
+                              {
+                                '\')\'' => 'sep'
+                              }
+                            ],
+                            [
+                              {
+                                'TRUE' => 'terminal'
+                              }
+                            ],
+                            [
+                              {
+                                'FALSE' => 'terminal'
+                              }
+                            ]
+                          ]
+          },
+          {
+            'Sign' => [
+                        [
+                          {
+                            'epsilon' => 'epsilon'
+                          }
+                        ],
+                        [
+                          {
+                            '\'+\'' => 'sep'
+                          }
+                        ],
+                        [
+                          {
+                            '\'-\'' => 'sep'
+                          }
+                        ]
+                      ]
+          },
+          {
+            'Array_Definition' => [
+                                    [
+                                      {
+                                        '\'[\'' => 'sep'
+                                      },
+                                      {
+                                        'Array_Initialization' => 'nonTerminal'
+                                      },
+                                      {
+                                        '\']\'' => 'sep'
+                                      }
+                                    ]
+                                  ]
+          },
+          {
+            'Array_Initialization' => [
+                                        [
+                                          {
+                                            'Elem' => 'nonTerminal'
+                                          }
+                                        ],
+                                        [
+                                          {
+                                            'Array_Initialization' => 'nonTerminal'
+                                          },
+                                          {
+                                            '\',\'' => 'sep'
+                                          },
+                                          {
+                                            'Elem' => 'nonTerminal'
+                                          }
+                                        ]
+                                      ]
+          },
+          {
+            'Elem' => [
+                        [
+                          {
+                            'Sign' => 'nonTerminal'
+                          },
+                          {
+                            'NUM' => 'terminal'
+                          }
+                        ]
+                      ]
+          },
+          {
+            'Statements' => [
+                              [
+                                {
+                                  'Statement' => 'nonTerminal'
+                                }
+                              ],
+                              [
+                                {
+                                  'Statements' => 'nonTerminal'
+                                },
+                                {
+                                  'Statement' => 'nonTerminal'
+                                }
+                              ]
+                            ]
+          },
+          {
+            'Statement' => [
+                             [
+                               {
+                                 'Turtle_Commands' => 'nonTerminal'
+                               }
+                             ],
+                             [
+                               {
+                                 'Assignment' => 'nonTerminal'
+                               }
+                             ],
+                             [
+                               {
+                                 'Conditional_Statement' => 'nonTerminal'
+                               }
+                             ],
+                             [
+                               {
+                                 'Iterative_Statement' => 'nonTerminal'
+                               }
+                             ]
+                           ]
+          },
+          {
+            'Turtle_Commands' => [
+                                   [
+                                     {
+                                       'Step' => 'nonTerminal'
+                                     }
+                                   ],
+                                   [
+                                     {
+                                       'Rotate' => 'nonTerminal'
+                                     }
+                                   ],
+                                   [
+                                     {
+                                       'Mode' => 'nonTerminal'
+                                     }
+                                   ],
+                                   [
+                                     {
+                                       'Dialogue' => 'nonTerminal'
+                                     }
+                                   ],
+                                   [
+                                     {
+                                       'Location' => 'nonTerminal'
+                                     }
+                                   ]
+                                 ]
+          },
+          {
+            'Step' => [
+                        [
+                          {
+                            'FORWARD' => 'terminal'
+                          },
+                          {
+                            'Expression' => 'nonTerminal'
+                          }
+                        ],
+                        [
+                          {
+                            'BACKWARD' => 'terminal'
+                          },
+                          {
+                            'Expression' => 'nonTerminal'
+                          }
+                        ]
+                      ]
+          },
+          {
+            'Rotate' => [
+                          [
+                            {
+                              'RRIGHT' => 'terminal'
+                            }
+                          ],
+                          [
+                            {
+                              'RLEFT' => 'terminal'
+                            }
+                          ]
+                        ]
+          },
+          {
+            'Mode' => [
+                        [
+                          {
+                            'PEN' => 'terminal'
+                          },
+                          {
+                            'UP' => 'terminal'
+                          }
+                        ],
+                        [
+                          {
+                            'PEN' => 'terminal'
+                          },
+                          {
+                            'DOWN' => 'terminal'
+                          }
+                        ]
+                      ]
+          },
+          {
+            'Dialogue' => [
+                            [
+                              {
+                                'Say_Statement' => 'nonTerminal'
+                              }
+                            ],
+                            [
+                              {
+                                'Ask_Statement' => 'nonTerminal'
+                              }
+                            ]
+                          ]
+          },
+          {
+            'Location' => [
+                            [
+                              {
+                                'GOTO' => 'terminal'
+                              },
+                              {
+                                'NUM' => 'terminal'
+                              },
+                              {
+                                '\',\'' => 'sep'
+                              },
+                              {
+                                'NUM' => 'terminal'
+                              }
+                            ],
+                            [
+                              {
+                                'WHERE' => 'terminal'
+                              },
+                              {
+                                '\'?\'' => 'sep'
+                              }
+                            ]
+                          ]
+          },
+          {
+            'Assignment' => [
+                              [
+                                {
+                                  'Variable' => 'nonTerminal'
+                                },
+                                {
+                                  '\'=\'' => 'sep'
+                                },
+                                {
+                                  'Expression' => 'nonTerminal'
+                                }
+                              ]
+                            ]
+          },
+          {
+            'Variable' => [
+                            [
+                              {
+                                'IDENT' => 'terminal'
+                              },
+                              {
+                                'Array_Acess' => 'nonTerminal'
+                              }
+                            ]
+                          ]
+          },
+          {
+            'Array_Acess' => [
+                               [
+                                 {
+                                   'epsilon' => 'epsilon'
+                                 }
+                               ],
+                               [
+                                 {
+                                   '\'[\'' => 'sep'
+                                 },
+                                 {
+                                   'Single_Expression' => 'nonTerminal'
+                                 },
+                                 {
+                                   '\']\'' => 'sep'
+                                 }
+                               ]
+                             ]
+          },
+          {
+            'Expression' => [
+                              [
+                                {
+                                  'Single_Expression' => 'nonTerminal'
+                                }
+                              ],
+                              [
+                                {
+                                  'Expression' => 'nonTerminal'
+                                },
+                                {
+                                  'Rel_Op' => 'nonTerminal'
+                                },
+                                {
+                                  'Single_Expression' => 'nonTerminal'
+                                }
+                              ]
+                            ]
+          },
+          {
+            'Single_Expression' => [
+                                     [
+                                       {
+                                         'Term' => 'nonTerminal'
+                                       }
+                                     ],
+                                     [
+                                       {
+                                         'Single_Expression' => 'nonTerminal'
+                                       },
+                                       {
+                                         'Add_Op' => 'nonTerminal'
+                                       },
+                                       {
+                                         'Term' => 'nonTerminal'
+                                       }
+                                     ]
+                                   ]
+          },
+          {
+            'Term' => [
+                        [
+                          {
+                            'Factor' => 'nonTerminal'
+                          }
+                        ],
+                        [
+                          {
+                            'Term' => 'nonTerminal'
+                          },
+                          {
+                            'Mul_Op' => 'nonTerminal'
+                          },
+                          {
+                            'Factor' => 'nonTerminal'
+                          }
+                        ]
+                      ]
+          },
+          {
+            'Factor' => [
+                          [
+                            {
+                              'Constant' => 'nonTerminal'
+                            }
+                          ],
+                          [
+                            {
+                              'Variable' => 'nonTerminal'
+                            }
+                          ],
+                          [
+                            {
+                              'SuccOrPred' => 'nonTerminal'
+                            }
+                          ],
+                          [
+                            {
+                              '\'(\'' => 'sep'
+                            },
+                            {
+                              '\'!\'' => 'sep'
+                            },
+                            {
+                              'Expression' => 'nonTerminal'
+                            },
+                            {
+                              '\')\'' => 'sep'
+                            }
+                          ],
+                          [
+                            {
+                              '\'(\'' => 'sep'
+                            },
+                            {
+                              '\'+\'' => 'sep'
+                            },
+                            {
+                              'Expression' => 'nonTerminal'
+                            },
+                            {
+                              '\')\'' => 'sep'
+                            }
+                          ],
+                          [
+                            {
+                              '\'(\'' => 'sep'
+                            },
+                            {
+                              '\'-\'' => 'sep'
+                            },
+                            {
+                              'Expression' => 'nonTerminal'
+                            },
+                            {
+                              '\')\'' => 'sep'
+                            }
+                          ],
+                          [
+                            {
+                              '\'(\'' => 'sep'
+                            },
+                            {
+                              'Expression' => 'nonTerminal'
+                            },
+                            {
+                              '\')\'' => 'sep'
+                            }
+                          ]
+                        ]
+          },
+          {
+            'Add_Op' => [
+                          [
+                            {
+                              '\'+\'' => 'sep'
+                            }
+                          ],
+                          [
+                            {
+                              '\'-\'' => 'sep'
+                            }
+                          ],
+                          [
+                            {
+                              'OU' => 'terminal'
+                            }
+                          ]
+                        ]
+          },
+          {
+            'Mul_Op' => [
+                          [
+                            {
+                              '\'*\'' => 'sep'
+                            }
+                          ],
+                          [
+                            {
+                              '\'/\'' => 'sep'
+                            }
+                          ],
+                          [
+                            {
+                              'E' => 'terminal'
+                            }
+                          ],
+                          [
+                            {
+                              'MULTMULT' => 'terminal'
+                            }
+                          ]
+                        ]
+          },
+          {
+            'Rel_Op' => [
+                          [
+                            {
+                              'IGUAL' => 'terminal'
+                            }
+                          ],
+                          [
+                            {
+                              'DIF' => 'terminal'
+                            }
+                          ],
+                          [
+                            {
+                              '\'<\'' => 'sep'
+                            }
+                          ],
+                          [
+                            {
+                              '\'>\'' => 'sep'
+                            }
+                          ],
+                          [
+                            {
+                              'MENORIGUAL' => 'terminal'
+                            }
+                          ],
+                          [
+                            {
+                              'MAIORIGUAL' => 'terminal'
+                            }
+                          ],
+                          [
+                            {
+                              'IN' => 'terminal'
+                            }
+                          ]
+                        ]
+          },
+          {
+            'SuccOrPred' => [
+                              [
+                                {
+                                  'SuccPred' => 'nonTerminal'
+                                },
+                                {
+                                  'IDENT' => 'terminal'
+                                }
+                              ]
+                            ]
+          },
+          {
+            'SuccPred' => [
+                            [
+                              {
+                                'SUCC' => 'terminal'
+                              }
+                            ],
+                            [
+                              {
+                                'PRED' => 'terminal'
+                              }
+                            ]
+                          ]
+          },
+          {
+            'Say_Statement' => [
+                                 [
+                                   {
+                                     'SAY' => 'terminal'
+                                   },
+                                   {
+                                     '\'(\'' => 'sep'
+                                   },
+                                   {
+                                     'Expression' => 'nonTerminal'
+                                   },
+                                   {
+                                     '\')\'' => 'sep'
+                                   }
+                                 ]
+                               ]
+          },
+          {
+            'Ask_Statement' => [
+                                 [
+                                   {
+                                     'ASK' => 'terminal'
+                                   },
+                                   {
+                                     '\'(\'' => 'sep'
+                                   },
+                                   {
+                                     'STRING' => 'terminal'
+                                   },
+                                   {
+                                     '\',\'' => 'sep'
+                                   },
+                                   {
+                                     'Variable' => 'nonTerminal'
+                                   },
+                                   {
+                                     '\')\'' => 'sep'
+                                   }
+                                 ]
+                               ]
+          },
+          {
+            'Conditional_Statement' => [
+                                         [
+                                           {
+                                             'IfThenElse_Stat' => 'nonTerminal'
+                                           }
+                                         ]
+                                       ]
+          },
+          {
+            'Iterative_Statement' => [
+                                       [
+                                         {
+                                           'While_Stat' => 'nonTerminal'
+                                         }
+                                       ]
+                                     ]
+          },
+          {
+            'IfThenElse_Stat' => [
+                                   [
+                                     {
+                                       'IF' => 'terminal'
+                                     },
+                                     {
+                                       'Expression' => 'nonTerminal'
+                                     },
+                                     {
+                                       'THEN' => 'terminal'
+                                     },
+                                     {
+                                       '\'{\'' => 'sep'
+                                     },
+                                     {
+                                       'Statements' => 'nonTerminal'
+                                     },
+                                     {
+                                       '\'}\'' => 'sep'
+                                     },
+                                     {
+                                       'Else_Expression' => 'nonTerminal'
+                                     }
+                                   ]
+                                 ]
+          },
+          {
+            'Else_Expression' => [
+                                   [
+                                     {
+                                       'epsilon' => 'epsilon'
+                                     }
+                                   ],
+                                   [
+                                     {
+                                       'ELSE' => 'terminal'
+                                     },
+                                     {
+                                       '\'{\'' => 'sep'
+                                     },
+                                     {
+                                       'Statements' => 'nonTerminal'
+                                     },
+                                     {
+                                       '\'}\'' => 'sep'
+                                     }
+                                   ]
+                                 ]
+          },
+          {
+            'While_Stat' => [
+                              [
+                                {
+                                  'WHILE' => 'terminal'
+                                },
+                                {
+                                  '\'(\'' => 'sep'
+                                },
+                                {
+                                  'Expression' => 'nonTerminal'
+                                },
+                                {
+                                  '\')\'' => 'sep'
+                                },
+                                {
+                                  '\'{\'' => 'sep'
+                                },
+                                {
+                                  'Statements' => 'nonTerminal'
+                                },
+                                {
+                                  '\'}\'' => 'sep'
+                                }
+                              ]
+                            ]
+          }
+        ];

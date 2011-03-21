@@ -100,15 +100,15 @@ sub lex {
 }
 
 sub main {
-    #print Dumper $value;
-	for my $elem ( @{$value} ) {
-		my %production = %{$elem};
-		for my $prod_name (keys %production) {
-			my $list_productions = $production{$prod_name};
-			print "<" . $prod_name . ">" . "\n";
-			removeLeftRecursionPlus($prod_name,$list_productions);
-		}
-	}
+    print Dumper $value;
+#	for my $elem ( @{$value} ) {
+#		my %production = %{$elem};
+#		for my $prod_name (keys %production) {
+#			my $list_productions = $production{$prod_name};
+#			print "<" . $prod_name . ">" . "\n";
+#			removeLeftRecursionPlus($prod_name,$list_productions);
+#		}
+#	}
 }
 
 sub removeLeftRecursionPlus {
