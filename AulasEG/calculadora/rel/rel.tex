@@ -1,0 +1,411 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{graphicx}
+\usepackage{alltt}
+\usepackage[portuges]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{color}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{multicol}
+
+\setlength{\textwidth}{16.5cm}
+\setlength{\textheight}{24cm}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{0pt plus 1pt}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{-1.1cm}
+\setlength{\headsep}{20pt}
+\setlength{\columnsep}{1.5pc}
+\setlength\columnseprule{.4pt}
+\setlength\premulticols{6\baselineskip}
+\pagestyle{fancy}
+
+\definecolor{castanho_ulisses}{rgb}{0.71,0.33,0.14}
+\definecolor{gray_ulisses}{gray}{0.55}
+\definecolor{green_ulises}{rgb}{0.2,0.75,0}
+
+\lstdefinelanguage{C_ulisses}
+{
+basicstyle=\ttfamily\scriptsize,
+%backgroundcolor=\color{yellow},
+% frameshape={RYRYNYYYY}{yny}{yny}{RYRYNYYYY}, %contornos... muito nice...
+sensitive=true,
+morecomment=[l][\color{gray_ulisses}\scriptsize]{//},
+morecomment=[s][\color{gray_ulisses}\scriptsize]{/*}{*/},
+morestring=[b]",
+morestring=[b]',
+stringstyle=\color{red},
+showstringspaces=false,
+% firstnumber=\thelstnumber,
+numbers=left,
+numberstyle=\tiny,
+numberblanklines=true,
+showspaces=false,
+breaklines=true,
+showtabs=false,
+xleftmargin=-10pt,
+xrightmargin=-20pt,
+%% funcoes predefinidas...
+emph=
+{[1]
+return,printf,fprintf,if,else,scanf,sscanf,sprintf,malloc,
+calloc,realloc,fgets,fputs,puts,system,strcmp,strstr,
+strchr,exit,for,while,fclose,fopen,atoi,sizeof,sin,cos
+%% e muitos mais que a medida que sejam necessrios irei adicionar...
+},
+emphstyle={[1]\color{blue}\textbf},
+%% tipos de dados e nao so... >mais enph's<;
+emph={[2]char,float,double,void,NULL,int,bool},
+emphstyle={[2]\color{green_ulises}\textbf},
+emph={[3]typedef, struct},
+emphstyle={[3]\color{castanho_ulisses}\textbf}
+}
+
+\lstdefinelanguage{txt}
+{
+       basicstyle=\ttfamily\scriptsize,
+       showstringspaces=false,
+       breaklines=true,
+       numbers=left,
+       numberstyle=\tiny,
+       numberblanklines=true,
+       showspaces=false,
+       showtabs=false
+}
+\lstnewenvironment{code_txt}{\lstset{language=txt}}{}
+\lstnewenvironment{code_c}{\lstset{language=C_ulisses}}{}
+
+\lstnewenvironment{code_lex}
+{\textbf{Código Lex} \hspace{1cm} \hrulefill \lstset{language=txt}}
+{\hrule\smallskip}
+
+\title{\sf Engenharia de Linguagens \\
+\begin{tabular}{c}
+    %\includegraphics[width=.1\textwidth]{stuff/uminho.jpg}
+    %\includegraphics[width=.07\textwidth]{stuff/informatica.jpg}\\
+    {\small Universidade do Minho}, {\small LEI}\\
+    {\small Ano lectivo 2010/2011}\\
+    {\small Engenharia Gramatical -Calculadora em ANTLR}\\
+\end{tabular}
+}
+\author{
+    {\small José Pedro Silva - pg17628} \and
+    {\small Mário Ulisses Costa - pg15817} \and
+    {\small Pedro Faria - pg17684}}
+\date{{\small \today}}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+Descrição da solução proposta para a gramática de uma calculadora em ANTLR.
+\end{abstract}
+
+\tableofcontents
+
+\section{Problema}
+Pretende-se escrever uma gramática em ANTLR que possua as produções necessárias para reconhecer uma pequena linguagem que permite:
+\begin{itemize}
+    \item declarações de variáveis (inteiras e floats)
+    \item atribuições de valores a variáveis
+    \item operações aritméticas (soma, subtracção, multiplicação e divisão de valores)
+\end{itemize}
+
+As acções semânticas, além de calcularem os resultados das operações aritméticas, deverão reportar erros quando:
+\begin{itemize}
+    \item haja redeclarações de variáveis
+    \item atribuições a variáveis não declaradas
+    \item atribuir a uma variável tipo inteiro, um float
+\end{itemize}
+
+
+\section{Solução}
+
+\subsection{Estruturas de dados necessárias}
+Para guardar os tipos das variáveis já declaradas, assim como os valores que lhes vão sendo atribuidos, criamos um hashmap no qual a key é o nome da variável e o valor é um objecto chamado \textit{Par}.
+O \textit{Par} contém duas variáveis privadas, o tipo que é uma String e o value que é um float.
+\begin{code_txt}
+public class Par{
+	private String tipo;
+	private float value;
+	
+	public Par(){
+		this.tipo = "";
+		this.value = 0;
+	}
+	
+	public Par(String tipo, float value){
+		this.tipo = tipo;
+		this.value = value;
+	}
+	
+	public String getTipo(){return this.tipo;}	
+	public float getValue(){return this.value;}
+	
+	public void setTipo(String tipo){this.tipo = tipo;}	
+	public void setValue(float val){this.value = val;}
+}
+\end{code_txt}
+
+Também criamos um enum Tipo, que é utilizado para guardar o resultado da avaliação de um valor numérico, em relação ao seu tipo: 
+\begin{code_txt}
+enum Tipo {REAL, INT};
+.
+.
+.
+.
+if ($expression.valor == Math.round($expression.valor)) {
+	tipo = Tipo.INT;
+} else {
+	tipo = Tipo.REAL;
+	}
+\end{code_txt}
+
+
+
+\subsection{Descrição da solução}
+O hashmap \textit{declarations\_in}, é espalhado por todos os elementos da árvore, quer seja nas declarações para que seja adicionada 
+a variável e o seu tipo ao hashmap, quer nas atribuições, nas quais o valor da variável pode ser alterado.
+O hashmap \textit{declarations\_out}, que recebe o estado do \textit{declarations\_in} no fim da acção semântica, sobe na árvore, de modo
+a ser disponibilizado já actualizado para a próxima declaração ou atribuição.\\
+\\
+Na produção \textbf{declaration} é verificado se a variável que se pretende declarar ainda não existe, se já existir emite um erro.
+
+
+\begin{code_txt}
+//INPUT:
+int x;
+real x;
+x  = 2;
+
+//OUTPUT
+ERRO: A variavel x ja foi declarada antes.
+\end{code_txt}
+
+
+Na produção \textbf{attrib} é verificado se a variável à qual se pretende atribuir um valor, já foi previamente declarada.
+\begin{code_txt}
+//INPUT:
+int x;
+y  = 2;
+
+
+//OUTPUT
+ERRO: A variavel y ainda nao foi declarada!
+\end{code_txt}
+
+Ainda na produção \textbf{attrib} é feita a verificação do tipo do valor que irá a ser atribuido à variável. Se for fracionário, e se estiver a ser atribuido a um inteiro é emitido um warning.
+\begin{code_txt}
+//INPUT:
+int x;
+real y;
+x = 1;
+x = x div 3;
+
+
+//OUTPUT
+x == 1.0
+Warning: Possivel perda de precisao! (guardar real em variavel inteira)
+x == 0.0
+\end{code_txt}
+
+Nas produções \textbf{expression} e \textbf{term}, vão sendo efectuados os cálculos, quer sejam somas, subtracções, multiplicações ou divisões. O resultado é guardado na produção \textbf{attrib}.
+
+\begin{code_txt}
+//INPUT:
+int x;
+real y;
+x = 4 - 6;
+y = 4 div 2 * 3 + x;
+
+//OUTPUT
+x == -2.0
+y == 4.0
+\end{code_txt}
+
+\section{Anexos}
+\subsection{Calculadora}
+
+\begin{code_txt}
+grammar calc_better;
+
+@header{
+import java.util.HashMap;
+import java.util.ArrayList;
+}
+
+
+@members{
+enum Tipo {REAL, INT};
+
+//*===========  Par ============= */
+public class Par{
+	private String tipo;
+	private float value;
+	
+	public Par(){
+		this.tipo = "";
+		this.value = 0;
+	}
+	
+	public Par(String tipo, float value){
+		this.tipo = tipo;
+		this.value = value;
+	}
+	
+	public String getTipo(){return this.tipo;}	
+	public float getValue(){return this.value;}
+	
+	public void setTipo(String tipo){this.tipo = tipo;}	
+	public void setValue(float val){this.value = val;}
+}
+
+}
+
+
+
+language returns [HashMap<String,Par> identificadores]
+	 @init {HashMap <String,Par>declarations_in = new HashMap<String,Par>();}
+	:	 ((declaration[declarations_in]{declarations_in=$declaration.declarations_out;} 
+		  |attrib [declarations_in] {declarations_in=$declaration.declarations_out;} 
+		  | io[declarations_in]) ';' )*
+		  		{$identificadores = $declaration.declarations_out;}
+	;
+	
+declaration [HashMap<String,Par> declarations_in] returns [HashMap<String,Par> declarations_out]
+	:	(tipo=Type_Int | tipo=Type_Real)   ID {
+						if (declarations_in.containsKey($ID.text)){
+							System.out.println( "ERRO: A variavel " + $ID.text +" ja foi declarada antes.\n");
+							
+							}
+						else	{
+							Par p = new Par($tipo.text,0);
+					 		 declarations_in.put($ID.text, p);
+							}
+							declarations_out = declarations_in;
+						}
+	;
+
+attrib	[HashMap<String,Par> declarations_in] returns [HashMap<String,Par> declarations_out]
+	:	ID '=' expression [declarations_in] 
+			{
+				if (!declarations_in.containsKey($ID.text)){
+					 System.out.println("ERRO: A variavel "+ $ID.text + " ainda nao foi declarada!\n" );
+				}
+				else {
+					Tipo tipo;
+					if ($expression.valor == Math.round($expression.valor)) {
+ 					   tipo = Tipo.INT;
+					} else {
+					    tipo = Tipo.REAL;
+					}
+					if (declarations_in.get($ID.text).getTipo().equals("int") && tipo == Tipo.REAL ){
+						System.out.println( "Warning: Possivel perda de precisao! (guardar real em variavel inteira)");
+						Par p = declarations_in.get($ID.text);
+						p.setValue(Math.round($expression.valor));
+					}
+					else{
+						Par p = declarations_in.get($ID.text);
+						p.setValue($expression.valor);
+					}	
+					System.out.println($ID.text + " == " + declarations_in.get($ID.text).getValue());
+ 			 		declarations_out = declarations_in;
+				}
+			}
+	;
+	 
+io	[HashMap<String,Par> declarations_in]
+	:	'?' ID {}
+	|	'!' expression [declarations_in]
+	;
+	
+expression [HashMap<String,Par> declarations_in] 
+	returns [Tipo tipo, float valor]
+	: 
+	|	t1=term[declarations_in]{$valor = $t1.valor;} (operatorAdd t2=term[declarations_in]{
+									if($operatorAdd.text.equals("+"))
+										$valor = $valor + $t2.valor;
+									else
+						 				$valor = $valor - $t2.valor;
+						 			})*  {}		
+	;
+	
+term	[HashMap<String,Par> declarations_in]
+	returns [float valor]
+	:	f1=factor[declarations_in]{$valor = $f1.valor;} (operatorMul f2=factor[declarations_in]{
+									if($operatorMul.text.equals("*"))																	
+										$valor = $valor * $f2.valor;
+									else
+										$valor = $valor / $f2.valor;
+										})* {}  
+	;
+	
+factor	[HashMap<String,Par> declarations_in]
+	returns [float valor]
+	:	'(' expression[declarations_in] ')' {$valor = $expression.valor;}
+	| 	value[declarations_in] {$valor = $value.valor;} 
+	;
+	
+operatorAdd
+	:	'+' | '-'
+	;
+	
+operatorMul
+	:	'*' | 'div'
+	;
+	
+operator:	'+' | '-' | '*' | 'div'
+	;
+	
+
+value  	[HashMap<String,Par> declarations_in]
+	returns[float valor]
+ 	:	ID {$valor = declarations_in.get($ID.text).getValue();} 
+ 		| INT {$valor = Integer.parseInt($INT.text);}
+ 		| FLOAT {$valor = Float.parseFloat($FLOAT.text);}
+ 	; 
+ 
+Type_Int:	 'int'
+	;
+		
+Type_Real
+	:	'real'	 
+	;
+
+
+ID  :	('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*
+    ;
+
+INT :	'0'..'9'+
+    ;
+
+FLOAT
+    :   ('0'..'9')+ '.' ('0'..'9')* EXPONENT?
+    |   '.' ('0'..'9')+ EXPONENT?
+    |   ('0'..'9')+ EXPONENT
+    ;
+
+COMMENT
+    :   '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;}
+    |   '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}
+    ;
+
+WS  :   ( ' '
+        | '\t'
+        | '\r'
+        | '\n'
+        ) {$channel=HIDDEN;} 
+    ;
+
+fragment
+EXPONENT : ('e'|'E') ('+'|'-')? ('0'..'9')+ ;
+
+
+\end{code_txt}
+\end{document}
+
+
+

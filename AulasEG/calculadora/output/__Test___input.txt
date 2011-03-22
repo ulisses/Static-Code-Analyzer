@@ -1,0 +1,5 @@
+int x;
+real y;
+x = 4 - 6;
+y = 4 div 2 * 3 + x;
+
