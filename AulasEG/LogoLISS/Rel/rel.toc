@@ -1,0 +1,12 @@
+\select@language {portuges}
+\contentsline {section}{\numberline {1}Problema}{2}{section*.1}
+\contentsline {section}{\numberline {2}Solu\IeC {\c c}\IeC {\~a}o}{2}{section*.1}
+\contentsline {subsection}{\numberline {2.1}Lex}{2}{section*.2}
+\contentsline {paragraph}{Dificuldades}{2}{section*.3}
+\contentsline {paragraph}{Outras dificuldades}{3}{section*.4}
+\contentsline {subsubsection}{\numberline {2.1.1}Resolu\IeC {\c c}\IeC {\~a}o}{3}{section*.4}
+\contentsline {subsection}{\numberline {2.2}Gram\IeC {\'a}tica}{3}{lstlisting.-6}
+\contentsline {subsubsection}{\numberline {2.2.1}Regras}{4}{section*.5}
+\contentsline {subsubsection}{\numberline {2.2.2}Implementa\IeC {\c c}\IeC {\~a}o}{4}{figure.2}
+\contentsline {section}{\numberline {3}Trabalho Futuro}{6}{lstlisting.-8}
+\contentsline {section}{\numberline {4}Conclus\IeC {\~a}o}{6}{lstlisting.-8}
