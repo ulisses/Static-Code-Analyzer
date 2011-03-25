@@ -13,12 +13,17 @@ GetOptions("open=s"       => \$_opt_filePath,
            "pie!"         => \$_opt_pie,
            "bars!"        => \$_opt_abrs,
            "out=s"        => \$_opt_fileNamePrefix,
+           "path:s"       => \$_opt_fileSavePath,
 
            "optional:s"   => \$optionalstring,
            "int=i"        => \$mandatoryinteger,
            "optint:i"     => \$optionalinteger,
            "float=f"      => \$mandatoryfloat,
            "optfloat:f"   => \$optionalfloat);
+
+if(!$_opt_fileSavePath) {
+	$_opt_fileSavePath = dir('.');
+}
 
 if($_opt_bars eq $_opt_pie) {
 	$_opt_bars = 1;
@@ -142,30 +147,40 @@ my @_dataPercentageFiles = map { $_types{$_}{"percentageNrFiles"} } @_dataTypes;
 my @_dataPercentageComments = map { $_types{$_}{"percentageNrComments"} } @_dataTypes;
 
 if($_opt_allTogether) {
-    plotToPng("$_opt_fileNamePrefix\_projectLanguages.png",\@_dataTypes,\@_dataPercentageLines,\@_dataPercentageFiles,\@_dataPercentageComments,"Languages", "Percentage", "Global project");
+	my $file = file($_opt_fileSavePath, "$_opt_fileNamePrefix\_projectLanguages.png") ;
+
+    plotToPng($file,\@_dataTypes,\@_dataPercentageLines,\@_dataPercentageFiles,\@_dataPercentageComments,"Languages", "Percentage", "Global project");
 }
 if($_opt_separated && !$_opt_percent) {
+	my $file1 = file($_opt_fileSavePath, "$_opt_fileNamePrefix\_LinesPerLanguage.png") ;
+	my $file2 = file($_opt_fileSavePath, "$_opt_fileNamePrefix\_FilesPerLanguage.png") ;
+	my $file3 = file($_opt_fileSavePath, "$_opt_fileNamePrefix\_RatioFilesLines.png") ;
+
     my @arr = ("Nr of lines","Nr of comments");
 
-    plotToPngLinesAndComments("$_opt_fileNamePrefix\_LinesPerLanguage.png"
+    plotToPngLinesAndComments($file1
                              ,\@_dataTypes,\@_dataNrLines,\@_dataNrComments,
                              "Languages", "Number of lines", "Number of lines per language"
                              ,\@arr);
-    plotToPng("$_opt_fileNamePrefix\_FilesPerLanguage.png",\@_dataTypes,\@_dataNrFiles,"Languages", "Number of files", "Number of files per language");
-    plotToPng("$_opt_fileNamePrefix\_RatioFilesLines.png",\@_dataTypes,\@_dataRatioNrFilesNrLines,"Languages", "Number of lines per file", "Ratio of nr lines/nr files per language");
+    plotToPng($file2,\@_dataTypes,\@_dataNrFiles,"Languages", "Number of files", "Number of files per language");
+    plotToPng($file3,\@_dataTypes,\@_dataRatioNrFilesNrLines,"Languages", "Number of lines per file", "Ratio of nr lines/nr files per language");
 }
 if($_opt_separated && $_opt_percent) {
+	my $file1 = file($_opt_fileSavePath, "$_opt_fileNamePrefix\_LinesPerLanguage.png") ;
+	my $file2 = file($_opt_fileSavePath, "$_opt_fileNamePrefix\_FilesPerLanguage.png") ;
+	my $file3 = file($_opt_fileSavePath, "$_opt_fileNamePrefix\_RatioFilesLines.png") ;
+
     my @arr = ("% of lines","% of comments");
 
-    plotToPngLinesAndComments("$_opt_fileNamePrefix\_LinesPerLanguage.png"
+    plotToPngLinesAndComments($file1
                              ,\@_dataTypes,\@_dataPercentageLines,\@_dataPercentageComments
                              ,"Languages", "Percentage", "% number of lines per language"
                              ,\@arr);
-    plotToPng("$_opt_fileNamePrefix\_FilesPerLanguage.png"
+    plotToPng($file2
              ,\@_dataTypes,\@_dataPercentageFiles
              ,"Languages", "% number of files", "% number of files per language"
              );
-    plotToPng("$_opt_fileNamePrefix\_RatioFilesLines.png"
+    plotToPng($file3
              ,\@_dataTypes,\@_dataRatioNrFilesNrLines
              ,"Languages", "Number of lines per file", "Ratio of nr lines/nr files per language"
              );
