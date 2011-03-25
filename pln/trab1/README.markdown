@@ -6,11 +6,11 @@ DEPENDENCIES
 ============
 We need to have GD installed, so if you are in MacOSX and you use DarwinPorts you should do:
     sudo port install gd2
-    sudo cpan -fi GD::Graph GD::Graph::bars GD::Graph::pie
+    sudo cpan -fi GD::Graph GD::Graph::bars GD::Graph::pie Path::Class
 
 If you use linux you shoul do:
     sudo aptitude install libgd-dev
-    sudo cpan -fi GD::Graph GD::Graph::bars GD::Graph::pie
+    sudo cpan -fi GD::Graph GD::Graph::bars GD::Graph::pie Path::Class
 
 OPTIONS
 =======
