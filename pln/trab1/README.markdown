@@ -1,6 +1,6 @@
 USE
 ===
-perl count.pl -open \<dirPath\> [-verbose] [-separated | -allTogether] [-percent] [-bars | -pie] -out \<fileNamePrefix\>
+perl count.pl -open \<dirPath\> [-verbose] [-separated | -allTogether] [-percent] [-bars | -pie] -out \<fileNamePrefix\> [-path <path_to_save>]
 
 DEPENDENCIES
 ============
@@ -24,6 +24,7 @@ OPTIONS
     -pie                  - This fag will generate all the images in a pie chart
     -bars                 - This fag will generate all the images in a bars chart (this is the default)
     -out <fileNamePrefix> - This flag is mandatory, and fileNamePrefix is the prefix to be places before each filename image produced
+	-path <path_to_save>  - This is an optional flag. With this you can save the output (the images) to the folder path_to_save
 
 EXAMPLES
 ========
@@ -36,3 +37,6 @@ To get 3 separated images, regarding the project in dir <dir>
 
 To get 3 separated images and the values in percentage, regarding the project in dir <dir>
     perl count.pl -open <dir> -verbose -out <prefix> -percent
+
+To get 3 separated images and the values in percentage, regarding the project in dir <dir> and save this to path path_to_save
+    perl count.pl -open <dir> -verbose -out <prefix> -percent -path path_to_save
