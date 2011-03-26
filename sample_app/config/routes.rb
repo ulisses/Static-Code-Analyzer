@@ -21,8 +21,8 @@ SampleApp::Application.routes.draw do
   resources :sessions, :only => [:new, :create, :destroy]
   resources :concorrentes
   resources :users
-  resources :concursos
   match '/concursos/stats',  :to => 'concursos#stats'
+  resources :concursos
   resources :participantes
   match '/enunciados/newxml',  :to => 'enunciados#newxml'
   match '/enunciados/createxml',  :to => 'enunciados#createxml'  

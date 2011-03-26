@@ -1,5 +1,5 @@
 class ConcursosController < ApplicationController
-   before_filter :admin_user,   :only => [:edit, :update, :new, :destroy, :create]
+   before_filter :admin_user,   :only => [:edit, :update, :new, :destroy, :create, :stats]
    before_filter :authenticate
   
   def index
@@ -68,28 +68,38 @@ class ConcursosController < ApplicationController
   end
   
   def stats
-=begin
     @title = "Stats1"
     
-    if params[:type]
-      #verifica se existe id de concurso,se nao apresenta stats para todos
-      if params[:concurso_id]
-        @concurso = Concurso.find(params[:concurso_id])
-        dir = File.join(Rails.root, "data/concursos","contest-"+@concurso.id.to_s)
-        if params[:type] == 1
-          scriptCommand =  "perl count.pl -open #{dir} -perc -out pre"
-          @imagePath =  
-      else
+    if params[:concurso_id]
+      @concurso = Concurso.find(params[:concurso_id])
+      dir = File.join(Rails.root, "data/concursos","contest-"+@concurso.id.to_s)
+      dirStatsComplete = File.join(Rails.root,"public/images/stats/","contest-"+@concurso.id.to_s)
+      dirStatsParcial = File.join("/images/stats/","contest-"+@concurso.id.to_s)        
+      files = Dir.glob(dirStatsComplete+"/*")
+      
+      #se não existirem os 3 ficheiros de estatística, ou se for um pedido de refresh, criar os ficheiros
+      @ok = true
+      if files.size < 3 || params[:refresh] == true
+        #cria o comando que chama o script perl count.pl
+        scriptCommand =  "perl count.pl -open #{dir} -perc -out pre -path #{dirStatsComplete} "
+        
+        #executa o comando
+        @ok = system("cd data/scripts && #{scriptCommand} ")
+        
+        #verifica se o comando gerou 3 ficheiros
+        files = Dir.glob(dirStatsComplete+"/*")
+        if !files.size == 3
+          @ok = false
+        end
         
       end
-    else
-      
+
+      @imagePath1 = File.join(dirStatsParcial,"pre_FilesPerLanguage.png")  
+      @imagePath2 = File.join(dirStatsParcial,"pre_RatioFilesLines.png")  
+      @imagePath3 = File.join(dirStatsParcial,"pre_LinesPerLanguage.png")
     end
+    @cenas = File.join(Rails.root, "public/images/stats","contest-"+@concurso.id.to_s)
     
-    #executa o comando
-    ok = system("cd data/scripts && #{scriptCommand} ")
-    
-=end    
   end
 
   
@@ -132,12 +142,30 @@ class ConcursosController < ApplicationController
 			if !File.exists?(path)
 				Dir.mkdir(path)
 			end
+
+      #para as stats
+      path = File.join(Rails.root, "public/stats")
+			if !File.exists?(path)
+				Dir.mkdir(path)
+			end
+			
+			path = File.join(Rails.root, "public/images/stats","contest-"+@concurso.id.to_s)
+			if !File.exists?(path)
+				Dir.mkdir(path)
+			end
+			
 		end
 	
 		def deleteFolder
-			path = File.join(Rails.root, "data/concursos","contest"-@concurso.id.to_s)
+			path = File.join(Rails.root, "data/concursos","contest-"+@concurso.id.to_s)
 			if File.exists?(path)
 				`rm -rf #{path}`
 			end
+			
+			path = File.join(Rails.root, "public/images/stats","contest-"+@concurso.id.to_s+"")
+			if !File.exists?(path)
+				`rm -rf #{path}`
+			end
 		end
+		
 end
