@@ -25,8 +25,12 @@ my $prompt = " → "; my $flag = 1;			#Prompt e flag do ciclo principal
 my $attrs = $term->Attribs;				#Atributos do módulo readline
 $attrs->{completion_entry_function} = $attrs->{list_completion_function};
 my %comandos = (					#Hash que contém comandos e apontadores para funções
-	um	=>	\&dummy,
-	dois	=>	\&dummy,
+	'list-users'		=>	\&getUsers,
+	'list-enunciados'	=>	\&getEnunciados,
+	'list-concorrentes'	=>	\&getConcorrentes,
+	'list-concursos'	=>	\&getConcursos,
+	'list-linguagens'	=>	\&getLinguagens,
+	'dois'	=>	\&dummy,
 	tres	=>	\&dummy,
 	quatro	=>	\&dummy,
 	cinco	=>	\&dummy,
@@ -47,8 +51,8 @@ while($flag){
 	if($comandos{$_}){
 		$comandos{$_}->();			#executa comando pretendido
 	}elsif($_){
-		print "Comando não existe\n";
-		$comandos{"help"}->();			
+		print "Comando não existe\nEscreva <help> para abrir o manual deste interpretador\n";
+					
 	}else {}
 	
 	$term->addhistory($_) if /\S/;			#adiciona comando ao histórico
@@ -59,11 +63,11 @@ while($flag){
 #Função para exibir uma ajuda
 sub help {
 	print 	"Ajuda:\n",
-		"\tum - listar todos os utilizadores\n",
-		"\tdois - listar todos os utilizadores\n",
-		"\ttres - listar todos os utilizadores\n",
-		"\tquatro - listar todos os utilizadores\n",
-		"\tcinco - listar todos os utilizadores\n",
+		"\tlist-users → listar todos os utilizadores\n",
+		"\tlist-concursos → listar todos os concursos\n",
+		"\tlist-concorrentes → listar todos os concorrentes\n",
+		"\tlist-enunciados → listar todos os enunciados\n",
+		"\tlist-linguagens → listar todas os linguagens\n",
 		"\tseis - listar todos os utilizadores\n",
 		"\tsete - listar todos os utilizadores\n",
 		"\toito - listar todos os utilizadores\n",
@@ -81,4 +85,44 @@ sub byebye {
 #Função teste
 sub dummy {
 	print "I'm a dummy function\n";
+}
+
+#list users
+sub getUsers {
+	my @listUsers = $access->get_users;
+	foreach(sort {$a->name cmp $b->name} @listUsers){
+	        print $_->name . "\n";
+	}
+}
+
+#list enunciados
+sub getEnunciados {
+	my @listEnunciados = $access->get_enunciados;
+	foreach(sort {$a->titulo cmp $b->titulo} @listEnunciados){
+	        print $_->titulo . "\n";
+	}
+}
+
+#list concorrentes
+sub getConcorrentes {
+	my @listConcorrentes = $access->get_concorrentes;
+	foreach(sort {$a->nome cmp $b->nome} @listConcorrentes){
+	        print $_->nome . "\n";
+	}
+}
+
+#list concursos
+sub getConcursos {
+	my @listConcursos = $access->get_concursos;
+	foreach(sort {$a->tit cmp $b->tit} @listConcursos){
+	        print $_->tit . "\n";
+	}
+}
+
+#list linguagens
+sub getLinguagens {
+	my @listLinguagens = $access->get_languages;
+	foreach(sort {$a->ling cmp $b->ling} @listLinguagens){
+	        print $_->ling . "\n";
+	}
 }
