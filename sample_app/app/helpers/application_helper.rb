@@ -2,7 +2,7 @@ module ApplicationHelper
 
   # Return a title on a per-page basis.
   def title
-    base_title = "Software para Analise e Avaliacao de Programas"
+    base_title = "Submissão Online para Análise de Software"
     if @title.nil?
       base_title
     else
@@ -11,7 +11,7 @@ module ApplicationHelper
   end
   
   def logo
-    image_tag("images.jpg", :alt => "Sample App", :class => "round")
+    image_tag("sopas1.jpg", :alt => "Sample App", :class => "round")
   end
   
   

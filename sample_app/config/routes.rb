@@ -29,6 +29,7 @@ SampleApp::Application.routes.draw do
   resources :enunciados 
   resources :languages# , :only => [:new,:create,:destroy,:index]
   resources :functions #, :only => [:new,:create,:destroy,:index]  
+  match '/options', :to => 'pages#options'
   resources :tentativas
   resources :baterias#, :only => [:index]
   resources :results
