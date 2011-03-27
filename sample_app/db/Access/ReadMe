@@ -1,0 +1,9 @@
+
+Tudo que está nesta pasta é provisório. Trata-se de ficheiros em perl que serão necessários para construir uma interface pelo terminal 
+para o software S.O.P.A.S.. O ficheiro perl 'sopas' é o script principal de teste.
+
+Notas:
+ - Módulos necessários para esta aplicação funcionar:
+	Moose
+	DBIx::Class
+	Term::ReadLine
