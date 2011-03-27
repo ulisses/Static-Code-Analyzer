@@ -1,0 +1,84 @@
+#!/usr/bin/perl
+
+use strict;
+use Data::Dumper;
+use Term::ReadLine;
+use Access;
+
+###### Intro
+system("clear");
+my $creditos =	"Trabalho Realizado Por:
+	José Pedro Silva\tpg17xxx\t\tzepedro.cs\@gmail.com
+	Mário Ulisses Costa\tpg15xxx\t\tulissesmonhecosta\@gmail.com
+	Pedro Faria\t\tpg17684\t\tpedro.faria.80\@gmail.com\n\n";
+print 	"\n\n",
+	" S. O. P. A. S. - Submissão Online Para Análise de Software\n\n",
+	"Coisa muito linda para escrever aqui em jeito de introdução.\nInterface gráfica para a aplicação\n\n",
+	,$creditos;
+######
+
+######begin main
+
+my $access = Access->new;				#Iniciação do nosso objecto
+my $term = new Term::ReadLine 'Simple Perl Menu';	#Módulo para usar o readline
+my $prompt = " → "; my $flag = 1;			#Prompt e flag do ciclo principal
+my $attrs = $term->Attribs;				#Atributos do módulo readline
+$attrs->{completion_entry_function} = $attrs->{list_completion_function};
+my %comandos = (					#Hash que contém comandos e apontadores para funções
+	um	=>	\&dummy,
+	dois	=>	\&dummy,
+	tres	=>	\&dummy,
+	quatro	=>	\&dummy,
+	cinco	=>	\&dummy,
+	seis	=>	\&dummy,
+	sete	=>	\&dummy,
+	oito	=>	\&dummy,
+	"exit"	=>	\&byebye,
+	help	=>	\&help,
+);
+$attrs->{completion_word} = [keys(%comandos)];		#Adiciona comandos ao prompt
+
+while($flag){
+	defined($_ = $term->readline($prompt));
+	chomp($_);
+	$_ =~ s/\s+//g;
+	
+	#print "Comando: $_\n";		
+	if($comandos{$_}){
+		$comandos{$_}->();			#executa comando pretendido
+	}elsif($_){
+		print "Comando não existe\n";
+		$comandos{"help"}->();			
+	}else {}
+	
+	$term->addhistory($_) if /\S/;			#adiciona comando ao histórico
+}
+
+#####end main
+
+#Função para exibir uma ajuda
+sub help {
+	print 	"Ajuda:\n",
+		"\tum - listar todos os utilizadores\n",
+		"\tdois - listar todos os utilizadores\n",
+		"\ttres - listar todos os utilizadores\n",
+		"\tquatro - listar todos os utilizadores\n",
+		"\tcinco - listar todos os utilizadores\n",
+		"\tseis - listar todos os utilizadores\n",
+		"\tsete - listar todos os utilizadores\n",
+		"\toito - listar todos os utilizadores\n",
+		"\tnove - listar todos os utilizadores\n",
+		"\tdez - listar todos os utilizadores\n",
+		"\thelp - exibe esta ajuda\n";
+}
+
+#Muda a variável de cujo ciclo principal depende
+sub byebye {
+	print "\nBye bye!\n\n";
+	$flag = 0;
+}
+
+#Função teste
+sub dummy {
+	print "I'm a dummy function\n";
+}
