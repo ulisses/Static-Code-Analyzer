@@ -27,8 +27,9 @@ SampleApp::Application.routes.draw do
   match '/enunciados/newxml',  :to => 'enunciados#newxml'
   match '/enunciados/createxml',  :to => 'enunciados#createxml'  
   resources :enunciados 
-  resources :languages# , :only => [:new,:create,:destroy,:index]
-  resources :functions #, :only => [:new,:create,:destroy,:index]  
+  resources :languages, :only => [:new,:create,:destroy,:index,:edit,:update]
+  resources :functions, :only => [:new,:create,:destroy,:index,:edit,:update]  
+  match '/options', :to => 'pages#options'
   resources :tentativas
   resources :baterias#, :only => [:index]
   resources :results

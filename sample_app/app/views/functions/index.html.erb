@@ -13,6 +13,7 @@
 					  | <%= link_to "delete", f, :method => :delete,
 												 :confirm => "You sure?",
 												 :title => "Delete #{f.func}" %>
+						| <%= link_to "edit", edit_function_path(f)%>
 					</li>
 				<% end %>
 			</ul>

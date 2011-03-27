@@ -6,13 +6,21 @@
 			<%= will_paginate %>
 
 			<ul class="funcoes">
-				<% @languages.each do |f|%>
+				<% @languages.each do |l|%>
 					<li>
-						<b>Linguagem:</b><br/>
-						<%= f.ling %>
-					  | <%= link_to "delete", f, :method => :delete,
+						<b>Linguagem:</b>
+						<%= l.ling %>
+						| <%= link_to "delete", l, :method => :delete,
 												 :confirm => "You sure?",
-												 :title => "Delete #{f.ling}" %>
+												 :title => "Delete #{l.ling}" %>
+						| 						<%= link_to "edit", edit_language_path(l) %>
+					  <br/>
+						<b>String compilação:</b>
+						<%= l.compString %><br/>
+						<b>String execução:</b>
+						<%= l.execString %><br/>
+						<b>String complexa execução:</b>
+						<%= l.complexExecString %><br/>
 					</li>
 				<% end %>
 			</ul>

@@ -1,26 +1,43 @@
 class FunctionsController < ApplicationController
-  before_filter :admin_user,   :only => [:new, :destroy, :create,:index]
+  before_filter :admin_user,   :only => [:new, :destroy, :create,:index,:edit,:update]
   before_filter :authenticate
   
   def index
-    @title = "Todos as funcoes de avaliacao"
+    @title = "Todos as funções de avaliacão"
     @functions = Function.paginate(:page => params[:page])
   end
   
   def new
-    @title = "Nova funcao de avaliacao"
+    @title = "Nova função de avaliação"
     @function = Function.new
   end
   
   def create
     @function = Function.new(params[:function])
     if @function.save
-      flash[:success] = "Funcao criada com sucesso!"
+      flash[:success] = "Funcão criada com sucesso!"
       redirect_to functions_path
     else
       @title = "Nova funcao de avaliacao"
       render 'new'
     end
+  end
+  
+  def edit
+    @title = "Editar função"
+    @function = Function.find(params[:id])
+  end
+  
+  def update
+    @function = Function.find(params[:id])
+
+     if @function.update_attributes(params[:function]) 	       
+       flash[:success] = "Função alterada com sucesso."
+       redirect_to functions_path
+     else
+       @title = "Editar Função."
+       render 'edit'
+     end
   end
 
   def destroy
