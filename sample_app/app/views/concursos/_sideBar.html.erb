@@ -12,6 +12,8 @@
 	<br/>
 	<%= link_to "Listar Participantes", participantes_path(:concurso_id => @concurso.id) %>	
 	<br/>
+	<%= link_to "Mostrar estatísticas", :controller=>"concursos", :action=> "stats",:concurso_id => @concurso.id %>	
+	<br/>
 	<b>Núm. de concorrentes: </b><%= @concurso.participantes.count%>
 	<br/><br/>	
 	

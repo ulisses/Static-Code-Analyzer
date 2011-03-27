@@ -1,2 +1,18 @@
-    image_tag(@image, :alt => "Sample App", :class => "round")
+<h2><%= link_to "Actualizar gráficos!", :controller => "concursos", 
+            :action => "stats",:concurso_id=>@concurso.id, :refresh=>true %>
+ <--> 	<%= link_to "Voltar ao concurso", concurso_path(@concurso)%>
 
+</h2>
+
+<br/><br/>
+
+	<% if @ok %>
+		<h3>Número de ficheiros por linguagem:</h3>
+		<%=  image_tag(@imagePath1, :alt => "Sample App", :class => "round")%>
+		<h3>Rácio do número de linhas pelo número de ficheiros por linguagem:</h3>
+		<%=  image_tag(@imagePath2, :alt => "Sample App", :class => "round")%>
+		<h3>Número de linhas por linguagem:</h3>		
+		<%=  image_tag(@imagePath3, :alt => "Sample App", :class => "round")%>
+	<% else %>
+		O concurso não contém dados necessários para se gerarem estatísticas.
+	<% end %>
