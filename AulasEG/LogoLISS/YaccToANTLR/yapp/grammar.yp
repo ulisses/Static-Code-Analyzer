@@ -103,8 +103,8 @@ sub main {
 		my %production = %{$elem};
 		for my $prod_name (keys %production) {
 			my $list_productions = $production{$prod_name};
-			prettyPrint(  removeLeftRecursion($prod_name,$list_productions) ) ;
-			#print Dumper $list_productions;
+			my @r = removeLeftRecursion($prod_name,$list_productions);
+			prettyPrint( @r , $prod_name ) ;
 		}
 	}
 }
@@ -160,20 +160,20 @@ sub removeLeftRecursion {
 
 		for my $elem (@{$list_productions}) {
 			if($i == $i_) {
-				push(@ret , { [@r] => 'plus'} );
+				push(@ret , ( [@r] , 'plus' ) );
 			} else {
-				push(@ret , { @{$list_productions}[$i] => 'void'} );
+				push(@ret , ( @{$list_productions}[$i] , 'void' ) );
 			}
 			$i++;
 		}
 	} else {
 		for my $e (@{$list_productions}) {
-			push(@ret , {$e => 'void'});
+			push(@ret , ($e , 'void'));
 		}
 	}
 	#print Dumper [@ret];
 
-	return [@ret] ;
+	return [@ret];
 	
 #	$list_productions =
 #		[
@@ -193,19 +193,59 @@ sub removeLeftRecursion {
 #		];
 }
 
+# Example of an instance of the variable $prod that this 'sub' will receive.
+#
+# $VAR1 = [
+#          [
+#           { 'Term' => 'nonTerminal' }
+#          ],
+#          'void',
+#          [
+#           { 'Add_Op' => 'nonTerminal' },
+#           { 'Term' => 'nonTerminal'   }
+#          ],
+#          'plus'
+#         ];
+#
+#
+
 sub prettyPrint {
-	my $grammar = $_[0];
+	my $prod = $_[0];
+	my $prod_name = $_[1];
 	my $key;
 	my $value;
+	my $i = 0;
+	my $j = 0;
+	my $space = " ";
+	my $prod_size = length($prod_name)+1;
+	my $spaces = $space x  $prod_size ;
+	my @list = @{$prod};
 
-	for my $e ( @{$grammar} ) {
-		my %h = %{$e};
-		for my $f ( values %h ) {
-			while( ($key, $value) = each %h ) {
-				print Dumper @{$key};
+	print $prod_name . " :";
+	for my $e ( @list ) {
+		if($i%2 != 0) {
+			if($e eq 'plus') {
+				#print ')+';
+			}
+		} else {
+			for my $f ( @{$e} ) {
+				my %h = %{$f};
+				for my $k ( keys %h ) {
+					if($j==0) {
+						#print '(' ;
+					}
+					print " $k " ;
+
+					$j++;
+				}
 			}
 		}
+		if($i != length(@list)) {
+			print "\n" . $spaces . "|" ;
+		}
+		$i++;
 	}
+	print "\n" . $spaces . ";\n";
 }
 
 main();
