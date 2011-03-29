@@ -933,8 +933,6 @@ sub prettyPrint {
 					$j++;
 				}
 			}
-		}
-		if($i != length(@list)) {
 			print "\n" . $spaces . "|" ;
 		}
 		$i++;

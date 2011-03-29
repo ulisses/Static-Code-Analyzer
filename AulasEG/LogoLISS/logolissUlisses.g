@@ -1,19 +1,17 @@
-grammar cenassa;
+grammar logolissUlisses;
 
 LISS			: 'PUGRAMA' 'IDENT' '{' Body '}'
 				;
 Body			: 'DECLARATIONS' Declarations 
        			  'STATEMENT' Statements
 				;
-Declarations		: Declaration
-			| Declarations Declaration
+Declarations		: (Declaration) (Declaration)*
 			;
 Declaration		: Variable_Declaration
 			;
 Variable_Declaration 	: Vars 'SETA' Type ';'
 		;
-Vars		: Var 
-		| Vars ',' Var
+Vars		: (Var) (',' Var)*
 		;
 Var		: 'IDENT' Value_Var 
 		;
@@ -37,13 +35,11 @@ Sign		:
  		;
 Array_Definition 	: '[' Array_Initialization ']'
 			;
-Array_Initialization 	: Elem
-			| Array_Initialization ',' Elem
+Array_Initialization 	: (Elem) (',' Elem)*
 			;
 Elem		: Sign 'NUM'
 			;
-Statements		: Statement
-	    		| Statements Statement
+Statements		: (Statement) (Statement)*
 			;
 Statement	: Turtle_Commands
 	   		| Assignment
@@ -78,14 +74,11 @@ Variable	: 'IDENT' Array_Acess
 Array_Acess	: 
 	     	| '[' Single_Expression ']'
 		;
-Expression	: Single_Expression
-	    	| Expression Rel_Op Single_Expression
+Expression	: (Single_Expression) (Rel_Op Single_Expression)*
 		;
-Single_Expression	: Term
-		  	| Single_Expression Add_Op Term
+Single_Expression	: (Term) (Add_Op Term)*
 			;
-Term		: Factor
-       		| Term Mul_Op Factor
+Term		: (Factor) (Mul_Op Factor)*
 		;
 Factor		: Constant 
 	 	| Variable
