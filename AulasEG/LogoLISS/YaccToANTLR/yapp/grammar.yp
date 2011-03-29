@@ -222,26 +222,31 @@ sub prettyPrint {
 	my @list = @{$prod};
 
 	print $prod_name . " :";
-	for my $e ( @list ) {
-		if($i%2 != 0) {
-			if($e eq 'plus') {
-				#print ')+';
-			}
-		} else {
-			for my $f ( @{$e} ) {
-				my %h = %{$f};
-				for my $k ( keys %h ) {
-					if($j==0) {
-						#print '(' ;
-					}
-					print " $k " ;
+	while ( $list[$i+1] ) {
+		my $e = $list[$i];
+		$j = 0;
 
-					$j++;
+		for my $f ( @{$e} ) {
+			my %h = %{$f};
+			for my $k ( keys %h ) {
+				if($j==0 && $list[$i+1] eq 'plus') {
+					print '(' ;
 				}
+				if($k eq 'epsilon') {
+				} else {
+					print " $k " ;
+				}
+				$j++;
 			}
+		}
+		$e = $list[$i+1];
+		if($e eq 'plus') {
+			print ')+';
+		}
+		$i+=2;
+		if( $list[$i+1] ) {
 			print "\n" . $spaces . "|" ;
 		}
-		$i++;
 	}
 	print "\n" . $spaces . ";\n";
 }
