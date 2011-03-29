@@ -53,6 +53,7 @@ sep         : SEPARATOR           {
 %%
 package main;
 use Data::Dumper;
+use strict;
 
 our($debug);
 
@@ -102,7 +103,8 @@ sub main {
 		my %production = %{$elem};
 		for my $prod_name (keys %production) {
 			my $list_productions = $production{$prod_name};
-			removeLeftRecursion($prod_name,$list_productions);
+			prettyPrint(  removeLeftRecursion($prod_name,$list_productions) ) ;
+			#print Dumper $list_productions;
 		}
 	}
 }
@@ -111,22 +113,67 @@ sub removeLeftRecursion {
 	my $prod_name = $_[0];
 	my $list_productions = $_[1];
 
-	print "<" . $prod_name . ">" . "\n";
-	print Dumper $list_productions;
+	#print "<" . $prod_name . ">" . "\n";
 
 	my $foundLeftRecursion = 0;
 	my @derivs;
+	my $i = 0;
+	my $j = 0;
+	my $i_ = 0;
+	my $j_ = 0;
 
 	for my $elem1 ( @{$list_productions} ) {
 		for my $elem2 ( @{$elem1} ) {
 			my %deriv = %{$elem2};
 			if( $deriv{$prod_name} ) {
 				$foundLeftRecursion = 1;
+				$i_ = $i;
+				$j_ = $j;
+			}
+			$j++;
+		}
+		$i++;
+	}
+	
+	my $found=0;
+	my @r;
+	my @ret;
+
+	# here we have the production derivation we found the left recursion
+	# for the following example, here we have the second line.
+	# Expression : Single_Expression
+	#            | Expression Rel_Op Single_Expression
+	if($foundLeftRecursion) {
+		for my $e (@{@{$list_productions}[$i_]}) {
+			my %h = %{$e};
+			for my $k (keys %h) {
+				if($found) {
+					push(@r , {$k => $h{$k}});
+				}
+				if($k eq $prod_name) {
+					$found = 1;
+				}
 			}
 		}
+	
+		$i = 0;
+
+		for my $elem (@{$list_productions}) {
+			if($i == $i_) {
+				push(@ret , { [@r] => 'plus'} );
+			} else {
+				push(@ret , { @{$list_productions}[$i] => 'void'} );
+			}
+			$i++;
+		}
+	} else {
+		for my $e (@{$list_productions}) {
+			push(@ret , {$e => 'void'});
+		}
 	}
-	if($foundLeftRecursion) {
-	}
+	#print Dumper [@ret];
+
+	return [@ret] ;
 	
 #	$list_productions =
 #		[
@@ -144,9 +191,22 @@ sub removeLeftRecursion {
 #				}
 #			]
 #		];
-
 }
 
+sub prettyPrint {
+	my $grammar = $_[0];
+	my $key;
+	my $value;
+
+	for my $e ( @{$grammar} ) {
+		my %h = %{$e};
+		for my $f ( values %h ) {
+			while( ($key, $value) = each %h ) {
+				print Dumper @{$key};
+			}
+		}
+	}
+}
 
 main();
 
