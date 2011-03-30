@@ -17,4 +17,6 @@
 *.snm
 *.toc
 *.vrb
+*.pid
+*.tex.backup
 
