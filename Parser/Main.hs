@@ -7,7 +7,7 @@ import Language.C.Data.Ident
 import System.Environment
 import Mpi
 
-data C a = C Either () (a,[a])
+data C a = C (Either () (a,[a]))
 	deriving Show
 
 --newtype Out a c = Out { out :: c a -> Either () (a,c a) }
@@ -18,16 +18,17 @@ newtype Out a b c = Out { out :: Either b (b, Out a b c) }
 
 --BTree a -> Either () (a,(BTree a,BTree a))
 
-fun :: (Num t, Data t) => C [a]
-fun = gfoldl fpass fterm [1,2,3]
+--fun :: (Num t, Data t) => C [a]
+--fun = gfoldl fpass fterm [1,2,3]
 
 -- a -> c a
 fterm :: a -> C a
 fterm a = C $ Left ()
 
+fpass = undefined
 -- fpass :: c (a -> b) -> a -> c b
-fpass :: C (d -> b) -> d -> C b
-fpass (C (Left ())) d = C 
+--fpass :: C (d -> b) -> d -> C b
+--fpass (C (Left ())) d = C 
 
 cata g = g . (rec (cata g)) . out
 rec f = id -|- (id >< f)
