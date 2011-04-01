@@ -5,10 +5,7 @@ ifeq ($(UNAME),Darwin)
 	latexmk -e '$$pdflatex=q/pdflatex -synctex=1 %T/' -pdf rel.tex
 endif
 ifeq ($(UNAME),Linux)
-	pdflatex rel
-	bibtex rel
-	pdflatex rel
-	pdflatex rel
+	latexmk -pdf rel.tex
 endif
 
 clean:
