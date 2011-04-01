@@ -1,0 +1,16 @@
+Weighted methods per class (WMC):
+
+Esta métrica diz respeito à complexidade que cada métodos tem para cada class. Assim, para se obter o valor desta métrica soma-se
+as complexidades que cada método pertencente a uma class tem. Se considerarmos a complexidade de cada método como medida unitária
+então a métrica WMC para um classe é igual ao número de métodos definidos nessa classe, referimo-nos a isto como WMC1.
+A métrica WMC1 para uma classe pode ser obtida pelo diagrama de classes de um modelo UML, identificando a classe e contando o número
+de métodos que essa classe implementa. Aternativamente podemos considerar a complexidade de cada método como o McCabe Cyclomatic Complexity, que referimos
+como WMCcc. Os diagramas de actividade, sequencia e comunicação conteem informação relevante para o WMCcc, mas é igualmente
+plausibel que os diagrama de estado possam ser usados para calcular este valor para a casse como um todo.
+
+Depth of inheritance tree (DIT):
+
+Esta é uma medida de profundidade da classe relativamente à sua árvore de herança. Esta métrica define-se por ser igual à distaância máxima
+desde a classe até á sua super classe root na árvore de herança. Esta métrica pode ser calculada para uma classe fazendo a união de todos os diagramas
+de classe num modelo UML e atravessando a hierarquia de herança desta classe.
+
