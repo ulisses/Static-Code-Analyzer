@@ -1,23 +1,21 @@
-\documentclass[11pt,a4paper,notitlepage]{article}
+\documentclass[11pt]{article}
+%\documentclass[11pt,a4paper,notitlepage]{article}
 \usepackage{graphics}
 \usepackage{alltt}
 \usepackage[portuges]{babel}
 \usepackage[utf8x]{inputenc}
 \usepackage{color}
 \usepackage{fancyhdr}
+\usepackage{pslatex}
 \usepackage{listings}
 \usepackage{multicol}
-\usepackage{babel}
 \usepackage{hyperref}
-\usepackage{t1enc}
 %\usepackage{aeguill}
 \usepackage{varioref}
 \usepackage{fancyvrb}
 \usepackage{color}
 \usepackage{cite}
 \usepackage{float}
-\usepackage{listings}
-\usepackage{harvard}
 \usepackage{geometry}
 \usepackage{setspace}
 \usepackage{thumbpdf}
@@ -26,80 +24,6 @@
 \usepackage{alltt}
 \usepackage{graphicx}
 \usepackage{verbatim}
-\usepackage{color}
-\usepackage{url}
-\usepackage{epsf}
-\usepackage{listings}
-\usepackage[refpages]{gloss}
-\usepackage{array}
-\usepackage{longtable}
-\usepackage{multirow}
-\usepackage{amsmath, amsthm, amssymb}
-\usepackage{slashbox}
-\usepackage{rotating}
-
-\setlength{\textwidth}{16.5cm}
-\setlength{\textheight}{24cm}
-\setlength{\parindent}{1em}
-\setlength{\parskip}{0pt plus 1pt}
-\setlength{\oddsidemargin}{0cm}
-\setlength{\evensidemargin}{0cm}
-\setlength{\topmargin}{-1.1cm}
-\setlength{\headsep}{20pt}
-\setlength{\columnsep}{1.5pc}
-\setlength\columnseprule{.4pt}
-\setlength\premulticols{6\baselineskip}
-\pagestyle{fancy}
-
-\definecolor{castanho_ulisses}{rgb}{0.71,0.33,0.14}
-\definecolor{gray_ulisses}{gray}{0.55}
-\definecolor{green_ulises}{rgb}{0.2,0.75,0}
-
-\lstdefinelanguage{C_ulisses}{
-	basicstyle=\ttfamily\scriptsize,
-    sensitive=true,
-	morecomment=[l][\color{gray_ulisses}\scriptsize]{//},
-	morecomment=[s][\color{gray_ulisses}\scriptsize]{/*}{*/},
-	morestring=[b]",
-	morestring=[b]',
-	stringstyle=\color{red},
-	showstringspaces=false,
-	numbers=left,
-	numberstyle=\tiny,
-	numberblanklines=true,
-	showspaces=false,
-	showtabs=false,
-	xleftmargin=-10pt,
-	xrightmargin=-20pt,
-	emph=
-	{[1]
-		return,printf,fprintf,if,else,scanf,sscanf,sprintf,malloc,
-		calloc,realloc,fgets,fputs,puts,system,strcmp,strstr,
-		strchr,exit,for,while,fclose,fopen,atoi,sizeof,sin,cos
-	},
-	emphstyle={[1]\color{blue}\textbf},
-	emph={[2]char,float,double,void,NULL,int,bool},
-	emphstyle={[2]\color{green_ulises}\textbf},
-	emph={[3]typedef, struct},
-	emphstyle={[3]\color{castanho_ulisses}\textbf}
-}
-
-\lstdefinelanguage{txt}
-{
-       basicstyle=\ttfamily\scriptsize,
-       showstringspaces=false,
-       numbers=left,
-       numberstyle=\tiny,
-       numberblanklines=true,
-       showspaces=false,
-       showtabs=false
-}
-\lstnewenvironment{code_txt}{\lstset{language=txt}}{}
-\lstnewenvironment{code_c}{\lstset{language=C_ulisses}}{}
-
-\lstnewenvironment{code_lex}
-{\textbf{Código Lex} \hspace{1cm} \hrulefill \lstset{language=txt}}
-{\hrule\smallskip}
 
 \title{\sf  Métricas para avaliação de Linguagens de Modelação - UML \\ Engenharia de Linguagens \\ Engenharia Gramatical \\
 \begin{tabular}{c}
@@ -115,7 +39,6 @@
     {\small Mário Ulisses Costa - pg15817} \and
     {\small Pedro Faria - pg17684}}
 \date{{\small \today}}
-
 
 \begin{document}
 
@@ -160,22 +83,22 @@ Para ser possível computar um valor para esta métrica, informação do modo de
 
 \section{cenas}
 --estas metricas sao importantes para model driven arquitecture ?
-
-
-Este conjunto de métricas são referidas em vários papers e são sem sombra de dúvidas as mais estudas e também as mais utilizadas para avaliar modelos UML. Têm em conta principalmente os diagramas de classe, visto estes serem os que mais facilmente se transformam em código e também porque dão uma boa visão geral do sistema. Estas métricas em particular são definidas por McQuillan e Power em (referencia a http://www.minds.nuim.ie/~jmcq/NUIM-CS-TR-2006-03.pdf). Existe também um software (SDMetrics) que avalia além destas, um conjunto mais extenso de métricas, que analisa outros diagramas além do de classes, como por exemplo os diagramas de estados e de actividades.
-
-
-
-
+Este conjunto de métricas são referidas em vários papers e sem sombra de dúvidas são as mais estudas, também as mais utilizadas para avaliar modelos UML.
+Estas focam-se mais nos diagramas de classes visto estes serem os que mais facilmente se transformam em código e é preciso ter
+em consideração que como estas regras derivam directamente do modelo OO, é mais fácil aplica-las
+aos diagramas de classes. Para além disso este tipo de diagrams do ponto de vista da implementação dão uma visão mais geral do sistema que modela.
+Estas métricas em particular são detalhadas por McQuillan e Power em ~\cite{Power}. Existe também um software (SDMetrics) que avalia além destas, um conjunto mais extenso de métricas, que analisa outros diagramas além do de classes, como por exemplo os diagramas de estados e de actividades.
 
 \section{Formulas}
 \input{formula.tex}
 
 \section{Conclusão}
 
-\section{Referências Bibliográficas}
-http://www.pacis-net.org/file/2005/158.pdf
-http://www.minds.nuim.ie/~jmcq/NUIM-CS-TR-2006-03.pdf
-http://www.cs.nuim.ie/~jpower/Research/Papers/2006/modelsize06.pdf
+%\section{Referências Bibliográficas}
+%http://www.pacis-net.org/file/2005/158.pdf
+%http://www.cs.nuim.ie/~jpower/Research/Papers/2006/modelsize06.pdf
+%\end{document}
+\bibliography{bibPaper}{}
+\bibliographystyle{plain}
 \end{document}
 
