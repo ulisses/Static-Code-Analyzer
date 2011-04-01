@@ -18,13 +18,13 @@ derivs      : nts            { return [$_[1]]; }
             | derivs '|' nts {
                                push @{$_[1]},$_[3];
                                return $_[1];
-			                 }
+                             }
             |                { return [[ { 'epsilon' => 'epsilon' } ]]; }
             ;
 nts         : nt     { return $_[1]; }
             | nts nt {
                        push @{$_[1]},@{$_[2]};
-					   return $_[1];
+                       return $_[1];
                      }
             ;
 nt          : terminal    {
@@ -99,98 +99,98 @@ sub lex {
 }
 
 sub main {
-	for my $elem ( @{$value} ) {
-		my %production = %{$elem};
-		for my $prod_name (keys %production) {
-			my $list_productions = $production{$prod_name};
-			my @r = removeLeftRecursion($prod_name,$list_productions);
-			prettyPrint( @r , $prod_name ) ;
-		}
-	}
+    for my $elem ( @{$value} ) {
+        my %production = %{$elem};
+        for my $prod_name (keys %production) {
+            my $list_productions = $production{$prod_name};
+            my @r = removeLeftRecursion($prod_name,$list_productions);
+            prettyPrint( @r , $prod_name ) ;
+        }
+    }
 }
 
 sub removeLeftRecursion {
-	my $prod_name = $_[0];
-	my $list_productions = $_[1];
+    my $prod_name = $_[0];
+    my $list_productions = $_[1];
 
-	#print "<" . $prod_name . ">" . "\n";
+    #print "<" . $prod_name . ">" . "\n";
 
-	my $foundLeftRecursion = 0;
-	my @derivs;
-	my $i = 0;
-	my $j = 0;
-	my $i_ = 0;
-	my $j_ = 0;
+    my $foundLeftRecursion = 0;
+    my @derivs;
+    my $i = 0;
+    my $j = 0;
+    my $i_ = 0;
+    my $j_ = 0;
 
-	for my $elem1 ( @{$list_productions} ) {
-		for my $elem2 ( @{$elem1} ) {
-			my %deriv = %{$elem2};
-			if( $deriv{$prod_name} ) {
-				$foundLeftRecursion = 1;
-				$i_ = $i;
-				$j_ = $j;
-			}
-			$j++;
-		}
-		$i++;
-	}
-	
-	my $found=0;
-	my @r;
-	my @ret;
+    for my $elem1 ( @{$list_productions} ) {
+        for my $elem2 ( @{$elem1} ) {
+            my %deriv = %{$elem2};
+            if( $deriv{$prod_name} ) {
+                $foundLeftRecursion = 1;
+                $i_ = $i;
+                $j_ = $j;
+            }
+            $j++;
+        }
+        $i++;
+    }
+    
+    my $found=0;
+    my @r;
+    my @ret;
 
-	# here we have the production derivation we found the left recursion
-	# for the following example, here we have the second line.
-	# Expression : Single_Expression
-	#            | Expression Rel_Op Single_Expression
-	if($foundLeftRecursion) {
-		for my $e (@{@{$list_productions}[$i_]}) {
-			my %h = %{$e};
-			for my $k (keys %h) {
-				if($found) {
-					push(@r , {$k => $h{$k}});
-				}
-				if($k eq $prod_name) {
-					$found = 1;
-				}
-			}
-		}
-	
-		$i = 0;
+    # here we have the production derivation we found the left recursion
+    # for the following example, here we have the second line.
+    # Expression : Single_Expression
+    #            | Expression Rel_Op Single_Expression
+    if($foundLeftRecursion) {
+        for my $e (@{@{$list_productions}[$i_]}) {
+            my %h = %{$e};
+            for my $k (keys %h) {
+                if($found) {
+                    push(@r , {$k => $h{$k}});
+                }
+                if($k eq $prod_name) {
+                    $found = 1;
+                }
+            }
+        }
+    
+        $i = 0;
 
-		for my $elem (@{$list_productions}) {
-			if($i == $i_) {
-				push(@ret , ( [@r] , 'plus' ) );
-			} else {
-				push(@ret , ( @{$list_productions}[$i] , 'void' ) );
-			}
-			$i++;
-		}
-	} else {
-		for my $e (@{$list_productions}) {
-			push(@ret , ($e , 'void'));
-		}
-	}
-	#print Dumper [@ret];
+        for my $elem (@{$list_productions}) {
+            if($i == $i_) {
+                push(@ret , ( [@r] , 'plus' ) );
+            } else {
+                push(@ret , ( @{$list_productions}[$i] , 'void' ) );
+            }
+            $i++;
+        }
+    } else {
+        for my $e (@{$list_productions}) {
+            push(@ret , ($e , 'void'));
+        }
+    }
+    #print Dumper [@ret];
 
-	return [@ret];
-	
-#	$list_productions =
-#		[
-#			[
-#				{
-#					'Declaration' => 'nonTerminal'
-#				}
-#			],
-#			[
-#				{
-#					'Declarations' => 'nonTerminal'
-#				},
-#				{
-#					'Declaration' => 'nonTerminal'
-#				}
-#			]
-#		];
+    return [@ret];
+    
+#    $list_productions =
+#        [
+#            [
+#                {
+#                    'Declaration' => 'nonTerminal'
+#                }
+#            ],
+#            [
+#                {
+#                    'Declarations' => 'nonTerminal'
+#                },
+#                {
+#                    'Declaration' => 'nonTerminal'
+#                }
+#            ]
+#        ];
 }
 
 # Example of an instance of the variable $prod that this 'sub' will receive.
@@ -210,45 +210,45 @@ sub removeLeftRecursion {
 #
 
 sub prettyPrint {
-	my $prod = $_[0];
-	my $prod_name = $_[1];
-	my $key;
-	my $value;
-	my $i = 0;
-	my $j = 0;
-	my $space = " ";
-	my $prod_size = length($prod_name)+1;
-	my $spaces = $space x  $prod_size ;
-	my @list = @{$prod};
+    my $prod = $_[0];
+    my $prod_name = $_[1];
+    my $key;
+    my $value;
+    my $i = 0;
+    my $j = 0;
+    my $space = " ";
+    my $prod_size = length($prod_name)+1;
+    my $spaces = $space x  $prod_size ;
+    my @list = @{$prod};
 
-	print $prod_name . " :";
-	while ( $list[$i+1] ) {
-		my $e = $list[$i];
-		$j = 0;
+    print $prod_name . " :";
+    while ( $list[$i+1] ) {
+        my $e = $list[$i];
+        $j = 0;
 
-		for my $f ( @{$e} ) {
-			my %h = %{$f};
-			for my $k ( keys %h ) {
-				if($j==0 && $list[$i+1] eq 'plus') {
-					print '(' ;
-				}
-				if($k eq 'epsilon') {
-				} else {
-					print " $k " ;
-				}
-				$j++;
-			}
-		}
-		$e = $list[$i+1];
-		if($e eq 'plus') {
-			print ')+';
-		}
-		$i+=2;
-		if( $list[$i+1] ) {
-			print "\n" . $spaces . "|" ;
-		}
-	}
-	print "\n" . $spaces . ";\n";
+        for my $f ( @{$e} ) {
+            my %h = %{$f};
+            for my $k ( keys %h ) {
+                if($j==0 && $list[$i+1] eq 'plus') {
+                    print '(' ;
+                }
+                if($k eq 'epsilon') {
+                } else {
+                    print " $k " ;
+                }
+                $j++;
+            }
+        }
+        $e = $list[$i+1];
+        if($e eq 'plus') {
+            print ')+';
+        }
+        $i+=2;
+        if( $list[$i+1] ) {
+            print "\n" . $spaces . "|" ;
+        }
+    }
+    print "\n" . $spaces . ";\n";
 }
 
 main();
