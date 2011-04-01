@@ -16,7 +16,11 @@
 				   \item DIT - Depth of Inheritance Tree  = $ max_leng $ , onde $ max_leng $ é o comprimento máximo desde a raiz até à folha.
                                   \end{itemize}
  \item [Quality Measure Metrics] - \begin{itemize}
-                                   \item MHF - Method Hiding Factor 
+                                   \item MHF - Method Hiding Factor = $ \frac{\sum_{i=1}^{rc} \sum_{m=1}^{Md(c_i)} (1-V(M_{mi}))} {\sum_{i=1}^{rc} Md(c_i)} $ onde: \begin{itemize}
+																				      \item $V(M_{mi})$ = $\frac{\sum_{j=i}^{rc} is\_visible(M_{mi},C_j)}{TC-1} $
+																				      \item $is\_visible(M_{mi},C_j) $ = $ qqrcena $
+																				    \end{itemize}
+
                                   \end{itemize}
 
 
