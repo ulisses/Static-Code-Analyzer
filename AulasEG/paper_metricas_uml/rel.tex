@@ -158,6 +158,16 @@ de classe num modelo UML e atravessando a hierarquia de herança desta classe.\\
 \textbf{Lack of cohesion in methods} (LCOM)- ou seja, falta de coesão entre métodos. Calcular esta métrica para uma dada classe envolve descobrir, para cada possível par de métodos, se os conjuntos de variáveis de instância acedidos por cada método têm uma interseção que não um conjunto vazio.
 Para ser possível computar um valor para esta métrica, informação do modo de uso das variáveis de instância pelos métodos de uma classe é essencial. Esta informação não pode ser obtida através de uma diagrama de classes. No entanto, o valor máximo para esta métrica pode ser computado usando o número de métodos na classe. Diagramas contendo essa informação sobre o uso das variáveis, por exemplo, os diagramas sequenciais podem ser usados para calcular esta métrica.\\
 
+\section{cenas}
+--estas metricas sao importantes para model driven arquitecture ?
+
+
+Este conjunto de métricas são referidas em vários papers e são sem sombra de dúvidas as mais estudas e também as mais utilizadas para avaliar modelos UML. Têm em conta principalmente os diagramas de classe, visto estes serem os que mais facilmente se transformam em código e também porque dão uma boa visão geral do sistema. Estas métricas em particular são definidas por McQuillan e Power em (referencia a http://www.minds.nuim.ie/~jmcq/NUIM-CS-TR-2006-03.pdf). Existe também um software (SDMetrics) que avalia além destas, um conjunto mais extenso de métricas, que analisa outros diagramas além do de classes, como por exemplo os diagramas de estados e de actividades.
+
+
+
+
+
 \section{Formulas}
 \input{formula.tex}
 
