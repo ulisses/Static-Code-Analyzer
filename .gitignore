@@ -19,4 +19,6 @@
 *.vrb
 *.pid
 *.tex.backup
+*.lof
+*.lot
 
