@@ -1,15 +1,19 @@
+Temos então 4 grandes grupos de medidas que pudemos usar para definir as fórmulas que vão ser usadas para análise dos diagramas e consequentemente extracção de uma métrica
+de qualidade para os diagramas UML.
+\paragraph{Métricas primitivas} que consistem na extracção bruta de informaçao no que diz respeito á quantidade de métodos, classes, parametros, etc.
+Temos que o número total de classes (\textit{Total Number of Classes}) é $$TNC = \sum_{i=1}^{n} tnc_i $$
+o número total de relações herdadas (\textit{Total Number of Inheritance Relationships})  $$TNIR = \sum_{i=1}^{n} tnir_i $$
+o número total de relações que ão sejam herdadas (\textit{ Total Number of Realization Relationships})  $$TNRR = \sum_{i=1}^{n} tnrr_i $$ por isto entende-se
+uma relação entre dois elementos do modelo UML, entre dois diagramas de classes, cujo elemento cliente conhece o comportamento do outro elemento a que ele está ligado.
+Temos ainda a contagem do número total de relações que existem (\textit{Total Number of Use Relationships})  $$TNUR = \sum_{i=1}^{n} tnur_i $$
+o número total de associações (\textit{Total Number of Associations})    $$TNA = \sum_{i=1}^{n} tna_i $$
+\\\\
+(\textit{Total Number of Roles})   $TNR = \sum_{i=1}^{n} tnr_i $
+(\textit{Total Number of Operation})   $TNO = \sum_{i=1}^{n} tno_i $
+(\textit{Total Number of Parameters})  $TNP = \sum_{i=1}^{n} tnp_i $
+(\textit{Total Number of Class Attributes})  $TNCA = \sum_{i=1}^{n} tnca_i $
+
 \begin{description}
- \item [Primitive Metrics] - \begin{itemize}
-				\item TNC - Total number of class  = $ \sum_{i=1}^{n} tnc_i $
-				\item TNIR - Total Number of Inheritance Relationships  = $ \sum_{i=1}^{n} tnir_i $
-				\item TNRR - Total Number of Realization Relationships  = $ \sum_{i=1}^{n} tnrr_i $
-				\item TNUR - Total Number of Use Relationships  = $ \sum_{i=1}^{n} tnur_i $
-				\item TNA - Total Number of Associations  = $ \sum_{i=1}^{n} tna_i $
-				\item TNR - Total Number of Roles  = $ \sum_{i=1}^{n} tnr_i $
-				\item TNO - Total Number of Operation  = $ \sum_{i=1}^{n} tno_i $
-				\item TNP - Total Number of Parameters  = $ \sum_{i=1}^{n} tnp_i $
-				\item TNCA - Total Number of Class Attributes  = $ \sum_{i=1}^{n} tnca_i $
-			    \end{itemize}
  \item [Fault-Proneness Metrics] - \begin{itemize}
                                    \item WMC - Weighted Method per Class  = $ \sum_{i=1}^{n} c_i $ , onde $c_i$ é a complexidade dos métodos.
 				   \item NOC - Number of Children per Class = $ \sum_{i=1}^{n} sc_i $ , onde $sc_i$ é o número de subclasses imediatas.
