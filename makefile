@@ -5,7 +5,8 @@
 CAT=$(shell cat .gitignore)
 
 clean:
-	`for f in $(CAT) ; do find . -iname $$f | xargs rm -f ; done`
+	@echo "A fazer nigalhadas inventadas pelo Ulisses"
+	@`for f in $(CAT) ; do find . -iname $$f | xargs rm -f ; done`
 
 #
 # To install you need to execute with 'sudo'.
