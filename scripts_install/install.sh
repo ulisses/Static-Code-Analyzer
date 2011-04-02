@@ -65,6 +65,14 @@ function is_perl_module_installed {
 	fi
 }
 
+function check_user_id {
+	if [[ $(/usr/bin/id -u) -ne 0 ]]; then
+		echo "Not running as root. Yes this is an installation file..."
+		exit 1 ;
+	fi
+}
+
+check_user_id
 install_package
 
 exit 0;
