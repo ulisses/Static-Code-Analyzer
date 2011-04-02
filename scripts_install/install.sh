@@ -66,7 +66,7 @@ function is_perl_module_installed {
 }
 
 function check_user_id {
-	if [[ $(/usr/bin/id -u) -ne 0 ]]; then
+	if [ ! "`whoami`" = "root" ]; then
 		echo "Not running as root. Yes this is an installation file..."
 		exit 1 ;
 	fi

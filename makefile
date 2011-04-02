@@ -5,7 +5,7 @@
 CAT=$(shell cat .gitignore)
 
 clean:
-	@echo "A fazer nigalhadas inventadas pelo Ulisses"
+	@echo "Cleaning the shop..."
 	@`for f in $(CAT) ; do find . -iname $$f | xargs rm -f ; done`
 
 #
