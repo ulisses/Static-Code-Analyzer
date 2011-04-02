@@ -50,45 +50,26 @@ $$V(M_{mi}) = \frac{\sum_{j=i}^{rc} is\_visible(M_{mi},C_j)}{TC-1} $$
 	\right.\\
 0 & \quad otherwise\\
 \end{array} \right. \]
-
 $$TC = \textrm{Número total de classes}$$
-
 $$Md = \textrm{Número total de métodos definidos}$$
+$$V(M_{mi}) = \textrm{A visibilidade de todas as classes onde o método $M_{mi}$ é visível}$$
+\\
+De seguinda temos a métrica que mede a herdagem através de atributos (\textit{Method Inheritance Factor} $$MIF = \frac{\sum_{i=1}^{rc} M_i(C_i)}{\sum_{i=1}^{rc} M_a(C_i)} $$
+onde:
+$$ M_a(C_i) = Md(C_i) + M_i(C_i)\textrm{, é o número total de métodos disponíveis}$$
+De recordar que por métodos disponíveis entende-se os definidos localmente mais os herdados.
 
-$$V(M\_{mi}) = \textrm{A visibilidade de todas as classes onde o método $M_{mi}$ é visível}$$
-
-\begin{description}
- \item [Quality Measure Metrics] - \begin{itemize}
-								   
-				   \item AHF - Attribute Hiding Factor = $ \frac{\sum_{i=1}^{rc} \sum_{m=1}^{Ad(c_i)} (1-V(A_{mi}))} {\sum_{i=1}^{rc} Ad(c_i)} $ onde: \begin{itemize}
-																				      \item $V(A_{mi})$ = $\frac{\sum_{j=i}^{rc} is\_visible(A_{mi},C_j)}{TC-1} $
-																				      \item $ is\_visible(A_{mi},C_j) $ = \( \left \{ \begin{array}{l l}
-																									      1 & \quad iff \left \{ \begin{array}{l l}
-																									                              j \neq i \\
-																												      C_j \texttt{may call} A_{mi}\\
-																									                             \end{array}
-\right.\\
-																									      0 & \quad otherwise\\
-																									    \end{array} \right. \)
-																				      \item TC $=$ Número total de classes
-																				      \item Ad $=$ Número total de atributos definidos
-																				      \item $V(A_{mi})$ $=$ A visibilidade de todas as classes onde o atributo $A_{mi}$ é visível
-																				      \item AHF é então a medida do uso de informação através de atributos
-																				    \end{itemize}
-				   \item MIF - Method Inheritance Factor = $ \frac{\sum_{i=1}^{rc} M_i(C_i)}{\sum_{i=1}^{rc} M_a(C_i)} $ onde: \begin{itemize}
-				                                                                                                                \item $ M_a(C_i) = Md(C_i) + M_i(C_i)$, é o número total de métodos disponíveis(definidos localmente mais os herdados)
-				                                                                                                                \item MIF é então a medida de herdagem através de métodos
-				                                                                                                               \end{itemize}
-				   \item AIF - Attribute Inheritance Factor = $ \frac{\sum_{i=1}^{rc} A_i(C_i)}{\sum_{i=1}^{rc} A_a(C_i)} $ onde: \begin{itemize}
-				                                                                                                                \item $ A_a(C_i) = Ad(C_i) + A_i(C_i)$, é o número total de atributos disponíveis(definidos localmente mais os herdados)
-				                                                                                                                \item MIF é então a medida de herdagem através de atributos
-				                                                                                                               \end{itemize}
-
-                                  \end{itemize}
- \item [Use Case Metrics] - Para se obter complexidade dinâmica através da informação obtida de um diagrama Use Case:\begin{itemize}
-                             \item NOA - Number of actors = $ \sum_{i=1}^{n} noa_i $
-                             \item NOUC - Number of use cases = $ \sum_{i=1}^{n} nouc_i $
-                             \item NOUCA - Use cases per Actor = $ \sum_{i=1}^{n} nouca_i $
-                            \end{itemize}
-  
-\end{description}
+Por último temos o factor de herança de atributos (\textit{Attribute Inheritance Factor}) $$AIF = \frac{\sum_{i=1}^{rc} A_i(C_i)}{\sum_{i=1}^{rc} A_a(C_i)} $$
+onde:
+$$ A_a(C_i) = Ad(C_i) + A_i(C_i)\textrm{, é o número total de atributos disponíveis}$$
+\paragraph{Métricas sobre Use Cases} (\textit{Use Case Metrics}) embora estejamos mais focados para as métricas sobre diagramas de classes,
+também existem métricas que se aplicam a outros tipos de diagramas, como os Use Cases, assim é importante também explicar algumas elas
+relativamente a uma anãlise quantitativa do sistema no que diz respeito à informação que conseguimos extraír de um diagrama deste tipo.
+Assim conseguimos obter a complexidade do sistema através da informação obtida de um diagrama Use Case:
+Contabilizar o número de actores, para ter uma noção sobre a quantidade de grupos de pessoas que
+vão interagir com o sistema (\textit{Number of actors})  $$NOA = \sum_{i=1}^{n} noa_i $$
+\\
+O número de Use Cases que o sistema modela (\textit{Number of use cases})  $$NOUC = \sum_{i=1}^{n} nouc_i $$
+\\
+O nºumeor de Use Cases que cada actor tem diz-nos ou pode indicar a extensão com que cada utilizador pode
+usufruir do sistema (\textit{Use cases per Actor}) $$UCPA = \sum_{i=1}^{n} nouca_i $$
