@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99c (TeX Live 2009)
+The top-level auxiliary file: rel.aux
+The style file: alpha.bst
+Database file #1: bibPaper.bib
+Warning--to sort, need author or key in SDMetrics
+Warning--empty institution in Power
+You've used 3 entries,
+            2543 wiz_defined-function locations,
+            576 strings with 4834 characters,
+and the built_in function-call counts, 966 in all, are:
+= -- 97
+> -- 39
+< -- 0
++ -- 14
+- -- 12
+* -- 64
+:= -- 162
+add.period$ -- 8
+call.type$ -- 3
+change.case$ -- 17
+chr.to.int$ -- 3
+cite$ -- 6
+duplicate$ -- 35
+empty$ -- 75
+format.name$ -- 14
+if$ -- 194
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 1
+newline$ -- 17
+num.names$ -- 6
+pop$ -- 18
+preamble$ -- 1
+purify$ -- 19
+quote$ -- 0
+skip$ -- 34
+stack$ -- 0
+substring$ -- 49
+swap$ -- 2
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 24
+warning$ -- 2
+while$ -- 8
+width$ -- 5
+write$ -- 36
+(There were 2 warnings)

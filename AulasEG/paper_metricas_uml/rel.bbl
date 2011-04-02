@@ -1,0 +1,18 @@
+\begin{thebibliography}{MP06}
+
+\bibitem[CK94]{Chidamber:1994:MSO:630808.631131}
+S.~R. Chidamber and C.~F. Kemerer.
+\newblock A metrics suite for object oriented design.
+\newblock {\em IEEE Trans. Softw. Eng.}, 20:476--493, June 1994.
+
+\bibitem[MP06]{Power}
+Jacqueline~A. Mcquillan and James~F. Power.
+\newblock A definition of the chidamber and kemerer metrics suite for the
+  unified modeling language.
+\newblock Technical report, 2006.
+
+\bibitem[SDM]{SDMetrics}
+Sdmetrics.
+\newblock \url{http://www.sdmetrics.com/}.
+
+\end{thebibliography}
