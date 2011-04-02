@@ -1,5 +1,5 @@
-Temos então 4 grandes grupos de medidas que pudemos usar para definir as fórmulas que vão ser usadas para análise dos diagramas e consequentemente extracção de uma métrica
-de qualidade para os diagramas UML.
+Temos então quatro grandes grupos de medidas que pudemos usar para definir as fórmulas que vão ser usadas para análise dos diagramas e
+consequentemente extracção de uma métrica de qualidade para os diagramas UML.
 \paragraph{Métricas primitivas} que consistem na extracção bruta de informaçao no que diz respeito á quantidade de métodos, classes, parametros, etc.
 Temos que o número total de classes (\textit{Total Number of Classes}) é $$TNC = \sum_{i=1}^{n} tnc_i $$
 o número total de relações herdadas (\textit{Total Number of Inheritance Relationships})  $$TNIR = \sum_{i=1}^{n} tnir_i $$
@@ -7,34 +7,59 @@ o número total de relações que ão sejam herdadas (\textit{ Total Number of R
 uma relação entre dois elementos do modelo UML, entre dois diagramas de classes, cujo elemento cliente conhece o comportamento do outro elemento a que ele está ligado.
 Temos ainda a contagem do número total de relações que existem (\textit{Total Number of Use Relationships})  $$TNUR = \sum_{i=1}^{n} tnur_i $$
 o número total de associações (\textit{Total Number of Associations})    $$TNA = \sum_{i=1}^{n} tna_i $$
-\\\\
-(\textit{Total Number of Roles})   $TNR = \sum_{i=1}^{n} tnr_i $
-(\textit{Total Number of Operation})   $TNO = \sum_{i=1}^{n} tno_i $
-(\textit{Total Number of Parameters})  $TNP = \sum_{i=1}^{n} tnp_i $
-(\textit{Total Number of Class Attributes})  $TNCA = \sum_{i=1}^{n} tnca_i $
+Uma associação representa uma relação entre duas classes. Por exemplo, numa relação entre duas classes, podemos usar associações para mostrar as decisões de design
+que fizemos sobre a classe e para mostrar ainda que classe precisa dos atributos da outra.
+Número total de operações (\textit{Total Number of Operation})   $$TNO = \sum_{i=1}^{n} tno_i $$
+Número total de parametros (\textit{Total Number of Parameters})  $$TNP = \sum_{i=1}^{n} tnp_i $$
+Número total de atributos de uma classe (\textit{Total Number of Class Attributes})  $$TNCA = \sum_{i=1}^{n} tnca_i $$
+
+\paragraph{Métricas de propensão a falhas} (\textit{Fault-Proneness Metrics}) este grupo de métricas tem este nome porque são muito orientadas a hierarquia dos diagramas
+de classes, assim sendo se houver um erro numa classe root esse erro será propagado para as classes filho que herdam.
+Temos três formulas que nos ajudam a ganhar conhecimento sobre a propensão a falhas que o nosso diagrama de classes tem:
+Peso de cada método por classe (\textit{Weighted Method per Class}) 
+\begin{displaymath}
+WMC = \sum_{i=1}^{n} c_i  \textrm{, onde $c_i$ é a complexidade dos métodos.}
+\end{displaymath}
+
+Número de sub classes que cada classe tem (\textit{Number of Children per Class})
+\begin{displaymath}
+NOC = \sum_{i=1}^{n} sc_i  \textrm{, onde $sc_i$ é o número de subclasses imediatas.}
+\end{displaymath}
+Profundidade da árvore de herança (\textit{Depth of Inheritance Tree})
+\begin{displaymath}
+DIT = max\_leng  \textrm{, onde $ max\_leng $ é o comprimento máximo desde a raiz até à folha.}
+\end{displaymath}
+
+\paragraph{Métricas de qualidade} (\textit{Quality Measure Metrics}) Este grupo de métricas são as mais interessantes do ponto de vista da qualidade, visto que
+usam as anteriormente definidas como ferramenta para se chegar a uma conclusão sobre a qualidade do diagrama UML em questão.
+Os diagramas de UML, tal como as linguagens de programação que recorrem ao modelo orientado a objectos teem a noção de protecção de elementos que definem uma class,
+quer seja um método, uma variável de instância ou uma propriedade. Por isso é importante medir também este factor, assime existe o MHF (\textit{Method Hiding Factor}),
+podemos dizer que esta métrica é a medida do uso de informação através de métodos e define-se por:
+\begin{displaymath}
+\frac{\sum_{i=1}^{rc} \sum_{m=1}^{Md(c_i)} (1-V(M_{mi}))} {\sum_{i=1}^{rc} Md(c_i)}
+\end{displaymath}
+onde:
+$$V(M_{mi}) = \frac{\sum_{j=i}^{rc} is\_visible(M_{mi},C_j)}{TC-1} $$
+
+\[ is\_visible(M_{mi},C_j) = \left\{ \begin{array}{l l}
+	1 & \quad iff \left \{
+		\begin{array}{l l}
+			j \neq i \\
+			C_j \texttt{may call} M_{mi}\\
+		\end{array}
+	\right.\\
+0 & \quad otherwise\\
+\end{array} \right. \]
+
+$$TC = \textrm{Número total de classes}$$
+
+$$Md = \textrm{Número total de métodos definidos}$$
+
+$$V(M\_{mi}) = \textrm{A visibilidade de todas as classes onde o método $M_{mi}$ é visível}$$
 
 \begin{description}
- \item [Fault-Proneness Metrics] - \begin{itemize}
-                                   \item WMC - Weighted Method per Class  = $ \sum_{i=1}^{n} c_i $ , onde $c_i$ é a complexidade dos métodos.
-				   \item NOC - Number of Children per Class = $ \sum_{i=1}^{n} sc_i $ , onde $sc_i$ é o número de subclasses imediatas.
-				   \item DIT - Depth of Inheritance Tree  = $ max_leng $ , onde $ max_leng $ é o comprimento máximo desde a raiz até à folha.
-                                  \end{itemize}
  \item [Quality Measure Metrics] - \begin{itemize}
-                                   \item MHF - Method Hiding Factor = $ \frac{\sum_{i=1}^{rc} \sum_{m=1}^{Md(c_i)} (1-V(M_{mi}))} {\sum_{i=1}^{rc} Md(c_i)} $ onde: \begin{itemize}
-																				      \item $V(M_{mi})$ = $\frac{\sum_{j=i}^{rc} is\_visible(M_{mi},C_j)}{TC-1} $
-																				      \item $ is\_visible(M_{mi},C_j) $ = \( \left \{ \begin{array}{l l}
-																									      1 & \quad iff \left \{ \begin{array}{l l}
-																									                              j \neq i \\
-																												      C_j \texttt{may call} M_{mi}\\
-																									                             \end{array}
-\right.\\
-																									      0 & \quad otherwise\\
-																									    \end{array} \right. \)
-																				      \item TC $=$ Número total de classes
-																				      \item Md $=$ Número total de métodos definidos
-																				      \item $V(M_{mi})$ $=$ A visibilidade de todas as classes onde o método $M_{mi}$ é visível
-																				      \item MHF é então a medida do uso de informação através de métodos
-																				    \end{itemize}
+								   
 				   \item AHF - Attribute Hiding Factor = $ \frac{\sum_{i=1}^{rc} \sum_{m=1}^{Ad(c_i)} (1-V(A_{mi}))} {\sum_{i=1}^{rc} Ad(c_i)} $ onde: \begin{itemize}
 																				      \item $V(A_{mi})$ = $\frac{\sum_{j=i}^{rc} is\_visible(A_{mi},C_j)}{TC-1} $
 																				      \item $ is\_visible(A_{mi},C_j) $ = \( \left \{ \begin{array}{l l}
