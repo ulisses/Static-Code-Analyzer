@@ -52,26 +52,27 @@ function install_aptitude_modules {
 
 function install_perl_modules {
 	perl -MCPAN -e '$CPAN->{prerequisites_policy}=follow'
-	if_not_exist_install_perl_modules Makefile::Parser Parse::Yapp
-	if_not_exist_install_perl_modules GD GD::Graph GD::Graph::bars GD::Graph::pie Path::Class
-	if_not_exist_install_perl_modules Moose 
-	if_not_exist_install_perl_modules Term::ReadLine Term::ReadLine::Gnu 
-	if_not_exist_install_perl_modules Digest::SHA 
-	if_not_exist_install_perl_modules DBIx DBIx:Class
-	if_not_exist_install_perl_modules Data::Dumper 
+	local packages=(Makefile::Parser Parse::Yapp  GD GD::Graph GD::Graph::bars GD::Graph::pie Path::Class
+	          Moose Term::ReadLine Term::ReadLine::Gnu Digest::SHA DBIx::Class Data::Dumper)
+	
+	if_not_exist_install_perl_modules ${packages[@]}
 }
 
 function if_not_exist_install_perl_modules {
+	local packages=()
+	
 	for module in $@; do
 		is_perl_module_installed $module
 		if [ $? -eq 1 ]; then
 			echo "$module installed";
 		else
 			echo "$module not installed, installing...";
-			EXEC="cpan -if $module"
-			$EXEC
+			packages[$[${#packages[@]}+1]]=$module;
 		fi
 	done;
+	
+	EXEC="cpan -if ${packages[@]}"
+	$EXEC
 }
 
 function is_perl_module_installed {
