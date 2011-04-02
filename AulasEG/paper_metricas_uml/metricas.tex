@@ -14,9 +14,9 @@ plausibel que os diagrama de estado possam ser usados para calcular este valor p
 \textbf{Depth of inheritance tree} (DIT):
 Esta é uma medida de profundidade da classe relativamente à sua árvore de herança. Esta métrica define-se por ser igual à distaância máxima
 desde a classe até á sua super classe root na árvore de herança. Esta métrica pode ser calculada para uma classe fazendo a união de todos os diagramas
-de classe num modelo UML e atravessando a hierarquia de herança desta classe.\\
+de classe num modelo \umlS e atravessando a hierarquia de herança desta classe.\\
 
-\textbf{Number of children} (NOC): Esta métrica representa o número de decendentes imediatos de uma determinada classe. Esta métrica pode ser obtida ao juntar todos os diagramas de classes numa modelação UML e verificar todas as relações de herança da classe.\\
+\textbf{Number of children} (NOC): Esta métrica representa o número de decendentes imediatos de uma determinada classe. Esta métrica pode ser obtida ao juntar todos os diagramas de classes numa modelação \umlS e verificar todas as relações de herança da classe.\\
 
 \textbf{Coupling between object classes}: Duas classes estão relacionadas se o método de uma classe usa uma variável de instância ou um método da outra classe. Uma estimativa desta métrica pode ser obtida a partir dos diagramas de classes, contando o número de classes relacionadas com a classe em questão e contando todos os tipos de referência dos atributos e todos os parâmetros dos métodos da classe. Para obter um valor mais fidedigno, pode ter em conta informação dada pelos diagramas comportamentais, de forma a obter mais informação sobre o uso das variáveis de instância e de métodos de invocação. O diagrama de sequência, por exemplo, oferece informação directa sobre interacções entre métodos de classes diferentes. \\
 
@@ -25,3 +25,12 @@ de classe num modelo UML e atravessando a hierarquia de herança desta classe.\\
 
 \textbf{Lack of cohesion in methods} (LCOM)- ou seja, falta de coesão entre métodos. Calcular esta métrica para uma dada classe envolve descobrir, para cada possível par de métodos, se os conjuntos de variáveis de instância acedidos por cada método têm uma interseção que não um conjunto vazio.
 Para ser possível computar um valor para esta métrica, informação do modo de uso das variáveis de instância pelos métodos de uma classe é essencial. Esta informação não pode ser obtida através de uma diagrama de classes. No entanto, o valor máximo para esta métrica pode ser computado usando o número de métodos na classe. Diagramas contendo essa informação sobre o uso das variáveis, por exemplo, os diagramas sequenciais podem ser usados para calcular esta métrica.\\
+
+O conjunto de métricas aqui definidas são referidos em vários papers e sem sombra de dúvidas são as mais estudadas, e também as mais utilizadas para avaliar modelos \uml.\\
+Estas focam-se mais nos diagramas de classes visto estes serem os que mais facilmente se relacionam com código e é preciso ter em consideração que como estas regras derivam 
+directamente do paradigma Orientado-a-Objectos, é mais fácil aplicá-las aos diagramas de classes. Para além disso este tipo de diagrams do ponto de vista da implementação 
+dão uma visão mais geral do sistema que modela.\\
+Estas métricas em particular são detalhadas por McQuillan e Power em~\cite{Power}. Também existe o SDMetrics software~\cite{SDMetrics} que avalia além destas, um conjunto
+ mais extenso de métricas, que analisam outros diagramas além do de classes, como por exemplo os diagramas de estados e de actividades. \\ 
+Como grande parte das métricas derivam de fórmulas matemáticas, no capítulo seguinte serão apresentadas algumas que são essenciais para o cálculo dos
+valores das métricas apresentadas anteriormente.
