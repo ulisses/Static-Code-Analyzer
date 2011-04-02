@@ -26,3 +26,8 @@
 *.blg
 *.fdb_latexmk
 *.gz
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
