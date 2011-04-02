@@ -54,6 +54,11 @@ function install_perl_modules {
 	perl -MCPAN -e '$CPAN->{prerequisites_policy}=follow'
 	if_not_exist_install_perl_modules Makefile::Parser Parse::Yapp
 	if_not_exist_install_perl_modules GD GD::Graph GD::Graph::bars GD::Graph::pie Path::Class
+	if_not_exist_install_perl_modules Moose 
+	if_not_exist_install_perl_modules Term::ReadLine 
+	if_not_exist_install_perl_modules Digest::SHA 
+	if_not_exist_install_perl_modules DBIx DBIx:Class
+	if_not_exist_install_perl_modules Data::Dumper 
 }
 
 function if_not_exist_install_perl_modules {
