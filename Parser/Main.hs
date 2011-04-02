@@ -42,7 +42,7 @@ process file = do
 	case stream of
 		( Left error  ) -> print error
 		--( Right cprog ) -> f cprog
-		( Right cprog ) -> print "OK"
+		( Right cprog ) -> print cprog
 
 f :: CTranslUnit -> IO()
 f (CTranslUnit l n) = mapM_ g l
