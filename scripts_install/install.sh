@@ -55,7 +55,7 @@ function install_perl_modules {
 	if_not_exist_install_perl_modules Makefile::Parser Parse::Yapp
 	if_not_exist_install_perl_modules GD GD::Graph GD::Graph::bars GD::Graph::pie Path::Class
 	if_not_exist_install_perl_modules Moose 
-	if_not_exist_install_perl_modules Term::ReadLine 
+	if_not_exist_install_perl_modules Term::ReadLine Term::ReadLine::Gnu 
 	if_not_exist_install_perl_modules Digest::SHA 
 	if_not_exist_install_perl_modules DBIx DBIx:Class
 	if_not_exist_install_perl_modules Data::Dumper 
