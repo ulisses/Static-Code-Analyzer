@@ -34,8 +34,20 @@ function install_macosx {
 }
 
 function install_ubuntu {
-	aptitude install libgd-dev
+	install_aptitude_modules libgd-dev
 	install_perl_modules
+}
+
+function install_aptitude_modules {
+	for pkg in $@; do
+		dpkg -s $pkg
+		if [ $? -eq 0 ]; then
+			echo "module $pkg installed"
+		else
+			echo "module $pkg not installed, installing..."
+			aptitude --assume-yes install $pkg
+		fi
+	done;
 }
 
 function install_perl_modules {
