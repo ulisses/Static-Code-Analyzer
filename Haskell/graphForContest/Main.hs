@@ -14,15 +14,9 @@ import System.Random
 import System.Environment(getArgs)
 import Prices(prices1)
 
--- demonstrate AreaSpots4D
-
 main = getArgs >>= ren
 
 ren _ = renderableToPNGFile (toRenderable l) 800 600 "out.png"
---ll = defaultLayout1 {
-		
-	
---	}
 
 l = layout1_title ^="Price History"
     $ layout1_background ^= solidFillStyle (opaque white)
@@ -36,9 +30,7 @@ f = area_spots_4d_title ^= "random value"
     $ area_spots_4d_values  ^= values
     $ defaultAreaSpots4D
 
-values = [ (d, v, z, t) | ((d,v,z),_,t) <- zip3 prices1 zs ts ]
-    where zs,ts :: [Int]
-          zs     = randoms $ mkStdGen 0
-          ts     = randomRs (-2,27) $ mkStdGen 1
-          tss    = randomRs (-2,27) $ mkStdGen 1
+values = [ (d, v, z, t) | ((d,v,z),t) <- zip prices colours ]
+    where colours :: [Int]
+          colours = [1..]
 
