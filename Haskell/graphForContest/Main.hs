@@ -1,5 +1,8 @@
 {-# OPTIONS -XNoMonomorphismRestriction #-}
-module Main where  
+
+-- example folder: /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/sample_app/data/concursos/contest-1/en-1/user-1/tent-20110303163050/
+
+module Main where
 
 import Graphics.Rendering.Chart
 import Graphics.Rendering.Chart.Gtk
@@ -13,52 +16,29 @@ import Prices(prices1)
 
 -- demonstrate AreaSpots4D
 
-chart :: Double -> Renderable ()
-chart lwidth = toRenderable layout
-    where
-        layout = layout1_title ^="Price History"
-            $ layout1_background ^= solidFillStyle (opaque white)
-            $ layout1_left_axis ^: laxis_override ^= axisTicksHide
-            $ layout1_plots ^= [ Left (toPlot price1), Left (toPlot spots) ]
-            $ setLayout1Foreground (opaque black)
-            $ defaultLayout1
-        price1 = area_spots_4d_title ^= "random value"
-            $ area_spots_4d_max_radius ^= 20
-            $ area_spots_4d_values ^= values
-            $ defaultAreaSpots4D
-        spots = area_spots_4d_title ^= "random value"
-            $ area_spots_4d_max_radius ^= 20
-            $ area_spots_4d_values ^= values
-            $ defaultAreaSpots4D
+main = getArgs >>= ren
 
-        points = map (\ (d,v,z,t)-> (d,v) ) values
-        values = [ (d, v, z, t) | ((d,v,_),z,t) <- zip3 prices1 zs ts ]
-        zs,ts :: [Int]
-        zs     = randoms $ mkStdGen 0
-        ts     = randomRs (-2,27) $ mkStdGen 1
-        lineStyle = line_width ^= 3 * lwidth
-            $ line_color ^= opaque blue
-            $ defaultPlotLines ^. plot_lines_style
+ren _ = renderableToPNGFile (toRenderable l) 800 600 "out.png"
+--ll = defaultLayout1 {
+		
+	
+--	}
 
-main1 :: [String] -> IO (PickFn ())
-main1 ["small"]  = renderableToPNGFile (chart 0.25) 320 240 "test14_small.png"
-main1 ["big"]    = renderableToPNGFile (chart 0.25) 800 600 "test14_big.png"
-main1 _          = renderableToWindow  (chart 1.00) 640 480 >> return undefined
-
-main = getArgs >>= main2
-
-main2 _ = renderableToPNGFile (toRenderable l) 320 320 "out.png"
 l = layout1_title ^="Price History"
+    $ layout1_background ^= solidFillStyle (opaque white)
+    $ layout1_left_axis ^: laxis_override ^= axisTicksHide
     $ layout1_plots ^= [ Left (toPlot f) ]
+    $ setLayout1Foreground (opaque black)
     $ defaultLayout1
-
 
 f = area_spots_4d_title ^= "random value"
     $ area_spots_4d_max_radius ^= 20
-    $ area_spots_4d_values  ^= v
+    $ area_spots_4d_values  ^= values
     $ defaultAreaSpots4D
-	where
-		v :: [(Int,Int,Int,Int)]
-		v =  [(1,2,3,0),(2,3,4,0)]
 
+values = [ (d, v, z, t) | ((d,v,z),_,t) <- zip3 prices1 zs ts ]
+    where zs,ts :: [Int]
+          zs     = randoms $ mkStdGen 0
+          ts     = randomRs (-2,27) $ mkStdGen 1
+          tss    = randomRs (-2,27) $ mkStdGen 1
 
