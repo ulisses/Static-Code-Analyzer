@@ -60,7 +60,7 @@
 }
 % % % fim do listings e ref
 
-\title{GD::Graph - Graph Plotting Module}
+\title{Stanford Parser e Tregex}
 \author{José Pedro Silva \and
 Pedro Faria \and
 Ulisses Costa
@@ -68,7 +68,7 @@ Ulisses Costa
 
 \date{\today}
 \institute{Engenharia de Linguagens\\
-Projecto integrado
+Processamento de Linguagem Natural
 }
 
 \AtBeginSubsection[] {
@@ -89,25 +89,93 @@ Projecto integrado
    \titlepage
 \end{frame}
 
-\begin{frame} \frametitle{Description}
-GD::Graph is a perl5 module to create charts using the GD module. The following classes for graphs with axes are defined:
+\section{Stanford}
+\begin{frame} \frametitle{Stanford}
+\begin{itemize}
+ \item Software desenvolvido na Universidade de Stanford.
+ \item Parser dedicado a extrair a estrutura gramatical de frases em linguagem natural.
+ \item Entre as linguagens disponíveis temos: \begin{itemize}
+                                               \item Inglês
+					       \item Alemão
+					       \item Mandarim
+					       \item Árabe
+                                              \end{itemize}
+ \item Usado também para outras línguas (como o Português).
+\end{itemize}
+
+\end{frame}
+
+\subsection{Interfaces}
+\begin{frame} \frametitle{Interfaces}
+ A aplicação, desenvolvida em \emph{Java}, tem disponível duas interfaces:
 \begin{description}
-\item[GD::Graph::lines] Create a line chart.
-\item[GD::Graph::bars] Create a bar chart with vertical or horizontal bars.
-\item[GD::Graph::linespoints] Combination of lines and points.
-\item[GD::Graph::area] Create a graph, representing the data as areas under a line.
-\item[GD::Graph::pie] Create a pie chart.
+ \item [Gráfica], usando tecnologia \emph{Java Swing}
+ \item [Pelo terminal], através de \emph{scripts} escritos em \emph{csh}, uma linguagem \emph{bash} com \emph{syntax} equivalente a linguagem \texttt{C}
 \end{description}
+Optou-se por conduzir a exploração da ferramenta apenas pelo terminal.
+\end{frame}
+
+\subsection{Exemplos}
+\begin{frame} \frametitle{Exemplo}
+ Usou-se como caso de estudo o ficheiro \texttt{exem} com a frase:
+ 
+\begin{block}{exem}
+A simple complete sentence consists of a single clause.
+\end{block}
+
+\end{frame}
+
+\begin{frame}\frametitle{Output 1}
+O primeiro \emph{output} produzido é uma árvore com a estrutura gramatical da frase. Cada nodo da árvore está também decorado com
+uma \emph{tag} correspondendo ao valor sintático da palavra:\\
+\begin{lstlisting}
+ (ROOT
+  (S
+    (NP (DT A) (JJ simple) (JJ complete) (NN sentence))
+    (VP (VBZ consists)
+      (PP (IN of)
+        (NP (DT a) (JJ single) (NN clause))))
+    (. .)))
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}\frametitle{\emph{Tags}}
+Lista de algumas definições de \emph{tags} do exemplo anterior.\\
+ \begin{description}
+  \item [S] - frase.
+  \item [DT] - determinante.
+  \item [JJ] - adjectivo ou numeral.
+  \item [NN] - nome.
+  \item [VBZ] - verbo no presente da 3\ª pessoa do singular.
+  \item [IN] - preposição ou conjunção.
+ \end{description}
+\end{frame}
+
+\begin{frame}\frametitle{Output 2}
+ O segundo \emph{output} trata de apresentar relações gramaticais entre as palavras:
+
+\begin{lstlisting}
+det(sentence-4, A-1)
+amod(sentence-4, simple-2)
+amod(sentence-4, complete-3)
+nsubj(consists-5, sentence-4)
+det(clause-9, a-7)
+amod(clause-9, single-8)
+prep_of(consists-5, clause-9)
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}\frametitle{Exemplo de Relação}
+  O seguinte output
+ \begin{block}
+  det(sentence-4, A-1)
+ \end{block}
+  representa a relação entre o determinante \texttt{'A'} com o nome \texttt{'sentence'}
+
 \end{frame}
 
 
-\begin{frame}[fragile] \frametitle{Overwrite bars - Output}
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=0.9\textwidth]{image/image_LinesPerLanguage.png}
-\end{center}
-\end{figure}
-\end{frame}
 \section*{Perguntas}
 \begin{frame} \frametitle{Perguntas}
 \begin{center}\huge{?}\end{center}
