@@ -6,7 +6,7 @@ consequentemente extracção de uma métrica de qualidade para os diagramas UML.
 \paragraph{Métricas primitivas} que consistem na extracção bruta de informaçao no que diz respeito á quantidade de métodos, classes, parametros, etc.
 Temos que o número total de classes (\textit{Total Number of Classes}) é $$TNC = \sum_{i=1}^{n} tnc_i $$
 o número total de relações herdadas (\textit{Total Number of Inheritance Relationships})  $$TNIR = \sum_{i=1}^{n} tnir_i $$
-o número total de relações que ão sejam herdadas (\textit{ Total Number of Realization Relationships})  $$TNRR = \sum_{i=1}^{n} tnrr_i $$ por isto entende-se
+o número total de relações que não sejam herdadas (\textit{ Total Number of Realization Relationships})  $$TNRR = \sum_{i=1}^{n} tnrr_i $$ por isto entende-se
 uma relação entre dois elementos do modelo UML, entre dois diagramas de classes, cujo elemento cliente conhece o comportamento do outro elemento a que ele está ligado.
 Temos ainda a contagem do número total de relações que existem (\textit{Total Number of Use Relationships})  $$TNUR = \sum_{i=1}^{n} tnur_i $$
 o número total de associações (\textit{Total Number of Associations})    $$TNA = \sum_{i=1}^{n} tna_i $$
@@ -35,8 +35,8 @@ DIT = max\_leng  \textrm{, onde $ max\_leng $ é o comprimento máximo desde a r
 
 \paragraph{Métricas de qualidade} (\textit{Quality Measure Metrics}) Este grupo de métricas são as mais interessantes do ponto de vista da qualidade, visto que
 usam as anteriormente definidas como ferramenta para se chegar a uma conclusão sobre a qualidade do diagrama UML em questão.
-Os diagramas de UML, tal como as linguagens de programação que recorrem ao modelo orientado a objectos teem a noção de protecção de elementos que definem uma class,
-quer seja um método, uma variável de instância ou uma propriedade. Por isso é importante medir também este factor, assime existe o MHF (\textit{Method Hiding Factor}),
+Os diagramas de UML, tal como as linguagens de programação que recorrem ao modelo orientado a objectos têm a noção de protecção de elementos que definem uma classe,
+quer seja um método, uma variável de instância ou uma propriedade. Por isso é importante medir também este factor, assim existe o MHF (\textit{Method Hiding Factor}),
 podemos dizer que esta métrica é a medida do uso de informação através de métodos e define-se por:
 \begin{displaymath}
 \frac{\sum_{i=1}^{rc} \sum_{m=1}^{Md(c_i)} (1-V(M_{mi}))} {\sum_{i=1}^{rc} Md(c_i)}
@@ -67,7 +67,7 @@ onde:
 $$ A_a(C_i) = Ad(C_i) + A_i(C_i)\textrm{, é o número total de atributos disponíveis}$$
 \paragraph{Métricas sobre Use Cases} (\textit{Use Case Metrics}) embora estejamos mais focados para as métricas sobre diagramas de classes,
 também existem métricas que se aplicam a outros tipos de diagramas, como os Use Cases, assim é importante também explicar algumas elas
-relativamente a uma anãlise quantitativa do sistema no que diz respeito à informação que conseguimos extraír de um diagrama deste tipo.
+relativamente a uma análise quantitativa do sistema no que diz respeito à informação que conseguimos extraír de um diagrama deste tipo.
 Assim conseguimos obter a complexidade do sistema através da informação obtida de um diagrama Use Case:
 Contabilizar o número de actores, para ter uma noção sobre a quantidade de grupos de pessoas que
 vão interagir com o sistema (\textit{Number of actors})  $$NOA = \sum_{i=1}^{n} noa_i $$
