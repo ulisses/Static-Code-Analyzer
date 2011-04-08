@@ -1,19 +1,19 @@
 As métricas para avaliação de  software estão bem mais desenvolvidas que as métricas para linguagens de modelação. É então interessante ter em conta o estudo já realizado sobre métricas para avaliação de código, como é o caso das CK Metrics, como ponto de partida para métricas de modelação.\\
-As CK Metrics, umas das primeiras métricas para o modelo Orientado a Objectos (OO), foram propostas por Chidamber e  Kemerer \cite{Chidamber:1994:MSO:630808.631131}. O conjunto das CK Metrics consiste em seis métricas: Weighted Methods Per Class (WMC), Depth of Inheritance Tree (DIT), Number of Children (NOC), Coupling between Object Classes (CBO), Response For a Class (RFC), e Lack of Cohesion in Methods (LCOM). Estas métricas foram depois adaptadas para linguagens de modelação. De seguida, será explicado como são calculadas cada uma das métricas referidas.
+As CK Metrics, umas das primeiras métricas para o modelo Orientado a Objectos (OO), foram propostas por Chidamber e  Kemerer \cite{Chidamber:1994:MSO:630808.631131}. O conjunto das CK Metrics consiste em seis métricas: Weighted Methods Per Class (WMC), Depth of Inheritance Tree (DIT), Number of Children (NOC), Coupling between Object Classes (CBO), Response For a Class (RFC), e Lack of Cohesion in Methods (LCOM). Estas métricas foram depois adaptadas para linguagens de modelação, tal como é mostrado em ~\cite{Power2}. De seguida, será explicado como são calculadas cada uma das métricas referidas.
 
 \subsection{Métricas \textrm{CK}}
 \textbf{Weighted methods per class} (WMC):
-Esta métrica diz respeito à complexidade que cada métodos tem para cada class. Assim, para se obter o valor desta métrica soma-se
-as complexidades que cada método pertencente a uma class tem. Se considerarmos a complexidade de cada método como medida unitária
+Esta métrica diz respeito à complexidade que cada método tem para cada classe. Assim, para se obter o valor desta métrica soma-se
+as complexidades que cada método pertencente a uma classe tem. Se considerarmos a complexidade de cada método como medida unitária
 então a métrica WMC para um classe é igual ao número de métodos definidos nessa classe, referimo-nos a isto como WMC1.
 A métrica WMC1 para uma classe pode ser obtida pelo diagrama de classes de um modelo UML, identificando a classe e contando o número
 de métodos que essa classe implementa. Aternativamente podemos considerar a complexidade de cada método como o McCabe Cyclomatic Complexity, que referimos
-como WMCcc. Os diagramas de actividade, sequencia e comunicação conteem informação relevante para o WMCcc, mas é igualmente
-plausibel que os diagrama de estado possam ser usados para calcular este valor para a casse como um todo.\\
+como WMCcc. Os diagramas de actividade, sequência e comunicação contêm informação relevante para o WMCcc, mas é igualmente
+plausível que os diagramas de estado possam ser usados para calcular este valor para a classe como um todo.\\
 
 \textbf{Depth of inheritance tree} (DIT):
-Esta é uma medida de profundidade da classe relativamente à sua árvore de herança. Esta métrica define-se por ser igual à distaância máxima
-desde a classe até á sua super classe root na árvore de herança. Esta métrica pode ser calculada para uma classe fazendo a união de todos os diagramas
+Esta é uma medida de profundidade da classe relativamente à sua árvore de herança. Esta métrica define-se por ser igual à distância máxima
+desde a classe até à sua super classe root na árvore de herança. Esta métrica pode ser calculada para uma classe fazendo a união de todos os diagramas
 de classe num modelo \umlS e atravessando a hierarquia de herança desta classe.\\
 
 \textbf{Number of children} (NOC): Esta métrica representa o número de decendentes imediatos de uma determinada classe. Esta métrica pode ser obtida ao juntar todos os diagramas de classes numa modelação \umlS e verificar todas as relações de herança da classe.\\
@@ -24,7 +24,7 @@ de classe num modelo \umlS e atravessando a hierarquia de herança desta classe.
 
 
 \textbf{Lack of cohesion in methods} (LCOM)- ou seja, falta de coesão entre métodos. Calcular esta métrica para uma dada classe envolve descobrir, para cada possível par de métodos, se os conjuntos de variáveis de instância acedidos por cada método têm uma interseção que não um conjunto vazio.
-Para ser possível computar um valor para esta métrica, informação do modo de uso das variáveis de instância pelos métodos de uma classe é essencial. Esta informação não pode ser obtida através de uma diagrama de classes. No entanto, o valor máximo para esta métrica pode ser computado usando o número de métodos na classe. Diagramas contendo essa informação sobre o uso das variáveis, por exemplo, os diagramas sequenciais podem ser usados para calcular esta métrica.\\
+Para ser possível computar um valor para esta métrica, informação do modo de uso das variáveis de instância pelos métodos de uma classe é essencial. Esta informação não pode ser obtida através de um diagrama de classes. No entanto, o valor máximo para esta métrica pode ser computado usando o número de métodos na classe. Diagramas contendo essa informação sobre o uso das variáveis, por exemplo, os diagramas sequenciais podem ser usados para calcular esta métrica.\\
 
 O conjunto de métricas aqui definidas são referidos em vários papers e sem sombra de dúvidas são as mais estudadas, e também as mais utilizadas para avaliar modelos \uml.\\
 Estas focam-se mais nos diagramas de classes visto estes serem os que mais facilmente se relacionam com código e é preciso ter em consideração que como estas regras derivam 
