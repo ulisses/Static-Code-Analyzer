@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g 2011-04-11 11:35:50
+// $ANTLR 3.2 Sep 23, 2009 12:02:23 /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g 2011-04-11 11:41:02
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -74,15 +74,15 @@ public class logolissParser extends DebugParser {
     // delegators
 
     public static final String[] ruleNames = new String[] {
-        "invalidRule", "location", "value_var", "factor", "term", "rotate", 
-        "add_op", "type", "declaration", "array_initialization", "else_expression", 
-        "declarations", "conditional_statement", "ask_statement", "var", 
-        "statements", "succpred", "mul_op", "expression", "elem", "step", 
-        "mode", "rel_op", "inic_var", "iterative_statement", "logoliss", 
-        "statement", "assignment", "likeaboss", "dialogue", "while_stat", 
-        "array_acess", "ifthenelse_stat", "vars", "say_statement", "body", 
-        "turtle_commands", "variable_declaration", "array_definition", "constant", 
-        "succorpred", "variable", "single_expression"
+        "invalidRule", "else_expression", "rel_op", "rotate", "logoliss", 
+        "vars", "term", "statement", "type", "variable_declaration", "step", 
+        "mode", "single_expression", "ask_statement", "variable", "succpred", 
+        "add_op", "expression", "array_definition", "statements", "factor", 
+        "inic_var", "say_statement", "elem", "var", "assignment", "succorpred", 
+        "turtle_commands", "mul_op", "body", "while_stat", "declaration", 
+        "dialogue", "ifthenelse_stat", "conditional_statement", "iterative_statement", 
+        "array_acess", "array_initialization", "location", "constant", "declarations", 
+        "likeaboss", "value_var"
     };
      
         public int ruleLevel = 0;
