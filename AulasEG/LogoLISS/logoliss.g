@@ -12,8 +12,7 @@ logoliss
 	;
 	
 body
-	:	DECLARATIONS		declarations
-		STATEMENTS		statements
+	:	DECLARATIONS		declarations 		STATEMENTS		statements
 	;
 	
 //**************************declarations*************************
@@ -54,15 +53,12 @@ inic_var
 	;
 	
 constant
-	:	sign	NUM
+	:	NUM
 	|	STRING
 	|	TRUE
 	|	FALSE
 	;
-	
-sign	:	'+'
-	|	'-'
-	;
+
 	
 //************************ Declarations: Variables: Array_Definition
 
@@ -76,7 +72,7 @@ array_initialization
 	;
 
 elem
-	:	sign 	NUM
+	:	NUM
 	;
 
 //************************* Statements
@@ -131,22 +127,22 @@ assignment
 	;
 
 variable
-	:	IDENT 	array_acess
+	:	IDENT 	(array_acess)?
 	;
 
 array_acess
-	:
-        	| 	'['	 single_expression 	']'
+	:	'['	 single_expression 	']'
 	;
 
 //*********************** Expression
 expression
-	:	single_expression	(rel_op 	expression)? 	
+options{k=2;}
+	:	single_expression	(rel_op 	expression)?
 	;
 
 //******** Single_Expression
 single_expression
-	:	term	add_op single_expression
+	:	term	(add_op single_expression)?
 	;
 
 //******* Term
@@ -156,13 +152,11 @@ term
 
 //******* Factor
 factor
+options{k=3;}
 	:	constant
 	|	variable
 	|	succorpred
-	|	'!'	expression
-	|	'+'	expression
-	|	'-'	expression	
-	|	'('	expression	')'
+	|	('+'|'-'|'!')? '('	expression	')'
 	;
 
 //******** Operators
@@ -310,7 +304,7 @@ DOWNS :  ('D'|'d')('O'|'o')('W'|'w')('N'|'n')
 IDENT : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9')*
         ;
 
-NUM :   '('('0'..'9')+')'
+NUM :   ('+'|'-')?('0'..'9')+
         ;
 
 WS  :   ( ' '
