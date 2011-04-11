@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g 2011-04-11 11:35:50
+// $ANTLR 3.3 Nov 30, 2010 12:45:30 /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g 2011-04-11 11:50:06
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -11,79 +11,85 @@ public class logolissParser extends DebugParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "TRUE", "FALSE", "PROGRAM", "IDENT", "DECLARATIONS", "STATEMENTS", "INTEGER", "BOOLEAN", "ARRAY", "SIZE", "NUM", "STRING", "FORWARD", "BACKWARD", "RRIGHT", "RLEFT", "PEN", "UPS", "DOWNS", "GOTO", "WHERE", "SUCC", "PRED", "SAY", "ASK", "IF", "THEN", "ELSE", "WHILE", "IN", "WS", "'{'", "'}'", "'->'", "';'", "','", "'='", "'['", "']'", "'?'", "'+'", "'-'", "'!'", "'('", "')'", "'||'", "'*'", "'/'", "'&&'", "'**'", "'=='", "'!='", "'<'", "'>'", "'<='", "'>='", "'in'"
     };
-    public static final int WHERE=24;
-    public static final int FORWARD=16;
-    public static final int WHILE=32;
-    public static final int UPS=21;
     public static final int EOF=-1;
-    public static final int T__60=60;
-    public static final int IF=29;
-    public static final int RLEFT=19;
-    public static final int T__55=55;
-    public static final int T__56=56;
-    public static final int T__57=57;
-    public static final int T__58=58;
-    public static final int T__51=51;
-    public static final int BOOLEAN=11;
-    public static final int IN=33;
-    public static final int THEN=30;
-    public static final int T__52=52;
-    public static final int T__53=53;
-    public static final int T__54=54;
-    public static final int T__59=59;
-    public static final int IDENT=7;
-    public static final int SUCC=25;
-    public static final int GOTO=23;
-    public static final int T__50=50;
-    public static final int ARRAY=12;
-    public static final int T__42=42;
-    public static final int INTEGER=10;
-    public static final int T__43=43;
-    public static final int T__40=40;
-    public static final int T__41=41;
-    public static final int T__46=46;
-    public static final int RRIGHT=18;
-    public static final int T__47=47;
-    public static final int T__44=44;
-    public static final int T__45=45;
-    public static final int T__48=48;
-    public static final int T__49=49;
-    public static final int PRED=26;
-    public static final int PEN=20;
-    public static final int ELSE=31;
-    public static final int ASK=28;
-    public static final int BACKWARD=17;
-    public static final int DECLARATIONS=8;
-    public static final int SAY=27;
-    public static final int TRUE=4;
-    public static final int NUM=14;
-    public static final int WS=34;
     public static final int T__35=35;
     public static final int T__36=36;
     public static final int T__37=37;
     public static final int T__38=38;
     public static final int T__39=39;
-    public static final int STATEMENTS=9;
-    public static final int PROGRAM=6;
-    public static final int DOWNS=22;
+    public static final int T__40=40;
+    public static final int T__41=41;
+    public static final int T__42=42;
+    public static final int T__43=43;
+    public static final int T__44=44;
+    public static final int T__45=45;
+    public static final int T__46=46;
+    public static final int T__47=47;
+    public static final int T__48=48;
+    public static final int T__49=49;
+    public static final int T__50=50;
+    public static final int T__51=51;
+    public static final int T__52=52;
+    public static final int T__53=53;
+    public static final int T__54=54;
+    public static final int T__55=55;
+    public static final int T__56=56;
+    public static final int T__57=57;
+    public static final int T__58=58;
+    public static final int T__59=59;
+    public static final int T__60=60;
+    public static final int TRUE=4;
     public static final int FALSE=5;
+    public static final int PROGRAM=6;
+    public static final int IDENT=7;
+    public static final int DECLARATIONS=8;
+    public static final int STATEMENTS=9;
+    public static final int INTEGER=10;
+    public static final int BOOLEAN=11;
+    public static final int ARRAY=12;
     public static final int SIZE=13;
+    public static final int NUM=14;
     public static final int STRING=15;
+    public static final int FORWARD=16;
+    public static final int BACKWARD=17;
+    public static final int RRIGHT=18;
+    public static final int RLEFT=19;
+    public static final int PEN=20;
+    public static final int UPS=21;
+    public static final int DOWNS=22;
+    public static final int GOTO=23;
+    public static final int WHERE=24;
+    public static final int SUCC=25;
+    public static final int PRED=26;
+    public static final int SAY=27;
+    public static final int ASK=28;
+    public static final int IF=29;
+    public static final int THEN=30;
+    public static final int ELSE=31;
+    public static final int WHILE=32;
+    public static final int IN=33;
+    public static final int WS=34;
 
     // delegates
     // delegators
 
     public static final String[] ruleNames = new String[] {
-        "invalidRule", "location", "value_var", "factor", "term", "rotate", 
-        "add_op", "type", "declaration", "array_initialization", "else_expression", 
-        "declarations", "conditional_statement", "ask_statement", "var", 
-        "statements", "succpred", "mul_op", "expression", "elem", "step", 
-        "mode", "rel_op", "inic_var", "iterative_statement", "logoliss", 
-        "statement", "assignment", "likeaboss", "dialogue", "while_stat", 
-        "array_acess", "ifthenelse_stat", "vars", "say_statement", "body", 
-        "turtle_commands", "variable_declaration", "array_definition", "constant", 
-        "succorpred", "variable", "single_expression"
+        "invalidRule", "declaration", "expression", "elem", "rotate", "vars", 
+        "ifthenelse_stat", "step", "term", "assignment", "array_definition", 
+        "inic_var", "body", "array_initialization", "declarations", "mode", 
+        "variable", "while_stat", "conditional_statement", "say_statement", 
+        "succorpred", "var", "add_op", "turtle_commands", "succpred", "ask_statement", 
+        "else_expression", "iterative_statement", "single_expression", "variable_declaration", 
+        "statement", "statements", "dialogue", "mul_op", "value_var", "factor", 
+        "constant", "type", "logoliss", "rel_op", "likeaboss", "location", 
+        "array_acess"
     };
+    public static final boolean[] decisionCanBacktrack = new boolean[] {
+        false, // invalid decision
+        false, false, false, false, false, false, false, false, false, false, 
+            false, false, false, false, false, false, false, false, false
+    };
+
      
         public int ruleLevel = 0;
         public int getRuleLevel() { return ruleLevel; }
@@ -115,12 +121,12 @@ public class logolissParser extends DebugParser {
 
 
     public String[] getTokenNames() { return logolissParser.tokenNames; }
-    public String getGrammarFileName() { return "/home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g"; }
+    public String getGrammarFileName() { return "/Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g"; }
 
 
 
     // $ANTLR start "logoliss"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:10:1: logoliss : PROGRAM IDENT '{' body '}' ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:10:1: logoliss : PROGRAM IDENT '{' body '}' ;
     public final void logoliss() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "logoliss");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -128,25 +134,25 @@ public class logolissParser extends DebugParser {
         dbg.location(10, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:11:2: ( PROGRAM IDENT '{' body '}' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:11:5: ( PROGRAM IDENT '{' body '}' )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:11:4: PROGRAM IDENT '{' body '}'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:11:10: PROGRAM IDENT '{' body '}'
             {
-            dbg.location(11,4);
-            match(input,PROGRAM,FOLLOW_PROGRAM_in_logoliss31); 
-            dbg.location(11,12);
-            match(input,IDENT,FOLLOW_IDENT_in_logoliss33); 
-            dbg.location(11,19);
-            match(input,35,FOLLOW_35_in_logoliss36); 
-            dbg.location(11,23);
-            pushFollow(FOLLOW_body_in_logoliss38);
+            dbg.location(11,10);
+            match(input,PROGRAM,FOLLOW_PROGRAM_in_logoliss43); 
+            dbg.location(11,21);
+            match(input,IDENT,FOLLOW_IDENT_in_logoliss48); 
+            dbg.location(11,34);
+            match(input,35,FOLLOW_35_in_logoliss57); 
+            dbg.location(11,41);
+            pushFollow(FOLLOW_body_in_logoliss62);
             body();
 
             state._fsp--;
 
-            dbg.location(11,28);
-            match(input,36,FOLLOW_36_in_logoliss40); 
+            dbg.location(11,49);
+            match(input,36,FOLLOW_36_in_logoliss67); 
 
             }
 
@@ -157,7 +163,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(12, 2);
+        dbg.location(12, 5);
 
         }
         finally {
@@ -172,7 +178,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "body"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:14:1: body : DECLARATIONS declarations STATEMENTS statements ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:14:1: body : DECLARATIONS declarations STATEMENTS statements ;
     public final void body() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "body");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -180,23 +186,23 @@ public class logolissParser extends DebugParser {
         dbg.location(14, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:15:2: ( DECLARATIONS declarations STATEMENTS statements )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:15:5: ( DECLARATIONS declarations STATEMENTS statements )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:15:4: DECLARATIONS declarations STATEMENTS statements
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:15:10: DECLARATIONS declarations STATEMENTS statements
             {
-            dbg.location(15,4);
-            match(input,DECLARATIONS,FOLLOW_DECLARATIONS_in_body53); 
-            dbg.location(15,18);
-            pushFollow(FOLLOW_declarations_in_body56);
+            dbg.location(15,10);
+            match(input,DECLARATIONS,FOLLOW_DECLARATIONS_in_body95); 
+            dbg.location(15,30);
+            pushFollow(FOLLOW_declarations_in_body104);
             declarations();
 
             state._fsp--;
 
-            dbg.location(15,33);
-            match(input,STATEMENTS,FOLLOW_STATEMENTS_in_body60); 
-            dbg.location(15,45);
-            pushFollow(FOLLOW_statements_in_body63);
+            dbg.location(15,51);
+            match(input,STATEMENTS,FOLLOW_STATEMENTS_in_body114); 
+            dbg.location(15,69);
+            pushFollow(FOLLOW_statements_in_body123);
             statements();
 
             state._fsp--;
@@ -211,7 +217,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(16, 2);
+        dbg.location(16, 5);
 
         }
         finally {
@@ -226,7 +232,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "declarations"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:20:1: declarations : declaration ( declarations )? ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:20:1: declarations : declaration ( declarations )? ;
     public final void declarations() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "declarations");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -234,22 +240,22 @@ public class logolissParser extends DebugParser {
         dbg.location(20, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:21:2: ( declaration ( declarations )? )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:21:5: ( declaration ( declarations )? )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:21:4: declaration ( declarations )?
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:21:10: declaration ( declarations )?
             {
-            dbg.location(21,4);
-            pushFollow(FOLLOW_declaration_in_declarations77);
+            dbg.location(21,10);
+            pushFollow(FOLLOW_declaration_in_declarations149);
             declaration();
 
             state._fsp--;
 
-            dbg.location(21,17);
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:21:17: ( declarations )?
+            dbg.location(21,29);
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:21:29: ( declarations )?
             int alt1=2;
             try { dbg.enterSubRule(1);
-            try { dbg.enterDecision(1);
+            try { dbg.enterDecision(1, decisionCanBacktrack[1]);
 
             int LA1_0 = input.LA(1);
 
@@ -262,10 +268,10 @@ public class logolissParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:21:17: declarations
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:21:29: declarations
                     {
-                    dbg.location(21,17);
-                    pushFollow(FOLLOW_declarations_in_declarations80);
+                    dbg.location(21,29);
+                    pushFollow(FOLLOW_declarations_in_declarations158);
                     declarations();
 
                     state._fsp--;
@@ -287,7 +293,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(22, 2);
+        dbg.location(22, 5);
 
         }
         finally {
@@ -302,7 +308,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "declaration"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:24:1: declaration : variable_declaration ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:24:1: declaration : variable_declaration ;
     public final void declaration() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "declaration");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -310,13 +316,13 @@ public class logolissParser extends DebugParser {
         dbg.location(24, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:25:2: ( variable_declaration )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:25:5: ( variable_declaration )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:25:4: variable_declaration
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:25:10: variable_declaration
             {
-            dbg.location(25,4);
-            pushFollow(FOLLOW_variable_declaration_in_declaration93);
+            dbg.location(25,10);
+            pushFollow(FOLLOW_variable_declaration_in_declaration183);
             variable_declaration();
 
             state._fsp--;
@@ -331,7 +337,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(26, 2);
+        dbg.location(26, 5);
 
         }
         finally {
@@ -346,7 +352,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "variable_declaration"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:30:1: variable_declaration : vars '->' type ';' ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:30:1: variable_declaration : vars '->' type ';' ;
     public final void variable_declaration() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "variable_declaration");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -354,27 +360,27 @@ public class logolissParser extends DebugParser {
         dbg.location(30, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:31:2: ( vars '->' type ';' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:31:5: ( vars '->' type ';' )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:31:4: vars '->' type ';'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:31:10: vars '->' type ';'
             {
-            dbg.location(31,4);
-            pushFollow(FOLLOW_vars_in_variable_declaration108);
+            dbg.location(31,10);
+            pushFollow(FOLLOW_vars_in_variable_declaration213);
             vars();
 
             state._fsp--;
 
-            dbg.location(31,9);
-            match(input,37,FOLLOW_37_in_variable_declaration110); 
-            dbg.location(31,14);
-            pushFollow(FOLLOW_type_in_variable_declaration112);
+            dbg.location(31,18);
+            match(input,37,FOLLOW_37_in_variable_declaration218); 
+            dbg.location(31,26);
+            pushFollow(FOLLOW_type_in_variable_declaration223);
             type();
 
             state._fsp--;
 
-            dbg.location(31,19);
-            match(input,38,FOLLOW_38_in_variable_declaration114); 
+            dbg.location(31,34);
+            match(input,38,FOLLOW_38_in_variable_declaration228); 
 
             }
 
@@ -385,7 +391,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(32, 2);
+        dbg.location(32, 5);
 
         }
         finally {
@@ -400,7 +406,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "vars"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:34:1: vars : var ( ',' vars )? ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:34:1: vars : var ( ',' vars )? ;
     public final void vars() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "vars");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -408,22 +414,22 @@ public class logolissParser extends DebugParser {
         dbg.location(34, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:34:6: ( var ( ',' vars )? )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:34:9: ( var ( ',' vars )? )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:34:8: var ( ',' vars )?
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:34:14: var ( ',' vars )?
             {
-            dbg.location(34,8);
-            pushFollow(FOLLOW_var_in_vars125);
+            dbg.location(34,14);
+            pushFollow(FOLLOW_var_in_vars251);
             var();
 
             state._fsp--;
 
-            dbg.location(34,12);
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:34:12: ( ',' vars )?
+            dbg.location(34,21);
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:34:21: ( ',' vars )?
             int alt2=2;
             try { dbg.enterSubRule(2);
-            try { dbg.enterDecision(2);
+            try { dbg.enterDecision(2, decisionCanBacktrack[2]);
 
             int LA2_0 = input.LA(1);
 
@@ -436,12 +442,12 @@ public class logolissParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:34:13: ',' vars
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:34:22: ',' vars
                     {
-                    dbg.location(34,13);
-                    match(input,39,FOLLOW_39_in_vars128); 
-                    dbg.location(34,17);
-                    pushFollow(FOLLOW_vars_in_vars130);
+                    dbg.location(34,22);
+                    match(input,39,FOLLOW_39_in_vars257); 
+                    dbg.location(34,29);
+                    pushFollow(FOLLOW_vars_in_vars262);
                     vars();
 
                     state._fsp--;
@@ -463,7 +469,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(35, 2);
+        dbg.location(35, 5);
 
         }
         finally {
@@ -478,7 +484,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "var"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:37:1: var : IDENT value_var ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:37:1: var : IDENT value_var ;
     public final void var() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "var");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -486,15 +492,15 @@ public class logolissParser extends DebugParser {
         dbg.location(37, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:37:5: ( IDENT value_var )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:37:8: ( IDENT value_var )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:37:7: IDENT value_var
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:37:13: IDENT value_var
             {
-            dbg.location(37,7);
-            match(input,IDENT,FOLLOW_IDENT_in_var142); 
             dbg.location(37,13);
-            pushFollow(FOLLOW_value_var_in_var144);
+            match(input,IDENT,FOLLOW_IDENT_in_var283); 
+            dbg.location(37,22);
+            pushFollow(FOLLOW_value_var_in_var288);
             value_var();
 
             state._fsp--;
@@ -509,7 +515,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(38, 2);
+        dbg.location(38, 5);
 
         }
         finally {
@@ -524,7 +530,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "value_var"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:40:1: value_var : ( ( '=' ) inic_var | );
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:40:1: value_var : ( ( '=' ) inic_var | );
     public final void value_var() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "value_var");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -532,9 +538,9 @@ public class logolissParser extends DebugParser {
         dbg.location(40, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:41:2: ( ( '=' ) inic_var | )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:41:5: ( ( '=' ) inic_var | )
             int alt3=2;
-            try { dbg.enterDecision(3);
+            try { dbg.enterDecision(3, decisionCanBacktrack[3]);
 
             int LA3_0 = input.LA(1);
 
@@ -557,21 +563,21 @@ public class logolissParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:41:4: ( '=' ) inic_var
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:41:10: ( '=' ) inic_var
                     {
-                    dbg.location(41,4);
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:41:4: ( '=' )
+                    dbg.location(41,10);
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:41:10: ( '=' )
                     dbg.enterAlt(1);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:41:5: '='
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:41:11: '='
                     {
-                    dbg.location(41,5);
-                    match(input,40,FOLLOW_40_in_value_var157); 
+                    dbg.location(41,11);
+                    match(input,40,FOLLOW_40_in_value_var313); 
 
                     }
 
-                    dbg.location(41,10);
-                    pushFollow(FOLLOW_inic_var_in_value_var160);
+                    dbg.location(41,19);
+                    pushFollow(FOLLOW_inic_var_in_value_var319);
                     inic_var();
 
                     state._fsp--;
@@ -582,7 +588,7 @@ public class logolissParser extends DebugParser {
                 case 2 :
                     dbg.enterAlt(2);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:43:2: 
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:43:5: 
                     {
                     }
                     break;
@@ -595,7 +601,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(43, 2);
+        dbg.location(43, 5);
 
         }
         finally {
@@ -610,7 +616,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "type"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:45:1: type : ( INTEGER | BOOLEAN | ARRAY SIZE NUM );
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:45:1: type : ( INTEGER | BOOLEAN | ARRAY SIZE NUM );
     public final void type() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "type");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -618,9 +624,9 @@ public class logolissParser extends DebugParser {
         dbg.location(45, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:45:6: ( INTEGER | BOOLEAN | ARRAY SIZE NUM )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:45:9: ( INTEGER | BOOLEAN | ARRAY SIZE NUM )
             int alt4=3;
-            try { dbg.enterDecision(4);
+            try { dbg.enterDecision(4, decisionCanBacktrack[4]);
 
             switch ( input.LA(1) ) {
             case INTEGER:
@@ -652,34 +658,34 @@ public class logolissParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:45:8: INTEGER
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:45:14: INTEGER
                     {
-                    dbg.location(45,8);
-                    match(input,INTEGER,FOLLOW_INTEGER_in_type173); 
+                    dbg.location(45,14);
+                    match(input,INTEGER,FOLLOW_INTEGER_in_type344); 
 
                     }
                     break;
                 case 2 :
                     dbg.enterAlt(2);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:46:4: BOOLEAN
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:46:10: BOOLEAN
                     {
-                    dbg.location(46,4);
-                    match(input,BOOLEAN,FOLLOW_BOOLEAN_in_type178); 
+                    dbg.location(46,10);
+                    match(input,BOOLEAN,FOLLOW_BOOLEAN_in_type355); 
 
                     }
                     break;
                 case 3 :
                     dbg.enterAlt(3);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:47:4: ARRAY SIZE NUM
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:47:10: ARRAY SIZE NUM
                     {
-                    dbg.location(47,4);
-                    match(input,ARRAY,FOLLOW_ARRAY_in_type183); 
                     dbg.location(47,10);
-                    match(input,SIZE,FOLLOW_SIZE_in_type185); 
-                    dbg.location(47,15);
-                    match(input,NUM,FOLLOW_NUM_in_type187); 
+                    match(input,ARRAY,FOLLOW_ARRAY_in_type366); 
+                    dbg.location(47,19);
+                    match(input,SIZE,FOLLOW_SIZE_in_type371); 
+                    dbg.location(47,27);
+                    match(input,NUM,FOLLOW_NUM_in_type376); 
 
                     }
                     break;
@@ -692,7 +698,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(48, 2);
+        dbg.location(48, 5);
 
         }
         finally {
@@ -707,7 +713,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "inic_var"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:50:1: inic_var : ( constant | array_definition );
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:50:1: inic_var : ( constant | array_definition );
     public final void inic_var() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "inic_var");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -715,9 +721,9 @@ public class logolissParser extends DebugParser {
         dbg.location(50, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:51:2: ( constant | array_definition )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:51:5: ( constant | array_definition )
             int alt5=2;
-            try { dbg.enterDecision(5);
+            try { dbg.enterDecision(5, decisionCanBacktrack[5]);
 
             int LA5_0 = input.LA(1);
 
@@ -740,10 +746,10 @@ public class logolissParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:51:4: constant
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:51:10: constant
                     {
-                    dbg.location(51,4);
-                    pushFollow(FOLLOW_constant_in_inic_var199);
+                    dbg.location(51,10);
+                    pushFollow(FOLLOW_constant_in_inic_var400);
                     constant();
 
                     state._fsp--;
@@ -754,10 +760,10 @@ public class logolissParser extends DebugParser {
                 case 2 :
                     dbg.enterAlt(2);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:52:4: array_definition
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:52:10: array_definition
                     {
-                    dbg.location(52,4);
-                    pushFollow(FOLLOW_array_definition_in_inic_var204);
+                    dbg.location(52,10);
+                    pushFollow(FOLLOW_array_definition_in_inic_var411);
                     array_definition();
 
                     state._fsp--;
@@ -774,7 +780,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(53, 2);
+        dbg.location(53, 5);
 
         }
         finally {
@@ -789,7 +795,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "constant"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:55:1: constant : ( NUM | STRING | TRUE | FALSE );
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:55:1: constant : ( NUM | STRING | TRUE | FALSE );
     public final void constant() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "constant");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -797,12 +803,12 @@ public class logolissParser extends DebugParser {
         dbg.location(55, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:56:2: ( NUM | STRING | TRUE | FALSE )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:56:5: ( NUM | STRING | TRUE | FALSE )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:
             {
-            dbg.location(56,2);
+            dbg.location(56,5);
             if ( (input.LA(1)>=TRUE && input.LA(1)<=FALSE)||(input.LA(1)>=NUM && input.LA(1)<=STRING) ) {
                 input.consume();
                 state.errorRecovery=false;
@@ -823,7 +829,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(60, 2);
+        dbg.location(60, 5);
 
         }
         finally {
@@ -838,7 +844,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "array_definition"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:65:1: array_definition : '[' array_initialization ']' ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:65:1: array_definition : '[' array_initialization ']' ;
     public final void array_definition() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "array_definition");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -846,21 +852,21 @@ public class logolissParser extends DebugParser {
         dbg.location(65, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:66:2: ( '[' array_initialization ']' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:66:5: ( '[' array_initialization ']' )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:66:4: '[' array_initialization ']'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:66:10: '[' array_initialization ']'
             {
-            dbg.location(66,4);
-            match(input,41,FOLLOW_41_in_array_definition247); 
-            dbg.location(66,8);
-            pushFollow(FOLLOW_array_initialization_in_array_definition249);
+            dbg.location(66,10);
+            match(input,41,FOLLOW_41_in_array_definition496); 
+            dbg.location(66,14);
+            pushFollow(FOLLOW_array_initialization_in_array_definition498);
             array_initialization();
 
             state._fsp--;
 
-            dbg.location(66,29);
-            match(input,42,FOLLOW_42_in_array_definition251); 
+            dbg.location(66,35);
+            match(input,42,FOLLOW_42_in_array_definition500); 
 
             }
 
@@ -871,7 +877,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(67, 2);
+        dbg.location(67, 5);
 
         }
         finally {
@@ -886,7 +892,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "array_initialization"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:69:1: array_initialization : ( elem ',' array_initialization | elem );
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:69:1: array_initialization : ( elem ',' array_initialization | elem );
     public final void array_initialization() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "array_initialization");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -894,20 +900,20 @@ public class logolissParser extends DebugParser {
         dbg.location(69, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:70:2: ( elem ',' array_initialization | elem )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:70:5: ( elem ',' array_initialization | elem )
             int alt6=2;
-            try { dbg.enterDecision(6);
+            try { dbg.enterDecision(6, decisionCanBacktrack[6]);
 
             int LA6_0 = input.LA(1);
 
             if ( (LA6_0==NUM) ) {
                 int LA6_1 = input.LA(2);
 
-                if ( (LA6_1==42) ) {
-                    alt6=2;
-                }
-                else if ( (LA6_1==39) ) {
+                if ( (LA6_1==39) ) {
                     alt6=1;
+                }
+                else if ( (LA6_1==42) ) {
+                    alt6=2;
                 }
                 else {
                     NoViableAltException nvae =
@@ -930,18 +936,18 @@ public class logolissParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:70:4: elem ',' array_initialization
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:70:10: elem ',' array_initialization
                     {
-                    dbg.location(70,4);
-                    pushFollow(FOLLOW_elem_in_array_initialization263);
+                    dbg.location(70,10);
+                    pushFollow(FOLLOW_elem_in_array_initialization524);
                     elem();
 
                     state._fsp--;
 
-                    dbg.location(70,10);
-                    match(input,39,FOLLOW_39_in_array_initialization266); 
-                    dbg.location(70,14);
-                    pushFollow(FOLLOW_array_initialization_in_array_initialization268);
+                    dbg.location(70,19);
+                    match(input,39,FOLLOW_39_in_array_initialization530); 
+                    dbg.location(70,26);
+                    pushFollow(FOLLOW_array_initialization_in_array_initialization535);
                     array_initialization();
 
                     state._fsp--;
@@ -952,10 +958,10 @@ public class logolissParser extends DebugParser {
                 case 2 :
                     dbg.enterAlt(2);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:71:5: elem
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:71:11: elem
                     {
-                    dbg.location(71,5);
-                    pushFollow(FOLLOW_elem_in_array_initialization276);
+                    dbg.location(71,11);
+                    pushFollow(FOLLOW_elem_in_array_initialization552);
                     elem();
 
                     state._fsp--;
@@ -972,7 +978,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(72, 2);
+        dbg.location(72, 5);
 
         }
         finally {
@@ -987,7 +993,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "elem"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:74:1: elem : NUM ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:74:1: elem : NUM ;
     public final void elem() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "elem");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -995,13 +1001,13 @@ public class logolissParser extends DebugParser {
         dbg.location(74, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:75:2: ( NUM )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:75:5: ( NUM )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:75:4: NUM
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:75:10: NUM
             {
-            dbg.location(75,4);
-            match(input,NUM,FOLLOW_NUM_in_elem287); 
+            dbg.location(75,10);
+            match(input,NUM,FOLLOW_NUM_in_elem572); 
 
             }
 
@@ -1012,7 +1018,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(76, 2);
+        dbg.location(76, 5);
 
         }
         finally {
@@ -1027,7 +1033,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "statements"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:80:1: statements : ( statement )+ ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:80:1: statements : ( statement )+ ;
     public final void statements() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "statements");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -1035,20 +1041,20 @@ public class logolissParser extends DebugParser {
         dbg.location(80, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:81:2: ( ( statement )+ )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:81:5: ( ( statement )+ )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:81:4: ( statement )+
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:81:10: ( statement )+
             {
-            dbg.location(81,4);
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:81:4: ( statement )+
+            dbg.location(81,10);
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:81:10: ( statement )+
             int cnt7=0;
             try { dbg.enterSubRule(7);
 
             loop7:
             do {
                 int alt7=2;
-                try { dbg.enterDecision(7);
+                try { dbg.enterDecision(7, decisionCanBacktrack[7]);
 
                 int LA7_0 = input.LA(1);
 
@@ -1063,10 +1069,10 @@ public class logolissParser extends DebugParser {
             	case 1 :
             	    dbg.enterAlt(1);
 
-            	    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:81:4: statement
+            	    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:81:10: statement
             	    {
-            	    dbg.location(81,4);
-            	    pushFollow(FOLLOW_statement_in_statements300);
+            	    dbg.location(81,10);
+            	    pushFollow(FOLLOW_statement_in_statements594);
             	    statement();
 
             	    state._fsp--;
@@ -1097,7 +1103,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(82, 12);
+        dbg.location(82, 15);
 
         }
         finally {
@@ -1112,7 +1118,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "statement"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:84:1: statement : ( turtle_commands | assignment | conditional_statement | iterative_statement );
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:84:1: statement : ( turtle_commands | assignment | conditional_statement | iterative_statement );
     public final void statement() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "statement");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -1120,9 +1126,9 @@ public class logolissParser extends DebugParser {
         dbg.location(84, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:85:2: ( turtle_commands | assignment | conditional_statement | iterative_statement )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:85:5: ( turtle_commands | assignment | conditional_statement | iterative_statement )
             int alt8=4;
-            try { dbg.enterDecision(8);
+            try { dbg.enterDecision(8, decisionCanBacktrack[8]);
 
             switch ( input.LA(1) ) {
             case FORWARD:
@@ -1169,10 +1175,10 @@ public class logolissParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:85:4: turtle_commands
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:85:10: turtle_commands
                     {
-                    dbg.location(85,4);
-                    pushFollow(FOLLOW_turtle_commands_in_statement333);
+                    dbg.location(85,10);
+                    pushFollow(FOLLOW_turtle_commands_in_statement639);
                     turtle_commands();
 
                     state._fsp--;
@@ -1183,10 +1189,10 @@ public class logolissParser extends DebugParser {
                 case 2 :
                     dbg.enterAlt(2);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:86:5: assignment
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:86:11: assignment
                     {
-                    dbg.location(86,5);
-                    pushFollow(FOLLOW_assignment_in_statement339);
+                    dbg.location(86,11);
+                    pushFollow(FOLLOW_assignment_in_statement651);
                     assignment();
 
                     state._fsp--;
@@ -1197,10 +1203,10 @@ public class logolissParser extends DebugParser {
                 case 3 :
                     dbg.enterAlt(3);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:87:5: conditional_statement
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:87:11: conditional_statement
                     {
-                    dbg.location(87,5);
-                    pushFollow(FOLLOW_conditional_statement_in_statement345);
+                    dbg.location(87,11);
+                    pushFollow(FOLLOW_conditional_statement_in_statement663);
                     conditional_statement();
 
                     state._fsp--;
@@ -1211,10 +1217,10 @@ public class logolissParser extends DebugParser {
                 case 4 :
                     dbg.enterAlt(4);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:88:5: iterative_statement
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:88:11: iterative_statement
                     {
-                    dbg.location(88,5);
-                    pushFollow(FOLLOW_iterative_statement_in_statement351);
+                    dbg.location(88,11);
+                    pushFollow(FOLLOW_iterative_statement_in_statement675);
                     iterative_statement();
 
                     state._fsp--;
@@ -1231,7 +1237,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(89, 2);
+        dbg.location(89, 5);
 
         }
         finally {
@@ -1246,7 +1252,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "turtle_commands"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:92:1: turtle_commands : ( step | rotate | mode | dialogue | location );
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:92:1: turtle_commands : ( step | rotate | mode | dialogue | location );
     public final void turtle_commands() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "turtle_commands");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -1254,9 +1260,9 @@ public class logolissParser extends DebugParser {
         dbg.location(92, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:93:2: ( step | rotate | mode | dialogue | location )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:93:5: ( step | rotate | mode | dialogue | location )
             int alt9=5;
-            try { dbg.enterDecision(9);
+            try { dbg.enterDecision(9, decisionCanBacktrack[9]);
 
             switch ( input.LA(1) ) {
             case FORWARD:
@@ -1302,10 +1308,10 @@ public class logolissParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:93:4: step
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:93:10: step
                     {
-                    dbg.location(93,4);
-                    pushFollow(FOLLOW_step_in_turtle_commands364);
+                    dbg.location(93,10);
+                    pushFollow(FOLLOW_step_in_turtle_commands700);
                     step();
 
                     state._fsp--;
@@ -1316,10 +1322,10 @@ public class logolissParser extends DebugParser {
                 case 2 :
                     dbg.enterAlt(2);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:94:4: rotate
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:94:10: rotate
                     {
-                    dbg.location(94,4);
-                    pushFollow(FOLLOW_rotate_in_turtle_commands369);
+                    dbg.location(94,10);
+                    pushFollow(FOLLOW_rotate_in_turtle_commands711);
                     rotate();
 
                     state._fsp--;
@@ -1330,10 +1336,10 @@ public class logolissParser extends DebugParser {
                 case 3 :
                     dbg.enterAlt(3);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:95:4: mode
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:95:10: mode
                     {
-                    dbg.location(95,4);
-                    pushFollow(FOLLOW_mode_in_turtle_commands374);
+                    dbg.location(95,10);
+                    pushFollow(FOLLOW_mode_in_turtle_commands722);
                     mode();
 
                     state._fsp--;
@@ -1344,10 +1350,10 @@ public class logolissParser extends DebugParser {
                 case 4 :
                     dbg.enterAlt(4);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:96:4: dialogue
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:96:10: dialogue
                     {
-                    dbg.location(96,4);
-                    pushFollow(FOLLOW_dialogue_in_turtle_commands379);
+                    dbg.location(96,10);
+                    pushFollow(FOLLOW_dialogue_in_turtle_commands733);
                     dialogue();
 
                     state._fsp--;
@@ -1358,10 +1364,10 @@ public class logolissParser extends DebugParser {
                 case 5 :
                     dbg.enterAlt(5);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:97:4: location
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:97:10: location
                     {
-                    dbg.location(97,4);
-                    pushFollow(FOLLOW_location_in_turtle_commands384);
+                    dbg.location(97,10);
+                    pushFollow(FOLLOW_location_in_turtle_commands744);
                     location();
 
                     state._fsp--;
@@ -1378,7 +1384,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(98, 2);
+        dbg.location(98, 5);
 
         }
         finally {
@@ -1393,7 +1399,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "step"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:100:1: step : ( FORWARD expression | BACKWARD expression );
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:100:1: step : ( FORWARD expression | BACKWARD expression );
     public final void step() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "step");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -1401,9 +1407,9 @@ public class logolissParser extends DebugParser {
         dbg.location(100, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:101:2: ( FORWARD expression | BACKWARD expression )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:101:5: ( FORWARD expression | BACKWARD expression )
             int alt10=2;
-            try { dbg.enterDecision(10);
+            try { dbg.enterDecision(10, decisionCanBacktrack[10]);
 
             int LA10_0 = input.LA(1);
 
@@ -1426,12 +1432,12 @@ public class logolissParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:101:4: FORWARD expression
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:101:10: FORWARD expression
                     {
-                    dbg.location(101,4);
-                    match(input,FORWARD,FOLLOW_FORWARD_in_step397); 
-                    dbg.location(101,13);
-                    pushFollow(FOLLOW_expression_in_step400);
+                    dbg.location(101,10);
+                    match(input,FORWARD,FOLLOW_FORWARD_in_step769); 
+                    dbg.location(101,22);
+                    pushFollow(FOLLOW_expression_in_step775);
                     expression();
 
                     state._fsp--;
@@ -1442,12 +1448,12 @@ public class logolissParser extends DebugParser {
                 case 2 :
                     dbg.enterAlt(2);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:102:8: BACKWARD expression
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:102:14: BACKWARD expression
                     {
-                    dbg.location(102,8);
-                    match(input,BACKWARD,FOLLOW_BACKWARD_in_step409); 
-                    dbg.location(102,18);
-                    pushFollow(FOLLOW_expression_in_step412);
+                    dbg.location(102,14);
+                    match(input,BACKWARD,FOLLOW_BACKWARD_in_step790); 
+                    dbg.location(102,27);
+                    pushFollow(FOLLOW_expression_in_step796);
                     expression();
 
                     state._fsp--;
@@ -1464,7 +1470,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(103, 6);
+        dbg.location(103, 9);
 
         }
         finally {
@@ -1479,7 +1485,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "rotate"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:105:1: rotate : ( RRIGHT | RLEFT );
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:105:1: rotate : ( RRIGHT | RLEFT );
     public final void rotate() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "rotate");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -1487,12 +1493,12 @@ public class logolissParser extends DebugParser {
         dbg.location(105, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:105:8: ( RRIGHT | RLEFT )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:105:11: ( RRIGHT | RLEFT )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:
             {
-            dbg.location(105,8);
+            dbg.location(105,11);
             if ( (input.LA(1)>=RRIGHT && input.LA(1)<=RLEFT) ) {
                 input.consume();
                 state.errorRecovery=false;
@@ -1513,7 +1519,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(107, 8);
+        dbg.location(107, 11);
 
         }
         finally {
@@ -1528,7 +1534,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "mode"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:109:1: mode : PEN likeaboss ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:109:1: mode : PEN likeaboss ;
     public final void mode() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "mode");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -1536,15 +1542,15 @@ public class logolissParser extends DebugParser {
         dbg.location(109, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:109:7: ( PEN likeaboss )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:109:10: ( PEN likeaboss )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:109:9: PEN likeaboss
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:109:15: PEN likeaboss
             {
-            dbg.location(109,9);
-            match(input,PEN,FOLLOW_PEN_in_mode468); 
-            dbg.location(109,14);
-            pushFollow(FOLLOW_likeaboss_in_mode471);
+            dbg.location(109,15);
+            match(input,PEN,FOLLOW_PEN_in_mode882); 
+            dbg.location(109,23);
+            pushFollow(FOLLOW_likeaboss_in_mode888);
             likeaboss();
 
             state._fsp--;
@@ -1559,7 +1565,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(110, 2);
+        dbg.location(110, 5);
 
         }
         finally {
@@ -1574,7 +1580,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "likeaboss"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:112:1: likeaboss : ( UPS | DOWNS ) ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:112:1: likeaboss : ( UPS | DOWNS ) ;
     public final void likeaboss() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "likeaboss");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -1582,12 +1588,12 @@ public class logolissParser extends DebugParser {
         dbg.location(112, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:113:2: ( ( UPS | DOWNS ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:113:5: ( ( UPS | DOWNS ) )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:113:4: ( UPS | DOWNS )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:113:10: ( UPS | DOWNS )
             {
-            dbg.location(113,4);
+            dbg.location(113,10);
             if ( (input.LA(1)>=UPS && input.LA(1)<=DOWNS) ) {
                 input.consume();
                 state.errorRecovery=false;
@@ -1608,7 +1614,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(114, 2);
+        dbg.location(114, 5);
 
         }
         finally {
@@ -1623,7 +1629,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "dialogue"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:116:1: dialogue : ( say_statement | ask_statement );
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:116:1: dialogue : ( say_statement | ask_statement );
     public final void dialogue() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "dialogue");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -1631,9 +1637,9 @@ public class logolissParser extends DebugParser {
         dbg.location(116, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:116:11: ( say_statement | ask_statement )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:116:14: ( say_statement | ask_statement )
             int alt11=2;
-            try { dbg.enterDecision(11);
+            try { dbg.enterDecision(11, decisionCanBacktrack[11]);
 
             int LA11_0 = input.LA(1);
 
@@ -1656,10 +1662,10 @@ public class logolissParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:116:13: say_statement
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:116:19: say_statement
                     {
-                    dbg.location(116,13);
-                    pushFollow(FOLLOW_say_statement_in_dialogue498);
+                    dbg.location(116,19);
+                    pushFollow(FOLLOW_say_statement_in_dialogue936);
                     say_statement();
 
                     state._fsp--;
@@ -1670,10 +1676,10 @@ public class logolissParser extends DebugParser {
                 case 2 :
                     dbg.enterAlt(2);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:117:12: ask_statement
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:117:18: ask_statement
                     {
-                    dbg.location(117,12);
-                    pushFollow(FOLLOW_ask_statement_in_dialogue511);
+                    dbg.location(117,18);
+                    pushFollow(FOLLOW_ask_statement_in_dialogue955);
                     ask_statement();
 
                     state._fsp--;
@@ -1690,7 +1696,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(118, 2);
+        dbg.location(118, 5);
 
         }
         finally {
@@ -1705,7 +1711,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "location"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:120:1: location : ( GOTO NUM ',' NUM | WHERE '?' );
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:120:1: location : ( GOTO NUM ',' NUM | WHERE '?' );
     public final void location() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "location");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -1713,9 +1719,9 @@ public class logolissParser extends DebugParser {
         dbg.location(120, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:120:10: ( GOTO NUM ',' NUM | WHERE '?' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:120:13: ( GOTO NUM ',' NUM | WHERE '?' )
             int alt12=2;
-            try { dbg.enterDecision(12);
+            try { dbg.enterDecision(12, decisionCanBacktrack[12]);
 
             int LA12_0 = input.LA(1);
 
@@ -1738,28 +1744,28 @@ public class logolissParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:120:12: GOTO NUM ',' NUM
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:120:18: GOTO NUM ',' NUM
                     {
-                    dbg.location(120,12);
-                    match(input,GOTO,FOLLOW_GOTO_in_location521); 
                     dbg.location(120,18);
-                    match(input,NUM,FOLLOW_NUM_in_location524); 
-                    dbg.location(120,23);
-                    match(input,39,FOLLOW_39_in_location527); 
-                    dbg.location(120,28);
-                    match(input,NUM,FOLLOW_NUM_in_location530); 
+                    match(input,GOTO,FOLLOW_GOTO_in_location974); 
+                    dbg.location(120,27);
+                    match(input,NUM,FOLLOW_NUM_in_location980); 
+                    dbg.location(120,35);
+                    match(input,39,FOLLOW_39_in_location986); 
+                    dbg.location(120,43);
+                    match(input,NUM,FOLLOW_NUM_in_location992); 
 
                     }
                     break;
                 case 2 :
                     dbg.enterAlt(2);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:121:5: WHERE '?'
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:121:11: WHERE '?'
                     {
-                    dbg.location(121,5);
-                    match(input,WHERE,FOLLOW_WHERE_in_location536); 
                     dbg.location(121,11);
-                    match(input,43,FOLLOW_43_in_location538); 
+                    match(input,WHERE,FOLLOW_WHERE_in_location1004); 
+                    dbg.location(121,20);
+                    match(input,43,FOLLOW_43_in_location1009); 
 
                     }
                     break;
@@ -1772,7 +1778,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(122, 2);
+        dbg.location(122, 5);
 
         }
         finally {
@@ -1787,7 +1793,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "assignment"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:125:1: assignment : variable '=' expression ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:125:1: assignment : variable '=' expression ;
     public final void assignment() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "assignment");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -1795,21 +1801,21 @@ public class logolissParser extends DebugParser {
         dbg.location(125, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:126:2: ( variable '=' expression )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:126:5: ( variable '=' expression )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:126:4: variable '=' expression
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:126:10: variable '=' expression
             {
-            dbg.location(126,4);
-            pushFollow(FOLLOW_variable_in_assignment560);
+            dbg.location(126,10);
+            pushFollow(FOLLOW_variable_in_assignment1043);
             variable();
 
             state._fsp--;
 
-            dbg.location(126,14);
-            match(input,40,FOLLOW_40_in_assignment563); 
-            dbg.location(126,19);
-            pushFollow(FOLLOW_expression_in_assignment566);
+            dbg.location(126,23);
+            match(input,40,FOLLOW_40_in_assignment1049); 
+            dbg.location(126,31);
+            pushFollow(FOLLOW_expression_in_assignment1055);
             expression();
 
             state._fsp--;
@@ -1824,7 +1830,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(127, 2);
+        dbg.location(127, 5);
 
         }
         finally {
@@ -1839,7 +1845,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "variable"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:129:1: variable : IDENT ( array_acess )? ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:129:1: variable : IDENT ( array_acess )? ;
     public final void variable() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "variable");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -1847,18 +1853,18 @@ public class logolissParser extends DebugParser {
         dbg.location(129, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:130:2: ( IDENT ( array_acess )? )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:130:5: ( IDENT ( array_acess )? )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:130:4: IDENT ( array_acess )?
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:130:10: IDENT ( array_acess )?
             {
-            dbg.location(130,4);
-            match(input,IDENT,FOLLOW_IDENT_in_variable577); 
-            dbg.location(130,11);
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:130:11: ( array_acess )?
+            dbg.location(130,10);
+            match(input,IDENT,FOLLOW_IDENT_in_variable1075); 
+            dbg.location(130,20);
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:130:20: ( array_acess )?
             int alt13=2;
             try { dbg.enterSubRule(13);
-            try { dbg.enterDecision(13);
+            try { dbg.enterDecision(13, decisionCanBacktrack[13]);
 
             int LA13_0 = input.LA(1);
 
@@ -1871,10 +1877,10 @@ public class logolissParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:130:12: array_acess
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:130:21: array_acess
                     {
-                    dbg.location(130,12);
-                    pushFollow(FOLLOW_array_acess_in_variable581);
+                    dbg.location(130,21);
+                    pushFollow(FOLLOW_array_acess_in_variable1082);
                     array_acess();
 
                     state._fsp--;
@@ -1896,7 +1902,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(131, 2);
+        dbg.location(131, 5);
 
         }
         finally {
@@ -1911,7 +1917,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "array_acess"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:133:1: array_acess : '[' single_expression ']' ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:133:1: array_acess : '[' single_expression ']' ;
     public final void array_acess() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "array_acess");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -1919,21 +1925,21 @@ public class logolissParser extends DebugParser {
         dbg.location(133, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:134:2: ( '[' single_expression ']' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:134:5: ( '[' single_expression ']' )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:134:4: '[' single_expression ']'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:134:10: '[' single_expression ']'
             {
-            dbg.location(134,4);
-            match(input,41,FOLLOW_41_in_array_acess594); 
-            dbg.location(134,9);
-            pushFollow(FOLLOW_single_expression_in_array_acess597);
+            dbg.location(134,10);
+            match(input,41,FOLLOW_41_in_array_acess1104); 
+            dbg.location(134,18);
+            pushFollow(FOLLOW_single_expression_in_array_acess1110);
             single_expression();
 
             state._fsp--;
 
-            dbg.location(134,28);
-            match(input,42,FOLLOW_42_in_array_acess600); 
+            dbg.location(134,40);
+            match(input,42,FOLLOW_42_in_array_acess1116); 
 
             }
 
@@ -1944,7 +1950,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(135, 2);
+        dbg.location(135, 5);
 
         }
         finally {
@@ -1959,7 +1965,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "expression"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:138:1: expression options {k=2; } : single_expression ( rel_op expression )? ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:138:1: expression options {k=2; } : single_expression ( rel_op expression )? ;
     public final void expression() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "expression");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -1967,22 +1973,22 @@ public class logolissParser extends DebugParser {
         dbg.location(138, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:140:2: ( single_expression ( rel_op expression )? )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:140:5: ( single_expression ( rel_op expression )? )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:140:4: single_expression ( rel_op expression )?
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:140:10: single_expression ( rel_op expression )?
             {
-            dbg.location(140,4);
-            pushFollow(FOLLOW_single_expression_in_expression619);
+            dbg.location(140,10);
+            pushFollow(FOLLOW_single_expression_in_expression1144);
             single_expression();
 
             state._fsp--;
 
-            dbg.location(140,22);
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:140:22: ( rel_op expression )?
+            dbg.location(140,31);
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:140:31: ( rel_op expression )?
             int alt14=2;
             try { dbg.enterSubRule(14);
-            try { dbg.enterDecision(14);
+            try { dbg.enterDecision(14, decisionCanBacktrack[14]);
 
             int LA14_0 = input.LA(1);
 
@@ -1995,16 +2001,16 @@ public class logolissParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:140:23: rel_op expression
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:140:32: rel_op expression
                     {
-                    dbg.location(140,23);
-                    pushFollow(FOLLOW_rel_op_in_expression622);
+                    dbg.location(140,32);
+                    pushFollow(FOLLOW_rel_op_in_expression1150);
                     rel_op();
 
                     state._fsp--;
 
-                    dbg.location(140,31);
-                    pushFollow(FOLLOW_expression_in_expression625);
+                    dbg.location(140,43);
+                    pushFollow(FOLLOW_expression_in_expression1156);
                     expression();
 
                     state._fsp--;
@@ -2026,7 +2032,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(141, 2);
+        dbg.location(141, 5);
 
         }
         finally {
@@ -2041,7 +2047,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "single_expression"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:144:1: single_expression : term ( add_op single_expression )? ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:144:1: single_expression : term ( add_op single_expression )? ;
     public final void single_expression() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "single_expression");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -2049,22 +2055,22 @@ public class logolissParser extends DebugParser {
         dbg.location(144, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:145:2: ( term ( add_op single_expression )? )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:145:5: ( term ( add_op single_expression )? )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:145:4: term ( add_op single_expression )?
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:145:10: term ( add_op single_expression )?
             {
-            dbg.location(145,4);
-            pushFollow(FOLLOW_term_in_single_expression639);
+            dbg.location(145,10);
+            pushFollow(FOLLOW_term_in_single_expression1179);
             term();
 
             state._fsp--;
 
-            dbg.location(145,9);
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:145:9: ( add_op single_expression )?
+            dbg.location(145,18);
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:145:18: ( add_op single_expression )?
             int alt15=2;
             try { dbg.enterSubRule(15);
-            try { dbg.enterDecision(15);
+            try { dbg.enterDecision(15, decisionCanBacktrack[15]);
 
             int LA15_0 = input.LA(1);
 
@@ -2077,16 +2083,16 @@ public class logolissParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:145:10: add_op single_expression
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:145:19: add_op single_expression
                     {
-                    dbg.location(145,10);
-                    pushFollow(FOLLOW_add_op_in_single_expression642);
+                    dbg.location(145,19);
+                    pushFollow(FOLLOW_add_op_in_single_expression1185);
                     add_op();
 
                     state._fsp--;
 
-                    dbg.location(145,17);
-                    pushFollow(FOLLOW_single_expression_in_single_expression644);
+                    dbg.location(145,26);
+                    pushFollow(FOLLOW_single_expression_in_single_expression1187);
                     single_expression();
 
                     state._fsp--;
@@ -2108,7 +2114,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(146, 2);
+        dbg.location(146, 5);
 
         }
         finally {
@@ -2123,7 +2129,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "term"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:149:1: term : factor ( mul_op term )? ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:149:1: term : factor ( mul_op term )? ;
     public final void term() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "term");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -2131,22 +2137,22 @@ public class logolissParser extends DebugParser {
         dbg.location(149, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:150:2: ( factor ( mul_op term )? )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:150:5: ( factor ( mul_op term )? )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:150:4: factor ( mul_op term )?
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:150:10: factor ( mul_op term )?
             {
-            dbg.location(150,4);
-            pushFollow(FOLLOW_factor_in_term658);
+            dbg.location(150,10);
+            pushFollow(FOLLOW_factor_in_term1210);
             factor();
 
             state._fsp--;
 
-            dbg.location(150,11);
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:150:11: ( mul_op term )?
+            dbg.location(150,20);
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:150:20: ( mul_op term )?
             int alt16=2;
             try { dbg.enterSubRule(16);
-            try { dbg.enterDecision(16);
+            try { dbg.enterDecision(16, decisionCanBacktrack[16]);
 
             int LA16_0 = input.LA(1);
 
@@ -2159,16 +2165,16 @@ public class logolissParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:150:12: mul_op term
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:150:21: mul_op term
                     {
-                    dbg.location(150,12);
-                    pushFollow(FOLLOW_mul_op_in_term661);
+                    dbg.location(150,21);
+                    pushFollow(FOLLOW_mul_op_in_term1216);
                     mul_op();
 
                     state._fsp--;
 
-                    dbg.location(150,19);
-                    pushFollow(FOLLOW_term_in_term663);
+                    dbg.location(150,31);
+                    pushFollow(FOLLOW_term_in_term1221);
                     term();
 
                     state._fsp--;
@@ -2190,7 +2196,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(151, 2);
+        dbg.location(151, 5);
 
         }
         finally {
@@ -2205,7 +2211,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "factor"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:154:1: factor options {k=3; } : ( constant | variable | succorpred | ( '+' | '-' | '!' )? '(' expression ')' );
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:154:1: factor options {k=3; } : ( constant | variable | succorpred | ( '+' | '-' | '!' )? '(' expression ')' );
     public final void factor() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "factor");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -2213,9 +2219,9 @@ public class logolissParser extends DebugParser {
         dbg.location(154, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:156:2: ( constant | variable | succorpred | ( '+' | '-' | '!' )? '(' expression ')' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:156:5: ( constant | variable | succorpred | ( '+' | '-' | '!' )? '(' expression ')' )
             int alt18=4;
-            try { dbg.enterDecision(18);
+            try { dbg.enterDecision(18, decisionCanBacktrack[18]);
 
             switch ( input.LA(1) ) {
             case TRUE:
@@ -2259,10 +2265,10 @@ public class logolissParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:156:4: constant
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:156:10: constant
                     {
-                    dbg.location(156,4);
-                    pushFollow(FOLLOW_constant_in_factor685);
+                    dbg.location(156,10);
+                    pushFollow(FOLLOW_constant_in_factor1255);
                     constant();
 
                     state._fsp--;
@@ -2273,10 +2279,10 @@ public class logolissParser extends DebugParser {
                 case 2 :
                     dbg.enterAlt(2);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:157:4: variable
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:157:10: variable
                     {
-                    dbg.location(157,4);
-                    pushFollow(FOLLOW_variable_in_factor690);
+                    dbg.location(157,10);
+                    pushFollow(FOLLOW_variable_in_factor1266);
                     variable();
 
                     state._fsp--;
@@ -2287,10 +2293,10 @@ public class logolissParser extends DebugParser {
                 case 3 :
                     dbg.enterAlt(3);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:158:4: succorpred
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:158:10: succorpred
                     {
-                    dbg.location(158,4);
-                    pushFollow(FOLLOW_succorpred_in_factor695);
+                    dbg.location(158,10);
+                    pushFollow(FOLLOW_succorpred_in_factor1277);
                     succorpred();
 
                     state._fsp--;
@@ -2301,13 +2307,13 @@ public class logolissParser extends DebugParser {
                 case 4 :
                     dbg.enterAlt(4);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:159:4: ( '+' | '-' | '!' )? '(' expression ')'
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:159:10: ( '+' | '-' | '!' )? '(' expression ')'
                     {
-                    dbg.location(159,4);
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:159:4: ( '+' | '-' | '!' )?
+                    dbg.location(159,10);
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:159:10: ( '+' | '-' | '!' )?
                     int alt17=2;
                     try { dbg.enterSubRule(17);
-                    try { dbg.enterDecision(17);
+                    try { dbg.enterDecision(17, decisionCanBacktrack[17]);
 
                     int LA17_0 = input.LA(1);
 
@@ -2320,9 +2326,9 @@ public class logolissParser extends DebugParser {
                         case 1 :
                             dbg.enterAlt(1);
 
-                            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:
+                            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:
                             {
-                            dbg.location(159,4);
+                            dbg.location(159,10);
                             if ( (input.LA(1)>=44 && input.LA(1)<=46) ) {
                                 input.consume();
                                 state.errorRecovery=false;
@@ -2340,16 +2346,16 @@ public class logolissParser extends DebugParser {
                     }
                     } finally {dbg.exitSubRule(17);}
 
-                    dbg.location(159,19);
-                    match(input,47,FOLLOW_47_in_factor709); 
-                    dbg.location(159,23);
-                    pushFollow(FOLLOW_expression_in_factor711);
+                    dbg.location(159,25);
+                    match(input,47,FOLLOW_47_in_factor1297); 
+                    dbg.location(159,32);
+                    pushFollow(FOLLOW_expression_in_factor1302);
                     expression();
 
                     state._fsp--;
 
-                    dbg.location(159,34);
-                    match(input,48,FOLLOW_48_in_factor713); 
+                    dbg.location(159,46);
+                    match(input,48,FOLLOW_48_in_factor1307); 
 
                     }
                     break;
@@ -2362,7 +2368,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(160, 2);
+        dbg.location(160, 5);
 
         }
         finally {
@@ -2377,7 +2383,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "add_op"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:163:1: add_op : ( '+' | '-' | '||' );
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:163:1: add_op : ( '+' | '-' | '||' );
     public final void add_op() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "add_op");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -2385,12 +2391,12 @@ public class logolissParser extends DebugParser {
         dbg.location(163, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:164:2: ( '+' | '-' | '||' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:164:5: ( '+' | '-' | '||' )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:
             {
-            dbg.location(164,2);
+            dbg.location(164,5);
             if ( (input.LA(1)>=44 && input.LA(1)<=45)||input.LA(1)==49 ) {
                 input.consume();
                 state.errorRecovery=false;
@@ -2411,7 +2417,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(167, 2);
+        dbg.location(167, 5);
 
         }
         finally {
@@ -2426,7 +2432,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "mul_op"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:169:1: mul_op : ( '*' | '/' | '&&' | '**' );
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:169:1: mul_op : ( '*' | '/' | '&&' | '**' );
     public final void mul_op() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "mul_op");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -2434,12 +2440,12 @@ public class logolissParser extends DebugParser {
         dbg.location(169, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:170:2: ( '*' | '/' | '&&' | '**' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:170:5: ( '*' | '/' | '&&' | '**' )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:
             {
-            dbg.location(170,2);
+            dbg.location(170,5);
             if ( (input.LA(1)>=50 && input.LA(1)<=53) ) {
                 input.consume();
                 state.errorRecovery=false;
@@ -2460,7 +2466,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(174, 2);
+        dbg.location(174, 5);
 
         }
         finally {
@@ -2475,7 +2481,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "rel_op"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:176:1: rel_op : ( '==' | '!=' | '<' | '>' | '<=' | '>=' | 'in' );
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:176:1: rel_op : ( '==' | '!=' | '<' | '>' | '<=' | '>=' | 'in' );
     public final void rel_op() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "rel_op");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -2483,12 +2489,12 @@ public class logolissParser extends DebugParser {
         dbg.location(176, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:177:2: ( '==' | '!=' | '<' | '>' | '<=' | '>=' | 'in' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:177:5: ( '==' | '!=' | '<' | '>' | '<=' | '>=' | 'in' )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:
             {
-            dbg.location(177,2);
+            dbg.location(177,5);
             if ( (input.LA(1)>=54 && input.LA(1)<=60) ) {
                 input.consume();
                 state.errorRecovery=false;
@@ -2509,7 +2515,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(184, 2);
+        dbg.location(184, 5);
 
         }
         finally {
@@ -2524,7 +2530,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "succorpred"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:187:1: succorpred : succpred IDENT ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:187:1: succorpred : succpred IDENT ;
     public final void succorpred() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "succorpred");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -2532,19 +2538,19 @@ public class logolissParser extends DebugParser {
         dbg.location(187, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:188:2: ( succpred IDENT )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:188:5: ( succpred IDENT )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:188:5: succpred IDENT
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:188:11: succpred IDENT
             {
-            dbg.location(188,5);
-            pushFollow(FOLLOW_succpred_in_succorpred903);
+            dbg.location(188,11);
+            pushFollow(FOLLOW_succpred_in_succorpred1599);
             succpred();
 
             state._fsp--;
 
-            dbg.location(188,15);
-            match(input,IDENT,FOLLOW_IDENT_in_succorpred906); 
+            dbg.location(188,24);
+            match(input,IDENT,FOLLOW_IDENT_in_succorpred1605); 
 
             }
 
@@ -2555,7 +2561,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(189, 2);
+        dbg.location(189, 5);
 
         }
         finally {
@@ -2570,7 +2576,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "succpred"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:191:1: succpred : ( SUCC | PRED );
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:191:1: succpred : ( SUCC | PRED );
     public final void succpred() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "succpred");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -2578,12 +2584,12 @@ public class logolissParser extends DebugParser {
         dbg.location(191, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:192:2: ( SUCC | PRED )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:192:5: ( SUCC | PRED )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:
             {
-            dbg.location(192,2);
+            dbg.location(192,5);
             if ( (input.LA(1)>=SUCC && input.LA(1)<=PRED) ) {
                 input.consume();
                 state.errorRecovery=false;
@@ -2604,7 +2610,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(194, 2);
+        dbg.location(194, 5);
 
         }
         finally {
@@ -2619,7 +2625,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "say_statement"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:197:1: say_statement : SAY '(' expression ')' ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:197:1: say_statement : SAY '(' expression ')' ;
     public final void say_statement() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "say_statement");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -2627,23 +2633,23 @@ public class logolissParser extends DebugParser {
         dbg.location(197, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:198:2: ( SAY '(' expression ')' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:198:5: ( SAY '(' expression ')' )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:198:4: SAY '(' expression ')'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:198:10: SAY '(' expression ')'
             {
-            dbg.location(198,4);
-            match(input,SAY,FOLLOW_SAY_in_say_statement942); 
-            dbg.location(198,9);
-            match(input,47,FOLLOW_47_in_say_statement945); 
-            dbg.location(198,14);
-            pushFollow(FOLLOW_expression_in_say_statement948);
+            dbg.location(198,10);
+            match(input,SAY,FOLLOW_SAY_in_say_statement1665); 
+            dbg.location(198,18);
+            match(input,47,FOLLOW_47_in_say_statement1671); 
+            dbg.location(198,26);
+            pushFollow(FOLLOW_expression_in_say_statement1677);
             expression();
 
             state._fsp--;
 
-            dbg.location(198,26);
-            match(input,48,FOLLOW_48_in_say_statement951); 
+            dbg.location(198,41);
+            match(input,48,FOLLOW_48_in_say_statement1683); 
 
             }
 
@@ -2654,7 +2660,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(199, 2);
+        dbg.location(199, 5);
 
         }
         finally {
@@ -2669,7 +2675,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "ask_statement"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:201:1: ask_statement : ASK '(' STRING ',' variable ')' ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:201:1: ask_statement : ASK '(' STRING ',' variable ')' ;
     public final void ask_statement() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "ask_statement");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -2677,27 +2683,27 @@ public class logolissParser extends DebugParser {
         dbg.location(201, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:202:2: ( ASK '(' STRING ',' variable ')' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:202:5: ( ASK '(' STRING ',' variable ')' )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:202:4: ASK '(' STRING ',' variable ')'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:202:10: ASK '(' STRING ',' variable ')'
             {
-            dbg.location(202,4);
-            match(input,ASK,FOLLOW_ASK_in_ask_statement962); 
-            dbg.location(202,9);
-            match(input,47,FOLLOW_47_in_ask_statement965); 
-            dbg.location(202,14);
-            match(input,STRING,FOLLOW_STRING_in_ask_statement968); 
-            dbg.location(202,22);
-            match(input,39,FOLLOW_39_in_ask_statement971); 
-            dbg.location(202,27);
-            pushFollow(FOLLOW_variable_in_ask_statement974);
+            dbg.location(202,10);
+            match(input,ASK,FOLLOW_ASK_in_ask_statement1703); 
+            dbg.location(202,18);
+            match(input,47,FOLLOW_47_in_ask_statement1709); 
+            dbg.location(202,26);
+            match(input,STRING,FOLLOW_STRING_in_ask_statement1715); 
+            dbg.location(202,37);
+            match(input,39,FOLLOW_39_in_ask_statement1721); 
+            dbg.location(202,45);
+            pushFollow(FOLLOW_variable_in_ask_statement1727);
             variable();
 
             state._fsp--;
 
-            dbg.location(202,37);
-            match(input,48,FOLLOW_48_in_ask_statement977); 
+            dbg.location(202,58);
+            match(input,48,FOLLOW_48_in_ask_statement1733); 
 
             }
 
@@ -2708,7 +2714,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(203, 2);
+        dbg.location(203, 5);
 
         }
         finally {
@@ -2723,7 +2729,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "conditional_statement"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:206:1: conditional_statement : ifthenelse_stat ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:206:1: conditional_statement : ifthenelse_stat ;
     public final void conditional_statement() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "conditional_statement");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -2731,13 +2737,13 @@ public class logolissParser extends DebugParser {
         dbg.location(206, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:207:2: ( ifthenelse_stat )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:207:5: ( ifthenelse_stat )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:207:4: ifthenelse_stat
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:207:10: ifthenelse_stat
             {
-            dbg.location(207,4);
-            pushFollow(FOLLOW_ifthenelse_stat_in_conditional_statement989);
+            dbg.location(207,10);
+            pushFollow(FOLLOW_ifthenelse_stat_in_conditional_statement1754);
             ifthenelse_stat();
 
             state._fsp--;
@@ -2752,7 +2758,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(208, 2);
+        dbg.location(208, 5);
 
         }
         finally {
@@ -2767,7 +2773,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "iterative_statement"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:210:1: iterative_statement : while_stat ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:210:1: iterative_statement : while_stat ;
     public final void iterative_statement() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "iterative_statement");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -2775,13 +2781,13 @@ public class logolissParser extends DebugParser {
         dbg.location(210, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:211:2: ( while_stat )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:211:5: ( while_stat )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:211:4: while_stat
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:211:10: while_stat
             {
-            dbg.location(211,4);
-            pushFollow(FOLLOW_while_stat_in_iterative_statement1000);
+            dbg.location(211,10);
+            pushFollow(FOLLOW_while_stat_in_iterative_statement1774);
             while_stat();
 
             state._fsp--;
@@ -2796,7 +2802,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(212, 2);
+        dbg.location(212, 5);
 
         }
         finally {
@@ -2811,7 +2817,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "ifthenelse_stat"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:215:1: ifthenelse_stat : ( IF expression | THEN '{' statements '}' | else_expression );
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:215:1: ifthenelse_stat : ( IF expression | THEN '{' statements '}' | else_expression );
     public final void ifthenelse_stat() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "ifthenelse_stat");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -2819,9 +2825,9 @@ public class logolissParser extends DebugParser {
         dbg.location(215, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:216:3: ( IF expression | THEN '{' statements '}' | else_expression )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:216:9: ( IF expression | THEN '{' statements '}' | else_expression )
             int alt19=3;
-            try { dbg.enterDecision(19);
+            try { dbg.enterDecision(19, decisionCanBacktrack[19]);
 
             switch ( input.LA(1) ) {
             case IF:
@@ -2853,12 +2859,12 @@ public class logolissParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:216:5: IF expression
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:216:14: IF expression
                     {
-                    dbg.location(216,5);
-                    match(input,IF,FOLLOW_IF_in_ifthenelse_stat1015); 
-                    dbg.location(216,8);
-                    pushFollow(FOLLOW_expression_in_ifthenelse_stat1017);
+                    dbg.location(216,14);
+                    match(input,IF,FOLLOW_IF_in_ifthenelse_stat1807); 
+                    dbg.location(216,20);
+                    pushFollow(FOLLOW_expression_in_ifthenelse_stat1812);
                     expression();
 
                     state._fsp--;
@@ -2869,30 +2875,30 @@ public class logolissParser extends DebugParser {
                 case 2 :
                     dbg.enterAlt(2);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:217:19: THEN '{' statements '}'
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:217:25: THEN '{' statements '}'
                     {
-                    dbg.location(217,19);
-                    match(input,THEN,FOLLOW_THEN_in_ifthenelse_stat1037); 
-                    dbg.location(217,24);
-                    match(input,35,FOLLOW_35_in_ifthenelse_stat1039); 
-                    dbg.location(217,29);
-                    pushFollow(FOLLOW_statements_in_ifthenelse_stat1042);
+                    dbg.location(217,25);
+                    match(input,THEN,FOLLOW_THEN_in_ifthenelse_stat1838); 
+                    dbg.location(217,33);
+                    match(input,35,FOLLOW_35_in_ifthenelse_stat1843); 
+                    dbg.location(217,41);
+                    pushFollow(FOLLOW_statements_in_ifthenelse_stat1849);
                     statements();
 
                     state._fsp--;
 
-                    dbg.location(217,41);
-                    match(input,36,FOLLOW_36_in_ifthenelse_stat1045); 
+                    dbg.location(217,56);
+                    match(input,36,FOLLOW_36_in_ifthenelse_stat1855); 
 
                     }
                     break;
                 case 3 :
                     dbg.enterAlt(3);
 
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:218:18: else_expression
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:218:24: else_expression
                     {
-                    dbg.location(218,18);
-                    pushFollow(FOLLOW_else_expression_in_ifthenelse_stat1064);
+                    dbg.location(218,24);
+                    pushFollow(FOLLOW_else_expression_in_ifthenelse_stat1880);
                     else_expression();
 
                     state._fsp--;
@@ -2909,7 +2915,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(219, 16);
+        dbg.location(219, 19);
 
         }
         finally {
@@ -2924,7 +2930,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "else_expression"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:221:1: else_expression : ELSE '{' statements '}' ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:221:1: else_expression : ELSE '{' statements '}' ;
     public final void else_expression() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "else_expression");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -2932,23 +2938,23 @@ public class logolissParser extends DebugParser {
         dbg.location(221, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:221:17: ( ELSE '{' statements '}' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:221:20: ( ELSE '{' statements '}' )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:221:20: ELSE '{' statements '}'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:221:26: ELSE '{' statements '}'
             {
-            dbg.location(221,20);
-            match(input,ELSE,FOLLOW_ELSE_in_else_expression1089); 
-            dbg.location(221,25);
-            match(input,35,FOLLOW_35_in_else_expression1091); 
-            dbg.location(221,30);
-            pushFollow(FOLLOW_statements_in_else_expression1094);
+            dbg.location(221,26);
+            match(input,ELSE,FOLLOW_ELSE_in_else_expression1914); 
+            dbg.location(221,34);
+            match(input,35,FOLLOW_35_in_else_expression1919); 
+            dbg.location(221,42);
+            pushFollow(FOLLOW_statements_in_else_expression1925);
             statements();
 
             state._fsp--;
 
-            dbg.location(221,42);
-            match(input,36,FOLLOW_36_in_else_expression1097); 
+            dbg.location(221,57);
+            match(input,36,FOLLOW_36_in_else_expression1931); 
 
             }
 
@@ -2959,7 +2965,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(222, 3);
+        dbg.location(222, 9);
 
         }
         finally {
@@ -2974,7 +2980,7 @@ public class logolissParser extends DebugParser {
 
 
     // $ANTLR start "while_stat"
-    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:225:1: while_stat : WHILE '(' expression ')' '{' statements '}' ;
+    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:225:1: while_stat : WHILE '(' expression ')' '{' statements '}' ;
     public final void while_stat() throws RecognitionException {
         try { dbg.enterRule(getGrammarFileName(), "while_stat");
         if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -2982,33 +2988,33 @@ public class logolissParser extends DebugParser {
         dbg.location(225, 1);
 
         try {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:226:3: ( WHILE '(' expression ')' '{' statements '}' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:226:9: ( WHILE '(' expression ')' '{' statements '}' )
             dbg.enterAlt(1);
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:226:5: WHILE '(' expression ')' '{' statements '}'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:226:14: WHILE '(' expression ')' '{' statements '}'
             {
-            dbg.location(226,5);
-            match(input,WHILE,FOLLOW_WHILE_in_while_stat1111); 
-            dbg.location(226,11);
-            match(input,47,FOLLOW_47_in_while_stat1113); 
-            dbg.location(226,16);
-            pushFollow(FOLLOW_expression_in_while_stat1116);
+            dbg.location(226,14);
+            match(input,WHILE,FOLLOW_WHILE_in_while_stat1960); 
+            dbg.location(226,23);
+            match(input,47,FOLLOW_47_in_while_stat1965); 
+            dbg.location(226,31);
+            pushFollow(FOLLOW_expression_in_while_stat1971);
             expression();
 
             state._fsp--;
 
-            dbg.location(226,28);
-            match(input,48,FOLLOW_48_in_while_stat1119); 
-            dbg.location(226,33);
-            match(input,35,FOLLOW_35_in_while_stat1122); 
-            dbg.location(226,38);
-            pushFollow(FOLLOW_statements_in_while_stat1125);
+            dbg.location(226,46);
+            match(input,48,FOLLOW_48_in_while_stat1977); 
+            dbg.location(226,54);
+            match(input,35,FOLLOW_35_in_while_stat1983); 
+            dbg.location(226,62);
+            pushFollow(FOLLOW_statements_in_while_stat1989);
             statements();
 
             state._fsp--;
 
-            dbg.location(226,50);
-            match(input,36,FOLLOW_36_in_while_stat1128); 
+            dbg.location(226,77);
+            match(input,36,FOLLOW_36_in_while_stat1995); 
 
             }
 
@@ -3019,7 +3025,7 @@ public class logolissParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(227, 3);
+        dbg.location(227, 9);
 
         }
         finally {
@@ -3037,130 +3043,130 @@ public class logolissParser extends DebugParser {
 
  
 
-    public static final BitSet FOLLOW_PROGRAM_in_logoliss31 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_IDENT_in_logoliss33 = new BitSet(new long[]{0x0000000800000000L});
-    public static final BitSet FOLLOW_35_in_logoliss36 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_body_in_logoliss38 = new BitSet(new long[]{0x0000001000000000L});
-    public static final BitSet FOLLOW_36_in_logoliss40 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_DECLARATIONS_in_body53 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_declarations_in_body56 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_STATEMENTS_in_body60 = new BitSet(new long[]{0x00000001F99F0080L});
-    public static final BitSet FOLLOW_statements_in_body63 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_declaration_in_declarations77 = new BitSet(new long[]{0x0000000000000082L});
-    public static final BitSet FOLLOW_declarations_in_declarations80 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_variable_declaration_in_declaration93 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_vars_in_variable_declaration108 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_37_in_variable_declaration110 = new BitSet(new long[]{0x0000000000001C00L});
-    public static final BitSet FOLLOW_type_in_variable_declaration112 = new BitSet(new long[]{0x0000004000000000L});
-    public static final BitSet FOLLOW_38_in_variable_declaration114 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_var_in_vars125 = new BitSet(new long[]{0x0000008000000002L});
-    public static final BitSet FOLLOW_39_in_vars128 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_vars_in_vars130 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENT_in_var142 = new BitSet(new long[]{0x0000010000000000L});
-    public static final BitSet FOLLOW_value_var_in_var144 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_40_in_value_var157 = new BitSet(new long[]{0x000002000000C030L});
-    public static final BitSet FOLLOW_inic_var_in_value_var160 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_INTEGER_in_type173 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_BOOLEAN_in_type178 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ARRAY_in_type183 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_SIZE_in_type185 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_NUM_in_type187 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_constant_in_inic_var199 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_array_definition_in_inic_var204 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_PROGRAM_in_logoliss43 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_IDENT_in_logoliss48 = new BitSet(new long[]{0x0000000800000000L});
+    public static final BitSet FOLLOW_35_in_logoliss57 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_body_in_logoliss62 = new BitSet(new long[]{0x0000001000000000L});
+    public static final BitSet FOLLOW_36_in_logoliss67 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_DECLARATIONS_in_body95 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_declarations_in_body104 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_STATEMENTS_in_body114 = new BitSet(new long[]{0x00000001F99F0080L});
+    public static final BitSet FOLLOW_statements_in_body123 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_declaration_in_declarations149 = new BitSet(new long[]{0x0000000000000082L});
+    public static final BitSet FOLLOW_declarations_in_declarations158 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_variable_declaration_in_declaration183 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_vars_in_variable_declaration213 = new BitSet(new long[]{0x0000002000000000L});
+    public static final BitSet FOLLOW_37_in_variable_declaration218 = new BitSet(new long[]{0x0000000000001C00L});
+    public static final BitSet FOLLOW_type_in_variable_declaration223 = new BitSet(new long[]{0x0000004000000000L});
+    public static final BitSet FOLLOW_38_in_variable_declaration228 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_var_in_vars251 = new BitSet(new long[]{0x0000008000000002L});
+    public static final BitSet FOLLOW_39_in_vars257 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_vars_in_vars262 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_var283 = new BitSet(new long[]{0x0000010000000000L});
+    public static final BitSet FOLLOW_value_var_in_var288 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_40_in_value_var313 = new BitSet(new long[]{0x000002000000C030L});
+    public static final BitSet FOLLOW_inic_var_in_value_var319 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_INTEGER_in_type344 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_BOOLEAN_in_type355 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ARRAY_in_type366 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_SIZE_in_type371 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_NUM_in_type376 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_constant_in_inic_var400 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_array_definition_in_inic_var411 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_set_in_constant0 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_41_in_array_definition247 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_array_initialization_in_array_definition249 = new BitSet(new long[]{0x0000040000000000L});
-    public static final BitSet FOLLOW_42_in_array_definition251 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_elem_in_array_initialization263 = new BitSet(new long[]{0x0000008000000000L});
-    public static final BitSet FOLLOW_39_in_array_initialization266 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_array_initialization_in_array_initialization268 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_elem_in_array_initialization276 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_NUM_in_elem287 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_statement_in_statements300 = new BitSet(new long[]{0x00000001F99F0082L});
-    public static final BitSet FOLLOW_turtle_commands_in_statement333 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_assignment_in_statement339 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_conditional_statement_in_statement345 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_iterative_statement_in_statement351 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_step_in_turtle_commands364 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rotate_in_turtle_commands369 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_mode_in_turtle_commands374 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_dialogue_in_turtle_commands379 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_location_in_turtle_commands384 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_FORWARD_in_step397 = new BitSet(new long[]{0x0000F0000600C0B0L});
-    public static final BitSet FOLLOW_expression_in_step400 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_BACKWARD_in_step409 = new BitSet(new long[]{0x0000F0000600C0B0L});
-    public static final BitSet FOLLOW_expression_in_step412 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_41_in_array_definition496 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_array_initialization_in_array_definition498 = new BitSet(new long[]{0x0000040000000000L});
+    public static final BitSet FOLLOW_42_in_array_definition500 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_elem_in_array_initialization524 = new BitSet(new long[]{0x0000008000000000L});
+    public static final BitSet FOLLOW_39_in_array_initialization530 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_array_initialization_in_array_initialization535 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_elem_in_array_initialization552 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_NUM_in_elem572 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_statement_in_statements594 = new BitSet(new long[]{0x00000001F99F0082L});
+    public static final BitSet FOLLOW_turtle_commands_in_statement639 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_assignment_in_statement651 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_conditional_statement_in_statement663 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_iterative_statement_in_statement675 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_step_in_turtle_commands700 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rotate_in_turtle_commands711 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_mode_in_turtle_commands722 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_dialogue_in_turtle_commands733 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_location_in_turtle_commands744 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_FORWARD_in_step769 = new BitSet(new long[]{0x0000F0000600C0B0L});
+    public static final BitSet FOLLOW_expression_in_step775 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_BACKWARD_in_step790 = new BitSet(new long[]{0x0000F0000600C0B0L});
+    public static final BitSet FOLLOW_expression_in_step796 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_set_in_rotate0 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_PEN_in_mode468 = new BitSet(new long[]{0x0000000000600000L});
-    public static final BitSet FOLLOW_likeaboss_in_mode471 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_set_in_likeaboss482 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_say_statement_in_dialogue498 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ask_statement_in_dialogue511 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_GOTO_in_location521 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_NUM_in_location524 = new BitSet(new long[]{0x0000008000000000L});
-    public static final BitSet FOLLOW_39_in_location527 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_NUM_in_location530 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_WHERE_in_location536 = new BitSet(new long[]{0x0000080000000000L});
-    public static final BitSet FOLLOW_43_in_location538 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_variable_in_assignment560 = new BitSet(new long[]{0x0000010000000000L});
-    public static final BitSet FOLLOW_40_in_assignment563 = new BitSet(new long[]{0x0000F0000600C0B0L});
-    public static final BitSet FOLLOW_expression_in_assignment566 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENT_in_variable577 = new BitSet(new long[]{0x0000020000000002L});
-    public static final BitSet FOLLOW_array_acess_in_variable581 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_41_in_array_acess594 = new BitSet(new long[]{0x0000F0000600C0B0L});
-    public static final BitSet FOLLOW_single_expression_in_array_acess597 = new BitSet(new long[]{0x0000040000000000L});
-    public static final BitSet FOLLOW_42_in_array_acess600 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_single_expression_in_expression619 = new BitSet(new long[]{0x1FC0000000000002L});
-    public static final BitSet FOLLOW_rel_op_in_expression622 = new BitSet(new long[]{0x0000F0000600C0B0L});
-    public static final BitSet FOLLOW_expression_in_expression625 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_term_in_single_expression639 = new BitSet(new long[]{0x0002300000000002L});
-    public static final BitSet FOLLOW_add_op_in_single_expression642 = new BitSet(new long[]{0x0000F0000600C0B0L});
-    public static final BitSet FOLLOW_single_expression_in_single_expression644 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_factor_in_term658 = new BitSet(new long[]{0x003C000000000002L});
-    public static final BitSet FOLLOW_mul_op_in_term661 = new BitSet(new long[]{0x0000F0000600C0B0L});
-    public static final BitSet FOLLOW_term_in_term663 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_constant_in_factor685 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_variable_in_factor690 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_succorpred_in_factor695 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_set_in_factor700 = new BitSet(new long[]{0x0000800000000000L});
-    public static final BitSet FOLLOW_47_in_factor709 = new BitSet(new long[]{0x0000F0000600C0B0L});
-    public static final BitSet FOLLOW_expression_in_factor711 = new BitSet(new long[]{0x0001000000000000L});
-    public static final BitSet FOLLOW_48_in_factor713 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_PEN_in_mode882 = new BitSet(new long[]{0x0000000000600000L});
+    public static final BitSet FOLLOW_likeaboss_in_mode888 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_set_in_likeaboss908 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_say_statement_in_dialogue936 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ask_statement_in_dialogue955 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_GOTO_in_location974 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_NUM_in_location980 = new BitSet(new long[]{0x0000008000000000L});
+    public static final BitSet FOLLOW_39_in_location986 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_NUM_in_location992 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_WHERE_in_location1004 = new BitSet(new long[]{0x0000080000000000L});
+    public static final BitSet FOLLOW_43_in_location1009 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_variable_in_assignment1043 = new BitSet(new long[]{0x0000010000000000L});
+    public static final BitSet FOLLOW_40_in_assignment1049 = new BitSet(new long[]{0x0000F0000600C0B0L});
+    public static final BitSet FOLLOW_expression_in_assignment1055 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_variable1075 = new BitSet(new long[]{0x0000020000000002L});
+    public static final BitSet FOLLOW_array_acess_in_variable1082 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_41_in_array_acess1104 = new BitSet(new long[]{0x0000F0000600C0B0L});
+    public static final BitSet FOLLOW_single_expression_in_array_acess1110 = new BitSet(new long[]{0x0000040000000000L});
+    public static final BitSet FOLLOW_42_in_array_acess1116 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_single_expression_in_expression1144 = new BitSet(new long[]{0x1FC0000000000002L});
+    public static final BitSet FOLLOW_rel_op_in_expression1150 = new BitSet(new long[]{0x0000F0000600C0B0L});
+    public static final BitSet FOLLOW_expression_in_expression1156 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_term_in_single_expression1179 = new BitSet(new long[]{0x0002300000000002L});
+    public static final BitSet FOLLOW_add_op_in_single_expression1185 = new BitSet(new long[]{0x0000F0000600C0B0L});
+    public static final BitSet FOLLOW_single_expression_in_single_expression1187 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_factor_in_term1210 = new BitSet(new long[]{0x003C000000000002L});
+    public static final BitSet FOLLOW_mul_op_in_term1216 = new BitSet(new long[]{0x0000F0000600C0B0L});
+    public static final BitSet FOLLOW_term_in_term1221 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_constant_in_factor1255 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_variable_in_factor1266 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_succorpred_in_factor1277 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_set_in_factor1288 = new BitSet(new long[]{0x0000800000000000L});
+    public static final BitSet FOLLOW_47_in_factor1297 = new BitSet(new long[]{0x0000F0000600C0B0L});
+    public static final BitSet FOLLOW_expression_in_factor1302 = new BitSet(new long[]{0x0001000000000000L});
+    public static final BitSet FOLLOW_48_in_factor1307 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_set_in_add_op0 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_set_in_mul_op0 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_set_in_rel_op0 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_succpred_in_succorpred903 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_IDENT_in_succorpred906 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_succpred_in_succorpred1599 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_IDENT_in_succorpred1605 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_set_in_succpred0 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_SAY_in_say_statement942 = new BitSet(new long[]{0x0000800000000000L});
-    public static final BitSet FOLLOW_47_in_say_statement945 = new BitSet(new long[]{0x0000F0000600C0B0L});
-    public static final BitSet FOLLOW_expression_in_say_statement948 = new BitSet(new long[]{0x0001000000000000L});
-    public static final BitSet FOLLOW_48_in_say_statement951 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ASK_in_ask_statement962 = new BitSet(new long[]{0x0000800000000000L});
-    public static final BitSet FOLLOW_47_in_ask_statement965 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_STRING_in_ask_statement968 = new BitSet(new long[]{0x0000008000000000L});
-    public static final BitSet FOLLOW_39_in_ask_statement971 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_variable_in_ask_statement974 = new BitSet(new long[]{0x0001000000000000L});
-    public static final BitSet FOLLOW_48_in_ask_statement977 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ifthenelse_stat_in_conditional_statement989 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_while_stat_in_iterative_statement1000 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IF_in_ifthenelse_stat1015 = new BitSet(new long[]{0x0000F0000600C0B0L});
-    public static final BitSet FOLLOW_expression_in_ifthenelse_stat1017 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_THEN_in_ifthenelse_stat1037 = new BitSet(new long[]{0x0000000800000000L});
-    public static final BitSet FOLLOW_35_in_ifthenelse_stat1039 = new BitSet(new long[]{0x00000001F99F0080L});
-    public static final BitSet FOLLOW_statements_in_ifthenelse_stat1042 = new BitSet(new long[]{0x0000001000000000L});
-    public static final BitSet FOLLOW_36_in_ifthenelse_stat1045 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_else_expression_in_ifthenelse_stat1064 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ELSE_in_else_expression1089 = new BitSet(new long[]{0x0000000800000000L});
-    public static final BitSet FOLLOW_35_in_else_expression1091 = new BitSet(new long[]{0x00000001F99F0080L});
-    public static final BitSet FOLLOW_statements_in_else_expression1094 = new BitSet(new long[]{0x0000001000000000L});
-    public static final BitSet FOLLOW_36_in_else_expression1097 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_WHILE_in_while_stat1111 = new BitSet(new long[]{0x0000800000000000L});
-    public static final BitSet FOLLOW_47_in_while_stat1113 = new BitSet(new long[]{0x0000F0000600C0B0L});
-    public static final BitSet FOLLOW_expression_in_while_stat1116 = new BitSet(new long[]{0x0001000000000000L});
-    public static final BitSet FOLLOW_48_in_while_stat1119 = new BitSet(new long[]{0x0000000800000000L});
-    public static final BitSet FOLLOW_35_in_while_stat1122 = new BitSet(new long[]{0x00000001F99F0080L});
-    public static final BitSet FOLLOW_statements_in_while_stat1125 = new BitSet(new long[]{0x0000001000000000L});
-    public static final BitSet FOLLOW_36_in_while_stat1128 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_SAY_in_say_statement1665 = new BitSet(new long[]{0x0000800000000000L});
+    public static final BitSet FOLLOW_47_in_say_statement1671 = new BitSet(new long[]{0x0000F0000600C0B0L});
+    public static final BitSet FOLLOW_expression_in_say_statement1677 = new BitSet(new long[]{0x0001000000000000L});
+    public static final BitSet FOLLOW_48_in_say_statement1683 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ASK_in_ask_statement1703 = new BitSet(new long[]{0x0000800000000000L});
+    public static final BitSet FOLLOW_47_in_ask_statement1709 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_STRING_in_ask_statement1715 = new BitSet(new long[]{0x0000008000000000L});
+    public static final BitSet FOLLOW_39_in_ask_statement1721 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_variable_in_ask_statement1727 = new BitSet(new long[]{0x0001000000000000L});
+    public static final BitSet FOLLOW_48_in_ask_statement1733 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ifthenelse_stat_in_conditional_statement1754 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_while_stat_in_iterative_statement1774 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IF_in_ifthenelse_stat1807 = new BitSet(new long[]{0x0000F0000600C0B0L});
+    public static final BitSet FOLLOW_expression_in_ifthenelse_stat1812 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_THEN_in_ifthenelse_stat1838 = new BitSet(new long[]{0x0000000800000000L});
+    public static final BitSet FOLLOW_35_in_ifthenelse_stat1843 = new BitSet(new long[]{0x00000001F99F0080L});
+    public static final BitSet FOLLOW_statements_in_ifthenelse_stat1849 = new BitSet(new long[]{0x0000001000000000L});
+    public static final BitSet FOLLOW_36_in_ifthenelse_stat1855 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_else_expression_in_ifthenelse_stat1880 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ELSE_in_else_expression1914 = new BitSet(new long[]{0x0000000800000000L});
+    public static final BitSet FOLLOW_35_in_else_expression1919 = new BitSet(new long[]{0x00000001F99F0080L});
+    public static final BitSet FOLLOW_statements_in_else_expression1925 = new BitSet(new long[]{0x0000001000000000L});
+    public static final BitSet FOLLOW_36_in_else_expression1931 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_WHILE_in_while_stat1960 = new BitSet(new long[]{0x0000800000000000L});
+    public static final BitSet FOLLOW_47_in_while_stat1965 = new BitSet(new long[]{0x0000F0000600C0B0L});
+    public static final BitSet FOLLOW_expression_in_while_stat1971 = new BitSet(new long[]{0x0001000000000000L});
+    public static final BitSet FOLLOW_48_in_while_stat1977 = new BitSet(new long[]{0x0000000800000000L});
+    public static final BitSet FOLLOW_35_in_while_stat1983 = new BitSet(new long[]{0x00000001F99F0080L});
+    public static final BitSet FOLLOW_statements_in_while_stat1989 = new BitSet(new long[]{0x0000001000000000L});
+    public static final BitSet FOLLOW_36_in_while_stat1995 = new BitSet(new long[]{0x0000000000000002L});
 
 }

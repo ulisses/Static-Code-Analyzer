@@ -1,0 +1,34 @@
+= Language.C =
+
+Language.C is a parser and pretty-printer framework for C99 and the extensions of gcc.
+
+See http://www.sivity.net/projects/language.c/
+
+== Build and Install ==
+
+cabal install
+
+-- or --
+
+runhaskell Setup configure FLAGS
+runhaskell Setup build
+runhaskell Setup install
+
+Provide the set of flags passing
+ --flags="<flags-seperated-by-space>"
+to configure.
+
+== Sources ==
+
+see src/README
+
+== Examples ==
+
+A couple of small examples are available in /examples
+
+== Testing ==
+
+A couple of regression tests can be run via
+> cd test/harness; make
+
+For more tests, see test/README.

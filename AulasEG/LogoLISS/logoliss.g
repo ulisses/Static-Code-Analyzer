@@ -1,231 +1,231 @@
 grammar logoliss;
 
 tokens{
-	TRUE='TRUE';
-	FALSE='FALSE';
+    TRUE='TRUE';
+    FALSE='FALSE';
 }
 
 //**************************program*************************
 
 logoliss 
-	:	PROGRAM	IDENT		'{'	body	'}'	
-	;
-	
+    :    PROGRAM    IDENT        '{'    body    '}'    
+    ;
+    
 body
-	:	DECLARATIONS		declarations 		STATEMENTS		statements
-	;
-	
+    :    DECLARATIONS        declarations         STATEMENTS        statements
+    ;
+    
 //**************************declarations*************************
 
 declarations
-	:	declaration		declarations?
-	;
-	
+    :    declaration        declarations?
+    ;
+    
 declaration
-	:	variable_declaration
-	;
-	
+    :    variable_declaration
+    ;
+    
 //**************************declarations: variables*************************
-	
+    
 variable_declaration
-	:	vars	'->'	type	';'
-	;
-	
-vars	:	var	(','	vars)?
-	;
+    :    vars    '->'    type    ';'
+    ;
+    
+vars    :    var    (','    vars)?
+    ;
 
-var	:	IDENT	value_var
-	;
-	
+var    :    IDENT    value_var
+    ;
+    
 value_var
-	:	('=')	inic_var
-	|
-	;
+    :    ('=')    inic_var
+    |
+    ;
 
-type	:	INTEGER
-	|	BOOLEAN
-	|	ARRAY	SIZE	NUM
-	;
-	
+type    :    INTEGER
+    |    BOOLEAN
+    |    ARRAY    SIZE    NUM
+    ;
+    
 inic_var
-	:	constant
-	|	array_definition
-	;
-	
+    :    constant
+    |    array_definition
+    ;
+    
 constant
-	:	NUM
-	|	STRING
-	|	TRUE
-	|	FALSE
-	;
+    :    NUM
+    |    STRING
+    |    TRUE
+    |    FALSE
+    ;
 
-	
+    
 //************************ Declarations: Variables: Array_Definition
 
 array_definition 
-	:	'[' array_initialization ']'
-	;
-	
+    :    '[' array_initialization ']'
+    ;
+    
 array_initialization
-	:	elem 	','	array_initialization 	
-	| 	elem
-	;
+    :    elem     ','    array_initialization     
+    |     elem
+    ;
 
 elem
-	:	NUM
-	;
+    :    NUM
+    ;
 
 //************************* Statements
 
 statements
-	:	statement+
-          	;
-          	
+    :    statement+
+              ;
+              
 statement
-	:	turtle_commands
-	| 	assignment
-	| 	conditional_statement
-	| 	iterative_statement
-	;
-	
+    :    turtle_commands
+    |     assignment
+    |     conditional_statement
+    |     iterative_statement
+    ;
+    
 //************************* Turtle Statement
 turtle_commands
-	:	step
-	|	rotate
-	|	mode
-	|	dialogue
-	|	location
-	;
-	
+    :    step
+    |    rotate
+    |    mode
+    |    dialogue
+    |    location
+    ;
+    
 step 
-	:	FORWARD 	expression
-    	|	BACKWARD 	expression
-    	;
-    	
-rotate	: 	RRIGHT
-      	| 	RLEFT
-      	;
-      	
-mode 	:	PEN 	likeaboss
-	;
+    :    FORWARD     expression
+        |    BACKWARD     expression
+        ;
+        
+rotate    :     RRIGHT
+          |     RLEFT
+          ;
+          
+mode     :    PEN     likeaboss
+    ;
 
 likeaboss
-	:	(UPS|DOWNS)
-	;
-	
-dialogue 	:	say_statement
-        	|	ask_statement
-	;
+    :    (UPS|DOWNS)
+    ;
+    
+dialogue     :    say_statement
+            |    ask_statement
+    ;
 
-location	:	GOTO 	NUM	 ',' 	NUM
-	| 	WHERE	'?'
-	;
-	        
+location    :    GOTO     NUM     ','     NUM
+    |     WHERE    '?'
+    ;
+            
 //************************* Assignment Statement
 assignment 
-	:	variable 	'=' 	expression
-	;
+    :    variable     '='     expression
+    ;
 
 variable
-	:	IDENT 	(array_acess)?
-	;
+    :    IDENT     (array_acess)?
+    ;
 
 array_acess
-	:	'['	 single_expression 	']'
-	;
+    :    '['     single_expression     ']'
+    ;
 
 //*********************** Expression
 expression
 options{k=2;}
-	:	single_expression	(rel_op 	expression)?
-	;
+    :    single_expression    (rel_op     expression)?
+    ;
 
 //******** Single_Expression
 single_expression
-	:	term	(add_op single_expression)?
-	;
+    :    term    (add_op single_expression)?
+    ;
 
 //******* Term
 term
-	:	factor	(mul_op	term)?	
-	;
+    :    factor    (mul_op    term)?    
+    ;
 
 //******* Factor
 factor
 options{k=3;}
-	:	constant
-	|	variable
-	|	succorpred
-	|	('+'|'-'|'!')? '('	expression	')'
-	;
+    :    constant
+    |    variable
+    |    succorpred
+    |    ('+'|'-'|'!')? '('    expression    ')'
+    ;
 
 //******** Operators
 add_op 
-	: 	'+'
-      	| 	'-'
-     	| 	'||'
-	;
+    :     '+'
+          |     '-'
+         |     '||'
+    ;
 
 mul_op
-	:	'*'
-       	| 	'/'
-       	| 	'&&'
-       	| 	'**'
-	;
+    :    '*'
+           |     '/'
+           |     '&&'
+           |     '**'
+    ;
 
 rel_op 
-	:	'=='
-       	| 	'!='
-       	| 	'<'
-       	| 	'>'
-       	| 	'<='
-       	| 	'>='
-       	| 	'in'
-	;
+    :    '=='
+           |     '!='
+           |     '<'
+           |     '>'
+           |     '<='
+           |     '>='
+           |     'in'
+    ;
 
 //******** SuccOrPredd
 succorpred
-	: 	succpred 	IDENT
-	;
+    :     succpred     IDENT
+    ;
 
 succpred
-	:	SUCC
-        	|	PRED
-	;
+    :    SUCC
+            |    PRED
+    ;
 
 //********************* IO Statements
 say_statement
-	:	SAY 	'(' 	expression	 ')'
-	;
+    :    SAY     '('     expression     ')'
+    ;
 
 ask_statement
-	:	ASK 	'(' 	STRING 	',' 	variable 	')'
-	;
+    :    ASK     '('     STRING     ','     variable     ')'
+    ;
 
 //********************* Conditional & Iterative Statements
 conditional_statement
-	:	ifthenelse_stat
-	;
+    :    ifthenelse_stat
+    ;
 
 iterative_statement
-	:	while_stat
-	;
+    :    while_stat
+    ;
 
 //******** IfThenElse_Stat
-ifthenelse_stat		
-		:	IF	expression
-               	|	THEN	'{' 	statements 	'}'
-              	|	else_expression
-              	;
+ifthenelse_stat        
+        :    IF    expression
+                   |    THEN    '{'     statements     '}'
+                  |    else_expression
+                  ;
 
-else_expression	: 	ELSE	'{' 	statements 	'}'
-		;
+else_expression    :     ELSE    '{'     statements     '}'
+        ;
 
 //******** While_Stat
 while_stat
-		:	WHILE	'(' 	expression 	')' 	'{' 	statements 	'}'
-		;
-		
+        :    WHILE    '('     expression     ')'     '{'     statements     '}'
+        ;
+        
 PRED :  ('P'|'p')('R'|'r')('E'|'e')('D'|'d')
         ;
 
@@ -275,8 +275,8 @@ BOOLEAN :       ('B'|'b')('O'|'o')('O'|'o')('L'|'l')('E'|'e')('A'|'a')('N'|'n')
         ;
 
 DECLARATIONS :  ('D'|'d')('E'|'e')('C'|'c')('L'|'l')('A'|'a')('R'|'r')('A'|'a')('T'|'t')('I'|'i')('O'|'o')('N'|'n')('S'|'s')
-	;
-	
+    ;
+    
 ARRAY : ('A'|'a')('R'|'r')('R'|'r')('A'|'a')('Y'|'y')
         ;
 
@@ -295,9 +295,9 @@ SAY :   ('S'|'s')('A'|'a')('Y'|'y')
 PEN :   ('P'|'p')('E'|'e')('N'|'n')
         ;
         
-SUCC :	('S'|'s')('U'|'u')('C'|'c')('C'|'c')
-	;
-	
+SUCC :    ('S'|'s')('U'|'u')('C'|'c')('C'|'c')
+    ;
+    
 DOWNS :  ('D'|'d')('O'|'o')('W'|'w')('N'|'n')
         ;
 

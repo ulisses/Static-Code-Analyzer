@@ -6,6 +6,7 @@ import Language.C.System.GCC
 import Language.C.Data.Ident
 import System.Environment
 import Mpi
+import Data.Generics.Strafunski.StrategyLib.ChaseImports
 
 data C a = C (Either () (a,[a]))
 	deriving Show

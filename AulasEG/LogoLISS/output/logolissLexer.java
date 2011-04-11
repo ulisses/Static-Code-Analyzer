@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g 2011-04-11 11:35:50
+// $ANTLR 3.3 Nov 30, 2010 12:45:30 /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g 2011-04-11 11:50:06
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -6,64 +6,64 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class logolissLexer extends Lexer {
-    public static final int WHERE=24;
-    public static final int FORWARD=16;
-    public static final int WHILE=32;
-    public static final int UPS=21;
-    public static final int T__60=60;
     public static final int EOF=-1;
-    public static final int RLEFT=19;
-    public static final int IF=29;
-    public static final int T__55=55;
-    public static final int T__56=56;
-    public static final int T__57=57;
-    public static final int T__58=58;
-    public static final int BOOLEAN=11;
-    public static final int T__51=51;
-    public static final int T__52=52;
-    public static final int THEN=30;
-    public static final int IN=33;
-    public static final int T__53=53;
-    public static final int T__54=54;
-    public static final int T__59=59;
-    public static final int IDENT=7;
-    public static final int SUCC=25;
-    public static final int GOTO=23;
-    public static final int T__50=50;
-    public static final int ARRAY=12;
-    public static final int T__42=42;
-    public static final int INTEGER=10;
-    public static final int T__43=43;
-    public static final int T__40=40;
-    public static final int T__41=41;
-    public static final int T__46=46;
-    public static final int RRIGHT=18;
-    public static final int T__47=47;
-    public static final int T__44=44;
-    public static final int T__45=45;
-    public static final int T__48=48;
-    public static final int T__49=49;
-    public static final int PRED=26;
-    public static final int PEN=20;
-    public static final int ELSE=31;
-    public static final int BACKWARD=17;
-    public static final int ASK=28;
-    public static final int DECLARATIONS=8;
-    public static final int TRUE=4;
-    public static final int SAY=27;
-    public static final int NUM=14;
-    public static final int WS=34;
     public static final int T__35=35;
     public static final int T__36=36;
     public static final int T__37=37;
     public static final int T__38=38;
     public static final int T__39=39;
-    public static final int STATEMENTS=9;
-    public static final int PROGRAM=6;
-    public static final int DOWNS=22;
+    public static final int T__40=40;
+    public static final int T__41=41;
+    public static final int T__42=42;
+    public static final int T__43=43;
+    public static final int T__44=44;
+    public static final int T__45=45;
+    public static final int T__46=46;
+    public static final int T__47=47;
+    public static final int T__48=48;
+    public static final int T__49=49;
+    public static final int T__50=50;
+    public static final int T__51=51;
+    public static final int T__52=52;
+    public static final int T__53=53;
+    public static final int T__54=54;
+    public static final int T__55=55;
+    public static final int T__56=56;
+    public static final int T__57=57;
+    public static final int T__58=58;
+    public static final int T__59=59;
+    public static final int T__60=60;
+    public static final int TRUE=4;
     public static final int FALSE=5;
+    public static final int PROGRAM=6;
+    public static final int IDENT=7;
+    public static final int DECLARATIONS=8;
+    public static final int STATEMENTS=9;
+    public static final int INTEGER=10;
+    public static final int BOOLEAN=11;
+    public static final int ARRAY=12;
     public static final int SIZE=13;
+    public static final int NUM=14;
     public static final int STRING=15;
+    public static final int FORWARD=16;
+    public static final int BACKWARD=17;
+    public static final int RRIGHT=18;
+    public static final int RLEFT=19;
+    public static final int PEN=20;
+    public static final int UPS=21;
+    public static final int DOWNS=22;
+    public static final int GOTO=23;
+    public static final int WHERE=24;
+    public static final int SUCC=25;
+    public static final int PRED=26;
+    public static final int SAY=27;
+    public static final int ASK=28;
+    public static final int IF=29;
+    public static final int THEN=30;
+    public static final int ELSE=31;
+    public static final int WHILE=32;
+    public static final int IN=33;
+    public static final int WS=34;
 
     // delegates
     // delegators
@@ -76,15 +76,15 @@ public class logolissLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "/home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g"; }
+    public String getGrammarFileName() { return "/Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g"; }
 
     // $ANTLR start "TRUE"
     public final void mTRUE() throws RecognitionException {
         try {
             int _type = TRUE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:3:6: ( 'TRUE' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:3:8: 'TRUE'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:3:6: ( 'TRUE' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:3:8: 'TRUE'
             {
             match("TRUE"); 
 
@@ -104,8 +104,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = FALSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:4:7: ( 'FALSE' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:4:9: 'FALSE'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:4:7: ( 'FALSE' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:4:9: 'FALSE'
             {
             match("FALSE"); 
 
@@ -125,8 +125,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:5:7: ( '{' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:5:9: '{'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:5:7: ( '{' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:5:9: '{'
             {
             match('{'); 
 
@@ -145,8 +145,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:6:7: ( '}' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:6:9: '}'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:6:7: ( '}' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:6:9: '}'
             {
             match('}'); 
 
@@ -165,8 +165,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:7:7: ( '->' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:7:9: '->'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:7:7: ( '->' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:7:9: '->'
             {
             match("->"); 
 
@@ -186,8 +186,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:8:7: ( ';' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:8:9: ';'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:8:7: ( ';' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:8:9: ';'
             {
             match(';'); 
 
@@ -206,8 +206,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:9:7: ( ',' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:9:9: ','
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:9:7: ( ',' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:9:9: ','
             {
             match(','); 
 
@@ -226,8 +226,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__40;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:10:7: ( '=' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:10:9: '='
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:10:7: ( '=' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:10:9: '='
             {
             match('='); 
 
@@ -246,8 +246,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__41;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:11:7: ( '[' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:11:9: '['
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:11:7: ( '[' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:11:9: '['
             {
             match('['); 
 
@@ -266,8 +266,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__42;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:12:7: ( ']' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:12:9: ']'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:12:7: ( ']' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:12:9: ']'
             {
             match(']'); 
 
@@ -286,8 +286,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__43;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:13:7: ( '?' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:13:9: '?'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:13:7: ( '?' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:13:9: '?'
             {
             match('?'); 
 
@@ -306,8 +306,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__44;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:14:7: ( '+' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:14:9: '+'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:14:7: ( '+' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:14:9: '+'
             {
             match('+'); 
 
@@ -326,8 +326,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__45;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:15:7: ( '-' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:15:9: '-'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:15:7: ( '-' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:15:9: '-'
             {
             match('-'); 
 
@@ -346,8 +346,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__46;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:16:7: ( '!' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:16:9: '!'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:16:7: ( '!' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:16:9: '!'
             {
             match('!'); 
 
@@ -366,8 +366,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__47;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:17:7: ( '(' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:17:9: '('
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:17:7: ( '(' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:17:9: '('
             {
             match('('); 
 
@@ -386,8 +386,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__48;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:18:7: ( ')' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:18:9: ')'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:18:7: ( ')' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:18:9: ')'
             {
             match(')'); 
 
@@ -406,8 +406,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__49;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:19:7: ( '||' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:19:9: '||'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:19:7: ( '||' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:19:9: '||'
             {
             match("||"); 
 
@@ -427,8 +427,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__50;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:20:7: ( '*' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:20:9: '*'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:20:7: ( '*' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:20:9: '*'
             {
             match('*'); 
 
@@ -447,8 +447,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__51;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:21:7: ( '/' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:21:9: '/'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:21:7: ( '/' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:21:9: '/'
             {
             match('/'); 
 
@@ -467,8 +467,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__52;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:22:7: ( '&&' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:22:9: '&&'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:22:7: ( '&&' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:22:9: '&&'
             {
             match("&&"); 
 
@@ -488,8 +488,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__53;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:23:7: ( '**' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:23:9: '**'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:23:7: ( '**' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:23:9: '**'
             {
             match("**"); 
 
@@ -509,8 +509,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__54;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:24:7: ( '==' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:24:9: '=='
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:24:7: ( '==' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:24:9: '=='
             {
             match("=="); 
 
@@ -530,8 +530,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__55;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:25:7: ( '!=' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:25:9: '!='
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:25:7: ( '!=' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:25:9: '!='
             {
             match("!="); 
 
@@ -551,8 +551,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__56;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:26:7: ( '<' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:26:9: '<'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:26:7: ( '<' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:26:9: '<'
             {
             match('<'); 
 
@@ -571,8 +571,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__57;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:27:7: ( '>' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:27:9: '>'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:27:7: ( '>' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:27:9: '>'
             {
             match('>'); 
 
@@ -591,8 +591,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__58;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:28:7: ( '<=' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:28:9: '<='
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:28:7: ( '<=' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:28:9: '<='
             {
             match("<="); 
 
@@ -612,8 +612,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__59;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:29:7: ( '>=' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:29:9: '>='
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:29:7: ( '>=' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:29:9: '>='
             {
             match(">="); 
 
@@ -633,8 +633,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = T__60;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:30:7: ( 'in' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:30:9: 'in'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:30:7: ( 'in' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:30:9: 'in'
             {
             match("in"); 
 
@@ -654,8 +654,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = PRED;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:229:6: ( ( 'P' | 'p' ) ( 'R' | 'r' ) ( 'E' | 'e' ) ( 'D' | 'd' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:229:9: ( 'P' | 'p' ) ( 'R' | 'r' ) ( 'E' | 'e' ) ( 'D' | 'd' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:229:6: ( ( 'P' | 'p' ) ( 'R' | 'r' ) ( 'E' | 'e' ) ( 'D' | 'd' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:229:9: ( 'P' | 'p' ) ( 'R' | 'r' ) ( 'E' | 'e' ) ( 'D' | 'd' )
             {
             if ( input.LA(1)=='P'||input.LA(1)=='p' ) {
                 input.consume();
@@ -709,8 +709,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = GOTO;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:232:6: ( ( 'G' | 'g' ) ( 'O' | 'o' ) ( 'T' | 't' ) ( 'O' | 'o' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:232:9: ( 'G' | 'g' ) ( 'O' | 'o' ) ( 'T' | 't' ) ( 'O' | 'o' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:232:6: ( ( 'G' | 'g' ) ( 'O' | 'o' ) ( 'T' | 't' ) ( 'O' | 'o' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:232:9: ( 'G' | 'g' ) ( 'O' | 'o' ) ( 'T' | 't' ) ( 'O' | 'o' )
             {
             if ( input.LA(1)=='G'||input.LA(1)=='g' ) {
                 input.consume();
@@ -764,8 +764,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = RRIGHT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:235:8: ( ( 'R' | 'r' ) ( 'R' | 'r' ) ( 'I' | 'i' ) ( 'G' | 'g' ) ( 'H' | 'h' ) ( 'T' | 't' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:235:17: ( 'R' | 'r' ) ( 'R' | 'r' ) ( 'I' | 'i' ) ( 'G' | 'g' ) ( 'H' | 'h' ) ( 'T' | 't' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:235:8: ( ( 'R' | 'r' ) ( 'R' | 'r' ) ( 'I' | 'i' ) ( 'G' | 'g' ) ( 'H' | 'h' ) ( 'T' | 't' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:235:17: ( 'R' | 'r' ) ( 'R' | 'r' ) ( 'I' | 'i' ) ( 'G' | 'g' ) ( 'H' | 'h' ) ( 'T' | 't' )
             {
             if ( input.LA(1)=='R'||input.LA(1)=='r' ) {
                 input.consume();
@@ -837,8 +837,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = FORWARD;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:238:9: ( ( 'F' | 'f' ) ( 'O' | 'o' ) ( 'R' | 'r' ) ( 'W' | 'w' ) ( 'A' | 'a' ) ( 'R' | 'r' ) ( 'D' | 'd' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:238:17: ( 'F' | 'f' ) ( 'O' | 'o' ) ( 'R' | 'r' ) ( 'W' | 'w' ) ( 'A' | 'a' ) ( 'R' | 'r' ) ( 'D' | 'd' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:238:9: ( ( 'F' | 'f' ) ( 'O' | 'o' ) ( 'R' | 'r' ) ( 'W' | 'w' ) ( 'A' | 'a' ) ( 'R' | 'r' ) ( 'D' | 'd' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:238:17: ( 'F' | 'f' ) ( 'O' | 'o' ) ( 'R' | 'r' ) ( 'W' | 'w' ) ( 'A' | 'a' ) ( 'R' | 'r' ) ( 'D' | 'd' )
             {
             if ( input.LA(1)=='F'||input.LA(1)=='f' ) {
                 input.consume();
@@ -919,8 +919,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = IF;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:241:4: ( ( 'I' | 'i' ) ( 'F' | 'f' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:241:9: ( 'I' | 'i' ) ( 'F' | 'f' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:241:4: ( ( 'I' | 'i' ) ( 'F' | 'f' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:241:9: ( 'I' | 'i' ) ( 'F' | 'f' )
             {
             if ( input.LA(1)=='I'||input.LA(1)=='i' ) {
                 input.consume();
@@ -956,8 +956,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = PROGRAM;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:244:9: ( ( 'P' | 'p' ) ( 'R' | 'r' ) ( 'O' | 'o' ) ( 'G' | 'g' ) ( 'R' | 'r' ) ( 'A' | 'a' ) ( 'M' | 'm' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:244:17: ( 'P' | 'p' ) ( 'R' | 'r' ) ( 'O' | 'o' ) ( 'G' | 'g' ) ( 'R' | 'r' ) ( 'A' | 'a' ) ( 'M' | 'm' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:244:9: ( ( 'P' | 'p' ) ( 'R' | 'r' ) ( 'O' | 'o' ) ( 'G' | 'g' ) ( 'R' | 'r' ) ( 'A' | 'a' ) ( 'M' | 'm' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:244:17: ( 'P' | 'p' ) ( 'R' | 'r' ) ( 'O' | 'o' ) ( 'G' | 'g' ) ( 'R' | 'r' ) ( 'A' | 'a' ) ( 'M' | 'm' )
             {
             if ( input.LA(1)=='P'||input.LA(1)=='p' ) {
                 input.consume();
@@ -1038,8 +1038,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = INTEGER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:247:9: ( ( 'I' | 'i' ) ( 'N' | 'n' ) ( 'T' | 't' ) ( 'E' | 'e' ) ( 'G' | 'g' ) ( 'E' | 'e' ) ( 'R' | 'r' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:247:17: ( 'I' | 'i' ) ( 'N' | 'n' ) ( 'T' | 't' ) ( 'E' | 'e' ) ( 'G' | 'g' ) ( 'E' | 'e' ) ( 'R' | 'r' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:247:9: ( ( 'I' | 'i' ) ( 'N' | 'n' ) ( 'T' | 't' ) ( 'E' | 'e' ) ( 'G' | 'g' ) ( 'E' | 'e' ) ( 'R' | 'r' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:247:17: ( 'I' | 'i' ) ( 'N' | 'n' ) ( 'T' | 't' ) ( 'E' | 'e' ) ( 'G' | 'g' ) ( 'E' | 'e' ) ( 'R' | 'r' )
             {
             if ( input.LA(1)=='I'||input.LA(1)=='i' ) {
                 input.consume();
@@ -1120,8 +1120,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = ELSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:250:6: ( ( 'E' | 'e' ) ( 'L' | 'l' ) ( 'S' | 's' ) ( 'E' | 'e' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:250:9: ( 'E' | 'e' ) ( 'L' | 'l' ) ( 'S' | 's' ) ( 'E' | 'e' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:250:6: ( ( 'E' | 'e' ) ( 'L' | 'l' ) ( 'S' | 's' ) ( 'E' | 'e' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:250:9: ( 'E' | 'e' ) ( 'L' | 'l' ) ( 'S' | 's' ) ( 'E' | 'e' )
             {
             if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                 input.consume();
@@ -1175,8 +1175,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = ASK;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:253:5: ( ( 'A' | 'a' ) ( 'S' | 's' ) ( 'K' | 'k' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:253:9: ( 'A' | 'a' ) ( 'S' | 's' ) ( 'K' | 'k' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:253:5: ( ( 'A' | 'a' ) ( 'S' | 's' ) ( 'K' | 'k' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:253:9: ( 'A' | 'a' ) ( 'S' | 's' ) ( 'K' | 'k' )
             {
             if ( input.LA(1)=='A'||input.LA(1)=='a' ) {
                 input.consume();
@@ -1221,8 +1221,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = SIZE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:256:6: ( ( 'S' | 's' ) ( 'I' | 'i' ) ( 'Z' | 'z' ) ( 'E' | 'e' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:256:9: ( 'S' | 's' ) ( 'I' | 'i' ) ( 'Z' | 'z' ) ( 'E' | 'e' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:256:6: ( ( 'S' | 's' ) ( 'I' | 'i' ) ( 'Z' | 'z' ) ( 'E' | 'e' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:256:9: ( 'S' | 's' ) ( 'I' | 'i' ) ( 'Z' | 'z' ) ( 'E' | 'e' )
             {
             if ( input.LA(1)=='S'||input.LA(1)=='s' ) {
                 input.consume();
@@ -1276,8 +1276,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = RLEFT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:259:7: ( ( 'R' | 'r' ) ( 'L' | 'l' ) ( 'E' | 'e' ) ( 'F' | 'f' ) ( 'T' | 't' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:259:9: ( 'R' | 'r' ) ( 'L' | 'l' ) ( 'E' | 'e' ) ( 'F' | 'f' ) ( 'T' | 't' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:259:7: ( ( 'R' | 'r' ) ( 'L' | 'l' ) ( 'E' | 'e' ) ( 'F' | 'f' ) ( 'T' | 't' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:259:9: ( 'R' | 'r' ) ( 'L' | 'l' ) ( 'E' | 'e' ) ( 'F' | 'f' ) ( 'T' | 't' )
             {
             if ( input.LA(1)=='R'||input.LA(1)=='r' ) {
                 input.consume();
@@ -1340,8 +1340,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = UPS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:262:5: ( ( 'U' | 'u' ) ( 'P' | 'p' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:262:10: ( 'U' | 'u' ) ( 'P' | 'p' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:262:5: ( ( 'U' | 'u' ) ( 'P' | 'p' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:262:10: ( 'U' | 'u' ) ( 'P' | 'p' )
             {
             if ( input.LA(1)=='U'||input.LA(1)=='u' ) {
                 input.consume();
@@ -1377,8 +1377,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = THEN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:265:6: ( ( 'T' | 't' ) ( 'H' | 'h' ) ( 'E' | 'e' ) ( 'N' | 'n' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:265:9: ( 'T' | 't' ) ( 'H' | 'h' ) ( 'E' | 'e' ) ( 'N' | 'n' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:265:6: ( ( 'T' | 't' ) ( 'H' | 'h' ) ( 'E' | 'e' ) ( 'N' | 'n' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:265:9: ( 'T' | 't' ) ( 'H' | 'h' ) ( 'E' | 'e' ) ( 'N' | 'n' )
             {
             if ( input.LA(1)=='T'||input.LA(1)=='t' ) {
                 input.consume();
@@ -1432,8 +1432,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = WHILE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:268:7: ( ( 'W' | 'w' ) ( 'H' | 'h' ) ( 'I' | 'i' ) ( 'L' | 'l' ) ( 'E' | 'e' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:268:9: ( 'W' | 'w' ) ( 'H' | 'h' ) ( 'I' | 'i' ) ( 'L' | 'l' ) ( 'E' | 'e' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:268:7: ( ( 'W' | 'w' ) ( 'H' | 'h' ) ( 'I' | 'i' ) ( 'L' | 'l' ) ( 'E' | 'e' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:268:9: ( 'W' | 'w' ) ( 'H' | 'h' ) ( 'I' | 'i' ) ( 'L' | 'l' ) ( 'E' | 'e' )
             {
             if ( input.LA(1)=='W'||input.LA(1)=='w' ) {
                 input.consume();
@@ -1496,8 +1496,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = STATEMENTS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:271:12: ( ( 'S' | 's' ) ( 'T' | 't' ) ( 'A' | 'a' ) ( 'T' | 't' ) ( 'E' | 'e' ) ( 'M' | 'm' ) ( 'E' | 'e' ) ( 'N' | 'n' ) ( 'T' | 't' ) ( 'S' | 's' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:271:17: ( 'S' | 's' ) ( 'T' | 't' ) ( 'A' | 'a' ) ( 'T' | 't' ) ( 'E' | 'e' ) ( 'M' | 'm' ) ( 'E' | 'e' ) ( 'N' | 'n' ) ( 'T' | 't' ) ( 'S' | 's' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:271:12: ( ( 'S' | 's' ) ( 'T' | 't' ) ( 'A' | 'a' ) ( 'T' | 't' ) ( 'E' | 'e' ) ( 'M' | 'm' ) ( 'E' | 'e' ) ( 'N' | 'n' ) ( 'T' | 't' ) ( 'S' | 's' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:271:17: ( 'S' | 's' ) ( 'T' | 't' ) ( 'A' | 'a' ) ( 'T' | 't' ) ( 'E' | 'e' ) ( 'M' | 'm' ) ( 'E' | 'e' ) ( 'N' | 'n' ) ( 'T' | 't' ) ( 'S' | 's' )
             {
             if ( input.LA(1)=='S'||input.LA(1)=='s' ) {
                 input.consume();
@@ -1605,8 +1605,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = BOOLEAN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:274:9: ( ( 'B' | 'b' ) ( 'O' | 'o' ) ( 'O' | 'o' ) ( 'L' | 'l' ) ( 'E' | 'e' ) ( 'A' | 'a' ) ( 'N' | 'n' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:274:17: ( 'B' | 'b' ) ( 'O' | 'o' ) ( 'O' | 'o' ) ( 'L' | 'l' ) ( 'E' | 'e' ) ( 'A' | 'a' ) ( 'N' | 'n' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:274:9: ( ( 'B' | 'b' ) ( 'O' | 'o' ) ( 'O' | 'o' ) ( 'L' | 'l' ) ( 'E' | 'e' ) ( 'A' | 'a' ) ( 'N' | 'n' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:274:17: ( 'B' | 'b' ) ( 'O' | 'o' ) ( 'O' | 'o' ) ( 'L' | 'l' ) ( 'E' | 'e' ) ( 'A' | 'a' ) ( 'N' | 'n' )
             {
             if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                 input.consume();
@@ -1687,8 +1687,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = DECLARATIONS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:277:14: ( ( 'D' | 'd' ) ( 'E' | 'e' ) ( 'C' | 'c' ) ( 'L' | 'l' ) ( 'A' | 'a' ) ( 'R' | 'r' ) ( 'A' | 'a' ) ( 'T' | 't' ) ( 'I' | 'i' ) ( 'O' | 'o' ) ( 'N' | 'n' ) ( 'S' | 's' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:277:17: ( 'D' | 'd' ) ( 'E' | 'e' ) ( 'C' | 'c' ) ( 'L' | 'l' ) ( 'A' | 'a' ) ( 'R' | 'r' ) ( 'A' | 'a' ) ( 'T' | 't' ) ( 'I' | 'i' ) ( 'O' | 'o' ) ( 'N' | 'n' ) ( 'S' | 's' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:277:14: ( ( 'D' | 'd' ) ( 'E' | 'e' ) ( 'C' | 'c' ) ( 'L' | 'l' ) ( 'A' | 'a' ) ( 'R' | 'r' ) ( 'A' | 'a' ) ( 'T' | 't' ) ( 'I' | 'i' ) ( 'O' | 'o' ) ( 'N' | 'n' ) ( 'S' | 's' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:277:17: ( 'D' | 'd' ) ( 'E' | 'e' ) ( 'C' | 'c' ) ( 'L' | 'l' ) ( 'A' | 'a' ) ( 'R' | 'r' ) ( 'A' | 'a' ) ( 'T' | 't' ) ( 'I' | 'i' ) ( 'O' | 'o' ) ( 'N' | 'n' ) ( 'S' | 's' )
             {
             if ( input.LA(1)=='D'||input.LA(1)=='d' ) {
                 input.consume();
@@ -1814,8 +1814,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = ARRAY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:280:7: ( ( 'A' | 'a' ) ( 'R' | 'r' ) ( 'R' | 'r' ) ( 'A' | 'a' ) ( 'Y' | 'y' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:280:9: ( 'A' | 'a' ) ( 'R' | 'r' ) ( 'R' | 'r' ) ( 'A' | 'a' ) ( 'Y' | 'y' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:280:7: ( ( 'A' | 'a' ) ( 'R' | 'r' ) ( 'R' | 'r' ) ( 'A' | 'a' ) ( 'Y' | 'y' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:280:9: ( 'A' | 'a' ) ( 'R' | 'r' ) ( 'R' | 'r' ) ( 'A' | 'a' ) ( 'Y' | 'y' )
             {
             if ( input.LA(1)=='A'||input.LA(1)=='a' ) {
                 input.consume();
@@ -1878,8 +1878,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = BACKWARD;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:283:10: ( ( 'B' | 'b' ) ( 'A' | 'a' ) ( 'C' | 'c' ) ( 'K' | 'k' ) ( 'W' | 'w' ) ( 'A' | 'a' ) ( 'R' | 'r' ) ( 'D' | 'd' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:283:17: ( 'B' | 'b' ) ( 'A' | 'a' ) ( 'C' | 'c' ) ( 'K' | 'k' ) ( 'W' | 'w' ) ( 'A' | 'a' ) ( 'R' | 'r' ) ( 'D' | 'd' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:283:10: ( ( 'B' | 'b' ) ( 'A' | 'a' ) ( 'C' | 'c' ) ( 'K' | 'k' ) ( 'W' | 'w' ) ( 'A' | 'a' ) ( 'R' | 'r' ) ( 'D' | 'd' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:283:17: ( 'B' | 'b' ) ( 'A' | 'a' ) ( 'C' | 'c' ) ( 'K' | 'k' ) ( 'W' | 'w' ) ( 'A' | 'a' ) ( 'R' | 'r' ) ( 'D' | 'd' )
             {
             if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                 input.consume();
@@ -1969,8 +1969,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = IN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:286:4: ( ( 'I' | 'i' ) ( 'N' | 'n' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:286:9: ( 'I' | 'i' ) ( 'N' | 'n' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:286:4: ( ( 'I' | 'i' ) ( 'N' | 'n' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:286:9: ( 'I' | 'i' ) ( 'N' | 'n' )
             {
             if ( input.LA(1)=='I'||input.LA(1)=='i' ) {
                 input.consume();
@@ -2006,8 +2006,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = WHERE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:289:7: ( ( 'W' | 'w' ) ( 'H' | 'h' ) ( 'E' | 'e' ) ( 'R' | 'r' ) ( 'E' | 'e' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:289:9: ( 'W' | 'w' ) ( 'H' | 'h' ) ( 'E' | 'e' ) ( 'R' | 'r' ) ( 'E' | 'e' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:289:7: ( ( 'W' | 'w' ) ( 'H' | 'h' ) ( 'E' | 'e' ) ( 'R' | 'r' ) ( 'E' | 'e' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:289:9: ( 'W' | 'w' ) ( 'H' | 'h' ) ( 'E' | 'e' ) ( 'R' | 'r' ) ( 'E' | 'e' )
             {
             if ( input.LA(1)=='W'||input.LA(1)=='w' ) {
                 input.consume();
@@ -2070,8 +2070,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = SAY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:292:5: ( ( 'S' | 's' ) ( 'A' | 'a' ) ( 'Y' | 'y' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:292:9: ( 'S' | 's' ) ( 'A' | 'a' ) ( 'Y' | 'y' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:292:5: ( ( 'S' | 's' ) ( 'A' | 'a' ) ( 'Y' | 'y' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:292:9: ( 'S' | 's' ) ( 'A' | 'a' ) ( 'Y' | 'y' )
             {
             if ( input.LA(1)=='S'||input.LA(1)=='s' ) {
                 input.consume();
@@ -2116,8 +2116,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = PEN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:295:5: ( ( 'P' | 'p' ) ( 'E' | 'e' ) ( 'N' | 'n' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:295:9: ( 'P' | 'p' ) ( 'E' | 'e' ) ( 'N' | 'n' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:295:5: ( ( 'P' | 'p' ) ( 'E' | 'e' ) ( 'N' | 'n' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:295:9: ( 'P' | 'p' ) ( 'E' | 'e' ) ( 'N' | 'n' )
             {
             if ( input.LA(1)=='P'||input.LA(1)=='p' ) {
                 input.consume();
@@ -2162,8 +2162,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = SUCC;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:298:6: ( ( 'S' | 's' ) ( 'U' | 'u' ) ( 'C' | 'c' ) ( 'C' | 'c' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:298:8: ( 'S' | 's' ) ( 'U' | 'u' ) ( 'C' | 'c' ) ( 'C' | 'c' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:298:6: ( ( 'S' | 's' ) ( 'U' | 'u' ) ( 'C' | 'c' ) ( 'C' | 'c' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:298:11: ( 'S' | 's' ) ( 'U' | 'u' ) ( 'C' | 'c' ) ( 'C' | 'c' )
             {
             if ( input.LA(1)=='S'||input.LA(1)=='s' ) {
                 input.consume();
@@ -2217,8 +2217,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = DOWNS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:301:7: ( ( 'D' | 'd' ) ( 'O' | 'o' ) ( 'W' | 'w' ) ( 'N' | 'n' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:301:10: ( 'D' | 'd' ) ( 'O' | 'o' ) ( 'W' | 'w' ) ( 'N' | 'n' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:301:7: ( ( 'D' | 'd' ) ( 'O' | 'o' ) ( 'W' | 'w' ) ( 'N' | 'n' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:301:10: ( 'D' | 'd' ) ( 'O' | 'o' ) ( 'W' | 'w' ) ( 'N' | 'n' )
             {
             if ( input.LA(1)=='D'||input.LA(1)=='d' ) {
                 input.consume();
@@ -2272,8 +2272,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = IDENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:304:7: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )* )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:304:9: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:304:7: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )* )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:304:9: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
             {
             if ( (input.LA(1)>='A' && input.LA(1)<='Z')||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();
@@ -2284,7 +2284,7 @@ public class logolissLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:304:28: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:304:28: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
             loop1:
             do {
                 int alt1=2;
@@ -2297,7 +2297,7 @@ public class logolissLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:
+            	    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -2333,10 +2333,10 @@ public class logolissLexer extends Lexer {
         try {
             int _type = NUM;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:307:5: ( ( '+' | '-' )? ( '0' .. '9' )+ )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:307:9: ( '+' | '-' )? ( '0' .. '9' )+
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:307:5: ( ( '+' | '-' )? ( '0' .. '9' )+ )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:307:9: ( '+' | '-' )? ( '0' .. '9' )+
             {
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:307:9: ( '+' | '-' )?
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:307:9: ( '+' | '-' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -2345,7 +2345,7 @@ public class logolissLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:
+                    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:
                     {
                     if ( input.LA(1)=='+'||input.LA(1)=='-' ) {
                         input.consume();
@@ -2362,7 +2362,7 @@ public class logolissLexer extends Lexer {
 
             }
 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:307:19: ( '0' .. '9' )+
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:307:19: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -2376,7 +2376,7 @@ public class logolissLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:307:20: '0' .. '9'
+            	    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:307:20: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -2408,8 +2408,8 @@ public class logolissLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:310:5: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:310:9: ( ' ' | '\\t' | '\\r' | '\\n' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:310:5: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:310:9: ( ' ' | '\\t' | '\\r' | '\\n' )
             {
             if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
                 input.consume();
@@ -2437,11 +2437,11 @@ public class logolissLexer extends Lexer {
         try {
             int _type = STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:318:5: ( '\"' (~ ( '\\\\' | '\"' ) )* '\"' )
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:318:8: '\"' (~ ( '\\\\' | '\"' ) )* '\"'
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:318:5: ( '\"' (~ ( '\\\\' | '\"' ) )* '\"' )
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:318:8: '\"' (~ ( '\\\\' | '\"' ) )* '\"'
             {
             match('\"'); 
-            // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:318:12: (~ ( '\\\\' | '\"' ) )*
+            // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:318:12: (~ ( '\\\\' | '\"' ) )*
             loop4:
             do {
                 int alt4=2;
@@ -2454,7 +2454,7 @@ public class logolissLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:318:14: ~ ( '\\\\' | '\"' )
+            	    // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:318:14: ~ ( '\\\\' | '\"' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2487,404 +2487,404 @@ public class logolissLexer extends Lexer {
     // $ANTLR end "STRING"
 
     public void mTokens() throws RecognitionException {
-        // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:8: ( TRUE | FALSE | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | PRED | GOTO | RRIGHT | FORWARD | IF | PROGRAM | INTEGER | ELSE | ASK | SIZE | RLEFT | UPS | THEN | WHILE | STATEMENTS | BOOLEAN | DECLARATIONS | ARRAY | BACKWARD | IN | WHERE | SAY | PEN | SUCC | DOWNS | IDENT | NUM | WS | STRING )
+        // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:8: ( TRUE | FALSE | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | PRED | GOTO | RRIGHT | FORWARD | IF | PROGRAM | INTEGER | ELSE | ASK | SIZE | RLEFT | UPS | THEN | WHILE | STATEMENTS | BOOLEAN | DECLARATIONS | ARRAY | BACKWARD | IN | WHERE | SAY | PEN | SUCC | DOWNS | IDENT | NUM | WS | STRING )
         int alt5=57;
         alt5 = dfa5.predict(input);
         switch (alt5) {
             case 1 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:10: TRUE
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:10: TRUE
                 {
                 mTRUE(); 
 
                 }
                 break;
             case 2 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:15: FALSE
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:15: FALSE
                 {
                 mFALSE(); 
 
                 }
                 break;
             case 3 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:21: T__35
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:21: T__35
                 {
                 mT__35(); 
 
                 }
                 break;
             case 4 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:27: T__36
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:27: T__36
                 {
                 mT__36(); 
 
                 }
                 break;
             case 5 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:33: T__37
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:33: T__37
                 {
                 mT__37(); 
 
                 }
                 break;
             case 6 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:39: T__38
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:39: T__38
                 {
                 mT__38(); 
 
                 }
                 break;
             case 7 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:45: T__39
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:45: T__39
                 {
                 mT__39(); 
 
                 }
                 break;
             case 8 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:51: T__40
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:51: T__40
                 {
                 mT__40(); 
 
                 }
                 break;
             case 9 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:57: T__41
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:57: T__41
                 {
                 mT__41(); 
 
                 }
                 break;
             case 10 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:63: T__42
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:63: T__42
                 {
                 mT__42(); 
 
                 }
                 break;
             case 11 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:69: T__43
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:69: T__43
                 {
                 mT__43(); 
 
                 }
                 break;
             case 12 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:75: T__44
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:75: T__44
                 {
                 mT__44(); 
 
                 }
                 break;
             case 13 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:81: T__45
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:81: T__45
                 {
                 mT__45(); 
 
                 }
                 break;
             case 14 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:87: T__46
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:87: T__46
                 {
                 mT__46(); 
 
                 }
                 break;
             case 15 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:93: T__47
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:93: T__47
                 {
                 mT__47(); 
 
                 }
                 break;
             case 16 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:99: T__48
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:99: T__48
                 {
                 mT__48(); 
 
                 }
                 break;
             case 17 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:105: T__49
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:105: T__49
                 {
                 mT__49(); 
 
                 }
                 break;
             case 18 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:111: T__50
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:111: T__50
                 {
                 mT__50(); 
 
                 }
                 break;
             case 19 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:117: T__51
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:117: T__51
                 {
                 mT__51(); 
 
                 }
                 break;
             case 20 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:123: T__52
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:123: T__52
                 {
                 mT__52(); 
 
                 }
                 break;
             case 21 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:129: T__53
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:129: T__53
                 {
                 mT__53(); 
 
                 }
                 break;
             case 22 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:135: T__54
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:135: T__54
                 {
                 mT__54(); 
 
                 }
                 break;
             case 23 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:141: T__55
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:141: T__55
                 {
                 mT__55(); 
 
                 }
                 break;
             case 24 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:147: T__56
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:147: T__56
                 {
                 mT__56(); 
 
                 }
                 break;
             case 25 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:153: T__57
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:153: T__57
                 {
                 mT__57(); 
 
                 }
                 break;
             case 26 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:159: T__58
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:159: T__58
                 {
                 mT__58(); 
 
                 }
                 break;
             case 27 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:165: T__59
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:165: T__59
                 {
                 mT__59(); 
 
                 }
                 break;
             case 28 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:171: T__60
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:171: T__60
                 {
                 mT__60(); 
 
                 }
                 break;
             case 29 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:177: PRED
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:177: PRED
                 {
                 mPRED(); 
 
                 }
                 break;
             case 30 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:182: GOTO
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:182: GOTO
                 {
                 mGOTO(); 
 
                 }
                 break;
             case 31 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:187: RRIGHT
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:187: RRIGHT
                 {
                 mRRIGHT(); 
 
                 }
                 break;
             case 32 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:194: FORWARD
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:194: FORWARD
                 {
                 mFORWARD(); 
 
                 }
                 break;
             case 33 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:202: IF
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:202: IF
                 {
                 mIF(); 
 
                 }
                 break;
             case 34 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:205: PROGRAM
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:205: PROGRAM
                 {
                 mPROGRAM(); 
 
                 }
                 break;
             case 35 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:213: INTEGER
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:213: INTEGER
                 {
                 mINTEGER(); 
 
                 }
                 break;
             case 36 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:221: ELSE
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:221: ELSE
                 {
                 mELSE(); 
 
                 }
                 break;
             case 37 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:226: ASK
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:226: ASK
                 {
                 mASK(); 
 
                 }
                 break;
             case 38 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:230: SIZE
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:230: SIZE
                 {
                 mSIZE(); 
 
                 }
                 break;
             case 39 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:235: RLEFT
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:235: RLEFT
                 {
                 mRLEFT(); 
 
                 }
                 break;
             case 40 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:241: UPS
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:241: UPS
                 {
                 mUPS(); 
 
                 }
                 break;
             case 41 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:245: THEN
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:245: THEN
                 {
                 mTHEN(); 
 
                 }
                 break;
             case 42 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:250: WHILE
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:250: WHILE
                 {
                 mWHILE(); 
 
                 }
                 break;
             case 43 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:256: STATEMENTS
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:256: STATEMENTS
                 {
                 mSTATEMENTS(); 
 
                 }
                 break;
             case 44 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:267: BOOLEAN
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:267: BOOLEAN
                 {
                 mBOOLEAN(); 
 
                 }
                 break;
             case 45 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:275: DECLARATIONS
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:275: DECLARATIONS
                 {
                 mDECLARATIONS(); 
 
                 }
                 break;
             case 46 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:288: ARRAY
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:288: ARRAY
                 {
                 mARRAY(); 
 
                 }
                 break;
             case 47 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:294: BACKWARD
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:294: BACKWARD
                 {
                 mBACKWARD(); 
 
                 }
                 break;
             case 48 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:303: IN
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:303: IN
                 {
                 mIN(); 
 
                 }
                 break;
             case 49 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:306: WHERE
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:306: WHERE
                 {
                 mWHERE(); 
 
                 }
                 break;
             case 50 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:312: SAY
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:312: SAY
                 {
                 mSAY(); 
 
                 }
                 break;
             case 51 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:316: PEN
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:316: PEN
                 {
                 mPEN(); 
 
                 }
                 break;
             case 52 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:320: SUCC
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:320: SUCC
                 {
                 mSUCC(); 
 
                 }
                 break;
             case 53 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:325: DOWNS
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:325: DOWNS
                 {
                 mDOWNS(); 
 
                 }
                 break;
             case 54 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:331: IDENT
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:331: IDENT
                 {
                 mIDENT(); 
 
                 }
                 break;
             case 55 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:337: NUM
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:337: NUM
                 {
                 mNUM(); 
 
                 }
                 break;
             case 56 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:341: WS
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:341: WS
                 {
                 mWS(); 
 
                 }
                 break;
             case 57 :
-                // /home/oitenta/ELPI/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:344: STRING
+                // /Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/AulasEG/LogoLISS/logoliss.g:1:344: STRING
                 {
                 mSTRING(); 
 
