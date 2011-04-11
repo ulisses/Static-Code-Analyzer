@@ -39,7 +39,7 @@ var	:	IDENT	value_var
 	;
 	
 value_var
-	:	('->'|'=')	inic_var
+	:	('=')	inic_var
 	;
 
 type	:	INTEGER
