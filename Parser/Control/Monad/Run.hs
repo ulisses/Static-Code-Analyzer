@@ -1,4 +1,5 @@
 {-# LANGUAGE FlexibleInstances, UndecidableInstances #-}
+{-#OPTIONS -XMultiParamTypeClasses -XFunctionalDependencies -XFlexibleContexts #-}
 ------------------------------------------------------------------------------ 
 -- | 
 -- Author    	: Ralf Laemmel, Joost Visser

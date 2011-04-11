@@ -1,4 +1,5 @@
 {-# LANGUAGE MultiParamTypeClasses, FlexibleInstances, UndecidableInstances #-}
+{-#OPTIONS -XRankNTypes -XFunctionalDependencies#-}
 ------------------------------------------------------------------------------
 -- | 
 -- Maintainer	: Ralf Laemmel, Joost Visser

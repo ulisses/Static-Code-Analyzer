@@ -1,4 +1,5 @@
 {-# LANGUAGE FlexibleInstances, UndecidableInstances #-}
+{-#OPTIONS -XMultiParamTypeClasses #-}
 ------------------------------------------------------------------------------
 -- | 
 -- Author	: Ralf Laemmel, Joost Visser

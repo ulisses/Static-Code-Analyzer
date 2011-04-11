@@ -6,6 +6,13 @@ import Language.C.System.GCC
 import Language.C.Data.Ident
 import System.Environment
 import Data.Generics.Strafunski.StrategyLib.ChaseImports
+import Data.Generics.Strafunski.StrategyLib.StrategyPrimitives
+import Data.Generics.Strafunski.StrategyLib.TraversalTheme
+import Data.Generics.Strafunski.StrategyLib.StrategyPrelude
+import Control.Monad
+
+--func :: TU CTranslUnit Maybe
+--func = (failTU `adhocTU`) (\(Just a) -> return a)
 
 process :: String -> IO ()
 process file = do

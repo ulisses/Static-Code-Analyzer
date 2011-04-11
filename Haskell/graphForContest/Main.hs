@@ -12,7 +12,7 @@ import Data.Colour.Names
 import Data.Accessor
 import System.Random
 import System.Environment(getArgs)
-import Prices(prices1)
+import ExtractValues
 
 main = getArgs >>= ren
 
@@ -30,7 +30,7 @@ f = area_spots_4d_title ^= "random value"
     $ area_spots_4d_values  ^= values
     $ defaultAreaSpots4D
 
-values = [ (d, v, z, t) | ((d,v,z),t) <- zip prices colours ]
+values = [ (d, v, z, t) | ((d,v,z),t) <- zip vals colours ]
     where colours :: [Int]
           colours = [1..]
 
