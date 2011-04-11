@@ -13,7 +13,7 @@ logoliss
 	
 body
 	:	DECLARATIONS		declarations
-	|	STATEMENTS		statements
+		STATEMENTS		statements
 	;
 	
 //**************************declarations*************************
@@ -40,6 +40,7 @@ var	:	IDENT	value_var
 	
 value_var
 	:	('=')	inic_var
+	|
 	;
 
 type	:	INTEGER
