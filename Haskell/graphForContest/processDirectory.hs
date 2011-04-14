@@ -1,29 +1,29 @@
-module ProcessDirectory(
-	scan,
-	Disk(..),
-	Data(..)
-)
+module ProcessDirectory
 where
 
 import System.Directory ( doesFileExist, getDirectoryContents, getModificationTime , getHomeDirectory)
 import System.IO as IO ( openBinaryFile , hFileSize , hClose , IOMode(..) , openFile)
 import System.IO.Error as Error (try , ioeGetFileName , ioeGetErrorType)
 import System.Time
-import Mpi
 import System.IO.Unsafe
 import System.IO.Error
 import Data.Maybe ( fromMaybe )
 import Data.List as L (elemIndices)
 
+import Mpi
+
 --filterDotDir = filter (/= ".") . filter (/= "..")
 --getDContents = getDirectoryContents "/Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/Static-Code-Analyzer/sample_app/data/concursos" >>= return . filterDotDir
+
+--filterz :: Disk Data -> [Int]
+--filterz (File 
 
 data Disk a = File a
              | Folder    a [Disk a]
              deriving (Eq , Ord , Read)
 
 instance Functor Disk where
-    fmap f = catadisco $ indisco . recdisco f id
+    fmap f = catadisk $ indisk . recdisk f id
 
 instance Show a => Show (Disk a) where
     show = showDisk
@@ -58,7 +58,7 @@ type DataSec = Int
 data Data = Data { name         :: String
                  , size         :: Integer
                  , creationTime :: DataSec
-                 , tipo         :: String
+                 , typ         :: String
                  }
           | DataNull
           deriving (Eq , Ord , Show , Read)
@@ -69,7 +69,6 @@ getIntTime fileTime = tdSec $ diffClockTimes fileTime $ TOD 0 0
 
 putTime :: DataSec -> ClockTime
 putTime fileClockTime = TOD (toInteger fileClockTime) 0
-
 
 --
 -- | Is the responsable for find files recursively in any
@@ -105,32 +104,32 @@ scan_ s = do
 -- >       return $ (drop 2) $ map (s++) l
 --
 getDirectoryContentsDiskCatalog :: FilePath -> IO [FilePath]
-getDirectoryContentsDiskCatalog f = getDirectoryContents f >>= return . (Prelude.drop 2) . Prelude.map (f++)
+getDirectoryContentsDiskCatalog fp = getDirectoryContents fp >>= return . (Prelude.drop 2) . Prelude.map (fp++)
 
 ----------------------------------------------------------------------
--- material para o tipo @Disk a@
+-- material para o typ @Disk a@
 ----------------------------------------------------------------------
-catadisco :: (Either a (a,[c]) -> c) -> Disk a -> c
-{-# SPECIALIZE INLINE catadisco :: (Either Data (Data,[Disk Data]) -> Disk Data) -> Disk Data -> Disk Data #-}
-catadisco f = f . recdisco id (catadisco f) . outdisco
+catadisk :: (Either a (a,[c]) -> c) -> Disk a -> c
+{-# SPECIALIZE INLINE catadisk :: (Either Data (Data,[Disk Data]) -> Disk Data) -> Disk Data -> Disk Data #-}
+catadisk f = f . recdisk id (catadisk f) . outdisk
 
-anadisco :: (a -> Either a (a,[a])) -> a -> Disk a
-anadisco h = indisco . (recdisco id (anadisco h)) . h
+anadisk :: (a -> Either a (a,[a])) -> a -> Disk a
+anadisk h = indisk . (recdisk id (anadisk h)) . h
 
-hylodisco :: (Either a (a,[c]) -> c ) -> (a ->  Either a (a,[a])) -> a -> c
-hylodisco f g = catadisco f . anadisco g
+hylodisk :: (Either a (a,[c]) -> c ) -> (a ->  Either a (a,[a])) -> a -> c
+hylodisk f g = catadisk f . anadisk g
 
-recdisco :: (a -> b) -> (c -> d) -> Either a (a,[c]) -> Either b (b,[d])
-recdisco f g = f -|- f >< map g
+recdisk :: (a -> b) -> (c -> d) -> Either a (a,[c]) -> Either b (b,[d])
+recdisk f g = f -|- f >< map g
 
-outdisco :: Disk a -> Either a (a,[Disk a])
-{-# SPECIALIZE INLINE outdisco :: Disk Data -> Either Data (Data,[Disk Data]) #-}
-outdisco (File a) = i1 a
-outdisco (Folder a l)  = i2 (a,l)
+outdisk :: Disk a -> Either a (a,[Disk a])
+{-# SPECIALIZE INLINE outdisk :: Disk Data -> Either Data (Data,[Disk Data]) #-}
+outdisk (File a) = i1 a
+outdisk (Folder a l)  = i2 (a,l)
 
-indisco :: Either a (a,[Disk a]) -> Disk a
-{-# SPECIALIZE INLINE indisco :: Either Data (Data,[Disk Data]) -> Disk Data #-}
-indisco = either File (uncurry Folder)
+indisk :: Either a (a,[Disk a]) -> Disk a
+{-# SPECIALIZE INLINE indisk :: Either Data (Data,[Disk Data]) -> Disk Data #-}
+indisk = either File (uncurry Folder)
 
 type FileName = String
 ----------------------------------------------------------------------
@@ -188,15 +187,15 @@ getInfoFile f e = do
         Left()  -> do
             teste_try <- Error.try $ openBinaryFile f ReadMode
             case teste_try of
-                Left err      -> do reportError err ; return Nothing
+                Left err      -> do reportError err >> return Nothing
                 Right handle  -> do
                     teste_try_size <- Error.try $ hFileSize handle
                     case teste_try_size of
-                        Left err -> do reportError err ; return Nothing
+                        Left err -> do reportError err >> return Nothing
                         Right size -> do
                             teste_try' <- Error.try $ getModificationTime f
                             case teste_try' of
-                                Left err -> do reportError err ; return Nothing
+                                Left err -> do reportError err >> return Nothing
                                 Right time' -> do
                                     let time = getIntTime time'
                                     hClose handle
@@ -204,7 +203,7 @@ getInfoFile f e = do
         Right() -> do
             teste_try' <- Error.try $ getModificationTime f
             case teste_try' of
-                Left err    -> do reportError err ; return Nothing
+                Left err    -> reportError err >> return Nothing
                 Right time' -> (return $ getIntTime time') >>= \time -> return $ Just $ Data newFileName 0 time ""
 
 database , errorFile :: FilePath
@@ -217,21 +216,21 @@ errorFile = (unsafePerformIO getHomeDirectory) ++ "/.cd/info.log"
 reportError :: IOError -> IO ()
 reportError err = do
     time_file <- getClockTime
-    let tipo          = ioeGetErrorType err
+    let typ          = ioeGetErrorType err
     let (Just file)   = ioeGetFileName err
-    appendFile errorFile ((logError (tipo,file) $ show time_file) ++ "\n")
+    appendFile errorFile ((logError (typ,file) $ show time_file) ++ "\n")
     where
     logError :: (IOErrorType , String) -> String -> String
-    logError (tipo,file) time =
-        case tipo of
-            alreadyExistsErrorType -> "(EE) " ++ time ++ ": erro no ficheiro " ++ file ++ ": ja existe"
+    logError (typ,file) time =
+        case typ of
             doesNotExistErrorType -> "(EE) " ++ time ++ ": erro no ficheiro " ++ file ++ ": ficheiro nao existe"
             alreadyInUseErrorType -> "(EE) " ++ time ++ ": erro no ficheiro " ++ file ++ ": resource ocupado"
-            fullErrorType -> "(EE) " ++ time ++ ": erro no ficheiro " ++ file ++ ": resource exausted"
+            alreadyExistsErrorType -> "(EE) " ++ time ++ ": erro no ficheiro " ++ file ++ ": ja existe"
             eofErrorType -> "(EE) " ++ time ++ ": erro no ficheiro " ++ file ++ ": end of file"
             illegalOperationErrorType -> "(EE) " ++ time ++ ": erro no ficheiro " ++ file ++ ": operacao ilegal"
             permissionErrorType -> "(EE) " ++ time ++ ": erro no ficheiro " ++ file ++ ": permissao negada"
             userErrorType -> "(EE) " ++ time ++ ": erro no ficheiro " ++ file ++ ": erro de utilizador"
+            fullErrorType -> "(EE) " ++ time ++ ": erro no ficheiro " ++ file ++ ": resource exausted"
 
 
 -- | Um atalho para /following/ declaration

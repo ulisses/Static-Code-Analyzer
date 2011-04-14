@@ -12,6 +12,7 @@ import Data.Colour.Names
 import Data.Accessor
 import System.Random
 import System.Environment(getArgs)
+
 import ExtractValues
 
 main = getArgs >>= ren
