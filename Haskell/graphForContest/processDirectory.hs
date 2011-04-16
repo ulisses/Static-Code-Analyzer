@@ -1,3 +1,4 @@
+{-#OPTIONS -XNamedFieldPuns#-}
 module ProcessDirectory
 where
 
@@ -61,8 +62,10 @@ data Data = Data { name         :: String
                  , typ         :: String
                  }
           | DataNull
-          deriving (Eq , Ord , Show , Read)
+          deriving (Eq , Ord , Read)
 
+instance Show Data where
+	show (Data {name,size,creationTime,typ}) = name
 
 getIntTime :: ClockTime -> DataSec
 getIntTime fileTime = tdSec $ diffClockTimes fileTime $ TOD 0 0
