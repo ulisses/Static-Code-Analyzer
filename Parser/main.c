@@ -1,3 +1,6 @@
+
+void lala(int a, int b);
+
 void main(int argc) {
 	if(1) {}
 	if(1) {}
@@ -22,5 +25,9 @@ void main(int argc) {
 	return 0;
 }
 
-void lala() {}
+void lala(int a, int b) {}
+void lala1() {}
+void lala2() {}
+void lala3() {}
+int * lala4() {}
 
