@@ -1,5 +1,5 @@
 {-# LANGUAGE FlexibleInstances, UndecidableInstances #-}
-{-#OPTIONS -XMultiParamTypeClasses -XFunctionalDependencies -XFlexibleContexts #-}
+{-#OPTIONS -XMultiParamTypeClasses -XFunctionalDependencies -XFlexibleContexts -XTypeSynonymInstances #-}
 ------------------------------------------------------------------------------ 
 -- | 
 -- Author    	: Ralf Laemmel, Joost Visser

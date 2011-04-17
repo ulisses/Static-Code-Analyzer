@@ -1,29 +1,48 @@
+{-#OPTIONS -XScopedTypeVariables -XNoMonomorphismRestriction -XFlexibleInstances -XUndecidableInstances#-}
+
 module Main where
 
+import GHC.IO (unsafePerformIO)
+import System.Environment
 import Data.Data
+import Data.Monoid
+import Data.Maybe
 import Language.C
 import Language.C.System.GCC
 import Language.C.Data.Ident
-import System.Environment
 import Data.Generics.Strafunski.StrategyLib.ChaseImports
 import Data.Generics.Strafunski.StrategyLib.StrategyPrimitives
 import Data.Generics.Strafunski.StrategyLib.TraversalTheme
 import Data.Generics.Strafunski.StrategyLib.StrategyPrelude
+import Data.Generics.Strafunski.StrategyLib.FlowTheme
 import Control.Monad
 
---func :: TU CTranslUnit Maybe
---func = (failTU `adhocTU`) (\(Just a) -> return a)
+teste =  parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] "main.c" >>= return . mcCabeIndex . (\(Right p) -> p)
+
+--mcCabeIndex :: Data a => a -> Int
+mcCabeIndex =  unsafePerformIO . applyTU (full_tdTU step)
+
+instance Num a => Monoid a where
+	mappend = (+)
+	mempty = 0
+
+step = ifTU isConditional (const $ constTU 1) (constTU 0)
+
+isConditional = constTU 0
+                       `adhocTU`  fa
+
+--fa :: Monad m => CStat -> m ()
+fa (CIf _ _ _ _) = putStrLn "encontrei um if" >> return 1
+fa a = putStrLn ("encontrei outra cena: " ++ show a) >> return 0
 
 process :: String -> IO ()
 process file = do
-	--stream <- readInputStream file
 	--stream <- parseCFile (newGCC "gcc") Nothing ["-I../../../../../2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp3/"] file
 	stream <- parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] file
---	putStr (take (20 - length file) $ repeat ' ')
 	case stream of
 		( Left error  ) -> print error
 		--( Right cprog ) -> f cprog
-		( Right cprog ) -> print cprog
+		--( Right cprog ) -> print cprog
 
 f :: CTranslUnit -> IO()
 f (CTranslUnit l n) = mapM_ g l

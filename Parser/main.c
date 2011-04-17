@@ -1,8 +1,14 @@
-#include <stdlib.h>
-
 
 void main(int argc) {
-	malloc(10);
+	if(1) {
+	} else {
+	}
+	if(1) {
+	} else {
+	}
+	if(1) {
+	} else {
+	}
 	return 0;
 }
 

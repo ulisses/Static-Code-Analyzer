@@ -46,10 +46,10 @@ getAssignmentName c = fog >>= return . (getAssignmentName_ c)
 
 type GroupName = String
 
-getGroupName :: ContestName -> AssignmentName -> IO [GroupName]
-getGroupName c assig = fog >>= return . (getGroupName_ c assig)
-getGroupName_ :: ContestName -> AssignmentName -> Disk Data -> [GroupName]
-getGroupName_ c as (Folder a l) |
+--getGroupName :: ContestName -> AssignmentName -> IO [GroupName]
+--getGroupName c assig = fog >>= return . (getGroupName_ c assig)
+--getGroupName_ :: ContestName -> AssignmentName -> Disk Data -> [GroupName]
+--getGroupName_ c as (Folder a l) |
 
 
 getNamesFolders :: [Disk Data] -> [String]
