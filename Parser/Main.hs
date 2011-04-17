@@ -19,7 +19,6 @@ import Control.Monad
 
 parr = parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] "main.c"
 
-
 {- mcCabe index, we need to have Int as Monoid, in the future
    we must change this to Sum, because we may want to have
    (*) as a Monoid too.
@@ -28,6 +27,8 @@ parr = parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] "main.c"
 testMcCabe :: IO Int
 testMcCabe =  parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] "main.c"
                    >>= (\(Right prog) -> ( mcCabeIndex prog))
+
+fromRight = (\(Right prog) -> prog)
 
 instance Num a => Monoid a where
 	mappend = (+)
@@ -42,6 +43,16 @@ isConditional = constTU 0
 test (CIf _ _ _ _) = return 1
 test (CSwitch _ _ _) = return 1
 test _ = return 0
+
+{- Get the name of all functions in our C file -}
+getFunctionsName :: IO [String]
+getFunctionsName = parr >>= return . fromRight >>= return . getFunName  
+
+getFunName = filter (not . null) . applyTU (once_tdTU names)
+
+names = constTU [] `adhocTU` test1
+
+test1 (CFunDef _ (CDeclr (Just name ) ((CFunDeclr _ _ _):_) _ _ _ ) _ _ _) = [identToString name]
 
 {- We may need to import some libraries to be able to put the input code
    to work, so we must say it to GCC like this:

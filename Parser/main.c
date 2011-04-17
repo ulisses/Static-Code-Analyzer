@@ -22,3 +22,5 @@ void main(int argc) {
 	return 0;
 }
 
+void lala() {}
+
