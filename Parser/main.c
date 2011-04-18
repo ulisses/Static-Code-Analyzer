@@ -1,3 +1,4 @@
+// #include <stdio.h>
 
 void lala(int a, int b);
 

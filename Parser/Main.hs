@@ -2,11 +2,14 @@
 
 module Main where
 
+import IO
 import GHC.IO (unsafePerformIO)
 import System.Environment
+import System.Process
 import Data.Data
 import Data.Monoid
 import Data.Maybe
+import qualified Data.ByteString as BS
 import Language.C
 import Language.C.System.GCC
 import Language.C.Data.Ident
@@ -18,7 +21,23 @@ import Data.Generics.Strafunski.StrategyLib.StrategyPrelude
 import Data.Generics.Strafunski.StrategyLib.FlowTheme
 import Control.Monad
 
+{- Try to incorporate on-the-fly tests with C random code generation with CSmith tool.
+   But we must have a method in Language.C that receives a Handler or a ByteString.
+   Because this is just for test purpose is probably too much work to do.
+   If someone is interested in doing this, please read the parceCFile in the
+   Language.C.System.GCC and Language.C libraries
+-}
+{-
+funfun :: IO BS.ByteString
+funfun = do (_,out,_,pid) <- runInteractiveProcess "csmith" [] Nothing Nothing
+            bs <- BS.hGetContents out
+            waitForProcess pid
+            return bs
+--            parseCFileFromCSmith bs
+-}
+
 parr = parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] "main.c"
+parse = parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] 
 
 fromRight = (\(Right prog) -> prog)
 
@@ -31,8 +50,8 @@ testMcCabe :: IO Int
 testMcCabe =  parr >>= mcCabeIndex . fromRight
 
 instance Num a => Monoid a where
-	mappend = (+)
-	mempty = 0
+    mappend = (+)
+    mempty = 0
 
 mcCabeIndex :: Data a => a -> IO Int
 mcCabeIndex =  applyTU (full_tdTU isConditional)
@@ -56,8 +75,15 @@ names = constTU [] `adhocTU` test1
 test1 (CFunDef _ (CDeclr (Just name ) ((CFunDeclr _ _ _):_) _ _ _ ) _ _ _) = [identToString name]
 
 {- Return the signature for all functions.
-   To see more clearly you can test with getFunctionsSign >>= return . map pretty
+   We never repeat functions signature declarations, if the programmer (the person who wrote the C code) had write function signatures
+   we will ignore it and only look at full functions specifications.
+
+   To see more clearly you can test with:
+       getFunctionsSign >>= putStr . unlines  . map (show . pretty)
 -}
+getFunctionsSignFromC :: Data a => a -> [CExtDecl]
+getFunctionsSignFromC = getFunSign
+
 getFunctionsSign :: IO [CExtDecl]
 getFunctionsSign = parr >>= return . getFunSign . fromRight
 
@@ -75,16 +101,16 @@ fromFunctionToSign _ = []
 -}
 process :: String -> IO ()
 process file = do
-	{- This version of Language.C does not support BLOCKS notation from MacOSX,
-	   so we need to undefine them... Is a fast solution to get our code being parsed
-	-}
-	stream <- parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] file
-	case stream of
-		( Left error  ) -> print error
-		--( Right cprog ) -> f cprog
+    {- This version of Language.C does not support BLOCKS notation from MacOSX,
+       so we need to undefine them... It is not pretty, but is a fast solution to get our code being parsed
+    -}
+    stream <- parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] file
+    case stream of
+        ( Left error  ) -> print error
+        ( Right cprog ) -> (putStr . unlines  . map (show . pretty) . getFunctionsSignFromC) cprog
 
 main :: IO ()
 main = do
-	files <- getArgs
-	mapM_ process files
+    files <- getArgs
+    mapM_ process files
 
