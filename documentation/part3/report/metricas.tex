@@ -1,0 +1,241 @@
+\chapter{Métricas}\label{chap:metricas}
+\minitoc
+
+Existem diversas métricas, com objectivos diferentes, para analisar um projecto de \emph{software}. Essas métricas podem ser vistas como diferentes 'lentes' com as quais olhamos para um software. 
+Neste capítulo, pretende-se mostrar a investigação que foi realizada relativamente a este tema, começando primeiro por definir alguns conceitos e depois dividir as métricas 
+por categorias. Cada categoria será estruturada da mesma maneira, indicada mais à frente.\\
+
+Assim, encarou-se a análise a um software como sendo uma área que se divide em dois ramos, a \textbf{Análise Estática} e a \textbf{Análise Dinâmica}.\\
+\section{Análise Estática}
+A Análise Estática é olhar para um programa sob o ponto de vista do seu código ou ficheiro já compilado, e retirar conclusões sobre as suas características, 
+sem nunca recorrer à sua execução ou análise de resultados da execução.
+Ainda relativamente à Análise Estática, temos essencialmente duas maneiras de olhar para o software. Podemos ver este tendo em conta a qualidade do ficheiro objecto 
+produzido ( o código máquina que ira correr, p. ex: em java seria o \emph{bytecode}) ou então tendo única e exclusivamente como objecto de observação os ficheiros de 
+texto correspondentes ao código que compõe o programa.
+De notar que a Análise Estática é sempre relativa ao código do programa, ou seja, até mesmo uma análise que tenha em vista a qualidade do ficheiro objecto vai 
+ser feita sobre o código do programa.\\
+
+Assim sendo, no que diz respeito à qualidade do ficheiro objecto produzido, temos:
+
+\paragraph{Syntax checking} é um programa ou parte de um programa que tenta atestar a correcção da linguagem escrita.
+
+\paragraph{Type checking}é o processo de verificacao dos tipos de dados num software que visa garantir a restrição 
+no que diz respeito aos tipos, implicando assim maior qualidade do software produzido e menos probabilidade de acontecerem erros aquando da execução. 
+Cada vez mais as linguagens recentes apresentam este tipo de sistemas, o que levam a que muitos dos erros ocorram em tempo de compilação, ou seja: 
+completamente ainda a tempo de serem corrigidos pelos programadores, por exemplo: \texttt{Haskell, C++0x, JAVA6}. 
+Estas linguagens apresentam um sistema de tipos forte o que garante este processo.~\footnote{Mais informação em: \url{http://en.wikipedia.org/wiki/Type_checking\#Type_checking}}
+
+\paragraph{Decompilation} é o processo de pegar num ficheiro objecto e tentar inferir ou descobrir o seu código fonte que o originou. 
+Designa-se assim porque é o inverso do processo de compilação. 
+Com a ajuda deste tipo de análise consegue-se obter, entre outras coisas, os algoritmos alto nível do código máquina em questão.~\footnote{Mais informação em: \url{http://en.wikipedia.org/wiki/Decompiler}}\\
+
+No que diz respeito à análise da qualidade do código como produto final temos as seguintes metodologias:
+
+\paragraph{Code metrics} é uma vasta área que se dedica a análise do código em si para tirar conclusão acerca da sua qualidade, estabilidade e manutenção.
+
+\paragraph{Style checking} funciona como uma análise para verificar determinadas regras que à partida se acreditam como boas na produção de código. 
+Estas regras podem ser relativas a identação,  existência de ficheiros \texttt{README} e de documentação.~\footnote{Mais informação em: \url{http://en.wikipedia.org/wiki/Programming_style}}
+
+\paragraph{Verification reverse engineering} é o método que serve para verificar se a implementação de um determinado sistema cumpre a sua especificação.~\footnote{Exemplo \href{http://docs.google.com/viewer?a=v&q=cache:_L5qP0rI96EJ:citeseerx.ist.psu.edu/viewdoc/download\%3Fdoi\%3D10.1.1.4.3018\%26rep\%3Drep1\%26type\%3Dpdf+verification+reverse+engineering&hl=en&pid=bl&srcid=ADGEESia4DLaaR6tVvzu1taWn_c19TP6FB9Tjb7UuLp5DlgboBCt4JN33qutEXnlmxS5dpUzVIfJy-sNUj38vQJaEz-F5GmQxYlbs7ei97y28QaKaxovm5vicKnCBc441jF2M2wi6JQg&sig=AHIEtbSaUaw3fdOCFHTavKW5ulxx4zPiWw}{Aqui}}\\
+
+O objectivo deste trabalho é puramente analisar estaticamente um programa, relativamente às metricas de código e eventualmente relativamente ao estilo também.
+Mesmo assim este tema tão vasto deixou-nos com motivação para conhecer o que é este mundo da análise de software.\\
+
+\section{Análise Dinâmica}
+Outros tipos de análises existentes são as chamadas análises dinâmicas, estas pegam numa peça de \emph{software} e não tendo em conta, 
+nem se preocupando com o código que a constitui, executam simplesmente o programa e analisam exaustivamente sob vários prismas o seu comportamento.
+De seguida vamos dissertar sobre alguns destes métodos e práticas que existem para analisar a execução de um programa.\\
+
+\paragraph{Log analysis} é o método que consiste em pesquisar (automaticamente ou manualmente) 
+os ficheiros de log produzidos por um determinado \emph{software}, para perceber o que este está a fazer. 
+Este tipo de análise muitas das vezes é feita a programas muito complexos e extensos que comunicam com o mundo real (rede, stdin, mundo IO).
+Um exemplo de quem faz este tipo de análise são os administradores de sistemas.~\footnote{Mais informação em: \url{http://en.wikipedia.org/wiki/Log_analysis}}
+
+\paragraph{Testing} é investigar o comportamento de um software através de uma bateria de testes que podem ter em consideração um determinado uso num caso que pode ser real. 
+Geralmente, este tipo de análise simula os casos extremos a que o \emph{software} pode ir, porque se acredita empiricamente que ao ter sucesso em situações extremas, 
+há-de ter sucesso nos restantes casos.
+O que se pretende obter com este tipo de análise é o aumento na confiança de que o programa está a fazer o que é suposto, por parte de quem fabrica o produto.~\footnote{Mais informação em: \url{http://en.wikipedia.org/wiki/Software_testing}}
+
+\paragraph{Debugging} é um método que ajuda as pessoas a terem conhecimento do que determinado \emph{software} está a fazer. Este método geralmente é usado ainda numa 
+fase inicial do produto, quando está a ser desenvolvido pelos programadores. É um bom método de detectar defeitos, falhas ou pequenos \emph{bugs} no \emph{software}.~\footnote{Mais informação em: \url{http://en.wikipedia.org/wiki/Debugging}}
+
+\paragraph{Instrumentation} é o método de monitorizar e medir o nível de performance de um determinado produto.~\footnote{Mais informação em: \url{http://en.wikipedia.org/wiki/Instrumentation_(computer_programming)}}
+
+\paragraph{Profiling} é a investigação sobre o comportamento de um programa aquando a sua execução, usando para isso informações do género recursos computacionais. 
+Este tipo de análise é útil para por exemplo efectuar gestão de memória.~\footnote{Mais informação em: \url{http://en.wikipedia.org/wiki/Profiling_(computer_programming)}}
+
+\paragraph{Benchmarking} é o processo de comparar o processo do utilizador com os processos conhecidos de outros, de modo a obter conhecimento 
+sobre as melhores práticas efectuadas na indústria.~\footnote{Mais informação em: \url{http://en.wikipedia.org/wiki/Benchmarking}}
+
+\section{Métricas de qualidade de \emph{software}}
+
+A presença de testes num determinado programa de \emph{software}, leva a que esse artefacto ganhe pontos no que diz respeito à análise estática sob o ponto de vista da 
+qualidade, porque, como dissemos anteiormente, a presença de testes num projecto de \emph{software} leva a que tenhamos mais confiança neste.
+Existem algumas fórmulas que nos dão alguns indicadores numerários sobre o nível desta confiança. De seguida são apresentadas algumas sobre a cobertura de testes.\\
+
+\[ \emph{\text{Line Coverage}} = \frac{\emph{\text{Nr of test lines}}}{\emph{\text{nr of tested lines}}} \] \\
+
+\[ \emph{\text{Decision coverage}} = \frac{\emph{\text{Nr of test methods}}}{\emph{\text{Sum of McCabe complexity}}} \] \\
+
+\[ \emph{\text{Test granularity}} = \frac{\emph{\text{Nr of test lines}}}{\emph{\text{nr of tests}}} \] \\
+
+\[\emph{\text{Test efficiency}} = \frac{\emph{\text{Decision coverage}}}{\emph{\text{line coverage}}} \] \\
+
+
+Podemos sempre aumentar a nossa precisão na análise se considerarmos apenas as linhas que contêem código e não as linhas em branco ou linhas com apenas um caracter, 
+como por exemplo as aberturas de blocos em \texttt{C, JAVA}.
+Ainda podemos também considerar não apenas o numero total de linhas mas também o número de métodos/funções testados.
+
+De notar que as formulas atrás descritas podem ser modificadas para obter outros tipos de métricas, não só referentes a testes, como por exemplo:\\
+
+\[\emph{\text{Code granularity}} = \frac{\emph{\text{Nr of lines}}}{\emph{\text{Nr of (methods/functions)}}} \] \\
+
+Como já referimos anteriormente, a análise que se pretende, por agora, é essencialmente estática. Assim sendo, segue-se uma lista de métricas estudadas que se pretendem 
+implementar no sistema.
+
+
+\subsection{Bug patterns}
+Um grave problema na utilização de linguagens de baixo nível como é o exemplo do C, é 
+que tem de existir uma grande responsabilidade por parte do progrmador. 
+Este tem de ter cuidado com pormenores que em linguagens de mais alto nível nem sequer pensa nisso.
+Um exemplo da falta de segurança do C, pode ser visto de seguida:
+
+\begin{code_files}
+// foo.c file
+#include <stdio.h>
+
+int main() {
+    char *a = "I like you";
+    char *b = "I hate you";
+
+    if(&a < &b) a = *(&a + 1);
+    else        a = *(&a - 1); 
+
+    printf("%s\n", a);
+}
+\end{code_files}
+
+Quando o utilizador executa o código acima descrito o que ele vai ter é o seguinte:
+
+\begin{code_files}
+[ulissesaraujocosta@maclisses:c]-$ gcc -o foo foo.c
+[ulissesaraujocosta@maclisses:c]-$ ./foo
+I hate you
+\end{code_files}
+
+Isto demonstra que conseguimos aceder ao espaço de uma variável através de uma outra, simplesmente para isso tendo conhecimento de como funciona a stack de 
+alocação de funcões. Repare-se que o código prevê até o crescimento da stack, quer seja para cima ou para baixo. 
+Assim conseguimos aceder ao valor de uma variável através de uma outra que esta declarada contiguamente.\\
+
+Á medida que subimos de nível nas linguagens vários problemas vão sendo melhorados e cada vez menos "poder" é dado ao programador. 
+Por outra lado cada vez mais segurança também é dada. 
+Mesmo assim há problemas sobre os quais nenhuma linguagem, por muito alto nível que ela seja, consegue resolver, um exemplo disso é:
+
+\begin{itemize}
+\item Null-dereferencing
+\item Lack of array bounds checking
+\item Buffer overflow
+\end{itemize}
+
+Como exemplo de uma ferramenta muito poderosa e que detecta vários padrões tidos como \emph{bugs} é o 
+\emph{FindBugs}~\footnote{Ferramenta em \url{http://findbugs.sourceforge.net/}} para \texttt{JAVA} que é gratuito. 
+Todas essas ferramentas têm como objectivo principal ajudar o programador a ter alguma correcção do seu código.
+
+\subsection{Source Lines of code (SLOC)}
+
+Este tipo métricas diz respeito à informação que uma linha de código pode conter. 
+Se pensarmos levianamente no assunto podemos, erradamente, chegar a conclusão que contar o número de linhas é um problema fácil, 
+mas mais uma vez aqui se mostra o quão empírico pode ser a tarefa de medir um software no que confere à sua qualidade.\\
+
+Assim, podemos pensar em linhas de código, como linhas onde tenhamos alguma certeza de que se encontram partes fundamentais 
+dos algoritmos e da implementação. Por exemplo, uma linha que esteja em branco ou que tenha comentários não deve ser contada, 
+mais ainda, uma linha que apenas tenha (por motivos de identação) um fechar bloco "\}" também não é útil de contar para efeitos de ter uma noção total do \texttt{SLOC}.\\
+
+Como podemos concluir, esta é uma métrica muito dependente da linguagem de programacao que se está a usar. E é necessario arranjar um 
+\emph{tradeoff} entre a medição do esforço e a productividade efectiva.\\
+
+Como exemplo podemos ver~\footnote{Informação e exemplo: \url{http://en.wikipedia.org/wiki/Source_lines_of_code}}:
+
+\begin{code_files}
+for (i = 0; i < 100; i += 1) printf("hello"); /* How many lines of code is this? */
+\end{code_files}
+
+Neste exemplo temos:
+
+\begin{itemize}
+\item $1$ Linha fisica de código (LOC)
+\item $2$ Linhas logicas de codigo (LLOC) (o for e o printf)
+\item $1$ Linha de comentário
+\end{itemize}
+
+Neste caso, seria interessante contar este código como $2$ linhas de código e nao apenas como uma única.
+
+\subsection{Métricas de Segurança}
+
+No que diz respeito a avaliação de software relativamente a métricas de segurança, é necessário compreender os tipos de ataques possíveis que uma 
+aplicação que comunica online ou com serviços terceiros pode sofrer. Existem várias técnicas de tentativa de corrupção ou alteração de um sistema online, 
+entre elas as que se podem identificar automaticamente são:
+
+\begin{description}
+\item[SQL injection attack] é um tipo de ameaça que ocorre quando são pedidos dados ao utilizador e este, aproveitando-se de falhas de segurança, injecta as suas pŕoprias 
+\emph{querys} à base de dados. Segue-se um pequeno exemplo de como este ataque é efectuado, imagine-se a seguinte \emph{query}:
+\begin{code_files}
+SELECT descricao FROM enunciados WHERE titulo = 'exemplo1';
+\end{code_files}
+O campo \texttt{titulo} é dado por um utilizador do sistema. Com falta de controlo sobre esse campo, um utilizador com más intenções poderia escrever \texttt{exmplo1'; DROP TABLE users ;--}, 
+o que resultaria na seguinte \emph{query}:
+\begin{code_files}
+SELECT descricao FROM enunciados WHERE titulo = 'exemplo1'; DROP TABLE users ; --'
+\end{code_files}
+Assim, um simples campo a pedir um dado a um utilizador poderia significar na destruição total da base de dados.~\footnote{Mais informção em: \url{http://en.wikipedia.org/wiki/SQL_injection}}
+
+\item[Storing plaintext and sending passwords] são falhas de segurança relacionadas com a falta de protecção sobre as \emph{passwords}. Imagine-se o seguinte caso, um sistema de login em que as \emph{passwords}, 
+em vez de estarem guardadas numa base de dados e protegidas por funções de \emph{hash} (como no nosso sistema), estão guardadas num ficheiro de texto simples, ou na própria aplicação. 
+Seria então trivial para um utilizador mal intencionado descobrir as \emph{passwords}. 
+
+\item[XSS - Cross-site scripting] é um tipo de vulnerabilidade na segurança muitas vezes encontradas em páginas \emph{Web}. Consiste em um cliente inserir \emph{scripts}
+ nessas páginas para que seja vista por outros utilizadores. Assim, um simples tarefa como descobrir uma \emph{password} de um determinado sujeito seria bastante simples, bastando 
+para isso que esse sujeito entrasse na página aquando o ataque.~\footnote{Mais informação em: \url{http://en.wikipedia.org/wiki/Cross-site_scripting}}
+\end{description}
+
+Existem várias ferramentas que procuram por estes padrões e tentam avisar o programador que o seu código pode ser vunerável a algum destes tipos de ataques, 
+entre elas sobressaem-se as seguintes aplicações proprietárias:
+
+\begin{itemize}
+\item \texttt{Fortify} para \texttt{Java}~\footnote{Ferramenta pode ser encontrada em \url{https://www.fortify.com/}}
+\item \texttt{Coverity} para \texttt{C C++ C\#}~\footnote{Ferramenta pode ser encontrada em \url{https://www.coverity.com/}} 
+\end{itemize}
+
+\subsection{Cyclomatic complexity}
+Esta métrica é bastante completa e tem como objectivo indicar a complexidade de um programa. Para isso representa-se um programa como um grafo de controlo de fluxo ( um grafo orientado ), onde os nodos são as instruções e uma aresta que liga dois nodos significa que aquelas duas instruções são executadas uma seguida da outra.\\
+A definição é bastante simples, mas este tipo de representação de um programa pode ter grandes vantagens, por exemplo para medir a quantidade de \emph{test cases} necessários desenvolver para testar todo um programa. Para atingir este objectivo apenas teríamos de contar o número de caminhos linearmente independentes que compõe este grafo.\\
+
+A definição matemática deste conceito é:
+
+$$M = E - N + 2P$$
+
+onde:
+
+\begin{description}
+\item[M] cyclomatic complexity
+\item[E] o número de arestas no grafo
+\item[N] o número de nodos no grafo
+\item[P] o número de componentes ligados no grafo
+\end{description}
+
+Assim, depois de calcular para cada programa (que pode ser um conjunto de ficheiro) a sua Cyclomatic Complexity, temos na seguinte tabela uma relação directa
+entre este valor calculado e a taxa de risco do programa em questão.
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{|l|l|}\hline
+Cyclomatic Complexity & Risco \\\hline
+1-10  & um programa simples sem muito risco\\\hline
+11-20 & programa mais complexo de risco moderado\\\hline
+21-50  & programa complexo, alto risco\\\hline
+>50  & programa instável (muito alto risco)\\\hline
+\end{tabular}
+\caption{Avaliação da cyclomatic complexity}
+\end{center}
+\end{table}
+
