@@ -1,19 +1,21 @@
 UNAME := $(shell uname -s)
+RELTEX := Relatorio.tex
+RELPDF := Relatorio.pdf
 
-all:
+$(RELPDF):$(RELTEX)
 ifeq ($(UNAME),Darwin)
-	latexmk -e '$$pdflatex=q/pdflatex -synctex=1 %T/' -pdf Relatorio.tex
+	latexmk -e '$$pdflatex=q/pdflatex -synctex=1 %T/' -pdf $(RELTEX)
 endif
 ifeq ($(UNAME),Linux)
-	latexmk -pdf rel.tex
+	latexmk -pdf $(RELTEX)
 endif
 
-open:
+open:$(RELPDF)
 ifeq ($(UNAME),Darwin)
-	open Relatorio.pdf
+	open $(RELPDF)
 endif
 ifeq ($(UNAME),Linux)
-	xpdf Relatorio.pdf
+	xpdf $(RELPDF)
 endif
 
 clean:
