@@ -1,7 +1,7 @@
 
 void lala(int a, int b);
 
-void main(int argc) {
+void main(int argc, char **argv) {
 	if(1) {}
 	if(1) {}
 	if(1) {}

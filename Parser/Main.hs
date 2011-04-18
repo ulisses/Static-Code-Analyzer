@@ -10,6 +10,7 @@ import Data.Maybe
 import Language.C
 import Language.C.System.GCC
 import Language.C.Data.Ident
+import Language.C.Pretty
 import Data.Generics.Strafunski.StrategyLib.ChaseImports
 import Data.Generics.Strafunski.StrategyLib.StrategyPrimitives
 import Data.Generics.Strafunski.StrategyLib.TraversalTheme
@@ -54,17 +55,17 @@ names = constTU [] `adhocTU` test1
 
 test1 (CFunDef _ (CDeclr (Just name ) ((CFunDeclr _ _ _):_) _ _ _ ) _ _ _) = [identToString name]
 
-{- Return the signature for all functions
---getFunctionsSign :: IO [String]
+{- Return the signature for all functions.
+   To see more clearly you can test with getFunctionsSign >>= return . map pretty
+-}
+getFunctionsSign :: IO [CExtDecl]
 getFunctionsSign = parr >>= return . getFunSign . fromRight
 
-getFunSign = filter (not . null) . applyTU (once_tdTU names1)
+getFunSign = applyTU (once_tdTU names1)
+names1 = failTU `adhocTU` fromFunctionToSign
 
-names1 = constTU [] `adhocTU` test2
--}
-getFunctionSign = parr >>= ((applyTU . once_td)  ((flip adhocTU (return . test2)) (constTU ( CDeclExt (CDecl [] [] internalNode))))) . fromRight
-
-test2 (CFDefExt (CFunDef lCDeclSpec cDeclr _ _ nInfo )) = CDeclExt (CDecl lCDeclSpec [(Just $ cDeclr,Nothing,Nothing)] internalNode) 
+fromFunctionToSign (CFDefExt (CFunDef lCDeclSpec cDeclr _ _ nInfo )) = [CDeclExt (CDecl lCDeclSpec [(Just $ cDeclr,Nothing,Nothing)] internalNode)]
+fromFunctionToSign _ = []
 
 {- We may need to import some libraries to be able to put the input code
    to work, so we must say it to GCC like this:
