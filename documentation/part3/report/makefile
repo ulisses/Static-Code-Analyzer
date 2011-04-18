@@ -1,5 +1,21 @@
+UNAME := $(shell uname -s)
+
 all:
-	pdflatex Relatorio.tex
+ifeq ($(UNAME),Darwin)
+	latexmk -e '$$pdflatex=q/pdflatex -synctex=1 %T/' -pdf Relatorio.tex
+endif
+ifeq ($(UNAME),Linux)
+	latexmk -pdf rel.tex
+endif
+
+open:
+ifeq ($(UNAME),Darwin)
+	open Relatorio.pdf
+endif
+ifeq ($(UNAME),Linux)
+	xpdf Relatorio.pdf
+endif
+
 clean:
 	find . -maxdepth 1 \( \! -iname "*.bib" \! -iname "*\.tex" -type f \! -iname "makefile" \! -iname "*.sty" \) -exec rm '{}' \;
 	find . -name *~ -or -name *.*~ | xargs rm
