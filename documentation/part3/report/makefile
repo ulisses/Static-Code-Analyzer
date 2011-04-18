@@ -2,7 +2,7 @@ UNAME := $(shell uname -s)
 RELTEX := Relatorio.tex
 RELPDF := Relatorio.pdf
 
-$(RELPDF):$(RELTEX)
+$(RELPDF):*.tex *.bib
 ifeq ($(UNAME),Darwin)
 	latexmk -e '$$pdflatex=q/pdflatex -synctex=1 %T/' -pdf $(RELTEX)
 endif

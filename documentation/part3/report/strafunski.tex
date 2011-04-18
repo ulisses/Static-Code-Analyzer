@@ -1,14 +1,14 @@
 \chapter{Strafunski}
 \minitoc
 
-Strafunski é uma biblioteca de programação genérica que implementa estratégias aplicadas ao paradigma funcional \cite{Lammel:2002:DPF:570186.570187}.\\
+Strafunski é uma biblioteca de programação genérica que implementa estratégias aplicadas ao paradigma funcional \cite{Lammel:2002:DPF:570186.570187,LV03-PADL}.\\
 Esta biblioteca segue a infraestrutura de \textit{Scrap your boilerplate} \cite{SYB3} do
-Haskell\footnote{Todos os módulos que estão debaixo do Data.Generics e cujos tipos implementam as classes Data e Typeable}.
+Haskell\footnote{Todos os módulos que estão debaixo do Data.Generics e cujos tipos implementam as classes Data e Typeable} e com isto pretende-se que o programador
+escreva código mais genérico que pode funcionar sobre vários tipos de dados e ao mesmo tempo código mais curto.\\
+Esta abordagem requer muita investigação e nem tanto começar de imediato a programar, visto haver bastante teoria por trás destas filosofias.
 
-segundo paper do joost \cite{LV03-PADL}
+\section{Estratégias}
 
-
-\section{Estudo do Front-End}\label{chap:frontend}
 
 \begin{haskell}
 data CTranslUnit = CTranslUnit [CExtDecl] NodeInfo
