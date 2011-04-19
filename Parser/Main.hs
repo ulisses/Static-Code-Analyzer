@@ -56,12 +56,11 @@ instance Num a => Monoid a where
 mcCabeIndex :: Data a => a -> IO Int
 mcCabeIndex =  applyTU (full_tdTU isConditional)
 
-isConditional = constTU 0
-                          `adhocTU` test
+isConditional = constTU 0 `adhocTU` (return . test)
 
-test (CIf _ _ _ _) = return 1
-test (CSwitch _ _ _) = return 1
-test _ = return 0
+test (CIf _ _ _ _) =  1
+test (CSwitch _ _ _) =  1
+test _ =  0
 
 {- Get the name of all functions names in our C file
 -}
@@ -93,6 +92,28 @@ names1 = failTU `adhocTU` fromFunctionToSign
 fromFunctionToSign (CFDefExt (CFunDef lCDeclSpec cDeclr _ _ nInfo )) = [CDeclExt (CDecl lCDeclSpec [(Just $ cDeclr,Nothing,Nothing)] internalNode)]
 fromFunctionToSign _ = []
 
+fromFunctionToSign2 (CFDefExt (CFunDef lCDeclSpec cDeclr _ _ nInfo )) = CDeclExt (CDecl lCDeclSpec [(Just $ cDeclr,Nothing,Nothing)] internalNode)
+
+
+{- testtttting -}
+-- Java metrics via instantiation of generic metrics
+--nestingDepth :: Term t => t -> Int
+nestingDepth =  applyTU (depthWith isConditional2)
+-- Generic algorithm for depth of nesting
+
+depthWith s = recurse `passTU` -- Sequential composition
+    \depth_subterms ->
+        let max_subterms = maximum (0:depth_subterms)
+        in (ifTU s
+            (const (constTU (max_subterms + 1)))
+            (constTU max_subterms))
+            where recurse = allTU (++) [] (depthWith s `passTU` \depth -> constTU [depth])
+
+isConditional2 = constTU 0 `adhocTU` testt
+
+testt (CIf _ _ _ _) =  return 1
+testt (CSwitch _ _ _) =  return 1
+testt _ =  return 0
 {- We may need to import some libraries to be able to put the input code
    to work, so we must say it to GCC like this:
    stream <- parseCFile (newGCC "gcc") Nothing ["-Idir"] file
