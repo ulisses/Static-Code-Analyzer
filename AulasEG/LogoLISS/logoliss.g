@@ -14,7 +14,6 @@ logoliss
 body
     :    DECLARATIONS        declarations         STATEMENTS        statements
     ;
-    
 //**************************declarations*************************
 
 declarations
