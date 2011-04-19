@@ -98,16 +98,16 @@ fromFunctionToSign2 (CFDefExt (CFunDef lCDeclSpec cDeclr _ _ nInfo )) = CDeclExt
 {- testtttting -}
 -- Java metrics via instantiation of generic metrics
 --nestingDepth :: Term t => t -> Int
-nestingDepth =  applyTU (depthWith isConditional2)
+nestingDepth =  applyTU (depthWith )
 -- Generic algorithm for depth of nesting
 
-depthWith s = recurse `passTU` -- Sequential composition
+depthWith = recurse `passTU` -- Sequential composition
     \depth_subterms ->
         let max_subterms = maximum (0:depth_subterms)
-        in (ifTU s
+        in (ifTU isConditional2
             (const (constTU (max_subterms + 1)))
             (constTU max_subterms))
-            where recurse = allTU (++) [] (depthWith s `passTU` \depth -> constTU [depth])
+            where recurse = allTU (++) [] (depthWith `passTU` \depth -> constTU [depth])
 
 isConditional2 = constTU 0 `adhocTU` testt
 

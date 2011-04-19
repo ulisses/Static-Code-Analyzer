@@ -6,11 +6,11 @@ void main(int argc, char **argv) {
     if(1) {}
     switch (1) {
         case 1: {
-					lala(1,1);
+                    lala(1,1);
                     break;
                 }
         case 1: {
-					int *v = lala4();
+                    int *v = lala4();
                     break;
                 }
     }
