@@ -42,8 +42,8 @@ funções para travessias na nossa árvore de tipos. Como nota é importante diz
 fazer a instânciação manual desta classe. Podemos recorrer ao confortável \textbf{deriving Data} que o Haskell suporta para qualquer declaração
 de tipos\footnote{Internamente o GHC trata de chamar a biblioteca do DrIFT, mais informações em: \url{http://repetae.net/computer/haskell/DrIFT/}}.\\
 
-No que diz respeito aos tipos de dados utilizados pelo Strafunski temos dois, o \textbf{TU} para estratégias de preservação dos tipos
-(o tipo do output e input coincidem), e \textbf{TP} para estratégias de tipo unificados (o output é sempre de um determinado tipo independentemente do tipo de entrada),
+No que diz respeito aos tipos de dados utilizados pelo Strafunski temos dois, o \textbf{TP} para estratégias de preservação dos tipos
+(o tipo do output e input coincidem), e \textbf{TU} para estratégias de tipo unificados (o output é sempre de um determinado tipo independentemente do tipo de entrada),
 como é explicado em \cite{Lammel:2002:DPF:570186.570187}.\\
 Estes tipo aos olhos do utilizador são abstractos, porque o lote de funções que nos são dadas para os trabalhar não implica o conhecimento destes.
 
@@ -95,6 +95,7 @@ A seguinte função é uma estratégia em si que falha sempre:
 $$failTP :: MonadPlus~m \Rightarrow TP~m$$
 $$failTU :: MonadPlus~m \Rightarrow TU~u~m$$
 
+\section{Exemplos}
 \begin{haskell}
 data CTranslUnit = CTranslUnit [CExtDecl] NodeInfo
 data CExtDecl = CDeclExt CDecl
