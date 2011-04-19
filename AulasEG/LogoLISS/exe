@@ -1,5 +1,4 @@
-PROGRAM logolissExemplo
-{
+PROGRAM logolissExemplo {
 DECLARATIONS
 x = +100 , y -> Integer ;
 z -> Boolean ;
