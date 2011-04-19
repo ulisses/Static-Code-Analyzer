@@ -40,7 +40,7 @@ Como já foi referenciado atrás para o Strafunski conseguir processar um tipo d
 Porque por exemplo a classe Data obriga à implementação de um catamorfismo para o nosso tipo de dados, chamado de $gfoldl$ e um anamorfismo $gunfold$, entre outras
 funções para travessias na nossa árvore de tipos. Como nota é importante dizer que o utilizador (a pessoa que desenhou os tipos de dados) não necessita
 fazer a instânciação manual desta classe. Podemos recorrer ao confortável \textbf{deriving Data} que o Haskell suporta para qualquer declaração
-de tipos\footnote{Internamente o GHC trata de chamar a biblioteca do DrIFT, mais informações em: \url{http://repetae.net/computer/haskell/DrIFT/}}.\\
+de tipos\footnote{Internamente o GHC trata de chamar a biblioteca do DrIFT. Esta faz uma análise ao código e infere as instâncias para essas classes, mais informações em: \url{http://repetae.net/computer/haskell/DrIFT/}}.\\
 
 No que diz respeito aos tipos de dados utilizados pelo Strafunski temos dois, o \textbf{TP} para estratégias de preservação dos tipos
 (o tipo do output e input coincidem), e \textbf{TU} para estratégias de tipo unificados (o output é sempre de um determinado tipo independentemente do tipo de entrada),
@@ -96,10 +96,78 @@ $$failTP :: MonadPlus~m \Rightarrow TP~m$$
 $$failTU :: MonadPlus~m \Rightarrow TU~u~m$$
 
 \section{Exemplos}
+Agora iremos mostrar alguns exemplos de como usar a biblioteca Strafunski para conseguir processar a nossa árvore de parsing.\\
+
+\subsection{McCabe Index$--$}
+O índice de McCabe consiste, como já referimos anteriormente, num grafo orientado onde os nodos são as computações. Para se chegar a este número
+temos de aplicar a formúla já descrita. Uma forma incipiente para calcular o índice de McCabe pdoeria ser contar o número de ifs, switches, fors e mais algumas
+expressões de controlo. Assim conseguimos fazer isto com o Strafunski da seguinte forma:
 \begin{haskell}
-data CTranslUnit = CTranslUnit [CExtDecl] NodeInfo
-data CExtDecl = CDeclExt CDecl
-              | CFDefExt CFunDef
-              | CAsmExt CStrLit
+testMcCabe :: IO Int 
+testMcCabe =  parr >>= mcCabeIndex . fromRight
+
+instance Num a => Monoid a where
+    mappend = (+) 
+    mempty = 0 
+        
+mcCabeIndex :: Data a => a -> IO Int 
+mcCabeIndex =  applyTU (full_tdTU isConditional)
+        
+isConditional = constTU 0 `adhocTU` (return . test)
+
+test (CIf _ _ _ _)    = 1
+test (CSwitch _ _ _)  = 1
+test (CWhile _ _ _ _) = 1
+test (CFor _ _ _ _ _) = 1
+test _                = 0
+\end{haskell}
+Como já explicamos anteriormente o tipo \textbf{TU} quando usado com determinados operadores exige que tenhamos uma instância de \textbf{Monoid} para o tipo de retorno.
+Assim fomos obrigados a definir a instância de \textbf{Monoid} para os tipos Numerários do Haskell como a função soma. Temos consciência de que isto por si só
+é uma grande restrição e também temos consciência que existem alternativas para resolver este problema, como é o caso das classes \textbf{Sum} e \textbf{Mul}.
+No entanto não conseguimos pôr a funcionar a tempo de entrega deste relatório essas instâncias com o tipo \textbf{TU} do Strafunski.
+
+\subsection{Extracção das assinaturas das funções}
+Um outro exemplo muito interessante e bastante útil é a extracção do cabeçalho das funções em C que constam no nosso código. Isto é bastante útil para se ter uma noção
+do tamanho da implementação e da sua estruturação.
+
+\begin{haskell}
+getFunctionsSign :: IO [CExtDecl]
+getFunctionsSign = parr >>= return . getFunSign . fromRight
+
+getFunSign = applyTU (once_tdTU names1)
+names1 = failTU `adhocTU` fromFunctionToSign
+
+fromFunctionToSign (CFDefExt (CFunDef lCDeclSpec cDeclr _ _ nInfo ))
+    = [CDeclExt (CDecl lCDeclSpec [(Just $ cDeclr,Nothing,Nothing)] internalNode)]
+fromFunctionToSign _ = []
 \end{haskell}
 
+Como podemos ver na função $fromFunctionToSign$ apenas estamos a converter de um construtor do tipo \textbf{CExtDecl}, que é o \textbf{CFDefExt} para o mesmo tipo,
+mas com o contrutor \textbf{CDeclExt}, ou seja estamos a passar o nodo da árvore de uma definição para uma declaração.\\
+
+Para o caso do seguinte código:
+\begin{code_files}
+void main(int argc, char **argv) {    
+    if(1) {}                                      
+    switch (1) {                  
+        case 1: {    
+            lala(1,1);    
+            break;                                 
+        }    
+        case 1: {                      
+            break;    
+        }                                                                         
+    }                    
+    return 0;    
+}                                                                                         
+
+void lala(int a, int b) {    
+    if(a) {}    
+}  
+\end{code_files}
+iriamos ter o seguinte output:
+\begin{code_files}
+*Main> getFunctionsSign >>= putStrLn . unlines . map (show . pretty)
+void main(int argc, char * * argv);
+void lala(int a, int b);
+\end{code_files}
