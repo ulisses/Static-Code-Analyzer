@@ -1,9 +1,9 @@
-{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {7.1}Explica\IeC {\c c}\IeC {\~a}o}{\reset@font\mtcSfont 36}{section*.32}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Tipos de dados}{\reset@font\mtcSSSfont 37}{section*.33}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {7.1.1}Estrat\IeC {\'e}gias}{\reset@font\mtcSSfont 37}{section*.33}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Data.Generics.Strafunski.StrategyLib.StrategyPrimitives}{\reset@font\mtcSSSfont 37}{section*.34}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Data.Generics.Strafunski.StrategyLib.TraversalTheme}{\reset@font\mtcSSSfont 38}{section*.35}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Data.Generics.Strafunski.StrategyLib.StrategyPrelude}{\reset@font\mtcSSSfont 38}{section*.36}}
-{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {7.2}Exemplos}{\reset@font\mtcSfont 38}{section*.36}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {7.2.1}McCabe Index$--$}{\reset@font\mtcSSfont 38}{section*.37}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {7.2.2}Extrac\IeC {\c c}\IeC {\~a}o das assinaturas das fun\IeC {\c c}\IeC {\~o}es}{\reset@font\mtcSSfont 39}{lstlisting.7.-20}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {7.1}Explica\IeC {\c c}\IeC {\~a}o}{\reset@font\mtcSfont 39}{section*.32}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Tipos de dados}{\reset@font\mtcSSSfont 40}{section*.33}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {7.1.1}Estrat\IeC {\'e}gias}{\reset@font\mtcSSfont 40}{section*.33}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Data.Generics.Strafunski.StrategyLib.StrategyPrimitives}{\reset@font\mtcSSSfont 40}{section*.34}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Data.Generics.Strafunski.StrategyLib.TraversalTheme}{\reset@font\mtcSSSfont 41}{section*.35}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Data.Generics.Strafunski.StrategyLib.StrategyPrelude}{\reset@font\mtcSSSfont 41}{section*.36}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {7.2}Exemplos}{\reset@font\mtcSfont 41}{section*.36}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {7.2.1}McCabe Index$--$}{\reset@font\mtcSSfont 41}{section*.37}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {7.2.2}Extrac\IeC {\c c}\IeC {\~a}o das assinaturas das fun\IeC {\c c}\IeC {\~o}es}{\reset@font\mtcSSfont 42}{lstlisting.7.-20}}
