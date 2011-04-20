@@ -30,8 +30,9 @@
 ._*
 .Spotlight-V100
 .Trashes
-.mlt*
-.mtc*
-.mlf*
-.maf
-.lot
+*.mlt*
+*.mtc*
+*.mlf*
+*.maf
+*.lot
+

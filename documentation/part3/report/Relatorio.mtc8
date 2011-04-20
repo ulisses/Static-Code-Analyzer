@@ -1,19 +1,19 @@
-{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {6.1}An\IeC {\'a}lise Est\IeC {\'a}tica}{\reset@font\mtcSfont 33}{section*.18}}
-{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Syntax checking}{\reset@font\mtcPfont 33}{section*.19}}
-{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Type checking}{\reset@font\mtcPfont 34}{section*.20}}
-{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Decompilation}{\reset@font\mtcPfont 34}{section*.21}}
-{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Code metrics}{\reset@font\mtcPfont 34}{section*.22}}
-{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Style checking}{\reset@font\mtcPfont 34}{section*.23}}
-{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Verification reverse engineering}{\reset@font\mtcPfont 34}{section*.24}}
-{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {6.2}An\IeC {\'a}lise Din\IeC {\^a}mica}{\reset@font\mtcSfont 34}{section*.24}}
-{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Log analysis}{\reset@font\mtcPfont 34}{section*.25}}
-{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Testing}{\reset@font\mtcPfont 34}{section*.26}}
-{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Debugging}{\reset@font\mtcPfont 35}{section*.27}}
-{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Instrumentation}{\reset@font\mtcPfont 35}{section*.28}}
-{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Profiling}{\reset@font\mtcPfont 35}{section*.29}}
-{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Benchmarking}{\reset@font\mtcPfont 35}{section*.30}}
-{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {6.3}M\IeC {\'e}tricas de qualidade de \emph {software}}{\reset@font\mtcSfont 35}{section*.30}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {6.3.1}Bug patterns}{\reset@font\mtcSSfont 36}{section*.31}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {6.3.2}Source Lines of code (SLOC)}{\reset@font\mtcSSfont 36}{lstlisting.6.-15}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {6.3.3}M\IeC {\'e}tricas de Seguran\IeC {\c c}a}{\reset@font\mtcSSfont 37}{lstlisting.6.-16}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {6.3.4}Cyclomatic complexity}{\reset@font\mtcSSfont 38}{lstlisting.6.-18}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {6.1}An\IeC {\'a}lise Est\IeC {\'a}tica}{\reset@font\mtcSfont 30}{section*.18}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Syntax checking}{\reset@font\mtcPfont 30}{section*.19}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Type checking}{\reset@font\mtcPfont 30}{section*.20}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Decompilation}{\reset@font\mtcPfont 31}{section*.21}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Code metrics}{\reset@font\mtcPfont 31}{section*.22}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Style checking}{\reset@font\mtcPfont 31}{section*.23}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Verification reverse engineering}{\reset@font\mtcPfont 31}{section*.24}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {6.2}An\IeC {\'a}lise Din\IeC {\^a}mica}{\reset@font\mtcSfont 31}{section*.24}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Log analysis}{\reset@font\mtcPfont 31}{section*.25}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Testing}{\reset@font\mtcPfont 31}{section*.26}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Debugging}{\reset@font\mtcPfont 31}{section*.27}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Instrumentation}{\reset@font\mtcPfont 32}{section*.28}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Profiling}{\reset@font\mtcPfont 32}{section*.29}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Benchmarking}{\reset@font\mtcPfont 32}{section*.30}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {6.3}M\IeC {\'e}tricas de qualidade de \emph {software}}{\reset@font\mtcSfont 32}{section*.30}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {6.3.1}Bug patterns}{\reset@font\mtcSSfont 33}{section*.31}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {6.3.2}Source Lines of code (SLOC)}{\reset@font\mtcSSfont 33}{lstlisting.6.-15}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {6.3.3}M\IeC {\'e}tricas de Seguran\IeC {\c c}a}{\reset@font\mtcSSfont 34}{lstlisting.6.-16}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {6.3.4}Cyclomatic complexity}{\reset@font\mtcSSfont 35}{lstlisting.6.-18}}

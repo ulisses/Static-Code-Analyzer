@@ -8,7 +8,7 @@ CAT=$(shell cat .gitignore)
 # So in the end you will have just the files under the git repo
 dangerous_clean:
 	@echo "Cleaning the shop..."
-	@`for f in $(CAT) ; do find . -iname $$f | xargs rm -f ; done`
+	`for f in $(CAT) ; do find . -iname $$f | xargs rm -f ; done`
 
 #
 # To install you need to execute with 'sudo'.
