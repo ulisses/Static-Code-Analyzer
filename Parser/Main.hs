@@ -109,11 +109,22 @@ depthWith = recurse `passTU` -- Sequential composition
             (constTU max_subterms))
             where recurse = allTU (++) [] (depthWith `passTU` \depth -> constTU [depth])
 
-isConditional2 = constTU 0 `adhocTU` testt
+isConditional2 = constTU 0 `adhocTU` testt `adhocTU` testtt
 
-testt (CIf _ _ _ _) =  return 1
-testt (CSwitch _ _ _) =  return 1
+testt (CIf _ _ _ _) =  putStrLn "encontrei um if" >> return 1
+testt (CSwitch _ _ _) =  putStrLn "encontrei um switch" >> return 1
 testt _ =  return 0
+
+testtt (CFDefExt (CFunDef _ (CDeclr (Just (Ident "main" _ _ )) _ _ _ _) _ _ _ )) = putStrLn "encontrei uma main fun" >> return 1
+testtt _ = return 0
+
+-- lets find main function
+
+
+
+
+
+
 {- We may need to import some libraries to be able to put the input code
    to work, so we must say it to GCC like this:
    stream <- parseCFile (newGCC "gcc") Nothing ["-Idir"] file

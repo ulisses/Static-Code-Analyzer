@@ -9,7 +9,7 @@ void main(int argc, char **argv) {
                     lala(1,1);
                     break;
                 }
-        case 1: {
+        case 2: {
                     int *v = lala4();
                     break;
                 }
@@ -21,8 +21,8 @@ void lala(int a, int b) {
     if(a) {}
 }
 
+void lala2() { if(1) {}}
 void lala1() {}
-void lala2() {}
 void lala3() {}
 int * lala4() { if(1) {} else{}}
 
