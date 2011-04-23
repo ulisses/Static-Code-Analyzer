@@ -193,7 +193,145 @@ Objectivos para terceira fase:
 
 \section{Aplicação Web}
 \section{Terminal Interface - Powered by Perl}
+
 \section{Strafunski}
+\begin{frame}[fragile] \frametitle{Strafunski}
+\begin{itemize}
+\item SYB (Scrap Your Boilerplate\footnote{\url{http://www.cs.uu.nl/wiki/GenericProgramming/SYB}}) - Programação genérica
+\item Implementa estratégias no paradigma funcional
+\end{itemize}
+
+\begin{block}{Data.Data (SYB)}
+$$gfoldl :: (c~(d \rightarrow b) \rightarrow d \rightarrow c~b) \rightarrow (g \rightarrow c~g) \rightarrow a \rightarrow c~a$$
+$$gunfold :: (c (b \rightarrow r) \rightarrow c~r) \rightarrow (r \rightarrow c~r) \rightarrow Constr \rightarrow c~a$$
+$$gmapT :: (b \rightarrow b) \rightarrow a \rightarrow a$$
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Porquê Strafunski? - Language.C exemplo}
+\begin{block}{void fun(int a, int b);}
+\begin{haskell}
+CTranslUnit 
+[CDeclExt
+(CDecl
+[CTypeSpec (CVoidType(NodeInfo("main.c", 2, 1) (Name { nameId = 1 })))]
+[ (Just
+(CDeclr (Just "fun")
+[CFunDeclr (Right
+([CDecl [CTypeSpec (CIntType (NodeInfo ("main.c",2,11) (Name {nameId = 4})))]
+[(Just (CDeclr (Just "a")[] Nothing[] (NodeInfo("main.c", 2, 15)
+(Name { nameId = 5 })))
+,Nothing, Nothing)] (NodeInfo("main.c", 2, 11) (Name { nameId = 6 }))
+,CDecl [CTypeSpec(CIntType(NodeInfo("main.c", 2, 18) (Name { nameId = 8 })))]
+[(Just(CDeclr(Just "b") [] Nothing [] (NodeInfo ("main.c",2,22)
+(Name {nameId = 9})))
+,Nothing,Nothing)]
+(NodeInfo ("main.c",2,18) (Name {nameId = 10}))],False))
+[] (NodeInfo ("main.c",2,10) (Name {nameId = 11}))
+]
+Nothing [] (NodeInfo ("main.c",2,6) (Name {nameId = 2}))
+)
+,Nothing
+,Nothing
+)
+] (NodeInfo ("main.c",2,1) (Name {nameId = 12})))]
+\end{haskell}
+\end{block}
+\end{frame}
+
+\begin{frame} \frametitle{Porquê Strafunski? - Como tratar arvores grandes (sem SYB)}
+\begin{alertblock}{\textbf{Muito} trabalhoso}
+\begin{itemize}
+\item Ter uma função para cada tipo de dados (no caso do Language.C 28)
+\item Ter uma acção para cada constructor de tipos (no caso do Language.C 84)
+\end{itemize}
+\end{alertblock}
+Rápidamente se atinge perto de 200 linhas de código para fazer uma travessia na árvore e executar uma acção num constructor\footnote{\url{https://github.com/ulisses/Static-Code-Analyzer/blob/95032a7e3eaf52e0dc6c36d3c1039519bc5fe689/Parser/Main.hs}}.
+\end{frame}
+
+\begin{frame} \frametitle{Porquê Strafunski? - Como tratar arvores grandes (com SYB)}
+\begin{exampleblock}{\textbf{Pouco} trabalhoso, genérico}
+\begin{itemize}
+\item Definir a acção que se quer tomar sobre o nodo em causa
+\item Definir uma estratégia
+\end{itemize}
+\end{exampleblock}
+Com pouco código definimos uma estratégia e uma acção sobre a árvore de parsing
+\end{frame}
+
+\begin{frame} \frametitle{Strafunski - Estratégias}
+Para a aplicação de uma estratégia a uma instância do nosso tipo de dados $t$ iremos usar:
+$$applyTP :: (Monad~m, Term~t) \Rightarrow TP~m \rightarrow t \rightarrow m~t$$
+$$applyTU :: (Monad~m, Term~t) \Rightarrow TU~u~m \rightarrow t \rightarrow m~u$$
+
+Permite adicionar estratégias:
+$$adhocTP :: (Monad~m, Term~t) \Rightarrow TP~m \rightarrow (t \rightarrow m t) \rightarrow TP~m$$
+$$adhocTU :: (Monad~m, Term~t) \Rightarrow TU a m \rightarrow (t \rightarrow m u) \rightarrow TU~u~m$$
+\end{frame}
+
+\begin{frame} \frametitle{Strafunski - Estratégias 2}
+Permite executar estratégias em sequência:
+$$seqTP :: Monad~m \Rightarrow TP~m \rightarrow TP~m \rightarrow TP~m$$
+$$seqTU :: Monad~m \Rightarrow TP~m \rightarrow TU~u~m \rightarrow TU~u~m$$
+
+Para tentar usar estratégias diferentes:
+$$choiceTP :: MonadPlus~m \Rightarrow TP~m \rightarrow TP~m \rightarrow TP~m$$
+$$choiceTU :: MonadPlus~m \Rightarrow TU~u~m \rightarrow TU~u~m \rightarrow TU~u~m$$
+\end{frame}
+
+\begin{frame} \frametitle{Strafunski - Estratégias 3}
+Aplica esta estratégia a todos os subtermos imediatos, para o \textbf{TU} os resultados são reduzidos com a função do monoid $+$:
+$$allTP :: Monad~m \Rightarrow TP~m \rightarrow TP~m$$
+$$allTU :: (Monad~m, Monoid~u) \Rightarrow TU~u~m \rightarrow TU~u~m$$
+
+Esta função permite aplicar a estratégia ao primeiro filho que aparecer da esquerda para a direita:
+$$once\_tdTP,once\_buTP :: MonadPlus~m \Rightarrow TP~m \rightarrow TP~m$$
+$$once\_tdTU, once\_buTU :: MonadPlus~m \Rightarrow TU~u~m \rightarrow TU~u~m$$
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Strafunski - Exemplos}
+Contar o número de $ifs$, $switches$ e ciclos (McCabeIndex$--$).
+\begin{haskell}
+testMcCabe :: IO Int 
+testMcCabe =  parse >>= mcCabeIndex . fromRight
+    where fromRight = (\(Right prog) -> prog)
+          parse = parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] "main.c"
+
+instance Num a => Monoid a where
+    mappend = (+) 
+    mempty = 0 
+        
+mcCabeIndex :: Data a => a -> IO Int 
+mcCabeIndex =  applyTU (full_tdTU loopCond)
+        
+loopCond = constTU 0 `adhocTU` (return . action)
+
+action :: Num a => CStat -> a
+action (CIf _ _ _ _)    = 1
+action (CSwitch _ _ _)  = 1
+action (CWhile _ _ _ _) = 1
+action (CFor _ _ _ _ _) = 1
+action _                = 0
+\end{haskell}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Strafunski - Exemplos}
+Extrair as assinaturas de todas as funções.
+\begin{haskell}
+getFunctionsSign :: IO [CExtDecl]
+getFunctionsSign = parse >>= return . getFunSign . fromRight
+    where fromRight = (\(Right prog) -> prog)
+          parse = parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] "main.c"
+
+getFunSign = applyTU (once_tdTU names1)
+names1 = failTU `adhocTU` fromFunctionToSign
+
+fromFunctionToSign (CFDefExt (CFunDef lCDeclSpec cDeclr _ _ nInfo ))
+    = [CDeclExt (CDecl lCDeclSpec [(Just $ cDeclr,Nothing,Nothing)] internalNode)]
+fromFunctionToSign _ = []
+\end{haskell}
+\end{frame}
+
 \section{Conclusão e trabalho futuro}
 \begin{frame} \frametitle{Conclusão e trabalho futuro}
 \end{frame}
