@@ -80,20 +80,18 @@ test1 (CFunDef _ (CDeclr (Just name ) ((CFunDeclr _ _ _):_) _ _ _ ) _ _ _) = [id
    To see more clearly you can test with:
        getFunctionsSign >>= putStr . unlines  . map (show . pretty)
 -}
-getFunctionsSignFromC :: Data a => a -> [CExtDecl]
+
+getFunctionsSignFromC :: Data x => x -> [x]
 getFunctionsSignFromC = getFunSign
 
-getFunctionsSign :: IO [CExtDecl]
+getFunctionsSign :: IO [CTranslUnit]
 getFunctionsSign = parr >>= return . getFunSign . fromRight
 
-getFunSign = applyTU (once_tdTU names1)
-names1 = failTU `adhocTU` fromFunctionToSign
+getFunSign :: Data x => x -> [x]
+getFunSign = applyTP (topdown names1)
+    where names1 = idTP `adhocTP` (return . fromFunctionToSign)
 
-fromFunctionToSign (CFDefExt (CFunDef lCDeclSpec cDeclr _ _ nInfo )) = [CDeclExt (CDecl lCDeclSpec [(Just $ cDeclr,Nothing,Nothing)] internalNode)]
-fromFunctionToSign _ = []
-
-fromFunctionToSign2 (CFDefExt (CFunDef lCDeclSpec cDeclr _ _ nInfo )) = CDeclExt (CDecl lCDeclSpec [(Just $ cDeclr,Nothing,Nothing)] internalNode)
-
+fromFunctionToSign (CFDefExt (CFunDef lCDeclSpec cDeclr _ _ _ )) = CDeclExt (CDecl lCDeclSpec [(Just $ cDeclr,Nothing,Nothing)] internalNode)
 
 {- testtttting -}
 -- Java metrics via instantiation of generic metrics
@@ -115,8 +113,12 @@ testt (CIf _ _ _ _) =  putStrLn "encontrei um if" >> return 1
 testt (CSwitch _ _ _) =  putStrLn "encontrei um switch" >> return 1
 testt _ =  return 0
 
-testtt (CFDefExt (CFunDef _ (CDeclr (Just (Ident "main" _ _ )) _ _ _ _) _ _ _ )) = putStrLn "encontrei uma main fun" >> return 1
+testtt (CFDefExt (CFunDef _ (CDeclr (Just (Ident "main" _ _ )) _ _ _ _) _ _ _ ))
+    = putStrLn "encontrei uma main fun" >> return 1
 testtt _ = return 0
+
+--getFunMcCabe fun1 (CFDefExt (CFunDef _ (CDeclr (Just (Ident fun2 _ _ )) _ _ _ _) _ _ _ ))
+--    | fun1 == fun2 = 
 
 -- lets find main function
 

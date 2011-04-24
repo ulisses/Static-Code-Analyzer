@@ -1,7 +1,15 @@
 // #include <stdio.h>
 
-void lala(int a, int b);
+//void lala(int a, int b);
 
+int * lala4() { if(1) {} else{}}
+
+void lala(int a, int b) {
+    if(a) {
+		lala4();
+	}
+}
+/*
 void main(int argc, char **argv) {
     if(1) {}
     switch (1) {
@@ -17,12 +25,9 @@ void main(int argc, char **argv) {
     return 0;
 }
 
-void lala(int a, int b) {
-    if(a) {}
-}
 
 void lala2() { if(1) {}}
 void lala1() {}
 void lala3() {}
-int * lala4() { if(1) {} else{}}
+*/
 
