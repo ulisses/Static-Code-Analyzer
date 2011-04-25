@@ -1,12 +1,13 @@
 <td class="sidebar round">
 	<%= link_to "Voltar ao concurso", concurso_path(@concurso) %> <br/>
 	------------------------<br/>
-	<%= link_to "Ver todas as minhas tentativas (este enunciado)", tentativas_path(:user_id=>current_user.id,:enunciado_id=>@enunciado.id) %>
+	<%= link_to "Minhas tentativas (para este enunciado)", tentativas_path(:user_id=>current_user.id,:enunciado_id=>@enunciado.id) %>
 	<br/>
-	<%= link_to "Ver todas as minhas tentativas", tentativas_path(:user_id=>current_user.id) %>
+	<%= link_to "Todas as tentativas (para este enunciado)",  tentativas_path(:user_id=>current_user.id,:enunciado_id=>@enunciado.id)%>
 	<br/>
-	<%= link_to "Ver todas as tentativas para este enunciado",  tentativas_path(:user_id=>current_user.id,:enunciado_id=>@enunciado.id)%>
-	<br/>	
+	<%= link_to "Minhas tentativas", tentativas_path(:user_id=>current_user.id) %>
+	<br/>
+
 	------------------------<br/>
 	<% if current_user.admin? %>
  		<%= link_to "Ver e adicionar testes", baterias_path(:enunciado_id=>@enunciado.id) %> <br/>

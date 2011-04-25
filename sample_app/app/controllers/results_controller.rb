@@ -5,7 +5,7 @@ class ResultsController < ApplicationController
       @results = @user.results.where(:concurso_id=>params[:concurso_id]).order('created_at DESC').paginate(:page => params[:page],:per_page=>10)
       @concurso = Concurso.find(params[:concurso_id])
     else
-      if params[:concurso]
+      if params[:concurso_id]
         @users = User.all
         @concurso = Concurso.find(params[:concurso_id])
         @results = Array.new

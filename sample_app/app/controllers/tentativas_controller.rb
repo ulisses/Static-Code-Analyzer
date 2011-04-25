@@ -297,9 +297,10 @@ class TentativasController < ApplicationController
     if i==1
       return false
     end
-    
-    @erros+= "[" + out + "]"
-        @erros+= "[" + bateria.output + "]"
+    ######################################################################
+    ######################################################################
+    #@erros+= "[" + out + "]"
+     #   @erros+= "[" + bateria.output + "]"
         
     #timestamp
     t = DateTime.now

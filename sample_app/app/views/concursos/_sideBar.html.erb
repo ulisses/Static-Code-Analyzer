@@ -14,6 +14,11 @@
 	<br/>
 	<%= link_to "Mostrar estatísticas", :controller=>"concursos", :action=> "stats",:concurso_id => @concurso.id %>	
 	<br/>
+	<%= link_to "Melhores resultados (neste concurso)", results_path(:concurso_id => @concurso.id) %>	
+	<br/>
+	<%= link_to "Meus melhores resultados (neste concurso)", results_path(:concurso_id => @concurso.id, :user_id => current_user.id) %>	
+	<br/>
+	
 	<b>Núm. de concorrentes: </b><%= @concurso.participantes.count%>
 	<br/><br/>	
 	

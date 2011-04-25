@@ -2,9 +2,11 @@
 <td><%= link_to result.id, result %></td>
 <% tentativa = Tentativa.find(result.tentativa_id)%>
 <td><%= link_to tentativa.id, tentativa %></td>
-<td><%= link_to current_user.name, current_user %></td>
+<% if !@user%>
+	<td><%= link_to current_user.name, current_user %></td>
+<% end %>	
 <% enunciado = Enunciado.find(result.enunciado_id)%>	
-<% if !@concurso%>
+<% if !@concurso %>
 		
 		<% concurso = Concurso.find(enunciado.concurso_id)%>
 	<td>

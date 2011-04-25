@@ -3,11 +3,14 @@
 		<td>
 			<h1>Melhores resultados por enunciado</h1>
 			
+			
+			
 			<% if @user %>
 				<% if @user.admin? %><b>Docente: </b><% else %><b>Grupo: </b><% end %>
 				<%= link_to @user.name, @user %><br/>
 			<% end %>
 			
+
 			<% if @concurso %>
 				<b>Concurso:</b>
 				<%= link_to @concurso.tit, @concurso %>
@@ -26,12 +29,12 @@
 				<ul class="tentativas">
 					<table border="1">
 						<tr>
-							<td>Num Resultdado</td>
-							<td>Tentativa respectiva</td>
-							<% if !@user%>
+							<td>ID Resultdado</td>
+							<td>ID da tentativa respectiva</td>
+							<% if !@user %>
 								<td>Grupo</td>
 							<% end %>
-							<% if !@concurso%>
+							<% if !@concurso %>
 								<td>Concurso</td>
 							<% end %>
 								<td>Enunciado</td>
@@ -49,10 +52,11 @@
 			<% end %>	
 			</td>
 			
-			
-		<td class="sidebar round">
-
-		</td>
+		<% if @concurso %>	
+			<td class="sidebar round">
+				<%= link_to "Voltar para o concurso", concurso_path(@concurso) %>
+			</td>
+		<% end %>
 	
 	</tr>
 </table>
