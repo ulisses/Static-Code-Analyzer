@@ -84,14 +84,26 @@ function is_perl_module_installed {
 }
 
 function check_user_id {
+	echo "`whoami` started this script installation file at `date`" >> logfile
 	if [ ! "`whoami`" = "root" ]; then
-		echo "Not running as root. Yes this is an installation file..."
+		echo "Not running as root. Yes, this is an installation file...";
+		echo "`whoami` has failed..." >> logfile;
 		exit 1 ;
 	fi
 }
 
-check_user_id
-install_package
+function install_perl {
+	echo "`whoami` is trying to install Perl" >> logfile
+	apt-get install perl
+	if [ $? ]; then
+		echo "Unsuccessful!" >> logfile;
+	else
+		echo "Successful!" >> logfile;
+	fi
+}
 
+check_user_id
+#install_package
+install_perl
 exit 0;
 
