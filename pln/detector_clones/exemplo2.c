@@ -1,6 +1,3 @@
-#include <stdio.h>
-
-
 	
 /*  dsadasd asd asd asda d*/
 
@@ -16,9 +13,13 @@
 
 //dbajkdbasjkdajskdbajksdba dsj baskjdb ka
 
- int sopa (int t){t+1;	return t;	}
 
-int mult (int t,int x){	return t*x;	}
+
+int mult (int t,int x){
+	return t*x;
+	}
+	
+	 int sopa (int t){t+1;	return t;	}
 	
 //dbajkdbasjkdajskdbajksdba dsj baskjdb ka	
 
