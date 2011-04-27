@@ -1,0 +1,46 @@
+\chapter{Script de instalação}\label{chap scriptinst}
+Após um dos elementos do grupo ter sofrido um grande infortúnio com a sua máquina de trabalho, surgiu a ideia, que deveria ter sido lembrada no início do desenvolvimento deste projecto, 
+de implementar uma \emph{script} de instalação (em \emph{bash}) que cuidasse de pôr em funcionamento todo o tipo de aplicações que o projecto oferece.\\
+
+Assim, começou-se por identificar as diversas ferramentas usadas ao longo deste projecto e que serão essenciais para o seu funcionamento final. Desde da aplicação web, com \emph{Ruby} e 
+\emph{Rails} (e diversas \emph{gems} de cada), ao \emph{parser}, com \emph{Haskell}, \emph{Strafunski} e \emph{Language.C}, a passar pela interface pelo terminal implementada em 
+\emph{Perl} (e os seus inúmeros módulos), vasto será o leque de preocupações que se terá que ter para que a partir de uma simples \emph{script} se ponha o projecto pronto a funcionar.\\
+
+Neste capítulo será explicada o funcionamento da \emph{script}, desde da identificação inicial da máquina em que se encontra, à instalação do mais pequeno módulo de \emph{Perl} utilizado.
+Vale a pena também referir a importância desta \emph{script}, pois além de ser bastante útil para a gestão e manutenção deste projecto, e apesar de ser uma tarefa árdua (tendo em conta 
+que se começou a meio do projecto), torna-se muito gratificante pelos ganhos de \emph{skill} em administração de sistemas.
+
+\section{Identificação da máquina}
+
+A \emph{script} começa a funcionar pela operação mais básica possível, a identificação da máquina em que corre. Esta poderá ter estar instalada com diversos sistemas operativos, o que 
+só por si, diferenciará muito o comportamento da \emph{script}. No momento em que corre o projecto, apenas foi possível ter em consideração máquinas com sistemas operativos \texttt{Linux}
+ e \texttt{MacOSX}.\\
+
+De seguida encontra-se o pedaço de código para o funcionamento em questão:\\
+
+\begin{code_files}
+function install\_package {
+        case `uname -s` in
+                "Darwin")
+                        install\_macosx
+                        ;;
+                "Linux")
+                        case `uname -v` in
+                                *"Ubuntu"*)
+                                        install\_ubuntu
+                                        ;;
+                                *)
+                                        echo "Your Linux is not supported yet. If it does have a packet manager please send an email to \$admin\_email"
+                                        exit 1;
+                                        ;;
+                                esac
+                        ;;
+                *)
+                        echo "Your operative system is not supported yet. Please send an email to \$admin\_email"
+                        exit 1;
+                        ;;
+        esac
+}
+\end{code_files}
+
+Como se pode ver na linha yada yada yada...
