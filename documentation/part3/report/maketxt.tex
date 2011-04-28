@@ -1,4 +1,5 @@
-\chapter{Script de instalação}\label{chap scriptinst}
+\chapter{Instalação}\label{chap scriptinst}
+\minitoc
 Após um dos elementos do grupo ter sofrido um grande infortúnio com a sua máquina de trabalho, surgiu a ideia, que deveria ter sido lembrada no início do desenvolvimento deste projecto, 
 de implementar uma \emph{script} de instalação (em \emph{bash}) que cuidasse de pôr em funcionamento todo o tipo de aplicações que o projecto oferece.\\
 
@@ -8,9 +9,25 @@ Assim, começou-se por identificar as diversas ferramentas usadas ao longo deste
 
 Neste capítulo será explicada o funcionamento da \emph{script}, desde da identificação inicial da máquina em que se encontra, à instalação do mais pequeno módulo de \emph{Perl} utilizado.
 Vale a pena também referir a importância desta \emph{script}, pois além de ser bastante útil para a gestão e manutenção deste projecto, e apesar de ser uma tarefa árdua (tendo em conta 
-que se começou a meio do projecto), torna-se muito gratificante pelos ganhos de \emph{skill} em administração de sistemas.
+que se começou a meio do projecto), torna-se muito gratificante pelos ganhos de \emph{skill} em administração de sistemas.\\
 
-\section{Identificação da máquina}
+\paragraph{Na fase actual,} apenas se dedica à instalção de \texttt{Perl} e dos seus módulos.
+
+\section{User check}
+Antes de se dar início à instalação da máquina é chamada uma função \texttt{check\_user\_id} para verificar se o utilizador é administrador da sua máquina. O seguinte pedaço de código 
+diz respeito a essa função.
+
+\begin{myxml}
+ function check_user_id {
+        if [ ! "`whoami`" = "root" ]; then
+                echo "Not running as root. Yes this is an installation file..."
+                exit 1 ;
+        fi
+}
+\end{myxml}
+
+
+\section{Identificação da máquina}\label{sec idmaq}
 
 A \emph{script} começa a funcionar pela operação mais básica possível, a identificação da máquina em que corre. Esta poderá ter estar instalada com diversos sistemas operativos, o que 
 só por si, diferenciará muito o comportamento da \emph{script}. No momento em que corre o projecto, apenas foi possível ter em consideração máquinas com sistemas operativos \texttt{Linux}
@@ -18,29 +35,125 @@ só por si, diferenciará muito o comportamento da \emph{script}. No momento em 
 
 De seguida encontra-se o pedaço de código para o funcionamento em questão:\\
 
-\begin{code_files}
-function install\_package {
+\begin{myxml}
+function install_package {
         case `uname -s` in
                 "Darwin")
-                        install\_macosx
+                        install_macosx
                         ;;
                 "Linux")
-                        case `uname -v` in
-                                *"Ubuntu"*)
-                                        install\_ubuntu
-                                        ;;
-                                *)
-                                        echo "Your Linux is not supported yet. If it does have a packet manager please send an email to \$admin\_email"
-                                        exit 1;
-                                        ;;
-                                esac
-                        ;;
+	case `uname -v` in
+		*"Ubuntu"*)
+		install_ubuntu
+		;;
+		*)
+		echo "Your Linux is not supported yet. If it does have a packet manager please send an email to $\$$admin_email"
+		exit 1;
+		;;
+		esac
+		;;
                 *)
-                        echo "Your operative system is not supported yet. Please send an email to \$admin\_email"
-                        exit 1;
-                        ;;
+		echo "Your operative system is not supported yet. Please send an email to $\$$admin_email"
+		exit 1;
+		;;
         esac
 }
-\end{code_files}
+\end{myxml}
 
-Como se pode ver na linha yada yada yada...
+Como se pode ver, exitem duas hipóteses principais na entrada desta função. Caso o output da função \texttt{uname} (função essa que imprime dados sobre o sistema operativo
+ instalado) seja igual a ``\emph{Darwin}'', dá-se início à instalação em \texttt{MacOSX} pela invocação da função \texttt{install\_macosx} (linha 4). Caso o output seja igual a 
+``\texttt{Linux}'' procura-se então mais informações sobre o sistema operativo instalado, com a \emph{flag} \texttt{-v}. Das distribuições que o \texttt{Linux} oferece, apenas está 
+suportada a distribuição \texttt{Ubuntu}.\\
+
+Dependendo agora do sistema conhecido, passa-se à invocação de uma das duas seguintes funções:\\
+
+\begin{myxml}
+ function install_macosx {
+        port install gd2
+        install_perl_modules 
+}   
+    
+function install_ubuntu {
+        install_aptitude_modules libgd-dev
+        install_perl_modules
+}
+\end{myxml}
+
+\section{Instalação MacOSX}
+Seguindo o raciocínio da secção anterior, a instalação em \texttt{MacOSX} parte da invocação da função \texttt{install\_macosx} que contém um conjunto de operações, geralmente dedicadas 
+a uma parte do projecto. 
+
+\subsection{Bibliotecas C}
+O primeiro ponto de instalação refere-se à biblioteca \texttt{gd2}, necessária para o uso de um módulo \texttt{Perl} chamado \texttt{GD}. Esse biblioteca será indispensável para se 
+gerar os gráficos descritos na secção~\ref{sec geraimg}.
+
+\subsection{Módulos Perl}\label{subsec modulosperlmacosx}
+Para se proceder à instalação dos módulos \texttt{Perl} usados neste projecto, é necessário definir a lista de módulos a instalar, como se pode ver na linha 3 da função seguinte.
+
+\begin{myxml}
+ function install_perl_modules {
+        perl -MCPAN -e '$\$$CPAN->{prerequisites_policy}=follow'
+        local packages=(Makefile::Parser Parse::Yapp  GD GD::Graph GD::Graph::bars GD::Graph::pie Path::Class
+                  Moose Term::ReadLine Term::ReadLine::Gnu Digest::SHA DBIx::Class Data::Dumper)
+
+        if_not_exist_install_perl_modules $\$${packages[@]}
+}
+\end{myxml}
+ 
+A partir desse passo, é chamada a função \texttt{if\_not\_exist\_install\_perl\_modules \${packages[@]}} (linha 6) que procede à instalação dos módulos definidos.
+
+\begin{myxml}
+ function if_not_exist_install_perl_modules {
+        local packages=()
+
+        for module in $\$$@; do
+                is_perl_module_installed $\$$module
+                if [ $\$$? -eq 1 ]; then
+                        echo "$\$$module installed";
+                else
+                        echo "$\$$module not installed, installing...";
+                        packages[$\$$[$\$${#packages[@]}+1]]=$\$$module;
+                fi
+        done;
+
+        EXEC="cpan -if $\$${packages[@]}"
+        $\$$EXEC
+}
+
+function is_perl_module_installed {
+        if [ -z "`perl -M$\$$1 -e 1 2>&1`" ]; then
+                return 1;
+        else
+                return 0;
+        fi
+}
+\end{myxml}
+
+Para cada módulo que a função recebe, será testada para ver se se encontra já instalada, pela função \texttt{is\_perl\_module\_installed}. Caso se encontre instalada, será removida da
+lista (linha 10). No final será contruído o comando de instalação e posteriormente executado (linha 15).
+
+\section{Instalação Ubuntu}
+Esta secção segue o modelo da anterior mas agora em relação ao sistema operativo \texttt{Ubuntu}. Percorre todas as operações que estão descritas na secção~\ref{sec idmaq}, na 
+função \texttt{install\_ubuntu}.
+
+\subsection{Bibliotecas C}
+A instalação de bibliotecas \texttt{C} na \emph{script} são chamadas à função \texttt{install\_aptitude\_modules}. Essa função recebe uma lista como argumentos, e para cada elemento 
+verifica se se encontra instalado. Caso não esteja corre o comando da linha 8 com a bibliteca em questão.\\
+
+\begin{myxml}
+function install_aptitude_modules {
+        for pkg in $\$$@; do
+                dpkg -s $\$$pkg
+                if [ $\$$? -eq 0 ]; then
+                        echo "module $\$$pkg installed"
+                else
+                        echo "module $\$$pkg not installed, installing..."
+                        aptitude --assume-yes install $\$$pkg
+                fi
+        done;
+}
+\end{myxml}
+
+
+\subsection{Módulos Perl}
+Ocorre de igual maneira à descrição em~\ref{subsec modulosperlmacosx}.
