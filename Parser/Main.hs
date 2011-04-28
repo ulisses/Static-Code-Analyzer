@@ -94,6 +94,7 @@ getFunSign = applyTP (topdown names1)
 fromFunctionToSign (CFDefExt (CFunDef lCDeclSpec cDeclr _ _ _ )) = CDeclExt (CDecl lCDeclSpec [(Just $ cDeclr,Nothing,Nothing)] internalNode)
 
 {- testtttting -}
+nestingDepthTest = parr >>= nestingDepth . fromRight
 -- Java metrics via instantiation of generic metrics
 --nestingDepth :: Term t => t -> Int
 nestingDepth =  applyTU (depthWith )
@@ -123,9 +124,38 @@ testtt _ = return 0
 -- lets find main function
 
 
+{- Count the number of instructions
+-}
+testCountInstr :: IO Int
+testCountInstr =  parr >>= countInstr . fromRight
 
+countInstr :: Data a => a -> IO Int
+countInstr d =  (putStrLn ("new ")) >> applyTU (full_tdTU typesOfInstr) d
 
+typesOfInstr = constTU 0 `adhocTU` loop `adhocTU` exprs
 
+loop :: CStat -> IO Int
+{- if without else -}
+loop (CIf e s Nothing _) =  countInstr e >>= \eR1 -> countInstr s
+    >>= \eR2 -> return (eR1+eR2+1)
+{- if with else -}
+--loop (CIf _ _ (Just _) _) =  return 2
+--loop (CSwitch _ _ _) =  return 1
+loop (CFor (Left Nothing) (Just e1) (Just e2) _ _)
+    = countInstr e1 >>= \rE1 -> countInstr e2 >>= \rE2 -> return (rE1 + rE2)
+loop (CFor (Left (Just e1)) (Just e2) (Just e3) _ _)
+    = countInstr e1 >>= \rE1 -> countInstr e2 >>= \rE2 -> countInstr e3 >>= \rE3 -> return (rE1 + rE2 + rE3)
+loop _ =  return 0
+
+exprs :: CExpr -> IO Int
+exprs (CComma l _) = mapM countInstr l >>= return . sum
+exprs (CAssign _ e1 e2 _)
+    = countInstr e1 >>= \rE1 -> countInstr e2 >>= \rE2 -> return (rE1 + rE2)
+exprs (CCast _ e _) = countInstr e
+exprs (CVar i _) = (putStrLn $ ("encontrei:" ++ identToString i)) >> return 1
+exprs _ =  return 0
+
+--decl (CDecl _ l _) = return . sum [ | () <- l]
 
 {- We may need to import some libraries to be able to put the input code
    to work, so we must say it to GCC like this:

@@ -290,6 +290,26 @@ $$once\_tdTP,once\_buTP :: MonadPlus~m \Rightarrow TP~m \rightarrow TP~m$$
 $$once\_tdTU, once\_buTU :: MonadPlus~m \Rightarrow TU~u~m \rightarrow TU~u~m$$
 \end{frame}
 
+\begin{frame}[fragile] \frametitle{TU vs TP}
+\begin{haskell}
+full_tdTU   :: (Monad m, Monoid a) => TU a m -> TU a m
+full_tdTU s =  op2TU mappend s (allTU' (full_tdTU s))
+\end{haskell}
+
+\begin{haskell}
+class Monoid a where
+  mempty :: a
+  mappend :: a -> a -> a
+  mconcat :: [a] -> a
+    -- Defined in Data.Monoid
+\end{haskell}
+
+\begin{haskell}
+full_tdTP   :: Monad m => TP m -> TP m
+full_tdTP s =  s `seqTP` (allTP (full_tdTP s))
+\end{haskell}
+\end{frame}
+
 \begin{frame}[fragile] \frametitle{Strafunski - Exemplos}
 Contar o número de $ifs$, $switches$ e ciclos (McCabeIndex$--$).
 \begin{haskell}
@@ -319,17 +339,17 @@ action _                = 0
 \begin{frame}[fragile] \frametitle{Strafunski - Exemplos}
 Extrair as assinaturas de todas as funções.
 \begin{haskell}
-getFunctionsSign :: IO [CExtDecl]
+getFunctionsSign :: IO [CTranslUnit]
 getFunctionsSign = parse >>= return . getFunSign . fromRight
     where fromRight = (\(Right prog) -> prog)
           parse = parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] "main.c"
 
-getFunSign = applyTU (once_tdTU names1)
-names1 = failTU `adhocTU` fromFunctionToSign
+getFunSign :: Data x => x -> [x]
+getFunSign = applyTP (topdown names1)
+    where names1 = idTP `adhocTP` (return . fromFunctionToSign)
 
-fromFunctionToSign (CFDefExt (CFunDef lCDeclSpec cDeclr _ _ nInfo ))
-    = [CDeclExt (CDecl lCDeclSpec [(Just $ cDeclr,Nothing,Nothing)] internalNode)]
-fromFunctionToSign _ = []
+fromFunctionToSign (CFDefExt (CFunDef lCDeclSpec cDeclr _ _ _ ))
+    = CDeclExt (CDecl lCDeclSpec [(Just $ cDeclr,Nothing,Nothing)] internalNode)
 \end{haskell}
 \end{frame}
 
