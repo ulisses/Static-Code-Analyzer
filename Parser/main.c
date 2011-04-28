@@ -2,11 +2,10 @@
 
 //void lala(int a, int b);
 
-int * lala4() { if(1) {} else{}}
+//int * lala4() { if(1) {} else{}}
 
 void lala(int a, int b) {
     if(a) {
-		lala4();
 	}
 }
 /*
