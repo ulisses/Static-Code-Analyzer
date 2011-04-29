@@ -5,7 +5,7 @@
 
 admin_email="ulissesmonhecosta@gmail.com"
 
-function install_package {
+function build_all {
 	case `uname -s` in
 		"Darwin")
 			build_macosx
@@ -28,30 +28,11 @@ function install_package {
 	esac
 }
 
-function build_macosx {
-	if [ is_ghc_installed == 1 ]; then
-		echo "GHC is installed, I will continue..."
-	else
-		echo "GHC is not installed, please go to: http://hackage.haskell.org/platform/mac.html and download and install it"
-		echo "Then you can execute this script again..."
-		echo "Cmplain about the haskell platform that don't provide a direct link to download the latest package"
-	fi
-}
-
-function build_ubuntu {
-	if [ is_ghc_installed == 1 ]; then
-		echo "GHC is installed, I will continue..."
-	else
-		echo "GHC is not installed, I will do it for you... Stay here: I will need your sudo password"
-		sudo aptitude --assume-yes install haskell-platform-doc haskell-platform
-	fi
-}
-
 function is_ghc_installed {
 	if [ -z `which ghc` ]; then
-		return 1;
-	else
 		return 0;
+	else
+		return 1;
 	fi
 }
 
@@ -62,5 +43,29 @@ function build_language_c {
 	cd -
 }
 
-build_language_c
+function build_macosx {
+	is_ghc_installed
+	if [ $? -eq 1 ]; then
+		echo "GHC is installed, I will continue..."
+		build_language_c
+	else
+		echo "GHC is not installed, please go to: http://hackage.haskell.org/platform/mac.html and download and install it"
+		echo "Then you can execute this script again..."
+		echo "Complain with haskell platform that don't provide a direct link to download the latest package"
+	fi
+}
+
+function build_ubuntu {
+	is_ghc_installed
+	if [ $? -eq 1 ]; then
+		echo "GHC is installed, I will continue..."
+		build_language_c
+	else
+		echo "GHC is not installed, I will do it for you... Stay here: I will need your sudo password"
+		sudo aptitude --assume-yes install haskell-platform-doc haskell-platform
+		build_language_c
+	fi
+}
+
+build_all
 
