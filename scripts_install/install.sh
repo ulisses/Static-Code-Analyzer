@@ -31,8 +31,76 @@ function install_package {
 	esac
 }
 
+#
+# Build
+#
+function build_macosx {
+	is_ghc_installed
+	if [ $? -eq 1 ]; then
+		echo "GHC is installed, I will continue..."
+		is_language_c_installed
+		if [ $? -eq 0 ]; then
+			echo "Language.C is not installed, I will install"
+			build_language_c
+			cd Parser/language-c-0.3.2.1/
+			runhaskell Setup.hs install
+			cd -
+		fi
+	else
+		echo "GHC is not installed, I will do it for you."
+		port install ghc
+		build_language_c
+	fi
+}
+
+function build_ubuntu {
+	is_ghc_installed
+	if [ $? -eq 1 ]; then
+		echo "GHC is installed, I will continue..."
+		is_language_c_installed
+		if [ $? -eq 0 ]; then
+			echo "Language.C is not installed, I will install"
+			build_language_c
+			cd Parser/language-c-0.3.2.1/
+			runhaskell Setup.hs install
+			cd -
+		fi
+	else
+		echo "GHC is not installed, I will do it for you."
+		aptitude --assume-yes install ghc
+		build_language_c
+		cd Parser/language-c-0.3.2.1/
+		runhaskell Setup.hs install
+		cd -
+	fi
+}
+
+function build_language_c {
+	sudo -u $USER -s 'cd Parser/language-c-0.3.2.1/ && runhaskell Setup.hs configure && runhaskell Setup.hs build && cd -'
+}
+
+function is_language_c_installed {
+	if [ -z `ghc-pkg list | grep language` ]; then
+		return 0;
+	else
+		return 1;
+	fi
+}
+
+function is_ghc_installed {
+	if [ -z `which ghc` ]; then
+		return 0;
+	else
+		return 1;
+	fi
+}
+
+#
+# Install
+#
 function install_macosx {
 	echo "Working on a MacOSX machine" | $andlogfile
+	build_macosx
 	port install gd2
 	install_perl_mac
 	install_perl_modules
@@ -40,6 +108,7 @@ function install_macosx {
 
 function install_ubuntu {
 	echo "Working on a Ubuntu machine" | $andlogfile
+	build_ubuntu
 	#install_aptitude_modules libgd-dev
 	install_perl_ub
 	#install_perl_modules
@@ -144,5 +213,6 @@ install_package
 #install_perl
 #install_rvm_and_ruby
 #install_rails
+
 exit 0;
 
