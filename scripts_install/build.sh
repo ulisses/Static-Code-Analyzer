@@ -49,9 +49,9 @@ function build_macosx {
 		echo "GHC is installed, I will continue..."
 		build_language_c
 	else
-		echo "GHC is not installed, please go to: http://hackage.haskell.org/platform/mac.html and download and install it"
-		echo "Then you can execute this script again..."
-		echo "Complain with haskell platform that don't provide a direct link to download the latest package"
+		echo "GHC is not installed, I will do it for you... Stay here: I will need your sudo password"
+		sudo port install ghc
+		build_language_c
 	fi
 }
 
