@@ -4,6 +4,9 @@
 #
 
 admin_email="ulissesmonhecosta@gmail.com"
+portins="port install"
+aptiins="aptitude install"
+andlogfile="tee -a main.log"
 
 function install_package {
 	case `uname -s` in
@@ -29,24 +32,26 @@ function install_package {
 }
 
 function install_macosx {
-	echo "Working on a MacOSX machine" >> logfile
+	echo "Working on a MacOSX machine" | $andlogfile
 	port install gd2
+	install_perl_mac
 	install_perl_modules
 }
 
 function install_ubuntu {
-	echo "Working on a Ubuntu machine" >> logfile
-	install_aptitude_modules libgd-dev
-	install_perl_modules
+	echo "Working on a Ubuntu machine" | $andlogfile
+	#install_aptitude_modules libgd-dev
+	install_perl_ub
+	#install_perl_modules
 }
 
 function install_aptitude_modules {
 	for pkg in $@; do
 		dpkg -s $pkg
 		if [ $? -eq 0 ]; then
-			echo "module $pkg installed"
+			echo "module $pkg installed" | $andlogfile
 		else
-			echo "module $pkg not installed, installing..."
+			echo "module $pkg not installed, installing..." | $andlogfile
 			aptitude --assume-yes install $pkg
 		fi
 	done;
@@ -66,9 +71,9 @@ function if_not_exist_install_perl_modules {
 	for module in $@; do
 		is_perl_module_installed $module
 		if [ $? -eq 1 ]; then
-			echo "$module installed";
+			echo "$module installed" | $andlogfile;
 		else
-			echo "$module not installed, installing...";
+			echo "$module not installed, installing..." | $andlogfile;
 			packages[$[${#packages[@]}+1]]=$module;
 		fi
 	done;
@@ -86,20 +91,30 @@ function is_perl_module_installed {
 }
 
 function check_user_id {
-	echo "`whoami` started this script installation file at `date`" | tee -a main.log
+	echo "`whoami` started this script installation file at `date`" | $andlogfile
 	if [ ! "`whoami`" = "root" ]; then
-		echo "Not running as root. Yes, this is an installation file..." | tee -a main.log
+		echo "Not running as root. Yes, this is an installation file..." | $andlogfile
 		exit 1 ;
 	fi
 }
 
-function install_perl {
-	echo "`whoami` is trying to install Perl" | tee -a main.log
-	apt-get install perl
+function install_perl_mac {
+	echo "`whoami` is trying to install Perl" | $andlogfile
+	$portins perl
 	if [ $? ]; then
-		echo "Unsuccessful!" | tee -a main.log;
+		echo "Unsuccessful!" | $andlogfile;
 	else
-		echo "Successful!" | tee -a main.log;
+		echo "Successful!" | $andlogfile;
+	fi
+}
+
+function install_perl_ub {
+	echo "`whoami` is trying to install Perl" | $andlogfile
+	$aptiins perl
+	if [ $? ]; then
+		echo "Unsuccessful!" | $andlogfile;
+	else
+		echo "Successful!" | $andlogfile;
 	fi
 }
 
@@ -124,11 +139,10 @@ function install_rails {
 	cd -
 }
 
-#check_user_id
-#install_package
+check_user_id
+install_package
 #install_perl
 #install_rvm_and_ruby
-install_rails
-
+#install_rails
 exit 0;
 
