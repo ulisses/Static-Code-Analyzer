@@ -4,10 +4,7 @@
 
 CAT=$(shell cat .gitignore)
 
-all:build
-
-build:
-	bash scripts_install/build.sh
+all:install
 
 clean:
 	@echo "Cleaning the shop(safe)..."
