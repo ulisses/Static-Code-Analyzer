@@ -5,7 +5,7 @@
 
 admin_email="ulissesmonhecosta@gmail.com"
 portins="port install"
-aptiins="aptitude install"
+aptiins="aptitude --assume-yes install"
 andlogfile="tee -a main.log"
 
 function install_package {
@@ -38,7 +38,17 @@ function build_macosx {
 	is_ghc_installed
 	if [ $? -eq 1 ]; then
 		echo "GHC is installed, I will continue..."
-		is_language_c_installed
+		is_ghc_package_installed "happy"
+		if [ $? -eq 0 ]; then
+			echo "Happy is not installed, I will install"
+			$portins hs-happy
+		fi
+		is_ghc_package_installed "alex"
+		if [ $? -eq 0 ]; then
+			echo "Alex is not installed, I will install"
+			$portins hs-alex
+		fi
+		is_ghc_package_installed "language"
 		if [ $? -eq 0 ]; then
 			echo "Language.C is not installed, I will install"
 			build_language_c
@@ -47,8 +57,18 @@ function build_macosx {
 			cd -
 		fi
 	else
+		is_ghc_package_installed "happy"
+		if [ $? -eq 0 ]; then
+			echo "Happy is not installed, I will install"
+			$portins hs-happy
+		fi
+		is_ghc_package_installed "alex"
+		if [ $? -eq 0 ]; then
+			echo "Alex is not installed, I will install"
+			$portins hs-alex
+		fi
 		echo "GHC is not installed, I will do it for you."
-		port install ghc
+		$portins ghc
 		build_language_c
 	fi
 }
@@ -57,7 +77,17 @@ function build_ubuntu {
 	is_ghc_installed
 	if [ $? -eq 1 ]; then
 		echo "GHC is installed, I will continue..."
-		is_language_c_installed
+		is_ghc_package_installed "happy"
+		if [ $? -eq 0 ]; then
+			echo "Happy is not installed, I will install"
+			$aptiins happy
+		fi
+		is_ghc_package_installed "alex"
+		if [ $? -eq 0 ]; then
+			echo "Alex is not installed, I will install"
+			$aptiins alex
+		fi
+		is_ghc_package_installed "language"
 		if [ $? -eq 0 ]; then
 			echo "Language.C is not installed, I will install"
 			build_language_c
@@ -66,8 +96,19 @@ function build_ubuntu {
 			cd -
 		fi
 	else
+		echo "GHC is installed, I will continue..."
+		is_ghc_package_installed "happy"
+		if [ $? -eq 0 ]; then
+			echo "Happy is not installed, I will install"
+			$aptiins happy
+		fi
+		is_ghc_package_installed "alex"
+		if [ $? -eq 0 ]; then
+			echo "Alex is not installed, I will install"
+			$aptiins alex
+		fi
 		echo "GHC is not installed, I will do it for you."
-		aptitude --assume-yes install ghc
+		$aptiins ghc
 		build_language_c
 		cd Parser/language-c-0.3.2.1/
 		runhaskell Setup.hs install
@@ -79,8 +120,8 @@ function build_language_c {
 	sudo -u $USER -s 'cd Parser/language-c-0.3.2.1/ && runhaskell Setup.hs configure && runhaskell Setup.hs build && cd -'
 }
 
-function is_language_c_installed {
-	if [ -z `ghc-pkg list | grep language` ]; then
+function is_ghc_package_installed {
+	if [ -z `ghc-pkg list | grep $1` ]; then
 		return 0;
 	else
 		return 1;
@@ -101,7 +142,7 @@ function is_ghc_installed {
 function install_macosx {
 	echo "Working on a MacOSX machine" | $andlogfile
 	build_macosx
-	port install gd2
+	$portins gd2
 	install_perl_mac
 	install_perl_modules
 }
@@ -121,7 +162,7 @@ function install_aptitude_modules {
 			echo "module $pkg installed" | $andlogfile
 		else
 			echo "module $pkg not installed, installing..." | $andlogfile
-			aptitude --assume-yes install $pkg
+			$aptiins $pkg
 		fi
 	done;
 }
