@@ -62,7 +62,7 @@ function build_ubuntu {
 		build_language_c
 	else
 		echo "GHC is not installed, I will do it for you... Stay here: I will need your sudo password"
-		sudo aptitude --assume-yes install haskell-platform-doc haskell-platform
+		sudo aptitude --assume-yes install ghc
 		build_language_c
 	fi
 }
