@@ -28,6 +28,14 @@ function build_all {
 	esac
 }
 
+function is_language_c_installed {
+	if [ -z `ghc-pkg list | grep language` ]; then
+		return 0;
+	else
+		return 1;
+	fi
+}
+
 function is_ghc_installed {
 	if [ -z `which ghc` ]; then
 		return 0;
@@ -47,7 +55,11 @@ function build_macosx {
 	is_ghc_installed
 	if [ $? -eq 1 ]; then
 		echo "GHC is installed, I will continue..."
-		build_language_c
+		is_language_c_installed
+		if [ $? -eq 0 ]; then
+			echo "Language.C is not installed, I will install"
+			build_language_c
+		fi
 	else
 		echo "GHC is not installed, I will do it for you... Stay here: I will need your sudo password"
 		sudo port install ghc
@@ -59,7 +71,11 @@ function build_ubuntu {
 	is_ghc_installed
 	if [ $? -eq 1 ]; then
 		echo "GHC is installed, I will continue..."
-		build_language_c
+		is_language_c_installed
+		if [ $? -eq 0 ]; then
+			echo "Language.C is not installed, I will install"
+			build_language_c
+		fi
 	else
 		echo "GHC is not installed, I will do it for you... Stay here: I will need your sudo password"
 		sudo aptitude --assume-yes install ghc
