@@ -129,5 +129,6 @@ function install_rails {
 #install_perl
 #install_rvm_and_ruby
 install_rails
+
 exit 0;
 
