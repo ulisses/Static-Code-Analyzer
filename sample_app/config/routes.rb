@@ -33,6 +33,8 @@ SampleApp::Application.routes.draw do
   resources :tentativas
   resources :baterias#, :only => [:index]
   resources :results
+  resources :clone_warnings, :only => [:index,:destroy]
+  match '/show_clone', :to => 'clone_warnings#present'
   
 #  resource :tests do
 #  collection do

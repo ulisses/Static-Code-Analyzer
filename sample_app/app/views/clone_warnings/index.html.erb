@@ -1,0 +1,29 @@
+
+
+<h1>Warnings</h1>
+
+<% if @clone_warnings && !@clone_warnings.empty? %> 
+
+	<%= will_paginate %>
+
+		<table border="1">
+			<tr>
+				<td>Num de funções em que se detectou</td>
+				<td>path1</td>
+				<td>path2</td>
+				<td>ID concurso</td>
+				<td>ID enunciado</td>
+				<td>Eliminar warning</td>				
+			</tr>
+			
+			<%= render @clone_warnings %>
+				
+		</table>
+
+	<%= will_paginate %>
+
+<% else %>
+
+	Não há warnings.
+
+<% end %>

@@ -4,6 +4,7 @@ class TentativasController < ApplicationController
     
     require "rexml/document"
     require 'fileutils'
+    require 'find'
     
   def index      
     if (params[:enunciado_id] && params[:user_id])
@@ -46,6 +47,7 @@ class TentativasController < ApplicationController
       
 	    case params[:commit]
         when "Submeter tentativa - Codigo" 
+          cloneDetect(path)
           trataSource(path)
         when "Submeter tentativa - XML" 
           if current_user.admin?
@@ -531,6 +533,76 @@ class TentativasController < ApplicationController
     
   end
 
+  ############  ############  ############  ############  ############  ############  ############  ############
+  #detecção de clones
   
+  def cloneDetect(path)
+    #pega em todos os ficheiros da tentativa submetida
+    files = getAllFiles(path)
+    
+    
+    #vai buscar todos os participantes deste concurso
+    concurso = Concurso.find(@enunciado.concurso_id)
+    participantes = concurso.participantes
+    
+    #para cada participante, vai buscar a sua tentativa mais recente (para este enunciado), e guarda o path num array
+    arrayPaths = []
+    participantes.each do |p|
+      tentativa = Tentativa.where(:user_id => p.user_id).order('created_at ASC').first
+      if tentativa && tentativa.user_id != current_user.id
+        arrayPaths << File.dirname(tentativa.path)
+      end
+    end
+
+    if !arrayPaths.empty?
+    
+      #compara todos os ficheiros desta tentativa com todas a tentativa
+      # mais recente , para este enunciado, dos restantes participantes
+      files.each do |f|
+        #vai buscar o path de uma tentativa
+        pathComp = arrayPaths.pop
+      
+        #vai buscar os ficheiros dentro desse dir
+        filesComp = getAllFiles(pathComp)
+      
+        #compara cada ficheiro desta dir com o file actual
+        filesComp.each do |fc|
+          ok = system("cd data/scripts/ && " + "perl cloneDt_v2.pl -file " + f + " -comp " + fc )
+          if ok
+            res = `cd data/scripts/ && perl cloneDt_v2.pl -file #{f} -comp #{fc}`
+            if !res.empty?
+              cardinality = res.lines.count
+              cw = CloneWarning.new(:cardinality => cardinality,
+                                      :pathFile => f,
+                                      :pathComp => fc,
+                                      :concurso_id => concurso.id,
+                                      :enunciado_id => @enunciado.id)
+              cw.save
+            end
+          end
+        end     
+        
+      end
+      
+      
+      
+      
+    end
+    
+    
+    files.each do |f|
+      @erros += f    
+    end  
+  end
+  
+  def getAllFiles(path)
+    files = []
+    dirname = File.dirname(path)
+    Find.find("#{path}") do |f| 
+      files << f
+    end
+  
+    return files    
+  end
   
 end

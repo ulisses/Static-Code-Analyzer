@@ -1,0 +1,15 @@
+<tr>
+	<td> <%= clone_warning.cardinality %></td>
+	<td> <%= link_to File.basename(clone_warning.pathFile),  {:action => "present", :controller => 
+	"clone_warnings", :file => clone_warning.pathFile} %> </td>	
+	<td> <%= link_to File.basename(clone_warning.pathComp), {:action => "present", :controller => 
+	"clone_warnings", :file => clone_warning.pathComp} %> </td>
+	<% concurso = Concurso.find(clone_warning.concurso_id)%>	
+	<td> <%= link_to concurso.id, concurso_path(concurso)%></td>
+	<% enunciado = Enunciado.find(clone_warning.enunciado_id)%>	
+	<td> <%= link_to enunciado.id, enunciado_path(enunciado) %></td>
+	<td> <%= link_to "delete",
+							clone_warning,
+	 						:method => :delete, :confirm => "Tem a certeza?",
+	                  :title => "Eliminar warning" %> </td>
+</tr>

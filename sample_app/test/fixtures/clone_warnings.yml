@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  cardinality: 1
+  pathFile: MyString
+  pathComp: MyString
+  concurso_id: 1
+  enunciado_id: 1
+
+two:
+  cardinality: 1
+  pathFile: MyString
+  pathComp: MyString
+  concurso_id: 1
+  enunciado_id: 1

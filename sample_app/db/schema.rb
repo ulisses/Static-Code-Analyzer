@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110307105357) do
+ActiveRecord::Schema.define(:version => 20110427165358) do
 
   create_table "baterias", :force => true do |t|
     t.string   "nome"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(:version => 20110307105357) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "enunciado_id"
+  end
+
+  create_table "clone_warnings", :force => true do |t|
+    t.integer  "cardinality"
+    t.string   "pathFile"
+    t.string   "pathComp"
+    t.integer  "concurso_id"
+    t.integer  "enunciado_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "concorrentes", :force => true do |t|
