@@ -192,8 +192,56 @@ Objectivos para terceira fase:
 \end{frame}
 
 \section{Aplicação Web}
+\begin{frame}[fragile] \frametitle{Novidades}
+\begin{itemize}
+\item Limaram-se alguns aspectos na interface, a nível de acessibilidade
+\item Alterou-se o script de detecção de clones, escrito em perl, de forma a interagir melhor com a aplicação
+\item Adicionou-se à aplicação a funcionalidade de detecção de clones
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Modo de utilização do script de detecção de clones (CloneDt.pl)}
+\begin{block}{Modo de utilização}
+perl cloneDt.pl -file [path1] -comp [path2]
+\end{block}
+\begin{itemize}
+\item em que [path1] representa o path do ficheiro que se acabou de submeter, e o path2 representa o path do ficheiro com o qual se pretende comparar o primeiro 
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile] \frametitle{Detalhes do script de detecção de clones (CloneDt.pl)}
+\begin{itemize}
+\item utiliza o comando 
+\begin{block}{Comando ctags}
+ctags -x [path]
+\end{block}
+de forma a obter as linhas referentes ao início de cada função
+\item lê o ficheiro e guarda o código de cada função, numa posição de array diferente
+\item remove espaços em branco e comentários
+\item substituí strings por 'S', números por '1' e variáveis por 'var' 
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile] \frametitle{Detalhes do script de detecção de clones (CloneDt.pl)}
+\begin{itemize}
+\item repete o mesmo processo para o segundo ficheiro
+\item compara cada elemento do primeiro array gerado com os elementos do segundo array
+\item quando encontra possíveis clones, imprime-os para o stdout
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Detecção de clones na aplicação}
+\begin{itemize}
+\item cada vez que um utilizador submete uma proposta de resolução, o seu código é comparado com o código das tentativas mais recentes dos restantes grupos, para o mesmo enunciado
+\item quando encontra possíveis clones, adiciona uma entrada na base de dados
+\end{itemize}
+\end{frame}
+
 
 \section{Terminal Interface}
+
 
 \section{Strafunski}
 \begin{frame}[fragile] \frametitle{Strafunski}
