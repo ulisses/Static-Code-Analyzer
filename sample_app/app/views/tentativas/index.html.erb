@@ -30,7 +30,32 @@
 				<ul class="tentativas">
 					<table border="1">
 						<tr>
-							<td>Num Tentativa</td>
+							
+							<% if params[:user_id] && params[:enunciado_id]%> 
+							<td><%= link_to "Id da Tentativa",
+							{:action => "index", :controller => "tentativas", :user_id=>params[:user_id],
+							 :enunciado_id=>params[:enunciado_id], :ordem=>"created_at DESC"}  %></td>
+							
+							<%else%>
+								<% if params[:user_id] %>
+								<td><%= link_to "Id da Tentativa",
+								{:action => "index", :controller => "tentativas", :user_id=>params[:user_id],
+								 :ordem=>"created_at DESC"}  %></td>
+								
+								<%else%>
+								<% if params[:enunciado_id] %>
+									<td><%= link_to "Id da Tentativa",
+									{:action => "index", :controller => "tentativas", :enunciado_id=>params[:enunciado_id],
+									 :ordem=>"created_at DESC"}  %></td>
+									<% else%>
+										<td><%= link_to "Id da Tentativa",
+										{:action => "index", :controller => "tentativas",
+										 :ordem=>"created_at DESC"}  %></td>
+									<%end%>
+								<%end%>
+							<%end%>
+							
+							
 							<td>Grupo</td>
 							<% if !@concurso%>
 								<td>Concurso</td>
@@ -38,8 +63,63 @@
 							<% if !@enunciado%>
 								<td>Enunciado</td>
 							<% end %>
-							<td>Resultado</td>
+							
+							
+							<% if params[:user_id] && params[:enunciado_id]%> 
+							<td><%= link_to "Resultado",
+							{:action => "index", :controller => "tentativas", :user_id=>params[:user_id],
+							 :enunciado_id=>params[:enunciado_id], :ordem=>"passedTests DESC"}  %></td>
+							
+							<%else%>
+								<% if params[:user_id] %>
+								<td><%= link_to "Resultado",
+								{:action => "index", :controller => "tentativas", :user_id=>params[:user_id],
+								 :ordem=>"passedTests DESC"}  %></td>
+								
+								<%else%>
+								<% if params[:enunciado_id] %>
+									<td><%= link_to "Resultado",
+									{:action => "index", :controller => "tentativas", :enunciado_id=>params[:enunciado_id],
+									 :ordem=>"passedTests DESC"}  %></td>
+									<% else%>
+										<td><%= link_to "Resultado",
+										{:action => "index", :controller => "tentativas",
+										 :ordem=>"passedTests DESC"}  %></td>
+									<%end%>
+								<%end%>
+							<%end%>
+							
+							
+							
 							<td>Compilou</td>
+							
+							
+							
+							<% if params[:user_id] && params[:enunciado_id]%> 
+							<td><%= link_to "Tempo de Exec",
+							{:action => "index", :controller => "tentativas", :user_id=>params[:user_id],
+							 :enunciado_id=>params[:enunciado_id], :ordem=>"tExec ASC"}  %></td>
+							
+							<%else%>
+								<% if params[:user_id] %>
+								<td><%= link_to "Tempo de Exec",
+								{:action => "index", :controller => "tentativas", :user_id=>params[:user_id],
+								 :ordem=>"tExec ASC"}  %></td>
+								
+								<%else%>
+								<% if params[:enunciado_id] %>
+									<td><%= link_to "Tempo de Exec",
+									{:action => "index", :controller => "tentativas", :enunciado_id=>params[:enunciado_id],
+									 :ordem=>"tExec ASC"}  %></td>
+									<% else%>
+										<td><%= link_to "Tempo de Exec",
+										{:action => "index", :controller => "tentativas",
+										 :ordem=>"tExec ASC"}  %></td>
+									<%end%>
+								<%end%>
+							<%end%>
+							
+							
 							<td>Terminou a execução</td>														
 						</tr>
 				  		<%= render @tentativas %>
@@ -54,12 +134,11 @@
 			<% end %>	
 			</td>
 			
-			
-		<td class="sidebar round">
-			<% if(@enunciado) %>
-				<%= link_to "Voltar para o enunciado", enunciado_path(@enunciado) %>
-			<% end %>
-		</td>
+		<% if(@enunciado) %>	
+			<td class="sidebar round">
+					<%= link_to "Voltar para o enunciado", enunciado_path(@enunciado) %>
+			</td>
+		<% end %>
 	
 	</tr>
 </table>

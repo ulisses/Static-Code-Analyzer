@@ -7,22 +7,31 @@ class TentativasController < ApplicationController
     require 'find'
     
   def index      
+    #ordem para ordenar por tipos de dados diferentes
+    ordem = ""
+    if !params[:ordem]
+      ordem = "created_at DESC"
+    else
+      ordem = params[:ordem]
+    end
+    
+    
     if (params[:enunciado_id] && params[:user_id])
       @user = current_user      
       @enunciado = Enunciado.find(params[:enunciado_id])
       @concurso = Concurso.find(@enunciado.concurso_id)
-      @tentativas = Tentativa.where(:user_id=>current_user.id, :enunciado_id=>@enunciado.id).order('created_at DESC').paginate(:page => params[:page])
+      @tentativas = Tentativa.where(:user_id=>current_user.id, :enunciado_id=>@enunciado.id).order("#{ordem}").paginate(:page => params[:page])
     else
       if (params[:user_id])
         @user = current_user
-        @tentativas = Tentativa.where(:user_id=>current_user.id).order('created_at DESC').paginate(:page => params[:page])
+        @tentativas = Tentativa.where(:user_id=>current_user.id).order("#{ordem}").paginate(:page => params[:page])
       else
         if (params[:enunciado_id])
           @enunciado = Enunciado.find(params[:enunciado_id])
           @concurso = Concurso.find(@enunciado.concurso_id)
-          @tentativas = @enunciado.tentativas.order('created_at DESC').paginate(:page => params[:page])
+          @tentativas = @enunciado.tentativas.order("#{ordem}").paginate(:page => params[:page])
         else
-          @tentativas = Tentativa.order('created_at DESC').paginate(:page => params[:page])
+          @tentativas = Tentativa.order("#{ordem}").paginate(:page => params[:page])
       end
     end
   end
