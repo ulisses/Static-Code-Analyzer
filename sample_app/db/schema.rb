@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110427165358) do
+ActiveRecord::Schema.define(:version => 20110501135726) do
 
   create_table "baterias", :force => true do |t|
     t.string   "nome"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(:version => 20110427165358) do
   end
 
   create_table "clone_warnings", :force => true do |t|
-    t.integer  "cardinality"
+    t.float    "cardinality"
     t.string   "pathFile"
     t.string   "pathComp"
     t.integer  "concurso_id"

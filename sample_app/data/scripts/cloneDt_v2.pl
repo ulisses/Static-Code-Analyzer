@@ -102,7 +102,7 @@ sub analisa {
 		
 		$text =~ s/[a-zA-Z]+[0-9]*/var/g;  # substitui as variaveis e os tipos por var
 		$text =~ s/".*"/S/g; #substitui as strings por S
-		$text =~ s/\d+/1/g; # substitui os numeros por 1
+		$text =~ s/[-+]?[0-9]*\.?[0-9]*/1/g; # substitui os numeros por 1
 		$text =~ s/\s+//g; #tira muitos espaços seguidos
 		$_ = $text;
 	}
@@ -113,15 +113,23 @@ sub analisa {
 sub compara{
 	my ($refFile,$refComp) = @_;
     
-	my $aux;
+    #guarda numero de funcoes do primeiro ficheiro
+    my $numFuncsFile = @{$refFile};
+    
+    #compara tudo para obter uma percentagem de possiveis copias
+	my $flag=0;
 	foreach my $f (@{$refFile}){
 		foreach my $c (@{$refComp}){
 			if( $f eq $c ){
-				print "[". $f . "] [" . $c . "]\n";
+				#print "[". $f . "] [" . $c . "]\n";
+				$flag++;
 			}
 		}
 	}
-	
+	my $out = ($flag/$numFuncsFile)*100;
+	if ($flag != 0){
+	    print  $out . "\n";
+    }
 };
 
 =if

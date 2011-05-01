@@ -571,7 +571,7 @@ class TentativasController < ApplicationController
           if ok
             res = `cd data/scripts/ && perl cloneDt_v2.pl -file #{f} -comp #{fc}`
             if !res.empty?
-              cardinality = res.lines.count
+              cardinality = Float(res)
               cw = CloneWarning.new(:cardinality => cardinality,
                                       :pathFile => f,
                                       :pathComp => fc,
@@ -599,7 +599,9 @@ class TentativasController < ApplicationController
     files = []
     dirname = File.dirname(path)
     Find.find("#{path}") do |f| 
-      files << f
+      if (File.extname(f).eql? ".C") || (File.extname(f).eql? ".c")
+        files << f
+      end
     end
   
     return files    

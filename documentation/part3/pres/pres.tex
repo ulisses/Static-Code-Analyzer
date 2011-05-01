@@ -192,6 +192,25 @@ Objectivos para terceira fase:
 \end{frame}
 
 \section{Aplicação Web}
+\begin{frame}[fragile] \frametitle{Estado da aplicação Web}
+A aplicação está praticamente terminada, o que se pretende fazer daqui para a frente será melhorar o que está feito e adicionar alguns extras. O que estava implementado até à entrega da fase anterior:
+\begin{itemize}
+\item Criação de contas de utilizador (grupo)
+\item Associação de concorrentes a determinado grupo
+\item Criação de concursos
+\item Criação de enunciados (através da interface web ou submetendo em formato xml)
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Estado da aplicação Web (parte 2)}
+\begin{itemize}
+\item Inserção de baterias de teste para os enunciados
+\item Submissão de programas para avaliação
+\item Adição simplificada de novas funções de avaliação ou de novas linguagens de programação ao sistema
+\item Apresentação de resultados referentes às diversas tentativas
+\end{itemize}
+\end{frame}
+
 \begin{frame}[fragile] \frametitle{Novidades}
 \begin{itemize}
 \item Limaram-se alguns aspectos na interface, a nível de acessibilidade
@@ -228,7 +247,8 @@ de forma a obter as linhas referentes ao início de cada função
 \begin{itemize}
 \item repete o mesmo processo para o segundo ficheiro
 \item compara cada elemento do primeiro array gerado com os elementos do segundo array
-\item quando encontra possíveis clones, imprime-os para o stdout
+\item regista cada vez que encontra uma função que pode ser cópia de outra
+\item no fim imprime para o stdout a percentagem de funções que foram assinaladas como clones
 \end{itemize}
 \end{frame}
 
