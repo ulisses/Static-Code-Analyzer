@@ -186,6 +186,7 @@ Concretizado até ao ínicio da terceira fase:
 Objectivos para terceira fase:
 \begin{itemize}
 \item Terminar a aplicação web esteticamente
+\item Início da implementação de uma \emph{script} de instalação do sistema
 \item Implementação de algumas métricas
 \item Melhoramento no interface pelo Terminal
 \end{itemize}
@@ -261,6 +262,140 @@ de forma a obter as linhas referentes ao início de cada função
 
 
 \section{Terminal Interface}
+\begin{frame}[fragile] \frametitle{Melhoramentos}
+\begin{itemize}
+ \item Implementação com sucesso de um sistema por comandos.
+ \item Criação de um módulo, \texttt{Access.pm}, de comunicação entre a camada de dados.
+\begin{itemize}
+ \item Usando módulo \texttt{Moose}
+\end{itemize}
+ \item Aumento da área de cobertura entre a interface e o sistema.
+\end{itemize}
+\end{frame}
+
+\section{Instalação do sistema}
+\begin{frame}[fragile] \frametitle{Instalação do sistema}
+\begin{itemize}
+ \item Implementar uma \emph{script} de instalação de todo o \emph{software} envolvido no sistema
+ \item \emph{Script} em \emph{bash}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Vantagens}
+\begin{itemize}
+ \item Facilitar a manutenção sistema
+ \item Facilidade em migrar o sistema
+ \item Gerir versões de \emph{software} usados pelo sistema
+ \item Novas \emph{skills} de administração de sistemas
+\end{itemize}
+\end{frame}
+
+\subsection{Software Instalado}
+\begin{frame}[fragile] \frametitle{Software instalado}
+De momento, a \emph{script} instala:
+
+\begin{itemize}
+ \item \texttt{Perl} e módulos
+ \item Bibliotecas \texttt{C} 
+ \item \texttt{Haskell} e derivados
+ \item \texttt{Ruby}, \texttt{Rails} e \texttt{Gems}
+\end{itemize}
+\end{frame}
+
+\subsection{Início e Exemplo}
+\begin{frame}[fragile] \frametitle{Início I - Verificação do utilizador}
+A primeira função invocada:
+\begin{block}{Check\_user\_id}
+\begin{haskell}
+andlogfile="tee -a main.log"
+
+function check_user_id {
+        echo "`whoami` started this script installation file at `date`" | $andlogfile
+        if [ ! "`whoami`" = "root" ]; then
+                echo "Not running as root. Yes, this is an installation file..." | $andlogfile
+                exit 1 ;
+        fi
+}
+\end{haskell}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Início II - Verificação do sistema}
+\begin{block}{install\_package}
+\begin{haskell}
+function install_package {
+        case `uname -s` in
+                "Darwin")       install_macosx
+                                ;;
+                "Linux")        case `uname -v` in
+                                *"Ubuntu"*)   install_ubuntu
+                                              ;;
+                                *)            echo "Your Linux is not supported yet. If it does have a packet manager please send an email to $admin_email"
+                                              exit 1;
+                                              ;;
+                                esac
+                        ;;
+                *)		echo "Your operative system is not supported yet. Please send an email to $admin_email"
+                        exit 1;
+                        ;;
+        esac
+}
+\end{haskell}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Exemplo I - Invocação da função geral}
+\begin{block}{install\_macosx}
+\begin{haskell}
+function install_macosx {
+        echo "Working on a MacOSX machine" | $andlogfile
+        build_macosx
+        $portins gd2
+        install_perl_mac
+        install_perl_modules
+}
+\end{haskell}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Exemplo II - \texttt{Haskell} e derivados}
+Função \texttt{build\_macosx} trata de instalar:
+\begin{itemize}
+ \item \texttt{GHCi} - Compilador de \texttt{Haskell}, juntamente com o interpretador.
+ \item \texttt{Happy} - Gerador de \emph{parsers} desenvolvido em \texttt{Haskell}
+ \item \texttt{Alex} - Gerador de analisadores léxicos desenvolvido em \texttt{Haskell}
+ \item \texttt{Language.C} - Biblioteca do \texttt{Haskell} para análise e geração de código \texttt{C}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Exemplo III - Instalação}
+\begin{block}{build\_macosx}
+\begin{haskell}
+function build_macosx {
+        is_ghc_installed
+        if [ $? -eq 1 ]; then
+                echo "GHC is installed, I will continue..."
+                is_ghc_package_installed "happy"
+                if [ $? -eq 0 ]; then
+                        echo "Happy is not installed, I will install"
+                        $portins hs-happy
+                fi
+                is_ghc_package_installed "alex"
+                if [ $? -eq 0 ]; then
+                        echo "Alex is not installed, I will install"
+                        $portins hs-alex
+                fi
+                is_ghc_package_installed "language"
+                if [ $? -eq 0 ]; then
+                        echo "Language.C is not installed, I will install"
+                        build_language_c
+                        cd Parser/language-c-0.3.2.1/
+                        runhaskell Setup.hs install
+                        cd -
+                fi
+\end{haskell}
+\end{block}
+\end{frame}
 
 
 \section{Strafunski}
