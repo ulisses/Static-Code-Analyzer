@@ -10,130 +10,25 @@ andlogfile="tee -a main.log"
 
 function install_package {
 	case `uname -s` in
-		"Darwin")
-			install_macosx
-			;;
-		"Linux")
-			case `uname -v` in
-				*"Ubuntu"*)
-					install_ubuntu
-					;;
-				*)
-					echo "Your Linux is not supported yet. If it does have a packet manager please send an email to $admin_email"
-					exit 1;
-					;;
-				esac
-			;;
+	"Darwin")
+		install_macosx
+	;;
+	"Linux")
+		case `uname -v` in
+		*"Ubuntu"*)
+			install_ubuntu
+		;;
 		*)
-			echo "Your operative system is not supported yet. Please send an email to $admin_email"
+			echo "Your Linux is not supported yet. If it does have a packet manager please send an email to $admin_email"
 			exit 1;
-			;;
+		;;
+		esac
+		;;
+	*)
+	echo "Your operative system is not supported yet. Please send an email to $admin_email"
+		exit 1;
+		;;
 	esac
-}
-
-#
-# Build
-#
-function build_macosx {
-	is_ghc_installed
-	if [ $? -eq 1 ]; then
-		echo "GHC is installed, I will continue..."
-		is_ghc_package_installed "happy"
-		if [ $? -eq 0 ]; then
-			echo "Happy is not installed, I will install"
-			$portins hs-happy
-		fi
-		is_ghc_package_installed "alex"
-		if [ $? -eq 0 ]; then
-			echo "Alex is not installed, I will install"
-			$portins hs-alex
-		fi
-		is_ghc_package_installed "language"
-		if [ $? -eq 0 ]; then
-			echo "Language.C is not installed, I will install"
-			build_language_c
-			cd Parser/language-c-0.3.2.1/
-			runhaskell Setup.hs install
-			cd -
-		fi
-	else
-		is_ghc_package_installed "happy"
-		if [ $? -eq 0 ]; then
-			echo "Happy is not installed, I will install"
-			$portins hs-happy
-		fi
-		is_ghc_package_installed "alex"
-		if [ $? -eq 0 ]; then
-			echo "Alex is not installed, I will install"
-			$portins hs-alex
-		fi
-		echo "GHC is not installed, I will do it for you."
-		$portins ghc
-		build_language_c
-	fi
-}
-
-function build_ubuntu {
-	is_ghc_installed
-	if [ $? -eq 1 ]; then
-		echo "GHC is installed, I will continue..."
-		is_ghc_package_installed "happy"
-		if [ $? -eq 0 ]; then
-			echo "Happy is not installed, I will install"
-			$aptiins happy
-		fi
-		is_ghc_package_installed "alex"
-		if [ $? -eq 0 ]; then
-			echo "Alex is not installed, I will install"
-			$aptiins alex
-		fi
-		is_ghc_package_installed "language"
-		if [ $? -eq 0 ]; then
-			echo "Language.C is not installed, I will install"
-			build_language_c
-			cd Parser/language-c-0.3.2.1/
-			runhaskell Setup.hs install
-			cd -
-		fi
-	else
-		echo "GHC is installed, I will continue..."
-		is_ghc_package_installed "happy"
-		if [ $? -eq 0 ]; then
-			echo "Happy is not installed, I will install"
-			$aptiins happy
-		fi
-		is_ghc_package_installed "alex"
-		if [ $? -eq 0 ]; then
-			echo "Alex is not installed, I will install"
-			$aptiins alex
-		fi
-		echo "GHC is not installed, I will do it for you."
-		$aptiins ghc
-		build_language_c
-		cd Parser/language-c-0.3.2.1/
-		runhaskell Setup.hs install
-		cd -
-	fi
-}
-
-function build_language_c {
-	sudo -u $USER -s 'cd Parser/language-c-0.3.2.1/ && runhaskell Setup.hs configure && runhaskell Setup.hs build && cd -'
-}
-
-function is_ghc_package_installed {
-	if [ -z `ghc-pkg list | grep $1` ]; then
-		return 0;
-	else
-		return 1;
-	fi
-}
-
-function is_ghc_installed {
-	if [ -z `which ghc` ]; then
-		return 0;
-	else
-		return 1;
-	fi
 }
 
 #
@@ -151,8 +46,91 @@ function install_ubuntu {
 	echo "Working on a Ubuntu machine" | $andlogfile
 	build_ubuntu
 	#install_aptitude_modules libgd-dev
-	install_perl_ub
+	#install_perl_ub
 	#install_perl_modules
+}
+
+#
+# Build
+#
+function build_macosx {
+	is_ghc_installed
+	if [ $? -eq 1 ]; then
+		echo "GHC is installed, I will continue..." | $andlogfile
+		which happy 1> /dev/null 
+		if [ $? -eq 1 ]; then
+			echo "Happy is not installed, I will install" | $andlogfile
+			$portins happy
+			else
+			echo "Happy is installed" | $andlogfile
+		fi
+		which alex 1> /dev/null 
+		if [ $? -eq 1 ]; then
+			echo "Alex is not installed, I will install" | $andlogfile
+			$portins alex
+			else
+			echo "Alex is installed" | $andlogfile
+		fi
+		echo "Trying to install Language.C" | $andlogfile
+		build_language_c
+		cd Parser/language-c-0.3.2.1/
+		runhaskell Setup.hs install
+		cd - 1> /dev/null
+	else
+		echo "GHC is not installed, I will do it for you." | $andlogfile
+		$portins ghc
+		build_ubuntu
+	fi
+}
+
+function build_ubuntu {
+	is_ghc_installed
+	if [ $? -eq 1 ]; then
+		echo "GHC is installed, I will continue..." | $andlogfile
+		which happy 1> /dev/null 
+		if [ $? -eq 1 ]; then
+			echo "Happy is not installed, I will install" | $andlogfile
+			$aptiins happy
+			else
+			echo "Happy is installed" | $andlogfile
+		fi
+		which alex 1> /dev/null 
+		if [ $? -eq 1 ]; then
+			echo "Alex is not installed, I will install" | $andlogfile
+			$aptiins alex
+			else
+			echo "Alex is installed" | $andlogfile
+		fi
+		echo "Trying to install Language.C" | $andlogfile
+		build_language_c
+		cd Parser/language-c-0.3.2.1/
+		runhaskell Setup.hs install
+		cd - 1> /dev/null
+	else
+		echo "GHC is not installed, I will do it for you." | $andlogfile
+		$aptiins ghc
+		build_ubuntu
+	fi
+}
+
+function build_language_c {
+	sudo -u $USER -s 'cd parser/language-c-0.3.2.1/ && runhaskell setup.hs configure && runhaskell setup.hs build && cd -'
+}
+
+function is_ghc_package_installed {
+	if [ -z `ghc-pkg list | grep $1` ]; then
+		return 0;
+	else
+		return 1;
+	fi
+}
+
+function is_ghc_installed {
+	if [ -z `which ghc` ]; then
+		return 0;
+	else
+		return 1;
+	fi
 }
 
 function install_aptitude_modules {
@@ -211,28 +189,17 @@ function check_user_id {
 function install_perl_mac {
 	echo "`whoami` is trying to install Perl" | $andlogfile
 	$portins perl
-	if [ $? ]; then
-		echo "Unsuccessful!" | $andlogfile;
-	else
-		echo "Successful!" | $andlogfile;
-	fi
 }
 
 function install_perl_ub {
-	echo "`whoami` is trying to install Perl" | $andlogfile
-	$aptiins perl
-	if [ $? ]; then
-		echo "Unsuccessful!" | $andlogfile;
-	else
-		echo "Successful!" | $andlogfile;
-	fi
+	echo "`whoami` is trying to install Perl..." | $andlogfile
+	$aptiins perl 
 }
 
 function install_rvm_and_ruby {
-	# Install RVM
-	#bash < <(curl -s https://rvm.beginrescueend.com/install/rvm)
+	echo "Install RVM (ruby version manager)" | $andlogfile
 	curl -s https://rvm.beginrescueend.com/install/rvm | bash 
-	# Install some rubies
+	echo "Installing ruby version 1.8.7" | $andlogfile
 	source "$HOME/.rvm/scripts/rvm"
 	rvm get head
 	rvm reload
@@ -241,19 +208,18 @@ function install_rvm_and_ruby {
 }
 
 function install_rails {
-	#sudo apt-get install rubygems
-	#sudo apt-get install libxslt-dev libxml2-dev libsqlite3-dev
+	echo "Installing ruby gems and libraries" | $andlogfile
+	$aptiins rubygems
+	$aptiins install libxslt-dev libxml2-dev libsqlite3-dev
 	gem install rails --version 3.0.3
 	cd sample_app
 	bundle install
 	cd -
+	$aptiins libopenssl-ruby
 }
 
 check_user_id
 install_package
-#install_perl
-#install_rvm_and_ruby
-#install_rails
 
 exit 0;
 
