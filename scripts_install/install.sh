@@ -3,10 +3,26 @@
 # To install you need to execute with 'sudo'.
 #
 
+#================================================================
+#		Variables and shortcuts
+#================================================================
+
 admin_email="ulissesmonhecosta@gmail.com"
 portins="port install"
 aptiins="aptitude --assume-yes install"
 andlogfile="tee -a main.log"
+
+#================================================================
+#		System verification and installation
+#================================================================
+
+function check_user_id {
+	echo "`whoami` started this script installation file at `date`" | $andlogfile
+	if [ ! "`whoami`" = "root" ]; then
+		echo "Not running as root. Yes, this is an installation file..." | $andlogfile
+		exit 1 ;
+	fi
+}
 
 function install_package {
 	case `uname -s` in
@@ -31,9 +47,6 @@ function install_package {
 	esac
 }
 
-#
-# Install
-#
 function install_macosx {
 	echo "Working on a MacOSX machine" | $andlogfile
 	build_macosx
@@ -50,9 +63,10 @@ function install_ubuntu {
 	#install_perl_modules
 }
 
-#
-# Build
-#
+#================================================================
+#		Haskell and haskell's things
+#================================================================
+
 function build_macosx {
 	is_ghc_installed
 	if [ $? -eq 1 ]; then
@@ -84,8 +98,8 @@ function build_macosx {
 }
 
 function build_ubuntu {
-	is_ghc_installed
-	if [ $? -eq 1 ]; then
+	which ghc 1> /dev/null
+	if [ $? -eq 0 ]; then
 		echo "GHC is installed, I will continue..." | $andlogfile
 		which happy 1> /dev/null 
 		if [ $? -eq 1 ]; then
@@ -117,22 +131,6 @@ function build_language_c {
 	sudo -u $USER -s 'cd parser/language-c-0.3.2.1/ && runhaskell setup.hs configure && runhaskell setup.hs build && cd -'
 }
 
-function is_ghc_package_installed {
-	if [ -z `ghc-pkg list | grep $1` ]; then
-		return 0;
-	else
-		return 1;
-	fi
-}
-
-function is_ghc_installed {
-	if [ -z `which ghc` ]; then
-		return 0;
-	else
-		return 1;
-	fi
-}
-
 function install_aptitude_modules {
 	for pkg in $@; do
 		dpkg -s $pkg
@@ -144,6 +142,10 @@ function install_aptitude_modules {
 		fi
 	done;
 }
+
+#================================================================
+#			Perl
+#================================================================
 
 function install_perl_modules {
 	perl -MCPAN -e '$CPAN->{prerequisites_policy}=follow'
@@ -178,14 +180,6 @@ function is_perl_module_installed {
 	fi
 }
 
-function check_user_id {
-	echo "`whoami` started this script installation file at `date`" | $andlogfile
-	if [ ! "`whoami`" = "root" ]; then
-		echo "Not running as root. Yes, this is an installation file..." | $andlogfile
-		exit 1 ;
-	fi
-}
-
 function install_perl_mac {
 	echo "`whoami` is trying to install Perl" | $andlogfile
 	$portins perl
@@ -196,6 +190,10 @@ function install_perl_ub {
 	$aptiins perl 
 }
 
+
+#================================================================
+#		Ruby, Rails, Gems and ruby's libs
+#================================================================
 function install_rvm_and_ruby {
 	echo "Install RVM (ruby version manager)" | $andlogfile
 	curl -s https://rvm.beginrescueend.com/install/rvm | bash 
@@ -217,6 +215,10 @@ function install_rails {
 	cd -
 	$aptiins libopenssl-ruby
 }
+
+#================================================================
+#			Execution
+#================================================================
 
 check_user_id
 install_package
