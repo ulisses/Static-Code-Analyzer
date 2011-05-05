@@ -11,6 +11,8 @@ admin_email="ulissesmonhecosta@gmail.com"
 portins="port install"
 aptiins="aptitude --assume-yes install"
 andlogfile="tee -a main.log"
+varmac=0
+varubu=0
 
 #================================================================
 #		System verification and installation
@@ -27,11 +29,13 @@ function check_user_id {
 function install_package {
 	case `uname -s` in
 	"Darwin")
+		varmac=1
 		install_macosx
 	;;
 	"Linux")
 		case `uname -v` in
 		*"Ubuntu"*)
+			varubu=1
 			install_ubuntu
 		;;
 		*)
@@ -49,17 +53,18 @@ function install_package {
 
 function install_macosx {
 	echo "Working on a MacOSX machine" | $andlogfile
-	build_macosx
+	build_haskell
 	$portins gd2
-	install_perl_mac
+	install_perl
 	install_perl_modules
 }
 
 function install_ubuntu {
+	echo "var = $varubu"
 	echo "Working on a Ubuntu machine" | $andlogfile
-	build_ubuntu
+	build_haskell
 	#install_aptitude_modules libgd-dev
-	#install_perl_ub
+	#install_perl
 	#install_perl_modules
 }
 
@@ -67,52 +72,34 @@ function install_ubuntu {
 #		Haskell and haskell's things
 #================================================================
 
-function build_macosx {
-	is_ghc_installed
-	if [ $? -eq 1 ]; then
-		echo "GHC is installed, I will continue..." | $andlogfile
-		which happy 1> /dev/null 
-		if [ $? -eq 1 ]; then
-			echo "Happy is not installed, I will install" | $andlogfile
-			$portins happy
-			else
-			echo "Happy is installed" | $andlogfile
-		fi
-		which alex 1> /dev/null 
-		if [ $? -eq 1 ]; then
-			echo "Alex is not installed, I will install" | $andlogfile
-			$portins alex
-			else
-			echo "Alex is installed" | $andlogfile
-		fi
-		echo "Trying to install Language.C" | $andlogfile
-		build_language_c
-		cd Parser/language-c-0.3.2.1/
-		runhaskell Setup.hs install
-		cd - 1> /dev/null
-	else
-		echo "GHC is not installed, I will do it for you." | $andlogfile
-		$portins ghc
-		build_ubuntu
-	fi
-}
-
-function build_ubuntu {
+function build_haskell {
 	which ghc 1> /dev/null
 	if [ $? -eq 0 ]; then
 		echo "GHC is installed, I will continue..." | $andlogfile
 		which happy 1> /dev/null 
 		if [ $? -eq 1 ]; then
 			echo "Happy is not installed, I will install" | $andlogfile
-			$aptiins happy
-			else
+			if [ $varubu -eq 1 ]; then 
+				$aptiins happy 
+			else 	
+				if [ $varmac -eq 1 ]; then 
+					$portins happy 
+				fi 
+			fi
+		else
 			echo "Happy is installed" | $andlogfile
 		fi
 		which alex 1> /dev/null 
 		if [ $? -eq 1 ]; then
 			echo "Alex is not installed, I will install" | $andlogfile
-			$aptiins alex
-			else
+			if [ $varubu -eq 1 ]; then 
+				$aptiins alex 
+			else 	
+				if [ $varmac -eq 1 ]; then 
+					$portins alex
+				fi 
+			fi
+		else
 			echo "Alex is installed" | $andlogfile
 		fi
 		echo "Trying to install Language.C" | $andlogfile
@@ -122,8 +109,14 @@ function build_ubuntu {
 		cd - 1> /dev/null
 	else
 		echo "GHC is not installed, I will do it for you." | $andlogfile
-		$aptiins ghc
-		build_ubuntu
+			if [ $varubu -eq 1 ]; then 
+				$aptiins ghc
+			else 	
+				if [ $varmac -eq 1 ]; then 
+					$portins ghc
+				fi 
+			fi
+		build_haskell
 	fi
 }
 
@@ -180,16 +173,16 @@ function is_perl_module_installed {
 	fi
 }
 
-function install_perl_mac {
+function install_perl {
 	echo "`whoami` is trying to install Perl" | $andlogfile
-	$portins perl
+	if [ $varubu -eq 1 ]; then 
+		$aptiins perl
+	else 	
+		if [ $varmac -eq 1 ]; then 
+			$portins perl
+		fi 
+	fi
 }
-
-function install_perl_ub {
-	echo "`whoami` is trying to install Perl..." | $andlogfile
-	$aptiins perl 
-}
-
 
 #================================================================
 #		Ruby, Rails, Gems and ruby's libs

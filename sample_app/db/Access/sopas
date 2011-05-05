@@ -13,7 +13,7 @@ my $creditos =	"Trabalho Realizado Por:
 	Pedro Faria\t\tpg17684\t\tpedro.faria.80\@gmail.com\n\n";
 print 	"\n\n",
 	" S. O. P. A. S. - Submissão Online Para Análise de Software\n\n",
-	"Coisa muito linda para escrever aqui em jeito de introdução.\nInterface gráfica para a aplicação\n\n",
+	"...\nInterface gráfica para a aplicação\n\n",
 	,$creditos;
 ######
 
