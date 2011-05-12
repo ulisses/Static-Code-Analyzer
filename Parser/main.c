@@ -1,32 +1,41 @@
 // #include <stdio.h>
 
-//void lala(int a, int b);
+/*helo boy
 
-//int * lala4() { if(1) {} else{}}
+i have a present for you
+*/
 
-void lala(int a, int b) {
-    if(a) {
-	}
-}
+//void fun(int a, int b);
+
+//int * fun4() { if(1) {} else{}}
 /*
+void fun(int a, int b) {
+    if(a) {
+    }
+}
+
 void main(int argc, char **argv) {
     if(1) {}
     switch (1) {
         case 1: {
-                    lala(1,1);
+                    fun(1,1);
                     break;
                 }
         case 2: {
-                    int *v = lala4();
+                    int *v = fun4();
                     break;
                 }
     }
     return 0;
 }
-
-
-void lala2() { if(1) {}}
-void lala1() {}
-void lala3() {}
 */
+
+void fun2() {
+    int i,j;
+    for(; (i < 10) || 10; i++,j++) {
+    }
+}
+
+//void fun1() {}
+//void fun3() {}
 
