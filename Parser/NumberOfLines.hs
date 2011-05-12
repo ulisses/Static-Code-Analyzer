@@ -11,21 +11,26 @@
 --
 ------------------------------------------------------------------------------
 
-module NumberOfLines(physicalLines) where
+module NumberOfLines(ncloc,physicalLines) where
 
 import Language.C
 import Language.C.System.GCC
 import Language.C.Data.Ident
 import Language.C.Pretty
 
-{- Get the number of physical lines, y this we mean:
+{- Get the number of lines, by this we mean:
    the number of lines of code, without blank lines
    and without comments.
 -}
-physicalLines :: FilePath -> IO Int
-physicalLines file = do
+ncloc :: FilePath -> IO Int
+ncloc file = do
     parse <- parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] file
     case parse of
         (Left err)   -> return 0
         (Right tree) -> (return . length . filter (not . null) . lines . show . pretty) tree
 
+{- Get the number of physical lines, so, the real number of lines
+   inside the file.
+-}
+physicalLines :: FilePath -> IO Int
+physicalLines file = readFile file >>= return . length . lines
