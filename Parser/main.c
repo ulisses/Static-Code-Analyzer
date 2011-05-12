@@ -1,8 +1,7 @@
 // #include <stdio.h>
 
-/*helo boy
+/*
 
-i have a present for you
 */
 
 //void fun(int a, int b);
@@ -38,4 +37,3 @@ void fun2() {
 
 //void fun1() {}
 //void fun3() {}
-
