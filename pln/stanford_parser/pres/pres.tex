@@ -204,6 +204,65 @@ prep\_of(consists-5, clause-9)
 
 \end{frame}
 
+\section{Tsurgeon}
+\begin{frame}\frametitle{TSurgeon}
+Tsurgeon é uma ferramenta que modifica árvores quando estas fazem \textit{match} de um determinado padrão. Sempre que a árvore corresponde ao padrão, é aplicada uma operação cirurgica à árvore.
+\end{frame}
+
+\begin{frame}\frametitle{Tipo de operações de transformação}
+O Tsurgeon oferece uma vasta gama de transformações, desde a remoção de um nodo (e tudo o que depende dele), passando pela inserção de um nodo ou de uma árvore, até à movimentação de determinado nó na árvore.
+\end{frame}
+
+\subsection{Modo de utilização}
+\begin{frame}\frametitle{Modo de utilização}
+\begin{block}{}
+./tsurgeon.csh -treeFile atree action
+\end{block}
+\begin{itemize}
+\item atree : ficheiro que contém a árvore(s) que se pretende transformar
+\item action : ficheiro que contém uma lista de padrões e uma lista de operações de transformação  
+\end{itemize}
+\end{frame}
+
+\subsection{Exemplo}
+\begin{frame}\frametitle{Exemplo}
+\begin{block}{árvore a transformar}
+(ROOT\\
+  (S\\
+    (NP (NNP Maria))\\
+    (VP (VBD was)\\
+      (VP (VBN arrested)\\
+        (PP (IN in)\\
+          (NP (NNP May)))))\\
+    (. .)))\\
+\end{block}
+\end{frame}
+
+\begin{frame}\frametitle{Exemplo}
+\begin{block}{script de alteração}
+VP \textless  PP = prep\\
+delete prep
+\end{block}
+\begin{itemize}
+\item \textbf{VP \textless  PP = prep} : esta expressão faz match a um nodo PP que seja filho directo de um nodo VP. O nodo PP é atribuido à variável \textit{prep}.
+\item \textbf{delete prep} : comando que dita a eliminação do nodo prep
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Exemplo}
+\begin{block}{Resultado da transformação}
+(ROOT\\
+  (S\\
+    (NP (NNP Maria))\\
+    (VP (VBD was)\\
+      (VP (VBN arrested)\\
+    (. .)))\\
+\end{block}
+\begin{itemize}
+\item o nodo PP foi eliminado, assim como os seus filhos.
+\end{itemize}
+\end{frame}
+
 
 \section*{Perguntas}
 \begin{frame} \frametitle{Perguntas}
