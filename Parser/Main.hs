@@ -33,6 +33,7 @@ import Control.Monad
 
 import Comments(getNrOfLinesOfComments,commentLinesDensity)
 import NumberOfLines
+import Metrics
 
 {- Try to incorporate on-the-fly tests with C random code generation with CSmith tool.
    But we must have a method in Language.C that receives a Handler or a ByteString.
