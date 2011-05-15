@@ -1,4 +1,7 @@
-// #include <stdio.h>
+  #include    <SYSstdio.h>
+#include "stdioss.h"
+ #include   <SYSstdio2.h>
+#include "stdiossds.h"
 
 /*
 

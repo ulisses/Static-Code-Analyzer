@@ -40,6 +40,8 @@ fromMetrics (Metrics m) = m
 -- unpackPack f (Metrics m) = toMetrics $ f $ fromMetrics m
 -}
 unpackPack f = toMetrics  . f . fromMetrics
+
+emptyMetrics :: Metrics
 emptyMetrics = Metrics M.empty
 
 {- Add new metric to metrics bag, or update a metric value
@@ -70,6 +72,7 @@ convertToXML (Metrics m) = [mkTree (XTag (mkName "metrics") [])  $ convertToXML_
 
 {- Show Metrics in XML
 -}
+showXMLMetrics :: Metrics -> IO ()
 showXMLMetrics = putStrLn . indentXMLMetrics . convertToXML
 
 {- Indent XML metrics (HXL seems to not has pretty printing)
