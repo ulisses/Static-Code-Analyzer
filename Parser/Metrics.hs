@@ -12,7 +12,9 @@
 --
 ------------------------------------------------------------------------------
 
-module Metrics where
+module Metrics(emptyMetrics
+              ,insertMetric, deleteMetric, concatMetrics
+              ,convertToXML, showXMLMetrics, writeMetricsToFile) where
 
 import Text.XML.HXT.DOM.XmlNode
 import Text.XML.HXT.DOM.MimeTypes
@@ -20,16 +22,35 @@ import Text.XML.HXT.DOM.ShowXml
 import Text.XML.HXT.DOM.TypeDefs
 import Text.XML.HXT.DOM.FormatXmlTree
 import Text.XML.HXT.Parser.XmlParsec
-import Data.Map
+
+import Data.Map as M
+import Data.Maybe
 
 data Metrics = Metrics (Map MetricName MetricValue)
     deriving Show
 type MetricName = String
 type MetricValue = Double
 
+toMetrics = Metrics
+fromMetrics (Metrics m) = m
+packUnpack f = toMetrics  . f . fromMetrics
+emptyMetrics = Metrics M.empty
+
+
+{- Add new metric to metrics bag, or update a metric value
+-}
 insertMetric :: (MetricName,MetricValue) -> Metrics -> Metrics
-insertMetric (mn,mv) r@(Metrics m) | member mn m = r
-                                   | otherwise   = Metrics $ insert mn mv m
+insertMetric (mn,mv) m | member mn fm = let (Just mv') = M.lookup mn fm
+                                        in if mv' == mv then m else packUnpack f m
+                       | otherwise   = packUnpack f m
+    where fm = fromMetrics m
+          f  = insert mn mv
+
+deleteMetric :: MetricName -> Metrics -> Metrics
+deleteMetric mn (Metrics m) = Metrics $ delete mn m
+
+concatMetrics :: Metrics -> Metrics -> Metrics
+concatMetrics m1 m2 = toMetrics $ union (fromMetrics m1) (fromMetrics m2)
 
 {- This function converts a metrics bag to XML
 -}
