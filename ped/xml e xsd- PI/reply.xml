@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Metrics>
+    <Metric Name="Metric1" Value="12.1" FunctionName="main" FileName="main.c"/>
+    <Metric Name="Metric2" Value="34.0" FunctionName="main" FileName="main.c"/>
+    <Metric Name="Metric3" Value="34.0" FunctionName="main" FileName="main.c"/>
+    <Metric Name="Metric4" Value="34.0" FileName="main.c"/>
+    <Metric Name="Metric4" Value="34.0"/>
+    <Metric Name="Metric5" Value="34.0" FunctionName="main" FileName="main.c"/>
+    <Metric Name="Metric6" Value="34.0" FunctionName="main" FileName="main.c"/>
+</Metrics>
