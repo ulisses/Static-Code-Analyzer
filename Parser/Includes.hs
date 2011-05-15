@@ -34,7 +34,7 @@ type Includes = String
    take any action. The filter process is done by using
    runInteractiveCommand from System.Process, I tried to use 
    Haskell regexps implementations, but all of the really suck.
-   So I am using grep directly.
+   So I am using a grep call directly.
 -}
 getIncludes :: FilePath -> IO ([SystemIncludes],[Includes])
 getIncludes file = do
@@ -45,4 +45,3 @@ getIncludes file = do
     let inc = map (takeWhile (/='\"')) $ map tail $ filter (not . null) $ map (dropWhile (/='\"')) $ includes
     let sysInc = map (takeWhile (/='>')) $ map tail $ filter (not . null)  $ map (dropWhile (/='<')) $ includes
     return (sysInc,inc)
-
