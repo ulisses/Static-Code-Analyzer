@@ -31,23 +31,29 @@ data Metrics = Metrics (Map MetricName MetricValue)
 type MetricName = String
 type MetricValue = Double
 
+{- Aux functions -}
 toMetrics = Metrics
 fromMetrics (Metrics m) = m
-packUnpack f = toMetrics  . f . fromMetrics
+{- Unpack from Metrics, apply a function 'f' and pack
+   again into Metrics.
+   This is the pointwise version of this function:
+-- unpackPack f (Metrics m) = toMetrics $ f $ fromMetrics m
+-}
+unpackPack f = toMetrics  . f . fromMetrics
 emptyMetrics = Metrics M.empty
-
 
 {- Add new metric to metrics bag, or update a metric value
 -}
 insertMetric :: (MetricName,MetricValue) -> Metrics -> Metrics
 insertMetric (mn,mv) m | member mn fm = let (Just mv') = M.lookup mn fm
-                                        in if mv' == mv then m else packUnpack f m
-                       | otherwise   = packUnpack f m
-    where fm = fromMetrics m
-          f  = insert mn mv
+                                        in if mv' == mv then m else unpackPack ins m
+                       | otherwise   = unpackPack ins m
+    where fm  = fromMetrics m
+          ins = insert mn mv
 
 deleteMetric :: MetricName -> Metrics -> Metrics
-deleteMetric mn (Metrics m) = Metrics $ delete mn m
+--deleteMetric mn m = unpackPack (delete mn) m
+deleteMetric = unpackPack . delete
 
 concatMetrics :: Metrics -> Metrics -> Metrics
 concatMetrics m1 m2 = toMetrics $ union (fromMetrics m1) (fromMetrics m2)
@@ -55,7 +61,7 @@ concatMetrics m1 m2 = toMetrics $ union (fromMetrics m1) (fromMetrics m2)
 {- This function converts a metrics bag to XML
 -}
 convertToXML :: Metrics -> XmlTrees
-convertToXML (Metrics m) = [mkTree (XTag (mkName "metricx") [])  $ convertToXML_]
+convertToXML (Metrics m) = [mkTree (XTag (mkName "metrics") [])  $ convertToXML_]
     where convertToXML_ = foldrWithKey (\k a b -> mkEntry (k, show a) : b) [] m
           mkEntry (k,a) = mkMetricTag [mkNameMetric k, mkValue a]
           mkMetricTag lst = mkTree (XTag (mkName "metric") lst) []
