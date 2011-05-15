@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="Metrics">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Metric" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:attribute name="Name" type="xs:string" />
+                        <xs:attribute name="Value" type="xs:float" />
+                        <xs:attribute name="FunctionName" type="xs:string"/>
+                        <xs:attribute name="FileName" type="xs:string"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+</xs:schema>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+    <Evaluation>
+        <Metric Name="metric 1" FunctionName="main" FileName="teste.c"/>
+        <Metric Name="metric 2" FunctionName="middle" FileName="teste.c"/>
+        <Metric Name="metric 2" FunctionName="exit" FileName="teste.c"/>
+        <Metric Name="metric 2" FileName="teste.c"/>
+        <Metric Name="metric 3"/>
+    </Evaluation>
+
+
