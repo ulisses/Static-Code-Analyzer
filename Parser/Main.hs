@@ -1,4 +1,14 @@
 {-#OPTIONS -XScopedTypeVariables -XNoMonomorphismRestriction -XFlexibleInstances -XUndecidableInstances#-}
+------------------------------------------------------------------------------ 
+-- | 
+-- Author       : Ulisses Araujo Costa
+-- Stability    : experimental
+-- Portability  : portable
+--
+-- This module is part of 'Static-Code-Analyzer', a library to automatic
+-- calculate some metrics related with C99 and GNU C extensions code.
+--
+------------------------------------------------------------------------------
 
 module Main where
 
@@ -20,6 +30,10 @@ import Data.Generics.Strafunski.StrategyLib.TraversalTheme
 import Data.Generics.Strafunski.StrategyLib.StrategyPrelude
 import Data.Generics.Strafunski.StrategyLib.FlowTheme
 import Control.Monad
+
+import Comments(getNrOfLinesOfComments,commentLinesDensity)
+import NumberOfLines
+import Metrics
 
 {- Try to incorporate on-the-fly tests with C random code generation with CSmith tool.
    But we must have a method in Language.C that receives a Handler or a ByteString.
@@ -132,7 +146,10 @@ testCountInstr =  parr >>= countInstr . fromRight
 countInstr :: Data a => a -> IO Int
 countInstr d =  (putStrLn ("new ")) >> applyTU (full_tdTU typesOfInstr) d
 
-typesOfInstr = constTU 0 `adhocTU` loop `adhocTU` exprs
+typesOfInstr = constTU 0
+    --`adhocTU` exprs
+	`adhocTU` unaryOp
+    `adhocTU` binaryOp
 
 loop :: CStat -> IO Int
 {- if without else -}
@@ -154,6 +171,42 @@ exprs (CAssign _ e1 e2 _)
 exprs (CCast _ e _) = countInstr e
 exprs (CVar i _) = (putStrLn $ ("encontrei:" ++ identToString i)) >> return 1
 exprs _ =  return 0
+
+binaryOp :: CBinaryOp -> IO Int
+binaryOp a = print a >> (return $ binaryOp_ a)
+    where
+    binaryOp_ CMulOp = 1
+    binaryOp_ CDivOp = 1
+    binaryOp_ CRmdOp = 1
+    binaryOp_ CAddOp = 1
+    binaryOp_ CSubOp = 1
+    binaryOp_ CShlOp = 1
+    binaryOp_ CShrOp = 1
+    binaryOp_ CLeOp = 1
+    binaryOp_ CGrOp = 1
+    binaryOp_ CLeqOp = 1
+    binaryOp_ CGeqOp = 1
+    binaryOp_ CEqOp = 1
+    binaryOp_ CNeqOp = 1
+    binaryOp_ CAndOp = 1
+    binaryOp_ CXorOp = 1
+    binaryOp_ COrOp = 1
+    binaryOp_ CLndOp = 1
+    binaryOp_ CLorOp = 1
+
+unaryOp :: CUnaryOp -> IO Int
+unaryOp a = print a >> (return . unaryOp_) a
+    where
+    unaryOp_ CPreIncOp = 1
+    unaryOp_ CPreDecOp = 1
+    unaryOp_ CPostIncOp = 1
+    unaryOp_ CPostDecOp = 1
+    unaryOp_ CAdrOp = 1
+    unaryOp_ CIndOp = 1
+    unaryOp_ CPlusOp = 1
+    unaryOp_ CMinOp = 1
+    unaryOp_ CCompOp = 1
+    unaryOp_ CNegOp = 1
 
 --decl (CDecl _ l _) = return . sum [ | () <- l]
 
