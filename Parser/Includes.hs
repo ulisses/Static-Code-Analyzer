@@ -15,6 +15,7 @@ module Includes(getIncludes) where
 
 import System.Process
 import GHC.IO.Handle
+import System.Exit
 import Data.List
 import Data.Char
 
@@ -38,12 +39,18 @@ type Includes = String
 -}
 getIncludes :: FilePath -> IO ([SystemIncludes],[Includes])
 getIncludes file = do
-    (_,code,_,_) <- runInteractiveCommand $ " grep -v -P '(\\*(.|\n|\r)*?\\*)|(^[ \t\n]*\\/\\/.*)' " ++ file
+    (_,code,_,proc) <- runInteractiveProcess "grep" ["-v", "-P", "'(\\*(.|\n|\r)*?\\*)|(^[ \t\n]*\\/\\/.*)'", file] Nothing Nothing
     hSetBinaryMode code False
-    f <- hGetContents code
-    let includes = map (dropWhile isSpace) $ filter (isInfixOf "#include") $ lines f
-    let inc = takke '\"' $ map tail $ filter (not . null) $ droppe '\"' $ includes
-    let sysInc = takke '>' $ map tail $ filter (not . null)  $ droppe '<' $ includes
-    return (sysInc,inc)
-        where takke c = map (takeWhile (/=c))
-              droppe c = map (dropWhile (/=c))
+    exitCode <- waitForProcess proc
+    case exitCode of
+        ExitSuccess -> do
+            f <- hGetContents code
+            let includes = map (dropWhile isSpace) $ filter (isInfixOf "#include") $ lines f
+            let inc = takke '\"' $ map tail $ filter (not . null) $ droppe '\"' $ includes
+            let sysInc = takke '>' $ map tail $ filter (not . null)  $ droppe '<' $ includes
+            return (sysInc,inc)
+                where takke c = map (takeWhile (/=c))
+                      droppe c = map (dropWhile (/=c))
+        exitError -> do
+            terminateProcess proc
+            exitWith exitError
