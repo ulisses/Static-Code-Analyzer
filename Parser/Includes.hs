@@ -42,6 +42,8 @@ getIncludes file = do
     hSetBinaryMode code False
     f <- hGetContents code
     let includes = map (dropWhile isSpace) $ filter (isInfixOf "#include") $ lines f
-    let inc = map (takeWhile (/='\"')) $ map tail $ filter (not . null) $ map (dropWhile (/='\"')) $ includes
-    let sysInc = map (takeWhile (/='>')) $ map tail $ filter (not . null)  $ map (dropWhile (/='<')) $ includes
+    let inc = takke '\"' $ map tail $ filter (not . null) $ droppe '\"' $ includes
+    let sysInc = takke '>' $ map tail $ filter (not . null)  $ droppe '<' $ includes
     return (sysInc,inc)
+        where takke c = map (takeWhile (/=c))
+              droppe c = map (dropWhile (/=c))
