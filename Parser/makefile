@@ -1,5 +1,5 @@
 all:
-	ghc --make Main.hs -o main 
+	ghc -threaded --make Main.hs -o main 
 run:
 	./main main.c 
 clean:
