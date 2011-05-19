@@ -9,12 +9,12 @@ all:install
 clean:
 	@echo "Cleaning the shop(safe)..."
 	@`for f in *.*~ *~ *.o *.a *.hi ; do find . -iname $$f | xargs rm -f ; done`
-	@echo "Try \"make dangerous_clean\" to clean the project, like it is in git repo"
+	@echo "Try \"make cleanall\" to clean the project, like it is in git repo"
 
 # this clean will search for all the names (entries) in the .gitignore file and exclude them.
 # So in the end you will have just the files under the git repo
-dangerous_clean:
-	@echo "Cleaning the shop(dangerous)..."
+cleanall:
+	@echo "Cleaning the shop(all)..."
 	@`for f in $(CAT) ; do find . -iname $$f | xargs rm -f ; done`
 
 #
