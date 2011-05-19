@@ -13,7 +13,7 @@ version = Version {versionBranch = [0,3,2,1], versionTags = []}
 bindir, libdir, datadir, libexecdir :: FilePath
 
 bindir     = "/usr/local/bin"
-libdir     = "/usr/local/lib/language-c-0.3.2.1/ghc-6.12.1"
+libdir     = "/usr/local/lib/language-c-0.3.2.1/ghc-7.0.2"
 datadir    = "/usr/local/share/language-c-0.3.2.1"
 libexecdir = "/usr/local/libexec"
 

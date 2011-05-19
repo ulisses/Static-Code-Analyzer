@@ -19,13 +19,10 @@ import Language.C.Data.Ident
 import Language.C.Pretty
 
 import qualified Data.ByteString as BS
-import qualified Data.ByteString.Search as BSS
-import qualified Data.ByteString.Char8 as BC
 import Data.ByteString.Internal
 import Data.Word
 import Data.List
 import System.IO
-import qualified System.IO.Strict as S
 import qualified Data.Text.IO as TIO
 import qualified Data.Text as T
 
@@ -44,20 +41,39 @@ ncloc file = do
    inside the file.
 -}
 physicalLines :: FilePath -> IO Int
-physicalLines file = readFile file >>= return . length . lines
+physicalLines file = BS.readFile file >>= return . BS.count (c2w '\n')
 
-{-
+{- This funtion receives the file where we want to test if hsa any clone code
+   and the database of files under our system (this file contains the full path
+   for other C files) => you can generate it executing:
+       find / -iname "*.c" 2> /dev/null > database.txt
+   
+   And we return a list of the files where the cloning occur.
+   We consider an occurrence as: one list of the line string and the line number.
 -}
+getClonesOneLine :: FilePath -> FilePath -> IO [(FilePath,[(String,[Int])])]
+getClonesOneLine fp db =  getClonesByLine fp db
+    >>= return
+        . groupByFileName
+        . groupBy (\(a,_,_) (b,_,_) -> a == b)
+        . sortBy  (\(a,_,_) (b,_,_) -> EQ)
 
-getClones_ fp = do
-    fps  <- readFile "db.txt" >>= return . lines
+groupByFileName  :: [[(FilePath, String, [Int])]] -> [(FilePath, [(String, [Int])])]
+groupByFileName [] = []
+groupByFileName (h:t) | not $ null h = let fn = (\(a,_,_) -> a) $ head h
+                                       in (fn,[ (s,l) | (fp,s,l) <- h]) : groupByFileName t
+                      | otherwise = groupByFileName t
+
+getClonesByLine :: FilePath -> FilePath -> IO [(FilePath, String, [Int])]
+getClonesByLine fp db = do
+    fps  <- readFile db >>= return . lines
     hss' <- mapM (flip openBinaryFile ReadMode) fps
     hss  <- mapM hGetContents hss'
     bss  <- (return . map lines) hss
-    getClones fp (zip fps bss)
+    getClones' fp (zip fps bss)
 
---getClones :: FilePath -> [(FilePath,ByteString)] -> IO [(String, [Int])]
-getClones fn db = readFile fn >>= return . filterNonClone . fun
+getClones' :: FilePath -> [(String, [String])] -> IO [(FilePath, String, [Int])]
+getClones' fn db = readFile fn >>= return . filterNonClone . fun
     where
           fun src = [ (fn', lin, findIndices (==lin) db') | (fn', db') <- db, lin <- map removeRepeatedSpaces $ lines src ]
           filterNonClone = filter (not . null . two    )
