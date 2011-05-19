@@ -34,6 +34,7 @@ import Control.Monad
 import Comments(getNrOfLinesOfComments,commentLinesDensity)
 import NumberOfLines
 import Metrics
+import NumberOfLines
 
 {- Try to incorporate on-the-fly tests with C random code generation with CSmith tool.
    But we must have a method in Language.C that receives a Handler or a ByteString.
@@ -227,7 +228,10 @@ process file = do
         ( Right cprog ) -> (putStr . unlines  . map (show . pretty) . getFunctionsSignFromC) cprog
 
 main :: IO ()
+{-
 main = do
     files <- getArgs
     mapM_ process files
 
+-}
+main = getClones_ "main.c" >>= print

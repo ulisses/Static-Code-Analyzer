@@ -11,7 +11,7 @@
 --
 ------------------------------------------------------------------------------
 
-module NumberOfLines(ncloc,physicalLines) where
+module NumberOfLines where
 
 import Language.C
 import Language.C.System.GCC
@@ -23,6 +23,11 @@ import qualified Data.ByteString.Search as BSS
 import qualified Data.ByteString.Char8 as BC
 import Data.ByteString.Internal
 import Data.Word
+import Data.List
+import System.IO
+import qualified System.IO.Strict as S
+import qualified Data.Text.IO as TIO
+import qualified Data.Text as T
 
 {- Get the number of lines, by this we mean:
    the number of lines of code, without blank lines
@@ -43,11 +48,31 @@ physicalLines file = readFile file >>= return . length . lines
 
 {-
 -}
-getClones :: FilePath -> IO [(String, [Int])]
-getClones fn = BS.readFile fn >>= return . fun
-    where fun cont = [ (BC.unpack $ removeRepeatedSpaces lin, BSS.indices (removeRepeatedSpaces lin) (removeRepeatedSpaces cont))
-                                    | lin <- BS.split (c2w '\n') (removeRepeatedSpaces cont), not $ BS.null (removeRepeatedSpaces lin)]
 
-removeRepeatedSpaces s | BS.null s        = s
-                       | BS.length s == 1 = s
-                       | otherwise        = if (BS.head s == (c2w ' ') && (BS.head . BS.drop 1) s == c2w ' ') then BS.tail s else s
+getClones_ fp = do
+    fps  <- readFile "db.txt" >>= return . lines
+    hss' <- mapM (flip openBinaryFile ReadMode) fps
+    hss  <- mapM hGetContents hss'
+    bss  <- (return . map lines) hss
+    getClones fp (zip fps bss)
+
+--getClones :: FilePath -> [(FilePath,ByteString)] -> IO [(String, [Int])]
+getClones fn db = readFile fn >>= return . filterNonClone . fun
+    where
+          fun src = [ (fn', lin, findIndices (==lin) db') | (fn', db') <- db, lin <- map removeRepeatedSpaces $ lines src ]
+          filterNonClone = filter (not . null . two    )
+                         . filter (not . null . three  )
+                         . filter (not . (=="}") . two )
+                         . filter (not . (=="{") . two )
+                         . filter (not . (=="/*") . two)
+                         . filter (not . (=="*/") . two)
+          one   = (\(a,_,_) -> a)
+          two   = (\(_,b,_) -> b)
+          three = (\(_,_,c) -> c)
+
+removeRepeatedSpaces = dropWhile (== ' ') . removeRepeatedSpaces_
+
+removeRepeatedSpaces_ s | null s        = s
+                        | length s == 1 = s
+                        | head s == (' ') && (head . drop 1) s == ' ' = removeRepeatedSpaces $ tail s
+                        | otherwise = s
