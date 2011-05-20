@@ -36,4 +36,5 @@
 *.mlf*
 *.maf
 *.lot
-
+*.p_o
+*.p_hi
