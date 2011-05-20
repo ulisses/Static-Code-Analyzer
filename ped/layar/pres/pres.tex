@@ -1,0 +1,161 @@
+\documentclass{beamer}
+
+\mode<presentation>
+{
+   \usetheme{EEng}
+ % \usetheme{Antibes}
+  %\usecolortheme{lily}
+  % \usetheme{Warsaw}
+  \setbeamercovered{transparent}
+  \setbeamercolor{background canvas}{bg=black!0}
+}
+
+%\usetheme{Antibes} % Beamer theme v 3.0
+%\usecolortheme{lily}
+
+\usepackage{enumerate}
+\usepackage{array}
+\usepackage{graphics}
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{xcolor}
+\usepackage{pgf}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{multicol}   % add-on
+\usepackage{boxedminipage} 
+\usepackage{indentfirst}   % add-on
+\usepackage{float}
+\usepackage[all]{xypic}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{boxedminipage}
+
+% % % inicio do listings e ref
+\definecolor{darkblue}{rgb}{0,0,0.6}
+\definecolor{gray_ulisses}{gray}{0.55}
+\definecolor{castanho_ulisses}{rgb}{0.71,0.33,0.14}
+\definecolor{preto_ulisses}{rgb}{0.41,0.20,0.04}
+\definecolor{green_ulises}{rgb}{0.2,0.75,0}
+
+\hypersetup{
+    a4paper,
+    pdftex,
+    bookmarks,
+    colorlinks,
+    citecolor=darkblue,
+    linkcolor=darkblue,
+    urlcolor=darkblue,
+    filecolor=darkblue
+}
+
+\lstdefinelanguage{perl_u} {
+       basicstyle=\ttfamily\tiny,
+       showstringspaces=false,
+       breaklines=true,
+       numbers=left,
+       numberstyle=\tiny,
+       numberblanklines=true,
+       showspaces=false,
+       showtabs=false
+}
+% % % fim do listings e ref
+
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[width=0.9\textwidth]{images/DI-UM.PNG}
+%\end{center}
+%\end{figure}
+
+\title{Layar - Augmented Reality}
+\author{José Pedro Silva \and
+Pedro Faria \and
+Ulisses Costa
+}
+
+\date{\today}
+\institute{Engenharia de Linguagens\\
+Processamento de Linguagem Natural
+}
+
+\AtBeginSubsection[] {
+  \begin{frame}<beamer>
+    \frametitle{Index}
+    \scriptsize{\tableofcontents[currentsection,currentsubsection]}
+  \end{frame}
+}
+
+\AtBeginSection[] {
+  \begin{frame}<beamer>
+    \frametitle{Index}
+    \scriptsize{\tableofcontents[currentsection]}
+  \end{frame}
+}
+\begin{document}
+\begin{frame}
+   \titlepage
+\end{frame}
+
+\setbeamercovered{transparent=1}
+
+\section{Layar}
+\subsection{O que é o Layar?}
+\begin{frame} \frametitle{O que é o Layar?}
+\begin{itemize}
+\pause \item platafoma móvel que permite descobrir informação sobre o mundo à nossa volta
+\pause \item usa realidade aumentada, para apresentar "camadas" de informação digital no campo  de visão do utilizador através do seu dispositivo movél
+\pause \item é uma plataforma aberta que permite publicar, descobrir e procurar "camadas"
+\pause \item só temos que criar as "camadas", o resto é fornecido pela aplicação \textit{Layar}
+\pause \item \textit{Layar} é o vizualisador de realidade aumentada mais usado (1.4 milhões de utilizadores)
+\pause \item está disponível para várias plataformas (Android, iPhone, Symbian, Bada)
+\pause \item 1800 "camadas" publicadas
+\end{itemize}
+\end{frame}
+
+\subsection{Funcionalidades}
+\begin{frame} \frametitle{Funcionalidades}
+\begin{itemize}
+\pause \item suporte a  2D e a modelos 3D
+\pause \item suporte para audio/vídeo
+\pause \item acções disponíveis nas "camadas": ligar, e-mail, partilhar (Twitter, Facebook), aceder à Web Page  
+\pause \item Suportado em 15 línguas incuindo o Português
+\end{itemize}
+\end{frame}
+
+\subsection{Requisitos}
+\begin{frame} \frametitle{Requisitos}
+Dispostivo móvel com:
+\begin{itemize}
+\pause \item GPS - localização
+\pause \item bússola - para onde estou a olhar
+\pause \item câmara - captar a realidade
+\pause \item acelerómetro
+\pause \item conectividade à internet
+\pause \item giroscópio - para uma experiência mais fluida  (opcional)
+\end{itemize}
+\end{frame}
+
+
+\section{Case-study}
+\begin{frame} \frametitle{Case-study}
+\begin{itemize}
+\pause \item Funcionário PT
+\pause \item Utiliza o seu dispositivo móvel para encontrar e identificar caixas PT
+\pause \item Ao apontar para uma caixa ou fio de telefone deverá receber informações sobre o mesmo
+\pause \item 
+\pause \item 
+\pause \item 
+\end{itemize}
+\end{frame}
+
+\section*{Perguntas}
+\begin{frame} \frametitle{Perguntas}
+\begin{center}\huge{?}\end{center}
+\end{frame}
+
+\end{document}
+
