@@ -234,4 +234,4 @@ main = do
     mapM_ process files
 
 -}
-main = getClonesOneLine "main.c" "db.txt" >>= print
+main = getClonesBlock "main.c" "db.txt" >>= print

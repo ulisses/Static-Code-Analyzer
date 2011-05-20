@@ -11,7 +11,9 @@
 --
 ------------------------------------------------------------------------------
 
-module NumberOfLines where
+module NumberOfLines(ncloc, physicalLines
+                    ,nrOfFilesDuplicatedLine, getClonesOneLine,densityOfDuplicatedLines
+                    ,getClonesBlock) where
 
 import Language.C
 import Language.C.System.GCC
@@ -43,6 +45,43 @@ ncloc file = do
 physicalLines :: FilePath -> IO Int
 physicalLines file = BS.readFile file >>= return . BS.count (c2w '\n')
 
+{-
+-}
+getClonesBlock :: FilePath -> FilePath -> IO [(String, [(String, Int, Int)])]
+getClonesBlock fp db =  getClonesByBlock fp db
+    >>= return
+        . groupByFileName
+        . groupBy (\(a,_,_,_) (b,_,_,_) -> a == b)
+        . sortBy  (\(a,_,_,_) (b,_,_,_) -> EQ)
+
+getClonesByBlock fp db = do
+    fps  <- readFile db >>= return . lines
+    hss' <- mapM (flip openBinaryFile ReadMode) fps
+    hss  <- mapM hGetContents hss'
+    bss  <- (return . map (blocks 3)) hss
+    getClones' fp (zip fps bss)
+
+blocks :: Int -> String -> [String]
+blocks n "" = []
+blocks n l = let lk = take n $ lines l
+                 lklen = length lk
+                 lkcat = concat lk
+                 (Just t) = stripPrefix lkcat l
+             in if (lklen <= n) then [lkcat] else lkcat : blocks n t
+
+{-Density of duplicated lines
+-}
+densityOfDuplicatedLines :: FilePath -> FilePath -> IO Double
+densityOfDuplicatedLines fp db = do
+    dl <- nrOfFilesDuplicatedLine fp db
+    phy <- physicalLines fp
+    return ((fromIntegral dl / fromIntegral phy) * 100)
+
+{- Count the number of files that have at least one duplicated line
+-}
+nrOfFilesDuplicatedLine :: FilePath -> FilePath -> IO Int
+nrOfFilesDuplicatedLine fp db = getClonesOneLine fp db >>= return . length . groupBy (\(_,a,_) (_,b,_) -> a == b) . concatMap (snd)
+
 {- This funtion receives the file where we want to test if hsa any clone code
    and the database of files under our system (this file contains the full path
    for other C files) => you can generate it executing:
@@ -51,20 +90,18 @@ physicalLines file = BS.readFile file >>= return . BS.count (c2w '\n')
    And we return a list of the files where the cloning occur.
    We consider an occurrence as: one list of the line string and the line number.
 -}
-getClonesOneLine :: FilePath -> FilePath -> IO [(FilePath,[(String,[Int])])]
+getClonesOneLine :: FilePath -> FilePath -> IO [(String, [(String, Int, Int)])]
 getClonesOneLine fp db =  getClonesByLine fp db
     >>= return
         . groupByFileName
-        . groupBy (\(a,_,_) (b,_,_) -> a == b)
-        . sortBy  (\(a,_,_) (b,_,_) -> EQ)
+        . groupBy (\(a,_,_,_) (b,_,_,_) -> a == b)
+        . sortBy  (\(a,_,_,_) (b,_,_,_) -> EQ)
 
-groupByFileName  :: [[(FilePath, String, [Int])]] -> [(FilePath, [(String, [Int])])]
 groupByFileName [] = []
-groupByFileName (h:t) | not $ null h = let fn = (\(a,_,_) -> a) $ head h
-                                       in (fn,[ (s,l) | (fp,s,l) <- h]) : groupByFileName t
+groupByFileName (h:t) | not $ null h = let fn = (\(a,_,_,_) -> a) $ head h
+                                       in (fn,[ (n,s,l) | (fp,n,s,l) <- h]) : groupByFileName t
                       | otherwise = groupByFileName t
 
-getClonesByLine :: FilePath -> FilePath -> IO [(FilePath, String, [Int])]
 getClonesByLine fp db = do
     fps  <- readFile db >>= return . lines
     hss' <- mapM (flip openBinaryFile ReadMode) fps
@@ -72,19 +109,21 @@ getClonesByLine fp db = do
     bss  <- (return . map lines) hss
     getClones' fp (zip fps bss)
 
-getClones' :: FilePath -> [(String, [String])] -> IO [(FilePath, String, [Int])]
 getClones' fn db = readFile fn >>= return . filterNonClone . fun
     where
-          fun src = [ (fn', lin, findIndices (==lin) db') | (fn', db') <- db, lin <- map removeRepeatedSpaces $ lines src ]
+          fun src = [ (fn', lin, nr, find lin db' ) | (fn', db') <- db, (nr,lin) <- zip [1..] (map removeRepeatedSpaces $ lines src) ]
+          find lin db = let l = map (+1) $ findIndices (==lin) db
+                        in if l == [] then 0 else head l 
           filterNonClone = filter (not . null . two    )
-                         . filter (not . null . three  )
+                         . filter (not . (==0) . four )
                          . filter (not . (=="}") . two )
                          . filter (not . (=="{") . two )
                          . filter (not . (=="/*") . two)
                          . filter (not . (=="*/") . two)
-          one   = (\(a,_,_) -> a)
-          two   = (\(_,b,_) -> b)
-          three = (\(_,_,c) -> c)
+          one   = (\(a,_,_,_) -> a)
+          two   = (\(_,b,_,_) -> b)
+          three = (\(_,_,c,_) -> c)
+          four  = (\(_,_,_,d) -> d)
 
 removeRepeatedSpaces = dropWhile (== ' ') . removeRepeatedSpaces_
 
