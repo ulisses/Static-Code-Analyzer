@@ -128,6 +128,7 @@
 |   |-- Metrics.hs
 |   |-- NumberOfLines.hs
 |   |-- README.markdown
+|   |-- a.c
 |   |-- db.txt
 |   |-- file.c
 |   |-- language-c-0.3.2.1
@@ -1011,4 +1012,4 @@
     |-- ReadMe
     `-- install.sh
 
-255 directories, 756 files
+255 directories, 757 files

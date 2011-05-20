@@ -58,16 +58,27 @@ getClonesByBlock fp db = do
     fps  <- readFile db >>= return . lines
     hss' <- mapM (flip openBinaryFile ReadMode) fps
     hss  <- mapM hGetContents hss'
-    bss  <- (return . map (blocks 3)) hss
-    getClones' fp (zip fps bss)
+    getClones'' fp (zip fps hss)
 
 blocks :: Int -> String -> [String]
 blocks n "" = []
 blocks n l = let lk = take n $ lines l
                  lklen = length lk
-                 lkcat = concat lk
-                 (Just t) = stripPrefix lkcat l
-             in if (lklen <= n) then [lkcat] else lkcat : blocks n t
+                 lkcat = concat $ intersperse "\n" lk
+                 lkcatRec = head lk ++ "\n"
+                 (Just t) = stripPrefix lkcatRec l
+             in if (lklen < n) then [lkcat] else lkcat : blocks n t
+
+getClones'' fn db = readFile fn >>= return . filterNonClone . fun
+    where
+          fun src = [ (fn', lin, nr, find lin (blocks 3 db') ) | (fn', db') <- db, (nr,lin) <- zip [1..] $ blocks 3 $ src ]
+          find lin db = let l = map (+1) $ findIndices (==lin) db
+                        in if l == [] then 0 else head l
+          filterNonClone = filter (not . null . two    )
+                         . filter (not . (==0) . four )
+                         . filter (not . (<=10) . length . two )
+          two   = (\(_,b,_,_) -> b)
+          four  = (\(_,_,_,d) -> d)
 
 {-Density of duplicated lines
 -}
