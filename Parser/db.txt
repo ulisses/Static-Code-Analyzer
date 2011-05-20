@@ -1719,7 +1719,6 @@
 ../../../../..//bolsa_snort/code/worm/x8113550.c
 ../../../../..//msc/el/pi/Static-Code-Analyzer/Parser/a.c
 ../../../../..//msc/el/pi/Static-Code-Analyzer/Parser/file.c
-../../../../..//msc/el/pi/Static-Code-Analyzer/Parser/main.c
 ../../../../..//msc/el/pi/Static-Code-Analyzer/Parser/main2.c
 ../../../../..//msc/el/pi/Static-Code-Analyzer/Parser/test.c
 ../../../../..//msc/el/pi/Static-Code-Analyzer/pln/detector_clones/exemplo.c
