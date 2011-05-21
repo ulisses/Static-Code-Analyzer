@@ -5,73 +5,93 @@ tokens{
     FALSE='FALSE';
 }
 
-//**************************program*************************
+@header{
+import java.util.HashMap;
+import java.util.ArrayList;
+}
 
+@members{
+enum Tipo {Integer, Boolean, Array};
+
+}
+
+//**************************program*************************
 logoliss 
-    :    PROGRAM    IDENT        '{'    body    '}'    
-    ;
+    	:    PROGRAM    IDENT        '{'    body    '}'    
+    	;
     
 body
-    :    DECLARATIONS        declarations         STATEMENTS        statements
-    ;
+    	:    DECLARATIONS        declarations         STATEMENTS        statements
+    	;
+
 //**************************declarations*************************
 
 declarations
-    :    declaration        declarations?
-    ;
+    	:    declaration        declarations?
+    	;
     
 declaration
-    :    variable_declaration
-    ;
+    	:    variable_declaration
+    	;
     
 //**************************declarations: variables*************************
     
 variable_declaration
-    :    vars    '->'    type    ';'
-    ;
+    	:    vars    '->'    type    ';'
+    	;
     
-vars    :    var    (','    vars)?
-    ;
+vars    
+	:    var    (','    vars)?
+    	;
 
-var    :    IDENT    value_var
-    ;
+var    
+	:    IDENT    value_var
+    	;
     
 value_var
-    :    ('=')    inic_var
-    |
-    ;
+    	:    ('=')    inic_var
+    	|
+    	;
 
-type    :    INTEGER
-    |    BOOLEAN
-    |    ARRAY    SIZE    NUM
-    ;
+type    
+returns[Tipo t_out, int s_out]
+	:    INTEGER				{$t_out = Tipo.Integer; $s_out = 0;}
+    	|    BOOLEAN				{$t_out = Tipo.Boolean; $s_out = 0;}
+    	|    ARRAY    SIZE    NUM		{$t_out = Tipo.Array; $s_out = Integer.parseInt($NUM.text);}
+    	;
     
 inic_var
-    :    constant
-    |    array_definition
-    ;
+returns[int value_out, ArrayList<Integer> lista_out]
+    	:    constant			{$value_out = $constant.value_out; $lista_out = null;}
+    	|    ad=array_definition		{$value_out = $ad.lista_out.size(); $lista_out = $ad.lista_out;}
+    	;
     
 constant
-    :    NUM
-    |    STRING
-    |    TRUE
-    |    FALSE
-    ;
+returns[int value_out]
+    	:    NUM	{$value_out = Integer.parseInt($NUM.text);} 
+//    	|    STRING
+    	|    TRUE	{$value_out = 1;}
+    	|    FALSE	{$value_out = 0;}
+    	;
 
-    
 //************************ Declarations: Variables: Array_Definition
 
-array_definition 
-    :    '[' array_initialization ']'
+array_definition
+returns[ArrayList<Integer> lista_out]
+    :    '[' air=array_initialization{lista_out=$air.lista_out;} ']'
     ;
     
 array_initialization
-    :    elem     ','    array_initialization     
-    |     elem
+returns[ArrayList<Integer> lista_out]
+@init{ArrayList<Integer> lista = new ArrayList<Integer>();}
+    :    el=elem     ','    lst=array_initialization  	{lista.add($el.value_out); for(int x : $lst.lista_out){lista.add(x);} lista_out = lista;
+    							}
+    |     elem	{lista.add($elem.value_out);lista_out = lista;}
     ;
 
 elem
-    :    NUM
+returns[int value_out]
+    :    NUM	{$value_out = Integer.parseInt($NUM.text);}
     ;
 
 //************************* Statements
