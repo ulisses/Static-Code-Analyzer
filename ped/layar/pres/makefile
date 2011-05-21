@@ -1,4 +1,4 @@
-all:pres.tex
+pres.pdf:pres.tex
 	pdflatex pres.tex
 
 open:pres.pdf
