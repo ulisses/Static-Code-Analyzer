@@ -34,6 +34,7 @@
 \usepackage{listings}
 \usepackage{verbatim}
 \usepackage{boxedminipage}
+\usepackage{multimedia}
 
 % % % inicio do listings e ref
 \definecolor{darkblue}{rgb}{0,0,0.6}
@@ -102,24 +103,27 @@ Processamento Estruturado de Documentos
 
 \setbeamercovered{transparent=1}
 
+
+
 \section{Layar}
 \subsection{O que é o Layar?}
+
 \begin{frame} \frametitle{O que é o Layar?}
 \begin{itemize}
-\pause \item platafoma móvel que permite descobrir informação sobre o mundo à nossa volta
+\item platafoma móvel que permite descobrir informação sobre o mundo à nossa volta
 \pause \item usa realidade aumentada, para apresentar "camadas" de informação digital no campo  de visão do utilizador através do seu dispositivo movél
 \pause \item é uma plataforma aberta que permite publicar, descobrir e procurar "camadas"
 \pause \item só temos que criar as "camadas", o resto é fornecido pela aplicação \textit{Layar}
 \pause \item \textit{Layar} é o vizualisador de realidade aumentada mais usado (1.4 milhões de utilizadores)
 \pause \item está disponível para várias plataformas (Android, iPhone, Symbian, Bada)
-\pause \item 1800 "camadas" publicadas
+\pause \item mais de 2000 "camadas" publicadas
 \end{itemize}
 \end{frame}
 
 \subsection{Funcionalidades}
 \begin{frame} \frametitle{Funcionalidades}
 \begin{itemize}
-\pause \item suporte a  2D e a modelos 3D
+\item suporte a  2D e a modelos 3D
 \pause \item suporte para audio/vídeo
 \pause \item acções disponíveis nas "camadas": ligar, e-mail, partilhar (Twitter, Facebook), aceder à Web Page  
 \pause \item Suportado em 15 línguas incuindo o Português
@@ -133,8 +137,8 @@ Dispostivo móvel com:
 \pause \item GPS - localização
 \pause \item bússola - para onde estou a olhar
 \pause \item câmara - captar a realidade
-\pause \item acelerómetro
-\pause \item conectividade à internet
+\pause \item acelerómetro - orientação do telefone
+\pause \item conectividade à internet - aceder às "camadas" digitais
 \pause \item giroscópio - para uma experiência mais fluida  (opcional)
 \end{itemize}
 \end{frame}
@@ -143,19 +147,45 @@ Dispostivo móvel com:
 \section{Case-study}
 \begin{frame} \frametitle{Case-study}
 \begin{itemize}
-\pause \item Funcionário PT
+\item Funcionário PT
 \pause \item Utiliza o seu dispositivo móvel para encontrar e identificar caixas PT
-\pause \item Ao apontar para uma caixa ou fio de telefone deverá receber informações sobre o mesmo
-\pause \item 
-\pause \item 
-\pause \item 
+\pause \item Ao apontar para uma caixa ou fio de telefone deverá receber informações sobre o mesmo (id da caixa, número e tipo das ligações,etc.)
 \end{itemize}
 \end{frame}
+
+
+\section{Como utilizar?}
+\begin{frame} \frametitle{Como utilizar?}
+\begin{itemize}
+\item criar uma "camada" no site do \textit{Layar}
+\pause \item criar um serviço que devolve os POI's (Points of Interest) para a aplicação \textit{Layar}
+		\begin{itemize}
+			\pause \item web server público
+			\pause \item base de dados
+			\pause \item resposta é em JSON
+		\end{itemize}
+\pause \item A "camada" pode ser testada no site do \textit{Layar} antes de ser publicada
+\end{itemize}
+\end{frame}
+
+\begin{frame} \frametitle{Como utilizar?}
+\begin{itemize}
+\pause \item criar um serviço que devolve os POI's (Points of Interest) para a aplicação \textit{Layar}
+		\begin{itemize}
+			\pause \item web server público
+			\pause \item base de dados
+			\pause \item resposta é em JSON
+		\end{itemize}
+\pause \item A "camada" pode ser testada no site do \textit{Layar} antes de ser publicada
+\end{itemize}
+\end{frame}
+
 
 \section*{Perguntas}
 \begin{frame} \frametitle{Perguntas}
 \begin{center}\huge{?}\end{center}
 \end{frame}
+
 
 \end{document}
 
