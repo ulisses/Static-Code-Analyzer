@@ -168,16 +168,21 @@ Dispostivo móvel com:
 \end{itemize}
 \end{frame}
 
-\begin{frame} \frametitle{Como utilizar?}
-\begin{itemize}
-\pause \item criar um serviço que devolve os POI's (Points of Interest) para a aplicação \textit{Layar}
-		\begin{itemize}
-			\pause \item web server público
-			\pause \item base de dados
-			\pause \item resposta é em JSON
-		\end{itemize}
-\pause \item A "camada" pode ser testada no site do \textit{Layar} antes de ser publicada
-\end{itemize}
+\begin{frame} \frametitle{Base de dados}
+\begin{block}{campos da tabela POI}
+\textbf{id} - id único dentro da "camada"\\
+\textbf{title} - titulo do painel de informações do POI\\
+attribution,line1,line2,lin3,lin4 - atributos referentes aos restantes campos do painel com informações sobre o POI\\
+\textbf{lat,lon} - latitude/longitude\\
+\textbf{ImageURL} - link para a imagem a ser apresentada no painel de informações\\
+\textbf{type} - define o tipo do POI (o tipo altera o tipo de icon)\\
+\textbf{dimension} - \textbf{1}->icon, \textbf{2}->imagem 2D, \textbf{3}-> objecto 3D\\
+\textbf{alt} - (Optional) Real altitude of object in meters. If this is missing, the same altitude as the user is assumed.\\
+\textbf{relativeAlt} - (Optional)Altitude in meters of the object with respect to the user's altitude.\\
+\textbf{distance} - The distance of the POI to the current location\\
+
+...
+\end{block}
 \end{frame}
 
 
