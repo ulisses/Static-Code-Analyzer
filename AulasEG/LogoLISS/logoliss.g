@@ -13,6 +13,45 @@ import java.util.ArrayList;
 @members{
 enum Tipo {Integer, Boolean, Array};
 
+public class Variavel{
+	public Tipo tipo;
+	public String nome;
+	public int valor;
+	public ArrayList<Integer> lista;
+	
+	public Variavel(){
+		this.tipo = Tipo.Integer;
+		this.valor = 0;
+		this.nome = "";
+		this.lista = new ArrayList<Integer>();
+	}
+	
+	public Variavel(String name, int value, ArrayList<Integer> list, Tipo type){
+		this.tipo = type;
+		this.valor = value;
+		this.lista = list;
+		this.nome = name;
+	}
+	
+	public String toString(){
+		String str = "";
+		if(this.tipo == Tipo.Boolean){
+			str = "Variável " + this.nome + "\nTipo Booleano\nValor " + this.valor + "\n";
+		}
+		if(this.tipo == Tipo.Integer){
+			str = "Variável " + this.nome + "\nTipo Inteiro\nValor " + this.valor + "\n";			
+		}
+		if(this.tipo == Tipo.Array){
+			str = "Variável " + this.nome + "\nTipo Array\nTamanho " + this.valor + "\nValores:\n";
+			for(int x : this.lista){
+				str = str + x + "\n";
+			}			
+		}
+		return str;
+	}
+	
+}
+
 }
 
 //**************************program*************************
@@ -21,36 +60,47 @@ logoliss
     	;
     
 body
-    	:    DECLARATIONS        declarations         STATEMENTS        statements
+    	:    DECLARATIONS        dec=declarations		
+    	     STATEMENTS {for(Variavel v : $dec.lista_out) System.out.println(v.toString());}        statements
     	;
 
 //**************************declarations*************************
 
 declarations
-    	:    declaration        declarations?
+returns[ArrayList<Variavel> lista_out]
+@init{ArrayList<Variavel> lista = new ArrayList<Variavel>();}
+    	:    	dec=declaration {for(Variavel var : $dec.lista_out){ lista.add(var);}}        
+    		( decls=declarations {System.out.println("Adicionando elementos!");
+    		for(Variavel var : $decls.lista_out){ lista.add(var);}} )?
+    		{$lista_out = lista;}
     	;
     
 declaration
-    	:    variable_declaration
+returns[ArrayList<Variavel> lista_out]
+    	:    vd=variable_declaration {$lista_out = $vd.lista_out;}
     	;
-    
-//**************************declarations: variables*************************
     
 variable_declaration
-    	:    vars    '->'    type    ';'
-    	;
-    
-vars    
-	:    var    (','    vars)?
-    	;
-
-var    
-	:    IDENT    value_var
-    	;
-    
-value_var
-    	:    ('=')    inic_var
-    	|
+returns[ArrayList<Variavel> lista_out]
+    	:    vars{$lista_out = $vars.lista_out;}    '->'    tt=type{	Tipo x = $tt.t_out;
+    									int tamanho = $tt.s_out;
+    									System.out.println("Tamanho:" + $lista_out.size());
+	    								for(Variavel va : $lista_out){
+	    									va.tipo = x; 
+	    									if(va.tipo == Tipo.Array){ 
+	    										va.valor = tamanho;
+	    									}
+	    								} 
+	    								if(x == Tipo.Array){
+	    									for(Variavel var : $lista_out){
+	    										int tam = var.lista.size();
+	    										while(tam < var.valor){
+	    											var.lista.add(0);
+	    											tam++;
+	    										}
+	    									}
+	    								}
+    								}  ';'
     	;
 
 type    
@@ -59,10 +109,28 @@ returns[Tipo t_out, int s_out]
     	|    BOOLEAN				{$t_out = Tipo.Boolean; $s_out = 0;}
     	|    ARRAY    SIZE    NUM		{$t_out = Tipo.Array; $s_out = Integer.parseInt($NUM.text);}
     	;
+        
+vars
+returns[ArrayList<Variavel> lista_out]
+@init{ArrayList<Variavel> lista = new ArrayList<Variavel>();}    
+	:    var{lista.add($var.v_out);}    (','    vs=vars {for(Variavel va : $vs.lista_out) lista.add(va);})? {$lista_out = lista;}
+    	;
+
+var
+returns[Variavel v_out]
+@init{Variavel v = new Variavel();}
+	:    IDENT{v.nome = $IDENT.text;}    vv=value_var {v.valor = $vv.value_out; v.lista = $vv.lista_out; $v_out = v;}
+    	;
     
+value_var
+returns[int value_out, ArrayList<Integer> lista_out]
+    	:    ('=')    iv=inic_var 	{$value_out = $iv.value_out; $lista_out = $iv.lista_out;}
+    	|				{$value_out = 0; $lista_out = new ArrayList<Integer>();}
+    	;
+
 inic_var
 returns[int value_out, ArrayList<Integer> lista_out]
-    	:    constant			{$value_out = $constant.value_out; $lista_out = null;}
+    	:    constant			{$value_out = $constant.value_out; $lista_out = new ArrayList<Integer>();}
     	|    ad=array_definition		{$value_out = $ad.lista_out.size(); $lista_out = $ad.lista_out;}
     	;
     
