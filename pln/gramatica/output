@@ -1,0 +1,128 @@
+Gramática Portuguesa:
+
+A'	:	A 
+	|	ADV 
+
+ADV'	:	ADV 
+
+ADVP	:	ADV 
+	|	ADVP 
+	|	CONJ 
+	|	NP 
+	|	PP 
+
+AP	:	A 
+	|	A' 
+	|	ADV 
+	|	AP 
+	|	CONJP 
+	|	PP 
+
+CARD'	:	ADV' 
+	|	CARD 
+	|	CONJP 
+
+CONJ'	:	SNS 
+
+CONJP	:	CARD 
+	|	CONJ 
+	|	NP 
+	|	S 
+	|	SNS 
+
+CP	:	C 
+	|	CONJ 
+	|	CP 
+	|	NP 
+	|	PP 
+	|	S 
+	|	SNS 
+
+D'	:	QNT 
+
+N'	:	A 
+	|	AP 
+	|	CARD 
+	|	CONJ 
+	|	CP 
+	|	D 
+	|	N 
+	|	N' 
+	|	NP 
+	|	ORD 
+	|	POSS 
+	|	PP 
+	|	PPAP 
+
+NP	:	ADVP 
+	|	CARD 
+	|	CARD' 
+	|	CL 
+	|	CONJ 
+	|	D 
+	|	D' 
+	|	DEM 
+	|	N 
+	|	N' 
+	|	NP 
+	|	POSS 
+	|	PRS 
+	|	QNT 
+	|	REL 
+
+PP	:	ADVP 
+	|	CONJ 
+	|	NP 
+	|	P 
+	|	PP 
+	|	V 
+	|	VP 
+
+PPAP	:	CONJ' 
+	|	PP 
+	|	PPA 
+
+ROOT	:	S 
+	|	SNS 
+
+S	:	ADV 
+	|	AP 
+	|	CONJ 
+	|	CONJP 
+	|	CP 
+	|	NP 
+	|	PP 
+	|	S 
+	|	SNS 
+	|	V 
+	|	V+SJ 
+	|	VP 
+
+SNS	:	V 
+	|	VP 
+
+V'	:	ADV 
+	|	ADVP 
+	|	NP 
+	|	PP 
+	|	V 
+	|	V' 
+
+V+SJ	:	ADV 
+	|	NP 
+	|	V 
+	|	V+SJ 
+
+VP	:	A 
+	|	ADV 
+	|	AP 
+	|	CONJ 
+	|	CONJP 
+	|	CP 
+	|	NP 
+	|	PP 
+	|	PPA 
+	|	PPAP 
+	|	V 
+	|	V' 
+	|	VP 
