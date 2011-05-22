@@ -25,10 +25,11 @@ import Data.Generics.Strafunski.StrategyLib.FlowTheme
 
 {- Get the name of all functions names in our C file
 -}
-getFunName :: Data a => a -> [String]
-getFunName = filter (not . null) . applyTU (once_tdTU names)
+getFunsName :: Data a => a -> IO [String]
+getFunsName = return . filter (not . null) . applyTU (once_tdTU names)
     where names = constTU [] `adhocTU` test1
-          test1 (CFunDef _ (CDeclr (Just name ) ((CFunDeclr _ _ _):_) _ _ _ ) _ _ _) = [identToString name]
+          test1 (CFDefExt (CFunDef _ (CDeclr (Just name ) ((CFunDeclr _ _ _):_) _ _ _ ) _ _ _)) = [identToString name]
+          test1 (CDeclExt (CDecl _ (((Just declr),_,_):_) _)) = (\((CDeclr (Just name ) ((CFunDeclr _ _ _):_) _ _ _ )) -> [identToString name]) declr
 
 {- Return the signature for all functions.
    We never repeat functions signature declarations, if the programmer (the person who wrote the C code) had write function signatures
