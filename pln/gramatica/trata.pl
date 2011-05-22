@@ -36,15 +36,32 @@ while(<>){
 	}
 }
 
-for $symbol (keys (%rightP)) {
-	
-	if($leftP{$symbol}){
-		#print "$symbol terminal\n";
+for $symbol (keys (%leftP)) {
+	$input =~ s/([^A-Za-z\+\']$symbol[^A-Za-z\+\'])/\L$1/g;
+	$input =~ s/([^A-Za-z\+\']$symbol[^A-Za-z\+\'])/\L$1/g;
+}
+
+print "Gramática Portuguesa:\n";
+for $symbol (keys (%leftP)) {
+	if($rightP{$symbol}){
+		
 	}else{
-		#print "$symbol não terminal\n";
-		$input =~ s/\s$symbol\s/\t\L$symbol\t/g;
-		$input =~ s/\s$symbol\s/\t\L$symbol\t/g;
+		print " - símbolo inicial: \L$symbol \n\n";
 	}
 }
 
 print $input;
+
+print "\n\nSímbolos Não-Terminais:\n";
+for $symbol (keys (%leftP)) {
+	print "\L$symbol ";
+}
+
+print "\n\nSímbolos Terminais:\n";
+for $symbol (keys (%rightP)){
+	if($leftP{$symbol}){
+		
+	}else{
+		print "$symbol ";
+	}
+}

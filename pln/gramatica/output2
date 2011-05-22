@@ -1,189 +1,198 @@
 Gramática Portuguesa:
+ - símbolo inicial: root 
 
-A'	:	adv	a	
 
-ADV'	:	adv	adv	
+a'	:	ADV	A 
 
-ADVP	:	adv	
-	|	adv	adv	
-	|	adv	ADVP	 
-	|	adv	PP	 
-	|	conj	
-	|	conj	ADVP	 
-	|	NP	 
+adv'	:	ADV	ADV 
 
-AP	:	a	
-	|	a	CONJP	 
-	|	a	PP	 
-	|	A'	AP	 
-	|	A'	CONJP	 
-	|	adv	
-	|	adv	a	
-	|	adv	AP	 
+advp	:	ADV 
+	|	ADV	ADV 
+	|	ADV	advp	 
+	|	ADV	pp	 
+	|	CONJ 
+	|	CONJ	advp	 
+	|	np	 
 
-CARD'	:	ADV'	card	 
-	|	card	
-	|	card	CONJP	 
+ap	:	A 
+	|	A	conjp	 
+	|	A	pp	 
+	|	a'	ap	 
+	|	a'	conjp	 
+	|	ADV 
+	|	ADV	A 
+	|	ADV	ap	 
 
-CONJ'	:	SNS	 
+card'	:	adv'	CARD	 
+	|	CARD 
+	|	CARD	conjp	 
 
-CONJP	:	conj	
-	|	conj	card	
-	|	conj	NP	 
-	|	conj	S	 
-	|	conj	SNS	 
+conj'	:	sns	 
 
-CP	:	c	
-	|	c	S	 
-	|	c	SNS	 
-	|	conj	
-	|	conj	CP	 
-	|	CP	CP	 
-	|	NP	S	 
-	|	PP	S	 
+conjp	:	CONJ 
+	|	CONJ	CARD 
+	|	CONJ	np	 
+	|	CONJ	s	 
+	|	CONJ	sns	 
 
-D'	:	qnt	
+cp	:	C 
+	|	C	s	 
+	|	C	sns	 
+	|	CONJ 
+	|	CONJ	cp	 
+	|	cp	cp	 
+	|	np	s	 
+	|	pp	s	 
 
-N'	:	a	
-	|	a	n	
-	|	a	N'	 
-	|	AP	 
-	|	AP	n	 
-	|	AP	N'	 
-	|	card	
-	|	card	n	
-	|	conj	n	
-	|	CP	 
-	|	d	
-	|	d	n	
-	|	d	N'	 
-	|	n	
-	|	n	a	
-	|	n	AP	 
-	|	n	CP	 
-	|	n	n	
-	|	n	N'	 
-	|	n	poss	
-	|	n	PP	 
-	|	n	PPAP	 
-	|	N'	CP	 
-	|	NP	NP	 
-	|	ord	
-	|	ord	n	
-	|	ord	N'	 
-	|	poss	
-	|	poss	n	
-	|	poss	N'	 
-	|	PP	 
+d'	:	QNT 
 
-NP	:	ADVP	NP	 
-	|	card	
-	|	card	n	
-	|	card	N'	 
-	|	CARD'	n	 
-	|	cl	
-	|	conj	
-	|	conj	NP	 
-	|	d	
-	|	d	n	
-	|	d	N'	 
-	|	D'	n	 
-	|	dem	
-	|	dem	n	
-	|	dem	N'	 
-	|	n	
-	|	N'	 
-	|	NP	NP	 
-	|	poss	
-	|	prs	
-	|	qnt	
-	|	qnt	n	
-	|	qnt	N'	 
-	|	qnt	NP	 
-	|	rel	
+n'	:	A 
+	|	A	N 
+	|	A	n'	 
+	|	ap	 
+	|	ap	N	 
+	|	ap	n'	 
+	|	CARD 
+	|	CARD	N 
+	|	CONJ	N 
+	|	cp	 
+	|	D 
+	|	D	N 
+	|	D	n'	 
+	|	N 
+	|	N	A 
+	|	N	ap	 
+	|	N	cp	 
+	|	N	N 
+	|	N	n'	 
+	|	N	POSS 
+	|	N	pp	 
+	|	N	ppap	 
+	|	n'	cp	 
+	|	np	np	 
+	|	ORD 
+	|	ORD	N 
+	|	ORD	n'	 
+	|	POSS 
+	|	POSS	N 
+	|	POSS	n'	 
+	|	pp	 
 
-PP	:	ADVP	 
-	|	conj	
-	|	conj	PP	 
-	|	NP	 
-	|	p	
-	|	p	NP	 
-	|	p	v	
-	|	p	VP	 
-	|	PP	PP	 
+np	:	advp	np	 
+	|	CARD 
+	|	CARD	N 
+	|	CARD	n'	 
+	|	card'	N	 
+	|	CL 
+	|	CONJ 
+	|	CONJ	np	 
+	|	D 
+	|	D	N 
+	|	D	n'	 
+	|	d'	N	 
+	|	DEM 
+	|	DEM	N 
+	|	DEM	n'	 
+	|	N 
+	|	n'	 
+	|	np	np	 
+	|	POSS 
+	|	PRS 
+	|	QNT 
+	|	QNT	N 
+	|	QNT	n'	 
+	|	QNT	np	 
+	|	REL 
 
-PPAP	:	ppa	
-	|	ppa	CONJ'	 
-	|	ppa	PP	 
+pp	:	advp	 
+	|	CONJ 
+	|	CONJ	pp	 
+	|	np	 
+	|	P 
+	|	P	np	 
+	|	P	V 
+	|	P	vp	 
+	|	pp	pp	 
 
-ROOT	:	S	 
-	|	SNS	 
+ppap	:	PPA 
+	|	PPA	conj'	 
+	|	PPA	pp	 
 
-S	:	adv	
-	|	adv	S	 
-	|	AP	S	 
-	|	conj	
-	|	conj	S	 
-	|	conj	SNS	 
-	|	CONJP	S	 
-	|	NP	 
-	|	NP	S	 
-	|	NP	v	 
-	|	NP	VP	 
-	|	PP	S	 
-	|	S	S	 
-	|	SNS	S	 
-	|	v	
-	|	v	NP	 
+root	:	s	 
+	|	sns	 
+
+s	:	ADV 
+	|	ADV	s	 
+	|	ap	s	 
+	|	CONJ 
+	|	CONJ	s	 
+	|	CONJ	sns	 
+	|	conjp	s	 
+	|	np	 
+	|	np	s	 
+	|	np	V	 
+	|	np	vp	 
+	|	pp	s	 
+	|	s	s	 
+	|	sns	s	 
+	|	V 
+	|	V	np	 
 	|	V+SJ	 
-	|	V+SJ	CP	 
-	|	VP	 
-	|	VP	NP	 
+	|	V+SJ	cp	 
+	|	vp	 
+	|	vp	np	 
 
-SNS	:	v	
-	|	VP	 
+sns	:	V 
+	|	vp	 
 
-V'	:	adv	v	
-	|	NP	v	 
-	|	v	
-	|	v	adv	
-	|	v	NP	 
-	|	v	PP	 
-	|	V'	ADVP	 
-	|	V'	PP	 
+v'	:	ADV	V 
+	|	np	V	 
+	|	V 
+	|	V	ADV 
+	|	V	np	 
+	|	V	pp	 
+	|	v'	advp	 
+	|	v'	pp	 
 
-V+SJ	:	NP	v	 
-	|	v	
-	|	v	NP	 
-	|	V+SJ	adv	 
+V+SJ	:	np	V	 
+	|	V 
+	|	V	np	 
+	|	V+SJ	ADV	 
 
-VP	:	adv	
-	|	adv	v	
-	|	adv	V'	 
-	|	adv	VP	 
-	|	AP	 
-	|	conj	
-	|	conj	VP	 
-	|	PP	 
-	|	PP	VP	 
-	|	v	
-	|	v	a	
-	|	v	adv	
-	|	v	AP	 
-	|	v	CONJP	 
-	|	v	CP	 
-	|	v	NP	 
-	|	v	PP	 
-	|	v	PPAP	 
-	|	v	v	
-	|	v	VP	 
-	|	V'	 
-	|	V'	CP	 
-	|	V'	NP	 
-	|	V'	PP	 
-	|	V'	ppa	 
-	|	V'	VP	 
-	|	VP	adv	 
-	|	VP	CONJP	 
-	|	VP	PP	 
-	|	VP	VP	 
+vp	:	ADV 
+	|	ADV	V 
+	|	ADV	v'	 
+	|	ADV	vp	 
+	|	ap	 
+	|	CONJ 
+	|	CONJ	vp	 
+	|	pp	 
+	|	pp	vp	 
+	|	V 
+	|	V	A 
+	|	V	ADV 
+	|	V	ap	 
+	|	V	conjp	 
+	|	V	cp	 
+	|	V	np	 
+	|	V	pp	 
+	|	V	ppap	 
+	|	V	V 
+	|	V	vp	 
+	|	v'	 
+	|	v'	cp	 
+	|	v'	np	 
+	|	v'	pp	 
+	|	v'	PPA	 
+	|	v'	vp	 
+	|	vp	ADV	 
+	|	vp	conjp	 
+	|	vp	pp	 
+	|	vp	vp	 
+
+
+Símbolos Não-Terminais:
+s adv' conjp n' ppap a' v' card' d' conj' vp ap v+sj np pp sns root cp advp 
+
+Símbolos Terminais:
+N POSS CARD D ORD V C PPA A ADV REL P CONJ DEM PRS QNT CL 

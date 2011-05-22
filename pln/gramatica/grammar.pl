@@ -23,7 +23,6 @@ while(<>){
 
 @producoes = sort (keys(%prods));
 
-print "Gramática Portuguesa:\n";
 foreach $key (@producoes) {
 	$key =~ m/^([A-Z\'\+]+).*/;
 	$ld = $1;
@@ -34,7 +33,6 @@ foreach $key (@producoes) {
 		print "\n$key \n";
 		$current = $ld;
 	}
-		#print "$key \n";
 }
 
 #####################################################################
