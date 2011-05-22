@@ -35,6 +35,7 @@ import Comments(getNrOfLinesOfComments,commentLinesDensity)
 import NumberOfLines
 import Metrics
 import NumberOfLines
+import Complexity
 
 {- Try to incorporate on-the-fly tests with C random code generation with CSmith tool.
    But we must have a method in Language.C that receives a Handler or a ByteString.
@@ -111,39 +112,8 @@ depthWith s = recurse `passTU` -- Sequential composition
 
 dep'' = failTU `adhocTU` loop
 
-{- mcCabe index, we need to have Int as Monoid, in the future
-   we must change this to Sum, because we may want to have
-   (*) as a Monoid too.
-   Read more here: http://blog.sigfpe.com/2009/01/haskell-monoids-and-their-uses.html
--}
-instance Num a => Monoid a where
-    mappend = (+)
-    mempty = 0
-
 mccabe :: IO Int
 mccabe =  parr >>= mccabeIndex . fromRight
-
-mccabeIndex :: Data a => a -> IO Int
-mccabeIndex = applyTU (full_tdTU typesOfInstr)
-
-typesOfInstr = constTU 0
-	`adhocTU` loop
-	`adhocTU` binaryOp
-
-loop :: CStat -> IO Int
-loop = return . loop_
-    where loop_ (CIf _ _ _ _)    = 1
-          loop_ (CSwitch _ _ _)  = 1
-          loop_ (CWhile _ _ _ _) = 1
-          loop_ (CFor _ _ _ _ _) = 1
-          loop_ _                = 0
-
-binaryOp :: CBinaryOp -> IO Int
-binaryOp = return . binaryOp_
-    where
-    binaryOp_ CLndOp = 1
-    binaryOp_ CLorOp  = 1
-    binaryOp_ _      = 0
 
 {-
 loop :: CStat -> IO Int
