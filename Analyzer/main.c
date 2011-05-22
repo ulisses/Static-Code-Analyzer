@@ -3,15 +3,22 @@
 
 */
 
-//void fun(int a, int b);
+void fun(int a, int b);
 
-//int * fun4() { if(1) {} else{}}
-/*
+int * fun4() {
+	if(1) {} else{}
+}
+
 void fun(int a, int b) {
     if(a) {
     }
+    if(a) {
+    }
+    if(a) {
+    }
+    if(a) {
+    }
 }
-*/
 
 void main(int argc, char **argv) {
     if(1) {}

@@ -36,6 +36,7 @@ import NumberOfLines
 import Metrics
 import NumberOfLines
 import Complexity
+import Functions
 
 {- Try to incorporate on-the-fly tests with C random code generation with CSmith tool.
    But we must have a method in Language.C that receives a Handler or a ByteString.
@@ -56,37 +57,6 @@ parr = parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] "main.c"
 parse = parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] 
 
 fromRight = (\(Right prog) -> prog)
-
-{- Get the name of all functions names in our C file
--}
-getFunctionsName :: IO [String]
-getFunctionsName = parr >>= return . getFunName . fromRight
-
-getFunName = filter (not . null) . applyTU (once_tdTU names)
-
-names = constTU [] `adhocTU` test1
-
-test1 (CFunDef _ (CDeclr (Just name ) ((CFunDeclr _ _ _):_) _ _ _ ) _ _ _) = [identToString name]
-
-{- Return the signature for all functions.
-   We never repeat functions signature declarations, if the programmer (the person who wrote the C code) had write function signatures
-   we will ignore it and only look at full functions specifications.
-
-   To see more clearly you can test with:
-       getFunctionsSign >>= putStr . unlines  . map (show . pretty)
--}
-
-getFunctionsSignFromC :: Data x => x -> [x]
-getFunctionsSignFromC = getFunSign
-
-getFunctionsSign :: IO [CTranslUnit]
-getFunctionsSign = parr >>= return . getFunSign . fromRight
-
-getFunSign :: Data x => x -> [x]
-getFunSign = applyTP (topdown names1)
-    where names1 = idTP `adhocTP` (return . fromFunctionToSign)
-
-fromFunctionToSign (CFDefExt (CFunDef lCDeclSpec cDeclr _ _ _ )) = CDeclExt (CDecl lCDeclSpec [(Just $ cDeclr,Nothing,Nothing)] internalNode)
 
 {- Count the number of instructions
 -}
@@ -189,16 +159,15 @@ unaryOp a = print a >> (return . unaryOp_) a
    stream <- parseCFile (newGCC "gcc") Nothing ["-Idir"] file
    where 'dir' is the directory where our code is.
    This flag is passed as it is directly to GCC, so is just an common import.
--}
 process :: String -> IO ()
 process file = do
-    {- This version of Language.C does not support BLOCKS notation from MacOSX,
-       so we need to undefine them... It is not pretty, but is a fast solution to get our code being parsed
-    -}
+    -- This version of Language.C does not support BLOCKS notation from MacOSX,
+    -- so we need to undefine them... It is not pretty, but is a fast solution to get our code being parsed
     stream <- parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] file
     case stream of
         ( Left error  ) -> print error
         ( Right cprog ) -> (putStr . unlines  . map (show . pretty) . getFunctionsSignFromC) cprog
+-}
 
 main :: IO ()
 {-
