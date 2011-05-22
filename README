@@ -1,4 +1,133 @@
 .
+|-- Analyzer
+|   |-- Comments.hs
+|   |-- Complexity.hs
+|   |-- Control
+|   |   `-- Monad
+|   |       |-- Maybe.hi
+|   |       |-- Maybe.hs
+|   |       |-- Maybe.o
+|   |       |-- Run.hi
+|   |       |-- Run.hs
+|   |       `-- Run.o
+|   |-- Data
+|   |   `-- Generics
+|   |       `-- Strafunski
+|   |           `-- StrategyLib
+|   |               |-- ChaseImports.hi
+|   |               |-- ChaseImports.hs
+|   |               |-- ChaseImports.o
+|   |               |-- ContainerTheme.hs
+|   |               |-- EffectTheme.hs
+|   |               |-- FixpointTheme.hs
+|   |               |-- FlowTheme.hi
+|   |               |-- FlowTheme.hs
+|   |               |-- FlowTheme.o
+|   |               |-- KeyholeTheme.hs
+|   |               |-- MetricsTheme.hs
+|   |               |-- MonadicFunctions.hi
+|   |               |-- MonadicFunctions.hs
+|   |               |-- MonadicFunctions.o
+|   |               |-- NameTheme.hs
+|   |               |-- OverloadingTheme.hi
+|   |               |-- OverloadingTheme.hs
+|   |               |-- OverloadingTheme.o
+|   |               |-- PathTheme.hs
+|   |               |-- RefactoringTheme.hs
+|   |               |-- StrategyInfix.hs
+|   |               |-- StrategyPrelude.hi
+|   |               |-- StrategyPrelude.hs
+|   |               |-- StrategyPrelude.o
+|   |               |-- StrategyPrimitives.hi
+|   |               |-- StrategyPrimitives.hs
+|   |               |-- StrategyPrimitives.o
+|   |               |-- TermRep.hi
+|   |               |-- TermRep.hs
+|   |               |-- TermRep.o
+|   |               |-- TraversalTheme.hi
+|   |               |-- TraversalTheme.hs
+|   |               `-- TraversalTheme.o
+|   |-- Functions.hs
+|   |-- Includes.hs
+|   |-- Main.hs
+|   |-- Metrics.hs
+|   |-- NumberOfLines.hs
+|   |-- README.markdown
+|   |-- a.c
+|   |-- db.txt
+|   |-- file.c
+|   |-- language-c-0.3.2.1
+|   |   |-- AUTHORS
+|   |   |-- AUTHORS.c2hs
+|   |   |-- ChangeLog
+|   |   |-- LICENSE
+|   |   |-- Makefile
+|   |   |-- README
+|   |   |-- Setup.hs
+|   |   |-- dist
+|   |   |   |-- build
+|   |   |   |   |-- Language
+|   |   |   |   |   `-- C
+|   |   |   |   |       |-- Analysis
+|   |   |   |   |       |-- Data
+|   |   |   |   |       |-- Parser
+|   |   |   |   |       |   |-- Lexer.hs
+|   |   |   |   |       |   `-- Parser.hs
+|   |   |   |   |       |-- Syntax
+|   |   |   |   |       `-- System
+|   |   |   |   `-- autogen
+|   |   |   |       |-- Paths_language_c.hs
+|   |   |   |       `-- cabal_macros.h
+|   |   |   |-- package.conf.inplace
+|   |   |   `-- setup-config
+|   |   |-- language-c.cabal
+|   |   `-- src
+|   |       `-- Language
+|   |           |-- C
+|   |           |   |-- Analysis
+|   |           |   |   |-- AstAnalysis.hs
+|   |           |   |   |-- Debug.hs
+|   |           |   |   |-- DeclAnalysis.hs
+|   |           |   |   |-- DefTable.hs
+|   |           |   |   |-- Export.hs
+|   |           |   |   |-- NameSpaceMap.hs
+|   |           |   |   |-- SemError.hs
+|   |           |   |   |-- SemRep.hs
+|   |           |   |   `-- TravMonad.hs
+|   |           |   |-- Analysis.hs
+|   |           |   |-- Data
+|   |           |   |   |-- Error.hs
+|   |           |   |   |-- Ident.hs
+|   |           |   |   |-- InputStream.hs
+|   |           |   |   |-- Name.hs
+|   |           |   |   |-- Node.hs
+|   |           |   |   |-- Position.hs
+|   |           |   |   `-- RList.hs
+|   |           |   |-- Data.hs
+|   |           |   |-- Parser
+|   |           |   |   |-- Builtin.hs
+|   |           |   |   |-- Lexer.x
+|   |           |   |   |-- Parser.y
+|   |           |   |   |-- ParserMonad.hs
+|   |           |   |   `-- Tokens.hs
+|   |           |   |-- Parser.hs
+|   |           |   |-- Pretty.hs
+|   |           |   |-- Syntax
+|   |           |   |   |-- AST.hs
+|   |           |   |   |-- Constants.hs
+|   |           |   |   `-- Ops.hs
+|   |           |   |-- Syntax.hs
+|   |           |   `-- System
+|   |           |       |-- GCC.hs
+|   |           |       `-- Preprocess.hs
+|   |           `-- C.hs
+|   |-- main
+|   |-- main.c
+|   |-- main2.c
+|   |-- makefile
+|   |-- new1
+|   |-- test.c
+|   `-- test.txt
 |-- AulasEG
 |   |-- Facturas
 |   |   |-- GA-Factura-a.txt
@@ -96,114 +225,6 @@
 |       |-- Mpi.hs
 |       |-- ProcessDirectory.hs
 |       `-- makefile
-|-- Parser
-|   |-- Comments.hs
-|   |-- Control
-|   |   `-- Monad
-|   |       |-- Maybe.hs
-|   |       `-- Run.hs
-|   |-- Data
-|   |   `-- Generics
-|   |       `-- Strafunski
-|   |           `-- StrategyLib
-|   |               |-- ChaseImports.hs
-|   |               |-- ContainerTheme.hs
-|   |               |-- EffectTheme.hs
-|   |               |-- FixpointTheme.hs
-|   |               |-- FlowTheme.hs
-|   |               |-- KeyholeTheme.hs
-|   |               |-- MetricsTheme.hs
-|   |               |-- MonadicFunctions.hs
-|   |               |-- NameTheme.hs
-|   |               |-- OverloadingTheme.hs
-|   |               |-- PathTheme.hs
-|   |               |-- RefactoringTheme.hs
-|   |               |-- StrategyInfix.hs
-|   |               |-- StrategyPrelude.hs
-|   |               |-- StrategyPrimitives.hs
-|   |               |-- TermRep.hs
-|   |               `-- TraversalTheme.hs
-|   |-- Includes.hs
-|   |-- Main.hs
-|   |-- Metrics.hs
-|   |-- NumberOfLines.hs
-|   |-- README.markdown
-|   |-- a.c
-|   |-- db.txt
-|   |-- file.c
-|   |-- language-c-0.3.2.1
-|   |   |-- AUTHORS
-|   |   |-- AUTHORS.c2hs
-|   |   |-- ChangeLog
-|   |   |-- LICENSE
-|   |   |-- Makefile
-|   |   |-- README
-|   |   |-- Setup.hs
-|   |   |-- dist
-|   |   |   |-- build
-|   |   |   |   |-- Language
-|   |   |   |   |   `-- C
-|   |   |   |   |       |-- Analysis
-|   |   |   |   |       |-- Data
-|   |   |   |   |       |-- Parser
-|   |   |   |   |       |   |-- Lexer.hs
-|   |   |   |   |       |   `-- Parser.hs
-|   |   |   |   |       |-- Syntax
-|   |   |   |   |       `-- System
-|   |   |   |   `-- autogen
-|   |   |   |       |-- Paths_language_c.hs
-|   |   |   |       `-- cabal_macros.h
-|   |   |   |-- package.conf.inplace
-|   |   |   `-- setup-config
-|   |   |-- language-c.cabal
-|   |   `-- src
-|   |       `-- Language
-|   |           |-- C
-|   |           |   |-- Analysis
-|   |           |   |   |-- AstAnalysis.hs
-|   |           |   |   |-- Debug.hs
-|   |           |   |   |-- DeclAnalysis.hs
-|   |           |   |   |-- DefTable.hs
-|   |           |   |   |-- Export.hs
-|   |           |   |   |-- NameSpaceMap.hs
-|   |           |   |   |-- SemError.hs
-|   |           |   |   |-- SemRep.hs
-|   |           |   |   `-- TravMonad.hs
-|   |           |   |-- Analysis.hs
-|   |           |   |-- Data
-|   |           |   |   |-- Error.hs
-|   |           |   |   |-- Ident.hs
-|   |           |   |   |-- InputStream.hs
-|   |           |   |   |-- Name.hs
-|   |           |   |   |-- Node.hs
-|   |           |   |   |-- Position.hs
-|   |           |   |   `-- RList.hs
-|   |           |   |-- Data.hs
-|   |           |   |-- Parser
-|   |           |   |   |-- Builtin.hs
-|   |           |   |   |-- Lexer.x
-|   |           |   |   |-- Parser.y
-|   |           |   |   |-- ParserMonad.hs
-|   |           |   |   `-- Tokens.hs
-|   |           |   |-- Parser.hs
-|   |           |   |-- Pretty.hs
-|   |           |   |-- Syntax
-|   |           |   |   |-- AST.hs
-|   |           |   |   |-- Constants.hs
-|   |           |   |   `-- Ops.hs
-|   |           |   |-- Syntax.hs
-|   |           |   `-- System
-|   |           |       |-- GCC.hs
-|   |           |       `-- Preprocess.hs
-|   |           `-- C.hs
-|   |-- main
-|   |-- main.c
-|   |-- main.h
-|   |-- main2.c
-|   |-- makefile
-|   |-- new1
-|   |-- test.c
-|   `-- test.txt
 |-- README
 |-- Results
 |   `-- ReadMe
@@ -352,6 +373,14 @@
 |-- logfile
 |-- makefile
 |-- ped
+|   |-- layar
+|   |   `-- pres
+|   |       |-- beamercolorthemeorange.sty
+|   |       |-- beamerthemeEEng.sty
+|   |       |-- images
+|   |       |   `-- DI-UM.PNG
+|   |       |-- makefile
+|   |       `-- pres.tex
 |   `-- xml e xsd- PI
 |       |-- enunciado.xml
 |       |-- enunciado.xsd
@@ -389,6 +418,15 @@
 |   |   |-- conj.txt
 |   |   |-- exemplo.c
 |   |   `-- exemplo2.c
+|   |-- gramatica
+|   |   |-- grammar.pl
+|   |   |-- input.txt
+|   |   |-- output
+|   |   |-- run.sh
+|   |   |-- testeLinha
+|   |   |-- testeLinhas
+|   |   |-- testeTree
+|   |   `-- testeTrees
 |   |-- parser_makefile
 |   |   |-- makefile
 |   |   |-- makefile.pl
@@ -1010,6 +1048,7 @@
 |       `-- plugins
 `-- scripts_install
     |-- ReadMe
-    `-- install.sh
+    |-- install.sh
+    `-- install.sh~
 
-255 directories, 757 files
+259 directories, 792 files
