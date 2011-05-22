@@ -1,0 +1,189 @@
+Gramática Portuguesa:
+
+A'	:	adv	a	
+
+ADV'	:	adv	adv	
+
+ADVP	:	adv	
+	|	adv	adv	
+	|	adv	ADVP	 
+	|	adv	PP	 
+	|	conj	
+	|	conj	ADVP	 
+	|	NP	 
+
+AP	:	a	
+	|	a	CONJP	 
+	|	a	PP	 
+	|	A'	AP	 
+	|	A'	CONJP	 
+	|	adv	
+	|	adv	a	
+	|	adv	AP	 
+
+CARD'	:	ADV'	card	 
+	|	card	
+	|	card	CONJP	 
+
+CONJ'	:	SNS	 
+
+CONJP	:	conj	
+	|	conj	card	
+	|	conj	NP	 
+	|	conj	S	 
+	|	conj	SNS	 
+
+CP	:	c	
+	|	c	S	 
+	|	c	SNS	 
+	|	conj	
+	|	conj	CP	 
+	|	CP	CP	 
+	|	NP	S	 
+	|	PP	S	 
+
+D'	:	qnt	
+
+N'	:	a	
+	|	a	n	
+	|	a	N'	 
+	|	AP	 
+	|	AP	n	 
+	|	AP	N'	 
+	|	card	
+	|	card	n	
+	|	conj	n	
+	|	CP	 
+	|	d	
+	|	d	n	
+	|	d	N'	 
+	|	n	
+	|	n	a	
+	|	n	AP	 
+	|	n	CP	 
+	|	n	n	
+	|	n	N'	 
+	|	n	poss	
+	|	n	PP	 
+	|	n	PPAP	 
+	|	N'	CP	 
+	|	NP	NP	 
+	|	ord	
+	|	ord	n	
+	|	ord	N'	 
+	|	poss	
+	|	poss	n	
+	|	poss	N'	 
+	|	PP	 
+
+NP	:	ADVP	NP	 
+	|	card	
+	|	card	n	
+	|	card	N'	 
+	|	CARD'	n	 
+	|	cl	
+	|	conj	
+	|	conj	NP	 
+	|	d	
+	|	d	n	
+	|	d	N'	 
+	|	D'	n	 
+	|	dem	
+	|	dem	n	
+	|	dem	N'	 
+	|	n	
+	|	N'	 
+	|	NP	NP	 
+	|	poss	
+	|	prs	
+	|	qnt	
+	|	qnt	n	
+	|	qnt	N'	 
+	|	qnt	NP	 
+	|	rel	
+
+PP	:	ADVP	 
+	|	conj	
+	|	conj	PP	 
+	|	NP	 
+	|	p	
+	|	p	NP	 
+	|	p	v	
+	|	p	VP	 
+	|	PP	PP	 
+
+PPAP	:	ppa	
+	|	ppa	CONJ'	 
+	|	ppa	PP	 
+
+ROOT	:	S	 
+	|	SNS	 
+
+S	:	adv	
+	|	adv	S	 
+	|	AP	S	 
+	|	conj	
+	|	conj	S	 
+	|	conj	SNS	 
+	|	CONJP	S	 
+	|	NP	 
+	|	NP	S	 
+	|	NP	v	 
+	|	NP	VP	 
+	|	PP	S	 
+	|	S	S	 
+	|	SNS	S	 
+	|	v	
+	|	v	NP	 
+	|	V+SJ	 
+	|	V+SJ	CP	 
+	|	VP	 
+	|	VP	NP	 
+
+SNS	:	v	
+	|	VP	 
+
+V'	:	adv	v	
+	|	NP	v	 
+	|	v	
+	|	v	adv	
+	|	v	NP	 
+	|	v	PP	 
+	|	V'	ADVP	 
+	|	V'	PP	 
+
+V+SJ	:	NP	v	 
+	|	v	
+	|	v	NP	 
+	|	V+SJ	adv	 
+
+VP	:	adv	
+	|	adv	v	
+	|	adv	V'	 
+	|	adv	VP	 
+	|	AP	 
+	|	conj	
+	|	conj	VP	 
+	|	PP	 
+	|	PP	VP	 
+	|	v	
+	|	v	a	
+	|	v	adv	
+	|	v	AP	 
+	|	v	CONJP	 
+	|	v	CP	 
+	|	v	NP	 
+	|	v	PP	 
+	|	v	PPAP	 
+	|	v	v	
+	|	v	VP	 
+	|	V'	 
+	|	V'	CP	 
+	|	V'	NP	 
+	|	V'	PP	 
+	|	V'	ppa	 
+	|	V'	VP	 
+	|	VP	adv	 
+	|	VP	CONJP	 
+	|	VP	PP	 
+	|	VP	VP	 
