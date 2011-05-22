@@ -16,21 +16,37 @@ module Complexity where
 import Data.Data
 import Data.Monoid
 import Language.C
+import Language.C.System.GCC
+import Language.C.Data.Ident
 import Data.Generics.Strafunski.StrategyLib.ChaseImports
 import Data.Generics.Strafunski.StrategyLib.StrategyPrimitives
 import Data.Generics.Strafunski.StrategyLib.TraversalTheme
 import Data.Generics.Strafunski.StrategyLib.StrategyPrelude
 import Data.Generics.Strafunski.StrategyLib.FlowTheme
 
+import Functions
+
+instance Num a => Monoid a where
+    mappend = (+)
+    mempty = 0
+
+p = parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] "main.c"
+r= (\(Right r) -> r)
+
+{- mccabe index per function, for all function inside a C file
+-}
+mccabePerFun :: CTranslUnit -> IO [(String,Int)]
+mccabePerFun d = do
+    funs <- getFunsName d
+    mccabes <- (mapM mccabeIndex . getListFunFromC )d
+    return $ zip funs mccabes
+    where getListFunFromC (CTranslUnit l _) = l
+
 {- mcCabe index, we need to have Int as Monoid, in the future
    we must change this to Sum, because we may want to have
    (*) as a Monoid too.
    Read more here: http://blog.sigfpe.com/2009/01/haskell-monoids-and-their-uses.html
 -}
-instance Num a => Monoid a where
-    mappend = (+)
-    mempty = 0
-
 mccabeIndex :: Data a => a -> IO Int
 mccabeIndex = applyTU (full_tdTU typesOfInstr)
 
