@@ -104,7 +104,7 @@ function build_haskell {
 		fi
 		echo "Trying to install Language.C" | $andlogfile
 		build_language_c
-		cd Parser/language-c-0.3.2.1/
+		cd Analyzer/language-c-0.3.2.1/
 		runhaskell Setup.hs install
 		cd - 1> /dev/null
 	else
@@ -121,7 +121,7 @@ function build_haskell {
 }
 
 function build_language_c {
-	sudo -u $USER -s 'cd parser/language-c-0.3.2.1/ && runhaskell setup.hs configure && runhaskell setup.hs build && cd -'
+	sudo -u $USER -s 'cd Analyzer/language-c-0.3.2.1/ && runhaskell setup.hs configure && runhaskell setup.hs build && cd -'
 }
 
 function install_aptitude_modules {
