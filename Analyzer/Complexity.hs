@@ -33,6 +33,13 @@ instance Num a => Monoid a where
 p = parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] "main.c"
 r= (\(Right r) -> r)
 
+{- fucntions names that are inside the range of complexities
+-}
+functionForMccabeIndex :: CTranslUnit -> (Int,Int) -> IO [(String,Int)]
+functionForMccabeIndex d (min,max) = do
+    l <- mccabePerFun d
+    return $ filter (\(_,val) -> val >= min && val <= max) l
+
 {- mccabe index per function, for all function inside a C file
 -}
 mccabePerFun :: CTranslUnit -> IO [(String,Int)]
