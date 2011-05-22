@@ -35,6 +35,8 @@ import Comments(getNrOfLinesOfComments,commentLinesDensity)
 import NumberOfLines
 import Metrics
 import NumberOfLines
+import Complexity
+import Functions
 
 {- Try to incorporate on-the-fly tests with C random code generation with CSmith tool.
    But we must have a method in Language.C that receives a Handler or a ByteString.
@@ -56,107 +58,37 @@ parse = parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"]
 
 fromRight = (\(Right prog) -> prog)
 
-{- mcCabe index, we need to have Int as Monoid, in the future
-   we must change this to Sum, because we may want to have
-   (*) as a Monoid too.
-   Read more here: http://blog.sigfpe.com/2009/01/haskell-monoids-and-their-uses.html
--}
-testMcCabe :: IO Int
-testMcCabe =  parr >>= mcCabeIndex . fromRight
-
-instance Num a => Monoid a where
-    mappend = (+)
-    mempty = 0
-
-mcCabeIndex :: Data a => a -> IO Int
-mcCabeIndex =  applyTU (full_tdTU isConditional)
-
-isConditional = constTU 0 `adhocTU` (return . test)
-
-test (CIf _ _ _ _) =  1
-test (CSwitch _ _ _) =  1
-test _ =  0
-
-{- Get the name of all functions names in our C file
--}
-getFunctionsName :: IO [String]
-getFunctionsName = parr >>= return . getFunName . fromRight
-
-getFunName = filter (not . null) . applyTU (once_tdTU names)
-
-names = constTU [] `adhocTU` test1
-
-test1 (CFunDef _ (CDeclr (Just name ) ((CFunDeclr _ _ _):_) _ _ _ ) _ _ _) = [identToString name]
-
-{- Return the signature for all functions.
-   We never repeat functions signature declarations, if the programmer (the person who wrote the C code) had write function signatures
-   we will ignore it and only look at full functions specifications.
-
-   To see more clearly you can test with:
-       getFunctionsSign >>= putStr . unlines  . map (show . pretty)
--}
-
-getFunctionsSignFromC :: Data x => x -> [x]
-getFunctionsSignFromC = getFunSign
-
-getFunctionsSign :: IO [CTranslUnit]
-getFunctionsSign = parr >>= return . getFunSign . fromRight
-
-getFunSign :: Data x => x -> [x]
-getFunSign = applyTP (topdown names1)
-    where names1 = idTP `adhocTP` (return . fromFunctionToSign)
-
-fromFunctionToSign (CFDefExt (CFunDef lCDeclSpec cDeclr _ _ _ )) = CDeclExt (CDecl lCDeclSpec [(Just $ cDeclr,Nothing,Nothing)] internalNode)
-
-{- testtttting -}
-nestingDepthTest = parr >>= nestingDepth . fromRight
--- Java metrics via instantiation of generic metrics
---nestingDepth :: Term t => t -> Int
-nestingDepth =  applyTU (depthWith )
--- Generic algorithm for depth of nesting
-
-depthWith = recurse `passTU` -- Sequential composition
-    \depth_subterms ->
-        let max_subterms = maximum (0:depth_subterms)
-        in (ifTU isConditional2
-            (const (constTU (max_subterms + 1)))
-            (constTU max_subterms))
-            where recurse = allTU (++) [] (depthWith `passTU` \depth -> constTU [depth])
-
-isConditional2 = constTU 0 `adhocTU` testt `adhocTU` testtt
-
-testt (CIf _ _ _ _) =  putStrLn "encontrei um if" >> return 1
-testt (CSwitch _ _ _) =  putStrLn "encontrei um switch" >> return 1
-testt _ =  return 0
-
-testtt (CFDefExt (CFunDef _ (CDeclr (Just (Ident "main" _ _ )) _ _ _ _) _ _ _ ))
-    = putStrLn "encontrei uma main fun" >> return 1
-testtt _ = return 0
-
---getFunMcCabe fun1 (CFDefExt (CFunDef _ (CDeclr (Just (Ident fun2 _ _ )) _ _ _ _) _ _ _ ))
---    | fun1 == fun2 = 
-
--- lets find main function
-
-
 {- Count the number of instructions
 -}
-testCountInstr :: IO Int
-testCountInstr =  parr >>= countInstr . fromRight
 
-countInstr :: Data a => a -> IO Int
-countInstr d =  (putStrLn ("new ")) >> applyTU (full_tdTU typesOfInstr) d
+{- Depth
+-}
+dep :: IO Int
+dep =  parr >>= dep' . fromRight
 
-typesOfInstr = constTU 0
-    --`adhocTU` exprs
-	`adhocTU` unaryOp
-    `adhocTU` binaryOp
+dep' :: Data a => a -> IO Int
+dep' = applyTU (depthWith dep'')
 
+depthWith s = recurse `passTU` -- Sequential composition
+    \depth_subterms ->
+        let max_subterms | null depth_subterms = -6
+                         | otherwise = maximum depth_subterms
+        in (ifTU s
+                (const (constTU (max_subterms + 1)))
+                (constTU max_subterms)
+           )
+        where
+        recurse = allTU (++) [] (depthWith s `passTU` \depth -> constTU [depth])
+
+dep'' = failTU `adhocTU` loop
+
+mccabe :: IO Int
+mccabe =  parr >>= mccabeIndex . fromRight
+
+{-
 loop :: CStat -> IO Int
-{- if without else -}
 loop (CIf e s Nothing _) =  countInstr e >>= \eR1 -> countInstr s
     >>= \eR2 -> return (eR1+eR2+1)
-{- if with else -}
 --loop (CIf _ _ (Just _) _) =  return 2
 --loop (CSwitch _ _ _) =  return 1
 loop (CFor (Left Nothing) (Just e1) (Just e2) _ _)
@@ -176,24 +108,24 @@ exprs _ =  return 0
 binaryOp :: CBinaryOp -> IO Int
 binaryOp a = print a >> (return $ binaryOp_ a)
     where
-    binaryOp_ CMulOp = 1
-    binaryOp_ CDivOp = 1
-    binaryOp_ CRmdOp = 1
-    binaryOp_ CAddOp = 1
-    binaryOp_ CSubOp = 1
-    binaryOp_ CShlOp = 1
-    binaryOp_ CShrOp = 1
-    binaryOp_ CLeOp = 1
-    binaryOp_ CGrOp = 1
-    binaryOp_ CLeqOp = 1
-    binaryOp_ CGeqOp = 1
-    binaryOp_ CEqOp = 1
-    binaryOp_ CNeqOp = 1
-    binaryOp_ CAndOp = 1
-    binaryOp_ CXorOp = 1
-    binaryOp_ COrOp = 1
-    binaryOp_ CLndOp = 1
-    binaryOp_ CLorOp = 1
+    binaryOp_ CMulOp = 2
+    binaryOp_ CDivOp = 2
+    binaryOp_ CRmdOp = 2
+    binaryOp_ CAddOp = 2
+    binaryOp_ CSubOp = 2
+    binaryOp_ CShlOp = 2
+    binaryOp_ CShrOp = 2
+    binaryOp_ CLeOp = 2
+    binaryOp_ CGrOp = 2
+    binaryOp_ CLeqOp = 2
+    binaryOp_ CGeqOp = 2
+    binaryOp_ CEqOp = 2
+    binaryOp_ CNeqOp = 2
+    binaryOp_ CAndOp = 2
+    binaryOp_ CXorOp = 2
+    binaryOp_ COrOp = 2
+    binaryOp_ CLndOp = 2
+    binaryOp_ CLorOp = 2
 
 unaryOp :: CUnaryOp -> IO Int
 unaryOp a = print a >> (return . unaryOp_) a
@@ -208,6 +140,17 @@ unaryOp a = print a >> (return . unaryOp_) a
     unaryOp_ CMinOp = 1
     unaryOp_ CCompOp = 1
     unaryOp_ CNegOp = 1
+-}
+
+
+
+
+
+
+
+
+
+
 
 --decl (CDecl _ l _) = return . sum [ | () <- l]
 
@@ -216,16 +159,15 @@ unaryOp a = print a >> (return . unaryOp_) a
    stream <- parseCFile (newGCC "gcc") Nothing ["-Idir"] file
    where 'dir' is the directory where our code is.
    This flag is passed as it is directly to GCC, so is just an common import.
--}
 process :: String -> IO ()
 process file = do
-    {- This version of Language.C does not support BLOCKS notation from MacOSX,
-       so we need to undefine them... It is not pretty, but is a fast solution to get our code being parsed
-    -}
+    -- This version of Language.C does not support BLOCKS notation from MacOSX,
+    -- so we need to undefine them... It is not pretty, but is a fast solution to get our code being parsed
     stream <- parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] file
     case stream of
         ( Left error  ) -> print error
         ( Right cprog ) -> (putStr . unlines  . map (show . pretty) . getFunctionsSignFromC) cprog
+-}
 
 main :: IO ()
 {-

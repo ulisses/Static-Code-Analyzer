@@ -1,17 +1,21 @@
-  #include    <SYSstdio.h>
-#include "stdioss.h"
- #include   <SYSstdio2.h>
-#include "stdiossds.h"
 
 /*
 
 */
 
-//void fun(int a, int b);
+void fun(int a, int b);
 
-//int * fun4() { if(1) {} else{}}
-/*
+int * fun4() {
+	if(1) {} else{}
+}
+
 void fun(int a, int b) {
+    if(a) {
+    }
+    if(a) {
+    }
+    if(a) {
+    }
     if(a) {
     }
 }
@@ -25,18 +29,34 @@ void main(int argc, char **argv) {
                 }
         case 2: {
                     int *v = fun4();
+                    
                     break;
                 }
     }
     return 0;
 }
-*/
 
 void fun2() {
     int i,j;
-    for(; (i < 10) || 10; i++,j++) {
+    for(; (i < 10 && 4) || 10; i++,j++) {
     }
+
+    int i;
+    int j;
+    
+    //(i < 10) || 10;
+	if(x>10) {
+		if(4) {
+			if(1) {
+				if(1) {
+					if(1) {
+							if(1) {}
+						}
+					}
+				}
+			}
+		}
 }
 
-//void fun1() {}
+//void fun1() { int j = 1++; }
 //void fun3() {}
