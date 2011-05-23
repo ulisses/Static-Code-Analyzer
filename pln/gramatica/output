@@ -1,128 +1,188 @@
-Gramática Portuguesa:
 
-A'	:	A 
-	|	ADV 
+A'	:	ADV	A 
 
-ADV'	:	ADV 
+ADV'	:	ADV	ADV 
 
 ADVP	:	ADV 
-	|	ADVP 
+	|	ADV	ADV 
+	|	ADV	ADVP	 
+	|	ADV	PP	 
 	|	CONJ 
-	|	NP 
-	|	PP 
+	|	CONJ	ADVP	 
+	|	NP	 
 
 AP	:	A 
-	|	A' 
+	|	A	CONJP	 
+	|	A	PP	 
+	|	A'	AP	 
+	|	A'	CONJP	 
 	|	ADV 
-	|	AP 
-	|	CONJP 
-	|	PP 
+	|	ADV	A 
+	|	ADV	AP	 
 
-CARD'	:	ADV' 
+CARD'	:	ADV'	CARD	 
 	|	CARD 
-	|	CONJP 
+	|	CARD	CONJP	 
 
-CONJ'	:	SNS 
+CONJ'	:	SNS	 
 
-CONJP	:	CARD 
-	|	CONJ 
-	|	NP 
-	|	S 
-	|	SNS 
+CONJP	:	CONJ 
+	|	CONJ	CARD 
+	|	CONJ	NP	 
+	|	CONJ	S	 
+	|	CONJ	SNS	 
 
 CP	:	C 
+	|	C	S	 
+	|	C	SNS	 
 	|	CONJ 
-	|	CP 
-	|	NP 
-	|	PP 
-	|	S 
-	|	SNS 
+	|	CONJ	CP	 
+	|	CP	CP	 
+	|	NP	S	 
+	|	PP	S	 
 
 D'	:	QNT 
 
 N'	:	A 
-	|	AP 
+	|	A	N 
+	|	A	N'	 
+	|	AP	 
+	|	AP	N	 
+	|	AP	N'	 
 	|	CARD 
-	|	CONJ 
-	|	CP 
+	|	CARD	N 
+	|	CONJ	N 
+	|	CP	 
 	|	D 
+	|	D	N 
+	|	D	N'	 
 	|	N 
-	|	N' 
-	|	NP 
+	|	N	A 
+	|	N	AP	 
+	|	N	CP	 
+	|	N	N 
+	|	N	N'	 
+	|	N	POSS 
+	|	N	PP	 
+	|	N	PPAP	 
+	|	N'	CP	 
+	|	NP	NP	 
 	|	ORD 
+	|	ORD	N 
+	|	ORD	N'	 
 	|	POSS 
-	|	PP 
-	|	PPAP 
+	|	POSS	N 
+	|	POSS	N'	 
+	|	PP	 
 
-NP	:	ADVP 
+NP	:	ADVP	NP	 
 	|	CARD 
-	|	CARD' 
+	|	CARD	N 
+	|	CARD	N'	 
+	|	CARD'	N	 
 	|	CL 
 	|	CONJ 
+	|	CONJ	NP	 
 	|	D 
-	|	D' 
+	|	D	N 
+	|	D	N'	 
+	|	D'	N	 
 	|	DEM 
+	|	DEM	N 
+	|	DEM	N'	 
 	|	N 
-	|	N' 
-	|	NP 
+	|	N'	 
+	|	NP	NP	 
 	|	POSS 
 	|	PRS 
 	|	QNT 
+	|	QNT	N 
+	|	QNT	N'	 
+	|	QNT	NP	 
 	|	REL 
 
-PP	:	ADVP 
+PP	:	ADVP	 
 	|	CONJ 
-	|	NP 
+	|	CONJ	PP	 
+	|	NP	 
 	|	P 
-	|	PP 
-	|	V 
-	|	VP 
+	|	P	NP	 
+	|	P	V 
+	|	P	VP	 
+	|	PP	PP	 
 
-PPAP	:	CONJ' 
-	|	PP 
-	|	PPA 
+PPAP	:	PPA 
+	|	PPA	CONJ'	 
+	|	PPA	PP	 
 
-ROOT	:	S 
-	|	SNS 
+ROOT	:	S	 
+	|	SNS	 
 
 S	:	ADV 
-	|	AP 
+	|	ADV	S	 
+	|	AP	S	 
 	|	CONJ 
-	|	CONJP 
-	|	CP 
-	|	NP 
-	|	PP 
-	|	S 
-	|	SNS 
+	|	CONJ	S	 
+	|	CONJ	SNS	 
+	|	CONJP	S	 
+	|	NP	 
+	|	NP	S	 
+	|	NP	V	 
+	|	NP	VP	 
+	|	PP	S	 
+	|	S	S	 
+	|	SNS	S	 
 	|	V 
-	|	V+SJ 
-	|	VP 
+	|	V	NP	 
+	|	V+SJ	 
+	|	V+SJ	CP	 
+	|	VP	 
+	|	VP	NP	 
 
 SNS	:	V 
-	|	VP 
+	|	VP	 
 
-V'	:	ADV 
-	|	ADVP 
-	|	NP 
-	|	PP 
+V'	:	ADV	V 
+	|	NP	V	 
 	|	V 
-	|	V' 
+	|	V	ADV 
+	|	V	NP	 
+	|	V	PP	 
+	|	V'	ADVP	 
+	|	V'	PP	 
 
-V+SJ	:	ADV 
-	|	NP 
+V+SJ	:	NP	V	 
 	|	V 
-	|	V+SJ 
+	|	V	NP	 
+	|	V+SJ	ADV	 
 
-VP	:	A 
-	|	ADV 
-	|	AP 
+VP	:	ADV 
+	|	ADV	V 
+	|	ADV	V'	 
+	|	ADV	VP	 
+	|	AP	 
 	|	CONJ 
-	|	CONJP 
-	|	CP 
-	|	NP 
-	|	PP 
-	|	PPA 
-	|	PPAP 
+	|	CONJ	VP	 
+	|	PP	 
+	|	PP	VP	 
 	|	V 
-	|	V' 
-	|	VP 
+	|	V	A 
+	|	V	ADV 
+	|	V	AP	 
+	|	V	CONJP	 
+	|	V	CP	 
+	|	V	NP	 
+	|	V	PP	 
+	|	V	PPAP	 
+	|	V	V 
+	|	V	VP	 
+	|	V'	 
+	|	V'	CP	 
+	|	V'	NP	 
+	|	V'	PP	 
+	|	V'	PPA	 
+	|	V'	VP	 
+	|	VP	ADV	 
+	|	VP	CONJP	 
+	|	VP	PP	 
+	|	VP	VP	 
