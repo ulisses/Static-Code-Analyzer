@@ -1,0 +1,2 @@
+Para gerar as árvores de teste (testeTrees) é preciso seguir o tutorial descrito em http://lxcenter.di.fc.ul.pt/tools/pt/LXParserPT.html para instalar o stanford parser, mais as partes em português, retirar o formato de output (usa o default para criar árvores) e passar o input.txt pela aplicação.
+
