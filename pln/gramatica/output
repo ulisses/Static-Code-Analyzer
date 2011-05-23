@@ -1,27 +1,46 @@
 
 A'	:	ADV	A 
+	|	ADV'	A	 
 
-ADV'	:	ADV	ADV 
+ADV'	:	ADV 
+	|	ADV	ADV 
+	|	ADV	ADVP	 
+	|	ADV'	ADVP	 
 
 ADVP	:	ADV 
 	|	ADV	ADV 
 	|	ADV	ADVP	 
 	|	ADV	PP	 
+	|	ADV'	ADV	 
+	|	ADVP	ADV	 
+	|	ADVP	ADVP	 
 	|	CONJ 
 	|	CONJ	ADVP	 
 	|	NP	 
 
 AP	:	A 
+	|	A	AP	 
 	|	A	CONJP	 
 	|	A	PP	 
+	|	A	PPAP	 
 	|	A'	AP	 
 	|	A'	CONJP	 
 	|	ADV 
 	|	ADV	A 
 	|	ADV	AP	 
+	|	ADV'	A	 
+	|	ADVP	A	 
+	|	ADVP	AP	 
+	|	CONJ 
+	|	CONJ	AP	 
+	|	ORD 
+	|	ORD	AP	 
 
-CARD'	:	ADV'	CARD	 
+CARD'	:	ADV	CARD 
+	|	ADV'	CARD	 
 	|	CARD 
+	|	CARD	 
+	|	CARD	CARD 
 	|	CARD	CONJP	 
 
 CONJ'	:	SNS	 
@@ -31,6 +50,7 @@ CONJP	:	CONJ
 	|	CONJ	NP	 
 	|	CONJ	S	 
 	|	CONJ	SNS	 
+	|	NP	 
 
 CP	:	C 
 	|	C	S	 
@@ -39,6 +59,7 @@ CP	:	C
 	|	CONJ	CP	 
 	|	CP	CP	 
 	|	NP	S	 
+	|	NP	SNS	 
 	|	PP	S	 
 
 D'	:	QNT 
@@ -51,21 +72,35 @@ N'	:	A
 	|	AP	N'	 
 	|	CARD 
 	|	CARD	N 
+	|	CARD	N'	 
+	|	CARD'	N	 
 	|	CONJ	N 
 	|	CP	 
 	|	D 
 	|	D	N 
 	|	D	N'	 
+	|	DEM 
+	|	DEM	N 
+	|	DEM	N'	 
 	|	N 
+	|	N	 
 	|	N	A 
 	|	N	AP	 
 	|	N	CP	 
+	|	N	DEM 
 	|	N	N 
 	|	N	N'	 
 	|	N	POSS 
 	|	N	PP	 
+	|	N	PPA 
 	|	N	PPAP	 
+	|	N'	A	 
+	|	N'	AP	 
 	|	N'	CP	 
+	|	N'	N'	 
+	|	N'	POSS	 
+	|	N'	PP	 
+	|	N'	PPAP	 
 	|	NP	NP	 
 	|	ORD 
 	|	ORD	N 
@@ -74,12 +109,17 @@ N'	:	A
 	|	POSS	N 
 	|	POSS	N'	 
 	|	PP	 
+	|	QNT 
+	|	QNT	N'	 
 
-NP	:	ADVP	NP	 
+NP	:	 
+	|	ADVP	NP	 
 	|	CARD 
 	|	CARD	N 
 	|	CARD	N'	 
+	|	CARD'	 
 	|	CARD'	N	 
+	|	CARD'	N'	 
 	|	CL 
 	|	CONJ 
 	|	CONJ	NP	 
@@ -91,35 +131,66 @@ NP	:	ADVP	NP
 	|	DEM	N 
 	|	DEM	N'	 
 	|	N 
+	|	N	PNT 
 	|	N'	 
+	|	N'	QNT	 
+	|	NP	 
+	|	NP	CP	 
 	|	NP	NP	 
+	|	NP	PP	 
 	|	POSS 
+	|	POSS	N 
+	|	POSS	N'	 
 	|	PRS 
 	|	QNT 
 	|	QNT	N 
 	|	QNT	N'	 
 	|	QNT	NP	 
+	|	QNT'	 
 	|	REL 
 
-PP	:	ADVP	 
+P'	:	P	P 
+
+PP	:	ADV 
+	|	ADV	PP	 
+	|	ADVP	 
+	|	ADVP	PP	 
 	|	CONJ 
 	|	CONJ	PP	 
 	|	NP	 
 	|	P 
+	|	P	 
+	|	P	ADV 
 	|	P	NP	 
 	|	P	V 
 	|	P	VP	 
+	|	P'	NP	 
+	|	PP	ADVP	 
 	|	PP	PP	 
 
-PPAP	:	PPA 
+PPA'	:	PPA 
+	|	PPA	CONJ'	 
+
+PPAP	:	ADV 
+	|	ADV	PPA 
+	|	ADV	PPAP	 
+	|	CONJ 
+	|	CONJ	PPAP	 
+	|	PPA 
 	|	PPA	CONJ'	 
 	|	PPA	PP	 
+	|	PPA'	PP	 
 
-ROOT	:	S	 
+QNT'	:	QNT	QNT 
+
+ROOT	:	 
+	|	S	 
 	|	SNS	 
 
-S	:	ADV 
+S	:	 
+	|	ADV 
 	|	ADV	S	 
+	|	ADV	SNS	 
 	|	AP	S	 
 	|	CONJ 
 	|	CONJ	S	 
@@ -129,17 +200,32 @@ S	:	ADV
 	|	NP	S	 
 	|	NP	V	 
 	|	NP	VP	 
+	|	PNT 
+	|	PNT	S	 
+	|	PP	 
 	|	PP	S	 
+	|	S	 
+	|	S	ADV	 
+	|	S	CONJP	 
+	|	S	PNT	 
+	|	S	PP	 
 	|	S	S	 
+	|	S	VP	 
+	|	SNS	 
 	|	SNS	S	 
 	|	V 
 	|	V	NP	 
 	|	V+SJ	 
 	|	V+SJ	CP	 
+	|	V+SJ	NP	 
+	|	V+SJ	PP	 
+	|	V+SJ	V	 
 	|	VP	 
 	|	VP	NP	 
+	|	VP	PNT	 
 
-SNS	:	V 
+SNS	:	 
+	|	V 
 	|	VP	 
 
 V'	:	ADV	V 
@@ -148,6 +234,7 @@ V'	:	ADV	V
 	|	V	ADV 
 	|	V	NP	 
 	|	V	PP	 
+	|	V'	ADV	 
 	|	V'	ADVP	 
 	|	V'	PP	 
 
@@ -155,34 +242,56 @@ V+SJ	:	NP	V
 	|	V 
 	|	V	NP	 
 	|	V+SJ	ADV	 
+	|	V+SJ	PP	 
 
 VP	:	ADV 
 	|	ADV	V 
 	|	ADV	V'	 
 	|	ADV	VP	 
+	|	ADV'	VP	 
+	|	ADVP	V	 
+	|	ADVP	VP	 
 	|	AP	 
 	|	CONJ 
+	|	CONJ	 
 	|	CONJ	VP	 
+	|	CONJ'	 
+	|	CONJP	 
+	|	CONJP	VP	 
+	|	NP	 
+	|	NP	V	 
 	|	PP	 
+	|	PP	V	 
 	|	PP	VP	 
+	|	PPAP	 
 	|	V 
+	|	V	 
 	|	V	A 
 	|	V	ADV 
+	|	V	ADVP	 
 	|	V	AP	 
 	|	V	CONJP	 
 	|	V	CP	 
 	|	V	NP	 
 	|	V	PP	 
+	|	V	PPA 
 	|	V	PPAP	 
 	|	V	V 
 	|	V	VP	 
 	|	V'	 
+	|	V'	A	 
+	|	V'	ADV	 
+	|	V'	AP	 
 	|	V'	CP	 
 	|	V'	NP	 
 	|	V'	PP	 
 	|	V'	PPA	 
+	|	V'	V	 
 	|	V'	VP	 
 	|	VP	ADV	 
+	|	VP	ADVP	 
+	|	VP	CONJ'	 
 	|	VP	CONJP	 
 	|	VP	PP	 
+	|	VP	V	 
 	|	VP	VP	 

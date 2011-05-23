@@ -3,28 +3,47 @@ Gramática Portuguesa:
 
 
 a'	:	ADV	A 
+	|	adv'	A	 
 
-adv'	:	ADV	ADV 
+adv'	:	ADV 
+	|	ADV	ADV 
+	|	ADV	advp	 
+	|	adv'	advp	 
 
 advp	:	ADV 
 	|	ADV	ADV 
 	|	ADV	advp	 
 	|	ADV	pp	 
+	|	adv'	ADV	 
+	|	advp	ADV	 
+	|	advp	advp	 
 	|	CONJ 
 	|	CONJ	advp	 
 	|	np	 
 
 ap	:	A 
+	|	A	ap	 
 	|	A	conjp	 
 	|	A	pp	 
+	|	A	ppap	 
 	|	a'	ap	 
 	|	a'	conjp	 
 	|	ADV 
 	|	ADV	A 
 	|	ADV	ap	 
+	|	adv'	A	 
+	|	advp	A	 
+	|	advp	ap	 
+	|	CONJ 
+	|	CONJ	ap	 
+	|	ORD 
+	|	ORD	ap	 
 
-card'	:	adv'	CARD	 
+card'	:	ADV	CARD 
+	|	adv'	CARD	 
 	|	CARD 
+	|	CARD	 
+	|	CARD	CARD 
 	|	CARD	conjp	 
 
 conj'	:	sns	 
@@ -34,6 +53,7 @@ conjp	:	CONJ
 	|	CONJ	np	 
 	|	CONJ	s	 
 	|	CONJ	sns	 
+	|	np	 
 
 cp	:	C 
 	|	C	s	 
@@ -42,6 +62,7 @@ cp	:	C
 	|	CONJ	cp	 
 	|	cp	cp	 
 	|	np	s	 
+	|	np	sns	 
 	|	pp	s	 
 
 d'	:	QNT 
@@ -54,21 +75,35 @@ n'	:	A
 	|	ap	n'	 
 	|	CARD 
 	|	CARD	N 
+	|	CARD	n'	 
+	|	card'	N	 
 	|	CONJ	N 
 	|	cp	 
 	|	D 
 	|	D	N 
 	|	D	n'	 
+	|	DEM 
+	|	DEM	N 
+	|	DEM	n'	 
 	|	N 
+	|	N	 
 	|	N	A 
 	|	N	ap	 
 	|	N	cp	 
+	|	N	DEM 
 	|	N	N 
 	|	N	n'	 
 	|	N	POSS 
 	|	N	pp	 
+	|	N	PPA 
 	|	N	ppap	 
+	|	n'	A	 
+	|	n'	ap	 
 	|	n'	cp	 
+	|	n'	n'	 
+	|	n'	POSS	 
+	|	n'	pp	 
+	|	n'	ppap	 
 	|	np	np	 
 	|	ORD 
 	|	ORD	N 
@@ -77,12 +112,17 @@ n'	:	A
 	|	POSS	N 
 	|	POSS	n'	 
 	|	pp	 
+	|	QNT 
+	|	QNT	n'	 
 
-np	:	advp	np	 
+np	:	 
+	|	advp	np	 
 	|	CARD 
 	|	CARD	N 
 	|	CARD	n'	 
+	|	card'	 
 	|	card'	N	 
+	|	card'	n'	 
 	|	CL 
 	|	CONJ 
 	|	CONJ	np	 
@@ -94,35 +134,66 @@ np	:	advp	np
 	|	DEM	N 
 	|	DEM	n'	 
 	|	N 
+	|	N	PNT 
 	|	n'	 
+	|	n'	QNT	 
+	|	np	 
+	|	np	cp	 
 	|	np	np	 
+	|	np	pp	 
 	|	POSS 
+	|	POSS	N 
+	|	POSS	n'	 
 	|	PRS 
 	|	QNT 
 	|	QNT	N 
 	|	QNT	n'	 
 	|	QNT	np	 
+	|	qnt'	 
 	|	REL 
 
-pp	:	advp	 
+p'	:	P	P 
+
+pp	:	ADV 
+	|	ADV	pp	 
+	|	advp	 
+	|	advp	pp	 
 	|	CONJ 
 	|	CONJ	pp	 
 	|	np	 
 	|	P 
+	|	P	 
+	|	P	ADV 
 	|	P	np	 
 	|	P	V 
 	|	P	vp	 
+	|	p'	np	 
+	|	pp	advp	 
 	|	pp	pp	 
 
-ppap	:	PPA 
+ppa'	:	PPA 
+	|	PPA	conj'	 
+
+ppap	:	ADV 
+	|	ADV	PPA 
+	|	ADV	ppap	 
+	|	CONJ 
+	|	CONJ	ppap	 
+	|	PPA 
 	|	PPA	conj'	 
 	|	PPA	pp	 
+	|	ppa'	pp	 
 
-root	:	s	 
+qnt'	:	QNT	QNT 
+
+root	:	 
+	|	s	 
 	|	sns	 
 
-s	:	ADV 
+s	:	 
+	|	ADV 
 	|	ADV	s	 
+	|	ADV	sns	 
 	|	ap	s	 
 	|	CONJ 
 	|	CONJ	s	 
@@ -132,17 +203,32 @@ s	:	ADV
 	|	np	s	 
 	|	np	V	 
 	|	np	vp	 
+	|	PNT 
+	|	PNT	s	 
+	|	pp	 
 	|	pp	s	 
+	|	s	 
+	|	s	ADV	 
+	|	s	conjp	 
+	|	s	PNT	 
+	|	s	pp	 
 	|	s	s	 
+	|	s	vp	 
+	|	sns	 
 	|	sns	s	 
 	|	V 
 	|	V	np	 
-	|	V+SJ	 
-	|	V+SJ	cp	 
+	|	v+sj	 
+	|	v+sj	cp	 
+	|	v+sj	np	 
+	|	v+sj	pp	 
+	|	v+sj	V	 
 	|	vp	 
 	|	vp	np	 
+	|	vp	PNT	 
 
-sns	:	V 
+sns	:	 
+	|	V 
 	|	vp	 
 
 v'	:	ADV	V 
@@ -151,48 +237,71 @@ v'	:	ADV	V
 	|	V	ADV 
 	|	V	np	 
 	|	V	pp	 
+	|	v'	ADV	 
 	|	v'	advp	 
 	|	v'	pp	 
 
-V+SJ	:	np	V	 
+v+sj	:	np	V	 
 	|	V 
 	|	V	np	 
-	|	V+SJ	ADV	 
+	|	v+sj	ADV	 
+	|	v+sj	pp	 
 
 vp	:	ADV 
 	|	ADV	V 
 	|	ADV	v'	 
 	|	ADV	vp	 
+	|	adv'	vp	 
+	|	advp	V	 
+	|	advp	vp	 
 	|	ap	 
 	|	CONJ 
+	|	CONJ	 
 	|	CONJ	vp	 
+	|	conj'	 
+	|	conjp	 
+	|	conjp	vp	 
+	|	np	 
+	|	np	V	 
 	|	pp	 
+	|	pp	V	 
 	|	pp	vp	 
+	|	ppap	 
 	|	V 
+	|	V	 
 	|	V	A 
 	|	V	ADV 
+	|	V	advp	 
 	|	V	ap	 
 	|	V	conjp	 
 	|	V	cp	 
 	|	V	np	 
 	|	V	pp	 
+	|	V	PPA 
 	|	V	ppap	 
 	|	V	V 
 	|	V	vp	 
 	|	v'	 
+	|	v'	A	 
+	|	v'	ADV	 
+	|	v'	ap	 
 	|	v'	cp	 
 	|	v'	np	 
 	|	v'	pp	 
 	|	v'	PPA	 
+	|	v'	V	 
 	|	v'	vp	 
 	|	vp	ADV	 
+	|	vp	advp	 
+	|	vp	conj'	 
 	|	vp	conjp	 
 	|	vp	pp	 
+	|	vp	V	 
 	|	vp	vp	 
 
 
 Símbolos Não-Terminais:
-s adv' conjp n' ppap a' v' card' d' conj' vp ap v+sj np pp sns root cp advp 
+s adv' ppa' conjp n' ppap a' qnt' v' card' d' conj' vp ap v+sj np sns pp root cp advp p' 
 
 Símbolos Terminais:
-N POSS CARD D ORD V C PPA A ADV REL P CONJ DEM PRS QNT CL 
+N POSS CARD PNT D ORD V C PPA A ADV REL P CONJ DEM PRS QNT CL 
