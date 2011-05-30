@@ -12,8 +12,11 @@
 ------------------------------------------------------------------------------
 
 module NumberOfLines(ncloc, physicalLines
-                    ,nrOfFilesDuplicatedLine, getClonesOneLine,densityOfDuplicatedLines
-                    ,getClonesBlock) where
+                    ,densityOfDuplicatedLinesBlock, nrOfFilesDuplicatedLineBlock
+                    ,getClonesBlock
+                    ,densityOfDuplicatedLinesOneLine, nrOfFilesDuplicatedLineOneLine
+                    ,getClonesOneLine
+                    ) where
 
 import Language.C
 import Language.C.System.GCC
@@ -45,7 +48,17 @@ ncloc file = do
 physicalLines :: FilePath -> IO Int
 physicalLines file = BS.readFile file >>= return . BS.count (c2w '\n')
 
-{-
+{-Density of duplicated lines for a block
+-}
+densityOfDuplicatedLinesBlock :: FilePath -> FilePath -> IO Double
+densityOfDuplicatedLinesBlock = densityOfDuplicatedLines nrOfFilesDuplicatedLineBlock
+
+{- Count the number of files that have at least one duplicated block
+-}
+nrOfFilesDuplicatedLineBlock :: FilePath -> FilePath -> IO Int
+nrOfFilesDuplicatedLineBlock = nrOfFilesDuplicatedLine getClonesBlock
+
+{- Get the clones for a blokc of contiguous lines
 -}
 getClonesBlock :: FilePath -> FilePath -> IO [(String, [(String, Int, Int)])]
 getClonesBlock fp db =  getClonesByBlock fp db
@@ -80,18 +93,15 @@ getClones'' fn db = readFile fn >>= return . filterNonClone . fun
           two   = (\(_,b,_,_) -> b)
           four  = (\(_,_,_,d) -> d)
 
-{-Density of duplicated lines
+{-Density of duplicated lines for one line duplication
 -}
-densityOfDuplicatedLines :: FilePath -> FilePath -> IO Double
-densityOfDuplicatedLines fp db = do
-    dl <- nrOfFilesDuplicatedLine fp db
-    phy <- physicalLines fp
-    return ((fromIntegral dl / fromIntegral phy) * 100)
+densityOfDuplicatedLinesOneLine :: FilePath -> FilePath -> IO Double
+densityOfDuplicatedLinesOneLine = densityOfDuplicatedLines nrOfFilesDuplicatedLineOneLine
 
 {- Count the number of files that have at least one duplicated line
 -}
-nrOfFilesDuplicatedLine :: FilePath -> FilePath -> IO Int
-nrOfFilesDuplicatedLine fp db = getClonesOneLine fp db >>= return . length . groupBy (\(_,a,_) (_,b,_) -> a == b) . concatMap (snd)
+nrOfFilesDuplicatedLineOneLine :: FilePath -> FilePath -> IO Int
+nrOfFilesDuplicatedLineOneLine = nrOfFilesDuplicatedLine getClonesOneLine
 
 {- This funtion receives the file where we want to test if hsa any clone code
    and the database of files under our system (this file contains the full path
@@ -142,3 +152,15 @@ removeRepeatedSpaces_ s | null s        = s
                         | length s == 1 = s
                         | head s == (' ') && (head . drop 1) s == ' ' = removeRepeatedSpaces $ tail s
                         | otherwise = s
+
+{- Auxiliar functions related with clone detection
+-}
+
+--densityOfDuplicatedLines :: FilePath -> FilePath -> IO Double
+densityOfDuplicatedLines f fp db = do
+    dl <- f fp db
+    phy <- physicalLines fp
+    return ((fromIntegral dl / fromIntegral phy) * 100)
+
+--nrOfFilesDuplicatedLine :: FilePath -> FilePath -> IO Int
+nrOfFilesDuplicatedLine f fp db = f fp db >>= return . length . groupBy (\(_,a,_) (_,b,_) -> a == b) . concatMap snd

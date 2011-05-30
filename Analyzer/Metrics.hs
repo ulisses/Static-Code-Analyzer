@@ -1,3 +1,4 @@
+{-#OPTIONS -XGADTs#-}
 ------------------------------------------------------------------------------ 
 -- | 
 -- Author       : Ulisses Araujo Costa
@@ -14,7 +15,7 @@
 
 module Metrics(emptyMetrics
               ,insertMetric, deleteMetric, concatMetrics
-              ,convertToXML, showXMLMetrics, writeMetricsToFile) where
+              ) where
 
 import Text.XML.HXT.DOM.XmlNode
 import Text.XML.HXT.DOM.MimeTypes
@@ -29,7 +30,15 @@ import Data.Maybe
 data Metrics = Metrics (Map MetricName MetricValue)
     deriving Show
 type MetricName = String
-type MetricValue = Double
+
+data MetricValue = Num Double
+                 | Complexity [(String, [(String, Int, Int)])]
+    deriving Show
+
+instance Eq MetricValue where
+    (Num d1) == (Num d2) = d1 == d2
+    (Complexity l1) == (Complexity l2) = l1 == l2
+    _ == _ = False
 
 {- Aux functions -}
 toMetrics = Metrics
@@ -61,7 +70,6 @@ concatMetrics :: Metrics -> Metrics -> Metrics
 concatMetrics m1 m2 = toMetrics $ union (fromMetrics m1) (fromMetrics m2)
 
 {- This function converts a metrics bag to XML
--}
 convertToXML :: Metrics -> XmlTrees
 convertToXML (Metrics m) = [mkTree (XTag (mkName "metrics") [])  $ convertToXML_]
     where convertToXML_ = foldrWithKey (\k a b -> mkEntry (k, show a) : b) [] m
@@ -69,24 +77,25 @@ convertToXML (Metrics m) = [mkTree (XTag (mkName "metrics") [])  $ convertToXML_
           mkMetricTag lst = mkTree (XTag (mkName "metric") lst) []
           mkValue v       = (mkAttr (mkName "value")) [(mkTree (mkText v) [])]
           mkNameMetric k  = (mkAttr (mkName "name")) [(mkTree (mkText k) [])]
+-}
 
 {- Show Metrics in XML
--}
 showXMLMetrics :: Metrics -> IO ()
 showXMLMetrics = putStrLn . indentXMLMetrics . convertToXML
+-}
 
 {- Indent XML metrics (HXL seems to not has pretty printing)
--}
 indentXMLMetrics :: XmlTrees -> String
 indentXMLMetrics [ NTree (XTag tag _) l ]
     =    "<" ++ localPart tag ++ ">"
       ++  foldr (\h t -> "\n\t" ++ xshow [h] ++ t) "\n" l
       ++ "</" ++ localPart tag ++ ">"
+-}
 
 {- Write metrics bag to file
--}
 writeMetricsToFile :: FilePath -> Metrics -> IO ()
 writeMetricsToFile fn = writeFile fn . indentXMLMetrics . convertToXML
 
 test :: Metrics
 test = Metrics ( fromList([("Jo2hn",34.0),("Jo3hn",34.0),("Jo134hn",34.0),("J314ohn",34.0),("Joh43343n",34.0), ("Bob",12.1)]) )
+-}
