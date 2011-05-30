@@ -49,7 +49,48 @@ public class Variavel{
 		}
 		return str;
 	}
+}
+
+public class Position {
+	public int x;
+	public int y;
 	
+	public Position(){
+		this.x = 0;
+		this.y = 0;
+	}
+	public Position(int x1, int y1){
+		this.x = x1;
+		this.y = y1;
+	}
+}
+
+public class ListaVar {
+	public HashMap<String,Variavel> lista;
+	public int state; //estado do robo
+	public boolean penup;
+	public Position pos;
+	
+	public ListaVar(){
+		this.lista = new HashMap<String,Variavel>();
+		this.state = 0;
+		this.penup = true;
+		this.pos = new Position();
+	}
+	
+	public ListaVar(ArrayList<Variavel> array){
+		this.lista = new HashMap<String,Variavel>();
+		for(Variavel v : array){
+			this.lista.put(v.nome,v);
+		}
+		this.state = 0;
+		this.penup = true;
+		this.pos = new Position();
+	}
+	
+	public Variavel getVar(String str){
+		return this.lista.get(str);
+	}
 }
 
 }
@@ -60,8 +101,11 @@ logoliss
     	;
     
 body
+@init{ListaVar list;}
     	:    DECLARATIONS        dec=declarations		
-    	     STATEMENTS {for(Variavel v : $dec.lista_out) System.out.println(v.toString());}        statements
+    	     STATEMENTS {//for(Variavel v : $dec.lista_out) System.out.println(v.toString());
+    	     			list = new ListaVar($dec.lista_out);
+    	     		}       statements[list]
     	;
 
 //**************************declarations*************************
@@ -164,153 +208,187 @@ returns[int value_out]
 
 //************************* Statements
 
-statements
-    :    statement+
-              ;
+statements[ListaVar list_in]
+returns[ListaVar list_out]
+	:    (statement[list_in])+
+	;
               
-statement
-    :    turtle_commands
-    |     assignment
-    |     conditional_statement
-    |     iterative_statement
-    ;
+statement[ListaVar list_in]
+returns[ListaVar list_out]
+	:     turtle_commands[list_in]
+	|     assignment[list_in]
+	|     conditional_statement[list_in]
+	|     iterative_statement[list_in]
+	;
     
 //************************* Turtle Statement
-turtle_commands
-    :    step
-    |    rotate
-    |    mode
-    |    dialogue
-    |    location
-    ;
+turtle_commands[ListaVar list_in]
+returns[ListaVar list_out]
+	:    step[list_in]
+	|    rotate 			{list_in.state += $rotate.value_out; if(list_in.state < 0)list_in.state += 360;if(list_in.state >= 360)list_in.state -= 360; $list_out = $list_in;}
+	|    mode			{list_in.penup = $mode.state_out; $list_out = list_in;}
+	|    dialogue[list_in]		{System.out.println("Dialogos a serem ignorados...");}
+	|    loc=location		{Position pes = new Position($loc.x_out,$loc.y_out); list_in.pos = pes; list_out=list_in;} 
+	;
     
-step 
-    :    FORWARD     expression
-        |    BACKWARD     expression
-        ;
+step[ListaVar list_in]
+returns[ListaVar list_out]
+	:    FORWARD     expression[list_in] 
+	|    BACKWARD     expression[list_in]
+	;
         
-rotate    :     RRIGHT
-          |     RLEFT
-          ;
+rotate
+returns[int value_out]
+	:     RRIGHT	{$value_out = 90;}
+	|     RLEFT	{$value_out = -90;}
+	;
           
-mode     :    PEN     likeaboss
-    ;
+mode 
+returns[boolean state_out]
+	:    PEN     likeaboss{$state_out = $likeaboss.state_out;}
+	;
 
-likeaboss
-    :    (UPS|DOWNS)
-    ;
+likeaboss 
+returns[boolean state_out]
+	:    	UPS	{$state_out = true;}
+	|	DOWNS	{$state_out = false;}
+	;
     
-dialogue     :    say_statement
-            |    ask_statement
-    ;
+dialogue[ListaVar list_in]
+returns[ListaVar list_out]     
+	:    say_statement[list_in]
+	|    ask_statement[list_in]
+	;
 
-location    :    GOTO     NUM     ','     NUM
-    |     WHERE    '?'
-    ;
+location
+returns[int x_out, int y_out]
+	:    GOTO     a=NUM{$x_out = Integer.parseInt($a.text);}     ','     b=NUM{$y_out = Integer.parseInt($b.text);}
+	|     WHERE{$x_out = 1; $y_out = 1;}	'?'
+	;
             
 //************************* Assignment Statement
-assignment 
-    :    variable     '='     expression
-    ;
+assignment[ListaVar list_in]
+returns[ListaVar list_out] 
+	:    variable[list_in]     '='     expression[list_in]
+	;
 
-variable
-    :    IDENT     (array_acess)?
-    ;
+variable[ListaVar list_in]
+returns[ListaVar list_out, int value_out]
+	:    IDENT     (array_acess[list_in])?	{$value_out = 5;}
+	;
 
-array_acess
-    :    '['     single_expression     ']'
-    ;
+array_acess[ListaVar list_in]
+returns[ListaVar list_out]
+	:    '['     single_expression[list_in]     ']'
+	;
 
 //*********************** Expression
-expression
+expression[ListaVar list_in]
+returns[ListaVar list_out]
 options{k=2;}
-    :    single_expression    (rel_op     expression)?
-    ;
+	:    single_expression[list_in]    (rel_op     expression[list_in])?
+	;
 
 //******** Single_Expression
-single_expression
-    :    term    (add_op single_expression)?
-    ;
+single_expression[ListaVar list_in]
+returns[ListaVar list_out]
+	:    term[list_in]    (add_op single_expression[list_in])?
+	;
 
 //******* Term
-term
-    :    factor    (mul_op    term)?    
-    ;
+term[ListaVar list_in]
+returns[ListaVar list_out,int value_out]
+	:    factor[list_in]    (mul_op    term[list_in])?    
+	;
 
 //******* Factor
-factor
+factor[ListaVar list_in]
+returns[ListaVar list_out, int value_out]
 options{k=3;}
-    :    constant
-    |    variable
-    |    succorpred
-    |    ('+'|'-'|'!')? '('    expression    ')'
-    ;
+	:    c=constant						{$value_out = $c.value_out;}
+	|    v=variable[list_in]				{$value_out = $v.value_out;}
+	|    s=succorpred[list_in]				{$value_out = $s.value_out;}
+	|    ('+'|'-'|'!')? '('    e=expression[list_in]    ')'	{$value_out = 2;}
+	;
 
 //******** Operators
 add_op 
-    :     '+'
-          |     '-'
-         |     '||'
-    ;
+returns[int aop_out]
+	:     '+'	{$aop_out = 1;}
+	|     '-'	{$aop_out = 2;}
+	|     '||'	{$aop_out = 3;}
+	;
 
 mul_op
-    :    '*'
-           |     '/'
-           |     '&&'
-           |     '**'
-    ;
+returns[int mop_out]
+	:    '*'	{$mop_out = 1;}
+	|     '/'	{$mop_out = 2;}
+	|     '&&'	{$mop_out = 3;}
+	|     '**'	{$mop_out = 4;}
+	;
 
 rel_op 
-    :    '=='
-           |     '!='
-           |     '<'
-           |     '>'
-           |     '<='
-           |     '>='
-           |     'in'
-    ;
+returns[int rop_out]
+	:    '=='	{$rop_out = 1;}
+	|     '!='	{$rop_out = 2;}
+	|     '<'	{$rop_out = 3;}
+	|     '>'	{$rop_out = 4;}
+	|     '<='	{$rop_out = 5;}
+	|     '>='	{$rop_out = 6;}
+	|     'in'	{$rop_out = 7;}
+	;
 
 //******** SuccOrPredd
-succorpred
-    :     succpred     IDENT
-    ;
+succorpred [ListaVar list_in]
+returns[ListaVar list_out, int value_out]
+	:     suc=succpred		IDENT {Variavel v = list_in.getVar($IDENT.text); v.valor += $suc.value_out;$value_out = v.valor;$list_out = list_in;}
+	;
 
-succpred
-    :    SUCC
-            |    PRED
-    ;
+succpred 
+returns[int value_out]
+	:    SUCC	{$value_out = 1;}
+	|    PRED	{$value_out = -1;}
+	;
 
 //********************* IO Statements
-say_statement
-    :    SAY     '('     expression     ')'
-    ;
+say_statement [ListaVar list_in]
+returns[ListaVar list_out]
+	:    SAY     '('     expression[list_in]     ')'
+	;
 
-ask_statement
-    :    ASK     '('     STRING     ','     variable     ')'
-    ;
+ask_statement [ListaVar list_in]
+returns[ListaVar list_out]
+	:    ASK     '('     STRING     ','     variable[list_in]     ')'
+	;
 
 //********************* Conditional & Iterative Statements
-conditional_statement
-    :    ifthenelse_stat
-    ;
+conditional_statement[ListaVar list_in]
+returns[ListaVar list_out]
+	:    ifthenelse_stat[list_in]
+	;
 
-iterative_statement
-    :    while_stat
-    ;
+iterative_statement[ListaVar list_in]
+returns[ListaVar list_out]
+	:    while_stat[list_in]
+	;
 
 //******** IfThenElse_Stat
-ifthenelse_stat        
-        :    IF    expression
-                   |    THEN    '{'     statements     '}'
-                  |    else_expression
-                  ;
+ifthenelse_stat[ListaVar list_in]
+returns[ListaVar list_out]
+	:    IF    expression[list_in]
+	|    THEN    '{'     statements[list_in]     '}'
+	|    else_expression[list_in]
+	;
 
-else_expression    :     ELSE    '{'     statements     '}'
-        ;
+else_expression[ListaVar list_in]
+returns[ListaVar list_out]
+	:     ELSE    '{'     statements[list_in]     '}'
+	;
 
 //******** While_Stat
-while_stat
-        :    WHILE    '('     expression     ')'     '{'     statements     '}'
+while_stat[ListaVar list_in]
+returns[ListaVar list_out]
+        :    WHILE    '('     expression[list_in]     ')'     '{'     statements[list_in]     '}'
         ;
         
 PRED :  ('P'|'p')('R'|'r')('E'|'e')('D'|'d')
@@ -351,17 +429,19 @@ UPS :    ('U'|'u')('P'|'p')
 
 THEN :  ('T'|'t')('H'|'h')('E'|'e')('N'|'n')
         ;
-
-WHILE : ('W'|'w')('H'|'h')('I'|'i')('L'|'l')('E'|'e')
+        
+WHILE 	:	 ('W'|'w')('H'|'h')('I'|'i')('L'|'l')('E'|'e')
         ;
 
 STATEMENTS :    ('S'|'s')('T'|'t')('A'|'a')('T'|'t')('E'|'e')('M'|'m')('E'|'e')('N'|'n')('T'|'t')('S'|'s')
         ;
-
-BOOLEAN :       ('B'|'b')('O'|'o')('O'|'o')('L'|'l')('E'|'e')('A'|'a')('N'|'n')
-        ;
-
-DECLARATIONS :  ('D'|'d')('E'|'e')('C'|'c')('L'|'l')('A'|'a')('R'|'r')('A'|'a')('T'|'t')('I'|'i')('O'|'o')('N'|'n')('S'|'s')
+        
+BOOLEAN 
+	:	       ('B'|'b')('O'|'o')('O'|'o')('L'|'l')('E'|'e')('A'|'a')('N'|'n')
+;
+        
+DECLARATIONS 
+	:	  ('D'|'d')('E'|'e')('C'|'c')('L'|'l')('A'|'a')('R'|'r')('A'|'a')('T'|'t')('I'|'i')('O'|'o')('N'|'n')('S'|'s')
     ;
     
 ARRAY : ('A'|'a')('R'|'r')('R'|'r')('A'|'a')('Y'|'y')
