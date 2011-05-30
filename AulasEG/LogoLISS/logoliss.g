@@ -8,6 +8,7 @@ tokens{
 @header{
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.lang.Math;
 }
 
 @members{
@@ -224,7 +225,7 @@ returns[ListaVar list_out]
 //************************* Turtle Statement
 turtle_commands[ListaVar list_in]
 returns[ListaVar list_out]
-	:    step[list_in]
+	:    step[list_in]		{$list_out = $step.list_out;}
 	|    rotate 			{list_in.state += $rotate.value_out; if(list_in.state < 0)list_in.state += 360;if(list_in.state >= 360)list_in.state -= 360; $list_out = $list_in;}
 	|    mode			{list_in.penup = $mode.state_out; $list_out = list_in;}
 	|    dialogue[list_in]		{System.out.println("Dialogos a serem ignorados...");}
@@ -233,8 +234,33 @@ returns[ListaVar list_out]
     
 step[ListaVar list_in]
 returns[ListaVar list_out]
-	:    FORWARD     expression[list_in] 
-	|    BACKWARD     expression[list_in]
+	:    FORWARD     ex1=expression[list_in] 
+		{
+			if(list_in.state == 0){
+				list_in.pos.y += $ex1.value_out; 
+			}else if(list_in.state == 90){
+				list_in.pos.x += $ex1.value_out;
+			}else if(list_in.state == 180){
+				list_in.pos.y -= $ex1.value_out;
+			}else if(list_in.state == 270){
+				list_in.pos.x -= $ex1.value_out;
+			}
+			$list_out = list_in;
+		}
+	
+	|    BACKWARD     ex=expression[list_in]
+		{
+			if(list_in.state == 0){
+				list_in.pos.y -= $ex.value_out; 
+			}else if(list_in.state == 90){
+				list_in.pos.x -= $ex.value_out;
+			}else if(list_in.state == 180){
+				list_in.pos.y += $ex.value_out;
+			}else if(list_in.state == 270){
+				list_in.pos.x += $ex.value_out;
+			}
+			$list_out = list_in;
+		}
 	;
         
 rotate
@@ -269,36 +295,118 @@ returns[int x_out, int y_out]
 //************************* Assignment Statement
 assignment[ListaVar list_in]
 returns[ListaVar list_out] 
-	:    variable[list_in]     '='     expression[list_in]
+	:    va=variable[list_in]     '='     ex=expression[list_in]	
+		{
+			Variavel v = $va.var_out;
+			if(v.tipo == Tipo.Array){
+				v.lista.set($va.indice_out,$ex.value_out);
+			}else{
+				v.valor = $ex.value_out;
+			} 
+		}
 	;
 
 variable[ListaVar list_in]
-returns[ListaVar list_out, int value_out]
-	:    IDENT     (array_acess[list_in])?	{$value_out = 5;}
+returns[ListaVar list_out, int value_out, Variavel var_out, int indice_out]
+	:    i=IDENT{$var_out = list_in.getVar($i.text);$value_out = list_in.getVar($i.text).valor; $indice_out = 0;}     
+		(a=array_acess[list_in, $i.text]
+		{$var_out = list_in.getVar($i.text);$value_out = $a.value_out; $indice_out = $a.indice_out;})?	
 	;
 
-array_acess[ListaVar list_in]
-returns[ListaVar list_out]
-	:    '['     single_expression[list_in]     ']'
+array_acess[ListaVar list_in, String id_in]
+returns[ListaVar list_out, int value_out, int indice_out]
+	:    '['     s=single_expression[list_in]     ']' 
+		{
+			Variavel v = list_in.getVar(id_in);
+			if(v.tipo == Tipo.Array){
+				if(v.lista.size() > $s.value_out){
+					$value_out = v.lista.get($s.value_out);
+					$indice_out = $s.value_out;
+				}else{
+					$value_out = 0;
+					$indice_out = 0;
+				}
+			}else{
+				$value_out = 0;
+				$indice_out = 0;
+			}
+		}
 	;
 
 //*********************** Expression
 expression[ListaVar list_in]
-returns[ListaVar list_out]
+returns[ListaVar list_out, int value_out]
 options{k=2;}
-	:    single_expression[list_in]    (rel_op     expression[list_in])?
+	:    s=single_expression[list_in]{$value_out = $s.value_out;}    (r=rel_op     e=expression[list_in]
+		{
+			if($r.rop_out == 1){
+				$value_out = (int)($s.value_out == $e.value_out ? 1 : 0);
+			}
+			else if($r.rop_out == 2){
+				$value_out = (int)($s.value_out != $e.value_out ? 1 : 0);
+			}
+			else if($r.rop_out == 3){
+				$value_out = (int)($s.value_out < $e.value_out ? 1 : 0);
+			}
+			else if($r.rop_out == 4){
+				$value_out = (int)($s.value_out > $e.value_out ? 1 : 0);
+			}
+			else if($r.rop_out == 5){
+				$value_out = (int)($s.value_out <= $e.value_out ? 1 : 0);
+			}
+			else if($r.rop_out == 6){
+				$value_out = (int)($s.value_out >= $e.value_out ? 1 : 0);
+			}
+			else if($r.rop_out == 7){
+				$value_out = (int)($s.value_out >= $e.value_out ? 1 : 0);
+			}else{
+				$value_out = 0;
+			}
+		}
+	)?
 	;
 
 //******** Single_Expression
 single_expression[ListaVar list_in]
-returns[ListaVar list_out]
-	:    term[list_in]    (add_op single_expression[list_in])?
+returns[ListaVar list_out, int value_out]
+	:    t=term[list_in] {$value_out = $t.value_out;}    (a=add_op s=single_expression[list_in]
+			{
+			if($a.aop_out == 1){
+				$value_out = $t.value_out + $t.value_out;
+			}
+			else if($a.aop_out == 2){
+				$value_out = $t.value_out - $t.value_out;
+			}
+			else if($a.aop_out == 3){
+				$value_out = $t.value_out - $t.value_out;
+			}else{
+				$value_out = 0;
+			}
+		}
+	)?
 	;
 
 //******* Term
 term[ListaVar list_in]
 returns[ListaVar list_out,int value_out]
-	:    factor[list_in]    (mul_op    term[list_in])?    
+	:    f=factor[list_in]{$value_out = $factor.value_out;}    (m=mul_op    t=term[list_in]
+		{
+			if($m.mop_out == 1){
+				$value_out = $f.value_out * $t.value_out;
+			}
+			else if($m.mop_out == 2){
+				$value_out = $f.value_out / $t.value_out;
+			}
+			else if($m.mop_out == 3){
+				$value_out = $f.value_out / $t.value_out;
+			}
+			else if($m.mop_out == 4){
+				$value_out = (int)Math.pow((double)$f.value_out,(double)$t.value_out);
+			}else{
+				$value_out = 0;
+			}
+		}
+	)?    
 	;
 
 //******* Factor
@@ -484,3 +592,4 @@ WS  :   ( ' '
 STRING
     :  '"' ( ~('\\'|'"') )* '"'
     ;
+    
