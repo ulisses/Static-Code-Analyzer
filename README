@@ -381,16 +381,19 @@
 |   |       |   `-- DI-UM.PNG
 |   |       |-- makefile
 |   |       `-- pres.tex
-|   `-- xml e xsd- PI
-|       |-- enunciado.xml
-|       |-- enunciado.xsd
-|       |-- enunciado2.xml
-|       |-- reply.xml
-|       |-- reply.xsd
-|       |-- request.xml
-|       |-- request.xsd
-|       |-- tentativa.xml
-|       `-- tentativa.xsd
+|   |-- xml e xsd- PI
+|   |   |-- enunciado.xml
+|   |   |-- enunciado.xsd
+|   |   |-- enunciado2.xml
+|   |   |-- reply.xml
+|   |   |-- reply.xsd
+|   |   |-- request.xml
+|   |   |-- request.xsd
+|   |   |-- tentativa.xml
+|   |   `-- tentativa.xsd
+|   `-- xmlToPdf
+|       |-- metricasOut.xsl
+|       `-- metricasOutExample.xml
 |-- pln
 |   |-- count
 |   |   |-- README.markdown
@@ -419,14 +422,17 @@
 |   |   |-- exemplo.c
 |   |   `-- exemplo2.c
 |   |-- gramatica
+|   |   |-- README
 |   |   |-- grammar.pl
 |   |   |-- input.txt
 |   |   |-- output
+|   |   |-- output2
 |   |   |-- run.sh
 |   |   |-- testeLinha
 |   |   |-- testeLinhas
 |   |   |-- testeTree
-|   |   `-- testeTrees
+|   |   |-- testeTrees
+|   |   `-- trata.pl
 |   |-- parser_makefile
 |   |   |-- makefile
 |   |   |-- makefile.pl
@@ -1048,7 +1054,6 @@
 |       `-- plugins
 `-- scripts_install
     |-- ReadMe
-    |-- install.sh
-    `-- install.sh~
+    `-- install.sh
 
-259 directories, 792 files
+260 directories, 796 files
