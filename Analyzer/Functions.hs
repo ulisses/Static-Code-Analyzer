@@ -41,6 +41,5 @@ getFunsName = return . filter (not . null) . applyTU (once_tdTU names)
 getFunSign :: Data x => x -> [x]
 getFunSign = applyTP (topdown names1)
     where names1 = idTP `adhocTP` (return . fromFunctionToSign)
-
-fromFunctionToSign (CFDefExt (CFunDef lCDeclSpec cDeclr _ _ _ )) = CDeclExt (CDecl lCDeclSpec [(Just $ cDeclr,Nothing,Nothing)] internalNode)
+          fromFunctionToSign (CFDefExt (CFunDef lCDeclSpec cDeclr _ _ _ )) = CDeclExt (CDecl lCDeclSpec [(Just $ cDeclr,Nothing,Nothing)] internalNode)
 

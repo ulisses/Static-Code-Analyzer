@@ -31,7 +31,7 @@ import Data.Generics.Strafunski.StrategyLib.StrategyPrelude
 import Data.Generics.Strafunski.StrategyLib.FlowTheme
 import Control.Monad
 
-import Comments(getNrOfLinesOfComments,commentLinesDensity)
+import Comments
 import NumberOfLines
 import Metrics
 import NumberOfLines

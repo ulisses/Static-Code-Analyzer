@@ -19,8 +19,10 @@ void fun(int a, int b) {
     }
 }
 
+*/
 void main(int argc, char **argv) {
-    if(1) {}
+    if(1) {
+    	}
     switch (1) {
         case 1: {
                     fun(1,1);
@@ -34,7 +36,6 @@ void main(int argc, char **argv) {
     }
     return 0;
 }
-*/
 
 void fun2() {
     int i,j;

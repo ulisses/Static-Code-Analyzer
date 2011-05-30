@@ -11,7 +11,7 @@
 -- In this module I implement the metrics related with complexity
 --
 ------------------------------------------------------------------------------
-module Complexity where
+module Complexity(functionForMccabeIndex, mccabePerFun, mccabeIndex) where
 
 import Data.Data
 import Data.Monoid
