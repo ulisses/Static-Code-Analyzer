@@ -31,7 +31,7 @@ instance Num a => Monoid a where
     mempty = 0
 
 p = parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] "main.c"
-r= (\(Right r) -> r)
+r = (\(Right r) -> r)
 
 {- fucntions names that are inside the range of complexities
 -}
@@ -45,8 +45,8 @@ functionForMccabeIndex d (min,max) = do
 mccabePerFun :: CTranslUnit -> IO [(String,Int)]
 mccabePerFun d = do
     funs <- getFunsName d
-    mccabes <- (mapM mccabeIndex . getListFunFromC )d
-    return $ zip funs mccabes
+    mccabes <- (mapM mccabeIndex . getListFunFromC) d
+    return $ filter ((/=nofunName) . fst) $ zip funs mccabes
     where getListFunFromC (CTranslUnit l _) = l
 
 {- mcCabe index, we need to have Int as Monoid, in the future
