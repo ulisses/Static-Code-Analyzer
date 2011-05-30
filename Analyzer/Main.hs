@@ -71,7 +71,7 @@ dep' = applyTU (depthWith dep'')
 
 depthWith s = recurse `passTU` -- Sequential composition
     \depth_subterms ->
-        let max_subterms | null depth_subterms = -6
+        let max_subterms | null depth_subterms = 0
                          | otherwise = maximum depth_subterms
         in (ifTU s
                 (const (constTU (max_subterms + 1)))
@@ -80,7 +80,14 @@ depthWith s = recurse `passTU` -- Sequential composition
         where
         recurse = allTU (++) [] (depthWith s `passTU` \depth -> constTU [depth])
 
-dep'' = failTU `adhocTU` loop
+dep'' = failTU `adhocTU` loop'
+
+--loop' :: CStat -> IO Int
+loop' = return . loop_
+    where loop_ (CIf _ _ _ _)    = 1
+          loop_ (CSwitch _ _ _)  = 1
+          loop_ (CWhile _ _ _ _) = 1
+          loop_ (CFor _ _ _ _ _) = 1
 
 mccabe :: IO Int
 mccabe =  parr >>= mccabeIndex . fromRight

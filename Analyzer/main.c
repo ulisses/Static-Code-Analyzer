@@ -1,7 +1,6 @@
 
 /*
 
-*/
 
 void fun(int a, int b);
 
@@ -35,27 +34,15 @@ void main(int argc, char **argv) {
     }
     return 0;
 }
+*/
 
 void fun2() {
     int i,j;
-    for(; (i < 10 && 4) || 10; i++,j++) {
-    }
-
-    int i;
-    int j;
-    
-    //(i < 10) || 10;
 	if(x>10) {
-		if(4) {
-			if(1) {
-				if(1) {
-					if(1) {
-							if(1) {}
-						}
-					}
-				}
-			}
+		if(1) {
+		
 		}
+	}
 }
 
 //void fun1() { int j = 1++; }

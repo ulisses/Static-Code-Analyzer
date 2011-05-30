@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metrics packageName="Name of the package">
+    <metric name="metric4" functionName="main" fileName="main.c">
+        <list>
+            <item v="34.0" />
+        </list>
+    </metric>
+    <metric name="metric5"   functionName="soma" fileName="main.c">
+        <list>
+            <item v="stdio.h" />
+            <item v="stdlib.h" />
+            <item v="cenas.h" />
+        </list>
+    </metric>
+</metrics>
