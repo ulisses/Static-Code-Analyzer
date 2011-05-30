@@ -33,14 +33,33 @@
     
     <xsl:template match="metrics">
         <fo:block>
-            <xsl:value-of select="@packageName" />
+            <fo:block font-size="20">
+                <xsl:value-of select="@packageName" />
+            </fo:block>
             
+            <fo:block>ola</fo:block><fo:block>&#160;&#160;&#160;&#160;jon  - - - - as</fo:block><fo:block>sabimbi</fo:block>
             
             <fo:table border="0.5pt solid black" text-align="center">
                 <fo:table-body>
                     
+                    <fo:table-row background-color="#0174DF">
+                        <fo:table-cell padding="6pt" border="0.5pt solid black">
+                            <fo:block > Name </fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell padding="6pt" border="0.5pt solid black">
+                            <fo:block> List of results </fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell padding="6pt" border="0.5pt solid black">
+                            <fo:block> Function name </fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell padding="6pt" border="0.5pt solid black">
+                            <fo:block> File name </fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>                                          
+                                        
+                    
                     <xsl:for-each select="metric">
-                        <fo:table-row>
+                        <fo:table-row background-color="#6699FF"> 
                             <fo:table-cell padding="6pt" border="0.5pt solid black">
                                 <fo:block> <xsl:value-of select="@name" /> </fo:block>
                             </fo:table-cell>
