@@ -21,6 +21,7 @@ import qualified Text.XML.HaXml.XmlContent.Parser as P
 import qualified Data.Map as M
 import Data.Maybe
 import Text.XML.HXT.Core
+import Text.XML.HXT.Arrow.Pickle.Xml
 
 infixl 5 >.>
 infixl 4 >+>
@@ -51,15 +52,6 @@ data MetricValue = Num Double
     deriving (Show, Eq)
 
 {- XML serialization and desearilization -}
-
-xpMetrics :: PU Metrics
-xpMetrics = xpElem "metrics"
-	      $ xpAddFixedAttr "packageName" "package"
-	      $ xpickle
-
-exM = emptyMetrics >.> ("metrica1",Num 1.90)  >.> ("metrica2",Num 2)
-    >.> ("metrica3", Clone "FILE" [("ex1",[("ex2",11,123),("ex22222",1,2)]),("ex44",[("ex3",1222,1)])])
-
 instance XmlPickler Metrics where
     xpickle 
         = xpWrap ( toMetrics . M.fromList , M.toList . fromMetrics ) $
@@ -69,20 +61,25 @@ instance XmlPickler Metrics where
 instance XmlPickler MetricValue where
     xpickle = xpAlt tag ps
         where
-        tag (Num _) = 0
+        tag (Num _)     = 0
         tag (Clone _ _) = 1
         ps = [ xpWrap ( Num , \(Num i) -> i )     (xpAddFixedAttr "type" "num" $ xpAttr "value" $ xpWrap (read, show) xpText)
              , xpWrap ( uncurry Clone, \(Clone s sl) -> (s,sl)) $ xpPair (xpAddFixedAttr "type" "clone" $ xpAttr "srcPath" xpText) (xpList xpTuple)
              ]
+        xpTuple = xpElem "cloneFile" $ xpPair (xpAttr "dstPath" xpText) xpTrip
+        xpTrip = xpList $  xpElem "location" $ xpTriple (xpAttr "srcTxt" xpText) (xpAttr "lineSrc" xpPrim) (xpAttr "lineDst" xpPrim)
 
--- we will need full path here 'xpText'
-xpTuple = xpElem "cloneFile" $ xpPair (xpAttr "dstPath" xpText) xpTrip
+xpMetrics :: PU Metrics
+xpMetrics = xpElem "metrics"
+	      $ xpAddFixedAttr "packageName" "package"
+	      $ xpickle
 
-xpTrip = xpList $  xpElem "location" $ xpTriple (xpAttr "srcTxt" xpText) (xpAttr "lineSrc" xpPrim) (xpAttr "lineDst" xpPrim)
+exM = emptyMetrics >.> ("metrica1",Num 1.90)  >.> ("metrica2",Num 2)
+    >.> ("metrica3", Clone "FILE" [("ex1",[("ex2",11,123),("ex22222",1,2)]),("ex44",[("ex3",1222,1)])])
 
---storeMetrics :: IO ()
-storeMetrics exM = do 
-    runX ( constA exM >>> xpickleDocument xpMetrics
+storeMetrics :: Metrics -> IO ()
+storeMetrics m = do 
+    runX ( constA m >>> xpickleDocument xpMetrics
            [withIndent yes] "pickle.xml"
          )
     readFile "pickle.xml" >>= putStrLn
@@ -121,29 +118,6 @@ m1 >+> m2 = concatMetrics m1 m2
 
 concatMetrics :: Metrics -> Metrics -> Metrics
 concatMetrics m1 m2 = toMetrics $ M.union (fromMetrics m1) (fromMetrics m2)
-
-{- This function converts a metrics bag to XML
-convertToXML :: Metrics -> XmlTrees
-convertToXML (Metrics m) = [mkTree (XTag (mkName "metrics") [])  $ convertToXML_]
-    where convertToXML_ = foldrWithKey (\k a b -> mkEntry (k, show a) : b) [] m
-          mkEntry (k,a) = mkMetricTag [mkNameMetric k, mkValue a]
-          mkMetricTag lst = mkTree (XTag (mkName "metric") lst) []
-          mkValue v       = (mkAttr (mkName "value")) [(mkTree (mkText v) [])]
-          mkNameMetric k  = (mkAttr (mkName "name")) [(mkTree (mkText k) [])]
--}
-
-{- Show Metrics in XML
-showXMLMetrics :: Metrics -> IO ()
-showXMLMetrics = putStrLn . indentXMLMetrics . convertToXML
--}
-
-{- Indent XML metrics (HXL seems to not has pretty printing)
-indentXMLMetrics :: XmlTrees -> String
-indentXMLMetrics [ NTree (XTag tag _) l ]
-    =    "<" ++ localPart tag ++ ">"
-      ++  foldr (\h t -> "\n\t" ++ xshow [h] ++ t) "\n" l
-      ++ "</" ++ localPart tag ++ ">"
--}
 
 {- Write metrics bag to file
 writeMetricsToFile :: FilePath -> Metrics -> IO ()
