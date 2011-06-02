@@ -22,7 +22,7 @@ import Language.C.Data.InputStream(inputStreamFromString)
 import Language.C.Parser
 import Language.C.Data.Position(nopos)
 
-import NumberOfLines(ncloc)
+import NumberOfLines
 
 commentLinesDensity :: FilePath -> IO Double
 commentLinesDensity file = do
