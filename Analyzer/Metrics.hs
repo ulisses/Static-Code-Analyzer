@@ -77,12 +77,12 @@ xpMetrics = xpElem "metrics"
 exM = emptyMetrics >.> ("metrica1",Num 1.90)  >.> ("metrica2",Num 2)
     >.> ("metrica3", Clone "FILE" [("ex1",[("ex2",11,123),("ex22222",1,2)]),("ex44",[("ex3",1222,1)])])
 
-storeMetrics :: Metrics -> IO ()
-storeMetrics m = do 
+--storeMetrics :: Metrics -> IO ()
+storeMetrics m = do
     runX ( constA m >>> xpickleDocument xpMetrics
            [withIndent yes] "pickle.xml"
          )
-    readFile "pickle.xml" >>= putStrLn
+    --readFile "pickle.xml" >>= putStrLn
 
 {- Aux functions -}
 toMetrics = Metrics
