@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metrics packageName="package">
+  <metric name="getClonesOneLine" type="clone" srcPath="FILE">
+    <cloneFile dstPath="..//Analyzer/file.c">
+      <location srcTxt="&#9;}" lineSrc="25" lineDst="41"/>
+      <location srcTxt="&#9;&#9;" lineSrc="44" lineDst="55"/>
+      <location srcTxt="&#9;&#9;}" lineSrc="45" lineDst="68"/>
+      <location srcTxt="&#9;}" lineSrc="46" lineDst="41"/>
+    </cloneFile>
+    <cloneFile dstPath="..//pln/detector_clones/exemplo2.c">
+      <location srcTxt="&#9;}" lineSrc="25" lineDst="20"/>
+      <location srcTxt="&#9;}" lineSrc="46" lineDst="20"/>
+    </cloneFile>
+  </metric>
+  <metric name="metrica1" type="num" value="1.9"/>
+  <metric name="metrica2" type="num" value="2.0"/>
+  <metric name="metrica3" type="clone" srcPath="FILE">
+    <cloneFile dstPath="ex1">
+      <location srcTxt="ex2" lineSrc="11" lineDst="123"/>
+      <location srcTxt="ex22222" lineSrc="1" lineDst="2"/>
+    </cloneFile>
+    <cloneFile dstPath="ex44">
+      <location srcTxt="ex3" lineSrc="1222" lineDst="1"/>
+    </cloneFile>
+  </metric>
+</metrics>
+

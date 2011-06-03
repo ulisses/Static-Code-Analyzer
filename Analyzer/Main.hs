@@ -9,7 +9,6 @@
 -- calculate some metrics related with C99 and GNU C extensions code.
 --
 ------------------------------------------------------------------------------
-
 module Main where
 
 import IO
@@ -76,73 +75,6 @@ loop' = return . loop_
 
 mccabe :: IO Int
 mccabe =  parr >>= mccabeIndex . fromRight
-
-{-
-loop :: CStat -> IO Int
-loop (CIf e s Nothing _) =  countInstr e >>= \eR1 -> countInstr s
-    >>= \eR2 -> return (eR1+eR2+1)
---loop (CIf _ _ (Just _) _) =  return 2
---loop (CSwitch _ _ _) =  return 1
-loop (CFor (Left Nothing) (Just e1) (Just e2) _ _)
-    = countInstr e1 >>= \rE1 -> countInstr e2 >>= \rE2 -> return (rE1 + rE2)
-loop (CFor (Left (Just e1)) (Just e2) (Just e3) _ _)
-    = countInstr e1 >>= \rE1 -> countInstr e2 >>= \rE2 -> countInstr e3 >>= \rE3 -> return (rE1 + rE2 + rE3)
-loop _ =  return 0
-
-exprs :: CExpr -> IO Int
-exprs (CComma l _) = mapM countInstr l >>= return . sum
-exprs (CAssign _ e1 e2 _)
-    = countInstr e1 >>= \rE1 -> countInstr e2 >>= \rE2 -> return (rE1 + rE2)
-exprs (CCast _ e _) = countInstr e
-exprs (CVar i _) = (putStrLn $ ("encontrei:" ++ identToString i)) >> return 1
-exprs _ =  return 0
-
-binaryOp :: CBinaryOp -> IO Int
-binaryOp a = print a >> (return $ binaryOp_ a)
-    where
-    binaryOp_ CMulOp = 2
-    binaryOp_ CDivOp = 2
-    binaryOp_ CRmdOp = 2
-    binaryOp_ CAddOp = 2
-    binaryOp_ CSubOp = 2
-    binaryOp_ CShlOp = 2
-    binaryOp_ CShrOp = 2
-    binaryOp_ CLeOp = 2
-    binaryOp_ CGrOp = 2
-    binaryOp_ CLeqOp = 2
-    binaryOp_ CGeqOp = 2
-    binaryOp_ CEqOp = 2
-    binaryOp_ CNeqOp = 2
-    binaryOp_ CAndOp = 2
-    binaryOp_ CXorOp = 2
-    binaryOp_ COrOp = 2
-    binaryOp_ CLndOp = 2
-    binaryOp_ CLorOp = 2
-
-unaryOp :: CUnaryOp -> IO Int
-unaryOp a = print a >> (return . unaryOp_) a
-    where
-    unaryOp_ CPreIncOp = 1
-    unaryOp_ CPreDecOp = 1
-    unaryOp_ CPostIncOp = 1
-    unaryOp_ CPostDecOp = 1
-    unaryOp_ CAdrOp = 1
-    unaryOp_ CIndOp = 1
-    unaryOp_ CPlusOp = 1
-    unaryOp_ CMinOp = 1
-    unaryOp_ CCompOp = 1
-    unaryOp_ CNegOp = 1
--}
-
-
-
-
-
-
-
-
-
-
 
 --decl (CDecl _ l _) = return . sum [ | () <- l]
 
