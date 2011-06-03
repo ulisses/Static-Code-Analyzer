@@ -51,7 +51,7 @@ data MetricValue = Num Double
                  | Clone String [(String, [(String, Int, Int)])]
     deriving (Show, Eq)
 
-{- XML serialization and desearilization -}
+{- XML Metrics serialization -}
 instance XmlPickler Metrics where
     xpickle 
         = xpWrap ( toMetrics . M.fromList , M.toList . fromMetrics ) $
@@ -67,7 +67,7 @@ instance XmlPickler MetricValue where
              , xpWrap ( uncurry Clone, \(Clone s sl) -> (s,sl)) $ xpPair (xpAddFixedAttr "type" "clone" $ xpAttr "srcPath" xpText) (xpList xpTuple)
              ]
         xpTuple = xpElem "cloneFile" $ xpPair (xpAttr "dstPath" xpText) xpTrip
-        xpTrip = xpList $  xpElem "location" $ xpTriple (xpAttr "srcTxt" xpText) (xpAttr "lineSrc" xpPrim) (xpAttr "lineDst" xpPrim)
+        xpTrip = xpList $  xpElem "location" $ xpTriple (xpAttr "srcTxt" xpText) (xpAttr "lineSrc" xpickle) (xpAttr "lineDst" xpickle)
 
 xpMetrics :: PU Metrics
 xpMetrics = xpElem "metrics"
@@ -75,7 +75,7 @@ xpMetrics = xpElem "metrics"
 	      $ xpickle
 
 exM = emptyMetrics >.> ("metrica1",Num 1.90)  >.> ("metrica2",Num 2)
-    >.> ("metrica3", Clone "FILE" [("ex1",[("ex2",11,123),("ex22222",1,2)]),("ex44",[("ex3",1222,1)])])
+    >.> ("metrica3", Clone "FILE2" [("ex1",[("ex2",11,123),("ex22222",1,2)]),("ex44",[("ex3",1222,1)])])
 
 --storeMetrics :: Metrics -> IO ()
 storeMetrics m = do

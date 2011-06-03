@@ -37,28 +37,10 @@ import Metrics
 import NumberOfLines
 import Complexity
 import Functions
-
-
-
-
-{- Try to incorporate on-the-fly tests with C random code generation with CSmith tool.
-   But we must have a method in Language.C that receives a Handler or a ByteString.
-   Because this is just for test purpose is probably too much work to do.
-   If someone is interested in doing this, please read the parceCFile in the
-   Language.C.System.GCC and Language.C libraries
--}
-{-
-funfun :: IO BS.ByteString
-funfun = do (_,out,_,pid) <- runInteractiveProcess "csmith" [] Nothing Nothing
-            bs <- BS.hGetContents out
-            waitForProcess pid
-            return bs
---            parseCFileFromCSmith bs
--}
+import AbsolutePath
 
 parr = parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] "main.c"
 parse = parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] 
-
 fromRight = (\(Right prog) -> prog)
 
 {- Count the number of instructions
