@@ -15,6 +15,8 @@
 
 module Metrics where
 
+import Data.List
+
 import Control.Monad.State
 import qualified Data.Map as M
 import Data.Maybe
@@ -23,6 +25,7 @@ import Text.XML.HXT.Arrow.Pickle.Xml
 import Text.LaTeX
 
 import System.Process
+import Control.Concurrent
 import GHC.IO.Handle
 import System.Exit
 
@@ -65,6 +68,9 @@ getAllClone = unpackPack (M.filterWithKey isClone)
           isClone _ _           = False
 
 {- LaTeX -}
+class LATEX a where
+    toLaTeX :: Monad m => a -> LaTeX m
+
 example = do
     documentclass [a4paper,twoside] article
     author "Daniel Diaz"
@@ -73,34 +79,50 @@ example = do
            maketitle
            tableofcontents
            section "Nums"
-           fromNumToLaTeX exM >> newpage
+           fromNumToLaTeX exM
            section "Clones"
 
 fromNumToLaTeX :: Monad m => Metrics -> LaTeX m
-fromNumToLaTeX m = let nums = getAllNum m
-                   in tabular ["c"] "|c|c|" (hline >> textbf "Metric Name" & textbf "Metric Value" // hline >> toTabular nums >> hline)
+fromNumToLaTeX = foldr (>>) newpage . intersperse newpage . map toTabular . toTabularParts . getAllNum
 
+{- This function will break a bag of metrics into a list of bags, each bag has maxPowsPerPage bags.
+   This is usefull because LaTeX won't break tables if they don't fit in one page.
+-}
+toTabularParts :: Metrics -> [Metrics]
+toTabularParts m | sizeM m > maxRowsPerPage = let (k,v) = elemAtM maxRowsPerPage m
+                                                  (m1,m2) = splitM k m
+                                              in m1 : toTabularParts m2
+                 | otherwise = [m]
+    where maxRowsPerPage = 25
+
+{- This version of toTabular will print a tabular environment, without taking care
+   if the elements are too much and the tabular won't fit in just one page.
+   So, this we only send to this function parts of our main tabular
+-}
 toTabular :: Monad m => Metrics -> LaTeX m
-toTabular (Metrics m) = M.foldrWithKey step "" m
+toTabular m = tabular ["c"] "|c|c|" (myhline >> textbf "Metric Name" & textbf "Metric Value" // myhline >> foldrM step noop m)
+    where step k v r = fromString k & (fromNum v) // myhline >> r
+          fromNum (Num a) = fromString $ show a
 
-step :: Monad m => String -> MetricValue -> LaTeX m -> LaTeX m
-step k v r = fromString k & (fromNum v) // r
-    where fromNum (Num a) = fromString $ show a
+myhline = "\\hline "
+noop = ""
 
 geraPDF :: IO()
 geraPDF = do
     t <- render example
-    writeFile "file.tex" t
-    (_,_,_,proc) <- runInteractiveProcess "pdflatex" ["file.tex"] Nothing Nothing
-    waitForProcess proc
-    (_,_,_,proc) <- runInteractiveProcess "pdflatex" ["file.tex"] Nothing Nothing
-    waitForProcess proc
-    (_,_,_,proc) <- runInteractiveProcess "pdflatex" ["file.tex"] Nothing Nothing
+    (inp,out,err,proc) <- runInteractiveProcess "pdflatex" [] Nothing Nothing
+    hPutStr inp t
+    hGetContents out >>= print
     exitCode <- waitForProcess proc
     case exitCode of
         ExitSuccess -> do
-            (_,_,_,proc) <- runInteractiveProcess "open" ["file.pdf"] Nothing Nothing
-            return()
+            (_,_,_,proc) <- runInteractiveProcess "open" ["article.pdf"] Nothing Nothing
+            exitCode <- waitForProcess proc
+            case exitCode of
+                ExitSuccess -> return()
+                exitError -> do
+                    terminateProcess proc
+                    exitWith exitError
         exitError -> do
             terminateProcess proc
             exitWith exitError
@@ -168,12 +190,31 @@ insertMetric (mn,mv) m | M.member mn fm = let (Just mv') = M.lookup mn fm
     where fm  = fromMetrics m
           ins = M.insert mn mv
 
+{- Delete Metrics by name -}
 deleteMetric :: MetricName -> Metrics -> Metrics
 --deleteMetric mn m = unpackPack (delete mn) m
 deleteMetric = unpackPack . M.delete
 
+{- Concat Metrics -}
 (>+>) :: Metrics -> Metrics -> Metrics
 m1 >+> m2 = concatMetrics m1 m2
 
 concatMetrics :: Metrics -> Metrics -> Metrics
 concatMetrics m1 m2 = toMetrics $ M.union (fromMetrics m1) (fromMetrics m2)
+
+{- foldr over Metrics -}
+foldrM :: (MetricName -> MetricValue -> c -> c) -> c -> Metrics -> c
+foldrM f s = M.foldrWithKey f s . fromMetrics
+
+{- get the size of a Metrics -}
+sizeM :: Metrics -> Int
+sizeM = M.size . fromMetrics
+
+{- get the element at position X -}
+elemAtM :: Int -> Metrics -> (MetricName, MetricValue)
+elemAtM n = M.elemAt n . fromMetrics
+
+{- split by key -}
+--splitM :: Int -> Metrics -> (MetricName, MetricValue)
+splitM k m = let (m1,m2) = M.split k $ fromMetrics m
+             in (toMetrics m1, toMetrics m2)
