@@ -1717,11 +1717,6 @@
 ../../../../..//bolsa_snort/code/worm/worm.c
 ../../../../..//bolsa_snort/code/worm/wormdes.c
 ../../../../..//bolsa_snort/code/worm/x8113550.c
-../../../../..//msc/el/pi/Static-Code-Analyzer/Analyzer/a.c
-../../../../..//msc/el/pi/Static-Code-Analyzer/Analyzer/file.c
-../../../../..//msc/el/pi/Static-Code-Analyzer/Analyzer/main2.c
-../../../../..//msc/el/pi/Static-Code-Analyzer/Analyzer/r1.c
-../../../../..//msc/el/pi/Static-Code-Analyzer/Analyzer/test.c
 ../../../../..//msc/el/pi/Static-Code-Analyzer/pln/detector_clones/exemplo.c
 ../../../../..//msc/el/pi/Static-Code-Analyzer/pln/detector_clones/exemplo2.c
 ../../../../..//msc/el/pi/Static-Code-Analyzer/sample_app/data/concursos/contest-1/en-1/user-1/tent-20110303163050/code.c

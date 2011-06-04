@@ -40,6 +40,10 @@ import Complexity(mccabeIndex)
 import Functions
 import AbsolutePath
 
+pdf = getClonesOneLine "main.c" "database.txt" >>= return . Clone "main.c" >>= (return . \c -> emptyMetrics >.> ("clonesByLine",c)) >>= geraPDF
+pdf1 = getClonesOneLine "main.c" "database.txt" >>= (return . \l -> Clone "main.c" (take 10 l)) >>= (return . \c -> emptyMetrics >.> ("clonesByLine",c)) 
+
+
 {- Main -}
 {- We may need to import some libraries to be able to put the input code
    to work, so we must say it to GCC like this:

@@ -1,27 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metrics packageName="package">
-  <metric name="getClonesOneLine" type="clone" srcPath="FILE">
-    <cloneFile dstPath="..//Analyzer/file.c">
-      <location srcTxt="&#9;}" lineSrc="25" lineDst="41"/>
-      <location srcTxt="&#9;&#9;" lineSrc="44" lineDst="55"/>
-      <location srcTxt="&#9;&#9;}" lineSrc="45" lineDst="68"/>
-      <location srcTxt="&#9;}" lineSrc="46" lineDst="41"/>
-    </cloneFile>
-    <cloneFile dstPath="..//pln/detector_clones/exemplo2.c">
-      <location srcTxt="&#9;}" lineSrc="25" lineDst="20"/>
-      <location srcTxt="&#9;}" lineSrc="46" lineDst="20"/>
-    </cloneFile>
-  </metric>
   <metric name="metrica1" type="num" value="1.9"/>
   <metric name="metrica2" type="num" value="2.0"/>
-  <metric name="metrica3" type="clone" srcPath="FILE">
-    <cloneFile dstPath="ex1">
-      <location srcTxt="ex2" lineSrc="11" lineDst="123"/>
-      <location srcTxt="ex22222" lineSrc="1" lineDst="2"/>
+  <metric name="metrica3" type="clone" srcPath="main.c">
+    <cloneFile dstPath="../../../../..//1-matricula/1.2/pp2/Aulas/0405/050405.c">
+      <location srcTxt="\t}" lineSrc="25" lineDst="44"/>
+      <location srcTxt="\t}" lineSrc="46" lineDst="44"/>
     </cloneFile>
-    <cloneFile dstPath="ex44">
-      <location srcTxt="ex3" lineSrc="1222" lineDst="1"/>
+    <cloneFile dstPath="../../../../..//1-matricula/1.2/pp2/Aulas/0422/turma.c">
+      <location srcTxt="\t}" lineSrc="25" lineDst="126"/>
+      <location srcTxt="\t}" lineSrc="46" lineDst="126"/>
+    </cloneFile>
+    <cloneFile dstPath="../../../../..//1-matricula/1.2/pp2/PP2 TP3/ex1.c">
+      <location srcTxt="\t}" lineSrc="25" lineDst="104"/>
+      <location srcTxt="return 0;" lineSrc="37" lineDst="606"/>
+      <location srcTxt="\t}" lineSrc="46" lineDst="104"/>
+    </cloneFile>
+    <cloneFile dstPath="../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/aulas/6.c">
+      <location srcTxt="\t\t}" lineSrc="45" lineDst="33"/>
+    </cloneFile>
+    <cloneFile dstPath="../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp1/_tp1/tp1.c">
+      <location srcTxt="return 0;" lineSrc="37" lineDst="67"/>
+    </cloneFile>
+    <cloneFile dstPath="../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp3/desenho.c">
+      <location srcTxt="\t}" lineSrc="25" lineDst="38"/>
+      <location srcTxt="\t\t" lineSrc="44" lineDst="214"/>
+      <location srcTxt="\t\t}" lineSrc="45" lineDst="37"/>
+      <location srcTxt="\t}" lineSrc="46" lineDst="38"/>
+    </cloneFile>
+    <cloneFile dstPath="../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp3/file.c">
+      <location srcTxt="\t}" lineSrc="25" lineDst="41"/>
+      <location srcTxt="\t\t" lineSrc="44" lineDst="55"/>
+      <location srcTxt="\t\t}" lineSrc="45" lineDst="68"/>
+      <location srcTxt="\t}" lineSrc="46" lineDst="41"/>
+    </cloneFile>
+    <cloneFile dstPath="../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp3/id.c">
+      <location srcTxt="\t}" lineSrc="25" lineDst="68"/>
+      <location srcTxt="\t\t" lineSrc="44" lineDst="140"/>
+      <location srcTxt="\t\t}" lineSrc="45" lineDst="56"/>
+      <location srcTxt="\t}" lineSrc="46" lineDst="68"/>
+    </cloneFile>
+    <cloneFile dstPath="../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp3/myio.c">
+      <location srcTxt="\t}" lineSrc="25" lineDst="59"/>
+      <location srcTxt="\t\t" lineSrc="44" lineDst="50"/>
+      <location srcTxt="\t\t}" lineSrc="45" lineDst="57"/>
+      <location srcTxt="\t}" lineSrc="46" lineDst="59"/>
+    </cloneFile>
+    <cloneFile dstPath="../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp3/prog.c">
+      <location srcTxt="\t}" lineSrc="25" lineDst="101"/>
+      <location srcTxt="\t\t" lineSrc="44" lineDst="95"/>
+      <location srcTxt="\t\t}" lineSrc="45" lineDst="123"/>
+      <location srcTxt="\t}" lineSrc="46" lineDst="101"/>
     </cloneFile>
   </metric>
+  <metric name="metricaNum2" type="num" value="1.0"/>
+  <metric name="metricaNum3" type="num" value="1.0"/>
+  <metric name="metricaNum4" type="num" value="1.0"/>
+  <metric name="metricaNum5" type="num" value="1.0"/>
+  <metric name="metricaNum6" type="num" value="1.009"/>
 </metrics>
 
