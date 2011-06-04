@@ -1,4 +1,4 @@
-{-#OPTIONS -XGADTs#-}
+{-#OPTIONS -XGADTs -XOverloadedStrings -XNoMonomorphismRestriction#-}
 ------------------------------------------------------------------------------ 
 -- | 
 -- Author       : Ulisses Araujo Costa
@@ -16,12 +16,15 @@
 module Metrics where
 
 import Control.Monad.State
-import qualified Text.XML.HaXml.XmlContent.Parser as P
-
 import qualified Data.Map as M
 import Data.Maybe
 import Text.XML.HXT.Core
 import Text.XML.HXT.Arrow.Pickle.Xml
+import Text.LaTeX
+
+import System.Process
+import GHC.IO.Handle
+import System.Exit
 
 infixl 5 >.>
 infixl 4 >+>
@@ -49,7 +52,58 @@ type MetricName = String
 
 data MetricValue = Num Double
                  | Clone String [(String, [(String, Int, Int)])]
-    deriving (Show, Eq)
+    deriving (Show, Eq, Ord)
+
+getAllNum :: Metrics -> Metrics
+getAllNum = unpackPack (M.filterWithKey isNum)
+    where isNum _ (Num _) = True
+          isNum _ _       = False
+
+getAllClone :: Metrics -> Metrics
+getAllClone = unpackPack (M.filterWithKey isClone)
+    where isClone _ (Clone _ _) = True
+          isClone _ _           = False
+
+{- LaTeX -}
+example = do
+    documentclass [a4paper,twoside] article
+    author "Daniel Diaz"
+    title "Example"
+    document $ do
+           maketitle
+           tableofcontents
+           section "Nums"
+           fromNumToLaTeX exM >> newpage
+           section "Clones"
+
+fromNumToLaTeX :: Monad m => Metrics -> LaTeX m
+fromNumToLaTeX m = let nums = getAllNum m
+                   in tabular ["c"] "|c|c|" (hline >> textbf "Metric Name" & textbf "Metric Value" // hline >> toTabular nums >> hline)
+
+toTabular :: Monad m => Metrics -> LaTeX m
+toTabular (Metrics m) = M.foldrWithKey step "" m
+
+step :: Monad m => String -> MetricValue -> LaTeX m -> LaTeX m
+step k v r = fromString k & (fromNum v) // r
+    where fromNum (Num a) = fromString $ show a
+
+geraPDF :: IO()
+geraPDF = do
+    t <- render example
+    writeFile "file.tex" t
+    (_,_,_,proc) <- runInteractiveProcess "pdflatex" ["file.tex"] Nothing Nothing
+    waitForProcess proc
+    (_,_,_,proc) <- runInteractiveProcess "pdflatex" ["file.tex"] Nothing Nothing
+    waitForProcess proc
+    (_,_,_,proc) <- runInteractiveProcess "pdflatex" ["file.tex"] Nothing Nothing
+    exitCode <- waitForProcess proc
+    case exitCode of
+        ExitSuccess -> do
+            (_,_,_,proc) <- runInteractiveProcess "open" ["file.pdf"] Nothing Nothing
+            return()
+        exitError -> do
+            terminateProcess proc
+            exitWith exitError
 
 {- XML Metrics serialization -}
 instance XmlPickler Metrics where
@@ -76,6 +130,11 @@ xpMetrics = xpElem "metrics"
 
 exM = emptyMetrics >.> ("metrica1",Num 1.90)  >.> ("metrica2",Num 2)
     >.> ("metrica3", Clone "FILE2" [("ex1",[("ex2",11,123),("ex22222",1,2)]),("ex44",[("ex3",1222,1)])])
+    >.> ("metricaNum2",Num 1)
+    >.> ("metricaNum3",Num 1)
+    >.> ("metricaNum4",Num 1)
+    >.> ("metricaNum5",Num 1)
+    >.> ("metricaNum6",Num 1.009)
 
 --storeMetrics :: Metrics -> IO ()
 storeMetrics m = do
@@ -118,11 +177,3 @@ m1 >+> m2 = concatMetrics m1 m2
 
 concatMetrics :: Metrics -> Metrics -> Metrics
 concatMetrics m1 m2 = toMetrics $ M.union (fromMetrics m1) (fromMetrics m2)
-
-{- Write metrics bag to file
-writeMetricsToFile :: FilePath -> Metrics -> IO ()
-writeMetricsToFile fn = writeFile fn . indentXMLMetrics . convertToXML
-
-test :: Metrics
-test = Metrics ( fromList([("Jo2hn",34.0),("Jo3hn",34.0),("Jo134hn",34.0),("J314ohn",34.0),("Joh43343n",34.0), ("Bob",12.1)]) )
--}
