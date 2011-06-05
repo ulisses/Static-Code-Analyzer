@@ -23,21 +23,29 @@ import Language.C.Parser
 import Language.C.Data.Position(nopos)
 
 import NumberOfLines
+import Metrics
 
-commentLinesDensity :: FilePath -> IO Double
+commentLinesDensity :: FilePath -> IO Metrics
 commentLinesDensity file = do
-    nrCom <- getNrOfLinesOfComments file
-    nrLin <- ncloc file
-    return ((fromIntegral nrCom / fromIntegral (nrLin + nrCom)) * 100)
+    mNrCom <- getNrOfLinesOfComments file
+    (Just (Num nrCom)) <- return $ lookupM ("getNrOfLinesOfComments",file,"") mNrCom
+    nrLin  <- ncloc file >>= return . fromIntegral
+    return $ emptyMetrics
+             >.> ( ("commentLinesDensity",file,"")
+                 , Num (( nrCom /  (nrLin + nrCom)) * 100)
+                 )
 
 {- Here we get the number of lines of comments for the human language
    writen lines of comments. So we exclude C code, we do not consider
    C code commented.
 -}
-getNrOfLinesOfComments :: FilePath -> IO Int
+getNrOfLinesOfComments :: FilePath -> IO Metrics
 getNrOfLinesOfComments file = do
     l <- comments file
-    return $ sum $ l >>= return . filterComment
+    return $ emptyMetrics
+             >.> ( ("getNrOfLinesOfComments",file,"")
+                 , Num $ sum $ l >>= return . fromIntegral . filterComment
+                 )
     where filterComment :: Comment -> Int
           filterComment x | isRealComment x = length $ filter (not . null) $ lines $ commentText x
                           | otherwise       = 0
