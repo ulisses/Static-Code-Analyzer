@@ -35,14 +35,14 @@ import Data.Maybe ( fromMaybe )
 import Comments
 import NumberOfLines
 import Metrics
+import Includes
 import NumberOfLines
 import Complexity(mccabeIndex)
 import Functions
 import AbsolutePath
 
-pdf = getClonesOneLine "main.c" "database.txt" >>= return . Clone "main.c" >>= (return . \c -> emptyMetrics >.> ("clonesByLine",c)) >>= geraPDF
-pdf1 = getClonesOneLine "main.c" "database.txt" >>= (return . \l -> Clone "main.c" (take 10 l)) >>= (return . \c -> emptyMetrics >.> ("clonesByLine",c)) 
-
+--pdf = getClonesOneLine "main.c" "database.txt" >>= return . Clone "main.c" >>= (return . \c -> emptyMetrics >.> ("clonesByLine",c)) >>= r
+--pdf1 = getClonesOneLine "main.c" "database.txt" >>= (return . \l -> Clone "main.c" (take 10 l)) >>= (return . \c -> emptyMetrics >.> ("clonesByLine",c)) 
 
 {- Main -}
 {- We may need to import some libraries to be able to put the input code
@@ -59,7 +59,6 @@ process file = do
         ( Left error  ) -> print error
         ( Right cprog ) -> (putStr . unlines  . map (show . pretty) . getFunctionsSignFromC) cprog
 -}
-
 
 data Flag  = Verbose
            | Help

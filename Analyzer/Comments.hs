@@ -28,7 +28,7 @@ import Metrics
 commentLinesDensity :: FilePath -> IO Metrics
 commentLinesDensity file = do
     mNrCom <- getNrOfLinesOfComments file
-    (Just (Num nrCom)) <- return $ lookupM ("getNrOfLinesOfComments",file,"") mNrCom
+    (Num nrCom) <- return $ getM ("getNrOfLinesOfComments",file,"") mNrCom
     nrLin  <- ncloc file >>= return . fromIntegral
     return $ emptyMetrics
              >.> ( ("commentLinesDensity",file,"")

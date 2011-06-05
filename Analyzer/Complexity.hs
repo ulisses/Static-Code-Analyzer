@@ -25,6 +25,7 @@ import Data.Generics.Strafunski.StrategyLib.StrategyPrelude
 import Data.Generics.Strafunski.StrategyLib.FlowTheme
 
 import Functions
+import Metrics
 
 instance Num a => Monoid a where
     mappend = (+)
