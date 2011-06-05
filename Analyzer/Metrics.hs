@@ -198,6 +198,7 @@ storeMetrics m = do
            [withIndent yes] "pickle.xml"
          )
     --readFile "pickle.xml" >>= putStrLn
+
 {-TEST-}
 exM = emptyMetrics
     >.> (("metrica1","file","fun1"),Num 1.90)
@@ -214,10 +215,7 @@ c = Clone "main.c" [("../../../../..//1-matricula/1.2/pp2/Aulas/0405/050405.c",[
 {- Aux functions -}
 toMetrics = Metrics
 fromMetrics (Metrics m) = m
-{- Unpack from Metrics, apply a function 'f' and pack
-   again into Metrics.
-   This is the pointwise version of this function:
--- unpackPack f (Metrics m) = toMetrics $ f $ fromMetrics m
+{- Unpack from Metrics, apply a function 'f' and pack again into Metrics.
 -}
 unpackPack f = toMetrics  . f . fromMetrics
 
@@ -238,7 +236,6 @@ insertMetric (mn,mv) m | M.member mn fm = let (Just mv') = M.lookup mn fm
 
 {- Delete Metrics by name -}
 deleteMetric :: MetricName -> Metrics -> Metrics
---deleteMetric mn m = unpackPack (delete mn) m
 deleteMetric = unpackPack . M.delete
 
 {- Concat Metrics -}
@@ -261,13 +258,18 @@ elemAtM :: Int -> Metrics -> (MetricName, MetricValue)
 elemAtM n = M.elemAt n . fromMetrics
 
 {- split by key -}
---splitM :: Int -> Metrics -> (MetricName, MetricValue)
+splitM :: MetricName -> Metrics -> (Metrics, Metrics)
 splitM k m = let (m1,m2) = M.split k $ fromMetrics m
              in (toMetrics m1, toMetrics m2)
 
 {- check if metrics bag is null -}
---splitM :: Int -> Metrics -> (MetricName, MetricValue)
+nullM :: Metrics -> Bool
 nullM = M.null . fromMetrics
 
 {- Lookup -}
+lookupM :: MetricName -> Metrics -> Maybe MetricValue
 lookupM k m = M.lookup k $ fromMetrics m
+
+{- get a value from key (we already know is there) -}
+getM :: MetricName -> Metrics -> MetricValue
+getM k m =  (fromMetrics m) M.! k
