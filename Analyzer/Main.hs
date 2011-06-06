@@ -12,9 +12,12 @@
 module Main where
 
 import IO
+import System.Process
+import GHC.IO.Handle
+import GHC.IO
+import System.Exit
 import GHC.IO (unsafePerformIO)
 import System.Environment
-import System.Process
 import Data.Data
 import Data.Monoid
 import Data.Maybe
@@ -31,6 +34,8 @@ import Data.Generics.Strafunski.StrategyLib.FlowTheme
 import Control.Monad
 import System.Console.GetOpt
 import Data.Maybe ( fromMaybe )
+import System.IO.HVFS.Utils
+import qualified Control.Monad.Parallel as P
 
 import Comments
 import NumberOfLines
@@ -94,10 +99,36 @@ compilerOpts argv = do
        (_,_,errs) -> ioError $ userError $ concat errs ++ usageInfo header options
         where header = "Usage: "++ name ++" [OPTION...] files..."
 
---main :: IO ()
+main :: IO ()
 main = do
-    opts <- getArgs
-    compilerOpts opts >>= print
+    (dir:_) <- getArgs
+    lst <- getListOfCFiles dir >>= return . take 1000
+    putStrLn "tenho a lista de files"
+    l1 <- P.mapM getNrOfLinesOfComments lst
+    putStrLn "tenho todas as metricas do mundo"
+    l2 <- return $ foldl (>+>) emptyMetrics l1
+    putStrLn "tudo numa metrica so, siga PDF"
+    geraPDF l2
+
+fromListOfPathsToMatetrics [] m = return m
+fromListOfPathsToMatetrics (h:t) mAcc = do
+    m <- getNrOfLinesOfComments h
+    fromListOfPathsToMatetrics t (m >+> mAcc)
+
+--mapM getNrOfLinesOfComments lst >>= return . foldl (>+>) emptyMetrics >>= geraPDF
+
+
+unsafeInterleaveMapIO f (x:xs) = unsafeInterleaveIO $ do
+    y <- f x
+    ys <- unsafeInterleaveMapIO f xs
+    return (y : ys)
+unsafeInterleaveMapIO _ [] = return []
+
+getListOfCFiles :: FilePath -> IO [FilePath]
+getListOfCFiles fp =
+    recurseDir SystemFS fp
+        >>= return . filter ((==".c") . reverse . take 2 . reverse)
+
 --main = getClonesBlock "main.c" "db.txt" >>= print
 
 {- auxiliar function to test -}

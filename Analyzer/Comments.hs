@@ -1,3 +1,4 @@
+{-#OPTIONS -XScopedTypeVariables#-}
 ------------------------------------------------------------------------------ 
 -- | 
 -- Author       : Ulisses Araujo Costa
@@ -15,12 +16,15 @@
 --
 ------------------------------------------------------------------------------
 
-module Comments(getNrOfLinesOfComments,commentLinesDensity) where
+--module Comments(getNrOfLinesOfComments,commentLinesDensity) where
+module Comments where
 
 import Language.C.Comments
 import Language.C.Data.InputStream(inputStreamFromString)
 import Language.C.Parser
 import Language.C.Data.Position(nopos)
+import qualified System.IO.Strict as S
+import qualified Control.Exception as Ex
 
 import NumberOfLines
 import Metrics
@@ -41,14 +45,21 @@ commentLinesDensity file = do
 -}
 getNrOfLinesOfComments :: FilePath -> IO Metrics
 getNrOfLinesOfComments file = do
-    l <- comments file
-    return $ emptyMetrics
-             >.> ( ("getNrOfLinesOfComments",file,"")
-                 , Num $ sum $ l >>= return . fromIntegral . filterComment
-                 )
+    tryToReadStrict file (return . commentsFromString) $
+        (\l -> return $ emptyMetrics
+                 >.> ( ("getNrOfLinesOfComments",file,"")
+                     , Num $ sum $ l >>= return . fromIntegral . filterComment
+                     ))
     where filterComment :: Comment -> Int
           filterComment x | isRealComment x = length $ filter (not . null) $ lines $ commentText x
                           | otherwise       = 0
+
+tryToReadStrict :: FilePath -> (String -> IO a) -> (a -> IO Metrics) -> IO Metrics
+tryToReadStrict file fun rest = do
+    eith <- Ex.try (S.readFile file >>= fun)
+    case eith of
+        (Left (_::Ex.SomeException)) -> putStrLn ("excepcao no ficheiro "++file) >> return emptyMetrics
+        (Right r) -> rest r
 
 {- Check if a comment is in fact a real human words command
    or a block of commented code.

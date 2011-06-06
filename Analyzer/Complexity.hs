@@ -43,7 +43,7 @@ functionForMccabeIndex d (min,max) = do
 
 {- mccabe index per function, for all function inside a C file
 -}
-mccabePerFun :: CTranslUnit -> IO [(String,Int)]
+--mccabePerFun :: CTranslUnit -> IO Metrics
 mccabePerFun d = do
     funs <- getFunsName d
     mccabes <- (mapM mccabeIndex . getListFunFromC) d

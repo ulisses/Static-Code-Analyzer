@@ -24,6 +24,8 @@ import Text.XML.HXT.Core
 import Text.XML.HXT.Arrow.Pickle.Xml
 import Text.LaTeX
 
+import System.Path.NameManip
+
 import System.Process
 import Control.Concurrent
 import GHC.IO.Handle
@@ -55,8 +57,10 @@ type MetricName = (String,String,String)
 
 data MetricValue = Num Double
                  | Clone FileSrc [(FileDst, [(Ocurrency, LineSrc, LineDst)])]
+                 | Mccabe [(FunctionName,Int)]
     deriving (Show, Eq, Ord)
 
+type FunctionName = String
 type FileDst = String
 type FileSrc = String
 type Ocurrency = String
@@ -76,6 +80,8 @@ example m packageName = do
     documentclass [a4paper,oneside] article
     "\\usepackage{verbatim}"
     "\\usepackage[pdftex]{hyperref}"
+    "\\usepackage{footnote}"
+    "\\makesavenoteenv{tabular}"
     title (("Metrics Report" >> footnote disclamer >> "  \\ on package ") >> (textsf $ fromString packageName))
     document $ do
            maketitle
@@ -104,7 +110,9 @@ fromCloneToLaTeX' m | nullM  m = noop
           getClonedLst (Clone _ l) = l
           stepL (s,l) r = (textbf $ myfromString s) >> (foldr stepOcorrencies noop l) // r
           stepOcorrencies (o,lsrc,ldst) r = newline
-                                                >> fromString ("Found at line " ++ (texString lsrc) ++ " in source file and at line " ++ (texString ldst)
+                                                >> fromString ("Found at line " ++ (texString lsrc)
+                                                               ++ " in source file and at line "
+                                                               ++ (texString ldst)
                                                     ++ " in destination file")
                                                 >> (verbatim $ fromString o)
                                             >> r
@@ -135,8 +143,10 @@ fromNumToLaTeX' m | nullM m   = noop
     toTabular :: Monad m => Metrics -> LaTeX m
     toTabular m = tabular ["c"] "|c|c|c|c|" (myhline >> textbf "Metric Name" & textbf "File Name" & textbf "Function Name"
                                                       & textbf "Metric Value" // myhline >> foldrM step noop m)
-        where step (k1,k2,k3) v r = fromString k1 & fromString k2 & fromString k3 & (fromNum v) // myhline >> r
-              fromNum (Num a) = texString a
+        where step (k1,k2,k3) v r = myfromString k1 & file & myfromString k3 & (fromNum v) // myhline >> r
+               where fromNum (Num a) = texString a
+                     file = let (path,f) = split_path k2
+                            in (myfromString f) >> (footnote $ myfromString ("This file can be found at: " ++ path))
 
 myfromString = fromString . fixString
 texString = myfromString . show
@@ -152,7 +162,8 @@ r m = render $ example m "clone"
 
 geraPDF exM = do
     t <- render $ example exM "test"
-    (inp,out,err,proc) <- runInteractiveProcess "pdflatex" [] Nothing Nothing
+    writeFile "test.tex" t
+{-    (inp,out,err,proc) <- runInteractiveProcess "pdflatex" [] Nothing Nothing
     hPutStr inp t
     hGetContents out >>= print
     exitCode <- waitForProcess proc
@@ -168,7 +179,7 @@ geraPDF exM = do
         exitError -> do
             terminateProcess proc
             exitWith exitError
-
+-}
 {- XML Metrics serialization -}
 instance XmlPickler Metrics where
     xpickle 
@@ -210,7 +221,7 @@ exM = emptyMetrics
     >.> (("metricaNum5","file","fun1"),Num 1)
     >.> (("metricaNum6","file",""),Num 1.009)
 
-c = Clone "main.c" [("../../../../..//1-matricula/1.2/pp2/Aulas/0405/050405.c",[("\\t}",25,44),("\\t}",46,44)]),("../../../../..//1-matricula/1.2/pp2/Aulas/0422/turma.c",[("\\t}",25,126),("\\t}",46,126)]),("../../../../..//1-matricula/1.2/pp2/PP2 TP3/ex1.c",[("\\t}",25,104),("return 0;",37,606),("\\t}",46,104)]),("../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/aulas/6.c",[("\\t\\t}",45,33)]),("../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp1/_tp1/tp1.c",[("return 0;",37,67)]),("../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp3/desenho.c",[("\\t}",25,38),("\\t\\t",44,214),("\\t\\t}",45,37),("\\t}",46,38)]),("../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp3/file.c",[("\\t}",25,41),("\\t\\t",44,55),("\\t\\t}",45,68),("\\t}",46,41)]),("../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp3/id.c",[("\\t}",25,68),("\\t\\t",44,140),("\\t\\t}",45,56),("\\t}",46,68)]),("../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp3/myio.c",[("\\t}",25,59),("\\t\\t",44,50),("\\t\\t}",45,57),("\\t}",46,59)]),("../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp3/prog.c",[("\\t}",25,101),("\\t\\t",44,95),("\\t\\t}",45,123),("\\t}",46,101)])]
+c = Clone "main.c" [("../../../../..//1-matricula/1.2/pp2/Aulas/0405/050405.c",[("\\t}",25,44),("\\t}",46,44)]),("../../../../..//1-matricula/1.2/pp2/Aulas/0422/turma.c",[("\\t}",25,126),("\\t}",46,126)]),("../../../../..//1-mat_ricula/1.2/pp2/PP2 TP3/ex1.c",[("\\t}",25,104),("return 0;",37,606),("\\t}",46,104)]),("../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/aulas/6.c",[("\\t\\t}",45,33)]),("../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp1/_tp1/tp1.c",[("return 0;",37,67)]),("../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp3/desenho.c",[("\\t}",25,38),("\\t\\t",44,214),("\\t\\t}",45,37),("\\t}",46,38)]),("../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp3/file.c",[("\\t}",25,41),("\\t\\t",44,55),("\\t\\t}",45,68),("\\t}",46,41)]),("../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp3/id.c",[("\\t}",25,68),("\\t\\t",44,140),("\\t\\t}",45,56),("\\t}",46,68)]),("../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp3/myio.c",[("\\t}",25,59),("\\t\\t",44,50),("\\t\\t}",45,57),("\\t}",46,59)]),("../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp3/prog.c",[("\\t}",25,101),("\\t\\t",44,95),("\\t\\t}",45,123),("\\t}",46,101)])]
 
 {- Aux functions -}
 toMetrics = Metrics
