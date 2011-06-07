@@ -112,9 +112,7 @@ deleteMetric = unpackPack . M.delete
 {- Concat Metrics -}
 (>+>) :: Metrics -> Metrics -> Metrics
 m1 >+> m2 = concatMetrics m1 m2
-
-concatMetrics :: Metrics -> Metrics -> Metrics
-concatMetrics m1 m2 = toMetrics $ M.union (fromMetrics m1) (fromMetrics m2)
+    where concatMetrics m1 m2 = toMetrics $ M.union (fromMetrics m1) (fromMetrics m2)
 
 {- foldr over Metrics -}
 foldrM :: (MetricName -> MetricValue -> c -> c) -> c -> Metrics -> c
@@ -144,3 +142,7 @@ lookupM k m = M.lookup k $ fromMetrics m
 {- get a value from key (we already know is there) -}
 getM :: MetricName -> Metrics -> MetricValue
 getM k m =  (fromMetrics m) M.! k
+
+{- Get a list of Metrics and return a Metrics -}
+concatMetrics :: [Metrics] -> Metrics
+concatMetrics = foldl (>+>) emptyMetrics

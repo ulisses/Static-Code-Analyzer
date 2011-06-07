@@ -11,7 +11,7 @@
 
 ------------------------------------------------------------------------------
 
-module Control.Monad.Maybe ( 
+module Strafunski.Control.Monad.Maybe ( 
 
  MaybeT(..)
 

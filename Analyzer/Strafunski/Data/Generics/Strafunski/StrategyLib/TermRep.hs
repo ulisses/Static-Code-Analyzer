@@ -5,7 +5,7 @@
 -- Cannot be tested right now because of GHC bugs.
 -- 
 
-module Data.Generics.Strafunski.StrategyLib.TermRep (
+module Strafunski.Data.Generics.Strafunski.StrategyLib.TermRep (
  Term
 ) where
 

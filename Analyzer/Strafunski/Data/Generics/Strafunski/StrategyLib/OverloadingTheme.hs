@@ -19,11 +19,11 @@
 
 ------------------------------------------------------------------------------ 
 
-module Data.Generics.Strafunski.StrategyLib.OverloadingTheme where
+module Strafunski.Data.Generics.Strafunski.StrategyLib.OverloadingTheme where
 
 import Control.Monad
 import Data.Monoid
-import Data.Generics.Strafunski.StrategyLib.StrategyPrelude
+import Strafunski.Data.Generics.Strafunski.StrategyLib.StrategyPrelude
 
 
 ------------------------------------------------------------------------------ 

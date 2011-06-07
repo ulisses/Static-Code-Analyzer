@@ -17,11 +17,11 @@ import Data.Monoid
 import Language.C
 import Language.C.System.GCC
 import Language.C.Data.Ident
-import Data.Generics.Strafunski.StrategyLib.ChaseImports
-import Data.Generics.Strafunski.StrategyLib.StrategyPrimitives
-import Data.Generics.Strafunski.StrategyLib.TraversalTheme
-import Data.Generics.Strafunski.StrategyLib.StrategyPrelude
-import Data.Generics.Strafunski.StrategyLib.FlowTheme
+import Strafunski.Data.Generics.Strafunski.StrategyLib.ChaseImports
+import Strafunski.Data.Generics.Strafunski.StrategyLib.StrategyPrimitives
+import Strafunski.Data.Generics.Strafunski.StrategyLib.TraversalTheme
+import Strafunski.Data.Generics.Strafunski.StrategyLib.StrategyPrelude
+import Strafunski.Data.Generics.Strafunski.StrategyLib.FlowTheme
 
 nofunName = "NOFUN"
 

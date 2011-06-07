@@ -12,11 +12,11 @@
 
 ------------------------------------------------------------------------------
 
-module Data.Generics.Strafunski.StrategyLib.TraversalTheme where
+module Strafunski.Data.Generics.Strafunski.StrategyLib.TraversalTheme where
 
-import Data.Generics.Strafunski.StrategyLib.StrategyPrelude
-import Data.Generics.Strafunski.StrategyLib.OverloadingTheme
-import Data.Generics.Strafunski.StrategyLib.FlowTheme
+import Strafunski.Data.Generics.Strafunski.StrategyLib.StrategyPrelude
+import Strafunski.Data.Generics.Strafunski.StrategyLib.OverloadingTheme
+import Strafunski.Data.Generics.Strafunski.StrategyLib.FlowTheme
 import Control.Monad
 import Data.Monoid
 

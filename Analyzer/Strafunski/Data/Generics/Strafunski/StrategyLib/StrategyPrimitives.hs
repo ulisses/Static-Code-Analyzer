@@ -10,7 +10,7 @@ retained as is.
 
 -----------------------------------------------------------------------------} 
 
-module Data.Generics.Strafunski.StrategyLib.StrategyPrimitives (
+module Strafunski.Data.Generics.Strafunski.StrategyLib.StrategyPrimitives (
 
   Term,
   TP,         TU,
@@ -30,12 +30,12 @@ module Data.Generics.Strafunski.StrategyLib.StrategyPrimitives (
 
 ) where
 
-import Data.Generics.Strafunski.StrategyLib.TermRep
+import Strafunski.Data.Generics.Strafunski.StrategyLib.TermRep
 import Data.Generics
 import Control.Monad
 import Data.Monoid
-import Data.Generics.Strafunski.StrategyLib.MonadicFunctions
-import Control.Monad.Run
+import Strafunski.Data.Generics.Strafunski.StrategyLib.MonadicFunctions
+import Strafunski.Control.Monad.Run
 
 
 --- Strategy representation --------------------------------------------------

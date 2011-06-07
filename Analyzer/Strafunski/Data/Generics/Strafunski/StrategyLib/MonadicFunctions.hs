@@ -11,7 +11,7 @@
 
 ------------------------------------------------------------------------------
 
-module Data.Generics.Strafunski.StrategyLib.MonadicFunctions where
+module Strafunski.Data.Generics.Strafunski.StrategyLib.MonadicFunctions where
 
 import Control.Monad
 

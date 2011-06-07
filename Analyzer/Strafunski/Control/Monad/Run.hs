@@ -14,13 +14,13 @@
 --
 ------------------------------------------------------------------------------
 
-module Control.Monad.Run where
+module Strafunski.Control.Monad.Run where
 
 import Control.Monad.Trans
 import Control.Monad.Identity
 import Control.Monad.State
 import Control.Monad.List
-import Control.Monad.Maybe
+import Strafunski.Control.Monad.Maybe
 import Control.Monad.Error
 --import Foreign (unsafePerformIO) -- for running IO monads
 

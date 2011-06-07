@@ -12,10 +12,10 @@
 
 ------------------------------------------------------------------------------
 
-module Data.Generics.Strafunski.StrategyLib.FlowTheme where
+module Strafunski.Data.Generics.Strafunski.StrategyLib.FlowTheme where
 
-import Data.Generics.Strafunski.StrategyLib.StrategyPrelude
-import Data.Generics.Strafunski.StrategyLib.OverloadingTheme
+import Strafunski.Data.Generics.Strafunski.StrategyLib.StrategyPrelude
+import Strafunski.Data.Generics.Strafunski.StrategyLib.OverloadingTheme
 import Control.Monad
 import Data.Monoid
 

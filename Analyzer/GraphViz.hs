@@ -23,7 +23,7 @@ import Files
 {-Graphviz-}
 generateGraphViz dir = do
     lst <- getListOfCFiles dir
-    m <- mapM getIncludes lst >>= return . foldr (>+>) emptyMetrics
+    m <- mapM getIncludes lst >>= return . concatMetrics
     writeDotToFile "out.dot" $ createDotGraph $ foldrM fromMetricsToDotEdge [] m
 
     where createDotGraph :: [DotEdge String] -> DotGraph String

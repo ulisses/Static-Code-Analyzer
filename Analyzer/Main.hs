@@ -26,11 +26,11 @@ import Language.C
 import Language.C.System.GCC
 import Language.C.Data.Ident
 import Language.C.Pretty
-import Data.Generics.Strafunski.StrategyLib.ChaseImports
-import Data.Generics.Strafunski.StrategyLib.StrategyPrimitives
-import Data.Generics.Strafunski.StrategyLib.TraversalTheme
-import Data.Generics.Strafunski.StrategyLib.StrategyPrelude
-import Data.Generics.Strafunski.StrategyLib.FlowTheme
+import Strafunski.Data.Generics.Strafunski.StrategyLib.ChaseImports
+import Strafunski.Data.Generics.Strafunski.StrategyLib.StrategyPrimitives
+import Strafunski.Data.Generics.Strafunski.StrategyLib.TraversalTheme
+import Strafunski.Data.Generics.Strafunski.StrategyLib.StrategyPrelude
+import Strafunski.Data.Generics.Strafunski.StrategyLib.FlowTheme
 import Control.Monad
 import System.Console.GetOpt
 import Data.Maybe ( fromMaybe )
@@ -47,9 +47,6 @@ import AbsolutePath
 import Files
 import Latex
 import XML
-
---pdf = getClonesOneLine "main.c" "database.txt" >>= return . Clone "main.c" >>= (return . \c -> emptyMetrics >.> ("clonesByLine",c)) >>= r
---pdf1 = getClonesOneLine "main.c" "database.txt" >>= (return . \l -> Clone "main.c" (take 10 l)) >>= (return . \c -> emptyMetrics >.> ("clonesByLine",c)) 
 
 {- Main -}
 {- We may need to import some libraries to be able to put the input code
@@ -101,14 +98,14 @@ compilerOpts argv = do
        (_,_,errs) -> ioError $ userError $ concat errs ++ usageInfo header options
         where header = "Usage: "++ name ++" [OPTION...] files..."
 
-t :: IO ()
-t = do
+main :: IO ()
+main = do
     (dir:_) <- getArgs
     lst <- getListOfCFiles dir >>= return . take 100
     putStrLn "tenho a lista de files"
     l1 <- P.mapM getNrOfLinesOfComments lst
     putStrLn "tenho todas as metricas do mundo"
-    l2 <- return $ foldl (>+>) emptyMetrics l1
+    l2 <- return $ concatMetrics l1
     putStrLn "tudo numa metrica so, siga PDF"
     geraPDF l2
 

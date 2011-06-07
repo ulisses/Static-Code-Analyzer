@@ -12,12 +12,12 @@
 
 ------------------------------------------------------------------------------
 
-module Data.Generics.Strafunski.StrategyLib.StrategyPrelude (
-  module Data.Generics.Strafunski.StrategyLib.StrategyPrimitives,
-  module Data.Generics.Strafunski.StrategyLib.StrategyPrelude
+module Strafunski.Data.Generics.Strafunski.StrategyLib.StrategyPrelude (
+  module Strafunski.Data.Generics.Strafunski.StrategyLib.StrategyPrimitives,
+  module Strafunski.Data.Generics.Strafunski.StrategyLib.StrategyPrelude
 ) where
 
-import Data.Generics.Strafunski.StrategyLib.StrategyPrimitives
+import Strafunski.Data.Generics.Strafunski.StrategyLib.StrategyPrimitives
 import Control.Monad
 import Data.Monoid
 

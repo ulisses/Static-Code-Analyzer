@@ -11,7 +11,7 @@
 
 -----------------------------------------------------------------------------} 
 
-module Data.Generics.Strafunski.StrategyLib.ChaseImports (
+module Strafunski.Data.Generics.Strafunski.StrategyLib.ChaseImports (
 -- * Type synonym
  ChaseName,
 -- * Generic import chasing
