@@ -19,6 +19,26 @@ import System.Path.NameManip
 
 import Metrics
 
+generatePDF exM = do
+    t <- render $ example exM "test"
+    writeFile "test.tex" t
+{-    (inp,out,err,proc) <- runInteractiveProcess "pdflatex" [] Nothing Nothing
+    hPutStr inp t
+    hGetContents out >>= print
+    exitCode <- waitForProcess proc
+    case exitCode of
+        ExitSuccess -> do
+            (_,_,_,proc) <- runInteractiveProcess "open" ["article.pdf"] Nothing Nothing
+            exitCode <- waitForProcess proc
+            case exitCode of
+                ExitSuccess -> return()
+                exitError -> do
+                    terminateProcess proc
+                    exitWith exitError
+        exitError -> do
+            terminateProcess proc
+            exitWith exitError
+-}
 
 {- Convert Metrics to LaTeX -}
 example m packageName = do
@@ -104,24 +124,3 @@ fixString ('_':t) = "\\_" ++ fixString t
 fixString (h:t) = h : fixString t
 
 r m = render $ example m "clone"
-
-geraPDF exM = do
-    t <- render $ example exM "test"
-    writeFile "test.tex" t
-{-    (inp,out,err,proc) <- runInteractiveProcess "pdflatex" [] Nothing Nothing
-    hPutStr inp t
-    hGetContents out >>= print
-    exitCode <- waitForProcess proc
-    case exitCode of
-        ExitSuccess -> do
-            (_,_,_,proc) <- runInteractiveProcess "open" ["article.pdf"] Nothing Nothing
-            exitCode <- waitForProcess proc
-            case exitCode of
-                ExitSuccess -> return()
-                exitError -> do
-                    terminateProcess proc
-                    exitWith exitError
-        exitError -> do
-            terminateProcess proc
-            exitWith exitError
--}

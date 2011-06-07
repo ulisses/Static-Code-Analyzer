@@ -107,7 +107,7 @@ main = do
     putStrLn "tenho todas as metricas do mundo"
     l2 <- return $ concatMetrics l1
     putStrLn "tudo numa metrica so, siga PDF"
-    geraPDF l2
+    generatePDF l2
 
 fromListOfPathsToMatetrics [] m = return m
 fromListOfPathsToMatetrics (h:t) mAcc = do
