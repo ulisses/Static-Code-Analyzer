@@ -11,16 +11,16 @@
 --
 ------------------------------------------------------------------------------
 
-module Includes(getIncludes) where
+module Includes where
 
 import System.Process
 import GHC.IO.Handle
 import System.Exit
 import Data.List
 import Data.Char
+import System.IO
 
-type SystemIncludes = String
-type Includes = String
+import Metrics
 
 {- This function returns the list of SystemIncludes
    by that we mean: #include <...>
@@ -37,20 +37,15 @@ type Includes = String
    Haskell regexps implementations, but all of the really suck.
    So I am using a grep call directly.
 -}
-getIncludes :: FilePath -> IO ([SystemIncludes],[Includes])
+getIncludes :: FilePath -> IO Metrics
 getIncludes file = do
-    (_,code,_,proc) <- runInteractiveProcess "grep" ["-v", "-P", "'(\\*(.|\n|\r)*?\\*)|(^[ \t\n]*\\/\\/.*)'", file] Nothing Nothing
-    hSetBinaryMode code False
-    exitCode <- waitForProcess proc
-    case exitCode of
-        ExitSuccess -> do
-            f <- hGetContents code
-            let includes = map (dropWhile isSpace) $ filter (isInfixOf "#include") $ lines f
-            let inc = takke '\"' $ map tail $ filter (not . null) $ droppe '\"' $ includes
-            let sysInc = takke '>' $ map tail $ filter (not . null)  $ droppe '<' $ includes
-            return (sysInc,inc)
-                where takke c = map (takeWhile (/=c))
-                      droppe c = map (dropWhile (/=c))
-        exitError -> do
-            terminateProcess proc
-            exitWith exitError
+    inph <- openFile file ReadMode
+    inp  <- hGetContents inph
+    code <- readProcess "grep" ["-v", "-P", "'(\\*(.|\n|\r)*?\\*)|(^[ \t\n]*\\/\\/.*)'"] inp
+    hClose inph
+    let includes = map (dropWhile isSpace) $ filter (isInfixOf "#include") $ lines code
+    let inc = takke '\"' $ map tail $ filter (not . null) $ droppe '\"' $ includes
+    let sysInc = takke '>' $ map tail $ filter (not . null)  $ droppe '<' $ includes
+    return (emptyMetrics >.> (("getIncludes",file,""),Includes (sysInc,inc)))
+        where takke c  = map (takeWhile (/=c))
+              droppe c = map (dropWhile (/=c))

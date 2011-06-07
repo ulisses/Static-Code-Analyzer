@@ -34,7 +34,6 @@ import Data.Generics.Strafunski.StrategyLib.FlowTheme
 import Control.Monad
 import System.Console.GetOpt
 import Data.Maybe ( fromMaybe )
-import System.IO.HVFS.Utils
 import qualified Control.Monad.Parallel as P
 
 import Comments
@@ -45,6 +44,9 @@ import NumberOfLines
 import Complexity(mccabeIndex)
 import Functions
 import AbsolutePath
+import Files
+import Latex
+import XML
 
 --pdf = getClonesOneLine "main.c" "database.txt" >>= return . Clone "main.c" >>= (return . \c -> emptyMetrics >.> ("clonesByLine",c)) >>= r
 --pdf1 = getClonesOneLine "main.c" "database.txt" >>= (return . \l -> Clone "main.c" (take 10 l)) >>= (return . \c -> emptyMetrics >.> ("clonesByLine",c)) 
@@ -99,10 +101,10 @@ compilerOpts argv = do
        (_,_,errs) -> ioError $ userError $ concat errs ++ usageInfo header options
         where header = "Usage: "++ name ++" [OPTION...] files..."
 
-main :: IO ()
-main = do
+t :: IO ()
+t = do
     (dir:_) <- getArgs
-    lst <- getListOfCFiles dir >>= return . take 1000
+    lst <- getListOfCFiles dir >>= return . take 100
     putStrLn "tenho a lista de files"
     l1 <- P.mapM getNrOfLinesOfComments lst
     putStrLn "tenho todas as metricas do mundo"
@@ -123,13 +125,6 @@ unsafeInterleaveMapIO f (x:xs) = unsafeInterleaveIO $ do
     ys <- unsafeInterleaveMapIO f xs
     return (y : ys)
 unsafeInterleaveMapIO _ [] = return []
-
-getListOfCFiles :: FilePath -> IO [FilePath]
-getListOfCFiles fp =
-    recurseDir SystemFS fp
-        >>= return . filter ((==".c") . reverse . take 2 . reverse)
-
---main = getClonesBlock "main.c" "db.txt" >>= print
 
 {- auxiliar function to test -}
 parr = parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] "main.c"
