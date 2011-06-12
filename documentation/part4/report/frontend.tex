@@ -1,0 +1,413 @@
+\chapter{Front-end}
+\minitoc
+Como já tinhamos explicado na primeira milestone, decidimos que o nosso sistema vai tentar suportar ao máximo avaliação de métricas sobre código C.
+Seria muito interessante suportar outras, mas acreditamos nesta altura que se o nosso sistema for extendido para suportar a avaliação de outras linguagens que não o C
+então deveriamos recorrer a ferramentas externas que fizessem algum trabalho por nós.\\
+Relativamente ao Front-end que utilizamos, ele está feito em Haskell e foi um GSoc (Google Summer of Code) feito em 2008, chama-se Language.C\footnote{Mais informação em: \url{http://trac.sivity.net/language\_c}}.
+Este pacote de software apresenta um completo e bem testado parser e pretty printer para a definição da linguagem \textrm{C99} e ainda muitas das \textrm{GNU extensions}.\\
+
+A nossa ideia é pegar em toda a investigação e trabalho dedicado à análise e descoberta de métricas, que estão descritas no Capítulo \ref{chap:metricas}, e implementa-las
+utilizando este Front-end.\\
+
+Inicialmente decidimos partir para a exploração da linguagem (dos tipos de dados) que estavam definidos neste parser. Rápidamente encontramos a AST da linguagem \textrm{C99}
+e assim descobrimos que a linguagem C não é assim tão grande como estariamos à espera, como podemos ver no Apêndice \ref{chap:ast}.
+
+\section{Estudo do Front-End}\label{chap:frontend}
+Todos os tipos deste parser estão munidos de um \textrm{NodeInfo}, que nada mais é do que a informação relativa ao ficheiro, número de linha e coluna onde apareceu
+esta derivação.\\
+Um ficheiro em linguagem \textrm{C99} é representado como uma lista de declarações externas que pode ser uma declaração ou uma definição de função como podemos ver
+na secção \ref{chap:extdefin}.
+
+\begin{haskell}
+data CTranslUnit = CTranslUnit [CExtDecl] NodeInfo
+data CExtDecl = CDeclExt CDecl
+              | CFDefExt CFunDef
+              | CAsmExt CStrLit
+\end{haskell}
+
+Depois podemos ver que uma declaração externa pode ser então uma declaração como podemos ver na secção \ref{chap:decl}, vejamos o que é isto de declaração no \textrm{Haskell}:
+\begin{haskell}
+data CDecl = CDecl [CDeclSpec] [(Maybe CDeclr, Maybe CInit, Maybe CExpr)] NodeInfo
+\end{haskell}
+Este tipo de declarações é bastante abrangente e inclui declarações de estruturas de dados, declaração de parâmetros e tipos de dados.\\
+
+Tal como  a definição é uma lista de declarações C e qualificadores:
+\begin{haskell}
+data CDeclSpec = CStorageSpec CStorageSpec  -- ^ storage-class specifier or typedef
+               | CTypeSpec    CTypeSpec     -- ^ type name
+               | CTypeQual    CTypeQual     -- ^ type qualifier
+
+data CStorageSpec = CAuto     NodeInfo     -- ^ auto
+                  | CRegister NodeInfo     -- ^ register
+                  | CStatic   NodeInfo     -- ^ static
+                  | CExtern   NodeInfo     -- ^ extern
+                  | CTypedef  NodeInfo     -- ^ typedef
+                  | CThread   NodeInfo     -- ^ GNUC thread local storage
+
+data CTypeSpec = CVoidType    NodeInfo
+               | CCharType    NodeInfo
+               | CShortType   NodeInfo
+               | CIntType     NodeInfo
+               | CLongType    NodeInfo
+               | CFloatType   NodeInfo
+               | CDoubleType  NodeInfo
+               | CSignedType  NodeInfo
+               | CUnsigType   NodeInfo
+               | CBoolType    NodeInfo
+               | CComplexType NodeInfo
+               | CSUType      CStructUnion NodeInfo  -- ^ Struct or Union specifier
+               | CEnumType    CEnum        NodeInfo  -- ^ Enumeration specifier
+               | CTypeDef     Ident        NodeInfo  -- ^ Typedef name
+               | CTypeOfExpr  CExpr        NodeInfo  -- ^ @typeof(expr)@
+               | CTypeOfType  CDecl        NodeInfo  -- ^ @typeof(type)@
+\end{haskell}
+
+\textrm{CTypeQual} diz respeito a qualificadores de tipos, por exemplo:
+\begin{itemize}
+\item const
+\item volatile
+\item restrict
+\item inline
+\item \_\_attribute\_\_
+\end{itemize}
+
+\begin{haskell}
+data CTypeQual = CConstQual NodeInfo
+               | CVolatQual NodeInfo
+               | CRestrQual NodeInfo
+               | CInlineQual NodeInfo
+               | CAttrQual  CAttr
+\end{haskell}
+
+E ainda uma lista de triplos de \textrm{Maybe}s (Maybe CDeclr, Maybe CInit, Maybe CExpr).
+Esta lista como tem 3 Maybes pode apresentar várias formas, estas formas definem o tipo de declaração que temos:
+
+\begin{description}
+\item[Toplevel declarations] Uma declaração na forma (Just declr, init?, Nothing)
+\item[Structure declarations] Declarações na forma (Just declr, Nothing, size?)
+\item[Parameter declarations] Declarações na forma (Just declr, Nothing, Nothing) ou (Nothing, Nothing, Just size)
+\item[Toplevel declarations] Declarações na forma (Just declr, Nothing, Nothing)
+\end{description}
+
+Tempo agora para mostrar o que são estas definições \textrm{CDeclr}, \textrm{CInit} e \textrm{CExpr}.
+
+\begin{haskell}
+data CDeclr = CDeclr (Maybe Ident) [CDerivedDeclr] (Maybe CStrLit) [CAttr] NodeInfo
+\end{haskell}
+\textrm{CDeclr} corresponde a declarações de funções ou tipos em C. Por exemplo:
+
+\begin{code_files}
+int x;
+CDeclr "x" []
+\end{code_files}
+
+\begin{code_files}
+const int * const * restrict x;
+CDeclr "x" [CPtrDeclr [restrict], CPtrDeclr [const]]
+\end{code_files}
+
+\begin{code_files}
+int* const f();
+CDeclr "f" [CFunDeclr [],CPtrDeclr [const]]
+\end{code_files}
+
+Ou seja, primeiro temos um possivel identificador, seguido de uma lista de 
+declaraçõe derivadas seguido de um string literal.
+
+Vejamos agora a definição de \textrm{CDerivedDeclr}:
+
+\begin{haskell}
+data CDerivedDeclr = CPtrDeclr [CTypeQual] NodeInfo
+                   -- ^ Pointer declarator @CPtrDeclr tyquals declr@
+                   | CArrDeclr [CTypeQual] (CArrSize) NodeInfo
+                   -- ^ Array declarator @CArrDeclr declr tyquals size-expr?@
+                   | CFunDeclr (Either [Ident] ([CDecl],Bool)) [CAttr] NodeInfo
+                   -- ^ Function declarator @CFunDeclr declr (old-style-params | new-style-params) c-attrs@
+\end{haskell}
+
+Isto basicamente corresponde a uma atribuição de um pointer (CPtrDeclr attrs),
+uma atribuição do resultado da computação de uma função (CFunDeclr attrs) e
+atribuição de um array de elementos (CArrayDeclr attrs).
+
+\textrm{CAttr} é simplesmente a utilização da anotação \_\_attribute\_\_
+
+Voltando ao triplo de Maybes, temos ainda como segundo elemento \textrm{CInit} que correpondem a inicializações em C.
+
+\begin{haskell}
+data CInit = CInitExpr CExpr
+             NodeInfo            -- ^ assignment expression
+           | CInitList CInitList
+             NodeInfo            -- ^ initialization list (see 'CInitList')
+\end{haskell}
+Estes inicializadoes podem ser uma de duas coisas, ou um assignment a uma expressao ou então
+uma inicialização de uma lista, rodeada de parêntices de bloco.\\
+Usemos então o caso das inicializações para introduzir as \textrm{CExpr}.
+
+\begin{haskell}
+data CExpr = CComma       [CExpr]       -- comma expression list, n >= 2
+             NodeInfo
+           | CAssign      CAssignOp     -- assignment operator
+             CExpr         -- l-value
+             CExpr         -- r-value
+             NodeInfo
+           | CCond        CExpr         -- conditional
+             NodeInfo
+           | CBinary      CBinaryOp     -- binary operator
+             CExpr         -- lhs
+             CExpr         -- rhs
+             NodeInfo
+           | CCast        CDecl         -- type name
+             CExpr
+             NodeInfo
+           | CUnary       CUnaryOp      -- unary operator
+             CExpr
+             NodeInfo
+           | CSizeofExpr  CExpr
+             NodeInfo
+           | CSizeofType  CDecl         -- type name
+             NodeInfo
+           | CAlignofExpr CExpr
+             NodeInfo
+           | CAlignofType CDecl         -- type name
+             NodeInfo
+           | CComplexReal CExpr         -- real part of complex number
+             NodeInfo
+           | CComplexImag CExpr         -- imaginary part of complex number
+             NodeInfo
+           | CIndex       CExpr         -- array
+             CExpr         -- index
+             NodeInfo
+           | CCall        CExpr         -- function
+             [CExpr]       -- arguments
+             NodeInfo
+           | CMember      CExpr         -- structure
+             Ident         -- member name
+             Bool          -- deref structure? (True for `->')
+             NodeInfo
+           | CVar         Ident         -- identifier (incl. enumeration const)
+             NodeInfo
+           | CConst       CConst        -- ^ integer, character, floating point and string constants
+           | CCompoundLit CDecl
+             CInitList     -- type name & initialiser list
+             NodeInfo      -- ^ C99 compound literal
+           | CStatExpr    CStat NodeInfo  -- ^ GNU C compound statement as expr
+           | CLabAddrExpr Ident NodeInfo  -- ^ GNU C address of label
+           | CBuiltinExpr CBuiltin        -- ^ builtin expressions, see 'CBuiltin'
+\end{haskell}
+Esta definição é tão completa que abrabge também algumas extenções feitas à linguagem C pelo, conhecidas como
+GCC Extensions, como por exemplo as: alignof, \_\_real, \_\_imag, (\{ stmt-expr \}).
+
+Terminada a explicação extensa de \textrm{CDecl}, continuamos a explicação de \textrm{CExtDecl} e passamos à definição de
+\textrm{CFunDef}, ou seja uma definição de função como podemos ver em \textrm{function-definition} na secção \ref{chap:extdefin}.
+
+\begin{haskell}
+data CFunDef = CFunDef [CDeclSpec]      -- type specifier and qualifier
+               CDeclr           -- declarator
+               [CDecl]          -- optional declaration list
+               CStat            -- compound statement
+               NodeInfo
+\end{haskell}
+
+Esta definição usa uma lista de especificadores de tipo e de quantificação, uma declaração,
+uma lista adicional de declarações e um C Statement. Como já explicamos todos, passamos para a explicação
+do \textrm{CStat}.\\
+
+Esta definição é capaz de ser a mais familiar e fácil de perceber na medida em que é aqui que estão
+definidos os statements C que caracterizam esta linguagem:
+
+\begin{haskell}
+data CStat = CLabel  Ident CStat [CAttr] NodeInfo  -- ^ An (attributed) label followed by a statement
+           | CCase CExpr CStat NodeInfo            -- ^ A statement of the form @case expr : stmt@
+           | CCases CExpr CExpr CStat NodeInfo     -- ^ A case range of the form @case lower ... upper : stmt@
+           | CDefault CStat NodeInfo               -- ^ The default case @default : stmt@
+           | CExpr (Maybe CExpr) NodeInfo
+             -- ^ A simple statement, that is in C: evaluating an expression with side-effects
+             --   and discarding the result.
+           | CCompound [Ident] [CBlockItem] NodeInfo    -- ^ compound statement @CCompound localLabels blockItems at@
+           | CIf CExpr CStat (Maybe CStat) NodeInfo     -- ^ conditional statement @CIf ifExpr thenStmt maybeElseStmt at@
+           | CSwitch CExpr CStat NodeInfo
+             -- ^ switch statement @CSwitch selectorExpr switchStmt@, where @switchStmt@ usually includes
+             -- /case/, /break/ and /default/ statements
+           | CWhile CExpr CStat Bool NodeInfo      -- ^ while or do-while statement @CWhile guard stmt isDoWhile at@
+           | CFor (Either (Maybe CExpr) CDecl)
+             (Maybe CExpr)
+             (Maybe CExpr)
+             CStat
+             NodeInfo
+             -- ^ for statement @CFor init expr-2 expr-3 stmt@, where @init@ is either a declaration or
+             -- initializing expression
+           | CGoto Ident NodeInfo            -- ^ goto statement @CGoto label@
+           | CGotoPtr CExpr NodeInfo         -- ^ computed goto @CGotoPtr labelExpr@
+           | CCont NodeInfo                  -- ^ continue statement
+           | CBreak    NodeInfo              -- ^ break statement
+           | CReturn (Maybe CExpr)NodeInfo   -- ^ return statement @CReturn returnExpr@
+           | CAsm CAsmStmt NodeInfo          -- ^ assembly statement
+\end{haskell}
+
+Aqui podemos então ver as Labels, Cases, statements de default dos Cases, expressões, ifs, switches,
+whiles, fors, gotos, continues, breaks, retuns e instruções assembly.\\
+
+Grande parte deste Front-End, Language.C, fica assim explicado. Achamos que explicar os detalhes
+sobre o \textrm{CStat} não seria necessáario, visto já termos detalhado os mais importantes.
+
+\section{Bug no \textrm{Language.C} em \textrm{MacOSX}}
+Depois de explorar e usar, sempre com exemplos pequenos este front-end descobrimos que se os ficheiros C submetidos fizerem uso de biliotecas externas teriamos um
+problema ao correr o avaliador de software em MacOSX. Este problema já é conhecido pela equipa que desenvolve o Language.C\footnote{Conforme se pode ver neste ticket: \url{http://trac.sivity.net/language_c/ticket/2}}.\\
+Embora o nosso sistema final corra numa máquina com Linux, o desenvolvimento desta aplicação de avaliação será feito em MacOSX e assim isto confere um problema nesta fase.
+Mesmo assim também foi interessante descorbrir este bug porque pretendemos que a nossa aplicação corra no máximo de plataformas possíveis. Imagine-se o caso em que
+queremos rápidamente instalar numa máquina o nosso sistema para demonstração ou montar um concurso rápido, sem que seja necessário um servidor.\\
+
+Este bug prende-se com o facto do Language.C na sua versão mais recente, 3.2.1, não suportar a notação de \_\_BLOCKS\_\_ que as librarias do MacOSX têem.\\
+Imagine-se o seguinte código Haskell a usar Language.C:
+
+\begin{haskell}
+module Main where
+
+import Language.C
+import Language.C.System.GCC
+import Language.C.Data.Ident
+import System.Environment
+
+process :: String -> IO ()
+process file = do
+    stream <- parseCFile (newGCC "gcc") Nothing [] file
+    case stream of
+        ( Left error  ) -> print error
+        ( Right cprog ) -> print "OK"
+
+main :: IO ()
+main = do
+    files <- getArgs
+    mapM_ process files
+\end{haskell}
+
+O comportamento deste programa seria receber $n$ ficheiros e a cada um deles passar ao preprocessador do GCC, seguidamente é construída a árvore de parsing que fica
+guardada em $stream$ e posteriormente verificamos se tivemos algum erro, se sim reportamos o erro para o $stdout$ se não então imprimimos "OK" para o $stdout$.\\
+
+Ao alimentar este programa com o seguinte pedaço de código:
+
+\begin{haskell}
+#include <stdlib.h>
+
+void main(int argc, char **argv) {
+    malloc(10);
+    return 0;
+}
+\end{haskell}
+
+acontece o seguinte erro:
+
+\begin{code_files}
+[ulissesaraujocosta@maclisses:Parser]-$ ./main main.c
+/usr/include/stdlib.h:272: (column 20) [ERROR]  >>> Syntax Error !
+  Syntax error !
+  The symbol `^' does not fit here.
+\end{code_files}
+
+Ao inspeccionar a linha 272 do stdlib.h verificamos a presença do seguinte código:
+
+\begin{haskell}
+#ifdef __BLOCKS__
+int  atexit_b(void (^)(void));
+void    *bsearch_b(const void *, const void *, size_t,
+size_t, int (^)(const void *, const void *));
+#endif /* __BLOCKS__ */
+\end{haskell}
+
+O problema reside exactamente aqui, ou seja o Language.C não consegue descobrir esta notação. Este problema parece já ter sido aberto há alguns meses e está previsto
+para correcção na próxima versão 4.0 do Language.C.\\
+
+Afim de tentarmos mesmo assim conseguir usar este front-end lembramos-nos de proibir o preprocessador do GCC para definir a variável \_\_BLOCKS\_\_. Assim sendo
+temos que incluír no nosso código a injecção de uma linha de código que fará com que todos os ficheiro C processados pelo nosso programa apresentem a desactivação desta variável:
+
+\begin{haskell}
+#undef __BLOCKS__
+#include <stdlib.h>
+
+void main(int argc) {
+    malloc(10);
+    return 0;
+}
+\end{haskell}
+
+\section{Exemplos da árvore gerada pelo Language.C}
+A árvore de parsing que é criada pelo Language.C tem $84$ tipos de nodos (constructores de tipos), o que faz dela uma árvore pequena, fácil de ler, de compreender
+e de começar rápidamente a trabalhar a informação contida.\\
+
+Infelizmente o pacote Language.C não vem com as intâncias $Show$ para os tipos, o que faz com que para vermos a nossa árvore tenhamos que estar constantemente
+a ler os tipos de dados e assim guiar ás escuras.\\
+Assim sendo, editamos os ficheiros todos e derivamos a classe $Show$ para todos os tipos\footnote{A nossa versão do Language.C está disponível no nosso pacote de software}.\\
+
+Agora tentamos explicar com mais detalhe relativamente à secção \ref{chap:frontend} os tipos de dados gerados pelo Language.C.\\
+
+Imaginemos um ficheiro com o nome main.c cujo conteúdo é o seguinte:
+\begin{code_files}
+void lala(int a, int b);
+\end{code_files}
+Ou seja, apenas a declaração de uma função, depois de executar a função de parsing obtemos a seguinte árvore:
+\begin{code_files}
+CTranslUnit 
+    [CDeclExt
+        (CDecl
+            [CTypeSpec (CVoidType(NodeInfo("main.c", 2, 1) (Name { nameId = 1 })))]
+                [ (Just
+                    (CDeclr (Just ` lala ')
+                        [CFunDeclr (Right
+                            ([CDecl [CTypeSpec (CIntType (NodeInfo ("main.c",2,11) (Name {nameId = 4})))]
+                                [(Just (CDeclr (Just `a')[] Nothing[] (NodeInfo("main.c", 2, 15)
+                                         (Name { nameId = 5 })))
+                                    ,Nothing, Nothing)] (NodeInfo("main.c", 2, 11) (Name { nameId = 6 }))
+                             ,CDecl [CTypeSpec(CIntType(NodeInfo("main.c", 2, 18) (Name { nameId = 8 })))]
+                                 [(Just(CDeclr(Just ` b ') [] Nothing [] (NodeInfo ("main.c",2,22)
+                                         (Name {nameId = 9})))
+                                     ,Nothing,Nothing)]
+                                 (NodeInfo ("main.c",2,18) (Name {nameId = 10}))],False))
+                                 [] (NodeInfo ("main.c",2,10) (Name {nameId = 11}))
+                                 ]
+                                 Nothing [] (NodeInfo ("main.c",2,6) (Name {nameId = 2}))
+                    )
+                  ,Nothing
+                  ,Nothing
+                  )
+                ] (NodeInfo ("main.c",2,1) (Name {nameId = 12})))]
+\end{code_files}
+
+Como podemos ver, embora a árvore de parsing seja bastante pequena, uma simples declaração de uma função
+pode tomar um tamanho grande. Mesmo assim achamos bastante simples, principalmente depois de ler a especificação da AST do C.\\
+
+Agora imaginemos que temos a seguinte função vazia em C:
+\begin{code_files}
+void lala(int a, int b) { }
+\end{code_files}
+
+A árvore que iríamos obter seria:
+\begin{code_files}
+CFDefExt
+    (CFunDef
+        [CTypeSpec
+            (CVoidType (NodeInfo ("main.c",28,1) (Name { nameId = 71 })))
+        ]
+        (CDeclr
+            (Just `lala')
+            [CFunDeclr
+                (Right
+                    ([CDecl
+                        [CTypeSpec(CIntType(NodeInfo("main.c", 28, 11) (Name { nameId = 74 })))]
+                        [(Just(CDeclr(Just ` a ') [] Nothing
+                            [] (NodeInfo ("main.c",28,15) (Name {nameId = 75})))
+                        ,Nothing
+                        ,Nothing)
+                        ] (NodeInfo ("main.c",28,11) (Name {nameId = 76}))
+                ,CDecl
+                    [CTypeSpec (CIntType (NodeInfo ("main.c",28,18) (Name {nameId = 78})))]
+                    [(Just (CDeclr (Just `b')[] Nothing[]
+                        (NodeInfo("main.c", 28, 22) (Name { nameId = 79 })))
+                        ,Nothing
+                        ,Nothing)] (NodeInfo("main.c", 28, 18) (Name { nameId = 80 }))], False
+                    )
+                )[] (NodeInfo("main.c", 28, 10) (Name { nameId = 81 }))]
+                    Nothing[] (NodeInfo("main.c", 28, 6) (Name { nameId = 72 })))[]
+        (CCompound[][] (NodeInfo("main.c", 28, 25) (Name { nameId = 82 })))
+            (NodeInfo("main.c", 28, 1) (Name { nameId = 83 })))
+\end{code_files}
+

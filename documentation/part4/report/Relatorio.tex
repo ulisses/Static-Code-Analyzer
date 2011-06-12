@@ -1,0 +1,288 @@
+%%!TEX encoding = UTF-8 Unicode 
+\documentclass[english,a4paper]{report}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[portuges]{babel}
+\usepackage[portuges]{minitoc}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[pdftex]{color,graphicx}
+% pretty collors.. :)
+\usepackage[a4paper, pdftex, bookmarks, colorlinks,citecolor=darkblue,linkcolor=darkblue,urlcolor=darkblue,filecolor=darkblue]{hyperref}
+%\usepackage{t1enc}
+%\usepackage{aeguill}
+ \usepackage[avantgarde]{quotchap}
+\usepackage{varioref}
+\usepackage{psboxit}
+\usepackage{fancybox}
+\usepackage{fancyvrb}
+\usepackage{color}
+\usepackage{cite}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{geometry}
+\usepackage{graphics}
+\usepackage{setspace}
+\usepackage{thumbpdf}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{alltt}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{url}
+\usepackage{epsf}
+\usepackage{listings}
+\usepackage[refpages]{gloss}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{slashbox}
+\usepackage{rotating}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{darkblue}{rgb}{0,0.1,0.5}
+%\definecolor{darkred}{rgb}{0.8,0,0}
+% \def\tagform@#1{\maketag@@@{\cornersize{0.8}\ovalbox{\ignorespaces\sffamily{#1}\unskip\@@italiccorr}}}
+%% first reset the headers and footers
+\fancyhead{}
+\fancyfoot{}
+%% make the odd pages have the section name on the top right
+\fancyhead[RO]{\sffamily\bfseries \rightmark}
+%% make the even pages have the chapter name on the top left
+\fancyhead[LE]{\sffamily\bfseries \leftmark}
+
+%% page nums on the bottom in a nice box
+%% even side pages
+\fancyfoot[LE]{\psboxit{box 0.8 setgray fill}
+{\framebox[10mm][c]{\rule{0cm}{4mm}\color{black}{\bfseries \thepage}}}}
+%% odd side pages
+\fancyfoot[RO]{\psboxit{box 1 setgray fill}
+{\hspace{\textwidth}\psboxit{box 0.8 setgray fill}
+{\framebox[10mm][c]{\rule{0cm}{4mm}\color{black}{\bfseries \thepage}}}}}
+
+%% make the bottom line above the page number box
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\footruleskip}{0mm}
+
+\pdfpagewidth=\paperwidth
+\pdfpageheight=\paperheight
+
+\renewcommand\familydefault{\sfdefault}% usar font sem serifas
+
+% definir acrónimos com itálico
+%\renewcommand*{\acf}[1]{\acffont{\textit{\acl{#1}}~\acfsfont{(\acs{#1})}}}
+
+\newtheorem{defin}{Definição}
+
+\pagestyle{fancy}
+%\lhead{}
+%\rhead{}
+
+%% now redefine the plain style pages (chapter pages, contents pages)
+%% to have the same page number stuff on the bottom
+\fancypagestyle{plain}{
+	\fancyhf{}
+	\fancyfoot[RO]{\psboxit{box 1 setgray fill}
+	{\hspace{\textwidth}\psboxit{box 0.8 setgray fill}
+	{\framebox[10mm][c]{\rule{0cm}{4mm}\color{black}{\bfseries \thepage}}}}}
+	\renewcommand{\headrulewidth}{0pt}
+	\renewcommand{\footrulewidth}{0.5pt}
+}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{gray_ulisses}{gray}{0.55}
+\definecolor{castanho_ulisses}{rgb}{0.71,0.33,0.14}
+\definecolor{preto_ulisses}{rgb}{0.41,0.20,0.04}
+\definecolor{green_ulises}{rgb}{0.2,0.75,0}
+
+%% stuff do minitoc %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{minitocdepth}{2}
+\setlength{\mtcindent}{24pt}
+\renewcommand{\mtcfont}{\small\rm}
+\renewcommand{\mtcSSfont}{\small\bf}
+%\newenvironment{mtc}{\secttoc\sectlof\sectlot}{\pagebreak}
+%                        ^       ^        ^
+%                    conteudos  figuras  tabelas
+% \newenvironment{mtc}{\minitoc\minilof\minilot}{\pagebreak}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstdefinelanguage{HaskellUlisses}
+{
+        basicstyle=\ttfamily\scriptsize,
+        %backgroundcolor=\color{yellow},
+        %frameshape={RYRYNYYYY}{yny}{yny}{RYRYNYYYY}, %contornos... muito nice...
+        sensitive=true,
+        morecomment=[l][\color{gray_ulisses}\ttfamily\tiny]{--},
+        morecomment=[s][\color{gray_ulisses}\ttfamily\tiny]{\{-}{-\}},
+        morestring=[b]",
+        stringstyle=\color{red},
+        showstringspaces=false,
+%       numbers=left,
+%       firstnumber=\thelstnumber,
+        numberstyle=\tiny,
+        numberblanklines=true,
+        showspaces=false,
+        breaklines=true,
+        showtabs=false,
+%       xleftmargin=15pt,
+%       xrightmargin=-20pt,
+        emph=
+        {[1]
+                FilePath,IOError,abs,acos,acosh,all,and,any,appendFile,approxRational,asTypeOf,asin,
+                asinh,atan,atan2,atanh,basicIORun,break,catch,ceiling,chr,compare,concat,concatMap,
+                const,cos,cosh,curry,cycle,decodeFloat,denominator,digitToInt,div,divMod,drop,
+                dropWhile,either,elem,encodeFloat,enumFrom,enumFromThen,enumFromThenTo,enumFromTo,
+                error,even,exp,exponent,fail,filter,flip,floatDigits,floatRadix,floatRange,floor,
+                fmap,foldl,foldl1,foldr,foldr1,fromDouble,fromEnum,fromInt,fromInteger,fromIntegral,
+                fromRational,fst,gcd,getChar,getContents,getLine,head,id,inRange,index,init,intToDigit,
+                interact,ioError,isAlpha,isAlphaNum,isAscii,isControl,isDenormalized,isDigit,isHexDigit,
+                isIEEE,isInfinite,isLower,isNaN,isNegativeZero,isOctDigit,isPrint,isSpace,isUpper,iterate,
+                last,lcm,length,lex,lexDigits,lexLitChar,lines,log,logBase,lookup,map,mapM,mapM_,max,
+                maxBound,maximum,maybe,min,minBound,minimum,mod,negate,not,notElem,null,numerator,odd,
+                or,ord,otherwise,pi,pred,primExitWith,print,product,properFraction,putChar,putStr,putStrLn,quot,
+                quotRem,range,rangeSize,read,readDec,readFile,readFloat,readHex,readIO,readInt,readList,readLitChar,
+                readLn,readOct,readParen,readSigned,reads,readsPrec,realToFrac,recip,rem,repeat,replicate,return,
+                reverse,round,scaleFloat,scanl,scanl1,scanr,scanr1,seq,sequence,sequence_,show,showChar,showInt,
+                showList,showLitChar,showParen,showSigned,showString,shows,showsPrec,significand,signum,sin,
+                sinh,snd,span,splitAt,sqrt,subtract,succ,sum,tail,take,takeWhile,tan,tanh,threadToIOResult,toEnum,
+                toInt,toInteger,toLower,toRational,toUpper,truncate,uncurry,undefined,unlines,until,unwords,unzip,
+                unzip3,userError,words,writeFile,zip,zip3,zipWith,zipWith3,listArray,doParse
+        },
+        emphstyle={[1]\color{blue}},
+        emph=
+        {[2]
+                Bool,Char,Double,Either,Float,IO,Integer,Int,Maybe,Ordering,Rational,Ratio,ReadS,ShowS,String,
+                Word8,InPacket
+        },
+        emphstyle={[2]\color{castanho_ulisses}},
+        emph=
+        {[3]
+                case,class,data,deriving,do,else,if,import,in,infixl,infixr,instance,let,
+                module,of,primitive,then,type,where
+        },
+        emphstyle={[3]\color{preto_ulisses}\textbf},
+        emph=
+        {[4]
+                quot,rem,div,mod,elem,notElem,seq
+        },
+        emphstyle={[4]\color{castanho_ulisses}\textbf},
+        emph=
+        {[5]
+                EQ,False,GT,Just,LT,Left,Nothing,Right,True,Show,Eq,Ord,Num
+        },
+        emphstyle={[5]\color{preto_ulisses}\textbf}
+}
+\lstnewenvironment{haskell}{\lstset{language=HaskellUlisses}}{}
+
+\lstdefinelanguage{files} {
+       basicstyle=\ttfamily\scriptsize,
+       showstringspaces=false,
+       showspaces=false,
+       showtabs=false
+}
+\lstnewenvironment{code_files}{\lstset{language=files}}{}
+
+\lstdefinelanguage{xxml} {
+    basicstyle=\ttfamily\scriptsize,
+	numbers=left,
+	numberstyle=\tiny,
+	numbersep=5pt,
+	breaklines=true,
+	mathescape=true,
+	frame=tB
+}
+\lstnewenvironment{myxml}{\lstset{language=xxml}}{}
+
+\geometry{verbose,a4paper,tmargin=30mm,bmargin=30mm,lmargin=30mm,rmargin=30mm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.3\textwidth]{Images/DI-UM}
+\end{center}
+\end{figure}
+{\centering \large
+{\large\bf \textbf{Universidade do Minho} \\ Departamento de Informática}\\
+\vspace{1cm}
+\bf{Engenharia de Linguagens}\\
+\vspace{2cm}
+{\Large \bf {Projecto Integrado}}\\
+\vspace{1cm}
+{\LARGE \bf {\emph{Software} para Análise e Avaliação de Programas}}\\
+\vspace{1cm}
+%{\large \bf {}}
+\vspace{8.5cm}
+}
+
+\flushleft{ \emph{Grupo 2:\\}
+\vspace{0.4cm}
+\begin{tabular}{ll}
+José Pedro Silva & pg17628 \\
+Mário Ulisses Costa & pg15817 \\
+Pedro Faria & pg17684 \\
+\end{tabular}
+\\
+}
+\vspace {1.5cm}
+\textbf{Braga, \today}\\
+\pagebreak
+\end{titlepage}
+
+\pagenumbering{roman}
+\include{abstract}
+% indices
+\dominitoc
+\dominilof
+\dominilot
+\renewcommand{\contentsname}{Índice}
+\tableofcontents
+\addcontentsline{toc}{chapter}{\contentsname}
+\renewcommand{\listfigurename}{Índice de Figuras}
+\listoffigures
+\addcontentsline{toc}{section}{\listfigurename}
+\renewcommand{\listtablename}{Índice de Tabelas}
+\listoftables
+\addcontentsline{toc}{section}{\listtablename}
+ 
+
+\newpage
+\pagenumbering{arabic}
+\addtocounter{mtc}{+2}
+\newpage
+\input{intro}
+\newpage
+\part{Modelação e Análise}
+\input{model}
+\newpage
+\input{metricas}
+\newpage
+\part{WebApp e interface pelo terminal\\ \& \\ Scripts de Instalação e Avaliação}
+\input{webApp}
+\newpage
+\input{perlz}
+\newpage
+\input{scripts}
+\newpage
+\input{cloneDt}
+\newpage
+\input{maketxt}
+\newpage
+\part{Parser e Aplicação das métricas}
+\input{strafunski}
+\newpage
+\input{frontend}
+\newpage
+\input{conc}
+
+\addcontentsline{toc}{chapter}{Bibliografia}
+\bibliography{bibRep}{}
+\bibliographystyle{alpha}
+\appendix
+\newpage
+\input{apendixA}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document} 

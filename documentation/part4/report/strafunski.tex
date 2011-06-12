@@ -1,0 +1,173 @@
+\chapter{Strafunski}
+\minitoc
+
+Strafunski é uma biblioteca de programação genérica que implementa estratégias aplicadas ao paradigma funcional \cite{Lammel:2002:DPF:570186.570187,LV03-PADL}.\\
+Esta biblioteca segue a infraestrutura de \textit{Scrap your boilerplate} \cite{SYB3} do
+Haskell\footnote{Todos os módulos que estão debaixo do Data.Generics e cujos tipos implementam as classes Data e Typeable} e com isto pretende-se que o programador
+escreva código mais genérico que pode funcionar sobre vários tipos de dados e ao mesmo tempo código mais curto.\\
+Esta abordagem requer muita investigação e nem tanto começar de imediato a programar, visto haver bastante teoria por trás destas filosofias.
+
+\section{Explicação}
+Nesta secção iremos explciar com mais algum detalhe as funções disponíveis na API do Strafunski e o que conseguimos fazer com elas.\\
+O pacote Strafunski está dividido nos seguintes módulos:
+\begin{code_files}
+Data
+    Generics
+        Strafunski
+            StrategyLib
+                Data.Generics.Strafunski.StrategyLib.ChaseImports
+                Data.Generics.Strafunski.StrategyLib.ContainerTheme
+                Data.Generics.Strafunski.StrategyLib.EffectTheme
+                Data.Generics.Strafunski.StrategyLib.FixpointTheme
+                Data.Generics.Strafunski.StrategyLib.FlowTheme
+                Data.Generics.Strafunski.StrategyLib.KeyholeTheme
+                Data.Generics.Strafunski.StrategyLib.MetricsTheme
+                Data.Generics.Strafunski.StrategyLib.MonadicFunctions
+                Data.Generics.Strafunski.StrategyLib.NameTheme
+                Data.Generics.Strafunski.StrategyLib.OverloadingTheme
+                Data.Generics.Strafunski.StrategyLib.PathTheme
+                Data.Generics.Strafunski.StrategyLib.RefactoringTheme
+                Data.Generics.Strafunski.StrategyLib.StrategyInfix
+                Data.Generics.Strafunski.StrategyLib.StrategyPrelude
+                Data.Generics.Strafunski.StrategyLib.StrategyPrimitives
+                Data.Generics.Strafunski.StrategyLib.TermRep
+                Data.Generics.Strafunski.StrategyLib.TraversalTheme
+\end{code_files}
+É interessante explicar apenas alguns destes módulos, os que conteem as funções principais e nem tanto explicar em grande detalhe cada um deles.\\
+
+\subsubsection{Tipos de dados}
+Como já foi referenciado atrás para o Strafunski conseguir processar um tipo de dados criado por nós, este tem de ser instância de Data e de Typeable.
+Porque por exemplo a classe Data obriga à implementação de um catamorfismo para o nosso tipo de dados, chamado de $gfoldl$ e um anamorfismo $gunfold$, entre outras
+funções para travessias na nossa árvore de tipos. Como nota é importante dizer que o utilizador (a pessoa que desenhou os tipos de dados) não necessita
+fazer a instânciação manual desta classe. Podemos recorrer ao confortável \textbf{deriving Data} que o Haskell suporta para qualquer declaração
+de tipos\footnote{Internamente o GHC trata de chamar a biblioteca do DrIFT. Esta faz uma análise ao código e infere as instâncias para essas classes, mais informações em: \url{http://repetae.net/computer/haskell/DrIFT/}}.\\
+
+No que diz respeito aos tipos de dados utilizados pelo Strafunski temos dois, o \textbf{TP} para estratégias de preservação dos tipos
+(o tipo do output e input coincidem), e \textbf{TU} para estratégias de tipo unificados (o output é sempre de um determinado tipo independentemente do tipo de entrada),
+como é explicado em \cite{Lammel:2002:DPF:570186.570187}.\\
+Estes tipo aos olhos do utilizador são abstractos, porque o lote de funções que nos são dadas para os trabalhar não implica o conhecimento destes.
+
+\subsection{Estratégias}
+De seguida iremos explicar no que consistem estas estratégias e como é que elas ganham forma no Strafunski, para efeitos de documentação iremos separar a explicação
+das funções pelo pacote a que pertecem, dentro do Strafunski.\\
+É de notar que para cada função que existe para o tipo de dados \textbf{TU} também existe a mesma para o \textbf{TP}.
+
+\subsubsection{Data.Generics.Strafunski.StrategyLib.StrategyPrimitives}
+
+Para a aplicação de uma estratégia a uma instância do nosso tipo de dados $t$ iremos usar:
+$$applyTP :: (Monad~m, Term~t) \Rightarrow TP~m \rightarrow t \rightarrow m~t$$
+$$applyTU :: (Monad~m, Term~t) \Rightarrow TU~u~m \rightarrow t \rightarrow m~u$$
+
+Permite adicionar estratégias:
+$$adhocTP :: (Monad~m, Term~t) \Rightarrow TP~m \rightarrow (t \rightarrow m t) \rightarrow TP~m$$
+$$adhocTU :: (Monad~m, Term~t) \Rightarrow TU a m \rightarrow (t \rightarrow m u) \rightarrow TU~u~m$$
+
+Permite executar estratégias em sequência:
+$$seqTP :: Monad~m \Rightarrow TP~m \rightarrow TP~m \rightarrow TP~m$$
+$$seqTU :: Monad~m \Rightarrow TP~m \rightarrow TU~u~m \rightarrow TU~u~m$$
+
+% $$passTP :: Monad~m \Rightarrow TU~u~m \rightarrow (u \rightarrow TP~m) \rightarrow TP~m$$
+% $$passTU :: Monad~m \Rightarrow TU~u~m \rightarrow (u \rightarrow TU~u~m) \rightarrow TU~u~m$$
+
+Para tentar usar estratégias diferentes:
+$$choiceTP :: MonadPlus~m \Rightarrow TP~m \rightarrow TP~m \rightarrow TP~m$$
+$$choiceTU :: MonadPlus~m \Rightarrow TU~u~m \rightarrow TU~u~m \rightarrow TU~u~m$$
+
+Aplica esta estratégia a todos os subtermos imediatos, para o \textbf{TU} os resultados são reduzidos com a função do monoid $+$:
+$$allTP :: Monad~m \Rightarrow TP~m \rightarrow TP~m$$
+$$allTU :: (Monad~m, Monoid~u) \Rightarrow TU~u~m \rightarrow TU~u~m$$
+
+\subsubsection{Data.Generics.Strafunski.StrategyLib.TraversalTheme}
+
+Esta função permite aplicar a estratégia ao primeiro filho que aparecer da esquerda para a direita:
+$$once\_tdTP,once\_buTP :: MonadPlus~m \Rightarrow TP~m \rightarrow TP~m$$
+$$once\_tdTU, once\_buTU :: MonadPlus~m \Rightarrow TU~u~m \rightarrow TU~u~m$$
+
+\subsubsection{Data.Generics.Strafunski.StrategyLib.StrategyPrelude}
+
+Função identidade:
+$$idTP :: Monad~m \Rightarrow TP~m$$
+
+Função constante:
+$$constTU :: Monad~m \Rightarrow u \rightarrow TU~u~m$$
+
+A seguinte função é uma estratégia em si que falha sempre:
+$$failTP :: MonadPlus~m \Rightarrow TP~m$$
+$$failTU :: MonadPlus~m \Rightarrow TU~u~m$$
+
+\section{Exemplos}
+Agora iremos mostrar alguns exemplos de como usar a biblioteca Strafunski para conseguir processar a nossa árvore de parsing.\\
+
+\subsection{McCabe Index$--$}
+O índice de McCabe consiste, como já referimos anteriormente, num grafo orientado onde os nodos são as computações. Para se chegar a este número
+temos de aplicar a formúla já descrita. Uma forma incipiente para calcular o índice de McCabe pdoeria ser contar o número de ifs, switches, fors e mais algumas
+expressões de controlo. Assim conseguimos fazer isto com o Strafunski da seguinte forma:
+\begin{haskell}
+testMcCabe :: IO Int 
+testMcCabe =  parr >>= mcCabeIndex . fromRight
+
+instance Num a => Monoid a where
+    mappend = (+) 
+    mempty = 0 
+        
+mcCabeIndex :: Data a => a -> IO Int 
+mcCabeIndex =  applyTU (full_tdTU isConditional)
+        
+isConditional = constTU 0 `adhocTU` (return . test)
+
+test (CIf _ _ _ _)    = 1
+test (CSwitch _ _ _)  = 1
+test (CWhile _ _ _ _) = 1
+test (CFor _ _ _ _ _) = 1
+test _                = 0
+\end{haskell}
+Como já explicamos anteriormente o tipo \textbf{TU} quando usado com determinados operadores exige que tenhamos uma instância de \textbf{Monoid} para o tipo de retorno.
+Assim fomos obrigados a definir a instância de \textbf{Monoid} para os tipos Numerários do Haskell como a função soma. Temos consciência de que isto por si só
+é uma grande restrição e também temos consciência que existem alternativas para resolver este problema, como é o caso das classes \textbf{Sum} e \textbf{Mul}.
+No entanto não conseguimos pôr a funcionar a tempo de entrega deste relatório essas instâncias com o tipo \textbf{TU} do Strafunski.
+
+\subsection{Extracção das assinaturas das funções}
+Um outro exemplo muito interessante e bastante útil é a extracção do cabeçalho das funções em C que constam no nosso código. Isto é bastante útil para se ter uma noção
+do tamanho da implementação e da sua estruturação.
+
+\begin{haskell}
+getFunctionsSign :: IO [CExtDecl]
+getFunctionsSign = parr >>= return . getFunSign . fromRight
+
+getFunSign = applyTU (once_tdTU names1)
+names1 = failTU `adhocTU` fromFunctionToSign
+
+fromFunctionToSign (CFDefExt (CFunDef lCDeclSpec cDeclr _ _ nInfo ))
+    = [CDeclExt (CDecl lCDeclSpec [(Just $ cDeclr,Nothing,Nothing)] internalNode)]
+fromFunctionToSign _ = []
+\end{haskell}
+
+Como podemos ver na função $fromFunctionToSign$ apenas estamos a converter de um construtor do tipo \textbf{CExtDecl}, que é o \textbf{CFDefExt} para o mesmo tipo,
+mas com o contrutor \textbf{CDeclExt}, ou seja estamos a passar o nodo da árvore de uma definição para uma declaração.\\
+
+Para o caso do seguinte código:
+\begin{code_files}
+void main(int argc, char **argv) {    
+    if(1) {}                                      
+    switch (1) {                  
+        case 1: {    
+            lala(1,1);    
+            break;                                 
+        }    
+        case 1: {                      
+            break;    
+        }                                                                         
+    }                    
+    return 0;    
+}                                                                                         
+
+void lala(int a, int b) {    
+    if(a) {}    
+}  
+\end{code_files}
+iriamos ter o seguinte output:
+\begin{code_files}
+*Main> getFunctionsSign >>= putStrLn . unlines . map (show . pretty)
+void main(int argc, char * * argv);
+void lala(int a, int b);
+\end{code_files}
