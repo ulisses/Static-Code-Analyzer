@@ -41,12 +41,13 @@ import NumberOfLines
 import Metrics
 import Includes
 import NumberOfLines
-import Complexity(mccabeIndex)
+import Complexity
 import Functions
 import AbsolutePath
 import Files
 import Latex
 import XML
+import GraphViz
 
 {- Main -}
 {- We may need to import some libraries to be able to put the input code
@@ -99,15 +100,18 @@ compilerOpts argv = do
         where header = "Usage: "++ name ++" [OPTION...] files..."
 
 main :: IO ()
-main = do
-    (dir:_) <- getArgs
-    lst <- getListOfCFiles dir >>= return . take 100
-    putStrLn "tenho a lista de files"
-    l1 <- P.mapM getNrOfLinesOfComments lst
-    putStrLn "tenho todas as metricas do mundo"
-    l2 <- return $ concatMetrics l1
-    putStrLn "tudo numa metrica so, siga PDF"
-    generatePDF l2
+main = do {
+    (dir:_) <- getArgs ;
+	generateGraphViz dir ;
+	return()
+	}
+    --lst <- getListOfCFiles dir >>= return . take 100
+    --putStrLn "tenho a lista de files"
+    --l1 <- P.mapM getNrOfLinesOfComments lst
+    --putStrLn "tenho todas as metricas do mundo"
+    --l2 <- return $ concatMetrics l1
+    --putStrLn "tudo numa metrica so, siga PDF"
+    --generatePDF l2
 
 fromListOfPathsToMatetrics [] m = return m
 fromListOfPathsToMatetrics (h:t) mAcc = do

@@ -11,7 +11,7 @@
 -- In this module I implement the metrics related with complexity
 --
 ------------------------------------------------------------------------------
-module Complexity(functionForMccabeIndex, mccabePerFun, mccabeIndex) where
+module Complexity where
 
 import Data.Data
 import Data.Monoid
@@ -35,20 +35,21 @@ p = parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] "main.c"
 r = (\(Right r) -> r)
 
 {- fucntions names that are inside the range of complexities
--}
 functionForMccabeIndex :: CTranslUnit -> (Int,Int) -> IO [(String,Int)]
 functionForMccabeIndex d (min,max) = do
     l <- mccabePerFun d
     return $ filter (\(_,val) -> val >= min && val <= max) l
-
+-}
 {- mccabe index per function, for all function inside a C file
 -}
---mccabePerFun :: CTranslUnit -> IO Metrics
-mccabePerFun d = do
+mccabePerFun :: (FilePath,CTranslUnit) -> IO Metrics
+mccabePerFun (file,d) = do
     funs <- getFunsName d
     mccabes <- (mapM mccabeIndex . getListFunFromC) d
-    return $ filter ((/=nofunName) . fst) $ zip funs mccabes
+    let lst = filter ((/=nofunName) . fst) $ zip funs mccabes
+    return $ foldl fromFunMccabeToMetrics emptyMetrics lst
     where getListFunFromC (CTranslUnit l _) = l
+          fromFunMccabeToMetrics r (funName,mccabeVal) = r >.> (("mccabePerFun",file,funName), Num $ fromIntegral mccabeVal)
 
 {- mcCabe index, we need to have Int as Monoid, in the future
    we must change this to Sum, because we may want to have

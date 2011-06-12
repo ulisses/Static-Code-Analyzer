@@ -49,7 +49,6 @@ type MetricName = (String,String,String)
 
 data MetricValue = Num Double
                  | Clone FileSrc [(FileDst, [(Ocurrency, LineSrc, LineDst)])]
-                 | Mccabe [(FunctionName,Int)]
                  | Includes ([SystemIncludes],[Includes])
     deriving (Show, Eq, Ord)
 

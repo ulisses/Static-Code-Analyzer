@@ -1,6 +1,4 @@
 
-/*
-ooollla
 
 void fun(int a, int b);
 
@@ -19,7 +17,6 @@ void fun(int a, int b) {
     }
 }
 
-*/
 void main(int argc, char **argv) {
     if(1) {
     	}
