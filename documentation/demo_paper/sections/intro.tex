@@ -1,0 +1,40 @@
+\section{Introduction}
+
+Models are a representation of reality aiming at the simplification of some complex objects: they are built so that we can better understand the system being developed.
+%They help us to visualize a system as it is or as we need it to be, allowing to specify the structure and behavior of it.
+They allow us to specify the structure and behavior of a system, providing the guidance lines/blueprints for constructing a system, and finally, they document the decisions taken for a given system.
+Specifying means building models that are precise, unambiguous and complete. 
+
+Some models are best described textually, other graphically. All interesting systems exhibit structures that transcend what can be represented in a programming language.
+
+A modeling language is a language whose vocabulary and rules focus on the conceptual and physical representation of a system. %%todo
+%% prh idea
+One the one hand, one can produce a strict formal specification of the system, which allows us to reason over the system proprieties, without running the system.
+On the other hand, one can follow a pragmatic approach, using a diagrammatic specification of the system, not allowing us to reason over programs,
+but deriving programs from the model specification. That aside, when assessing a modeling language we might need to infer on its quality.
+
+\begin{quotation}
+Effective management of any process requires quantification, measurement, and modeling.
+Software metrics provide a quantitative basis for the development and validation of models of the software development process.
+Metrics can be used to improve software productivity and quality\cite{g1:Millis:1998}.
+\end{quotation}
+
+The main goal of using model/software metrics is to be able to generate quantifiable measurements from the specifications/software. The use of model metrics is even more
+important to numerous valuable applications in earlier stages of the development process: in scheduling, cost estimation, quality assurance, and personnel task assignments.
+Nowadays, this metrics become increasingly essential for Software Engineering: they are crucial even for reengineering processes.
+In \emph{Forward Engineering} they are used to measure the software quality and estimate cost and effort of software projects\cite{Fenton}.
+In the field of \emph{Software Evolution}, they can be both used to identify stable or unstable parts of a system as to determine where refactoring can be or have been applied\cite{Serge}.
+They even can be used for assessing the quality and complexity of software systems in \emph{Software Reengineering} or \emph{Reverse Engineering}\cite{43044}.
+
+%The \uml\ addresses the specification of all the important analysis, design and implementation decision. %todo
+When focusing on the field of Object-Oriented (OO) systems, many metrics have been proposed for assessing the design of a software system.
+However, most of the existing approaches involve the analysis of the source code and cannot be applied in earlier stages of the development process.
+In fact, it is not always simple to apply the existing metrics in this earlier stages. 
+As the \textsf{Unified Modeling Language}, proposed by Booch, Jacobson and Rumbaugh\cite{USDPuml} has became a standard for expressing, design and specify OO systems, applying metrics to these models enables an early estimate of development efforts, implementation time, complexity and cost of the system under development. \\
+
+In this paper, we will introduce and discuss the major existing metrics for \uml\ models, and focus on present a set of tools designed for measuring \uml\ projects.
+We start in Section~\ref{metrics} to describe the principal measurements applicable to the most popular \uml\ diagrams.
+Then, in Section~\ref{tools} we present two of the best tools designed to extract metrics from \uml\ models and the results of applying them to a real case-study.
+Then, Section~\ref{assess} is devoted to the metrics assessment problem.
+Finally, we conclude in Section~\ref{conc} with a comparison between the presented tools.
+
