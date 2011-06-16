@@ -21,7 +21,7 @@ and then start submitting their solutions to each of the contest exercises.
 All of the work related to C files parsing, metrics extraction from them and output generation is done
 using Haskell programming language. To extract some metrics we use a parser
 library\footnote{Language.C - http://trac.sivity.net/language\_c/} done by Benedikt Huber under a GSoC (Google summer of code).
-With this library we are able to construct a small but complete parsing tree with the representation of our C code.\\
+With this library we are able to construct a small parsing tree with the complete AST of C~\cite{Kernighan:1988:CPL:576122} and some GNU C extensions.\\
 \indent To have an idea we only have 84 types of nodes (type constructors) in this tree, even so it is too big to traverse it by constructor, so
 it was mandatory to use strategies to traverse this tree. We decide to use Strafusnki library~\cite{LV03-PADL}.
 
