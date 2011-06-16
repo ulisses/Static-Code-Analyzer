@@ -101,7 +101,28 @@ class ConcursosController < ApplicationController
     @cenas = File.join(Rails.root, "public/images/stats","contest-"+@concurso.id.to_s)
     
   end
+  
+  
+  
+  def generateMetrics
+    @concurso =  Concurso.find(params[:concurso_id])
+    @title = "Todos os concursos"
+    
+    metricsCommand()
+    redirect_back_or concursos_path
+  end
 
+  # Stream a file to client
+  def downloadMetrics
+    @concurso =  Concurso.find(params[:concurso_id])
+    path = File.join(Rails.root, "data/concursos","contest-"+@concurso.id.to_s,"metrics","metrics.pdf")
+    send_file(   path,
+                 :filename => "metrics.pdf",
+                 :type => "application/pdf",
+                 :stream => "false",
+#                 :disposition =>'attachment') ##download
+                 :disposition =>"inline") #ver no browser
+  end
   
   
   private 
@@ -167,5 +188,22 @@ class ConcursosController < ApplicationController
 				`rm -rf #{path}`
 			end
 		end
+		
+		def metricsCommand
+		  path = File.join(Rails.root, "data/concursos","contest-"+@concurso.id.to_s,"metrics")
+			if File.exists?(path)
+				`rm -rf #{path}`
+			end
+			
+			if !File.exists?(path)
+				Dir.mkdir(path)
+			end
+			
+			#####COLOCAR AQUI COMANDO QUE CRIA O PDF NESTA PASTA
+			File.new(path+"/metrics.pdf", "w")
+			
+	  end
+		  
+		
 		
 end

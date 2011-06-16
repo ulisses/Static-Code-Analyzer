@@ -35,6 +35,8 @@ SampleApp::Application.routes.draw do
   resources :results
   resources :clone_warnings, :only => [:index,:destroy]
   match '/show_clone', :to => 'clone_warnings#present'
+  match '/generateMetrics', :to => 'concursos#generateMetrics'
+  match '/downloadMetrics', :to => 'concursos#downloadMetrics'
   
 #  resource :tests do
 #  collection do
