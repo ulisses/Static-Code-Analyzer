@@ -1,3 +1,16 @@
 \section{Metrics and Assessment}\label{metrics}
+We u
+\begin{haskell*}
+  map          &::& (\alpha\to\beta)\to[\alpha]\to[\beta]
+  &\hscom{type assertion}\\
+  map f []     &=& []
+  &\hscom{\<[]\> is the empty list}\\
+  map f (x:xs) &=& f x : map f xs
+  &\hscom{\<:\> is the infix list constr.}
+\end{haskell*}
 
-
+\begin{haskell*}
+  \hskwd{data} Metrics
+  & = & Nothing      &\hscom{No result}\\
+  & | & Just \alpha  &\hscom{Just a value of type \<\alpha\>}
+\end{haskell*}
