@@ -1,16 +1,43 @@
-\section{Metrics and Assessment}\label{metrics}
-We u
-\begin{haskell*}
-  map          &::& (\alpha\to\beta)\to[\alpha]\to[\beta]
-  &\hscom{type assertion}\\
-  map f []     &=& []
-  &\hscom{\<[]\> is the empty list}\\
-  map f (x:xs) &=& f x : map f xs
-  &\hscom{\<:\> is the infix list constr.}
-\end{haskell*}
+\newcommand{\metricsins}{\mathbin{>\mkern-7mu\circ\mkern-9mu>}}
+\newcommand{\metricscat}{\mathbin{>\mkern-7mu+\mkern-11mu>}}
 
+\section{Metrics and Assessment}\label{metrics}
+To be able to manipulate and store the calculated metrics we have develop an API. Here are the relevent data types:
 \begin{haskell*}
   \hskwd{data} Metrics
-  & = & Nothing      &\hscom{No result}\\
-  & | & Just \alpha  &\hscom{Just a value of type \<\alpha\>}
+    & = & Metrics (Map MetricName MetricValue)\\
+  \hskwd{type} MetricName
+    & = & (Name,FileName,FunctionName)\\
+  \hskwd{data} MetricValue
+    & = & Num Double\\
+    & | & Clone (Map FileDst [(Ocurrency, LineSrc, LineDst)])\\
+    & | & Includes ([SystemIncludes],[Includes])
 \end{haskell*}
+
+We have used a Map to store our metrics, where the key is the triple $MetricName$. Some metrics just make sense when extracted regarding all the software package,
+others may only be relevant regarding files and other may be extracted regarding a function. By letting some of empty fields in the triple we express this three categories
+of metrics. Regarding the $MetricValue$ we can have multiple types of metrics, most of them just return a numerary value, the cosntructor $Num$. And then we have more specific
+metrics related to clones found in the code, list of include and system includes.\\
+\indent Now we present one of the most important function to append metrics. The power of \textit{Haskell} infix notation allow us to use comfortably this kind of functions.
+
+\begin{haskell*}
+  \metricsins ::  Metrics & \to& (MetricName, &MetricValue) \to Metrics\\
+  m \metricsins (mn,mv) 
+     &\mid &member mn m & = \hslet{(Just mv') = lookup mn fm}
+	{\hskwd{if} mv' \equiv mv \hskwd{then} m \hskwd{else} unpackPack ins m}\\
+                            &\mid &otherwise   & = unpackPack ins m
+	\hswhere{ins = insert mn mv\\
+	         fm  = fromMetrics m}
+\end{haskell*}
+
+The previous function can be used when we want create a new metric, if so we must use $emptyMetrics$ as first paramenter.
+The $unpackPack$ function used is a trick to remove the cosntructor, apply some function and return $Metrics$, could be defined as: $unpackPack~f \doteq toMetrics  \circ f \circ fromMetrics$.\\
+\indent The following function can be used when the user already have some metrics calculated and want to concat them into one.
+
+\begin{haskell*}
+\metricscat & :: & Metrics \to Metrics \to Metrics\\
+m1 \metricscat m2 & = & toMetrics (union (fromMetrics m1) (fromMetrics m2))
+\end{haskell*}
+
+As an example we can use this function to take a list of $Metrics$ and concat all of them into just one $Metrics$ value: $foldl~(\metricscat)~emptyMetrics$
+
