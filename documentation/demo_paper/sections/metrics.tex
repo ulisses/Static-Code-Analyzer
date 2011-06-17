@@ -23,11 +23,10 @@ metrics related to clones found in the code, list of include and system includes
 \begin{haskell*}
   \metricsins ::  Metrics & \to& (MetricName, &MetricValue) \to Metrics\\
   m \metricsins (mn,mv) 
-     &\mid &member mn m & = \hslet{(Just mv') = lookup mn fm}
+     &\mid &member mn m & = \hslet{fm  & = & fromMetrics m\\(Just mv') & = & lookup mn fm}
 	{\hskwd{if} mv' \equiv mv \hskwd{then} m \hskwd{else} unpackPack ins m}\\
                             &\mid &otherwise   & = unpackPack ins m
-	\hswhere{ins = insert mn mv\\
-	         fm  = fromMetrics m}
+	\hswhere{ins = insert mn mv}
 \end{haskell*}
 
 The previous function can be used when we want create a new metric, if so we must use $emptyMetrics$ as first paramenter.
