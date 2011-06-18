@@ -30,6 +30,7 @@ import Data.List
 import System.IO
 import qualified Data.Text.IO as TIO
 import qualified Data.Text as T
+import qualified System.IO.Strict as S
 
 import Metrics
 
@@ -61,7 +62,8 @@ physicalLines file = do
 
 {- Get the clones for a blokc of contiguous lines
 -}
-getClonesBlock :: (FilePath,[String]) -> IO Metrics
+--getClonesBlock :: (FilePath,[String]) -> IO Metrics
+getClonesBlock :: (FilePath, [(FileDst, String)]) -> IO Metrics
 getClonesBlock (fp,fps) = do
     lst <- getClonesByBlock fp fps
         >>= return
@@ -70,10 +72,8 @@ getClonesBlock (fp,fps) = do
             . sortBy  (\(a,_,_,_) (b,_,_,_) -> EQ)
     return (emptyMetrics >.> (("getClonesBlock",fp,""), Clone lst))
 
-getClonesByBlock fp fps = do
-    hss' <- mapM (flip openBinaryFile ReadMode) fps
-    hss  <- mapM hGetContents hss'
-    getClones'' fp (zip fps hss)
+getClonesByBlock fp hss = do
+    getClones'' fp hss
 
 blocks :: Int -> String -> [String]
 blocks n "" = []
@@ -84,7 +84,7 @@ blocks n l = let lk = take n $ lines l
                  (Just t) = stripPrefix lkcatRec l
              in if (lklen < n) then [lkcat] else lkcat : blocks n t
 
-getClones'' fn db = readFile fn >>= return . filterNonClone . fun
+getClones'' fn db = S.readFile fn >>= return . filterNonClone . fun
     where
           fun src = [ (fn', lin, nr, find lin (blocks 3 db') ) | (fn', db') <- db, (nr,lin) <- zip [1..] $ blocks 3 $ src ]
           find lin db = let l = map (+1) $ findIndices (==lin) db

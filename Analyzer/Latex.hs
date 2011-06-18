@@ -19,6 +19,7 @@ import System.Path.NameManip
 
 import Metrics
 
+{- Convert Metrics to LaTeX -}
 generatePDF exM = do
     t <- render $ example exM "test"
     writeFile "test.tex" t
@@ -40,7 +41,6 @@ generatePDF exM = do
             exitWith exitError
 -}
 
-{- Convert Metrics to LaTeX -}
 example m packageName = do
     documentclass [a4paper,oneside] article
     "\\usepackage{verbatim}"

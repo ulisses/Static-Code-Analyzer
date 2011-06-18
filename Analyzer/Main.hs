@@ -36,7 +36,7 @@ import System.Console.GetOpt
 import Data.Maybe ( fromMaybe )
 import qualified Control.Monad.Parallel as P
 import qualified System.IO.Strict as S
-
+import System.IO
 
 import Comments
 import NumberOfLines
@@ -103,24 +103,30 @@ compilerOpts argv = do
 
 execAllMetrics :: FilePath -> IO Metrics
 execAllMetrics fp = do
-    lfp    <- getListOfCFiles fp >>= return . take 10
+    lfp    <- getListOfCFiles fp
     lstT   <- getTreeFromFile lfp
     dbFile <- getDBFileContents
     complexityM          <- mapM mccabePerFun lstT >>= return . concatMetrics
     includesM            <- mapM getIncludes lfp >>= return . concatMetrics
     linesOfCommentsM     <- mapM getNrOfLinesOfComments lfp >>= return . concatMetrics
-    linesOfCommentsDensM <- mapM commentLinesDensity lfp >>= return . concatMetrics
-    --contentsM            <- mapM getClonesBlock (zip lfp (repeat dbFile)) >>= return . concatMetrics
+    linesOfCommentsDensM <- mapM commentLinesDensity lstT >>= return . concatMetrics
+    lcommM               <- mapM getNrOfLinesOfComments lfp >>= return . concatMetrics
+    contentsM            <- mapM getClonesBlock (zip lfp (repeat dbFile)) >>= return . concatMetrics
     return $
         complexityM
         >+> includesM
         >+> linesOfCommentsM
+        >+> contentsM
+        >+> lcommM
         >+> linesOfCommentsDensM
-        -- >+> contentsM
 
-
-getDBFileContents ::  IO [String]
-getDBFileContents = readFile "database.txt" >>= return . lines
+getDBFileContents ::  IO [(FileDst,String)]
+getDBFileContents = do
+    fc <- S.readFile "database.txt" >>= return . lines
+    hss' <- P.mapM (flip openBinaryFile ReadMode) fc
+    hss  <- P.mapM hGetContents hss'
+    mapM hClose hss'
+    return $ zip fc hss
 
 getContentFromFile :: [FilePath] -> IO [(FilePath,[String])]
 getContentFromFile [] = return []
@@ -129,7 +135,6 @@ getContentFromFile (fp:t) = do
     case eith of
         (Left err) -> print err >> getContentFromFile t
         (Right co) -> getContentFromFile t >>= return . (\r -> (fp,lines co) : r)
-
 
 getTreeFromFile :: [FilePath] -> IO [(FilePath,CTranslUnit)]
 getTreeFromFile [] = return []
@@ -143,10 +148,8 @@ getTreeFromFile (fp:t) = do
 
 main :: IO ()
 main = do {
-    (dir:_) <- getArgs ;
     -- generateGraphViz dir ;
-	execAllMetrics "../" ;
-	return()
+	execAllMetrics "../" >>= generatePDF
 	}
     --lst <- getListOfCFiles dir >>= return . take 100
     --putStrLn "tenho a lista de files"

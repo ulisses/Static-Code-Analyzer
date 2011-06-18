@@ -44,9 +44,7 @@ h s = do x <- get
 -}
 {- types -}
 data Metrics = Metrics (M.Map MetricName MetricValue)
-    deriving Show
 type MetricName = (String,String,String)
-
 data MetricValue = Num Double
                  | Clone [(FileDst, [(Ocurrency, LineSrc, LineDst)])]
                  | Includes ([SystemIncludes],[Includes])
@@ -61,13 +59,17 @@ type Ocurrency = String
 type LineDst = Int
 type LineSrc = Int
 
+instance Show Metrics where
+    show = M.foldrWithKey (\k v t -> show k ++ "   ->   " ++ show v ++ "\n" ++ t) [] . fromMetrics
+
 getAllNum,getAllClone :: Metrics -> Metrics
 getAllNum = unpackPack (M.filterWithKey isNum)
     where isNum _ (Num _) = True
           isNum _ _       = False
 getAllClone = unpackPack (M.filterWithKey isClone)
-    where isClone _ (Clone _) = True
-          isClone _ _           = False
+    where isClone _ (Clone []) = False -- an empty clone is not a clone
+          isClone _ (Clone _)  = True
+          isClone _ _          = False
 
 {-TEST-}
 exM = emptyMetrics
@@ -107,8 +109,7 @@ deleteMetric = unpackPack . M.delete
 
 {- Concat Metrics -}
 (>+>) :: Metrics -> Metrics -> Metrics
-m1 >+> m2 = concatMetrics m1 m2
-    where concatMetrics m1 m2 = toMetrics $ M.union (fromMetrics m1) (fromMetrics m2)
+m1 >+> m2 = toMetrics $ M.union (fromMetrics m1) (fromMetrics m2)
 
 {- foldr over Metrics -}
 foldrM :: (MetricName -> MetricValue -> c -> c) -> c -> Metrics -> c

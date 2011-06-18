@@ -18,6 +18,10 @@
 
 module Comments(getNrOfLinesOfComments,commentLinesDensity) where
 
+import Language.C
+import Language.C.System.GCC
+import Language.C.Data.Ident
+import Language.C.Pretty
 import Language.C.Comments
 import Language.C.Data.InputStream(inputStreamFromString)
 import Language.C.Parser
@@ -28,11 +32,12 @@ import qualified Control.Exception as Ex
 import NumberOfLines
 import Metrics
 
-commentLinesDensity :: FilePath -> IO Metrics
-commentLinesDensity file = do
+commentLinesDensity :: (FilePath,CTranslUnit) -> IO Metrics
+commentLinesDensity (file,tree) = do
     mNrCom <- getNrOfLinesOfComments file
     (Num nrCom) <- return $ getM ("getNrOfLinesOfComments",file,"") mNrCom
-    (Num nrLin) <- return $ getM ("ncloc",file,"") mNrCom
+    nlocM <- ncloc (file,tree)
+    (Num nrLin) <- return $ getM ("ncloc",file,"") nlocM
     return $ emptyMetrics
              >.> ( ("commentLinesDensity",file,"")
                  , Num (( nrCom /  (nrLin + nrCom)) * 100)
