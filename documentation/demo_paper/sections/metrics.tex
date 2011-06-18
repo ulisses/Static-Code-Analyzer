@@ -2,6 +2,7 @@
 \newcommand{\metricscat}{\mathbin{>\mkern-7mu+\mkern-11mu>}}
 
 \section{Metrics and Assessment}\label{metrics}
+\subsection{API design}
 To be able to manipulate and store the calculated metrics we have develop an API. Here are the relevent data types:
 \begin{haskell*}
   \hskwd{data} Metrics
@@ -14,8 +15,8 @@ To be able to manipulate and store the calculated metrics we have develop an API
     & | & Includes ([SystemIncludes],[Includes])
 \end{haskell*}
 
-We have used a Map to store our metrics, where the key is the triple $MetricName$. Some metrics just make sense when extracted regarding all the software package,
-others may only be relevant regarding files and other may be extracted regarding a function. By letting some of empty fields in the triple we express this three categories
+\noindent We have used a Map to store our metrics, where the key is the triple $MetricName$. Some metrics just make sense regarding all the software package,
+others may only be relevant regarding files and other may be extracted from a function. By letting some of empty fields in the triple we express this three categories
 of metrics. Regarding the $MetricValue$ we can have multiple types of metrics, most of them just return a numerary value, the cosntructor $Num$. And then we have more specific
 metrics related to clones found in the code, list of include and system includes.\\
 \indent Now we present one of the most important function to append metrics. The power of \textit{Haskell} infix notation allow us to use comfortably this kind of functions.
@@ -38,5 +39,7 @@ The $unpackPack$ function used is a trick to remove the cosntructor, apply some 
 m1 \metricscat m2 & = & toMetrics (union (fromMetrics m1) (fromMetrics m2))
 \end{haskell*}
 
-As an example we can use this function to take a list of $Metrics$ and concat all of them into just one $Metrics$ value: $foldl~(\metricscat)~emptyMetrics$
+As an example we can use this function to take a list of $Metrics$ and concat all of them into just one $Metrics$ value: $foldl~(\metricscat)~emptyMetrics$.
 
+\subsection{Metrics}
+Write about the implemented metrics, formulae, etc...
