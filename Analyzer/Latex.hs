@@ -66,13 +66,13 @@ fromCloneToLaTeX' m | nullM  m = noop
                                      foldrM step noop m
     where singularOrPlural | sizeM m == 1 = " possible cloned file"
                            | otherwise = " possible cloned files"
-          step k v r = let fileName = myfromString $ getClonedFile v
+          step k v r = let fileName = myfromString $ getClonedFile k
                        in  subsection fileName
                                >> myfromString ("This file was possible cloned from "++(texString $ length $ getClonedLst v)++" files:") >> newline
                                >> (foldr stepL noop $ getClonedLst v)
                            >> r
-          getClonedFile (Clone f _) = f
-          getClonedLst (Clone _ l) = l
+          getClonedFile (_,f,_) = f
+          getClonedLst (Clone l) = l
           stepL (s,l) r = (textbf $ myfromString s) >> (foldr stepOcorrencies noop l) // r
           stepOcorrencies (o,lsrc,ldst) r = newline
                                                 >> fromString ("Found at line " ++ (texString lsrc)

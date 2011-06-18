@@ -12,9 +12,9 @@
 ------------------------------------------------------------------------------
 
 module NumberOfLines(ncloc, physicalLines
-                    ,densityOfDuplicatedLinesBlock, nrOfFilesDuplicatedLineBlock
+                    -- ,densityOfDuplicatedLinesBlock, nrOfFilesDuplicatedLineBlock
                     ,getClonesBlock
-                    ,densityOfDuplicatedLinesOneLine, nrOfFilesDuplicatedLineOneLine
+                    -- ,densityOfDuplicatedLinesOneLine, nrOfFilesDuplicatedLineOneLine
                     ,getClonesOneLine
                     ) where
 
@@ -31,44 +31,46 @@ import System.IO
 import qualified Data.Text.IO as TIO
 import qualified Data.Text as T
 
+import Metrics
+
 {- Get the number of lines, by this we mean:
    the number of lines of code, without blank lines
    and without comments.
 -}
-ncloc :: FilePath -> IO Int
-ncloc file = do
-    parse <- parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] file
-    case parse of
-        (Left err)   -> return 0
-        (Right tree) -> (return . length . filter (not . null) . lines . show . pretty) tree
+ncloc :: (FilePath,CTranslUnit) -> IO Metrics
+ncloc (file,tree) = let len = (length . filter (not . null) . lines . show . pretty) tree
+             in return $ emptyMetrics >.> (("ncloc",file,""),Num $ fromIntegral len)
 
 {- Get the number of physical lines, so, the real number of lines
    inside the file.
 -}
-physicalLines :: FilePath -> IO Int
-physicalLines file = BS.readFile file >>= return . BS.count (c2w '\n')
+physicalLines :: FilePath -> IO Metrics
+physicalLines file = do
+    len <- BS.readFile file >>= return . BS.count (c2w '\n')
+    return $ emptyMetrics >.> (("physicalLines",file,""),Num $ fromIntegral len)
 
 {-Density of duplicated lines for a block
 -}
-densityOfDuplicatedLinesBlock :: FilePath -> FilePath -> IO Double
-densityOfDuplicatedLinesBlock = densityOfDuplicatedLines nrOfFilesDuplicatedLineBlock
+--densityOfDuplicatedLinesBlock :: FilePath -> FilePath -> IO Metrics
+--densityOfDuplicatedLinesBlock = densityOfDuplicatedLines nrOfFilesDuplicatedLineBlock
 
 {- Count the number of files that have at least one duplicated block
 -}
-nrOfFilesDuplicatedLineBlock :: FilePath -> FilePath -> IO Int
-nrOfFilesDuplicatedLineBlock = nrOfFilesDuplicatedLine getClonesBlock
+--nrOfFilesDuplicatedLineBlock :: FilePath -> FilePath -> IO Int
+--nrOfFilesDuplicatedLineBlock = nrOfFilesDuplicatedLine getClonesBlock
 
 {- Get the clones for a blokc of contiguous lines
 -}
-getClonesBlock :: FilePath -> FilePath -> IO [(String, [(String, Int, Int)])]
-getClonesBlock fp db =  getClonesByBlock fp db
-    >>= return
-        . groupByFileName
-        . groupBy (\(a,_,_,_) (b,_,_,_) -> a == b)
-        . sortBy  (\(a,_,_,_) (b,_,_,_) -> EQ)
+getClonesBlock :: (FilePath,[String]) -> IO Metrics
+getClonesBlock (fp,fps) = do
+    lst <- getClonesByBlock fp fps
+        >>= return
+            . groupByFileName
+            . groupBy (\(a,_,_,_) (b,_,_,_) -> a == b)
+            . sortBy  (\(a,_,_,_) (b,_,_,_) -> EQ)
+    return (emptyMetrics >.> (("getClonesBlock",fp,""), Clone lst))
 
-getClonesByBlock fp db = do
-    fps  <- readFile db >>= return . lines
+getClonesByBlock fp fps = do
     hss' <- mapM (flip openBinaryFile ReadMode) fps
     hss  <- mapM hGetContents hss'
     getClones'' fp (zip fps hss)
@@ -95,13 +97,13 @@ getClones'' fn db = readFile fn >>= return . filterNonClone . fun
 
 {-Density of duplicated lines for one line duplication
 -}
-densityOfDuplicatedLinesOneLine :: FilePath -> FilePath -> IO Double
-densityOfDuplicatedLinesOneLine = densityOfDuplicatedLines nrOfFilesDuplicatedLineOneLine
+--densityOfDuplicatedLinesOneLine :: FilePath -> FilePath -> IO Double
+--densityOfDuplicatedLinesOneLine = densityOfDuplicatedLines nrOfFilesDuplicatedLineOneLine
 
 {- Count the number of files that have at least one duplicated line
 -}
-nrOfFilesDuplicatedLineOneLine :: FilePath -> FilePath -> IO Int
-nrOfFilesDuplicatedLineOneLine = nrOfFilesDuplicatedLine getClonesOneLine
+--nrOfFilesDuplicatedLineOneLine :: FilePath -> FilePath -> IO Int
+--nrOfFilesDuplicatedLineOneLine = nrOfFilesDuplicatedLine getClonesOneLine
 
 {- This funtion receives the file where we want to test if hsa any clone code
    and the database of files under our system (this file contains the full path
@@ -156,11 +158,12 @@ removeRepeatedSpaces_ s | null s        = s
 {- Auxiliar functions related with clone detection
 -}
 
---densityOfDuplicatedLines :: FilePath -> FilePath -> IO Double
+{-densityOfDuplicatedLines :: FilePath -> FilePath -> IO Double
 densityOfDuplicatedLines f fp db = do
     dl <- f fp db
-    phy <- physicalLines fp
-    return ((fromIntegral dl / fromIntegral phy) * 100)
-
+    phyM <- physicalLines fp
+    let phy = getM ("physicalLines",fp,"") phyM
+    return (( dl / phy) * 100)
+-}
 --nrOfFilesDuplicatedLine :: FilePath -> FilePath -> IO Int
 nrOfFilesDuplicatedLine f fp db = f fp db >>= return . length . groupBy (\(_,a,_) (_,b,_) -> a == b) . concatMap snd

@@ -16,8 +16,7 @@
 --
 ------------------------------------------------------------------------------
 
---module Comments(getNrOfLinesOfComments,commentLinesDensity) where
-module Comments where
+module Comments(getNrOfLinesOfComments,commentLinesDensity) where
 
 import Language.C.Comments
 import Language.C.Data.InputStream(inputStreamFromString)
@@ -33,7 +32,7 @@ commentLinesDensity :: FilePath -> IO Metrics
 commentLinesDensity file = do
     mNrCom <- getNrOfLinesOfComments file
     (Num nrCom) <- return $ getM ("getNrOfLinesOfComments",file,"") mNrCom
-    nrLin  <- ncloc file >>= return . fromIntegral
+    (Num nrLin) <- return $ getM ("ncloc",file,"") mNrCom
     return $ emptyMetrics
              >.> ( ("commentLinesDensity",file,"")
                  , Num (( nrCom /  (nrLin + nrCom)) * 100)

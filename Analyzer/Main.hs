@@ -35,6 +35,8 @@ import Control.Monad
 import System.Console.GetOpt
 import Data.Maybe ( fromMaybe )
 import qualified Control.Monad.Parallel as P
+import qualified System.IO.Strict as S
+
 
 import Comments
 import NumberOfLines
@@ -99,10 +101,51 @@ compilerOpts argv = do
        (_,_,errs) -> ioError $ userError $ concat errs ++ usageInfo header options
         where header = "Usage: "++ name ++" [OPTION...] files..."
 
+execAllMetrics :: FilePath -> IO Metrics
+execAllMetrics fp = do
+    lfp    <- getListOfCFiles fp >>= return . take 10
+    lstT   <- getTreeFromFile lfp
+    dbFile <- getDBFileContents
+    complexityM          <- mapM mccabePerFun lstT >>= return . concatMetrics
+    includesM            <- mapM getIncludes lfp >>= return . concatMetrics
+    linesOfCommentsM     <- mapM getNrOfLinesOfComments lfp >>= return . concatMetrics
+    linesOfCommentsDensM <- mapM commentLinesDensity lfp >>= return . concatMetrics
+    --contentsM            <- mapM getClonesBlock (zip lfp (repeat dbFile)) >>= return . concatMetrics
+    return $
+        complexityM
+        >+> includesM
+        >+> linesOfCommentsM
+        >+> linesOfCommentsDensM
+        -- >+> contentsM
+
+
+getDBFileContents ::  IO [String]
+getDBFileContents = readFile "database.txt" >>= return . lines
+
+getContentFromFile :: [FilePath] -> IO [(FilePath,[String])]
+getContentFromFile [] = return []
+getContentFromFile (fp:t) = do
+    eith <- try $ S.readFile fp
+    case eith of
+        (Left err) -> print err >> getContentFromFile t
+        (Right co) -> getContentFromFile t >>= return . (\r -> (fp,lines co) : r)
+
+
+getTreeFromFile :: [FilePath] -> IO [(FilePath,CTranslUnit)]
+getTreeFromFile [] = return []
+getTreeFromFile (fp:t) = do
+    r <- parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] fp
+    case r of
+        (Left err) -> do
+            getTreeFromFile t
+        (Right tree)  -> do
+            getTreeFromFile t >>= return . (\r -> (fp,tree) : r)
+
 main :: IO ()
 main = do {
     (dir:_) <- getArgs ;
-	generateGraphViz dir ;
+    -- generateGraphViz dir ;
+	execAllMetrics "../" ;
 	return()
 	}
     --lst <- getListOfCFiles dir >>= return . take 100

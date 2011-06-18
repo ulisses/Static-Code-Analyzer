@@ -28,10 +28,10 @@ instance XmlPickler MetricValue where
     xpickle = xpAlt tag ps
         where
         tag (Num _)     = 0
-        tag (Clone _ _) = 1
+        tag (Clone _) = 1
         ps = [ xpWrap ( Num , \(Num i) -> i )     (xpAddFixedAttr "type" "num" $ xpAttr "value" $ xpWrap (read, show) xpText)
-             , xpWrap ( uncurry Clone, \(Clone s sl) -> (s,sl)) $ xpPair (xpAddFixedAttr "type" "clone" $ xpAttr "srcPath" xpText) (xpList xpTuple)
-             ]
+             , xpWrap ( Clone, \(Clone sl) -> sl) $ (xpList xpTuple)
+             ] --  xpPair (xpAddFixedAttr "type" "clone" $ xpAttr "srcPath" xpText)
         xpTuple = xpElem "cloneFile" $ xpPair (xpAttr "dstPath" xpText) xpTrip
         xpTrip = xpList $  xpElem "location" $ xpTriple (xpAttr "srcTxt" xpText) (xpAttr "lineSrc" xpickle) (xpAttr "lineDst" xpickle)
 

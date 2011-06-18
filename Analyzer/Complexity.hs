@@ -11,7 +11,7 @@
 -- In this module I implement the metrics related with complexity
 --
 ------------------------------------------------------------------------------
-module Complexity where
+module Complexity(mccabePerFun) where
 
 import Data.Data
 import Data.Monoid
@@ -30,9 +30,6 @@ import Metrics
 instance Num a => Monoid a where
     mappend = (+)
     mempty = 0
-
-p = parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] "main.c"
-r = (\(Right r) -> r)
 
 {- fucntions names that are inside the range of complexities
 functionForMccabeIndex :: CTranslUnit -> (Int,Int) -> IO [(String,Int)]

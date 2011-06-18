@@ -10,7 +10,7 @@
 -- In this module I implement files related metrics
 --
 ------------------------------------------------------------------------------
-module Files where
+module Files(getListOfCFiles) where
 
 import System.IO.HVFS.Utils
 
@@ -18,7 +18,11 @@ import System.IO.HVFS.Utils
 getListOfCFiles :: FilePath -> IO [FilePath]
 getListOfCFiles fp = do
     c <- recurseDir SystemFS fp
-             >>= return . filter ((==".c") . reverse . take 2 . reverse)
+             >>= return . filter ((==".c") . last2)
     h <- recurseDir SystemFS fp
-             >>= return . filter ((==".h") . reverse . take 2 . reverse)
+             >>= return . filter ((==".h") . last2)
     return (c++h)
+
+last2 s | length s == 2 = s
+        | length s < 2 = []
+        | otherwise = last2 $ drop 2 s

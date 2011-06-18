@@ -48,7 +48,7 @@ data Metrics = Metrics (M.Map MetricName MetricValue)
 type MetricName = (String,String,String)
 
 data MetricValue = Num Double
-                 | Clone FileSrc [(FileDst, [(Ocurrency, LineSrc, LineDst)])]
+                 | Clone [(FileDst, [(Ocurrency, LineSrc, LineDst)])]
                  | Includes ([SystemIncludes],[Includes])
     deriving (Show, Eq, Ord)
 
@@ -66,21 +66,18 @@ getAllNum = unpackPack (M.filterWithKey isNum)
     where isNum _ (Num _) = True
           isNum _ _       = False
 getAllClone = unpackPack (M.filterWithKey isClone)
-    where isClone _ (Clone _ _) = True
+    where isClone _ (Clone _) = True
           isClone _ _           = False
 
 {-TEST-}
 exM = emptyMetrics
     >.> (("metrica1","file","fun1"),Num 1.90)
     >.> (("metrica2","",""),Num 2)
-    >.> (("metrica3","file","fun1"), c)
     >.> (("metricaNum2","file","fun1"),Num 1)
     >.> (("metricaNum3","file","fun1"),Num 1)
     >.> (("metricaNum4","file","fun1"),Num 1)
     >.> (("metricaNum5","file","fun1"),Num 1)
     >.> (("metricaNum6","file",""),Num 1.009)
-
-c = Clone "main.c" [("../../../../..//1-matricula/1.2/pp2/Aulas/0405/050405.c",[("\\t}",25,44),("\\t}",46,44)]),("../../../../..//1-matricula/1.2/pp2/Aulas/0422/turma.c",[("\\t}",25,126),("\\t}",46,126)]),("../../../../..//1-mat_ricula/1.2/pp2/PP2 TP3/ex1.c",[("\\t}",25,104),("return 0;",37,606),("\\t}",46,104)]),("../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/aulas/6.c",[("\\t\\t}",45,33)]),("../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp1/_tp1/tp1.c",[("return 0;",37,67)]),("../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp3/desenho.c",[("\\t}",25,38),("\\t\\t",44,214),("\\t\\t}",45,37),("\\t}",46,38)]),("../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp3/file.c",[("\\t}",25,41),("\\t\\t",44,55),("\\t\\t}",45,68),("\\t}",46,41)]),("../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp3/id.c",[("\\t}",25,68),("\\t\\t",44,140),("\\t\\t}",45,56),("\\t}",46,68)]),("../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp3/myio.c",[("\\t}",25,59),("\\t\\t",44,50),("\\t\\t}",45,57),("\\t}",46,59)]),("../../../../..//2-matricula/1.2/pp2/ex/media/win_c2/code/pp2/2-matricula/pp2_tp3/prog.c",[("\\t}",25,101),("\\t\\t",44,95),("\\t\\t}",45,123),("\\t}",46,101)])]
 
 {- Aux functions -}
 toMetrics = Metrics
