@@ -16,12 +16,18 @@ import System.Process
 import GHC.IO.Handle
 import GHC.IO
 import System.Exit
-import GHC.IO (unsafePerformIO)
 import System.Environment
 import Data.Data
 import Data.Monoid
 import Data.Maybe
 import qualified Data.ByteString as BS
+import Control.Monad
+import System.Console.GetOpt
+import Data.Maybe ( fromMaybe )
+import qualified Control.Monad.Parallel as P
+import qualified System.IO.Strict as S
+import System.IO
+
 import Language.C
 import Language.C.System.GCC
 import Language.C.Data.Ident
@@ -31,12 +37,6 @@ import Strafunski.Data.Generics.Strafunski.StrategyLib.StrategyPrimitives
 import Strafunski.Data.Generics.Strafunski.StrategyLib.TraversalTheme
 import Strafunski.Data.Generics.Strafunski.StrategyLib.StrategyPrelude
 import Strafunski.Data.Generics.Strafunski.StrategyLib.FlowTheme
-import Control.Monad
-import System.Console.GetOpt
-import Data.Maybe ( fromMaybe )
-import qualified Control.Monad.Parallel as P
-import qualified System.IO.Strict as S
-import System.IO
 
 import Comments
 import NumberOfLines
@@ -111,12 +111,12 @@ execAllMetrics fp = do
     linesOfCommentsM     <- mapM getNrOfLinesOfComments lfp >>= return . concatMetrics
     linesOfCommentsDensM <- mapM commentLinesDensity lstT >>= return . concatMetrics
     lcommM               <- mapM getNrOfLinesOfComments lfp >>= return . concatMetrics
-    contentsM            <- mapM getClonesBlock (zip lfp (repeat dbFile)) >>= return . concatMetrics
+    --contentsM            <- mapM getClonesBlock (zip lfp (repeat dbFile)) >>= return . concatMetrics
     return $
         complexityM
         >+> includesM
         >+> linesOfCommentsM
-        >+> contentsM
+        -- >+> contentsM
         >+> lcommM
         >+> linesOfCommentsDensM
 
@@ -125,7 +125,7 @@ getDBFileContents = do
     fc <- S.readFile "database.txt" >>= return . lines
     hss' <- P.mapM (flip openBinaryFile ReadMode) fc
     hss  <- P.mapM hGetContents hss'
-    mapM hClose hss'
+    --mapM hClose hss'
     return $ zip fc hss
 
 getContentFromFile :: [FilePath] -> IO [(FilePath,[String])]
@@ -139,25 +139,20 @@ getContentFromFile (fp:t) = do
 getTreeFromFile :: [FilePath] -> IO [(FilePath,CTranslUnit)]
 getTreeFromFile [] = return []
 getTreeFromFile (fp:t) = do
-    r <- parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] fp
+    r <- try $ parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__","-I../../gcc-4.6.0/","-I.","-I/Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/gcc-4.6.0/gcc/","-I/Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/gcc-4.6.0"] fp
     case r of
-        (Left err) -> do
-            getTreeFromFile t
-        (Right tree)  -> do
-            getTreeFromFile t >>= return . (\r -> (fp,tree) : r)
+        (Left _)    -> getTreeFromFile t
+        (Right res) -> do
+          case res of
+              (Left _)     -> getTreeFromFile t
+              (Right tree) -> getTreeFromFile t >>= return . (\r -> (fp,tree) : r)
 
 main :: IO ()
-main = do {
-    -- generateGraphViz dir ;
-	execAllMetrics "../" >>= generatePDF
-	}
-    --lst <- getListOfCFiles dir >>= return . take 100
-    --putStrLn "tenho a lista de files"
-    --l1 <- P.mapM getNrOfLinesOfComments lst
-    --putStrLn "tenho todas as metricas do mundo"
-    --l2 <- return $ concatMetrics l1
-    --putStrLn "tudo numa metrica so, siga PDF"
-    --generatePDF l2
+main = do
+    (dir:_) <- getArgs
+    m <- execAllMetrics dir
+    print m
+    generatePDF m
 
 fromListOfPathsToMatetrics [] m = return m
 fromListOfPathsToMatetrics (h:t) mAcc = do

@@ -19,6 +19,7 @@ import System.Exit
 import Data.List
 import Data.Char
 import System.IO
+import IO
 
 import Metrics
 
@@ -39,13 +40,14 @@ import Metrics
 -}
 getIncludes :: FilePath -> IO Metrics
 getIncludes file = do
-    inph <- openFile file ReadMode
-    inp  <- hGetContents inph
-    code <- readProcess "grep" ["-v", "-P", "'(\\*(.|\n|\r)*?\\*)|(^[ \t\n]*\\/\\/.*)'"] inp
-    hClose inph
-    let includes = map (dropWhile isSpace) $ filter (isInfixOf "#include") $ lines code
-    let inc = takke '\"' $ map tail $ filter (not . null) $ droppe '\"' $ includes
-    let sysInc = takke '>' $ map tail $ filter (not . null)  $ droppe '<' $ includes
-    return (emptyMetrics >.> (("getIncludes",file,""),Includes (sysInc,inc)))
-        where takke c  = map (takeWhile (/=c))
-              droppe c = map (dropWhile (/=c))
+    inph' <- try $ readFile file
+    case inph' of
+      (Left err) -> return emptyMetrics
+      (Right inp) -> do
+        code <- readProcess "grep" ["-v", "-P", "'(\\*(.|\n|\r)*?\\*)|(^[ \t\n]*\\/\\/.*)'"] inp
+        let includes = map (dropWhile isSpace) $ filter (isInfixOf "#include") $ lines code
+        let inc = takke '\"' $ map tail $ filter (not . null) $ droppe '\"' $ includes
+        let sysInc = takke '>' $ map tail $ filter (not . null)  $ droppe '<' $ includes
+        return (emptyMetrics >.> (("getIncludes",file,""),Includes (sysInc,inc)))
+            where takke c  = map (takeWhile (/=c))
+                  droppe c = map (dropWhile (/=c))
