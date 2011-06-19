@@ -16,12 +16,8 @@ import System.IO.HVFS.Utils
 
 {- Improve THIS!!!! -}
 getListOfCFiles :: FilePath -> IO [FilePath]
-getListOfCFiles fp = do
-    c <- recurseDir SystemFS fp
-             >>= return . filter ((==".c") . last2)
-    h <- recurseDir SystemFS fp
-             >>= return . filter ((==".h") . last2)
-    return (c++h)
+getListOfCFiles fp = recurseDir SystemFS fp >>= return . filter (cOrh . last2)
+    where cOrh s = s == ".c" || s == ".h"
 
 last2 s | length s == 2 = s
         | length s < 2 = []
