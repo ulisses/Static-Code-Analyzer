@@ -1,5 +1,6 @@
 \newcommand{\metricsins}{\mathbin{>\mkern-7mu\circ\mkern-9mu>}}
 \newcommand{\metricscat}{\mathbin{>\mkern-7mu+\mkern-11mu>}}
+\newcommand{\bind}{\mathbin{>\mkern-7mu>\mkern-4mu=}}
 
 \section{Metrics and Assessment}\label{metrics}
 \subsection{API design}
@@ -39,7 +40,11 @@ The $unpackPack$ function used is a trick to remove the cosntructor, apply some 
 m1 \metricscat m2 & = & toMetrics (union (fromMetrics m1) (fromMetrics m2))
 \end{haskell*}
 
-As an example we can use this function to take a list of $Metrics$ and concat all of them into just one $Metrics$ value: $foldl~(\metricscat)~emptyMetrics$.
+As an example we can use this function to take a list of $Metrics$ and concat all of them into just one $Metrics$ value. If we have a function
+$$mccabeIndex~::~FileContents \to IO~Metrics$$
+We can apply this function to a list of files $lst$ and concat the results into one single $Metrics$ bag:
+$$mapM~mccabeIndex~lst\bind return \circ foldl~(\metricscat)~emptyMetrics$$
 
 \subsection{Metrics}
-Write about the implemented metrics, formulae, etc...
+Write about the implemented metrics, formulae, etc...\\
+
