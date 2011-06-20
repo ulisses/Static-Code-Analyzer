@@ -46,5 +46,19 @@ We can apply this function to a list of files $lst$ and concat the results into 
 $$mapM~mccabeIndex~lst\bind return \circ foldl~(\metricscat)~emptyMetrics$$
 
 \subsection{Metrics}
-Write about the implemented metrics, formulae, etc...\\
+Our system is able to calculate some well known metrics. We have divided this metrics in some groups: Metrics over comments, Complexity metrics, Metrics over functions,
+Metrics over includes and Metrics over lines quantity.
+\paragraph{Comments metrics} are used to understand the overall matureness of the software project, so we consider \textit{lines of comments (lc)} as the non code comments
+number of lines and \textit{comment lines density} as $cld = \frac{lc}{nrLines + lc} * 100$.
+\paragraph{Complexity metrics} for now our system is only capable of mesure one metric, Cyclomatic Complexity from one overall file or from a function. This
+metric is calculates giving the parsing tree of a C file (or C function) and for everyone condition in the code increment the value $1$.
+So, for each $If$, $Switch$, $For$ and $While$ statement we add $1$ to our result.
+\paragraph{Functions metrics and Includes metrics} are not exactly quality metrics, but more a global view of the software project. We provide the following metrics:
+\textit{get functions name} that returns a list of functions names from a parsing tree and \textit{get functions signature} that returns a list of a signature node in the
+parsing tree (we can use pretty print functions provided by Language.C to print them out). For Includes metrics, we provide a function that receives the file name and
+returns a tuple containing two lists: the system includes and the library includes.
+\paragraph{Metrics over lines} where we extract some metrics related to lines, so for this metrics we do not use Language.C library.
+We implement \textit{number of lines of code (ncloc)}, \textit{number of physical lines} and two functions to exctract line clones and block of lines clones (one block
+could be 3 lines).
+
 
