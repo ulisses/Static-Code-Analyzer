@@ -1,7 +1,8 @@
 class ConcursosController < ApplicationController
-   before_filter :admin_user,   :only => [:edit, :update, :new, :destroy, :create, :stats, :downloadMetrics, :generateMetrics]
+   before_filter :admin_user,   :only => [:edit, :update, :new, :destroy, :create, :stats, :downloadMetrics, :generateMetrics,
+     :downloadResults, :generateResults]
    before_filter :authenticate
-   before_filter :concursoInactivo, :only => [:downloadMetrics, :generateMetrics]
+   before_filter :concursoInactivo, :only => [:downloadMetrics, :generateMetrics, :downloadResults, :generateResults]
   
    #define exercise struct, with an id, a grade, and a percentage
    Exercise = Struct.new( :id, :result )
@@ -144,10 +145,10 @@ class ConcursosController < ApplicationController
   def generateResults
     @concurso =  Concurso.find(params[:concurso_id])
     @title = "Todos os concursos"
-    
+    @erros = ""
     resultsCommand()
-    sleep 1.2
-    redirect_back_or concursos_path
+    flash[:error] = @erros unless @erros.eql? ""
+    redirect_to concursos_path
   end
   
     # Stream a file to client
@@ -316,13 +317,13 @@ class ConcursosController < ApplicationController
     
     def createLatex(allExercises,hash,numExerc,path)
       #create top of latex document
-      string = "\\documentclass[12pt]{article}\n"
+      string= "\\documentclass[12pt]{article}\n"
       string+= "\\usepackage[utf8]{inputenc}"
       string+= "\\begin{document}\n"
       string+= "\\begin{table}[ht]\n"
       string+= "\\section{Resultados do concurso #{@concurso.tit}}"
       allExercises.each do |exerc|
-        string+= "Enunciado #{exerc.id}: #{exerc.titulo}\\\\ \n"
+        string+= "Exercício #{exerc.id}: #{exerc.titulo}\\\\ \n"
       end
       string+="\n"
 #    	string+= "\\caption{Nonlinear Model Results}\n"
@@ -344,15 +345,16 @@ class ConcursosController < ApplicationController
     	string+=" \\\\ [0.5ex]\n"
     	string+= "\t\\hline\n"
 
-      calcRes = 0
-      total = 0
-      aux = 0
+      iterations = 0
+      maxIter = hash.size
     	#go through all groups
-	      hash.each do |key, value| 
+      hash.each do |key, value| 
+        calcRes = 0
+        total = 0
         string+= "#{key}"
-        #go through all exercises 
+        #go through all exercises
         allExercises.each do |ex|
-          aux = 0
+          aux = 0 
           value.each do |v|
             if ex.id == v.id  
               calcRes = (v.result * ex.peso)/100
@@ -360,10 +362,12 @@ class ConcursosController < ApplicationController
               string+= " & #{calcRes}"
               aux = 1
             end
-            string+= " & 0" unless aux == 1
           end
+          string+= " & 0" unless aux == 1
         end
-        string+=" & #{total} \\\\"
+        string+=" & #{total} \\\\\n"
+        iterations+=1
+        string+= "\t \\hline\n" unless iterations >= maxIter 
       end
 
       ##end table
@@ -384,9 +388,35 @@ class ConcursosController < ApplicationController
     
     def createPDF(path)
       dir = File.dirname(path)
-      Thread.new do
-        `cd #{dir} && pdflatex results.tex`
+      
+      #aux variables      
+      out1 = 0,out2 = 0
+      #thread that creates pdf
+      t1 = Thread.new do
+        out1 = system("cd #{dir} && pdflatex results.tex")
+        out2 = system("cd #{dir} && rm *.log  *.tex *.aux")
       end
+      
+      
+      #thread that kills the pdf creation if it takes too long
+      timer = Thread.new do
+        sleep 3
+        if t1.alive?
+          Thread.kill(t1)
+          @erros= "Ocorreu um erro na geração do report em PDF!"
+        end
+      end
+      
+      t1.join
+      if timer.alive?
+        Thread.kill(timer)
+      end
+      timer.join
+      
+      if (out1==0 || out2==0) 
+        @erros= "Ocorreu um erro na geração do report em PDF!"
+      end
+      
     end
 		
 end
