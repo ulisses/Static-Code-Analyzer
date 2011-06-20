@@ -1,7 +1,11 @@
 class ConcursosController < ApplicationController
-   before_filter :admin_user,   :only => [:edit, :update, :new, :destroy, :create, :stats]
+   before_filter :admin_user,   :only => [:edit, :update, :new, :destroy, :create, :stats, :downloadMetrics, :generateMetrics]
    before_filter :authenticate
+   before_filter :concursoInactivo, :only => [:downloadMetrics, :generateMetrics]
   
+   #define exercise struct, with an id, a grade, and a percentage
+   Exercise = Struct.new( :id, :result )
+   
   def index
     @title = "Todos os concursos"
     @concursos = Concurso.paginate(:page => params[:page])
@@ -103,7 +107,7 @@ class ConcursosController < ApplicationController
   end
   
   
-  
+  #generate metrics file
   def generateMetrics
     @concurso =  Concurso.find(params[:concurso_id])
     @title = "Todos os concursos"
@@ -120,11 +124,57 @@ class ConcursosController < ApplicationController
                  :filename => "metrics.pdf",
                  :type => "application/pdf",
                  :stream => "false",
-#                 :disposition =>'attachment') ##download
-                 :disposition =>"inline") #ver no browser
+                 :disposition =>'attachment') ##download
+                 #:disposition =>"inline") #ver no browser
   end
   
+    # Stream a file to client
+    def viewMetrics
+      @concurso =  Concurso.find(params[:concurso_id])
+      path = File.join(Rails.root, "data/concursos","contest-"+@concurso.id.to_s,"metrics","metrics.pdf")
+      send_file(   path,
+                   :filename => "metrics.pdf",
+                   :type => "application/pdf",
+                   :stream => "false",
+                   #:disposition =>'attachment') ##download
+                   :disposition =>"inline") #ver no browser
+    end
   
+  #generate results file
+  def generateResults
+    @concurso =  Concurso.find(params[:concurso_id])
+    @title = "Todos os concursos"
+    
+    resultsCommand()
+    sleep 1.2
+    redirect_back_or concursos_path
+  end
+  
+    # Stream a file to client
+    def downloadResults
+      @concurso =  Concurso.find(params[:concurso_id])
+      path = File.join(Rails.root, "data/concursos","contest-"+@concurso.id.to_s,"results","results.pdf")
+      send_file(   path,
+                   :filename => "results.pdf",
+                   :type => "application/pdf",
+                   :stream => "false",
+                   :disposition =>'attachment') ##download
+  #                 :disposition =>"inline") #ver no browser
+    end
+    
+    # Stream a file to client
+    def viewResults
+          @concurso =  Concurso.find(params[:concurso_id])
+          path = File.join(Rails.root, "data/concursos","contest-"+@concurso.id.to_s,"results","results.pdf")
+          send_file(   path,
+                       :filename => "results.pdf",
+                       :type => "application/pdf",
+                       :stream => "false",
+   #                    :disposition =>'attachment') ##download
+                       :disposition =>"inline") #ver no browser
+    end
+    
+    
   private 
   
     def admin_user
@@ -203,7 +253,140 @@ class ConcursosController < ApplicationController
 			File.new(path+"/metrics.pdf", "w")
 			
 	  end
+	  
+	  #verifica se o concurso esta inactivo
+    def concursoInactivo
+      conc = Concurso.find(params[:concurso_id])
+      (conc.inicio<=DateTime.now && conc.fim>=DateTime.now) ? false : true
+    end
 		  
-		
+		def resultsCommand
+		  path = File.join(Rails.root, "data/concursos","contest-"+@concurso.id.to_s,"results")
+			if File.exists?(path)
+				`rm -rf #{path}`
+			end
+			
+			if !File.exists?(path)
+				Dir.mkdir(path)
+			end
+			
+			#####COLOCAR AQUI COMANDO QUE CRIA O PDF NESTA PASTA
+			#File.new(path+"/results.pdf", "w")
+			path= File.join(Rails.root, "data/concursos","contest-"+@concurso.id.to_s,"results","results.tex")
+			
+			compileBestResults(path)
+	  end
+	  
+	  def compileBestResults(path)
+      #get all results
+	    allResults = Result.where(:concurso_id=>@concurso.id)
+	    #hash with hashes for each user
+	    hash = Hash.new("empty")
+	    #number of exercises of the contest
+      allExercises = Enunciado.where(:concurso_id=>@concurso.id).order('id ASC')
+      #number of exercises of the contest
+      numExerc = allExercises.size
+
+
+      #iterate trough results to fill an hash with the results for each user
+	    allResults.each do |res|
+	      #get all important values
+	      enunciado_id = res.enunciado_id
+	      result = res.bestRes
+	      group = User.find(res.user_id).name
+
+	      enunciado = Enunciado.find(enunciado_id)
+	      nomeEnunciado = enunciado.titulo
+	      peso = enunciado.peso
+        
+        #create Exercise
+        exercise = Exercise.new(enunciado_id, result)
+        
+	      #save values on hash
+	      if hash[group].eql? "empty"
+	        hash[group] = [exercise]
+        else
+          hash[group] << exercise
+	      end  
+      end
+	      
+     createLatex(allExercises,hash,numExerc,path)
+     createPDF(path)
+    end
+    
+    def createLatex(allExercises,hash,numExerc,path)
+      #create top of latex document
+      string = "\\documentclass[12pt]{article}\n"
+      string+= "\\usepackage[utf8]{inputenc}"
+      string+= "\\begin{document}\n"
+      string+= "\\begin{table}[ht]\n"
+      string+= "\\section{Resultados do concurso #{@concurso.tit}}"
+      allExercises.each do |exerc|
+        string+= "Enunciado #{exerc.id}: #{exerc.titulo}\\\\ \n"
+      end
+      string+="\n"
+#    	string+= "\\caption{Nonlinear Model Results}\n"
+#    	string+= "\\centering\n"
+    	string+= "\\begin{tabular}{|"
+    	numColumns = numExerc + 2
+    	numColumns.times do |n|
+    	  string+="c"
+    	  string+= " | " unless n == numColumns-1
+  	  end
+
+    	string+= "| }\n"
+    	string+= "\t\\hline\\hline\n"
+    	string+= "Grupo"
+    	allExercises.each do |e|
+    	  string+= " & Ex. #{e.id} "
+  	  end
+  	  string+= "& Total"
+    	string+=" \\\\ [0.5ex]\n"
+    	string+= "\t\\hline\n"
+
+      calcRes = 0
+      total = 0
+      aux = 0
+    	#go through all groups
+	      hash.each do |key, value| 
+        string+= "#{key}"
+        #go through all exercises 
+        allExercises.each do |ex|
+          aux = 0
+          value.each do |v|
+            if ex.id == v.id  
+              calcRes = (v.result * ex.peso)/100
+              total+= calcRes 
+              string+= " & #{calcRes}"
+              aux = 1
+            end
+            string+= " & 0" unless aux == 1
+          end
+        end
+        string+=" & #{total} \\\\"
+      end
+
+      ##end table
+      string+= "[1ex] \n"
+      string+= "\t\\hline\n"
+      string+= "\\end{tabular}\n"
+      string+= "\\label{table:nonlin}\n"
+      string+= "\\end{table}\n"
+      ##end latex document
+      string+= "\\end{document}\n"
+      
+      #write to file
+      File.open(path, "wb") do |f| 
+  			f.write(string)
+  		end
+    end
+    
+    
+    def createPDF(path)
+      dir = File.dirname(path)
+      Thread.new do
+        `cd #{dir} && pdflatex results.tex`
+      end
+    end
 		
 end

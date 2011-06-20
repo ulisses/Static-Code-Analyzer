@@ -29,6 +29,35 @@
 			<% else %>
 			(Estado: Inactivo)
 			<% end %>
+			
+			<!-- INICIO GERACAO DE RESULTADOS-->
+			<% if concursoActivo(concurso) %>
+			<% else %>
+				<!-- METRICAS -->
+				<br/>Metricas:
+				<% if metricasGeradas(concurso) %>
+				 <%= link_to("Download", :action=>'downloadMetrics',:controller=>'concursos',:concurso_id=>concurso.id) %>
+             | <%= link_to("Ver", :action=>'viewMetrics',:controller=>'concursos',:concurso_id=>concurso.id) %>
+				<% else %>
+				  <%= link_to "Gerar",  {:action => "generateMetrics", :controller =>"concursos", :concurso_id=>concurso.id} %>
+				<% end %>
+			
+				<!--Resultados exercicios-->
+				<br/>Resultados:
+				<% if concursoActivo(concurso) %>
+				<% else %>
+					<% if resultadosGerados(concurso) %>
+					 <%= link_to("Download", :action=>'downloadResults',:controller=>'concursos',:concurso_id=>concurso.id) %>
+					 | <%= link_to("Ver", :action=>'viewResults',:controller=>'concursos',:concurso_id=>concurso.id) %>
+					<% else %>
+					  <%= link_to "Gerar",  {:action => "generateResults", :controller =>"concursos", :concurso_id=>concurso.id} %>
+					<% end %>
+				<% end %>
+				
+			<% end %>
+			<!-- FIM GERACAO DE RESULTADOS-->
+			
+						
 		<% end %>
 	</li>
 <% end %>
