@@ -321,7 +321,8 @@ class ConcursosController < ApplicationController
       string+= "\\usepackage[utf8]{inputenc}"
       string+= "\\begin{document}\n"
       string+= "\\begin{table}[ht]\n"
-      string+= "\\section{Resultados do concurso #{@concurso.tit}}"
+#      string+= "\\section{Resultados do concurso #{@concurso.tit}}"
+      string+= "\\Large Resultados do concurso:  \\textbf{#{@concurso.tit}} \\normalsize\\\\ \n\n"
       allExercises.each do |exerc|
         string+= "Exercício #{exerc.id}: #{exerc.titulo}\\\\ \n"
       end
@@ -339,7 +340,7 @@ class ConcursosController < ApplicationController
     	string+= "\t\\hline\\hline\n"
     	string+= "Grupo"
     	allExercises.each do |e|
-    	  string+= " & Ex. #{e.id} "
+    	  string+= " & Ex. #{e.id} (#{e.peso}\\%) "
   	  end
   	  string+= "& Total"
     	string+=" \\\\ [0.5ex]\n"
@@ -403,7 +404,7 @@ class ConcursosController < ApplicationController
         sleep 3
         if t1.alive?
           Thread.kill(t1)
-          @erros= "Ocorreu um erro na geração do report em PDF!"
+          @erros= "Ocorreu um erro na geração do relatorio (PDF) dos resultados!"
         end
       end
       
@@ -414,7 +415,7 @@ class ConcursosController < ApplicationController
       timer.join
       
       if (out1==0 || out2==0) 
-        @erros= "Ocorreu um erro na geração do report em PDF!"
+        @erros= "Ocorreu um erro na geração do relatorio (PDF) dos resultados!"
       end
       
     end
