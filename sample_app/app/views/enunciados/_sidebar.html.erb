@@ -3,7 +3,7 @@
 	------------------------<br/>
 	<%= link_to "Minhas tentativas (para este enunciado)", tentativas_path(:user_id=>current_user.id,:enunciado_id=>@enunciado.id) %>
 	<br/>
-	<%= link_to "Todas as tentativas (para este enunciado)",  tentativas_path(:user_id=>current_user.id,:enunciado_id=>@enunciado.id)%>
+	<%= link_to "Todas as tentativas (para este enunciado)",  tentativas_path(:enunciado_id=>@enunciado.id)%>
 	<br/>
 	<%= link_to "Minhas tentativas", tentativas_path(:user_id=>current_user.id) %>
 	<br/>

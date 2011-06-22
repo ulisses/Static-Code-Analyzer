@@ -21,5 +21,14 @@ module ConcursosHelper
     return ((terminaC(concurso) - DateTime.now) / 60)
   end
     
+  #verifica se o ficheiro de metricas ja foi gerado
+  def metricasGeradas(concurso)
+    return File.exist? File.join(Rails.root, "data/concursos","contest-"+concurso.id.to_s,"metrics","metrics.pdf")    
+  end
+  
+  #verifica se o ficheiro de resultados ja foi gerado
+  def resultadosGerados(concurso)
+    return File.exist? File.join(Rails.root, "data/concursos","contest-"+concurso.id.to_s,"results","results.pdf")    
+  end
 
 end

@@ -361,7 +361,7 @@ class TentativasController < ApplicationController
   def guardaMelhorResultado
     res = @user.results.where(:enunciado_id=>@enunciado.id,:concurso_id=>@enunciado.concurso_id)
 
-    if res.size == 0
+    if !res || res.size == 0
       r = @user.results.build(:enunciado_id=>@enunciado.id,
                                  :concurso_id=>@enunciado.concurso_id,
                                  :bestRes=>params[:tentativa][:passedTests],
@@ -369,6 +369,8 @@ class TentativasController < ApplicationController
       r.save
     else
       result = res.first
+      old = res
+      old.destroy
       if result.bestRes < params[:tentativa][:passedTests]
         result.bestRes = params[:tentativa][:passedTests]
         result.save
@@ -557,7 +559,7 @@ class TentativasController < ApplicationController
     #para cada participante, vai buscar a sua tentativa mais recente (para este enunciado), e guarda o path num array
     arrayPaths = []
     participantes.each do |p|
-      tentativa = Tentativa.where(:user_id => p.user_id).order('created_at ASC').first
+      tentativa = Tentativa.where(:user_id => p.user_id).order('created_at DESC').first
       if tentativa && tentativa.user_id != current_user.id
         arrayPaths << File.dirname(tentativa.path)
       end
@@ -599,9 +601,9 @@ class TentativasController < ApplicationController
     end
     
     
-    files.each do |f|
-      @erros += f    
-    end  
+#    files.each do |f|
+#     @erros += f    
+#    end  
   end
   
   def getAllFiles(path)
