@@ -16,6 +16,7 @@ module Latex where
 import Text.LaTeX
 import Data.List
 import System.Path.NameManip
+import Data.Maybe
 
 import Metrics
 
@@ -71,7 +72,7 @@ fromCloneToLaTeX' m | nullM  m = noop
                                >> myfromString ("This file was possible cloned from "++(texString $ length $ getClonedLst v)++" files:") >> newline
                                >> (foldr stepL noop $ getClonedLst v)
                            >> r
-          getClonedFile (_,f,_) = f
+          getClonedFile (_,f,_) = maybe "" texString f
           getClonedLst (Clone l) = l
           stepL (s,l) r = (textbf $ myfromString s) >> (foldr stepOcorrencies noop l) // r
           stepOcorrencies (o,lsrc,ldst) r = newline
@@ -108,9 +109,9 @@ fromNumToLaTeX' m | nullM m   = noop
     toTabular :: Monad m => Metrics -> LaTeX m
     toTabular m = tabular ["c"] "|c|c|c|c|" (myhline >> textbf "Metric Name" & textbf "File Name" & textbf "Function Name"
                                                       & textbf "Metric Value" // myhline >> foldrM step noop m)
-        where step (k1,k2,k3) v r = myfromString k1 & file & myfromString k3 & (fromNum v) // myhline >> r
+        where step (k1,k2,k3) v r = myfromString k1 & file & maybe "" myfromString k3 & (fromNum v) // myhline >> r
                where fromNum (Num a) = texString a
-                     file = let (path,f) = split_path k2
+                     file = let (path,f) = split_path $ maybe "" id k2
                             in (myfromString f) >> (footnote $ myfromString ("This file can be found at: " ++ path))
 
 myfromString = fromString . fixString

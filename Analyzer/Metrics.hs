@@ -43,8 +43,8 @@ h s = do x <- get
          lift $ putStrLn s
 -}
 {- types -}
-data Metrics = Metrics (M.Map MetricName MetricValue)
-type MetricName = (String,String,String)
+type Metrics = M.Map MetricName MetricValue
+type MetricName = (String, Maybe FileSrc,Maybe FunctionName)
 data MetricValue = Num Double
                  | Clone [(FileDst, [(Ocurrency, LineSrc, LineDst)])]
                  | Includes ([SystemIncludes],[Includes])
@@ -59,37 +59,30 @@ type Ocurrency = String
 type LineDst = Int
 type LineSrc = Int
 
-instance Show Metrics where
-    show = M.foldrWithKey (\k v t -> show k ++ "   ->   " ++ show v ++ "\n" ++ t) [] . fromMetrics
+showMetrics :: Metrics -> String
+showMetrics = M.foldrWithKey (\k v t -> show k ++ "   ->   " ++ show v ++ "\n" ++ t) []
 
 getAllNum,getAllClone :: Metrics -> Metrics
-getAllNum = unpackPack (M.filterWithKey isNum)
+getAllNum = M.filterWithKey isNum
     where isNum _ (Num _) = True
           isNum _ _       = False
-getAllClone = unpackPack (M.filterWithKey isClone)
+getAllClone = M.filterWithKey isClone
     where isClone _ (Clone []) = False -- an empty clone is not a clone
           isClone _ (Clone _)  = True
           isClone _ _          = False
 
 {-TEST-}
 exM = emptyMetrics
-    >.> (("metrica1","file","fun1"),Num 1.90)
-    >.> (("metrica2","",""),Num 2)
-    >.> (("metricaNum2","file","fun1"),Num 1)
-    >.> (("metricaNum3","file","fun1"),Num 1)
-    >.> (("metricaNum4","file","fun1"),Num 1)
-    >.> (("metricaNum5","file","fun1"),Num 1)
-    >.> (("metricaNum6","file",""),Num 1.009)
-
-{- Aux functions -}
-toMetrics = Metrics
-fromMetrics (Metrics m) = m
-{- Unpack from Metrics, apply a function 'f' and pack again into Metrics.
--}
-unpackPack f = toMetrics  . f . fromMetrics
+    >.> (("metrica1",Just "file", Just "fun1"),Num 1.90)
+    >.> (("metrica2",Nothing,Nothing),Num 2)
+    >.> (("metricaNum2", Just "file",Just "fun1"),Num 1)
+    >.> (("metricaNum3",Just "file",Just "fun1"),Num 1)
+    >.> (("metricaNum4",Just "file",Just "fun1"),Num 1)
+    >.> (("metricaNum5",Just "file",Just "fun1"),Num 1)
+    >.> (("metricaNum6",Just "file", Nothing),Num 1.009)
 
 emptyMetrics :: Metrics
-emptyMetrics = Metrics M.empty
+emptyMetrics = M.empty
 
 {- Add new metric to metrics bag, or update a metric value
 -}
@@ -97,48 +90,47 @@ emptyMetrics = Metrics M.empty
 m >.> d = insertMetric d m
 
 insertMetric :: (MetricName,MetricValue) -> Metrics -> Metrics
-insertMetric (mn,mv) m | M.member mn fm = let (Just mv') = M.lookup mn fm
-                                          in if mv' == mv then m else unpackPack ins m
-                       | otherwise   = unpackPack ins m
-    where fm  = fromMetrics m
-          ins = M.insert mn mv
+insertMetric (mn,mv) m =
+    case M.lookup mn m of
+        Nothing    -> ins m
+        (Just mv') -> if mv' == mv then m else ins m
+    where ins = M.insert mn mv
 
 {- Delete Metrics by name -}
 deleteMetric :: MetricName -> Metrics -> Metrics
-deleteMetric = unpackPack . M.delete
+deleteMetric = M.delete
 
 {- Concat Metrics -}
 (>+>) :: Metrics -> Metrics -> Metrics
-m1 >+> m2 = toMetrics $ M.union (fromMetrics m1) (fromMetrics m2)
+m1 >+> m2 = M.union m1 m2
 
 {- foldr over Metrics -}
 foldrM :: (MetricName -> MetricValue -> c -> c) -> c -> Metrics -> c
-foldrM f s = M.foldrWithKey f s . fromMetrics
+foldrM f s = M.foldrWithKey f s
 
 {- get the size of a Metrics -}
 sizeM :: Metrics -> Int
-sizeM = M.size . fromMetrics
+sizeM = M.size
 
 {- get the element at position X -}
 elemAtM :: Int -> Metrics -> (MetricName, MetricValue)
-elemAtM n = M.elemAt n . fromMetrics
+elemAtM n = M.elemAt n
 
 {- split by key -}
 splitM :: MetricName -> Metrics -> (Metrics, Metrics)
-splitM k m = let (m1,m2) = M.split k $ fromMetrics m
-             in (toMetrics m1, toMetrics m2)
+splitM = M.split
 
 {- check if metrics bag is null -}
 nullM :: Metrics -> Bool
-nullM = M.null . fromMetrics
+nullM = M.null
 
 {- Lookup -}
 lookupM :: MetricName -> Metrics -> Maybe MetricValue
-lookupM k m = M.lookup k $ fromMetrics m
+lookupM k m = M.lookup k m
 
 {- get a value from key (we already know is there) -}
 getM :: MetricName -> Metrics -> MetricValue
-getM k m =  (fromMetrics m) M.! k
+getM k m =  m M.! k
 
 {- Get a list of Metrics and return a Metrics -}
 concatMetrics :: [Metrics] -> Metrics

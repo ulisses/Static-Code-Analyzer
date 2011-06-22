@@ -15,6 +15,7 @@ module GraphViz(generateGraphViz) where
 import System.Path.NameManip
 import Data.GraphViz.Types
 import Data.GraphViz
+import Data.Maybe
 
 import Metrics
 import Includes
@@ -32,7 +33,7 @@ generateGraphViz dir = do
           writeDotToFile file grp = prettyPrint grp >>= writeFile file
 
 fromMetricsToDotEdge :: MetricName -> MetricValue -> [DotEdge String] -> [DotEdge String]
-fromMetricsToDotEdge (_,file,_) (Includes (lsys,linc)) l = let (_,f) = split_path file
+fromMetricsToDotEdge (_,file,_) (Includes (lsys,linc)) l = let (_,f) = split_path $ maybe "" id file
                                                            in keyToDot ((lsys,linc),f) ++ l
     where keyToDot :: (([SystemIncludes], [Includes]), String) -> [DotEdge String]
           keyToDot ((lsys,linc),path) = f lsys path ++ f linc path

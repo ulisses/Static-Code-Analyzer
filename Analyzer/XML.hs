@@ -1,3 +1,4 @@
+{-#OPTIONS -XTypeSynonymInstances#-}
 ------------------------------------------------------------------------------ 
 -- | 
 -- Author       : Ulisses Araujo Costa
@@ -14,15 +15,23 @@ module XML where
 
 import Text.XML.HXT.Core
 import Text.XML.HXT.Arrow.Pickle.Xml
-import Data.Map as M
+import qualified Data.Map as M
+import Data.Maybe
 
 import Metrics
 
 instance XmlPickler Metrics where
-    xpickle 
-        = xpWrap ( toMetrics . M.fromList , M.toList . fromMetrics ) $
+    xpickle =
+          xpWrap ( fromL , toL ) $
           xpList $
-          xpElem "metric" $ xpPair (xpTriple (xpAttr "name" xpText) (xpAttr "fileName" xpText) (xpAttr "functionName" xpText)) xpickle
+          xpElem "metric" $ xpPair (xpTriple
+                                       (xpAttr "name" xpText)
+                                       (xpAttr "fileName" xpText)
+                                       (xpAttr "functionName" xpText)
+                                   )
+                                   xpickle
+            where fromL = M.fromList . foldr (\((a,b,c),d) t ->  ((a, if null b then Nothing else Just b, if null c then Nothing else Just c),d) :t ) []
+                  toL   = foldr (\((a,b,c),d) t ->  ((a, maybe "" id b, maybe "" id c),d) :t ) [] . M.toList
 
 instance XmlPickler MetricValue where
     xpickle = xpAlt tag ps

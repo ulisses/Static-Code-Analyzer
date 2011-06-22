@@ -35,11 +35,11 @@ import Metrics
 commentLinesDensity :: (FilePath,CTranslUnit) -> IO Metrics
 commentLinesDensity (file,tree) = do
     mNrCom <- getNrOfLinesOfComments file
-    (Num nrCom) <- return $ getM ("getNrOfLinesOfComments",file,"") mNrCom
+    (Num nrCom) <- return $ getM ("getNrOfLinesOfComments",Just file,Nothing) mNrCom
     nlocM <- ncloc (file,tree)
-    (Num nrLin) <- return $ getM ("ncloc",file,"") nlocM
+    (Num nrLin) <- return $ getM ("ncloc",Just file,Nothing) nlocM
     return $ emptyMetrics
-             >.> ( ("commentLinesDensity",file,"")
+             >.> ( ("commentLinesDensity",Just file,Nothing)
                  , Num (( nrCom /  (nrLin + nrCom)) * 100)
                  )
 
@@ -51,7 +51,7 @@ getNrOfLinesOfComments :: FilePath -> IO Metrics
 getNrOfLinesOfComments file = do
     tryToReadStrict file (return . commentsFromString) $
         (\l -> return $ emptyMetrics
-                 >.> ( ("getNrOfLinesOfComments",file,"")
+                 >.> ( ("getNrOfLinesOfComments",Just file,Nothing)
                      , Num $ sum $ l >>= return . fromIntegral . filterComment
                      ))
     where filterComment :: Comment -> Int

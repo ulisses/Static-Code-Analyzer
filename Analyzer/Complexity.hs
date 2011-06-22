@@ -46,7 +46,7 @@ mccabePerFun (file,d) = do
     let lst = filter ((/=nofunName) . fst) $ zip funs mccabes
     return $ foldl fromFunMccabeToMetrics emptyMetrics lst
     where getListFunFromC (CTranslUnit l _) = l
-          fromFunMccabeToMetrics r (funName,mccabeVal) = r >.> (("mccabePerFun",file,funName), Num $ fromIntegral mccabeVal)
+          fromFunMccabeToMetrics r (funName,mccabeVal) = r >.> (("mccabePerFun",Just file,Just funName), Num $ fromIntegral mccabeVal)
 
 {- mcCabe index, we need to have Int as Monoid, in the future
    we must change this to Sum, because we may want to have

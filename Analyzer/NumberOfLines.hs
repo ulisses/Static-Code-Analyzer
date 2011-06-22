@@ -40,7 +40,7 @@ import Metrics
 -}
 ncloc :: (FilePath,CTranslUnit) -> IO Metrics
 ncloc (file,tree) = let len = (length . filter (not . null) . lines . show . pretty) tree
-             in return $ emptyMetrics >.> (("ncloc",file,""),Num $ fromIntegral len)
+             in return $ emptyMetrics >.> (("ncloc",Just file,Nothing),Num $ fromIntegral len)
 
 {- Get the number of physical lines, so, the real number of lines
    inside the file.
@@ -48,7 +48,7 @@ ncloc (file,tree) = let len = (length . filter (not . null) . lines . show . pre
 physicalLines :: FilePath -> IO Metrics
 physicalLines file = do
     len <- BS.readFile file >>= return . BS.count (c2w '\n')
-    return $ emptyMetrics >.> (("physicalLines",file,""),Num $ fromIntegral len)
+    return $ emptyMetrics >.> (("physicalLines",Just file,Nothing),Num $ fromIntegral len)
 
 {-Density of duplicated lines for a block
 -}
@@ -70,7 +70,7 @@ getClonesBlock (fp,fps) = do
             . groupByFileName
             . groupBy (\(a,_,_,_) (b,_,_,_) -> a == b)
             . sortBy  (\(a,_,_,_) (b,_,_,_) -> EQ)
-    return (emptyMetrics >.> (("getClonesBlock",fp,""), Clone lst))
+    return (emptyMetrics >.> (("getClonesBlock",Just fp,Nothing), Clone lst))
 
 getClonesByBlock fp hss = do
     getClones'' fp hss

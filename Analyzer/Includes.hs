@@ -48,6 +48,6 @@ getIncludes file = do
         let includes = map (dropWhile isSpace) $ filter (isInfixOf "#include") $ lines code
         let inc = takke '\"' $ map tail $ filter (not . null) $ droppe '\"' $ includes
         let sysInc = takke '>' $ map tail $ filter (not . null)  $ droppe '<' $ includes
-        return (emptyMetrics >.> (("getIncludes",file,""),Includes (sysInc,inc)))
+        return (emptyMetrics >.> (("getIncludes",Just file,Nothing),Includes (sysInc,inc)))
             where takke c  = map (takeWhile (/=c))
                   droppe c = map (dropWhile (/=c))
