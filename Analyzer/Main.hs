@@ -22,7 +22,6 @@ import Data.Monoid
 import Data.Maybe
 import qualified Data.ByteString as BS
 import Control.Monad
-import System.Console.GetOpt
 import Data.Maybe ( fromMaybe )
 import qualified Control.Monad.Parallel as P
 import qualified System.IO.Strict as S
@@ -50,6 +49,7 @@ import Files
 import Latex
 import XML
 import GraphViz
+import Flags
 
 {- Main -}
 {- We may need to import some libraries to be able to put the input code
@@ -66,40 +66,6 @@ process file = do
         ( Left error  ) -> print error
         ( Right cprog ) -> (putStr . unlines  . map (show . pretty) . getFunctionsSignFromC) cprog
 -}
-
-data Flag  = Verbose
-           | Help
-           | Input String
-           | Output Format String
-           | LibDir String
-    deriving Show
-
-data Format = XML | PDF | LATEX
-    deriving Show
-
-options :: [OptDescr Flag]
-options =
-    [ Option ['v'] ["verbose"]    (NoArg Verbose)             "chatty output on stderr"
-    , Option ['x'] ["outputXML"]  (OptArg (out XML) "FILE")   "output in XML format to FILE, default: FILE=out.xml"
-    , Option ['p'] ["outputPDF"]  (OptArg (out PDF) "FILE")   "output in PDF format to FILE, default: FILE=out.pdf"
-    , Option ['t'] ["outputTEX"]  (OptArg (out LATEX) "FILE") "output in LaTeX format to FILE, default: FILE=out.tex"
-    , Option ['i'] ["input"]      (ReqArg Input  "FILE")      "input FILE in XML format"
-    , Option []    ["help"]       (NoArg Help)                "prints this help message"
-    --, Option ['L'] ["libdir"]     (ReqArg LibDir "DIR") "library directory"
-    ]
-
-out :: Format -> Maybe String -> Flag
-out XML   = Output XML . fromMaybe "out.xml"
-out PDF   = Output PDF . fromMaybe "out.pdf"
-out LATEX = Output LATEX . fromMaybe "out.tex"
-
-compilerOpts :: [String] -> IO ([Flag], [String])
-compilerOpts argv = do
-    name <- getProgName
-    case getOpt Permute options argv of
-       (o,n,[])   -> return (o,n)
-       (_,_,errs) -> ioError $ userError $ concat errs ++ usageInfo header options
-        where header = "Usage: "++ name ++" [OPTION...] files..."
 
 execAllMetrics :: FilePath -> IO Metrics
 execAllMetrics fp = do
@@ -153,58 +119,3 @@ main = do
     m <- execAllMetrics dir
     print m
     generatePDF m
-
-fromListOfPathsToMatetrics [] m = return m
-fromListOfPathsToMatetrics (h:t) mAcc = do
-    m <- getNrOfLinesOfComments h
-    fromListOfPathsToMatetrics t (m >+> mAcc)
-
---mapM getNrOfLinesOfComments lst >>= return . foldl (>+>) emptyMetrics >>= geraPDF
-
-
-unsafeInterleaveMapIO f (x:xs) = unsafeInterleaveIO $ do
-    y <- f x
-    ys <- unsafeInterleaveMapIO f xs
-    return (y : ys)
-unsafeInterleaveMapIO _ [] = return []
-
-{- auxiliar function to test -}
-parr = parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] "main.c"
-parse = parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__"] 
-fromRight = (\(Right prog) -> prog)
-
-{- Count the number of instructions
--}
-
-{- Depth
--}
-dep :: IO Int
-dep =  parr >>= dep' . fromRight
-
-dep' :: Data a => a -> IO Int
-dep' = applyTU (depthWith dep'')
-
-depthWith s = recurse `passTU` -- Sequential composition
-    \depth_subterms ->
-        let max_subterms | null depth_subterms = 0
-                         | otherwise = maximum depth_subterms
-        in (ifTU s
-                (const (constTU (max_subterms + 1)))
-                (constTU max_subterms)
-           )
-        where
-        recurse = allTU (++) [] (depthWith s `passTU` \depth -> constTU [depth])
-
-dep'' = failTU `adhocTU` loop'
-
---loop' :: CStat -> IO Int
-loop' = return . loop_
-    where loop_ (CIf _ _ _ _)    = 1
-          loop_ (CSwitch _ _ _)  = 1
-          loop_ (CWhile _ _ _ _) = 1
-          loop_ (CFor _ _ _ _ _) = 1
-
---mccabe :: IO Int
---mccabe =  parr >>= mccabeIndex . fromRight
-
---decl (CDecl _ l _) = return . sum [ | () <- l]
