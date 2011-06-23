@@ -1,3 +1,4 @@
+{-#OPTIONS -XExistentialQuantification -XGenerics#-}
 ------------------------------------------------------------------------------ 
 -- | 
 -- Author       : Ulisses Araujo Costa
@@ -26,32 +27,19 @@ import System.Exit
 infixl 5 >.>
 infixl 4 >+>
 
-{- We will need to use stateT in all the fucntions that generate metrics 
-f = execStateT g emptyMetrics
-
-g :: StateT Metrics IO ()
-g = do x <- get
-       put emptyMetrics
-       lift $ putStrLn "vou dizer ola noutra funcao"
-       h "ola"
-       y <- get
-       put $ insertMetric ("nomeMetrica2",Num 2) y
-
-h :: String -> StateT Metrics IO ()
-h s = do x <- get
-         put $ insertMetric ("nomeMetrica1",Num 1) x
-         lift $ putStrLn s
--}
 {- types -}
 type Metrics = M.Map MetricName MetricValue
 type MetricName = (String, Maybe FileSrc,Maybe FunctionName)
+
 data MetricValue = Num Double
-                 | Clone [(FileDst, [(Ocurrency, LineSrc, LineDst)])]
+                 | Clone (M.Map FileDst [(Ocurrency, LineSrc, LineDst)])
                  | Includes ([SystemIncludes],[Includes])
+                 | FunSig [FunSignature]
     deriving (Show, Eq, Ord)
 
 type SystemIncludes = String
 type Includes = String
+type FunSignature = String
 type FunctionName = String
 type FileDst = String
 type FileSrc = String
@@ -62,13 +50,19 @@ type LineSrc = Int
 showMetrics :: Metrics -> String
 showMetrics = M.foldrWithKey (\k v t -> show k ++ "   ->   " ++ show v ++ "\n" ++ t) []
 
-getAllNum,getAllClone :: Metrics -> Metrics
+getAllFunSig,getAllNum,getAllClone :: Metrics -> Metrics
+getAllFunSig = M.filterWithKey isFunSig
+    where isFunSig _ (FunSig []) = False
+          isFunSig _ (FunSig _ ) = True
+          isFunSig _ _ = False
+
 getAllNum = M.filterWithKey isNum
     where isNum _ (Num _) = True
           isNum _ _       = False
+
 getAllClone = M.filterWithKey isClone
-    where isClone _ (Clone []) = False -- an empty clone is not a clone
-          isClone _ (Clone _)  = True
+    where isClone _ (Clone m) | M.null m = False -- an empty clone is not a clone
+                              | otherwise = True
           isClone _ _          = False
 
 {-TEST-}

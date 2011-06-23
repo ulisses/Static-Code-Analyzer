@@ -17,6 +17,7 @@ import Text.XML.HXT.Core
 import Text.XML.HXT.Arrow.Pickle.Xml
 import qualified Data.Map as M
 import Data.Maybe
+import qualified Data.Map as M
 
 import Metrics
 
@@ -39,7 +40,7 @@ instance XmlPickler MetricValue where
         tag (Num _)     = 0
         tag (Clone _) = 1
         ps = [ xpWrap ( Num , \(Num i) -> i )     (xpAddFixedAttr "type" "num" $ xpAttr "value" $ xpWrap (read, show) xpText)
-             , xpWrap ( Clone, \(Clone sl) -> sl) $ (xpList xpTuple)
+             , xpWrap ( Clone . M.fromList, M.toList . \(Clone sl) -> sl) $ (xpList xpTuple)
              ] --  xpPair (xpAddFixedAttr "type" "clone" $ xpAttr "srcPath" xpText)
         xpTuple = xpElem "cloneFile" $ xpPair (xpAttr "dstPath" xpText) xpTrip
         xpTrip = xpList $  xpElem "location" $ xpTriple (xpAttr "srcTxt" xpText) (xpAttr "lineSrc" xpickle) (xpAttr "lineDst" xpickle)

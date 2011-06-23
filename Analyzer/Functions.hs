@@ -12,16 +12,20 @@
 ------------------------------------------------------------------------------
 module Functions where
 
+import Data.List
 import Data.Data
 import Data.Monoid
 import Language.C
 import Language.C.System.GCC
 import Language.C.Data.Ident
+import Language.C.Data.Node
 import Strafunski.Data.Generics.Strafunski.StrategyLib.ChaseImports
 import Strafunski.Data.Generics.Strafunski.StrategyLib.StrategyPrimitives
 import Strafunski.Data.Generics.Strafunski.StrategyLib.TraversalTheme
 import Strafunski.Data.Generics.Strafunski.StrategyLib.StrategyPrelude
 import Strafunski.Data.Generics.Strafunski.StrategyLib.FlowTheme
+
+import Metrics
 
 nofunName = "NOFUN"
 
@@ -39,9 +43,16 @@ getFunsName = return . filter (not . null) . applyTU (once_tdTU names)
    we will ignore it and only look at full functions specifications.
 
    To see more clearly you can test with:
-       getFunctionsSign >>= putStr . unlines  . map (show . pretty)
+       getFunSign >>= putStr . unlines  . map (show . pretty)
 -}
-getFunSign :: Data x => x -> [x]
+getFunSign :: CTranslUnit -> [CTranslUnit]
 getFunSign = applyTP (topdown names1)
-    where names1 = idTP `adhocTP` (return . fromFunctionToSign)
-          fromFunctionToSign (CFDefExt (CFunDef lCDeclSpec cDeclr _ _ _ )) = CDeclExt (CDecl lCDeclSpec [(Just $ cDeclr,Nothing,Nothing)] internalNode)
+    where names1 = idTP `adhocTP` fromFunctionToSign
+          fromFunctionToSign (CFDefExt (CFunDef lCDeclSpec cDeclr _ _ _ )) = [CDeclExt (CDecl lCDeclSpec [(Just $ cDeclr,Nothing,Nothing)] internalNode)]
+          fromFunctionToSign _ = [CDeclExt (CDecl [] [] internalNode)]
+
+t = parseCFile (newGCC "gcc") Nothing [] "main.c" >>= return . (\(Right t) -> fromSigToM ("main.c",t) )
+
+fromSigToM :: (FilePath, CTranslUnit) -> Metrics
+fromSigToM (fp,t) = let lst = (filter ( (/=";") . nub ) . concatMap lines . map (show . pretty) . getFunSign) t
+                    in emptyMetrics >.> (("fromSigToM",Just $ fp ,Nothing), FunSig lst)

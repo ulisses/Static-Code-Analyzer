@@ -11,21 +11,20 @@
 ------------------------------------------------------------------------------
 module Main where
 
-import IO
 import System.Process
-import GHC.IO.Handle
-import GHC.IO
 import System.Exit
 import System.Environment
+import System.IO
+import IO
+import GHC.IO.Handle
+import GHC.IO
+import qualified Data.ByteString as BS
+import qualified Control.Monad.Parallel as P
+import qualified System.IO.Strict as S
 import Data.Data
 import Data.Monoid
 import Data.Maybe
-import qualified Data.ByteString as BS
 import Control.Monad
-import Data.Maybe ( fromMaybe )
-import qualified Control.Monad.Parallel as P
-import qualified System.IO.Strict as S
-import System.IO
 
 import Language.C
 import Language.C.System.GCC
@@ -70,21 +69,21 @@ process file = do
 execAllMetrics :: FilePath -> IO Metrics
 execAllMetrics fp = do
     lfp    <- getListOfCFiles fp
-    lstT   <- getTreeFromFile lfp
-    dbFile <- getDBFileContents
-    complexityM          <- mapM mccabePerFun lstT >>= return . concatMetrics
-    includesM            <- mapM getIncludes lfp >>= return . concatMetrics
-    linesOfCommentsM     <- mapM getNrOfLinesOfComments lfp >>= return . concatMetrics
-    linesOfCommentsDensM <- mapM commentLinesDensity lstT >>= return . concatMetrics
-    lcommM               <- mapM getNrOfLinesOfComments lfp >>= return . concatMetrics
+    lstT   <- getTreeFromFile fp lfp
+    --dbFile <- getDBFileContents
+    complexityM          <- P.mapM mccabePerFun lstT >>= return . concatMetrics
+    includesM            <- P.mapM getIncludes lfp >>= return . concatMetrics
+    linesOfCommentsM     <- P.mapM getNrOfLinesOfComments lfp >>= return . concatMetrics
+    linesOfCommentsDensM <- P.mapM commentLinesDensity lstT >>= return . concatMetrics
+    let funSig = concatMetrics $ map fromSigToM lstT
     --contentsM            <- mapM getClonesBlock (zip lfp (repeat dbFile)) >>= return . concatMetrics
     return $
         complexityM
         >+> includesM
         >+> linesOfCommentsM
         -- >+> contentsM
-        >+> lcommM
         >+> linesOfCommentsDensM
+        >+> funSig
 
 getDBFileContents ::  IO [(FileDst,String)]
 getDBFileContents = do
@@ -102,16 +101,16 @@ getContentFromFile (fp:t) = do
         (Left err) -> print err >> getContentFromFile t
         (Right co) -> getContentFromFile t >>= return . (\r -> (fp,lines co) : r)
 
-getTreeFromFile :: [FilePath] -> IO [(FilePath,CTranslUnit)]
-getTreeFromFile [] = return []
-getTreeFromFile (fp:t) = do
-    r <- try $ parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__","-I../../gcc-4.6.0/","-I.","-I/Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/gcc-4.6.0/gcc/","-I/Users/ulissesaraujocosta/ulisses/univ/msc/el/pi/gcc-4.6.0"] fp
+getTreeFromFile :: FilePath -> [FilePath] -> IO [(FilePath,CTranslUnit)]
+getTreeFromFile _ [] = return []
+getTreeFromFile dir (fp:t) = do
+    r <- try $ parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__","-I"++dir] fp
     case r of
-        (Left _)    -> getTreeFromFile t
+        (Left _)    -> getTreeFromFile dir t
         (Right res) -> do
           case res of
-              (Left _)     -> getTreeFromFile t
-              (Right tree) -> getTreeFromFile t >>= return . (\r -> (fp,tree) : r)
+              (Left _)     -> getTreeFromFile dir t
+              (Right tree) -> getTreeFromFile dir t >>= return . (\r -> (fp,tree) : r)
 
 main :: IO ()
 main = do

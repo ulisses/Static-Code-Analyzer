@@ -26,6 +26,7 @@ import Language.C.Pretty
 import qualified Data.ByteString as BS
 import Data.ByteString.Internal
 import Data.Word
+import qualified Data.Map as M
 import Data.List
 import System.IO
 import qualified Data.Text.IO as TIO
@@ -70,7 +71,7 @@ getClonesBlock (fp,fps) = do
             . groupByFileName
             . groupBy (\(a,_,_,_) (b,_,_,_) -> a == b)
             . sortBy  (\(a,_,_,_) (b,_,_,_) -> EQ)
-    return (emptyMetrics >.> (("getClonesBlock",Just fp,Nothing), Clone lst))
+    return (emptyMetrics >.> (("getClonesBlock",Just fp,Nothing), Clone $ M.fromList lst))
 
 getClonesByBlock fp hss = do
     getClones'' fp hss
@@ -113,12 +114,14 @@ getClones'' fn db = S.readFile fn >>= return . filterNonClone . fun
    And we return a list of the files where the cloning occur.
    We consider an occurrence as: one list of the line string and the line number.
 -}
-getClonesOneLine :: FilePath -> FilePath -> IO [(String, [(String, Int, Int)])]
-getClonesOneLine fp db =  getClonesByLine fp db
-    >>= return
-        . groupByFileName
-        . groupBy (\(a,_,_,_) (b,_,_,_) -> a == b)
-        . sortBy  (\(a,_,_,_) (b,_,_,_) -> EQ)
+getClonesOneLine :: FilePath -> FilePath -> IO Metrics
+getClonesOneLine fp db = do
+    l <- getClonesByLine fp db
+           >>= return
+               . groupByFileName
+               . groupBy (\(a,_,_,_) (b,_,_,_) -> a == b)
+               . sortBy  (\(a,_,_,_) (b,_,_,_) -> EQ)
+    return $ emptyMetrics >.> (("getClonesOneLine",Just fp,Nothing),Clone $ M.fromList l)
 
 groupByFileName [] = []
 groupByFileName (h:t) | not $ null h = let fn = (\(a,_,_,_) -> a) $ head h

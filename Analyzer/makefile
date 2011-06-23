@@ -1,9 +1,9 @@
 all:
 	make release
 release:
-	ghc -O -rtsopts -threaded --make Main.hs -o main 
+	ghc -O2 -rtsopts -threaded --make Main.hs -o main 
 debug:
-	ghc -debug -rtsopts -threaded --make Main.hs -o main 
+	ghc --make Main.hs -o main 
 clean:
 	rm -f *.*~ *~ *.o *.hi
 run:all
