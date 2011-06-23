@@ -24,6 +24,7 @@ import Strafunski.Data.Generics.Strafunski.StrategyLib.StrategyPrimitives
 import Strafunski.Data.Generics.Strafunski.StrategyLib.TraversalTheme
 import Strafunski.Data.Generics.Strafunski.StrategyLib.StrategyPrelude
 import Strafunski.Data.Generics.Strafunski.StrategyLib.FlowTheme
+import System.Directory
 
 import Metrics
 
@@ -51,7 +52,12 @@ getFunSign = applyTP (topdown names1)
           fromFunctionToSign (CFDefExt (CFunDef lCDeclSpec cDeclr _ _ _ )) = [CDeclExt (CDecl lCDeclSpec [(Just $ cDeclr,Nothing,Nothing)] internalNode)]
           fromFunctionToSign _ = [CDeclExt (CDecl [] [] internalNode)]
 
-t = parseCFile (newGCC "gcc") Nothing [] "main.c" >>= return . (\(Right t) -> fromSigToM ("main.c",t) )
+t = do
+    curDir <- getCurrentDirectory
+    setCurrentDirectory "../../../../../3-matricula/3.2/mp2/trabalho/mp2_0.3"
+    p <- parseCFile (newGCC "gcc") Nothing [] "rua.c" >>= return . (\(Right t) -> fromSigToM ("main.c",t) )
+    setCurrentDirectory curDir
+    return p
 
 fromSigToM :: (FilePath, CTranslUnit) -> Metrics
 fromSigToM (fp,t) = let lst = (filter ( (/=";") . nub ) . concatMap lines . map (show . pretty) . getFunSign) t

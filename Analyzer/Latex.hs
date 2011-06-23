@@ -71,7 +71,7 @@ fromFunSigLaTeX' m | nullM  m = noop
                            | otherwise = " functions"
           step k v r = let fileName = myfromString $ getFileName k
                        in  subsection fileName
-                               >> myfromString ("This file have "++(texString $ length $ fromFunSig v)++" functions:") >> newline
+                               >> myfromString ("This file have "++(texString $ length $ fromFunSig v)++" functions:") // newline
                                >> (foldr stepL noop $ fromFunSig v)
                            >> r
           getFileName (_,Just f,_) = f
@@ -111,7 +111,7 @@ fromNumToLaTeX = fromNumToLaTeX' . getAllNum
 
 fromNumToLaTeX' :: Monad m => Metrics -> LaTeX m
 fromNumToLaTeX' m | nullM m   = noop
-                  | otherwise = do section "Nums"
+                  | otherwise = do section "Numeric metrics"
                                    (texString $ sizeM m) >> " metrics analyzed." // newline
                                    foldr (>>) newpage $ intersperse newpage $ map toTabular $ toTabularParts m
     where
