@@ -20,6 +20,7 @@ import Data.Maybe
 import qualified Data.Map as M
 
 import Metrics
+import AbsolutePath
 
 {- Convert Metrics to LaTeX -}
 generatePDF exM = do
@@ -70,11 +71,13 @@ fromFunSigLaTeX' m | nullM  m = noop
                                     foldrM step noop m
     where singularOrPlural | sizeM m == 1 = " function"
                            | otherwise = " functions"
-          step k v r = let fileName = myfromString $ getFileName k
-                       in  subsection fileName
+          step k v r = let fp = getFileName k
+                           (p,fn) = split_path $ mkAbsolutePathUnsafe fp
+                       in subsection (myfromString fn)
+                               >> myfromString ("This file can be found at: " ++ p) // newline
                                >> myfromString ("This file have "++(texString $ length $ fromFunSig v)++" functions:") // newline
                                >> (foldr stepL noop $ fromFunSig v)
-                           >> r
+                             >> r
           getFileName (_,Just f,_) = f
           fromFunSig (FunSig l) = l
           stepL h r = myfromString h // r

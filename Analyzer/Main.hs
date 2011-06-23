@@ -70,20 +70,15 @@ execAllMetrics :: FilePath -> IO Metrics
 execAllMetrics fp = do
     lfp    <- getListOfCFiles fp
     lstT   <- getTreeFromFile fp lfp
-    --dbFile <- getDBFileContents
-    complexityM          <- P.mapM mccabePerFun lstT >>= return . concatMetrics
-    includesM            <- P.mapM getIncludes lfp >>= return . concatMetrics
-    linesOfCommentsM     <- P.mapM getNrOfLinesOfComments lfp >>= return . concatMetrics
-    linesOfCommentsDensM <- P.mapM commentLinesDensity lstT >>= return . concatMetrics
-    let funSig = concatMetrics $ map fromSigToM lstT
-    --contentsM            <- mapM getClonesBlock (zip lfp (repeat dbFile)) >>= return . concatMetrics
-    return $
-        complexityM
-        >+> includesM
-        >+> linesOfCommentsM
-        -- >+> contentsM
-        >+> linesOfCommentsDensM
-        >+> funSig
+    dbFile <- getDBFileContents
+    getMetrics [getMetricsFrom mccabePerFun lstT
+               ,getMetricsFrom getIncludes lfp
+               ,getMetricsFrom getNrOfLinesOfComments lfp
+               ,getMetricsFrom commentLinesDensity lstT
+               ,getMetricsFrom getIncludes lfp
+               ,return $ concatMetrics $ map fromSigToM lstT
+               ,getMetricsFrom getClonesBlock (zip lfp (repeat dbFile))
+               ]
 
 getDBFileContents ::  IO [(FileDst,String)]
 getDBFileContents = do
@@ -104,7 +99,8 @@ getContentFromFile (fp:t) = do
 getTreeFromFile :: FilePath -> [FilePath] -> IO [(FilePath,CTranslUnit)]
 getTreeFromFile _ [] = return []
 getTreeFromFile dir (fp:t) = do
-    r <- try $ parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__","-I"++dir] fp
+    path <- mkAbsolutePath dir
+    r <- try $ parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__","-I"++path] fp
     case r of
         (Left _)    -> getTreeFromFile dir t
         (Right res) -> do

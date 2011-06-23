@@ -60,5 +60,5 @@ t = do
     return p
 
 fromSigToM :: (FilePath, CTranslUnit) -> Metrics
-fromSigToM (fp,t) = let lst = (filter ( (/=";") . nub ) . concatMap lines . map (show . pretty) . getFunSign) t
+fromSigToM (fp,t) = let lst = (filter ( (/=";") . nub ) . map (filter (/='\n')) . concatMap lines . map (show . pretty) . getFunSign) t
                     in emptyMetrics >.> (("fromSigToM",Just $ fp ,Nothing), FunSig lst)

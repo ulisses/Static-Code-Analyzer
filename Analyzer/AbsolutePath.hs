@@ -14,6 +14,7 @@ module AbsolutePath where
 
 import System.Directory
 import System.Path.NameManip
+import System.IO.Unsafe
 
 mkAbsolutePath :: FilePath -> IO FilePath
 mkAbsolutePath fp = do
@@ -24,3 +25,6 @@ mkAbsolutePath fp = do
     return $ if n==0 then fp else normalise_path $ unsplit_path (remove n d,rest)
     where remove 0 s = s
           remove n s = remove (n-1) $ dir_part s
+
+mkAbsolutePathUnsafe :: FilePath -> FilePath
+mkAbsolutePathUnsafe = unsafePerformIO . mkAbsolutePath
