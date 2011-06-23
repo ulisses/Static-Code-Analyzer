@@ -17,6 +17,7 @@ module Metrics where
 
 import Control.Monad.State
 import qualified Data.Map as M
+import qualified Control.Monad.Parallel as P
 import Data.Maybe
 
 import System.Process
@@ -65,16 +66,14 @@ getAllClone = M.filterWithKey isClone
                               | otherwise = True
           isClone _ _          = False
 
-{-TEST-}
-exM = emptyMetrics
-    >.> (("metrica1",Just "file", Just "fun1"),Num 1.90)
-    >.> (("metrica2",Nothing,Nothing),Num 2)
-    >.> (("metricaNum2", Just "file",Just "fun1"),Num 1)
-    >.> (("metricaNum3",Just "file",Just "fun1"),Num 1)
-    >.> (("metricaNum4",Just "file",Just "fun1"),Num 1)
-    >.> (("metricaNum5",Just "file",Just "fun1"),Num 1)
-    >.> (("metricaNum6",Just "file", Nothing),Num 1.009)
+getMetrics :: [IO Metrics] -> IO Metrics
+getMetrics [] = return emptyMetrics
+getMetrics (h:t) = h >>= \a -> getMetrics t >>= \b -> return $ a >+> b
 
+getMetricsFrom :: (a -> IO Metrics) -> [a] -> IO Metrics
+getMetricsFrom f l = P.mapM f l >>= return . concatMetrics
+
+{- The empty metrics bag -}
 emptyMetrics :: Metrics
 emptyMetrics = M.empty
 
@@ -86,9 +85,9 @@ m >.> d = insertMetric d m
 insertMetric :: (MetricName,MetricValue) -> Metrics -> Metrics
 insertMetric (mn,mv) m =
     case M.lookup mn m of
-        Nothing    -> ins m
-        (Just mv') -> if mv' == mv then m else ins m
-    where ins = M.insert mn mv
+        Nothing    -> m'
+        (Just mv') -> if mv' == mv then m else m'
+    where m' = M.insert mn mv m
 
 {- Delete Metrics by name -}
 deleteMetric :: MetricName -> Metrics -> Metrics
