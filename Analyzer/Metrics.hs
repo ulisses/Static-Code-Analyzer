@@ -15,7 +15,7 @@
 
 module Metrics where
 
-import Control.Monad.State
+import Control.Monad.Loops
 import qualified Data.Map as M
 import qualified Control.Monad.Parallel as P
 import Data.Maybe
@@ -71,7 +71,7 @@ getMetrics [] = return emptyMetrics
 getMetrics (h:t) = h >>= \a -> getMetrics t >>= \b -> return $ a >+> b
 
 getMetricsFrom :: (a -> IO Metrics) -> [a] -> IO Metrics
-getMetricsFrom f l = P.mapM f l >>= return . concatMetrics
+getMetricsFrom f l = forkMapM f l >>= return . concatMetrics . map (either (const emptyMetrics) id)
 
 {- The empty metrics bag -}
 emptyMetrics :: Metrics

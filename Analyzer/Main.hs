@@ -1,4 +1,9 @@
-{-#OPTIONS -XScopedTypeVariables -XNoMonomorphismRestriction -XFlexibleInstances -XUndecidableInstances#-}
+{-#OPTIONS -XScopedTypeVariables
+           -XNoMonomorphismRestriction
+           -XFlexibleInstances
+           -XUndecidableInstances
+           -XTupleSections
+#-}
 ------------------------------------------------------------------------------ 
 -- | 
 -- Author       : Ulisses Araujo Costa
@@ -25,6 +30,7 @@ import Data.Data
 import Data.Monoid
 import Data.Maybe
 import Control.Monad
+import Control.Monad.Loops
 
 import Language.C
 import Language.C.System.GCC
@@ -69,23 +75,24 @@ process file = do
 execAllMetrics :: FilePath -> IO Metrics
 execAllMetrics fp = do
     lfp    <- getListOfCFiles fp
+    print $ length lfp
     lstT   <- getTreeFromFile fp lfp
-    dbFile <- getDBFileContents
+    print $ length lstT
+    --dbFile <- getDBFileContents "database.txt"
     getMetrics [getMetricsFrom mccabePerFun lstT
                ,getMetricsFrom getIncludes lfp
                ,getMetricsFrom getNrOfLinesOfComments lfp
                ,getMetricsFrom commentLinesDensity lstT
-               ,getMetricsFrom getIncludes lfp
                ,return $ concatMetrics $ map fromSigToM lstT
-               ,getMetricsFrom getClonesBlock (zip lfp (repeat dbFile))
+               --,getMetricsFrom getClonesBlock (zip lfp (repeat dbFile))
                ]
 
-getDBFileContents ::  IO [(FileDst,String)]
-getDBFileContents = do
-    fc <- S.readFile "database.txt" >>= return . lines
-    hss' <- P.mapM (flip openBinaryFile ReadMode) fc
-    hss  <- P.mapM hGetContents hss'
-    --mapM hClose hss'
+getDBFileContents :: FilePath -> IO [(FileDst,String)]
+getDBFileContents db = do
+    fc <- S.readFile db >>= return . lines
+    hss' <- forkMapM (flip openBinaryFile ReadMode) fc >>= return . concatMap (either (const []) (:[]))
+    hss  <- forkMapM hGetContents hss' >>= return . concatMap (either (const []) (:[]))
+    forkMapM hClose hss'
     return $ zip fc hss
 
 getContentFromFile :: [FilePath] -> IO [(FilePath,[String])]
@@ -104,13 +111,29 @@ getTreeFromFile dir (fp:t) = do
     case r of
         (Left _)    -> getTreeFromFile dir t
         (Right res) -> do
-          case res of
-              (Left _)     -> getTreeFromFile dir t
-              (Right tree) -> getTreeFromFile dir t >>= return . (\r -> (fp,tree) : r)
+            case res of
+                (Left _) -> getTreeFromFile dir t
+                (Right tree) -> getTreeFromFile dir t >>= return . \r -> (fp,tree):r
+
+getTreeFromFileF :: FilePath -> [FilePath] -> IO [(FilePath,CTranslUnit)]
+getTreeFromFileF dir l =
+    forkMapM (getTreeFromFile' dir) l
+        >>= return . concatMap (either (const []) (maybe [] (:[])))
+
+getTreeFromFile' :: FilePath -> FilePath -> IO (Maybe (FilePath,CTranslUnit))
+getTreeFromFile' dir fp = do
+    path <- mkAbsolutePath dir
+    r <- try $ parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__","-I"++path] fp
+    case r of
+        (Left _)    -> return Nothing
+        (Right res) -> do
+            case res of
+                (Left _) -> return Nothing
+                (Right tree) -> return $ Just (fp,tree)
 
 main :: IO ()
 main = do
     (dir:_) <- getArgs
     m <- execAllMetrics dir
-    print m
+    --putStrLn $ showMetrics m
     generatePDF m
