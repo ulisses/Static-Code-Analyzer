@@ -46,7 +46,7 @@ getFunsName = return . filter (not . null) . applyTU (once_tdTU names)
    To see more clearly you can test with:
        getFunSign >>= putStr . unlines  . map (show . pretty)
 -}
-getFunSign :: CTranslUnit -> [CTranslUnit]
+--getFunSign :: CTranslUnit -> [CTranslUnit]
 getFunSign = applyTP (topdown names1)
     where names1 = idTP `adhocTP` fromFunctionToSign
           fromFunctionToSign (CFDefExt (CFunDef lCDeclSpec cDeclr _ _ _ )) = [CDeclExt (CDecl lCDeclSpec [(Just $ cDeclr,Nothing,Nothing)] internalNode)]
@@ -59,6 +59,17 @@ t = do
     setCurrentDirectory curDir
     return p
 
-fromSigToM :: (FilePath, CTranslUnit) -> Metrics
-fromSigToM (fp,t) = let lst = (filter ( (/=";") . nub ) . map (filter (/='\n')) . concatMap lines . map (show . pretty) . getFunSign) t
-                    in emptyMetrics >.> (("fromSigToM",Just $ fp ,Nothing), FunSig lst)
+fromSigToM :: (FilePath, CTranslUnit) -> IO Metrics
+fromSigToM (fp,t) = do
+    let lst = (filter ( (/=";") . nub ) . map (filter (/='\n')) . concatMap lines . map (show . pretty) . getFunSign) t
+    return $ emptyMetrics >.> (("fromSigToM",Just $ fp ,Nothing), FunSig lst)
+
+delNonWantedFun :: Data a => a -> CTranslUnit
+delNonWantedFun d = CTranslUnit (applyTU (once_tdTU names) d) internalNode
+    where names = constTU (CDeclExt (CDecl [] [] internalNode)) `adhocTU` test1
+          test1 t@(CFDefExt (CFunDef _ (CDeclr (Just name ) ((CFunDeclr _ _ _):_) _ _ _ ) _ _ _))
+                 | elem (identToString name) listToExclude = []
+                 | otherwise = [t]
+          test1 t = [t]
+
+listToExclude = ["__sputc"]

@@ -71,20 +71,22 @@ fromGraphvizPToLaTeX = fromGraphvizPLaTeX' . getAllGraphvizP
 fromGraphvizPLaTeX' :: Monad m => Metrics -> LaTeX m
 fromGraphvizPLaTeX' m | nullM  m = noop
                       | otherwise = do section "Global Image of Includes"
+                                       explainGraphvizProject
                                        foldrM step noop m
     where step k v r =  "\\begin{dot2tex}[]"
                            >> (fromString $ fromGraphvizP v)
                            >> "\\end{dot2tex}"
                          // r
           fromGraphvizP (GraphvizProject l) = l
-
+          explainGraphvizProject = "In this section we will provide an image that represents the usage of \\textit{include} pragma in your program dir. If the node is $.c$ this means that this file imports the files $.h$ where he points to."
 {- Convert a (Graphviz _) dotFile to LaTeX -}
 fromGraphvizToLaTeX :: Monad m => Metrics -> LaTeX m
 fromGraphvizToLaTeX = fromGraphvizLaTeX' . getAllGraphviz
 
 fromGraphvizLaTeX' :: Monad m => Metrics -> LaTeX m
 fromGraphvizLaTeX' m | nullM  m = noop
-                     | otherwise = do section "Includes"
+                     | otherwise = do section "Include files"
+                                      explainGraphviz
                                       foldrM step noop m
     where step k v r = let fp = getFileName k
                            (p,fn) = split_path $ mkAbsolutePathUnsafe fp
@@ -96,6 +98,7 @@ fromGraphvizLaTeX' m | nullM  m = noop
                              // r
           getFileName (_,Just f,_) = f
           fromGraphviz (Graphviz l) = l
+          explainGraphviz = "In this section we will provide an image that represents the usage of \\textit{include} pragma for each file we found under you project folder."
 
 {- Convert a (FunSig _) metricvalue to LaTeX -}
 fromFunSigToLaTeX :: Monad m => Metrics -> LaTeX m
@@ -104,20 +107,21 @@ fromFunSigToLaTeX = fromFunSigLaTeX' . getAllFunSig
 fromFunSigLaTeX' :: Monad m => Metrics -> LaTeX m
 fromFunSigLaTeX' m | nullM  m = noop
                    | otherwise = do section "Functions Signatures"
+                                    explainFunSig >> newline
                                     "Found " >> (texString $ sizeM m) >> singularOrPlural
                                     foldrM step noop m
-    where singularOrPlural | sizeM m == 1 = " function"
-                           | otherwise = " functions"
+    where singularOrPlural | sizeM m == 1 = " file."
+                           | otherwise = " files."
           step k v r = let fp = getFileName k
                            (p,fn) = split_path $ mkAbsolutePathUnsafe fp
                        in subsection (myfromString fn)
-                               >> myfromString ("This file can be found at: " ++ (mkAbsolutePathUnsafe p)) // newline
-                               >> myfromString ("This file have "++(texString $ length $ fromFunSig v)++" functions:") // newline
-                               >> (foldr stepL noop $ fromFunSig v)
+                               >> myfromString ("This file can be found at: " ++ (mkAbsolutePathUnsafe p))
+                               >> "\n\\begin{verbatim}" >> (foldr stepL noop $ fromFunSig v) >> "\\end{verbatim}\n"
                              >> r
           getFileName (_,Just f,_) = f
           fromFunSig (FunSig l) = l
-          stepL h r = myfromString h // r
+          stepL h r = fromString (h++"\n") >> r
+          explainFunSig = "In this section we will provide for each file we found all the functions signatures inside it."
 
 {- Convert a (Clone _ _) metricvalue to LaTeX -}
 fromCloneToLaTeX :: Monad m => Metrics -> LaTeX m

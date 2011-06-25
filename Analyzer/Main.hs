@@ -79,12 +79,14 @@ execAllMetrics fp = do
     lstT   <- getTreeFromFile fp lfp
     print $ length lstT
     --dbFile <- getDBFileContents "database.txt"
-    getMetrics [--getMetricsFrom mccabePerFun lstT
-               getMetricsFrom generateGraphVizFromFile lfp
+    getMetrics [getMetricsFrom mccabePerFun lstT
+               ,getMetricsFrom generateGraphVizFromFile lfp
                ,generateGraphVizFromProject lfp
                ,getMetricsFrom getNrOfLinesOfComments lfp
                ,getMetricsFrom commentLinesDensity lstT
-               ,return $ concatMetrics $ map fromSigToM lstT
+               ,getMetricsFrom fromSigToM lstT
+               ,getMetricsFrom ncloc lstT
+               ,getMetricsFrom physicalLines lfp
                --,getMetricsFrom getClonesBlock (zip lfp (repeat dbFile))
                ]
 
