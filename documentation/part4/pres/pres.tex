@@ -28,6 +28,7 @@
 \usepackage{listings}
 \usepackage{verbatim}
 \usepackage{boxedminipage}
+\usepackage{haskell}
 
 % % % inicio do listings e ref
 \definecolor{darkblue}{rgb}{0,0,0.6}
@@ -134,7 +135,7 @@
         },
         emphstyle={[5]\color{preto_ulisses}\textbf}
 }
-\lstnewenvironment{haskell}{\lstset{language=HaskellUlisses}}{}
+\lstnewenvironment{haskellcode}{\lstset{language=HaskellUlisses}}{}
 % % % fim do listings e ref
 
 % % % inicio da definicao de comandos
@@ -185,17 +186,107 @@ Concretizado até ao ínicio da quarta fase:
 \begin{frame} \frametitle{Motivação e Objectivos}
 Objectivos para terceira fase:
 \begin{itemize}
-\item Desenvolvimentod e uma API para gerir as métricas
+\item Desenvolvimento de uma API para gerir as métricas
 \item Terminar a implementação das métricas que pretendiamos
 \item Melhoramento da \emph{script} de instalação do sistema (dificil!)
 \item Permitir inserção de informação pelo terminal
 \end{itemize}
 \end{frame}
 
-\section{Aplicação Web}
-\section{Terminal Interface}
-\section{Instalação do sistema}
-\section{Strafunski}
+\section{Metricas}
+\begin{frame} \frametitle{Metricas Implementadas}
+\begin{itemize}
+\item Grafo de includes do sistema e de cada ficheiro
+\item Nr linhas de comentários (que não são pedaços de código comentados)
+\item Densidade de comentários
+\item Index de Mccabe
+\item NLOC (nr de linhas do pretty print)
+\item Nr de linhas fisicas
+\item Clones por bloco
+\item Assinaturas de funções e nomes de funções
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Metrics Datatypes}
+\begin{haskellcode}
+type Metrics = M.Map MetricName MetricValue
+type MetricName = (String, Maybe FileSrc,Maybe FunctionName)
+data MetricValue =
+    | Num Double
+    | Clone (M.Map FileDst [(Ocurrency, LineSrc, LineDst)])
+    | Includes ([SystemIncludes],[Includes])
+    | FunSig [FunSignature]
+    | Graphviz DotFile
+    | GraphvizProject DotFile																				 
+\end{haskellcode}
+\end{frame}
+
+\newcommand{\metricsins}{\mathbin{>\mkern-7mu\circ\mkern-9mu>}}
+\newcommand{\metricscat}{\mathbin{>\mkern-7mu+\mkern-11mu>}}
+\begin{frame}[fragile] \frametitle{Metrics API}
+\begin{haskellcode}
+(>.>) :: Metrics -> (MetricName,MetricValue) -> Metrics
+m >.> (mn,mv) = 
+    case M.lookup mn m of
+        Nothing    -> m'
+        (Just mv') -> if mv' == mv then m else m'
+    where m' = M.insert mn mv m
+\end{haskellcode}
+\begin{block}{Caso de uso}
+$emptyMetrics~\metricsins~(("mccbaIndex",Nothing,Nothing), Num~10)$
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Metrics API}
+\begin{haskellcode}
+(>+>) :: Metrics -> Metrics -> Metrics
+m1 >+> m2 = M.union m1 m2
+\end{haskellcode}
+\begin{block}{Caso de uso}
+\begin{haskellcode}
+concatMetrics :: [Metrics] -> Metrics
+concatMetrics = foldl (>+>) emptyMetrics
+\end{haskellcode}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Metrics API}
+\begin{haskellcode}
+foldrM :: (MetricName -> MetricValue -> c -> c) -> c -> Metrics -> c
+foldrM f s = M.foldrWithKey f s
+\end{haskellcode}
+\begin{block}{Caso de uso}
+\begin{haskellcode}
+...
+foldrM step noop m
+    where step k v r =  "\\begin{dot2tex}[]"
+                  >> (fromString $ fromGraphvizP v)
+                  >> "\\end{dot2tex}"
+                // r
+          fromGraphvizP (GraphvizProject l) = l
+\end{haskellcode}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Metrics API}
+\begin{haskellcode}
+getMetricsFrom :: (a -> IO Metrics) -> [a] -> IO Metrics
+getMetricsFrom f l =
+    forkMapM f l >>=
+        return . concatMetrics . map (either (const emptyMetrics) id)
+\end{haskellcode}
+\begin{block}{Caso de uso}
+\begin{haskellcode}
+getListOfCFiles :: FilePath -> IO [FilePath]
+getTreeFromFile :: FilePath -> [FilePath] -> IO [(FilePath,CTranslUnit)]
+mccabePerFun :: (FilePath,CTranslUnit) -> IO Metrics
+
+getListOfCFiles fp >>= getTreeFromFile fp >>= getMetricsFrom mccabePerFun
+\end{haskellcode}
+\end{block}
+\end{frame}
+
+
 \section{Conclusão e trabalho futuro}
 \begin{frame} \frametitle{Conclusão e trabalho futuro}
 \begin{itemize}
@@ -204,7 +295,6 @@ Objectivos para terceira fase:
 \end{itemize}
 \end{frame}
 
-\section*{Perguntas}
 \begin{frame} \frametitle{Perguntas}
 \begin{center}\huge{?}\end{center}
 \end{frame}
