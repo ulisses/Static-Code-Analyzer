@@ -31,7 +31,8 @@ instance XmlPickler Metrics where
                                        (xpAttr "functionName" xpText)
                                    )
                                    xpickle
-            where fromL = M.fromList . foldr (\((a,b,c),d) t ->  ((a, if null b then Nothing else Just b, if null c then Nothing else Just c),d) :t ) []
+            where fromL = M.fromList . foldr step []
+                  step ((a,b,c),d) t = ((a, if null b then Nothing else Just b, if null c then Nothing else Just c),d) : t
                   toL   = foldr (\((a,b,c),d) t ->  ((a, maybe "" id b, maybe "" id c),d) :t ) [] . M.toList
 
 instance XmlPickler MetricValue where
@@ -39,11 +40,27 @@ instance XmlPickler MetricValue where
         where
         tag (Num _)     = 0
         tag (Clone _) = 1
+        tag (Includes _) = 2
+        tag (Graphviz _) = 3
+        tag (GraphvizProject _) = 4
         ps = [ xpWrap ( Num , \(Num i) -> i )     (xpAddFixedAttr "type" "num" $ xpAttr "value" $ xpWrap (read, show) xpText)
              , xpWrap ( Clone . M.fromList, M.toList . \(Clone sl) -> sl) $ (xpList xpTuple)
+             , xpWrap ( Includes , \(Includes t) -> t) $ xpTupleIncludes
+             , xpWrap ( Graphviz , \(Graphviz df) -> df) $ xpDotFile
+             , xpWrap ( GraphvizProject , \(GraphvizProject df) -> df) $ xpDotFileProject
              ] --  xpPair (xpAddFixedAttr "type" "clone" $ xpAttr "srcPath" xpText)
         xpTuple = xpElem "cloneFile" $ xpPair (xpAttr "dstPath" xpText) xpTrip
         xpTrip = xpList $  xpElem "location" $ xpTriple (xpAttr "srcTxt" xpText) (xpAttr "lineSrc" xpickle) (xpAttr "lineDst" xpickle)
+        xpTupleIncludes = xpPair xpListSystemIncludes xpListIncludes
+        xpListSystemIncludes = xpElem "systemIncludes" $ xpList inc
+        xpListIncludes = xpElem "includes" $ xpList inc
+        inc = xpElem "value" $ xpText
+        xpDotFile = xpElem "graphvizCode" xpText
+        xpDotFileProject = xpElem "graphvizProject" xpText
+
+test =  generateXML "out.xml" "NAME" (emptyMetrics >.> (("includes",Nothing,Nothing),Includes (["sysA","sysB"],["A","B"])) 
+            >.> (("graphviz", Just "FILE",Nothing),Graphviz "GGGGGG\naaaa")
+          )
 
 xpMetrics :: String -> PU Metrics
 xpMetrics name =
