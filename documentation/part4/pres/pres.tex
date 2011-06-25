@@ -286,6 +286,42 @@ getListOfCFiles fp >>= getTreeFromFile fp >>= getMetricsFrom mccabePerFun
 \end{block}
 \end{frame}
 
+\begin{frame}[fragile] \frametitle{Implementação}
+\begin{block}{}
+\begin{haskellcode}
+mccabeIndex :: Data a => a -> IO Int
+mccabeIndex = applyTU (full_tdTU typesOfInstr)
+
+typesOfInstr = constTU 0
+  `adhocTU` loop
+  `adhocTU` binaryOp
+loop :: CStat -> IO Int
+loop = return . loop_
+  where loop_ (CIf _ _ _ _)    = 1
+        loop_ (CSwitch _ _ _)  = 1
+        loop_ (CWhile _ _ _ _) = 1
+        loop_ (CFor _ _ _ _ _) = 1
+        loop_ _                = 0
+        binaryOp :: CBinaryOp -> IO Int
+        binaryOp = return . binaryOp_
+          where binaryOp_ CLndOp = 1
+                binaryOp_ CLorOp  = 1
+                binaryOp_ _      = 0
+\end{haskellcode}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Implementação}
+\begin{block}{}
+\begin{haskellcode}
+ncloc :: (FilePath,CTranslUnit) -> IO Metrics
+ncloc (file,tree) =
+  let len = (length . filter (not . null) . lines . show . pretty) tree
+  in return $ emptyMetrics
+       >.> (("ncloc",Just file,Nothing),Num $ fromIntegral len)
+\end{haskellcode}
+\end{block}
+\end{frame}
 
 \section{Conclusão e trabalho futuro}
 \begin{frame} \frametitle{Conclusão e trabalho futuro}
