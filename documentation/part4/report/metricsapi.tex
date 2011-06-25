@@ -1,0 +1,190 @@
+\newcommand{\metricsins}{\mathbin{>\mkern-7mu\circ\mkern-9mu>}}
+\newcommand{\metricscat}{\mathbin{>\mkern-7mu+\mkern-11mu>}}
+\chapter{Métricas Implementadas}\label{chap:metricasapi}
+\minitoc
+
+Neste capítulo iremos falar sobre as métricas que implementamos, descrevê-las
+e explicar em detalhe como estas podem ser utilizadas em conjunto com a API
+que desenvolvemos para no futuro se poder extrair mais informação apartir
+do trabalho que já foi realizado até aqui.
+
+\section{Métricas calculadas}
+As métricas que o nosso sistema actual permite calcular estão divididas por
+grupos conforme o seu nível de actuação, assim sendo temos métricas
+relativas à complexidade, métricas relativas ás linhas de ficheiros,
+linhas de comentários, funções e includes.\\
+
+Mostramos agora todas as métricas que o nosso sistema consegue calcular até agora:
+\begin{itemize}
+\item Grafo de includes do sistema e de cada ficheiro
+\item Nr linhas de comentários (que não são pedaços de código comentados)
+\item Densidade de comentários
+\item Index de Mccabe
+\item NLOC (nr de linhas do pretty print)
+\item Nr de linhas físicas
+\item Clones por bloco
+\item Assinaturas de funções e nomes de funções
+\end{itemize}
+
+Todas estas métricas podem ser aplicadas tanto ao projecto total, como
+a um ficheiro ou até a apenas uma única função, dependendo se faz sentido
+ou não calcular essa métrica para vários níveis de detalhe.\\
+Por exemplo, o index de mccabe é possível e faz sentid calcular para
+os três níveis: projecto, ficheiro e função.\\
+
+Demos especial enfoque á contagem de número de linhas de comentários, sua densidade
+porque achamos que estes traduzem um bom software ou um sistema útil para o
+desenvolvimento por pessoas externas.\\
+Por clone por bloco temos em consideração várias linhas contíguas e verificamos
+se essas linhas ocorrem em mais algum ficheiro. Isto é uma forma mais precisa
+para dizer se um pedaço de código foi clonado.
+
+\section{Tipo de dados das métricas}
+De seguida mostramos as declarações em Haskell dos tipos de dados
+que suportam o conjunto a que chamamos de $Metrics$.
+
+\begin{haskell}
+type Metrics = M.Map MetricName MetricValue
+type MetricName = (String, Maybe FileSrc,Maybe FunctionName)
+data MetricValue =
+    | Num Double
+    | Clone (M.Map FileDst [(Ocurrency, LineSrc, LineDst)])
+    | Includes ([SystemIncludes],[Includes])
+    | FunSig [FunSignature]
+    | Graphviz DotFile
+    | GraphvizProject DotFile																				 
+\end{haskell}
+
+Escolhemos um $Map$ como tipo principal para guardar todas as nossas
+métricas por este apresentar a flexibilidade e rapidez desejada num sistema
+deste tipo.\\
+Como foi dito na secção anterior há metricas que faz sentido aplicar ao projecto
+todo, enquanto que outras apenas a ficheiros ou at~e funções, conseguimos
+essa expressividade através de um triplo cujo primeiro membro
+é obrigatório e os seguintes não o são. Deixamos assim ao critério de
+quem implementa as métricas se pretende aplciar essa métrica apenas ao projecto ou
+a mais alguma coisa em concreto.
+Este tripo será a chave n nosso $Map$, sendo que o valor é o valor da métrica
+em si.
+
+\section{API de métricas}
+Mostramos agora algumas das funções mais interessantes que compõe a API
+para manipulação de métricas que desenvolvemos.\\
+
+Para criar uma métrica apartir do zero, podemos usar a seguinte função:
+\begin{haskell}
+(>.>) :: Metrics -> (MetricName,MetricValue) -> Metrics
+m >.> (mn,mv) = 
+    case M.lookup mn m of
+        Nothing    -> m'
+        (Just mv') -> if mv' == mv then m else m'
+    where m' = M.insert mn mv m
+\end{haskell}
+Esta função é quase sempre usada aquando da criação de métricas novas, um
+exemplo do seu uso poderia ser:
+$emptyMetrics~\metricsins~(("mccbaIndex",Nothing,Nothing), Num~10)$.
+Estamos assim a dizer para criar uma métrica nova cujo seu nome é
+$mccabeIndex$ e aplicamos esta métrica ao pacote de software todo e ainda
+dizemos que o seu valor é o número $10$.\\
+
+Uma outra função muito interessante é a função de união de métricas.
+\begin{haskell}
+(>+>) :: Metrics -> Metrics -> Metrics
+m1 >+> m2 = M.union m1 m2
+\end{haskell}
+
+Esta função permite-nos por exemplo, pegar numa lista de métricas e fácilmente
+converter tudo numa única métrica.
+\begin{haskell}
+concatMetrics :: [Metrics] -> Metrics
+concatMetrics = foldl (>+>) emptyMetrics
+\end{haskell}
+
+Uma outra função é o tipico $foldr$ sobre o nosso conjunto de métricas.
+\begin{haskell}
+foldrM :: (MetricName -> MetricValue -> c -> c) -> c -> Metrics -> c
+foldrM f s = M.foldrWithKey f s
+\end{haskell}
+
+Esta função ajudou-nos bastante no caso concreto de produzir um documento \LaTeX,
+visto que muito fácilmente diziamos o que pretendiamso fazer a cada uma
+das métricas que estavam dentro do nosso conjunto. Mostramos agora
+um pequeno exemplo extraído desse mesmo código onde extraímos a informação
+da métrica que cria um ficheiro graphviz apartir dos includes.
+\begin{haskell}
+...
+foldrM step noop m
+    where step k v r =  "\\begin{dot2tex}[]"
+                  >> (fromString $ fromGraphvizP v)
+                  >> "\\end{dot2tex}"
+                // r
+          fromGraphvizP (GraphvizProject l) = l
+\end{haskell}
+
+Uma outra função muito útil para nós foi a seguinte:
+\begin{haskell}
+getMetricsFrom :: (a -> IO Metrics) -> [a] -> IO Metrics
+getMetricsFrom f l =
+    forkMapM f l >>=
+        return . concatMetrics . map (either (const emptyMetrics) id)
+\end{haskell}
+Graças a esta função conseguimos tornar o nosso calculador muito escalável.
+Esta função pode ser vista como um $map$ monadico que paraleliza as várias
+computações. Ou seja, pegamos numa função e numa lista e executamos esta função
+em paralelo para os vários elementos da lista.\\
+Conseguimos graneds ganhos de performance graças a esta função.\\
+
+Um exemplo do seu uso, para extraír a métrica index de mccabe de uma lista
+de ficheiros.
+\begin{haskell}
+getListOfCFiles :: FilePath -> IO [FilePath]
+getTreeFromFile :: FilePath -> [FilePath] -> IO [(FilePath,CTranslUnit)]
+mccabePerFun :: (FilePath,CTranslUnit) -> IO Metrics
+
+getListOfCFiles fp >>= getTreeFromFile fp >>= getMetricsFrom mccabePerFun
+\end{haskell}
+
+\section{Exemplos de cálculo de métricas}
+Agora mostramos alguns exemplos de métricas calculadas por nós.\\
+Para calcular o index de mccabe, decidimos abordar a questão não pela sua definição formal, mas sim por outras
+definições alternativas que encontramos. Assim, fomos por uma solução muito simples de implementar com o
+$Strafunski$ que apenas conta o número de ocorências para determinados construtores de tipos.\\
+Estamos a dizer para encontrar todas as ocorrêcnias de $Ifs$, $Switches$, $Whiles$, $Fors$ e ainda operadores $and$ e $or$ e adicionar o valor
+$1$ ao resultado.\\
+
+Quando usamos esta métrica para funções apenas passamos como input uma única função de cada vez e não o programa todo. Isso
+é muito fácil de obter, visto que o Language.C representa um ficheiro como uma lista de funções.
+
+\begin{haskell}
+mccabeIndex :: Data a => a -> IO Int
+mccabeIndex = applyTU (full_tdTU typesOfInstr)
+
+typesOfInstr = constTU 0
+  `adhocTU` loop
+  `adhocTU` binaryOp
+loop :: CStat -> IO Int
+loop = return . loop_
+  where loop_ (CIf _ _ _ _)    = 1
+        loop_ (CSwitch _ _ _)  = 1
+        loop_ (CWhile _ _ _ _) = 1
+        loop_ (CFor _ _ _ _ _) = 1
+        loop_ _                = 0
+        binaryOp :: CBinaryOp -> IO Int
+        binaryOp = return . binaryOp_
+          where binaryOp_ CLndOp = 1
+                binaryOp_ CLorOp  = 1
+                binaryOp_ _      = 0
+\end{haskell}
+
+Mostramos ainda a implementação de uma métrica bastante simples, que conta o número de linhas (pretty print) que uma determinada
+função tem. Esta métrica é importante para evitar contar o número de linhas directamente do ficheiro e evitamos assim
+o estilo de programação de cada programador.
+
+\begin{haskell}
+ncloc :: (FilePath,CTranslUnit) -> IO Metrics
+ncloc (file,tree) =
+  let len = (length . filter (not . null) . lines . show . pretty) tree
+  in return $ emptyMetrics
+       >.> (("ncloc",Just file,Nothing),Num $ fromIntegral len)
+\end{haskell}
+
