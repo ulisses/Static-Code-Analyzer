@@ -81,6 +81,7 @@ execAllMetrics fp = do
     --dbFile <- getDBFileContents "database.txt"
     getMetrics [--getMetricsFrom mccabePerFun lstT
                getMetricsFrom generateGraphVizFromFile lfp
+               ,generateGraphVizFromProject lfp
                ,getMetricsFrom getNrOfLinesOfComments lfp
                ,getMetricsFrom commentLinesDensity lstT
                ,return $ concatMetrics $ map fromSigToM lstT
@@ -134,6 +135,4 @@ getTreeFromFile' dir fp = do
 main :: IO ()
 main = do
     (dir:_) <- getArgs
-    m <- execAllMetrics dir
-    --putStrLn $ showMetrics m
-    generatePDF m
+    execAllMetrics dir >>= generateLatex

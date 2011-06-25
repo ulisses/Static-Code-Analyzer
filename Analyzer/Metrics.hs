@@ -37,6 +37,7 @@ data MetricValue = Num Double
                  | Includes ([SystemIncludes],[Includes])
                  | FunSig [FunSignature]
                  | Graphviz DotFile
+                 | GraphvizProject DotFile
     deriving (Show, Eq, Ord)
 
 type SystemIncludes = String
@@ -53,8 +54,11 @@ type LineSrc = Int
 showMetrics :: Metrics -> String
 showMetrics = M.foldrWithKey (\k v t -> show k ++ "   ->   " ++ show v ++ "\n" ++ t) []
 
+getAllGraphvizP,getAllGraphviz,getAllFunSig,getAllNum,getAllClone :: Metrics -> Metrics
 
-getAllGraphviz,getAllFunSig,getAllNum,getAllClone :: Metrics -> Metrics
+getAllGraphvizP = M.filterWithKey isGraphvizP
+    where isGraphvizP _ (GraphvizProject _) = True
+          isGraphvizP _ _ = False
 
 getAllGraphviz = M.filterWithKey isGraphviz
     where isGraphviz _ (Graphviz _) = True

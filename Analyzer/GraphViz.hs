@@ -27,11 +27,11 @@ generateGraphVizFromFile f = do
     dot <- getIncludes f >>= prettyPrint . createDotGraph . foldrM fromMetricsToDotEdge []
     return $ emptyMetrics >.> (("generateGraphVizFromFile",Just f, Nothing), Graphviz dot)
 
-generateGraphVizFromProject :: FilePath -> IO Metrics
-generateGraphVizFromProject dir = do
-    dot <- getListOfCFiles dir >>= return . take 100 >>= mapM getIncludes >>= return . concatMetrics
+generateGraphVizFromProject :: [FilePath] -> IO Metrics
+generateGraphVizFromProject lst = do
+    dot <- mapM getIncludes lst >>= return . concatMetrics
              >>= prettyPrint . createDotGraph . foldrM fromMetricsToDotEdge []
-    return $ emptyMetrics >.> (("generateGraphVizFromProject",Nothing, Nothing), Graphviz dot)
+    return $ emptyMetrics >.> (("generateGraphVizFromProject",Nothing, Nothing), GraphvizProject dot)
 
 createDotGraph :: [DotEdge String] -> DotGraph String
 createDotGraph edjs = DotGraph {strictGraph = False, directedGraph = True, graphID = Just (Str "G"), graphStatements = DotStmts {attrStmts = [GraphAttrs {attrs = [FontSize 45.0,Ratio FillRatio,Center True,FontName "Courier"]},NodeAttrs {attrs = [Shape Circle,Color [X11Color Gray],Style [SItem Rounded []],Width 1.0e-2,Height 1.0e-2,Skew 0.0,Style [SItem Filled []],FontName "Courier"]},EdgeAttrs {attrs = [Color [X11Color Black],FontName "Courier"]}], subGraphs = [], nodeStmts = [], edgeStmts = edjs}}

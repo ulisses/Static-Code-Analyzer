@@ -5,7 +5,7 @@ release:
 debug:
 	ghc --make Main.hs -o main 
 clean:
-	rm -f *.*~ *~ *.o *.hi test.* out.* *.dot
+	rm -f *.*~ *~ *.o *.hi test.* out.* *.dot *.tex
 run:all
 	./main gcc-4.6.0 +RTS -N2 -sstderr -qg
 
