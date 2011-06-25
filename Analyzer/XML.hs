@@ -45,14 +45,15 @@ instance XmlPickler MetricValue where
         xpTuple = xpElem "cloneFile" $ xpPair (xpAttr "dstPath" xpText) xpTrip
         xpTrip = xpList $  xpElem "location" $ xpTriple (xpAttr "srcTxt" xpText) (xpAttr "lineSrc" xpickle) (xpAttr "lineDst" xpickle)
 
-xpMetrics :: PU Metrics
-xpMetrics = xpElem "metrics"
-	      $ xpAddFixedAttr "packageName" "test"
+xpMetrics :: String -> PU Metrics
+xpMetrics name =
+            xpElem "metrics"
+	      $ xpAddFixedAttr "packageName" name
 	      $ xpickle
 
-generateXML :: String -> Metrics -> IO ()
-generateXML file m = do
-    _ <- runX ( constA m >>> xpickleDocument xpMetrics
+generateXML :: String -> String -> Metrics -> IO ()
+generateXML file name m = do
+    _ <- runX ( constA m >>> xpickleDocument (xpMetrics name)
                [withIndent yes] file
               )
     return ()

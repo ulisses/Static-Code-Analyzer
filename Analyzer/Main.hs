@@ -31,6 +31,7 @@ import Data.Monoid
 import Data.Maybe
 import Control.Monad
 import Control.Monad.Loops
+import System.Path.NameManip
 
 import Language.C
 import Language.C.System.GCC
@@ -77,28 +78,29 @@ main = do
     (flag, lstr) <- compilerOpts args
     let inp = getInput flag
     let (format,out) = getOutput flag
+    let (_,name) = split_path inp
     execAllMetrics inp >>=
         (case format of
-            XML   -> generateXML   out
-            PDF   -> generatePDF   out
-            LATEX -> generateLatex out
+            XML   -> generateXML   out name
+            PDF   -> generatePDF   out name
+            LATEX -> generateLatex out name
         )
 
 execAllMetrics :: FilePath -> IO Metrics
 execAllMetrics fp = do
     lfp    <- getListOfCFiles fp
-    print $ length lfp
+    putStrLn ("Found " ++ show ( length lfp) ++ " files.")
     lstT   <- getTreeFromFile fp lfp
-    print $ length lstT
+    putStrLn ("Found " ++ show ( length lstT) ++ " trees.")
     --dbFile <- getDBFileContents "database.txt"
-    getMetrics [getMetricsFrom mccabePerFun lstT
-               ,getMetricsFrom generateGraphVizFromFile lfp
-               ,generateGraphVizFromProject lfp
-               ,getMetricsFrom getNrOfLinesOfComments lfp
-               ,getMetricsFrom commentLinesDensity lstT
-               ,getMetricsFrom fromSigToM lstT
-               ,getMetricsFrom ncloc lstT
-               ,getMetricsFrom physicalLines lfp
+    getMetrics [--getMetricsFrom mccabePerFun lstT
+               getMetricsFrom generateGraphVizFromFile lfp
+               --,generateGraphVizFromProject lfp
+               --,getMetricsFrom getNrOfLinesOfComments lfp
+               --,getMetricsFrom commentLinesDensity lstT
+               --,getMetricsFrom fromSigToM lstT
+               --,getMetricsFrom ncloc lstT
+               --,getMetricsFrom physicalLines lfp
                --,getMetricsFrom getClonesBlock (zip lfp (repeat dbFile))
                ]
 

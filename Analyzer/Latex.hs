@@ -23,8 +23,8 @@ import Metrics
 import AbsolutePath
 
 {- Convert Metrics to LaTeX -}
-generateLatex out exM = do
-    t <- render $ example exM "test"
+generateLatex out name exM = do
+    t <- render $ example exM (myfromString name)
     writeFile out t
 
 example m packageName = do
