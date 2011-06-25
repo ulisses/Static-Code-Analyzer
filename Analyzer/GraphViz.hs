@@ -10,7 +10,7 @@
 -- In this module I implement the exporter to graphviz
 --
 ------------------------------------------------------------------------------
-module GraphViz(generateGraphViz) where
+module GraphViz(generateGraphVizFromFile, generateGraphVizFromProject) where
 
 import System.Path.NameManip
 import Data.GraphViz.Types
@@ -22,15 +22,19 @@ import Includes
 import Files
 
 {-Graphviz-}
-generateGraphViz dir = do
-    lst <- getListOfCFiles dir >>= return . take 100
-    m <- mapM getIncludes lst >>= return . concatMetrics
-    writeDotToFile "out.dot" $ createDotGraph $ foldrM fromMetricsToDotEdge [] m
+generateGraphVizFromFile :: FilePath -> IO Metrics
+generateGraphVizFromFile f = do
+    dot <- getIncludes f >>= prettyPrint . createDotGraph . foldrM fromMetricsToDotEdge []
+    return $ emptyMetrics >.> (("generateGraphVizFromFile",Just f, Nothing), Graphviz dot)
 
-    where createDotGraph :: [DotEdge String] -> DotGraph String
-          createDotGraph edjs = DotGraph {strictGraph = False, directedGraph = True, graphID = Just (Str "G"), graphStatements = DotStmts {attrStmts = [GraphAttrs {attrs = [FontSize 45.0,Ratio FillRatio,Center True,FontName "Courier"]},NodeAttrs {attrs = [Shape Circle,Color [X11Color Gray],Style [SItem Rounded []],Width 1.0e-2,Height 1.0e-2,Skew 0.0,Style [SItem Filled []],FontName "Courier"]},EdgeAttrs {attrs = [Color [X11Color Black],FontName "Courier"]}], subGraphs = [], nodeStmts = [], edgeStmts = edjs}}
-          
-          writeDotToFile file grp = prettyPrint grp >>= writeFile file
+generateGraphVizFromProject :: FilePath -> IO Metrics
+generateGraphVizFromProject dir = do
+    dot <- getListOfCFiles dir >>= return . take 100 >>= mapM getIncludes >>= return . concatMetrics
+             >>= prettyPrint . createDotGraph . foldrM fromMetricsToDotEdge []
+    return $ emptyMetrics >.> (("generateGraphVizFromProject",Nothing, Nothing), Graphviz dot)
+
+createDotGraph :: [DotEdge String] -> DotGraph String
+createDotGraph edjs = DotGraph {strictGraph = False, directedGraph = True, graphID = Just (Str "G"), graphStatements = DotStmts {attrStmts = [GraphAttrs {attrs = [FontSize 45.0,Ratio FillRatio,Center True,FontName "Courier"]},NodeAttrs {attrs = [Shape Circle,Color [X11Color Gray],Style [SItem Rounded []],Width 1.0e-2,Height 1.0e-2,Skew 0.0,Style [SItem Filled []],FontName "Courier"]},EdgeAttrs {attrs = [Color [X11Color Black],FontName "Courier"]}], subGraphs = [], nodeStmts = [], edgeStmts = edjs}}
 
 fromMetricsToDotEdge :: MetricName -> MetricValue -> [DotEdge String] -> [DotEdge String]
 fromMetricsToDotEdge (_,file,_) (Includes (lsys,linc)) l = let (_,f) = split_path $ maybe "" id file
@@ -41,3 +45,7 @@ fromMetricsToDotEdge (_,file,_) (Includes (lsys,linc)) l = let (_,f) = split_pat
           f :: [String] -> String -> [DotEdge String]
           f l path = foldl (\t h -> ed path h : t) [] l
           ed from to = DotEdge {edgeFromNodeID = from, edgeToNodeID = to, directedEdge = True, edgeAttributes = []}
+
+writeDotToFile file grp = prettyPrint grp >>= writeFile file
+
+--generateGraphVizToFile = --    writeDotToFile "out.dot" $ createDotGraph $ foldrM fromMetricsToDotEdge [] m

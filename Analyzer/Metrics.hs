@@ -36,10 +36,12 @@ data MetricValue = Num Double
                  | Clone (M.Map FileDst [(Ocurrency, LineSrc, LineDst)])
                  | Includes ([SystemIncludes],[Includes])
                  | FunSig [FunSignature]
+                 | Graphviz DotFile
     deriving (Show, Eq, Ord)
 
 type SystemIncludes = String
 type Includes = String
+type DotFile = String
 type FunSignature = String
 type FunctionName = String
 type FileDst = String
@@ -51,7 +53,13 @@ type LineSrc = Int
 showMetrics :: Metrics -> String
 showMetrics = M.foldrWithKey (\k v t -> show k ++ "   ->   " ++ show v ++ "\n" ++ t) []
 
-getAllFunSig,getAllNum,getAllClone :: Metrics -> Metrics
+
+getAllGraphviz,getAllFunSig,getAllNum,getAllClone :: Metrics -> Metrics
+
+getAllGraphviz = M.filterWithKey isGraphviz
+    where isGraphviz _ (Graphviz _) = True
+          isGraphviz _ _ = False
+
 getAllFunSig = M.filterWithKey isFunSig
     where isFunSig _ (FunSig []) = False
           isFunSig _ (FunSig _ ) = True

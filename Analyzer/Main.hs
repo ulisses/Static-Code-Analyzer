@@ -79,8 +79,8 @@ execAllMetrics fp = do
     lstT   <- getTreeFromFile fp lfp
     print $ length lstT
     --dbFile <- getDBFileContents "database.txt"
-    getMetrics [getMetricsFrom mccabePerFun lstT
-               ,getMetricsFrom getIncludes lfp
+    getMetrics [--getMetricsFrom mccabePerFun lstT
+               getMetricsFrom generateGraphVizFromFile lfp
                ,getMetricsFrom getNrOfLinesOfComments lfp
                ,getMetricsFrom commentLinesDensity lstT
                ,return $ concatMetrics $ map fromSigToM lstT
@@ -123,7 +123,7 @@ getTreeFromFileF dir l =
 getTreeFromFile' :: FilePath -> FilePath -> IO (Maybe (FilePath,CTranslUnit))
 getTreeFromFile' dir fp = do
     path <- mkAbsolutePath dir
-    r <- try $ parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__","-I"++path] fp
+    r <- try $ parseCFile (newGCC "gcc") Nothing ["-U__BLOCKS__","-I"++path,"-Iinclude/","-Iarch/x86/include"] fp
     case r of
         (Left _)    -> return Nothing
         (Right res) -> do
