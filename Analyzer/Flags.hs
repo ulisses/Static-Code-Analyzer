@@ -39,11 +39,10 @@ out LATEX = Output LATEX . fromMaybe "output.tex"
 compilerOpts :: [String] -> IO ([Flag], [String])
 compilerOpts argv = do
     name <- getProgName
+    let header = "Usage: "++ name ++" [OPTION...] files..."
     case getOpt Permute options argv of
        (o,n,[])   -> if existOut o then return (o,n) else ioError $ userError $ usageInfo header options
-        where header = "Usage: "++ name ++" [OPTION...] files..."
        (_,_,errs) -> ioError $ userError $ concat errs ++ usageInfo header options
-        where header = "Usage: "++ name ++" [OPTION...] files..."
 
 existOut :: [Flag] -> Bool
 existOut [] = False
