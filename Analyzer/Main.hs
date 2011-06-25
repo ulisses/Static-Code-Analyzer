@@ -52,6 +52,7 @@ import Functions
 import AbsolutePath
 import Files
 import Latex
+import Pdf
 import XML
 import GraphViz
 import Flags
@@ -71,6 +72,17 @@ process file = do
         ( Left error  ) -> print error
         ( Right cprog ) -> (putStr . unlines  . map (show . pretty) . getFunctionsSignFromC) cprog
 -}
+main = do
+    args <- getArgs
+    (flag, lstr) <- compilerOpts args
+    let inp = getInput flag
+    let (format,out) = getOutput flag
+    execAllMetrics inp >>=
+        (case format of
+            XML   -> generateXML   out
+            PDF   -> generatePDF   out
+            LATEX -> generateLatex out
+        )
 
 execAllMetrics :: FilePath -> IO Metrics
 execAllMetrics fp = do
@@ -133,8 +145,3 @@ getTreeFromFile' dir fp = do
             case res of
                 (Left _) -> return Nothing
                 (Right tree) -> return $ Just (fp,tree)
-
-main :: IO ()
-main = do
-    (dir:_) <- getArgs
-    execAllMetrics dir >>= generateLatex

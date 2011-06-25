@@ -50,9 +50,9 @@ xpMetrics = xpElem "metrics"
 	      $ xpAddFixedAttr "packageName" "test"
 	      $ xpickle
 
---storeMetrics :: Metrics -> IO ()
-storeMetrics m = do
-    runX ( constA m >>> xpickleDocument xpMetrics
-           [withIndent yes] "pickle.xml"
-         )
-    --readFile "pickle.xml" >>= putStrLn
+generateXML :: String -> Metrics -> IO ()
+generateXML file m = do
+    _ <- runX ( constA m >>> xpickleDocument xpMetrics
+               [withIndent yes] file
+              )
+    return ()

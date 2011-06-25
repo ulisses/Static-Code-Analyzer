@@ -10,6 +10,6 @@ run:all
 	./main gcc-4.6.0 +RTS -N2 -sstderr -qg
 
 pdf:
-	latexmk -e '$$pdflatex=q/pdflatex -synctex=1 %T/' -pdf test.tex > /dev/null
+	latexmk -e '$$pdflatex=q/pdflatex --shell-escape -synctex=1 %T/' -pdf test.tex > /dev/null
 	open test.pdf
 	
