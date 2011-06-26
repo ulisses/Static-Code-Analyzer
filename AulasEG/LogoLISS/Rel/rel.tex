@@ -120,13 +120,18 @@
 \maketitle
 
 \begin{abstract}
-Transformação da gramática da linguagem \texttt{LogoLISS} feita em \texttt{Yacc} para \texttt{AntLR} 
+Este relatório diz respeito a um trabalho de Engenharia de Linguagens que se divia em duas partes/problemas:
+\begin{itemize}
+ \item Transformação da gramática da linguagem \texttt{LogoLISS} feita em \texttt{Yacc} para \texttt{AntLR} 
+ \item Parser da linguagem e posterior execução.
+\end{itemize}
+
 \end{abstract}
 
 \tableofcontents
 
 \newpage
-\section{Problema}
+\section{Problema - Parte 1}
 A ideia deste trabalho seria implementar um programa que transformasse gramáticas em \texttt{Yacc} para \texttt{AntLR}. Para isso, escolheu-se fazer uma gramática em 
 \texttt{Yapp} ( um módulo de \texttt{Perl} próprio para implementação de gramáticas ) para tratar do ficheiro \texttt{.y} e um pequeno parser em \texttt{Perl} para retirar os 
 \emph{tokens} do fichero \texttt{.l}. \\
@@ -433,16 +438,243 @@ $$type~Derivation = [HashTable~NTS~Type]$$
 $$type~Type = String$$
 
 $$type~NT = String$$
-
 Onde $Type$ pode ser do tipo $nonTerminal$, $terminal$ ou $separator$ e $NT$ representa o nome do não terminal, terminal ou separador.
+\newpage
+\section{Probelma - Parte 2}
+A segunda parte do problema passa por usar a gramática gerada na primeira parte do problema.\\
 
-\section{Trabalho Futuro}
-Este trabalho, como já dissemos não é trivial de todo. Principalmente no que diz respeito à aplicação de regras nas estruturas de dados.\\
-No entanto já temos noção de como abordar este problema, precisando para isso de mais tempo para a sua conclusão.
+Não tendo problemas concretos com alíneas para solucionar, o trabalho realizado passou por colher as informações no bloco \texttt{Declarations} e processar a informação do bloco 
+\texttt{Statements}
 
-\section{Conclusão}
-Achamos este trabalho importantíssimo do ponto de vista de engenharia de linguagens, especialmente para transformação de programas. Consideramos até que deveriamos de continuar
-este trabalho e até explorar e discutir mais sobre esta problemática.
+\subsection{Classes Java}
+Antes de proceder à explicação, é importante explicar a criação das seguintes classes em \texttt{Java}:
+\begin{itemize}
+ \item \textbf{Variavel} - Classe que guarda informação sobre as variáveis encontradas: o nome, o tipo, o valor e a lista de elementos (no caso do tipo ser \texttt{Array}, caso contrário 
+\emph{null})
+ \item \textbf{Tipo} - Não sendo uma classe, é uma enumeração dos vários tipos existentes na linguagem: \texttt{Integer}, \texttt{Boolean} e \texttt{Array}.
+ \item \textbf{ListaVar} - Classe que guarda uma \emph{hash} de variáveis, em que a sua chave é o nome da variável. \textbf{Apesar de o nome não o sugerir}, esta classe serviu também para
+dar um ``estado'' ao que se sugeriu ser uma tartaruga (Mr. Turtle).
+ \item \textbf{Position} - Classe que apenas contém duas variáveis para se referir à posição da tartaruga.
+\end{itemize}
+
+\subsection{Bloco \texttt{Declarations}}
+Nesta fase, faz-se uma recolha de todas as variáveis declaradas e respectivas informações.\\
+
+Os dois seguintes pedaços de código são os mais relevantes. O primeiro diz respeito á informção que chega à produção \texttt{variable\_declaration : vars '->' type}
+
+\begin{code_txt}
+ type    
+returns[Tipo t_out, int s_out]
+	:    INTEGER				{$t_out = Tipo.Integer; $s_out = 0;}
+    	|    BOOLEAN				{$t_out = Tipo.Boolean; $s_out = 0;}
+    	|    ARRAY    SIZE    NUM		
+{$t_out = Tipo.Array; $s_out = Integer.parseInt($NUM.text);}
+    	;
+        
+vars
+returns[ArrayList<Variavel> lista_out]
+@init{ArrayList<Variavel> lista = new ArrayList<Variavel>();}    
+	:    var{lista.add($var.v_out);}    
+(','    vs=vars {for(Variavel va : $vs.lista_out) lista.add(va);})? {$lista_out = lista;}
+    	;
+
+var
+returns[Variavel v_out]
+@init{Variavel v = new Variavel();}
+	:    IDENT{v.nome = $IDENT.text;}    vv=value_var 
+{v.valor = $vv.value_out; v.lista = $vv.lista_out; $v_out = v;}
+    	;
+\end{code_txt}
+
+Como na produção mencionada anteriormente se pode verificar, o tipo das variáveis vem depois da declaração das mesmas. Isto levanta problemas que podem ser soluccionados de duas maneiras.
+Uma seria modificar a AST de modo a manipulá-la e conseguir chegar a informação do tipo antes. A escolhida, foi apanhar as variáveis e só então declarar o seu tipo. Esta solução, exigiu 
+alguma agilidade na forma de adicionar correctamente os tipos. Assim, criou-se uma lista provisória de variáveis que passaria por tratamento antes de ser devolvidada a uma lista 
+principal. O segundo pedaço de código diz respeito a esse tratamento, e, realça-se também o caso de especial de as variáveis serem \texttt{Arrays}.
+
+\begin{code_txt}
+ variable_declaration
+returns[ArrayList<Variavel> lista_out]
+    	:    vars{$lista_out = $vars.lista_out;}    '->'    tt=type
+{	Tipo x = $tt.t_out;
+	int tamanho = $tt.s_out;
+	//System.out.println("Tamanho:" + $lista_out.size());
+	for(Variavel va : $lista_out){
+		va.tipo = x; 
+		if(va.tipo == Tipo.Array){ 
+			va.valor = tamanho;
+		}
+	} 
+	if(x == Tipo.Array){
+		for(Variavel var : $lista_out){
+			int tam = var.lista.size();
+			while(tam < var.valor){
+				var.lista.add(0);
+				tam++;
+			}
+		}
+	}
+}  ';'
+    	;
+\end{code_txt}
+
+Quando finaliza este bloco, uma instância da classe \texttt{ListaVar} é criada, tendo como argumento, uma lista de variáveis temporária. Essa instância será depois um atributo herdado 
+no bloco \texttt{Statements}, como se pode ver:
+
+\begin{code_txt}
+body
+@init{ListaVar list;}
+    	:    DECLARATIONS        dec=declarations		
+    	     STATEMENTS {//for(Variavel v : $dec.lista_out) System.out.println(v.toString());
+    	     			list = new ListaVar($dec.lista_out);
+    	     		}       s=statements[list]	{System.out.println($s.list_out.toString());}
+    	;
+\end{code_txt}	
+
+\subsection{Bloco \texttt{Statements}}
+Neste bloco, o processo passou por actualizar a tabela das variáveis e o estado da tartaruga operação a operação. Por falta de tempo, as operações que envolvessem ciclos e diálogos não 
+foram consideradas. O resultado deste processo, poderá ser comprovado na subsecção seguinte.\\
+
+Assim, como já foi dito anteriormente, este bloco começa por receber um objecto que contém uma tabela de variáveis e o estado inicial da tartaruga. Para opções básicas, foi trivial 
+actualizar o estado da tartaruga, como se podem ver pelos exemplos seguintes:\\
+
+\begin{code_txt}
+//************************* Turtle Statement
+turtle_commands[ListaVar list_in]
+returns[ListaVar list_out]
+	:    step[list_in]		{$list_out = $step.list_out;}
+	|    rotate 			{list_in.state += $rotate.value_out; 
+	if(list_in.state < 0)list_in.state += 360;
+	if(list_in.state >= 360)list_in.state -= 360; $list_out = $list_in;}
+	|    mode			{list_in.penup = $mode.state_out; $list_out = list_in;}
+	|    dialogue[list_in]		{System.out.println("Dialogos a serem ignorados...");}
+	|    loc=location		{Position pes = new Position($loc.x_out,$loc.y_out); 
+					list_in.pos = pes; list_out=list_in;} 
+	;
+\end{code_txt}
+
+A complexidade neste tipo de operações fica na produção referente ao \texttt{rotate}, em que prende o valor da direcção do boneco entre o interválo de 0 a 360 graus. A instrução 
+\texttt{step}, dependerá de um valor á frente calculado, daí receber como argumento o atributo que diz respeito ao estado do boneco. Dependerá ainda do tipo de instrução, andar para a 
+frente ou para trás. De seguida, mostra-se o pedaço de código que diz respeito a esse problema:
+
+\begin{code_txt}
+ step[ListaVar list_in]
+returns[ListaVar list_out]
+	:    FORWARD     ex1=expression[list_in] 
+		{
+			if(list_in.state == 0){
+				list_in.pos.y += $ex1.value_out; 
+			}else if(list_in.state == 90){
+				list_in.pos.x += $ex1.value_out;
+			}else if(list_in.state == 180){
+				list_in.pos.y -= $ex1.value_out;
+			}else if(list_in.state == 270){
+				list_in.pos.x -= $ex1.value_out;
+			}
+			$list_out = list_in;
+		}
+	
+	|    BACKWARD     ex=expression[list_in]
+		{
+			if(list_in.state == 0){
+				list_in.pos.y -= $ex.value_out; 
+			}else if(list_in.state == 90){
+				list_in.pos.x -= $ex.value_out;
+			}else if(list_in.state == 180){
+				list_in.pos.y += $ex.value_out;
+			}else if(list_in.state == 270){
+				list_in.pos.x += $ex.value_out;
+			}
+			$list_out = list_in;
+		}
+	;
+\end{code_txt}
+
+Estas instruções, formam então o conjunto que diz respeito à edição do estado da tartaruga. O resto das produções dizem respeito às operações aritméticas e relacionais, que já foram 
+abordadas em exercícios anteriores, e podem-se verificar no apêndice final.
+
+\subsection{Testes e Resultados}
+De seguida, apresenta-se um teste e o seu respectivo resultado. Como se pode verificar, a cada operação, o estado da tartaruga é actualizado\\
+
+\textbf{Input}\\
+
+\begin{code_txt}
+PROGRAM logolissExemplo {
+DECLARATIONS
+x = 100 , y -> Integer ;
+vector = [1,1000,3] -> Array size 8;
+w = TRUE -> Boolean ;
+STATEMENTS
+FORWARD x
+RRIGHT
+PEN DOWN
+RLEFT
+RLEFT
+BACKWARD 200/199
+Forward vector [1]
+GOTO 20, 20
+} 
+\end{code_txt}
+
+\textbf{Output}\\
+
+\begin{code_txt}
+Mr. Turtle:
+esta na posicao (0,100)
+virado para norte
+e para ja, com a caneta levantada
+
+Mr. Turtle:
+esta na posicao (0,100)
+virado para este
+e para ja, com a caneta levantada
+
+Mr. Turtle:
+esta na posicao (0,100)
+virado para este
+e para ja, com caneta pousada
+
+Mr. Turtle:
+esta na posicao (0,100)
+virado para norte
+e para ja, com caneta pousada
+
+Mr. Turtle:
+esta na posicao (0,100)
+virado para oeste
+e para ja, com caneta pousada
+
+Mr. Turtle:
+esta na posicao (1,100)
+virado para oeste
+e para ja, com caneta pousada
+
+Mr. Turtle:
+esta na posicao (-999,100)
+virado para oeste
+e para ja, com caneta pousada
+
+Mr. Turtle:
+esta na posicao (20,20)
+virado para oeste
+e para ja, com caneta pousada
+
+Mr. Turtle:
+terminou na posicao (20,20)
+virado para oeste
+com a caneta pousada 
+\end{code_txt}
+
+\newpage
+\section{Conclusão e Trabalho Futuro}
+Em relação à primeira parte do trabalho, pode concluir que este problema não é trivial de todo. Ainda assim, a solução apresentada ficou próxima da versão final usada, tendo apenas sido 
+exigido uns retoques aos seus autores. Fica então como trabalho futuro resolver esses retoques automaticamente.\\
+
+Em relação à segunda parte do trabalho, foi bastante interessante ver as duas abordagens de atributos para resolver este problema, nos dois blocos. No bloco \texttt{Declarations} foram 
+usados essencialmente atributos sintetizados e no bloco \texttt{Statements} o uso recaiu sobre os atributos herdados. Fica como trabalho futuro acabar de implementar o uso dos ciclos.\\
+
+Vale a pena ainda referir, que embora se perceba que a se poderia optimizar muito mais as soluções apresentadas, decidiu-se cumprir o paradigma correcto do uso de atributos, conforme 
+foi aprendido nas aulas.
+
 
 \end{document}
 
