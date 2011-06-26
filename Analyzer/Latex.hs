@@ -162,7 +162,8 @@ fromNumToLaTeX' m | nullM m   = noop
         where step (k1,k2,k3) v r = myfromString k1 & file & maybe "" myfromString k3 & (fromNum v) // myhline >> r
                where fromNum (Num a) = texString a
                      file = let (path,f) = split_path $ maybe "" id k2
-                            in (myfromString f) >> (footnote $ myfromString ("This file can be found at: " ++ (mkAbsolutePathUnsafe path)))
+                            in (myfromString f)
+                                -- >> (footnote $ myfromString ("This file can be found at: " ++ (mkAbsolutePathUnsafe path)))
 
 myfromString = fromString . fixString
 texString = myfromString . show
