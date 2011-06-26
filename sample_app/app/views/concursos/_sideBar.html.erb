@@ -1,10 +1,5 @@
 <td class="sidebar round">
 	<% if current_user.admin? %>
-  		<%= link_to "Editar concurso", edit_concurso_path(@concurso) %>
-  		<br/>
-  		<%= link_to "Eliminar concurso", @concurso, :method => :delete,
-                                     			:confirm => "You sure?",
-                                     			:title => @concurso.tit %><br/>
  		<%= link_to "Adicionar enunciado", new_enunciado_path(:concurso_id=>@concurso.id) %><br/>
 		<%= link_to "Adicionar enunciado - XML", :controller => "enunciados", 
 		            :action => "newxml",:concurso_id=>@concurso.id %>

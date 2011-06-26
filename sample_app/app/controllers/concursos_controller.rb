@@ -5,7 +5,7 @@ class ConcursosController < ApplicationController
    before_filter :concursoInactivo, :only => [:downloadMetrics, :generateMetrics, :downloadResults, :generateResults]
   
    #define exercise struct, with an id, a grade, and a percentage
-   Exercise = Struct.new( :id, :result )
+   Exercise = Struct.new( :id, :result, :time )
    
   def index
     @title = "Todos os concursos"
@@ -259,7 +259,7 @@ class ConcursosController < ApplicationController
       out1 = 0,out2 = 0
       #thread that creates pdf
       t1 = Thread.new do
-        out1 = system("cd #{metricsPath} && analyser -i #{contestPath} -pdf +RTS -N2")
+        out1 = system("cd #{metricsPath} && analyzer -i #{contestPath} -pdf +RTS -N2")
         out2 = system("cd #{metricsPath} && rm *.log  *.tex *.aux *.out *.dot *.toc *.gz df.fdb_latexmk df")
       end
       
@@ -323,6 +323,7 @@ class ConcursosController < ApplicationController
 	      #get all important values
 	      enunciado_id = res.enunciado_id
 	      result = res.bestRes
+	      time = res.bestTime
 	      group = User.find(res.user_id).name
 
 	      enunciado = Enunciado.find(enunciado_id)
@@ -330,7 +331,7 @@ class ConcursosController < ApplicationController
 	      peso = enunciado.peso
         
         #create Exercise
-        exercise = Exercise.new(enunciado_id, result)
+        exercise = Exercise.new(enunciado_id, result, time)
         
 	      #save values on hash
 	      if hash[group].eql? "empty"
@@ -353,13 +354,14 @@ class ConcursosController < ApplicationController
 #      string+= "\\section{Resultados do concurso #{@concurso.tit}}"
       string+= "\\Large Resultados do concurso:  \\textbf{#{@concurso.tit}} \\normalsize\\\\ \n\n"
       allExercises.each do |exerc|
-        string+= "Exercício #{exerc.id}: #{exerc.titulo}\\\\ \n"
+        string+= "Exercício #{exerc.id} (#{exerc.peso}\\%): #{exerc.titulo}\\\\ \n"
       end
+      string+= "T = Tempo de execução de todas as baterias de teste para o enunciado.\\\\ \n"
       string+="\n"
 #    	string+= "\\caption{Nonlinear Model Results}\n"
 #    	string+= "\\centering\n"
     	string+= "\\begin{tabular}{|"
-    	numColumns = numExerc + 2
+    	numColumns = (numExerc*2) + 2
     	numColumns.times do |n|
     	  string+="c"
     	  string+= " | " unless n == numColumns-1
@@ -369,7 +371,7 @@ class ConcursosController < ApplicationController
     	string+= "\t\\hline\\hline\n"
     	string+= "Grupo"
     	allExercises.each do |e|
-    	  string+= " & Ex. #{e.id} (#{e.peso}\\%) "
+    	  string+= " & Ex. #{e.id} & T"
   	  end
   	  string+= "& Total"
     	string+=" \\\\ [0.5ex]\n"
@@ -387,13 +389,20 @@ class ConcursosController < ApplicationController
           aux = 0 
           value.each do |v|
             if ex.id == v.id  
-              calcRes = (v.result * ex.peso)/100
-              total+= calcRes 
-              string+= " & #{calcRes}"
-              aux = 1
+              #Se o execicio nao estiver 100% correcto nao conta
+              if v.result == 100
+                calcRes = (v.result * ex.peso)/100
+                total+= calcRes
+                string+= " & #{calcRes} & #{v.time.round(5)}"
+                aux = 1
+                else
+                 total+= 0
+                 string+= " & 0 & 0"
+                 aux = 1
+              end
             end
           end
-          string+= " & 0" unless aux == 1
+          string+= " & 0 & 0" unless aux == 1
         end
         string+=" & #{total} \\\\\n"
         iterations+=1

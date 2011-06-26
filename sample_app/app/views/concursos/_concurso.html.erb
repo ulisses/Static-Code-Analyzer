@@ -2,7 +2,8 @@
 	<li>
 		<%= link_to concurso.tit, concurso %>
 		<% if current_user.admin? %>
-		 |	<%= link_to "delete", concurso, :method => :delete,
+		| <%= link_to "editar", edit_concurso_path(concurso) %> 
+		 |	<%= link_to "eliminar", concurso, :method => :delete,
 									 		:confirm => "You sure?",
 		                             	 	:title => "Delete #{concurso.tit}" %>
 		|
@@ -20,14 +21,15 @@
 	<li>
 		<%= link_to concurso.tit, concurso %>
 		<% if current_user.admin? %>
-		 |	<%= link_to "delete", concurso, :method => :delete,
+		| <%= link_to "editar", edit_concurso_path(concurso) %> 
+		 |	<%= link_to "eliminar", concurso, :method => :delete,
 									 		:confirm => "You sure?",
 		                             	 	:title => "Delete #{concurso.tit}" %>
 		|
 			<% if concursoActivo(concurso) %>
-			(Estado: Activo)
+			<span style="color:green">(Estado: Activo)</span> 
 			<% else %>
-			(Estado: Inactivo)
+			<span style="color:red">(Estado: Inactivo)</span>
 			<% end %>
 			
 			<!-- INICIO GERACAO DE RESULTADOS-->

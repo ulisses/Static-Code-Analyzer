@@ -187,11 +187,64 @@ Concretizado até ao ínicio da quarta fase:
 Objectivos para terceira fase:
 \begin{itemize}
 \item Desenvolvimento de uma API para gerir as métricas
-\item Terminar a implementação das métricas que pretendiamos
+\item Terminar a implementação das métricas que pretendíamos
 \item Melhoramento da \emph{script} de instalação do sistema (dificil!)
 \item Permitir inserção de informação pelo terminal
+\item Corrigir e melhorar a aplicação Web
 \end{itemize}
 \end{frame}
+
+\section{Aplicação Web}
+\subsection{Correcção de bugs}
+\begin{frame} \frametitle{Correcção de bugs}
+\begin{itemize}
+\item Adicionada informação que estava em falta:
+	\begin{itemize}
+	\item warnings ou erros emitidos na altura da compilação já são guardados e apresentados ao utilizador
+	\end{itemize}
+\end{itemize}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{imagens/erros.png}
+\end{center}
+\end{figure}
+
+\end{frame}
+
+\subsection{Adição de funcionalidades}
+\begin{frame} \frametitle{Adição de funcionalidades}
+Preparação do sistema para:
+\begin{itemize}
+\item gerar relatório dos resultados e de métricas para determinado concurso
+\end{itemize}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.9\textwidth]{imagens/concurso.png}
+\end{center}
+\end{figure}
+
+\end{frame}
+
+\begin{frame} \frametitle{Gerar relatório de resultados}
+\begin{itemize}
+\item Ir à tabela de melhores resultados e ir buscar todas as entradas para o concurso em questão
+\item Para cada utilizador encontrar o resultado de cada enunciado
+\item Apenas contar os que estiverem 100\% correctos
+\item Calcular o resultado de cada enunciado, tendo em conta o seu peso no concurso
+\item Apresentar o resultado calculado e o tempo de execução
+\end{itemize}
+\end{frame}
+
+\begin{frame} \frametitle{Relatório de resultados}
+\begin{figure}[h]
+\begin{center}
+\includegraphics[scale=0.5]{imagens/relatorio.png}
+\end{center}
+\end{figure}
+\end{frame}
+
 
 \section{Metricas}
 \begin{frame} \frametitle{Metricas Implementadas}

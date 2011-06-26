@@ -11,7 +11,13 @@
 						
 					<b>Path:	</b><br/><%= @tentativa.path %><br/><br/>
 					
-					<b>Compilou: </b><%= @tentativa.compilou %><br/><br/>
+					<b>Compilou: </b>
+					<% if @tentativa.compilou %>
+					Sim
+					<% else %>
+					Não
+					<% end %>
+					<br/><br/>
 					<% if @tentativa.compileOut.eql? "" %>
 					<% else %>
 						<% if @tentativa.compilou %>
