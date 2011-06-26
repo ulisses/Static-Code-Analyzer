@@ -112,17 +112,19 @@ class ConcursosController < ApplicationController
   def generateMetrics
     @concurso =  Concurso.find(params[:concurso_id])
     @title = "Todos os concursos"
+    @erros = ""
     
     metricsCommand()
-    redirect_back_or concursos_path
+    flash[:error] = @erros unless @erros.eql? ""
+    redirect_to concursos_path
   end
 
   # Stream a file to client
   def downloadMetrics
     @concurso =  Concurso.find(params[:concurso_id])
-    path = File.join(Rails.root, "data/concursos","contest-"+@concurso.id.to_s,"metrics","metrics.pdf")
+    path = File.join(Rails.root, "data/concursos","contest-"+@concurso.id.to_s,"metrics","df.pdf")
     send_file(   path,
-                 :filename => "metrics.pdf",
+                 :filename => "df.pdf",
                  :type => "application/pdf",
                  :stream => "false",
                  :disposition =>'attachment') ##download
@@ -132,9 +134,9 @@ class ConcursosController < ApplicationController
     # Stream a file to client
     def viewMetrics
       @concurso =  Concurso.find(params[:concurso_id])
-      path = File.join(Rails.root, "data/concursos","contest-"+@concurso.id.to_s,"metrics","metrics.pdf")
+      path = File.join(Rails.root, "data/concursos","contest-"+@concurso.id.to_s,"metrics","df.pdf")
       send_file(   path,
-                   :filename => "metrics.pdf",
+                   :filename => "df.pdf",
                    :type => "application/pdf",
                    :stream => "false",
                    #:disposition =>'attachment') ##download
@@ -241,17 +243,44 @@ class ConcursosController < ApplicationController
 		end
 		
 		def metricsCommand
-		  path = File.join(Rails.root, "data/concursos","contest-"+@concurso.id.to_s,"metrics")
-			if File.exists?(path)
-				`rm -rf #{path}`
+		  contestPath = File.join(Rails.root, "data/concursos","contest-"+@concurso.id.to_s)
+		  metricsPath = File.join(Rails.root, "data/concursos","contest-"+@concurso.id.to_s,"metrics")
+			
+			if File.exists?(metricsPath)
+				`rm -rf #{metricsPath}`
 			end
 			
-			if !File.exists?(path)
-				Dir.mkdir(path)
+			if !File.exists?(metricsPath)
+				Dir.mkdir(metricsPath)
 			end
 			
-			#####COLOCAR AQUI COMANDO QUE CRIA O PDF NESTA PASTA
-			File.new(path+"/metrics.pdf", "w")
+      
+      #aux variables      
+      out1 = 0,out2 = 0
+      #thread that creates pdf
+      t1 = Thread.new do
+        out1 = system("cd #{metricsPath} && analyser -i #{contestPath} -pdf +RTS -N2")
+        out2 = system("cd #{metricsPath} && rm *.log  *.tex *.aux *.out *.dot *.toc *.gz df.fdb_latexmk df")
+      end
+      
+      #thread that kills the pdf creation if it takes too long
+      timer = Thread.new do
+        sleep 45
+        if t1.alive?
+          Thread.kill(t1)
+          @erros= "Ocorreu um erro na geração do relatorio (PDF) das metricas!"
+        end
+      end
+      
+      t1.join
+      if timer.alive?
+        Thread.kill(timer)
+      end
+      timer.join
+      
+      if (out1==0 || out2==0) 
+          @erros= "Ocorreu um erro na geração do relatorio (PDF) das metricas!"
+      end
 			
 	  end
 	  

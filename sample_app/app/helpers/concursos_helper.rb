@@ -23,7 +23,7 @@ module ConcursosHelper
     
   #verifica se o ficheiro de metricas ja foi gerado
   def metricasGeradas(concurso)
-    return File.exist? File.join(Rails.root, "data/concursos","contest-"+concurso.id.to_s,"metrics","metrics.pdf")    
+    return File.exist? File.join(Rails.root, "data/concursos","contest-"+concurso.id.to_s,"metrics","df.pdf")    
   end
   
   #verifica se o ficheiro de resultados ja foi gerado
