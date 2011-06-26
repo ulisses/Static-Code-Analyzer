@@ -1,19 +1,20 @@
 \chapter{Conclusão e Trabalho Futuro}\label{chap con} 
 Ao longo de toda primeira fase modelamos os vários aspectos do nosso sistema. Na segunda fase partimos para a implementação do
-sistema e focamos também a nossa atenção na exploração de um frontend para a linguagem C.\\
+sistema e focamos também a nossa atenção na exploração de um frontend para a linguagem C. Na terceira fase deu-se continuidade à  implementação de uma interface em linha de comandos que fizesse algumas das tarefas que se podem fazer através da interface Web. Também se aprofundou conhecimentos sobre o frontend \textit{Language.C}.\\
 \\
 Toda a modelação do sistema realizada, foi importante, devido à visão mais alargada que nos deu do problema e da sua resolução.
-A implementação correu de forma tranquila, onde apenas pequenos ajustes se realizaram, em relação ao pensado na fase anterior.
-O trabalho relativo à importação de enunciados e tentativas em formato XML, que tinha ficado incompleto na fase I, e foi na fase II
+A implementação correu de forma tranquila, onde apenas pequenos ajustes se realizaram, em relação ao pensado primeira fase.
+O trabalho relativo à importação de enunciados e tentativas em formato XML, que tinha ficado incompleto na fase I, foi na fase II
 completado.\\
-O sistema está no fim desta fase apto a receber as soluções dos utilizadores, tratá-las, apresentar resultados e fazer detecção de clonning.\\
+\\
 Na fase II foi também dado inicio ao desenvolvimento de uma interface em linha de comandos escrita em Perl, que alarga a acessibilidade à
 aplicação, deixando do acesso à mesma estar dependente de um browser.\\
-Ainda nesta fase a exploração do frontend \textit{Language.C} também deu os primeiros passos.\\
-Neste momento da fase III esta ferramenta esta completamente dominada e partimos para a exploração de técnicas de programação genérica que
-implemente estratégias de percorrer árvores de parsing, para conseguirmos extraír informação sobre o código que recebemos de input.
 \\
-Cremos que no fim desta fase III, o desenvolvimento da aplicação está terminado, foram corrigidos alguns bugs, a
-interface está mais apelativa e intuitiva.\\
+Ainda nesta fase a exploração do frontend \textit{Language.C} também deu os primeiros passos.\\
+No fim da terceira fase, o frontend escolhido foi completamente dominado e partiu-se para a exploração de técnicas de programação genérica que
+implementasse estratégias de percorrer árvores de parsing, para que se conseguisse extraír informação sobre o código que recebemos de input.\\
+\\
+O sistema, agora na última fase, está apto a receber as soluções dos utilizadores, tratá-las, apresentar resultados e fazer detecção de clonning. Preparou-se também o sistema para gerar e permitir o download de um relatório em pdf sobre os resultados obtidos nas tentativas submetidas pelos utilizadores, e também um relatório sobre as métricas extraídas pelo analisador criado. A aplicação Web ficou assim terminada.\\
+O analisador de métricas desenvolvido implementou todas as métricas pretendidas. Além disso foi criada uma API de metricas e um detector de clones. Este analisador gera um relatório em pdf, que além das métricas também apresenta os possíveis clones encontrados.\\
+O output do analisador deixa assim ao dispor do utizador tudo o que precisas para extrair uma noção de qualidade do software submetido.
 
-Para a próxima fase espera-nos o término da a aplicação pelo terminal e a aplicação de muito mais métricas e geração de um report com os resultados.
