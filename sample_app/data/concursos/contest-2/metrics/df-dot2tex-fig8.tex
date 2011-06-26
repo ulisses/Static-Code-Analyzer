@@ -1,0 +1,10 @@
+
+\begin{tikzpicture}[>=latex,line join=bevel,]
+%%
+\node (stdlib*h) at (21bp,21bp) [draw=gray,fill=gray,circle] {stdlib.h};
+  \node (somaParams*c) at (50bp,113bp) [draw=gray,fill=gray,circle] {somaParams.c};
+  \node (stdio*h) at (79bp,21bp) [draw=gray,fill=gray,circle] {stdio.h};
+  \draw [black,->] (somaParams*c) ..controls (36.507bp,70.193bp) and (33.33bp,60.117bp)  .. (stdlib*h);
+  \draw [black,->] (somaParams*c) ..controls (63.668bp,69.64bp) and (67.047bp,58.92bp)  .. (stdio*h);
+%
+\end{tikzpicture}

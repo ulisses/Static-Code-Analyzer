@@ -9,17 +9,27 @@
 		
 					<h1>Tentativa</h1>
 						
-					<b>Path:	</b><br/><%= @tentativa.path %><br/>
-					<b>Compilou: </b><%= @tentativa.compilou %><br/>
+					<b>Path:	</b><br/><%= @tentativa.path %><br/><br/>
+					
+					<b>Compilou: </b><%= @tentativa.compilou %><br/><br/>
+					<% if @tentativa.compileOut.eql? "" %>
+					<% else %>
+						<% if @tentativa.compilou %>
+							<b>Warnings: </b><br/>
+						<% else %>
+							<b>Erros: </b><br/>
+						<% end %>
+							<%= @tentativa.compileOut %><br/><br/>
+					<% end %>
 					
 					<b>Execução abortada: </b>
 					<% if @tentativa.execStop%>
 						Sim
 					<% else %>
 						Não
-					<% end %><br/>
+					<% end %><br/><br/>
 					
-					<% if @tentativa.tExec >= 0%>
+					<% if @tentativa.tExec >= 0 %>
 						<b>Tempo de execução para todos os testes: </b>
 						<%= @tentativa.tExec.round(6) %> segundos
 						

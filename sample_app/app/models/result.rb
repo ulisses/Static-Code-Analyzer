@@ -16,12 +16,13 @@
 class Result < ActiveRecord::Base
   	belongs_to :user
   	
-  	attr_accessible :enunciado_id, :concurso_id, :bestRes, :tentativa_id
+  	attr_accessible :enunciado_id, :concurso_id, :bestRes, :tentativa_id,:bestTime
   	
   	validates :user_id, :presence => true
   	validates :enunciado_id, :presence => true
   	validates :concurso_id, :presence => true
   	validates :bestRes, :presence => true
-  	validates :tentativa_id, :presence => true	  	  	  	  	
+  	validates :tentativa_id, :presence => true
+  	validates :tentativa_id, :presence => true
   
 end

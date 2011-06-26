@@ -1,0 +1,36 @@
+digraph G {
+graph [fontsize=45, ratio=fill, center=true, fontname=Courier];
+node [label="\N", shape=circle, color=gray, style=rounded, width="1.0e-2", height="1.0e-2", skew=0, fontname=Courier];
+edge [color=black, fontname=Courier];
+"contaParams.c" [style=filled];
+"stdio.h" [style=filled];
+"somaParams.c" [style=filled];
+"stdlib.h" [style=filled];
+"contaParams.c" -> "stdio.h";
+"contaParams.c" -> "stdio.h";
+"somaParams.c" -> "stdlib.h";
+"somaParams.c" -> "stdio.h";
+"somaParams.c" -> "stdlib.h";
+"somaParams.c" -> "stdio.h";
+"somaParams.c" -> "stdlib.h";
+"somaParams.c" -> "stdio.h";
+"somaParams.c" -> "stdlib.h";
+"somaParams.c" -> "stdio.h";
+"somaParams.c" -> "stdlib.h";
+"somaParams.c" -> "stdio.h";
+"somaParams.c" -> "stdlib.h";
+"somaParams.c" -> "stdio.h";
+"somaParams.c" -> "stdlib.h";
+"somaParams.c" -> "stdio.h";
+"somaParams.c" -> "stdlib.h";
+"somaParams.c" -> "stdio.h";
+"somaParams.c" -> "stdlib.h";
+"somaParams.c" -> "stdio.h";
+"somaParams.c" -> "stdlib.h";
+"somaParams.c" -> "stdio.h";
+"somaParams.c" -> "stdlib.h";
+"somaParams.c" -> "stdio.h";
+"somaParams.c" -> "stdlib.h";
+"somaParams.c" -> "stdio.h";
+"contaParams.c" -> "stdio.h";
+}

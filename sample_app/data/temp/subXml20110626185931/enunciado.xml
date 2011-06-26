@@ -1,0 +1,31 @@
+<?xm l version="1.0" encoding="UTF-8"?>
+
+<Enunciado xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="enunciado.xsd">
+    <Peso>50</Peso>
+    <Titulo> Soma dos argumentos recebidos </Titulo>
+    <Descricao> Some os números que lhe sao passados como argumento, e apresente o resultado. </Descricao>
+    <Func>diff -wiB</Func>
+    <MaxExecTime>2.0</MaxExecTime>    
+    <Linguagens> 
+        <Linguagem>C</Linguagem>        
+    </Linguagens>
+    <Dict>    
+        <Teste>
+            <Nome>Lista vazia</Nome>
+            <Input></Input>
+            <Output>0</Output>
+        </Teste>
+        <Teste>
+            <Nome>Lista c/ 1 elem</Nome>
+            <Input>1</Input>
+            <Output>1</Output>
+        </Teste>
+        <Teste>
+            <Nome>Lista c/ varios elem</Nome>
+            <Input> 2 3 4 5 </Input>
+            <Output>14</Output>
+        </Teste>
+    </Dict>
+        
+</Enunciado>

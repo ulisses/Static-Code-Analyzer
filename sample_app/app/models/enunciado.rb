@@ -20,6 +20,7 @@ class Enunciado < ActiveRecord::Base
   has_many :tentativas, :dependent => :destroy
   has_many :baterias, :dependent => :destroy#, :class_name => 'Teste' 
   has_many :enunciadoLangs, :dependent => :destroy
+  has_many :results, :dependent => :destroy
   
   attr_accessible :titulo, :desc, :funcao_id, :peso, :maxTempExec
   

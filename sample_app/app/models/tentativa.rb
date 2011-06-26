@@ -19,6 +19,6 @@
 class Tentativa < ActiveRecord::Base
 	belongs_to :enunciado
 	
-	attr_accessible :user_id, :path, :compilou, :passedTests, :execStop, :tExec, :language_id
+	attr_accessible :user_id, :path, :compilou, :passedTests, :execStop, :tExec, :language_id, :compileOut
 	
 end

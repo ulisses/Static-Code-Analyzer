@@ -175,7 +175,25 @@ class TentativasController < ApplicationController
       #tenta compilar
       compString = lang.compString
       compString = compString.gsub("\#{file}",file)
+      
+      #final command to compile source
       final = "cd " + dir + " && " + compString
+
+      params[:tentativa][:compileOut] = `#{final} 2>&1`    # | tee #{pathCompileOut} 
+=begin      #Read temp file and save in compileOut param
+      file = File.new(pathCompileOut, "r")
+      compileOut = ""
+      while (line = file.gets)
+        compileOut+= line
+      end
+      file.close
+      params[:tentativa][:compileOut] = compileOut
+
+      #eliminar ficheiro temp temporaria
+      if File.exists?(pathCompileOut)
+  	    FileUtils.rm_rf path
+      end
+=end       
       comp = system(final)
     
       #se compilou, executa
@@ -345,7 +363,7 @@ class TentativasController < ApplicationController
     #compara os ficheiros
     `#{func} #{path1} #{path2}` ; result=$?.success?
     
-    #eliminar pasta temporaria
+    #eliminar ficheiro temp temporaria
     if File.exists?(path)
 	    FileUtils.rm_rf path
     end
@@ -365,16 +383,21 @@ class TentativasController < ApplicationController
       r = @user.results.build(:enunciado_id=>@enunciado.id,
                                  :concurso_id=>@enunciado.concurso_id,
                                  :bestRes=>params[:tentativa][:passedTests],
-                                 :tentativa_id=>@tentativa.id);
+                                 :tentativa_id=>@tentativa.id,
+                                 :bestTime=>@tentativa.tExec);
       r.save
     else
       result = res.first
-      old = res
-      old.destroy
       if result.bestRes < params[:tentativa][:passedTests]
         result.bestRes = params[:tentativa][:passedTests]
-        result.save
-      end
+        result.tentativa_id = @tentativa.id
+      else
+        if result.bestRes == params[:tentativa][:passedTests] && result.bestTime > params[:tentativa][:tExec]
+           result.bestTime = params[:tentativa][:tExec]
+           result.tentativa_id = @tentativa.id
+         end
+       end
+       result.save
     end
 
   end

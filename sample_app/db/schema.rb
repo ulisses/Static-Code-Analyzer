@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110501135726) do
+ActiveRecord::Schema.define(:version => 20110626173135) do
 
   create_table "baterias", :force => true do |t|
     t.string   "nome"
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(:version => 20110501135726) do
     t.integer  "enunciado_id"
     t.float    "bestRes"
     t.integer  "tentativa_id"
+    t.float    "bestTime"
   end
 
   create_table "tentativas", :force => true do |t|
@@ -113,6 +114,7 @@ ActiveRecord::Schema.define(:version => 20110501135726) do
     t.float    "passedTests"
     t.float    "tExec"
     t.integer  "language_id"
+    t.string   "compileOut"
   end
 
   create_table "users", :force => true do |t|
