@@ -12,4 +12,8 @@ run:all
 pdf:
 	latexmk -e '$$pdflatex=q/pdflatex --shell-escape -synctex=1 %T/' -pdf test.tex > /dev/null
 	open test.pdf
-	
+
+install:
+	make all
+	sudo cp analyzer /usr/bin
+
