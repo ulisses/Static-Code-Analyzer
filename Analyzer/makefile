@@ -3,7 +3,7 @@ all:
 release:
 	ghc -O2 -rtsopts -threaded --make Main.hs -o analyzer 
 debug:
-	ghc --make Main.hs -o main 
+		ghc --make Main.hs -o analyzer 
 clean:
 	rm -f *.*~ *~ *.o *.hi test.* out.* *.dot *.tex *.aux *.log output.*
 run:all
