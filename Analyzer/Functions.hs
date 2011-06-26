@@ -61,8 +61,19 @@ t = do
 
 fromSigToM :: (FilePath, CTranslUnit) -> IO Metrics
 fromSigToM (fp,t) = do
-    let lst = (filter ( (/=";") . nub ) . map (filter (/='\n')) . concatMap lines . map (show . pretty) . getFunSign) t
+    let lst = (filter ( (/=";") . nub ) . normalizeFunsSig . map (filter (/='\n')) . concatMap lines . map (show . pretty) . getFunSign) t
     return $ emptyMetrics >.> (("fromSigToM",Just $ fp ,Nothing), FunSig lst)
+
+normalizeFunsSig :: [String] -> [String]
+normalizeFunsSig [] = []
+normalizeFunsSig l =
+    let firstsUntilMark = takeWhile ((==';') . last) l
+        toNormalize = takeWhile ((/=';') . last) $ dropWhile ((==';') . last) l
+        theRest = dropWhile ((/=';') . last) $ dropWhile ((==';') . last) l
+    in firstsUntilMark ++ [norm toNormalize] ++ theRest
+
+norm :: [String] -> String
+norm = concat
 
 delNonWantedFun :: Data a => a -> CTranslUnit
 delNonWantedFun d = CTranslUnit (applyTU (once_tdTU names) d) internalNode

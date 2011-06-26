@@ -1,7 +1,7 @@
 all:
 	make release
 release:
-	ghc -O2 -rtsopts -threaded --make Main.hs -o main 
+	ghc -O2 -rtsopts -threaded --make Main.hs -o analyzer 
 debug:
 	ghc --make Main.hs -o main 
 clean:
