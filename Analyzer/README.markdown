@@ -9,4 +9,13 @@ DEPENDENCIES
 ============
 
 Please read in the wikipage the procedures to install the Haskell libraries.
-After that hit make and the sudo make isntall in this folder, after that you will have a new command: analyzer
+After that hit
+
+	make
+
+and then
+
+	sudo make install
+	
+in this folder, after that you will have a new command: analyzer
+

@@ -88,7 +88,7 @@ main = do
 
 execAllMetrics :: FilePath -> IO Metrics
 execAllMetrics fp = do
-    lfp    <- getListOfCFiles fp
+    lfp    <- getListOfCFiles fp >>= return . take 100
     putStrLn ("Found " ++ show ( length lfp) ++ " files.")
     lstT   <- getTreeFromFile fp lfp
     putStrLn ("Found " ++ show ( length lstT) ++ " trees.")
