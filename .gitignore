@@ -3,7 +3,6 @@
 *.hi
 *.o
 *.a
-*.pdf
 *.tar.gz
 *.zip
 *.rar
